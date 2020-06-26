@@ -416,20 +416,20 @@ export default function Menu() {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/examples/login.html" className="nav-link">
+                  <a href="pages/examples/login" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Login</p>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/examples/register.html" className="nav-link">
+                  <a href="pages/examples/register" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Register</p>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
-                    href="pages/examples/forgot-password.html"
+                    href="pages/examples/forgot-password"
                     className="nav-link"
                   >
                     <i className="far fa-circle nav-icon" />

@@ -5,7 +5,7 @@ import Content from './components/content'
 import Control from './components/control'
 import Footer from './components/footer'
 
-function App() {
+export default function App() {
   return (
     <div className="wrapper">
       <Header />
@@ -16,5 +16,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
