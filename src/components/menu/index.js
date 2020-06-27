@@ -1,18 +1,19 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 export default function Menu() {
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       {/* Brand Logo */}
-      <a href="/#" className="brand-link">
+      <Link to="/" className="brand-link">
         <img
           src="dist/img/AdminLTELogo.png"
           alt="AdminLTE Logo"
           className="brand-image img-circle elevation-3"
           style={{ opacity: ".8" }}
         />
-        <span className="brand-text font-weight-light">CRM Online</span>
-      </a>
+        <span className="brand-text font-weight-light">WebDialy Online</span>
+      </Link>
       {/* Sidebar */}
       <div className="sidebar">
         {/* Sidebar user panel (optional) */}
@@ -25,9 +26,12 @@ export default function Menu() {
             />
           </div>
           <div className="info">
-            <a href="/#" className="d-block">
+            <Link to="/" className="d-block">
               Administrator
-            </a>
+            </Link>
+            <Link to="/login" style={{fontSize: "12px", color: "orange"}}>
+              <b>Logout</b>
+            </Link>
           </div>
         </div>
         {/* Sidebar Menu */}
