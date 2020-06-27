@@ -1,60 +1,58 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 export default function RecoverPassword() {
   return (
-    <div className="hold-transition login-page">
+    <div
+      className="hold-transition login-page"
+      style={{ backgroundImage: `url(${require("../../assets/bg.jpg")})` }}
+    >
       <div className="login-box">
         <div className="login-logo">
-          <a href="../../index2.html">
-            <b>Admin</b>LTE
-          </a>
+          <b style={{ color: "white" }}>Recover Password</b>
         </div>
-        {/* /.login-logo */}
         <div className="card">
           <div className="card-body login-card-body">
             <p className="login-box-msg">
-              You are only one step a way from your new password, recover your
-              password now.
+              คุณสามารถกู้คืนรหัสผ่านได้ทันที หลังจากยืนยันรหัสผ่าน
             </p>
-            <form action="login" method="post">
-              <div className="input-group mb-3">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                />
-                <div className="input-group-append">
-                  <div className="input-group-text">
-                    <span className="fas fa-lock" />
-                  </div>
+            <div className="input-group mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-lock" />
                 </div>
               </div>
-              <div className="input-group mb-3">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Confirm Password"
-                />
-                <div className="input-group-append">
-                  <div className="input-group-text">
-                    <span className="fas fa-lock" />
-                  </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirm Password"
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-lock" />
                 </div>
               </div>
-              <div className="row">
-                <div className="col-12">
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Link to="/login">
                   <button type="submit" className="btn btn-primary btn-block">
-                    Change password
+                    ยืนยันเปลี่ยนรหัสผ่าน
                   </button>
-                </div>
-                {/* /.col */}
+                </Link>
               </div>
-            </form>
+            </div>
             <p className="mt-3 mb-1">
-              <a href="login">Login</a>
+              <Link to="/login">กลับหน้า Login</Link>
             </p>
           </div>
-          {/* /.login-card-body */}
         </div>
       </div>
     </div>
