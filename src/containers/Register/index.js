@@ -8,17 +8,17 @@ export default function Register() {
       style={{ backgroundImage: `url(${require("../../assets/bg.jpg")})` }}
     >
       <div className="register-box">
-        <div className="register-logo">
+        <div className="register-logo" style={{marginTop: "30px"}}>
           <b style={{ color: "white" }}>ลงทะเบียนสมาชิกใหม่</b>
         </div>
         <div className="card">
           <div className="card-body register-card-body">
-            <p className="login-box-msg">บันทึกข้อมูลส่วนตัวของคุณ</p>
+            <p className="login-box-msg">ข้อมูลเบื้องต้น</p>
             <div className="input-group mb-3">
               <input
                 type="text"
                 className="form-control"
-                placeholder="Full name"
+                placeholder="ชื่อ - นามสกุล"
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -28,9 +28,21 @@ export default function Register() {
             </div>
             <div className="input-group mb-3">
               <input
+                type="number"
+                className="form-control"
+                placeholder="เบอร์มือถือ"
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-mobile" aria-hidden="true" />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <input
                 type="email"
                 className="form-control"
-                placeholder="Email"
+                placeholder="Email" autoComplete="off"
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -42,7 +54,7 @@ export default function Register() {
               <input
                 type="password"
                 className="form-control"
-                placeholder="Password"
+                placeholder="รหัสผ่าน" autoComplete="off"
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -54,7 +66,7 @@ export default function Register() {
               <input
                 type="password"
                 className="form-control"
-                placeholder="Retype password"
+                placeholder="ยืนยัน รหัสผ่าน" autoComplete="off"
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -63,7 +75,7 @@ export default function Register() {
               </div>
             </div>
             <div className="row">
-              <div className="col-8">
+              <div className="col-6">
                 <div className="icheck-primary">
                   <input
                     type="checkbox"
@@ -73,11 +85,11 @@ export default function Register() {
                   />
                   &nbsp;
                   <label htmlFor="agreeTerms">
-                    ยอมรับ <Link to="/Register">เงื่อนไข</Link>
+                    ยอมรับเงื่อนไข
                   </label>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-6">
                 <Link to="/login">
                   <button type="submit" className="btn btn-primary btn-block">
                     Register
@@ -86,7 +98,7 @@ export default function Register() {
               </div>
             </div>
             <div className="social-auth-links text-center">
-              <p>- OR -</p>
+              <p>- หรือ -</p>
               <Link to="/" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" />
                 เข้าระบบด้วย Facebook

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 export default function header() {
   return (
@@ -11,7 +12,7 @@ export default function header() {
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
               <li className="breadcrumb-item">
-                <a href="/#">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="breadcrumb-item active">Dashboard</li>
             </ol>
