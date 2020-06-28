@@ -46,7 +46,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="col-4">
-                <Link to="/">
+                <Link to="/dashboard">
                   <button type="submit" className="btn btn-primary btn-block">
                     Sign In
                   </button>
@@ -55,10 +55,10 @@ export default function Login() {
             </div>
             <div className="social-auth-links text-center mb-3">
               <p>- หรือ -</p>
-              <Link to="/" className="btn btn-block btn-primary">
+              <Link to="/dashboard" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" /> เข้าระบบด้วย Facebook
               </Link>
-              <Link to="/" className="btn btn-block btn-danger">
+              <Link to="/dashboard" className="btn btn-block btn-danger">
                 <i className="fab fa-google-plus mr-2" /> เข้าระบบด้วย Google+
               </Link>
             </div>

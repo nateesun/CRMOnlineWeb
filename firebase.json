@@ -1,6 +1,12 @@
 {
   "hosting": {
     "public": "build",
+    "appAssociation": "AUTO",
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html",
+      "dynamicLinks": true
+    }],
     "ignore": [
       "firebase.json",
       "**/.*",
