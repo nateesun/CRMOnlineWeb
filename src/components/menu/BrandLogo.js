@@ -10,7 +10,7 @@ export default function BrandLogo() {
         className="brand-image img-circle elevation-3"
         style={{ opacity: ".8" }}
       />
-      <span className="brand-text font-weight-light">WebDialy Online</span>
+      <span className="brand-text font-weight-light" data-widget="pushmenu">WebDialy Online</span>
     </Link>
   )
 }

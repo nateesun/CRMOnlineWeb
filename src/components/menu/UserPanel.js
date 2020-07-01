@@ -12,9 +12,9 @@ export default function UserPanel() {
         />
       </div>
       <div className="info">
-        <Link to="/" className="d-block">
+        <span className="d-block" style={{color: "white"}}>
           Administrator
-        </Link>
+        </span>
         <Link to="/login" style={{ fontSize: "12px", color: "orange" }}>
           <b>Logout</b>
         </Link>
