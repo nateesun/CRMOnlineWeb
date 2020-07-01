@@ -7,6 +7,7 @@ export default function RegisterForm(props) {
   const [mobile, setMobile] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [rePassword, setRePassword] = useState("")
 
   const onSaveRegister = () => {
     console.log("onSaveRegister")
@@ -16,6 +17,11 @@ export default function RegisterForm(props) {
       username,
       password,
     })
+    setFullName('')
+    setMobile('')
+    setUsername('')
+    setPassword('')
+    setRePassword('')
   }
 
   return (
@@ -93,6 +99,8 @@ export default function RegisterForm(props) {
                 className="form-control"
                 placeholder="ยืนยัน รหัสผ่าน"
                 autoComplete="off"
+                value={rePassword}
+                onChange={evt => setRePassword(evt.target.value)}
               />
               <div className="input-group-append">
                 <div className="input-group-text">
