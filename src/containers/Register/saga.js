@@ -17,8 +17,16 @@ export function* onAddRegisterMember() {
   try {
     const member = yield select(makeSelectMember())
     console.log(member)
+    const { fullName, mobile, username, password } = member
     const ref = firebase.app().database().ref()
-    ref.push(member)
+    const memberData = {
+      code: "00001",
+      fullName,
+      mobile,
+      username,
+      password,
+    }
+    ref.push(memberData)
     yield put(addRegisterMemberSuccess())
   } catch (err) {
     yield put(addRegisterMemberError(err))
