@@ -7,6 +7,7 @@ import {
 
 export const initialState = {
   member: {
+    prefix: "",
     fullName: "",
     mobile: "",
     username: "",
@@ -20,6 +21,7 @@ const registerReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case ADD_REGISTER_MEMBER:
+        draft.member.prefix = action.payload.prefix
         draft.member.fullName = action.payload.fullName
         draft.member.mobile = action.payload.mobile
         draft.member.username = action.payload.username

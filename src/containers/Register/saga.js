@@ -3,29 +3,32 @@ import { ADD_REGISTER_MEMBER } from "./constants"
 import { addRegisterMemberSuccess, addRegisterMemberError } from "./actions"
 
 import { makeSelectMember } from "./selectors"
+import firebase from '../../config/firebase'
 
-const firebase = require("firebase")
-firebase.initializeApp({
-  appName: "WebDialy Online",
-  serviceAccount: "./service-account.json",
-  authDomain: "webdialy-online.firebaseapp.com",
-  databaseURL: "https://webdialy-online.firebaseio.com",
-  storageBucket: "webdialy-online.appspot.com",
-})
+const moment = require('moment')
 
 export function* onAddRegisterMember() {
   try {
     const member = yield select(makeSelectMember())
     console.log(member)
-    const { fullName, mobile, username, password } = member
+    const { prefix, fullName, mobile, username, password } = member
     const ref = firebase.app().database().ref()
     const memberData = {
-      code: "00001",
+      code: "00000",
+      prefix,
       fullName,
       mobile,
       username,
       password,
+      created: moment().format('DD/MM/YYYY HH:mm:ss'),
+      updated: moment().format('DD/MM/YYYY HH:mm:ss'),
+      point: 0,
+      pointRedemption: 0,
+      pointBalacne:0,
+      pointExpired: '',
+      dateOfBirth: '',
     }
+    console.log(memberData)
     ref.push(memberData)
     yield put(addRegisterMemberSuccess())
   } catch (err) {

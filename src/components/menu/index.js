@@ -21,7 +21,7 @@ export default function Menu() {
             {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
             <li className="nav-item">
-              <Link to="/" className="nav-link active">
+              <Link to="/dashboard" className="nav-link active">
                 <i className="nav-icon fas fa-tachometer-alt" />
                 <p>
                   Dashboard
@@ -30,7 +30,7 @@ export default function Menu() {
               </Link>
             </li>
             <li className="nav-item has-treeview menu-open">
-              <a href="/#" className="nav-link">
+              <a href="/" className="nav-link">
                 <i className="nav-icon fas fa-th" />
                 <p>
                   All Menu
@@ -39,27 +39,27 @@ export default function Menu() {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/dashboard" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>สั่งสินค้า Online</p>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/dashboard" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>รายการสินค้าที่สั่ง</p>
                   </Link>
                 </li>
                 <li className="nav-header">ORDER HISTORY</li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/dashboard" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>ประวัติการสั่งสินค้า</p>
                   </Link>
                 </li>
                 <li className="nav-header">POINT REDEMPTION</li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/dashboard" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>คะแนนสะสม</p>
                   </Link>
