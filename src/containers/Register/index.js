@@ -18,9 +18,7 @@ const Register = props => {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  return (
-    <RegisterForm {...props} onRegister={onRegisterMember} />
-  )
+  return <RegisterForm {...props} onRegister={onRegisterMember} />
 }
 
 const mapStateToProps = state => {

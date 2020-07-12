@@ -1,19 +1,29 @@
-import React from "react"
+import React, { memo } from "react"
+import { connect } from "react-redux"
+import { compose } from 'redux';
 
-import Header from "../../components/header"
-import Menu from "../../components/menu"
-import Footer from "../../components/footer"
-import Content from "../../components/content"
-import Control from "../../components/control"
+import DashboardContent from './DashboardContent'
 
-export default function Dashboard() {
+const Dashboard = () => {
   return (
-    <div className="wrapper">
-      <Header />
-      <Menu />
-      <Content />
-      <Control />
-      <Footer />
-    </div>
+    <DashboardContent />
   )
 }
+
+const mapStateToProps = state => {
+  return {}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {}
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(
+  withConnect,
+  memo
+)(Dashboard)
