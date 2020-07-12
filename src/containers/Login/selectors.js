@@ -4,6 +4,12 @@ import { initialState } from "./reducer"
 const selectLogin = (state) => state.login || initialState
 
 const makeSelectLogin = () =>
-  createSelector(selectLogin, loginState => loginState.login)
+  createSelector(selectLogin, (loginState) => loginState.loginForm)
 
-export { selectLogin, makeSelectLogin }
+const makeLoggedIn = () =>
+  createSelector(selectLogin, (loginState) => loginState.loggedIn)
+
+const makeLoginError = () =>
+  createSelector(selectLogin, (loginState) => loginState.error)
+
+export { selectLogin, makeSelectLogin, makeLoggedIn, makeLoginError }

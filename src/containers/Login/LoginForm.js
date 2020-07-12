@@ -1,15 +1,22 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import { Redirect } from "react-router"
 
 export default function LoginForm(props) {
-  const { onLogin, history } = props
+  const { onCheckLogin, loggedIn, error } = props
   
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const onCheckLogin = () => {
-    onLogin(username, password)
-    history.push('/dashboard')
+  const onLogin = () => {
+    onCheckLogin(username, password)
+  }
+
+  if (loggedIn) {
+    return <Redirect push to="/dashboard" />
+  }
+  if (error) {
+    alert(error)
   }
 
   return (
@@ -60,7 +67,7 @@ export default function LoginForm(props) {
                 </div>
               </div>
               <div className="col-4">
-                <button className="btn btn-primary btn-block" onClick={onCheckLogin}>
+                <button className="btn btn-primary btn-block" onClick={onLogin}>
                   Sign In
                 </button>
               </div>

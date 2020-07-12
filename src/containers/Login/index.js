@@ -12,20 +12,21 @@ import saga from './saga'
 
 import LoginForm from "./LoginForm"
 import { checkLogin } from "./actions"
-import { makeSelectLogin } from "./selectors";
+import { makeSelectLogin, makeLoggedIn, makeLoginError } from "./selectors";
 
 const key = 'login'
 
 const Login = props => {
-  const { onCheckLogin } = props
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  return <LoginForm {...props} onLogin={onCheckLogin} />
+  return <LoginForm {...props} />
 }
 
 const mapStateToProps = createStructuredSelector({
   loginProfile: makeSelectLogin(),
+  loggedIn: makeLoggedIn(),
+  error: makeLoginError(),
 })
 
 const mapDispatchToProps = dispatch => {
