@@ -1,22 +1,14 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { Redirect } from "react-router"
 
 export default function LoginForm(props) {
-  const { onCheckLogin, loggedIn, error } = props
+  const { onCheckLogin } = props
   
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const onLogin = () => {
     onCheckLogin(username, password)
-  }
-
-  if (loggedIn) {
-    return <Redirect push to="/dashboard" />
-  }
-  if (error) {
-    alert(error)
   }
 
   return (
@@ -60,19 +52,13 @@ export default function LoginForm(props) {
               </div>
             </div>
             <div className="row">
-              <div className="col-8">
-                <div className="icheck-primary">
-                  <input type="checkbox" id="remember" />
-                  <label htmlFor="remember">&nbsp;จดจำฉันไว้</label>
-                </div>
-              </div>
-              <div className="col-4">
+              <div className="col-12">
                 <button className="btn btn-primary btn-block" onClick={onLogin}>
                   Sign In
                 </button>
               </div>
             </div>
-            <div className="social-auth-links text-center mb-3">
+            <div className="social-auth-links text-center mb-3" style={{display: 'none'}}>
               <p>- หรือ -</p>
               <Link to="/dashboard" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" /> เข้าระบบด้วย Facebook

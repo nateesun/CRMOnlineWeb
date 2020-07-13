@@ -5,7 +5,14 @@ import {
   CHECK_LOGOUT,
   CHECK_LOGOUT_SUCCESS,
   CHECK_LOGOUT_ERROR,
+  CLEAR_LOGIN,
 } from "./constants"
+
+export function clearLogin() {
+  return {
+    type: CLEAR_LOGIN,
+  }
+}
 
 export function checkLogin(username, password) {
   return {

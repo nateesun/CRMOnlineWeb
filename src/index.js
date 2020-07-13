@@ -1,9 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
+import { CookiesProvider } from "react-cookie"
+
 import App from "./containers/App"
-import history from './utils/history';
-import configureStore from './configureStore';
+import history from "./utils/history"
+import configureStore from "./configureStore"
 import * as serviceWorker from "./serviceWorker"
 
 // Create redux store with history
@@ -11,14 +13,16 @@ const initialState = {}
 const store = configureStore(initialState, history)
 const MOUNT_NODE = document.getElementById("root")
 
-// store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </CookiesProvider>,
   MOUNT_NODE
 )
 

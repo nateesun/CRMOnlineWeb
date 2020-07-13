@@ -6,6 +6,7 @@ import {
   CHECK_LOGOUT,
   CHECK_LOGOUT_ERROR,
   CHECK_LOGOUT_SUCCESS,
+  CLEAR_LOGIN
 } from "./constants"
 
 export const initialState = {
@@ -42,6 +43,14 @@ const loginReducer = (state = initialState, action) =>
         break
       case CHECK_LOGOUT_ERROR:
         draft.error = action.error
+        break
+      case CLEAR_LOGIN:
+        draft.error = ''
+        draft.loggedIn = false
+        draft.loginForm = {
+          username: "",
+          password: "",
+        }
         break
     }
   })

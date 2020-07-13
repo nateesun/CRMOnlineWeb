@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Link, Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 export default function RegisterForm(props) {
   const { onRegister } = props
@@ -11,6 +12,7 @@ export default function RegisterForm(props) {
   const [rePassword, setRePassword] = useState("")
   const [termAccept, setTermAccept] = useState(false)
   const [saveDone, setSaveDone] = useState(false)
+  const history = useHistory()
 
   const prefixData = ["นาย", "นาง", "นางสาว", "ดช.", "ดญ.", "คุณ"]
 
@@ -48,7 +50,7 @@ export default function RegisterForm(props) {
   }
 
   if (saveDone) {
-    return <Redirect to="/login" />
+    history.push('/login');
   }
 
   return (
