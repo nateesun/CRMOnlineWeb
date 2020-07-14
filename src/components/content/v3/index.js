@@ -1,7 +1,7 @@
 import React from "react"
-import OnlineStoreVisitors from "./OnlineStoreVisitors"
+// import OnlineStoreVisitors from "./OnlineStoreVisitors"
+// import SalesReport from "./SalesReport"
 import ProductsTable from "./ProductsTable"
-import SalesReport from "./SalesReport"
 import OnlineStoreOverView from './OnlineStoreOverview'
 import PointSummary from "./PointSummary"
 
@@ -12,11 +12,11 @@ export default function ContentV3() {
         <PointSummary />
       </div>
       <div className="col-lg-6">
-        <OnlineStoreVisitors />
+        {/* <OnlineStoreVisitors /> */}
         <ProductsTable />
       </div>
       <div className="col-lg-6">
-        <SalesReport />
+        {/* <SalesReport /> */}
         <OnlineStoreOverView />
       </div>
     </div>

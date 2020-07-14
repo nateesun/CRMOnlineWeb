@@ -17,7 +17,6 @@ export default function RegisterForm(props) {
   const prefixData = ["นาย", "นาง", "นางสาว", "ดช.", "ดญ.", "คุณ"]
 
   const onSaveRegister = () => {
-    console.log("onSaveRegister")
     if (prefix === "") {
       alert("กรุณาเลือกคำนำหน้า")
     } else if (fullName === "") {
@@ -50,7 +49,7 @@ export default function RegisterForm(props) {
   }
 
   if (saveDone) {
-    history.push('/login');
+    history.push('/');
   }
 
   return (
@@ -187,7 +186,7 @@ export default function RegisterForm(props) {
                 เข้าระบบด้วย Google+
               </Link>
             </div>
-            <Link to="/login" className="text-center">
+            <Link to="/" className="text-center">
               กลับหน้า Login
             </Link>
           </div>

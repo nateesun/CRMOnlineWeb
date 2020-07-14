@@ -5,11 +5,18 @@ import { checkLoginSuccess, checkLoginError, checkLogoutSuccess, checkLogoutErro
 import { makeSelectLogin } from "./selectors"
 import firebase from '../../config/firebase'
 
+// async function getProfile(username) {
+//     const ref = firebase.app().database().ref('/member')
+//     const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
+//     return snapshot.val()
+// }
+
 async function validUser(username, password) {
-    const ref = firebase.app().database().ref()
-    const snapshot = await ref.orderByChild('username').equalTo(username).once("value")
-    if (snapshot.val()) {
-      return JSON.stringify(snapshot.val()).match(password)
+    const ref = firebase.app().database().ref('/member')
+    const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
+    const member = snapshot.val()
+    if (member.password === password) {
+      return member
     } else {
       return false
     }
@@ -19,9 +26,9 @@ export function* onValidLogin() {
   try {
     const loginForm = yield select(makeSelectLogin())
     const { username, password } = loginForm
-    const result = yield validUser(username, password)
-    if (result) {
-      yield put(checkLoginSuccess())
+    const response = yield validUser(username, password)
+    if (response) {
+      yield put(checkLoginSuccess(response))
     } else {
       yield put(checkLoginError('Not found user'))
     }
@@ -29,6 +36,15 @@ export function* onValidLogin() {
     yield put(checkLoginError(err))
   }
 }
+
+// export function* onGetProfile(username) {
+//   try {
+//     const response = yield getProfile(username)
+//     yield put(checkLoginSuccess(response))
+//   } catch (err) {
+//     yield put(checkLoginError(err))
+//   }
+// }
 
 export function* onLogout() {
   try {
@@ -41,4 +57,5 @@ export function* onLogout() {
 export default function* loginSaga() {
   yield takeLatest(CHECK_LOGIN, onValidLogin)
   yield takeLatest(CHECK_LOGOUT, onLogout)
+  // yield takeLatest(GET_PROFILE, onGetProfile)
 }

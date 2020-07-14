@@ -53,7 +53,7 @@ export default function LoginForm(props) {
             </div>
             <div className="row">
               <div className="col-12">
-                <button className="btn btn-primary btn-block" onClick={onLogin}>
+                <button className="btn btn-primary btn-block" onClick={()=>onLogin()}>
                   Sign In
                 </button>
               </div>

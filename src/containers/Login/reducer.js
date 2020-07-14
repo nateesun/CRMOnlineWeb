@@ -6,7 +6,8 @@ import {
   CHECK_LOGOUT,
   CHECK_LOGOUT_ERROR,
   CHECK_LOGOUT_SUCCESS,
-  CLEAR_LOGIN
+  CLEAR_LOGIN,
+  LOAD_PROFILE_TOKEN
 } from "./constants"
 
 export const initialState = {
@@ -14,6 +15,7 @@ export const initialState = {
     username: "",
     password: "",
   },
+  profile: null,
   loggedIn: false,
   error: "",
 }
@@ -29,6 +31,7 @@ const loginReducer = (state = initialState, action) =>
         break
       case CHECK_LOGIN_SUCCESS:
         draft.loggedIn = true
+        draft.profile = action.payload
         break
       case CHECK_LOGIN_ERROR:
         draft.error = action.payload
@@ -51,6 +54,10 @@ const loginReducer = (state = initialState, action) =>
           username: "",
           password: "",
         }
+        break
+      case LOAD_PROFILE_TOKEN:
+        draft.loggedIn = true
+        draft.profile = action.payload
         break
     }
   })

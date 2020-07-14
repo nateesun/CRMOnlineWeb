@@ -6,6 +6,7 @@ import {
   CHECK_LOGOUT_SUCCESS,
   CHECK_LOGOUT_ERROR,
   CLEAR_LOGIN,
+  LOAD_PROFILE_TOKEN
 } from "./constants"
 
 export function clearLogin() {
@@ -24,9 +25,10 @@ export function checkLogin(username, password) {
   }
 }
 
-export function checkLoginSuccess() {
+export function checkLoginSuccess(payload) {
   return {
     type: CHECK_LOGIN_SUCCESS,
+    payload,
   }
 }
 
@@ -53,5 +55,12 @@ export function checkLogoutError(error) {
   return {
     type: CHECK_LOGOUT_ERROR,
     payload: error,
+  }
+}
+
+export function loadProfileFromToken(token) {
+  return {
+    type: LOAD_PROFILE_TOKEN,
+    payload: token,
   }
 }

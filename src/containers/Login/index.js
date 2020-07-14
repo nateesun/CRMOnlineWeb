@@ -13,38 +13,37 @@ import saga from './saga'
 
 import LoginForm from "./LoginForm"
 import { checkLogin, clearLogin } from "./actions"
-import { makeSelectLogin, makeLoggedIn, makeLoginError } from "./selectors";
+import { makeSelectLogin, makeSelectProfile, makeLoggedIn, makeLoginError } from "./selectors";
 import { useHistory } from "react-router-dom";
-
-const key = 'login'
+const jwt = require('jsonwebtoken');
 
 const Login = props => {
-  const { loggedIn, error, onClearLogin } = props
+  const { loggedIn, error, onClearLogin, profile } = props
   const [cookies, setCookie] = useCookies(['loggedIn'])
   const history = useHistory()
 
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
+  useInjectReducer({ key: 'login', reducer });
+  useInjectSaga({ key: 'login', saga });
 
-  useEffect(()=>{
-    if(error !== ''){
+  useEffect(() => {
+    if (error !== '') {
       alert(error)
       onClearLogin()
     }
-    return ()=>{
+    if (loggedIn === true || cookies.loggedIn === 'Y') {
+      const token = jwt.sign({ profile: profile }, 'softpos')
+      setCookie('loggedIn', 'Y', { path: '/' })
+      setCookie('token', token, { path: '/' })
+      history.push('/dashboard');
     }
-  }, [error, onClearLogin])
-
-  if (loggedIn === true) {
-    setCookie('loggedIn', 'Y', { path: '/' })
-    history.push('/dashboard');
-  }
+  })
 
   return <LoginForm {...props} />
 }
 
 const mapStateToProps = createStructuredSelector({
-  loginProfile: makeSelectLogin(),
+  login: makeSelectLogin(),
+  profile: makeSelectProfile(),
   loggedIn: makeLoggedIn(),
   error: makeLoginError(),
 })

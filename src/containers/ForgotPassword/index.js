@@ -39,7 +39,7 @@ export default function ForgotPassword() {
               </div>
             </div>
             <p className="mt-3 mb-1">
-              <Link to="/login">กลับหน้า Login</Link>
+              <Link to="/">กลับหน้า Login</Link>
             </p>
             <p className="mb-0">
               <Link to="/register" className="text-center">

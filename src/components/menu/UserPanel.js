@@ -7,10 +7,12 @@ import { checkLogout } from "../../containers/Login/actions"
 
 export default function UserPanel() {
   const dispath = useDispatch()
+  // eslint-disable-next-line no-unused-vars
   const [cookie, setCookie, removeCookie] = useCookies(['loggedIn'])
 
   const onCheckLogout = () => {
     removeCookie('loggedIn')
+    removeCookie('token')
     dispath(checkLogout())
   }
   return (
@@ -26,7 +28,7 @@ export default function UserPanel() {
         <span className="d-block" style={{color: "white"}}>
           Administrator
         </span>
-        <Link to="/login" style={{ fontSize: "12px", color: "orange" }} onClick={onCheckLogout}>
+        <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
           <b>Logout</b>
         </Link>
       </div>

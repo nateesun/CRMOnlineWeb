@@ -13,7 +13,7 @@ const initialState = {}
 const store = configureStore(initialState, history)
 const MOUNT_NODE = document.getElementById("root")
 
-store.subscribe(() => console.log(store.getState()))
+// store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
   <CookiesProvider>
