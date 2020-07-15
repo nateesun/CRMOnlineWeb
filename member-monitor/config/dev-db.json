@@ -1,0 +1,9 @@
+[
+  {
+    "host": "localhost",
+    "user": "root",
+    "password": "myPassword",
+    "database": "mycrmcenter",
+    "port": "3306"
+  }
+]

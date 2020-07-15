@@ -42,7 +42,7 @@ export default function RecoverPassword() {
             </div>
             <div className="row">
               <div className="col-12">
-                <Link to="/login">
+                <Link to="/">
                   <button type="submit" className="btn btn-primary btn-block">
                     ยืนยันเปลี่ยนรหัสผ่าน
                   </button>
@@ -50,7 +50,7 @@ export default function RecoverPassword() {
               </div>
             </div>
             <p className="mt-3 mb-1">
-              <Link to="/login">กลับหน้า Login</Link>
+              <Link to="/">กลับหน้า Login</Link>
             </p>
           </div>
         </div>

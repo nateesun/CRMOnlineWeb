@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom"
 
 import Dashboard from "../Dashboard"
@@ -7,12 +7,16 @@ import Register from "../Register"
 import ForgotPassword from "../ForgotPassword"
 import RecoverPassword from "../RecoverPassword"
 
-function App() {
+const App = (props) => {
+  useEffect(() => {
+    return () => {
+      console.log("App cleanup")
+    }
+  }, [])
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/login" component={Login} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/register" component={Register} />
         <Route path="/forgot-password" component={ForgotPassword} />

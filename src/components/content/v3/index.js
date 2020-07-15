@@ -1,23 +1,23 @@
 import React from "react"
-import OnlineStoreVisitors from "./OnlineStoreVisitors"
+// import OnlineStoreVisitors from "./OnlineStoreVisitors"
+// import SalesReport from "./SalesReport"
 import ProductsTable from "./ProductsTable"
-import SalesReport from "./SalesReport"
-import OnlineStoreOverView from './OnlineStoreOverview'
+// import OnlineStoreOverView from './OnlineStoreOverview'
 import PointSummary from "./PointSummary"
 
-export default function ContentV3() {
+export default function ContentV3(props) {
   return (
     <div className="row">
       <div className="col-lg-12">
-        <PointSummary />
+        <PointSummary {...props} />
+      </div>
+      <div className="col-lg-12">
+        {/* <OnlineStoreVisitors /> */}
+        <ProductsTable {...props} />
       </div>
       <div className="col-lg-6">
-        <OnlineStoreVisitors />
-        <ProductsTable />
-      </div>
-      <div className="col-lg-6">
-        <SalesReport />
-        <OnlineStoreOverView />
+        {/* <SalesReport /> */}
+        {/* <OnlineStoreOverView /> */}
       </div>
     </div>
   )

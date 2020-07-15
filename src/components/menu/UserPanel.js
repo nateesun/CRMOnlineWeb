@@ -1,7 +1,20 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { useCookies } from 'react-cookie'
 
-export default function UserPanel() {
+import { checkLogout } from "../../containers/Login/actions"
+
+export default function UserPanel(props) {
+  const dispath = useDispatch()
+  // eslint-disable-next-line no-unused-vars
+  const [cookie, setCookie, removeCookie] = useCookies(['loggedIn'])
+
+  const onCheckLogout = () => {
+    removeCookie('loggedIn')
+    removeCookie('token')
+    dispath(checkLogout())
+  }
   return (
     <div className="user-panel mt-3 pb-3 mb-3 d-flex">
       <div className="image">
@@ -13,9 +26,9 @@ export default function UserPanel() {
       </div>
       <div className="info">
         <span className="d-block" style={{color: "white"}}>
-          Administrator
+          {props.profile && props.profile.fullName}
         </span>
-        <Link to="/login" style={{ fontSize: "12px", color: "orange" }}>
+        <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
           <b>Logout</b>
         </Link>
       </div>

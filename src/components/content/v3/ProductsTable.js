@@ -4,7 +4,7 @@ export default function ProductsTable() {
   return (
     <div className="card">
       <div className="card-header border-0">
-        <h3 className="card-title">Products</h3>
+        <h3 className="card-title">รายการสั่งซื้อสินค้า</h3>
         <div className="card-tools">
           <a href="/#" className="btn btn-tool btn-sm">
             <i className="fas fa-download" />
@@ -18,14 +18,17 @@ export default function ProductsTable() {
         <table className="table table-striped table-valign-middle">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Sales</th>
-              <th>More</th>
+              <th>สินค้า</th>
+              <th>ราคา</th>
+              <th>จำนวน</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td colSpan={4} align="center">ยังไม่พบข้อมูลการสั่งซื้อสินค้า</td>
+            </tr>
+            {/* <tr>
               <td>
                 <img
                   src="dist/img/default-150x150.png"
@@ -117,7 +120,7 @@ export default function ProductsTable() {
                   <i className="fas fa-search" />
                 </a>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

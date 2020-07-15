@@ -10,9 +10,8 @@ const moment = require('moment')
 export function* onAddRegisterMember() {
   try {
     const member = yield select(makeSelectMember())
-    console.log(member)
     const { prefix, fullName, mobile, username, password } = member
-    const ref = firebase.app().database().ref()
+    const ref = firebase.app().database().ref('/member')
     const memberData = {
       code: "00000",
       prefix,
@@ -22,13 +21,12 @@ export function* onAddRegisterMember() {
       password,
       created: moment().format('DD/MM/YYYY HH:mm:ss'),
       updated: moment().format('DD/MM/YYYY HH:mm:ss'),
-      point: 0,
+      pointBalance:0,
       pointRedemption: 0,
-      pointBalacne:0,
+      rewardRedemption: 0,
       pointExpired: '',
       dateOfBirth: '',
     }
-    console.log(memberData)
     ref.push(memberData)
     yield put(addRegisterMemberSuccess())
   } catch (err) {
