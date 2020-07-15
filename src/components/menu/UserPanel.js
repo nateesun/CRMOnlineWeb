@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 
 import { checkLogout } from "../../containers/Login/actions"
 
-export default function UserPanel() {
+export default function UserPanel(props) {
   const dispath = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [cookie, setCookie, removeCookie] = useCookies(['loggedIn'])
@@ -26,7 +26,7 @@ export default function UserPanel() {
       </div>
       <div className="info">
         <span className="d-block" style={{color: "white"}}>
-          Administrator
+          {props.profile && props.profile.fullName}
         </span>
         <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
           <b>Logout</b>

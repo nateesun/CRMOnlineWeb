@@ -21,11 +21,11 @@ export default function DashboardContent(props) {
 
   return (
     <div className="wrapper">
-      <Header />
-      <Menu />
-      <Content />
-      <Control />
-      <Footer />
+      <Header {...props} />
+      <Menu {...props} />
+      <Content {...props} />
+      <Control {...props} />
+      <Footer {...props} />
     </div>
   )
 }

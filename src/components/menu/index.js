@@ -3,13 +3,13 @@ import BrandLogo from "./BrandLogo"
 import UserPanel from "./UserPanel"
 import { Link } from "react-router-dom"
 
-export default function Menu() {
+export default function Menu(props) {
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       <BrandLogo />
       {/* Sidebar */}
       <div className="sidebar">
-        <UserPanel />
+        <UserPanel {...props} />
         {/* Sidebar Menu */}
         <nav className="mt-2">
           <ul
