@@ -8,7 +8,8 @@ import {
 export const initialState = {
   member: {
     prefix: "",
-    fullName: "",
+    firstName: "",
+    lastName: "",
     mobile: "",
     username: "",
     password: "",
@@ -22,7 +23,8 @@ const registerReducer = (state = initialState, action) =>
     switch (action.type) {
       case ADD_REGISTER_MEMBER:
         draft.member.prefix = action.payload.prefix
-        draft.member.fullName = action.payload.fullName
+        draft.member.firstName = action.payload.firstName
+        draft.member.lastName = action.payload.lastName
         draft.member.mobile = action.payload.mobile
         draft.member.username = action.payload.username
         draft.member.password = action.payload.password

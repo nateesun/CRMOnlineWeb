@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 export default function RegisterForm(props) {
   const { onRegister } = props
   const [prefix, setPrefix] = useState("")
-  const [fullName, setFullName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [mobile, setMobile] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -19,8 +20,10 @@ export default function RegisterForm(props) {
   const onSaveRegister = () => {
     if (prefix === "") {
       alert("กรุณาเลือกคำนำหน้า")
-    } else if (fullName === "") {
-      alert("กรุณาระบุชื่อ-นามสกุล")
+    } else if (firstName === "") {
+      alert("กรุณาระบุชื่อ")
+    } else if (lastName === "") {
+      alert("กรุณาระบุนามสกุล")
     } else if (mobile === "") {
       alert("กรุณาระบุเบอร์ติดต่อ")
     } else if (username === "") {
@@ -32,13 +35,15 @@ export default function RegisterForm(props) {
     } else {
       onRegister({
         prefix,
-        fullName,
+        firstName,
+        lastName,
         mobile,
         username,
         password,
       })
       setPrefix("")
-      setFullName("")
+      setFirstName("")
+      setLastName("")
       setMobile("")
       setUsername("")
       setPassword("")
@@ -79,12 +84,13 @@ export default function RegisterForm(props) {
               </select>
             </div>
             <div className="input-group mb-3">
+            <div className="input-group mb-3">
               <input
                 type="text"
                 className="form-control"
-                placeholder="ชื่อ - นามสกุล"
-                value={fullName}
-                onChange={(evt) => setFullName(evt.target.value)}
+                placeholder="ชื่อ"
+                value={firstName}
+                onChange={(evt) => setFirstName(evt.target.value)}
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -93,6 +99,19 @@ export default function RegisterForm(props) {
               </div>
             </div>
             <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="นามสกุล"
+                value={lastName}
+                onChange={(evt) => setLastName(evt.target.value)}
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-user" />
+                </div>
+              </div>
+            </div>
               <input
                 type="number"
                 className="form-control"
@@ -175,7 +194,7 @@ export default function RegisterForm(props) {
                 </button>
               </div>
             </div>
-            <div className="social-auth-links text-center">
+            <div className="social-auth-links text-center" style={{display: 'none'}}>
               <p>- หรือ -</p>
               <Link to="/" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" />

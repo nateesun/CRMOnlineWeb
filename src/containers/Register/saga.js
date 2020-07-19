@@ -10,12 +10,13 @@ const moment = require('moment')
 export function* onAddRegisterMember() {
   try {
     const member = yield select(makeSelectMember())
-    const { prefix, fullName, mobile, username, password } = member
+    const { prefix, firstName, lastName, mobile, username, password } = member
     const ref = firebase.app().database().ref('/member')
     const memberData = {
-      code: "00000",
+      code: Math.random().toString(36).substr(2, 9),
       prefix,
-      fullName,
+      firstName,
+      lastName,
       mobile,
       username,
       password,

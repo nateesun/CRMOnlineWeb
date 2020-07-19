@@ -26,7 +26,7 @@ export default function UserPanel(props) {
       </div>
       <div className="info">
         <span className="d-block" style={{color: "white"}}>
-          {props.profile && props.profile.fullName}
+          {props.profile && props.profile.firstName}
         </span>
         <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
           <b>Logout</b>
