@@ -26,6 +26,7 @@ const registerReducer = (state = initialState, action) =>
         draft.member.firstName = action.payload.firstName
         draft.member.lastName = action.payload.lastName
         draft.member.mobile = action.payload.mobile
+        draft.member.dateStr = action.payload.dateStr
         draft.member.username = action.payload.username
         draft.member.password = action.payload.password
         break
