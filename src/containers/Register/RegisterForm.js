@@ -1,12 +1,18 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+const moment = require('moment')
 
 export default function RegisterForm(props) {
   const { onRegister } = props
   const [prefix, setPrefix] = useState("")
-  const [fullName, setFullName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [mobile, setMobile] = useState("")
+  const [dateOfBirth, setDateOfBirth] = useState(null)
+  const [dateStr, setDateStr] = useState('')
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [rePassword, setRePassword] = useState("")
@@ -16,13 +22,22 @@ export default function RegisterForm(props) {
 
   const prefixData = ["นาย", "นาง", "นางสาว", "ดช.", "ดญ.", "คุณ"]
 
+  const saveDate = (dateVal) => {
+    setDateOfBirth(dateVal)
+    setDateStr(moment(new Date(dateVal)).format('YYYY-MM-DD'));
+  }
+
   const onSaveRegister = () => {
     if (prefix === "") {
       alert("กรุณาเลือกคำนำหน้า")
-    } else if (fullName === "") {
-      alert("กรุณาระบุชื่อ-นามสกุล")
+    } else if (firstName === "") {
+      alert("กรุณาระบุชื่อ")
+    } else if (lastName === "") {
+      alert("กรุณาระบุนามสกุล")
     } else if (mobile === "") {
       alert("กรุณาระบุเบอร์ติดต่อ")
+    } else if (!dateOfBirth) {
+      alert("กรุณาระบุวันเกิด")
     } else if (username === "") {
       alert("กรุณาระบุอีเมล์ติดต่อ")
     } else if (password === "") {
@@ -32,14 +47,19 @@ export default function RegisterForm(props) {
     } else {
       onRegister({
         prefix,
-        fullName,
+        firstName,
+        lastName,
         mobile,
+        dateStr,
         username,
         password,
       })
       setPrefix("")
-      setFullName("")
+      setFirstName("")
+      setLastName("")
       setMobile("")
+      setDateOfBirth(null)
+      setDateStr('')
       setUsername("")
       setPassword("")
       setRePassword("")
@@ -49,7 +69,7 @@ export default function RegisterForm(props) {
   }
 
   if (saveDone) {
-    history.push('/');
+    history.push("/")
   }
 
   return (
@@ -79,20 +99,34 @@ export default function RegisterForm(props) {
               </select>
             </div>
             <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="ชื่อ - นามสกุล"
-                value={fullName}
-                onChange={(evt) => setFullName(evt.target.value)}
-              />
-              <div className="input-group-append">
-                <div className="input-group-text">
-                  <span className="fas fa-user" />
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="ชื่อ"
+                  value={firstName}
+                  onChange={(evt) => setFirstName(evt.target.value)}
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-user" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="input-group mb-3">
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="นามสกุล"
+                  value={lastName}
+                  onChange={(evt) => setLastName(evt.target.value)}
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-user" />
+                  </div>
+                </div>
+              </div>
               <input
                 type="number"
                 className="form-control"
@@ -103,6 +137,22 @@ export default function RegisterForm(props) {
               <div className="input-group-append">
                 <div className="input-group-text">
                   <span className="fas fa-mobile" aria-hidden="true" />
+                </div>
+              </div>
+            </div>
+            <div className="input-group mb-3">
+              <DatePicker
+                className="form-control"
+                selected={dateOfBirth}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="วันเกิด วว/ดด/ปปปป"
+                isClearable
+                showYearDropdown
+                onChange={date => saveDate(date)}
+              />
+              <div className="input-group-append">
+                <div className="input-group-text">
+                  <span className="fas fa-calendar" />
                 </div>
               </div>
             </div>
@@ -175,7 +225,10 @@ export default function RegisterForm(props) {
                 </button>
               </div>
             </div>
-            <div className="social-auth-links text-center">
+            <div
+              className="social-auth-links text-center"
+              style={{ display: "none" }}
+            >
               <p>- หรือ -</p>
               <Link to="/" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" />

@@ -25,8 +25,8 @@ export default function PointSummary(props) {
       <div className="col-lg-3 col-6">
         <div className="small-box bg-info">
           <div className="inner">
-            <h5>{pointBalance}</h5>
             <p>คะแนนสะสม</p>
+            <h5>{pointBalance}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-bag" />
@@ -39,8 +39,8 @@ export default function PointSummary(props) {
       <div className="col-lg-3 col-6">
         <div className="small-box bg-success">
           <div className="inner">
-            <h5>{pointRedemption} %</h5>
             <p>ยอดแลกซื้อสินค้า</p>
+            <h5>{pointRedemption} %</h5>
           </div>
           <div className="icon">
             <i className="ion ion-stats-bars" />
@@ -50,11 +50,11 @@ export default function PointSummary(props) {
           </span>
         </div>
       </div>
-      <div className="col-lg-3 col-6">
+      <div className="col-lg-3 col-6" style={{display: 'none'}}>
         <div className="small-box bg-danger">
           <div className="inner">
-            <h5>{rewardRedemption}</h5>
             <p>ของรางวัลที่แลก</p>
+            <h5>{rewardRedemption}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-pie-graph" />
@@ -64,11 +64,11 @@ export default function PointSummary(props) {
           </span>
         </div>
       </div>
-      <div className="col-lg-3 col-6">
+      <div className="col-lg-3 col-6" style={{display: 'none'}}>
         <div className="small-box bg-warning">
           <div className="inner">
-            <h5>{pointExpired}</h5>
             <p>วันหมดอายุคะแนน</p>
+            <h5>{pointExpired}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-person-add" />
