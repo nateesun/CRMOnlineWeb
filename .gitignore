@@ -4,3 +4,4 @@ build
 .vscode*
 .firebaserc
 firebase*
+test
