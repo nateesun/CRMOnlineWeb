@@ -5,12 +5,6 @@ import { checkLoginSuccess, checkLoginError, checkLogoutSuccess, checkLogoutErro
 import { makeSelectLogin } from "./selectors"
 import firebase from '../../config/firebase'
 
-// async function getProfile(username) {
-//     const ref = firebase.app().database().ref('/member')
-//     const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
-//     return snapshot.val()
-// }
-
 async function validUser(username, password) {
     const ref = firebase.app().database().ref('/member')
     const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
@@ -37,15 +31,6 @@ export function* onValidLogin() {
   }
 }
 
-// export function* onGetProfile(username) {
-//   try {
-//     const response = yield getProfile(username)
-//     yield put(checkLoginSuccess(response))
-//   } catch (err) {
-//     yield put(checkLoginError(err))
-//   }
-// }
-
 export function* onLogout() {
   try {
     yield put(checkLogoutSuccess())
@@ -57,5 +42,4 @@ export function* onLogout() {
 export default function* loginSaga() {
   yield takeLatest(CHECK_LOGIN, onValidLogin)
   yield takeLatest(CHECK_LOGOUT, onLogout)
-  // yield takeLatest(GET_PROFILE, onGetProfile)
 }
