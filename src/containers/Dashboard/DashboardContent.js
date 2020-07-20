@@ -2,11 +2,11 @@ import React from "react"
 import { useDispatch } from 'react-redux'
 import { useCookies } from 'react-cookie'
 
-import Header from "../../components/header"
-import Menu from "../../components/menu"
-import Footer from "../../components/footer"
-import Content from "../../components/content"
-import Control from "../../components/control"
+import Header from "components/header"
+import Menu from "components/menu"
+import Footer from "components/footer"
+import Content from "components/content"
+import Control from "components/control"
 import { loadProfileFromToken } from "../Login/actions"
 const jwt = require('jsonwebtoken');
 

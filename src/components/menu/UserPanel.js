@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useCookies } from 'react-cookie'
 
-import { checkLogout } from "../../containers/Login/actions"
+import { checkLogout } from "containers/Login/actions"
 
 export default function UserPanel(props) {
   const dispath = useDispatch()
