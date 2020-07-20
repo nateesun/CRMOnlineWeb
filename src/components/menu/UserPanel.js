@@ -9,6 +9,8 @@ export default function UserPanel(props) {
   const dispath = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [cookie, setCookie, removeCookie] = useCookies(['loggedIn'])
+  const { profile } = props
+  const sexLogo = profile && (profile.prefix ==='นาย' || profile.prefix === 'ดช.') ? 'avatar1.png': 'avatar2.png'
 
   const onCheckLogout = () => {
     removeCookie('loggedIn')
@@ -19,14 +21,14 @@ export default function UserPanel(props) {
     <div className="user-panel mt-3 pb-3 mb-3 d-flex">
       <div className="image">
         <img
-          src="dist/img/user2-160x160.jpg"
+          src={`dist/img/${sexLogo}`}
           className="img-circle elevation-2"
           alt="User Images"
         />
       </div>
       <div className="info">
         <span className="d-block" style={{color: "white"}}>
-          {props.profile && <span>{props.profile.firstName} {props.profile.lastName}</span>}
+          {profile && <span>{profile.firstName} {profile.lastName}</span>}
         </span>
         <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
           <b>Logout</b>

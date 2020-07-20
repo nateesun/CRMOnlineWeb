@@ -6,7 +6,7 @@ export default function BrandLogo() {
     <Link to="/" className="brand-link">
       <img
         src="dist/img/AdminLTELogo.png"
-        alt="AdminLTE Logo"
+        alt="WebDialy Online"
         className="brand-image img-circle elevation-3"
         style={{ opacity: ".8" }}
       />

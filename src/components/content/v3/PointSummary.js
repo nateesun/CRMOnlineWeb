@@ -40,7 +40,7 @@ export default function PointSummary(props) {
         <div className="small-box bg-success">
           <div className="inner">
             <p>ยอดแลกซื้อสินค้า</p>
-            <h5>{pointRedemption} %</h5>
+            <h5>{pointRedemption}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-stats-bars" />
