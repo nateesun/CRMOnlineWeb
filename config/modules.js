@@ -72,7 +72,7 @@ function getWebpackAliases(options = {}) {
 
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
-      src: paths.appSrc,
+      app: paths.appSrc,
     };
   }
 }
@@ -93,7 +93,7 @@ function getJestAliases(options = {}) {
 
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
-      '^src/(.*)$': '<rootDir>/src/$1',
+      '^app/(.*)$': '<rootDir>/app/$1',
     };
   }
 }
