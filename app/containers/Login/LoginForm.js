@@ -3,19 +3,16 @@ import { Link } from "react-router-dom"
 
 export default function LoginForm(props) {
   const { onCheckLogin } = props
-  
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
 
   const onLogin = () => {
     onCheckLogin(username, password)
   }
 
   return (
-    <div
-      className="hold-transition login-page"
-      style={{ backgroundImage: `url(${require("../../assets/bg.jpg")})` }}
-    >
+    <div className="hold-transition login-page">
       <div className="login-box">
         <div className="login-logo">
           <b style={{ color: "white" }}>Login System</b>
@@ -29,7 +26,7 @@ export default function LoginForm(props) {
                 className="form-control"
                 placeholder="Email"
                 value={username}
-                onChange={evt => setUsername(evt.target.value)}
+                onChange={(evt) => setUsername(evt.target.value)}
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -43,7 +40,7 @@ export default function LoginForm(props) {
                 className="form-control"
                 placeholder="Password"
                 value={password}
-                onChange={evt => setPassword(evt.target.value)}
+                onChange={(evt) => setPassword(evt.target.value)}
               />
               <div className="input-group-append">
                 <div className="input-group-text">
@@ -53,12 +50,18 @@ export default function LoginForm(props) {
             </div>
             <div className="row">
               <div className="col-12">
-                <button className="btn btn-primary btn-block" onClick={()=>onLogin()}>
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={() => onLogin()}
+                >
                   Sign In
                 </button>
               </div>
             </div>
-            <div className="social-auth-links text-center mb-3" style={{display: 'none'}}>
+            <div
+              className="social-auth-links text-center mb-3"
+              style={{ display: "none" }}
+            >
               <p>- หรือ -</p>
               <Link to="/dashboard" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2" /> เข้าระบบด้วย Facebook

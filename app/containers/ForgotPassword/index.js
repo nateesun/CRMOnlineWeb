@@ -3,10 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function ForgotPassword() {
   return (
-    <div
-      className="hold-transition login-page"
-      style={{ backgroundImage: `url(${require("../../assets/bg.jpg")})` }}
-    >
+    <div className="hold-transition login-page">
       <div className="login-box">
         <div className="login-logo">
           <b style={{ color: "white" }}>ลืมรหัสผ่าน ?</b>

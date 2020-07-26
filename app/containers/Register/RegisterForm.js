@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-const moment = require('moment')
+const moment = require("moment")
 
 export default function RegisterForm(props) {
   const { onRegister } = props
@@ -12,7 +12,7 @@ export default function RegisterForm(props) {
   const [lastName, setLastName] = useState("")
   const [mobile, setMobile] = useState("")
   const [dateOfBirth, setDateOfBirth] = useState(null)
-  const [dateStr, setDateStr] = useState('')
+  const [dateStr, setDateStr] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [rePassword, setRePassword] = useState("")
@@ -24,7 +24,7 @@ export default function RegisterForm(props) {
 
   const saveDate = (dateVal) => {
     setDateOfBirth(dateVal)
-    setDateStr(moment(new Date(dateVal)).format('YYYY-MM-DD'));
+    setDateStr(moment(new Date(dateVal)).format("YYYY-MM-DD"))
   }
 
   const onSaveRegister = () => {
@@ -59,7 +59,7 @@ export default function RegisterForm(props) {
       setLastName("")
       setMobile("")
       setDateOfBirth(null)
-      setDateStr('')
+      setDateStr("")
       setUsername("")
       setPassword("")
       setRePassword("")
@@ -73,10 +73,7 @@ export default function RegisterForm(props) {
   }
 
   return (
-    <div
-      className="hold-transition register-page"
-      style={{ backgroundImage: `url(${require("../../assets/bg.jpg")})` }}
-    >
+    <div className="hold-transition register-page">
       <div className="register-box">
         <div className="register-logo" style={{ marginTop: "30px" }}>
           <b style={{ color: "white" }}>ลงทะเบียนสมาชิกใหม่</b>
@@ -148,7 +145,7 @@ export default function RegisterForm(props) {
                 placeholderText="วันเกิด วว/ดด/ปปปป"
                 isClearable
                 showYearDropdown
-                onChange={date => saveDate(date)}
+                onChange={(date) => saveDate(date)}
               />
               <div className="input-group-append">
                 <div className="input-group-text">
