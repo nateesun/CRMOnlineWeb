@@ -54,18 +54,6 @@ export default function ProfileDashboard(props) {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          color: "orange",
-          width: "100%",
-          textAlign: "center",
-          position: "absolute",
-          bottom: "0",
-          paddingBottom: "10px",
-        }}
-      >
-        <b>CRM Online : Copyright © 2020</b>
-      </div>
     </div>
   )
 }
