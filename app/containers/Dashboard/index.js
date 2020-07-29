@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect'
 import { useCookies } from 'react-cookie'
 
-import { useInjectReducer } from '../../utils/injectReducer';
-import { useInjectSaga } from '../../utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import DashboardContent from './DashboardContent'
 

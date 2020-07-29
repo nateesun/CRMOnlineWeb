@@ -29,7 +29,7 @@ export function* onValidLogin() {
     if (response.status === 'Success') {
       yield put(checkLoginSuccess(response))
     } else {
-      yield put(checkLoginError("Not found user"))
+      yield put(checkLoginError("Username or password invalid"))
     }
   } catch (err) {
     yield put(checkLoginError(err))

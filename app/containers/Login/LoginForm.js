@@ -1,5 +1,12 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import styled from 'styled-components';
+
+const ImgLogo = styled.img`
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px 25px 5px 25px;
+`;
 
 export default function LoginForm(props) {
   const { onCheckLogin } = props
@@ -15,10 +22,13 @@ export default function LoginForm(props) {
     <div className="hold-transition login-page" style={{backgroundColor: '#123456'}}>
       <div className="login-box">
         <div className="login-logo">
+          <ImgLogo src="/images/login.png" width="128" height="128" />
+        </div>
+        <div className="login-logo">
           <b style={{ color: "white" }}>Login System</b>
         </div>
         <div className="card">
-          <div className="card-body login-card-body">
+          <div className="card-body login-card-body" style={{borderRadius: '25px', textShadow: '20px'}}>
             <p className="login-box-msg">ลงชื่อเข้าใช้งาน</p>
             <div className="input-group mb-3">
               <input
@@ -83,6 +93,16 @@ export default function LoginForm(props) {
           </div>
         </div>
       </div>
+      <div style={{
+          color: "orange",
+          width: "100%",
+          textAlign: "center",
+          position: "absolute",
+          bottom: "0",
+          paddingBottom: "10px",
+        }}>
+          <b>CRM Online : Copyright © 2020</b>
+        </div>
     </div>
   )
 }

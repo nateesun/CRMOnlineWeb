@@ -29,7 +29,7 @@ export default function ForgotPassword() {
             <div className="row">
               <div className="col-12">
                 <Link to="/recover-password">
-                  <button type="submit" className="btn btn-primary btn-block">
+                  <button type="submit" className="btn btn-primary btn-block" disabled>
                     ยืนยันการขอรับรหัสผ่านใหม่
                   </button>
                 </Link>

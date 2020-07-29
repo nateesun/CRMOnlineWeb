@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function RecoverPassword() {
   return (
-    <div className="hold-transition login-page">
+    <div className="hold-transition login-page" style={{backgroundColor: '#123456'}}>
       <div className="login-box">
         <div className="login-logo">
           <b style={{ color: "white" }}>Recover Password</b>

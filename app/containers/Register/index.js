@@ -2,8 +2,8 @@ import React, { memo } from "react"
 import { connect } from "react-redux"
 import { compose } from 'redux';
 
-import { useInjectReducer } from '../../utils/injectReducer';
-import { useInjectSaga } from '../../utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import RegisterForm from "./RegisterForm"
 import { addRegisterMember } from "./actions"

@@ -6,6 +6,7 @@ import Login from "../Login"
 import Register from "../Register"
 import ForgotPassword from "../ForgotPassword"
 import RecoverPassword from "../RecoverPassword"
+import Profile from "../Profile"
 
 const App = (props) => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = (props) => {
         <Route path="/register" component={Register} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/recover-password" component={RecoverPassword} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </Router>
   )

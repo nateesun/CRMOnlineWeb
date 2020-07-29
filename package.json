@@ -1,6 +1,7 @@
 {
   "name": "crm-online-web",
   "version": "0.1.0",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
@@ -42,6 +43,7 @@
     "jsonwebtoken": "^8.5.1",
     "mini-css-extract-plugin": "0.9.0",
     "moment": "^2.27.0",
+    "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.10",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
@@ -80,7 +82,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "rm -rf build && node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
