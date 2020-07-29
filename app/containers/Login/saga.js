@@ -1,31 +1,35 @@
-import { put, select, takeLatest } from "redux-saga/effects"
+import { put, select, takeLatest, call } from "redux-saga/effects"
+import request from "utils/request"
 import { CHECK_LOGIN, CHECK_LOGOUT } from "./constants"
-import { checkLoginSuccess, checkLoginError, checkLogoutSuccess, checkLogoutError } from "./actions"
+import {
+  checkLoginSuccess,
+  checkLoginError,
+  checkLogoutSuccess,
+  checkLogoutError,
+} from "./actions"
 
 import { makeSelectLogin } from "./selectors"
-// import firebase from '../../config/firebase'
-
-async function validUser(username, password) {
-    // const ref = firebase.app().database().ref('/member')
-    // const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
-    // const member = snapshot.val()
-    // if (member.password === password) {
-    //   return member
-    // } else {
-    //   return false
-    // }
-    return true
-}
 
 export function* onValidLogin() {
   try {
+    const requestURL = "/api/member/login"
     const loginForm = yield select(makeSelectLogin())
     const { username, password } = loginForm
-    const response = yield validUser(username, password)
-    if (response) {
+    const response = yield call(request, requestURL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+    if (response.status === 'Success') {
       yield put(checkLoginSuccess(response))
     } else {
-      yield put(checkLoginError('Not found user'))
+      yield put(checkLoginError("Not found user"))
     }
   } catch (err) {
     yield put(checkLoginError(err))

@@ -63,7 +63,7 @@ export default function RegisterForm(props) {
       setUsername("")
       setPassword("")
       setRePassword("")
-      alert("ทำการบันทึกข้อมูลเรียบร้อย")
+
       setSaveDone(true)
     }
   }
