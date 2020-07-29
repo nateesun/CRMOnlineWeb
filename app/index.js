@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 import { CookiesProvider } from "react-cookie"
+import { ThemeProvider } from "styled-components"
 
 import App from "containers/App"
 import history from "./utils/history"
@@ -16,13 +17,15 @@ const MOUNT_NODE = document.getElementById("root")
 // store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
-  <CookiesProvider>
-    <Provider store={store}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Provider>
-  </CookiesProvider>,
+  <ThemeProvider theme={{ "$bg-color": "#123456" }}>
+    <CookiesProvider>
+      <Provider store={store}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </Provider>
+    </CookiesProvider>
+  </ThemeProvider>,
   MOUNT_NODE
 )
 

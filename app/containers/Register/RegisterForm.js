@@ -73,7 +73,7 @@ export default function RegisterForm(props) {
   }
 
   return (
-    <div className="hold-transition register-page">
+    <div className="hold-transition register-page" style={{backgroundColor: '#123456'}}>
       <div className="register-box">
         <div className="register-logo" style={{ marginTop: "30px" }}>
           <b style={{ color: "white" }}>ลงทะเบียนสมาชิกใหม่</b>
