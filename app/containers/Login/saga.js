@@ -3,17 +3,18 @@ import { CHECK_LOGIN, CHECK_LOGOUT } from "./constants"
 import { checkLoginSuccess, checkLoginError, checkLogoutSuccess, checkLogoutError } from "./actions"
 
 import { makeSelectLogin } from "./selectors"
-import firebase from '../../config/firebase'
+// import firebase from '../../config/firebase'
 
 async function validUser(username, password) {
-    const ref = firebase.app().database().ref('/member')
-    const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
-    const member = snapshot.val()
-    if (member.password === password) {
-      return member
-    } else {
-      return false
-    }
+    // const ref = firebase.app().database().ref('/member')
+    // const snapshot = await ref.orderByChild('username').equalTo(username).once("child_added")
+    // const member = snapshot.val()
+    // if (member.password === password) {
+    //   return member
+    // } else {
+    //   return false
+    // }
+    return true
 }
 
 export function* onValidLogin() {
