@@ -31,7 +31,7 @@ const loginReducer = (state = initialState, action) =>
         break
       case CHECK_LOGIN_SUCCESS:
         draft.loggedIn = true
-        draft.profile = action.payload
+        draft.profile = action.payload.data
         break
       case CHECK_LOGIN_ERROR:
         draft.error = action.payload

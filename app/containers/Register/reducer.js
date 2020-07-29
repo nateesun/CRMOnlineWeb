@@ -14,7 +14,7 @@ export const initialState = {
     username: "",
     password: "",
   },
-  error: "",
+  status: "",
 }
 
 /* eslint-disable default-case, no-param-reassign */
@@ -31,9 +31,10 @@ const registerReducer = (state = initialState, action) =>
         draft.member.password = action.payload.password
         break
       case ADD_REGISTER_MEMBER_SUCCESS:
+        draft.status = 'Success'
         break
       case ADD_REGISTER_MEMBER_ERROR:
-        // draft.error = action.error
+        draft.status = action.error
         break
     }
   })
