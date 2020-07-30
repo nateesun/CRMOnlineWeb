@@ -14,6 +14,19 @@ router.get("/", (req, res, next) => {
   })
 })
 
+router.get("/:member_code", (req, res, next) => {
+  const member_code = req.params.member_code;
+  Task.find(member_code, (err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      res.status(200).json(JSON.parse(response.data))
+    }
+  })
+})
+
 /* GET employ listing. */
 router.post("/login", (req, res, next) => {
   const username = req.body.username
@@ -49,6 +62,18 @@ router.post("/login", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
   Task.create(req.body, (err, rows) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      res.status(200).json({ data: rows.affectedRows })
+    }
+  })
+})
+
+router.patch("/", (req, res, next) => {
+  Task.update(req.body, (err, rows) => {
     if (err) {
       res
         .status(500)
