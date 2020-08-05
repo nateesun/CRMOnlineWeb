@@ -1,6 +1,6 @@
-import React from "react"
-// const NumberFormat = require("react-number-format")
-// import { Link } from "react-router-dom"
+import React from "react";
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 export default function PointSummary(props) {
   const { profile } = props
@@ -25,28 +25,32 @@ export default function PointSummary(props) {
       <div className="col-lg-3 col-6">
         <div className="small-box bg-info">
           <div className="inner">
-            <p>คะแนนสะสม</p>
+            <p>
+              <FormattedMessage {...messages.pointBalance} />
+            </p>
             <h5>{pointBalance}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-bag" />
           </div>
           <span className="small-box-footer">
-            More info <i className="fas fa-arrow-circle-right" />
+            <FormattedMessage {...messages.moreInfo} /> <i className="fas fa-arrow-circle-right" />
           </span>
         </div>
       </div>
       <div className="col-lg-3 col-6">
         <div className="small-box bg-success">
           <div className="inner">
-            <p>ยอดแลกซื้อสินค้า</p>
+            <p>
+              <FormattedMessage {...messages.pointRedemption} />
+            </p>
             <h5>{pointRedemption}</h5>
           </div>
           <div className="icon">
             <i className="ion ion-stats-bars" />
           </div>
           <span className="small-box-footer">
-            More info <i className="fas fa-arrow-circle-right" />
+          <FormattedMessage {...messages.moreInfo} /> <i className="fas fa-arrow-circle-right" />
           </span>
         </div>
       </div>

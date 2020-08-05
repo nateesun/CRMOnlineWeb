@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useCookies } from 'react-cookie'
+import { FormattedMessage } from "react-intl"
+import messages from "./messages"
 
 import { checkLogout } from "containers/Login/actions"
 
@@ -31,7 +33,9 @@ export default function UserPanel(props) {
           {profile && <span>{profile.firstName} {profile.lastName}</span>}
         </span>
         <Link to="/" style={{ fontSize: "12px", color: "orange" }} onClick={()=>onCheckLogout()}>
-          <b>Logout</b>
+          <b>
+            <FormattedMessage {...messages.logout} />
+          </b>
         </Link>
       </div>
     </div>

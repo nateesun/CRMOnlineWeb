@@ -18,5 +18,21 @@
   "crmonlineweb.containers.Register.backLogin": "กลับสู่หน้า Login",
   "crmonlineweb.containers.LocaleToggle.th": "ไทย",
   "crmonlineweb.containers.LocaleToggle.en": "อังกฤษ",
-  "crmonlineweb.containers.LocaleToggle.switch" : "เปลี่ยนภาษา : "
+  "crmonlineweb.containers.LocaleToggle.switch" : "เปลี่ยนภาษา : ",
+  "crmonlineweb.containers.Dashboard.pointBalance" : "คะแนนสะสม",
+  "crmonlineweb.containers.Dashboard.pointRedemption" : "คะแนนแลกซื้อสินค้า",
+  "crmonlineweb.containers.Dashboard.moreInfo" : "รายละเอียด",
+  "crmonlineweb.containers.Dashboard.productTransaction" : "รายการซื้อสินค้า",
+  "crmonlineweb.containers.Dashboard.colProduct" : "สินค้า",
+  "crmonlineweb.containers.Dashboard.colPrice" : "ราคา",
+  "crmonlineweb.containers.Dashboard.colQty" : "จำนวน",
+  "crmonlineweb.containers.Dashboard.dataNotfound" : "ไม่พบข้อมูลการซื้อ",
+  "crmonlineweb.containers.LeftMenu.dashboard" : "Dashboard",
+  "crmonlineweb.containers.LeftMenu.new" : "ใหม่",
+  "crmonlineweb.containers.LeftMenu.all" : "เมนูทั้งหมด",
+  "crmonlineweb.containers.LeftMenu.orderOnline" : "สั่งซื้อสินค้า Online",
+  "crmonlineweb.containers.LeftMenu.orderTransaction" : "รายการสินค้าที่สั่ง",
+  "crmonlineweb.containers.LeftMenu.history" : "ประวัติ",
+  "crmonlineweb.containers.LeftMenu.historyTransaction" : "ประวัติการสั่งสินค้า",
+  "crmonlineweb.containers.LeftMenu.logout" : "ลงชื่อออก"
 }
