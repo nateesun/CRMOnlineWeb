@@ -1,0 +1,22 @@
+{
+  "crmonlineweb.containers.Login.header": "เข้าสู่ระบบ",
+  "crmonlineweb.containers.Login.signin": "ลงชื่อเข้าใช้งาน",
+  "crmonlineweb.containers.Login.submit": "ยืนยัน",
+  "crmonlineweb.containers.Login.forgotPassword": "ลืมรหัสผ่าน",
+  "crmonlineweb.containers.Login.registerMember": "ลงทะเบียนสมาชิก",
+  "crmonlineweb.containers.Register.header": "ลงทะเบียนสมาชิกใหม่",
+  "crmonlineweb.containers.Register.prefix": "คำนำหน้า",
+  "crmonlineweb.containers.Register.inputName": "ชื่อ",
+  "crmonlineweb.containers.Register.inputLastName": "นามสกุล",
+  "crmonlineweb.containers.Register.inputMobile": "เบอร์ติดต่อ",
+  "crmonlineweb.containers.Register.inputDateOfBirth": "วันเกิดสมาชิก",
+  "crmonlineweb.containers.Register.email": "อีเมล์",
+  "crmonlineweb.containers.Register.inputPassword": "รหัสผ่าน",
+  "crmonlineweb.containers.Register.inputRePassword": "ยืนยันรหัสผ่าน",
+  "crmonlineweb.containers.Register.acceptTermAndCons": "ยอมรับเงื่อนไข",
+  "crmonlineweb.containers.Register.submit": "ยืนยัน",
+  "crmonlineweb.containers.Register.backLogin": "กลับสู่หน้า Login",
+  "crmonlineweb.containers.LocaleToggle.th": "ไทย",
+  "crmonlineweb.containers.LocaleToggle.en": "อังกฤษ",
+  "crmonlineweb.containers.LocaleToggle.switch" : "เปลี่ยนภาษา : "
+}

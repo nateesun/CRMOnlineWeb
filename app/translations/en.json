@@ -1,0 +1,22 @@
+{
+  "crmonlineweb.containers.Login.header": "Login System",
+  "crmonlineweb.containers.Login.signin": "Sign In",
+  "crmonlineweb.containers.Login.submit": "Sign In",
+  "crmonlineweb.containers.Login.forgotPassword": "Forgot Password",
+  "crmonlineweb.containers.Login.registerMember": "Register Member",
+  "crmonlineweb.containers.Register.header": "Register Member",
+  "crmonlineweb.containers.Register.prefix": "Prefix",
+  "crmonlineweb.containers.Register.inputName": "Name",
+  "crmonlineweb.containers.Register.inputLastName": "Last Name",
+  "crmonlineweb.containers.Register.inputMobile": "Mobile Number",
+  "crmonlineweb.containers.Register.inputDateOfBirth": "Date of Birth",
+  "crmonlineweb.containers.Register.email": "Email",
+  "crmonlineweb.containers.Register.inputPassword": "Password",
+  "crmonlineweb.containers.Register.inputRePassword": "Re-Password",
+  "crmonlineweb.containers.Register.acceptTermAndCons": "Accept T&C",
+  "crmonlineweb.containers.Register.submit": "Confirm",
+  "crmonlineweb.containers.Register.backLogin": "Back to Login Page",
+  "crmonlineweb.containers.LocaleToggle.th": "th",
+  "crmonlineweb.containers.LocaleToggle.en": "en",
+  "crmonlineweb.containers.LocaleToggle.switch" : "Change language : "
+}
