@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from "redux-saga/effects"
+import { put, takeLatest, call } from "redux-saga/effects"
 import request from "utils/request"
 import { loadProfileSuccess, loadProfileError } from "./actions"
 import { LOAD_PROFILE } from './constants'

@@ -7,7 +7,12 @@ import { ThemeProvider } from "styled-components"
 import App from "containers/App"
 import history from "./utils/history"
 import configureStore from "./configureStore"
-import * as serviceWorker from "./serviceWorker"
+
+// Import Language Provider
+import LanguageProvider from "containers/LanguageProvider"
+
+// Import i18n messages
+import { translationMessages } from "./i18n"
 
 // Create redux store with history
 const initialState = {}
@@ -16,20 +21,50 @@ const MOUNT_NODE = document.getElementById("root")
 
 // store.subscribe(() => console.log(store.getState()))
 
-ReactDOM.render(
-  <ThemeProvider theme={{ "$bg-color": "#123456" }}>
-    <CookiesProvider>
-      <Provider store={store}>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </Provider>
-    </CookiesProvider>
-  </ThemeProvider>,
-  MOUNT_NODE
-)
+const render = (messages) => {
+  ReactDOM.render(
+    <ThemeProvider theme={{ "$bg-color": "#123456" }}>
+      <CookiesProvider>
+        <Provider store={store}>
+          <LanguageProvider messages={messages}>
+            <App />
+          </LanguageProvider>
+        </Provider>
+      </CookiesProvider>
+    </ThemeProvider>,
+    MOUNT_NODE
+  )
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+if (module.hot) {
+  // Hot reloadable React components and translation json files
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  module.hot.accept(["./i18n", "containers/App"], () => {
+    ReactDOM.unmountComponentAtNode(MOUNT_NODE)
+    render(translationMessages)
+  })
+}
+
+// Chunked polyfill for browsers without Intl support
+if (!window.Intl) {
+  new Promise((resolve) => {
+    resolve(import("intl"))
+  })
+    .then(() =>
+      Promise.all([
+        import("intl/locale-data/jsonp/en.js"),
+        import("intl/locale-data/jsonp/de.js"),
+      ])
+    )
+    .then(() => render(translationMessages))
+    .catch((err) => {
+      throw err
+    })
+} else {
+  render(translationMessages)
+}
+
+if (process.env.NODE_ENV === "production") {
+  require("offline-plugin/runtime").install() // eslint-disable-line global-require
+}

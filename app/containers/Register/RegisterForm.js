@@ -1,11 +1,13 @@
 import React, { useState } from "react"
+import { injectIntl } from "react-intl"
 import { Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import messages from "./messages"
 const moment = require("moment")
 
-export default function RegisterForm(props) {
+const RegisterForm = (props) => {
   const { onRegister } = props
   const [prefix, setPrefix] = useState("")
   const [firstName, setFirstName] = useState("")
@@ -19,6 +21,8 @@ export default function RegisterForm(props) {
   const [termAccept, setTermAccept] = useState(false)
   const [saveDone, setSaveDone] = useState(false)
   const history = useHistory()
+
+  const { formatMessage } = props.intl
 
   const prefixData = ["นาย", "นาง", "นางสาว", "ดช.", "ดญ.", "คุณ"]
 
@@ -73,10 +77,15 @@ export default function RegisterForm(props) {
   }
 
   return (
-    <div className="hold-transition register-page" style={{backgroundColor: '#123456'}}>
+    <div
+      className="hold-transition register-page"
+      style={{ backgroundColor: "#123456" }}
+    >
       <div className="register-box">
         <div className="register-logo" style={{ marginTop: "30px" }}>
-          <b style={{ color: "white" }}>ลงทะเบียนสมาชิกใหม่</b>
+          <b style={{ color: "white" }}>
+            {formatMessage(messages.header)}
+          </b>
         </div>
         <div className="card">
           <div className="card-body register-card-body">
@@ -86,7 +95,7 @@ export default function RegisterForm(props) {
                 value={prefix}
                 onChange={(evt) => setPrefix(evt.target.value)}
               >
-                <option value="">คำนำหน้า</option>
+                <option value="">{formatMessage(messages.prefix)}</option>
                 {prefixData &&
                   prefixData.map((data, index) => (
                     <option key={index} value={data}>
@@ -100,7 +109,7 @@ export default function RegisterForm(props) {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="ชื่อ"
+                  placeholder={formatMessage(messages.inputName)}
                   value={firstName}
                   onChange={(evt) => setFirstName(evt.target.value)}
                 />
@@ -114,7 +123,7 @@ export default function RegisterForm(props) {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="นามสกุล"
+                  placeholder={formatMessage(messages.inputLastName)}
                   value={lastName}
                   onChange={(evt) => setLastName(evt.target.value)}
                 />
@@ -127,7 +136,7 @@ export default function RegisterForm(props) {
               <input
                 type="number"
                 className="form-control"
-                placeholder="เบอร์มือถือ"
+                placeholder={formatMessage(messages.inputMobile)}
                 value={mobile}
                 onChange={(evt) => setMobile(evt.target.value)}
               />
@@ -142,7 +151,7 @@ export default function RegisterForm(props) {
                 className="form-control"
                 selected={dateOfBirth}
                 dateFormat="dd/MM/yyyy"
-                placeholderText="วันเกิด วว/ดด/ปปปป"
+                placeholderText={formatMessage(messages.inputDateOfBirth)}
                 isClearable
                 showYearDropdown
                 onChange={(date) => saveDate(date)}
@@ -157,7 +166,7 @@ export default function RegisterForm(props) {
               <input
                 type="email"
                 className="form-control"
-                placeholder="Email"
+                placeholder={formatMessage(messages.email)}
                 autoComplete="off"
                 value={username}
                 onChange={(evt) => setUsername(evt.target.value)}
@@ -172,7 +181,7 @@ export default function RegisterForm(props) {
               <input
                 type="password"
                 className="form-control"
-                placeholder="รหัสผ่าน"
+                placeholder={formatMessage(messages.inputPassword)}
                 autoComplete="off"
                 value={password}
                 onChange={(evt) => setPassword(evt.target.value)}
@@ -187,7 +196,7 @@ export default function RegisterForm(props) {
               <input
                 type="password"
                 className="form-control"
-                placeholder="ยืนยัน รหัสผ่าน"
+                placeholder={formatMessage(messages.inputRePassword)}
                 autoComplete="off"
                 value={rePassword}
                 onChange={(evt) => setRePassword(evt.target.value)}
@@ -209,7 +218,7 @@ export default function RegisterForm(props) {
                     onChange={() => setTermAccept(!termAccept)}
                   />
                   &nbsp;
-                  <label htmlFor="agreeTerms">ยอมรับเงื่อนไข</label>
+                  <label htmlFor="agreeTerms">{formatMessage(messages.acceptTermAndCons)}</label>
                 </div>
               </div>
               <div className="col-6">
@@ -218,7 +227,7 @@ export default function RegisterForm(props) {
                   onClick={() => onSaveRegister()}
                   disabled={!termAccept}
                 >
-                  Register
+                  {formatMessage(messages.submit)}
                 </button>
               </div>
             </div>
@@ -237,7 +246,7 @@ export default function RegisterForm(props) {
               </Link>
             </div>
             <Link to="/" className="text-center">
-              กลับหน้า Login
+              {formatMessage(messages.backLogin)}
             </Link>
           </div>
         </div>
@@ -245,3 +254,5 @@ export default function RegisterForm(props) {
     </div>
   )
 }
+
+export default injectIntl(RegisterForm)
