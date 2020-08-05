@@ -1,5 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { FormattedMessage } from "react-intl"
+import messages from "./messages"
 
 export default function MenuTabs() {
   return (
@@ -15,8 +17,10 @@ export default function MenuTabs() {
             <Link to="/dashboard" className="nav-link active">
               <i className="nav-icon fas fa-tachometer-alt" />
               <p>
-                Dashboard
-                <span className="right badge badge-danger">New</span>
+                <FormattedMessage {...messages.dashboard} />
+                <span className="right badge badge-danger">
+                  <FormattedMessage {...messages.new} />
+                </span>
               </p>
             </Link>
           </li>
@@ -24,7 +28,7 @@ export default function MenuTabs() {
             <a href="/" className="nav-link">
               <i className="nav-icon fas fa-th" />
               <p>
-                All Menu
+                <FormattedMessage {...messages.all} />
                 <i className="right fas fa-angle-left" />
               </p>
             </a>
@@ -32,27 +36,28 @@ export default function MenuTabs() {
               <li className="nav-item">
                 <Link to="/dashboard" className="nav-link">
                   <i className="far fa-circle nav-icon" />
-                  <p>สั่งสินค้า Online</p>
+                  <p>
+                    <FormattedMessage {...messages.orderOnline} />
+                  </p>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="/dashboard" className="nav-link">
                   <i className="far fa-circle nav-icon" />
-                  <p>รายการสินค้าที่สั่ง</p>
+                  <p>
+                    <FormattedMessage {...messages.orderTransaction} />
+                  </p>
                 </Link>
               </li>
-              <li className="nav-header">ORDER HISTORY</li>
+              <li className="nav-header">
+                <FormattedMessage {...messages.history} />
+              </li>
               <li className="nav-item">
                 <Link to="/dashboard" className="nav-link">
                   <i className="far fa-circle nav-icon" />
-                  <p>ประวัติการสั่งสินค้า</p>
-                </Link>
-              </li>
-              <li className="nav-header">POINT REDEMPTION</li>
-              <li className="nav-item">
-                <Link to="/dashboard" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>คะแนนสะสม</p>
+                  <p>
+                    <FormattedMessage {...messages.historyTransaction} />
+                  </p>
                 </Link>
               </li>
             </ul>
