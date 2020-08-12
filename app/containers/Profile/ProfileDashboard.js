@@ -18,10 +18,10 @@ export default function ProfileDashboard(props) {
           <b style={{ color: "white" }}>คุณนที สังข์ทองงาม</b>
         </div>
         <div className="login-logo">
-          <ImgLogo src="dist/img/avatar1.png" width="128" height="128" />
+          <ImgLogo src="dist/img/avatar5.png" width="128" height="128" />
         </div>
         <div className="login-logo">
-          <b style={{ color: "white", fontSize: '1.5rem' }}>Total Point</b>
+          <b style={{ color: "white", fontSize: '1.5rem' }}>รายละเอียด</b>
         </div>
         <div className="row">
           <div className="col-lg-6 col-6">
