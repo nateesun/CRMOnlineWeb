@@ -29,7 +29,7 @@ router.get("/:member_code", (req, res, next) => {
 
 /* GET employ listing. */
 router.post("/login", (req, res, next) => {
-  const username = req.body.username
+  const username = req.body.email
   const password = req.body.password
   Task.validLogin(username, password, (err, response) => {
     if (err) {
