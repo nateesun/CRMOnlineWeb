@@ -17,6 +17,7 @@ import makeSelectDashboard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import DashboardContent from './DahboardContent'
 
 export function Dashboard() {
   useInjectReducer({ key: 'dashboard', reducer });
@@ -25,6 +26,7 @@ export function Dashboard() {
   return (
     <div>
       <FormattedMessage {...messages.header} />
+      <DashboardContent />
     </div>
   );
 }

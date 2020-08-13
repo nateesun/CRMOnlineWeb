@@ -11,6 +11,6 @@ export const scope = 'app.containers.Profile';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the Profile container!',
+    defaultMessage: 'Profile container!',
   },
 });

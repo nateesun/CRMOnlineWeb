@@ -17,6 +17,7 @@ import makeSelectProfile from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import ProfileContent from './ProfileContent'
 
 export function Profile() {
   useInjectReducer({ key: 'profile', reducer });
@@ -25,6 +26,7 @@ export function Profile() {
   return (
     <div>
       <FormattedMessage {...messages.header} />
+      <ProfileContent />
     </div>
   );
 }
