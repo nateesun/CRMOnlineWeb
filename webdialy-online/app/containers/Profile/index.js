@@ -13,29 +13,28 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectProfile from './selectors';
+import { makeSelectProfile, makeLoggedIn } from "containers/Login/selectors";
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import ProfileContent from './ProfileContent'
 
-export function Profile() {
+export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
   return (
     <div>
-      <FormattedMessage {...messages.header} />
-      <ProfileContent />
+      <ProfileContent {...props} />
     </div>
   );
 }
 
 Profile.propTypes = {
-  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
+  loggedIn: makeLoggedIn(),
   profile: makeSelectProfile(),
 });
 

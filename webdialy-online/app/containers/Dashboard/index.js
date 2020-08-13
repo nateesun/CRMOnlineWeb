@@ -7,42 +7,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectDashboard from './selectors';
+import { makeSelectProfile, makeLoggedIn } from "containers/Login/selectors";
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import DashboardContent from './DahboardContent'
 
-export function Dashboard() {
+export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
   useInjectSaga({ key: 'dashboard', saga });
 
   return (
     <div>
-      <FormattedMessage {...messages.header} />
-      <DashboardContent />
+      <DashboardContent {...props} />
     </div>
   );
 }
 
 Dashboard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  dashboard: makeSelectDashboard(),
+  loggedIn: makeLoggedIn(),
+  profile: makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-  };
+  }
 }
 
 const withConnect = connect(

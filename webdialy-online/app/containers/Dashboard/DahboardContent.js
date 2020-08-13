@@ -1,10 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-export default function DahboardContent() {
-    return (
-        <div>
-            Point Balance: 0<br />
-            Point Redemption: 0<br />
-        </div>
-    )
+export default function DahboardContent(props) {
+  const { profile } = props;
+  const {
+    prefix,
+    firstName,
+    lastName,
+    pointBalance,
+    pointRedemption,
+  } = profile;
+
+  return (
+    <div>
+      Point Balance: {pointBalance}
+      <br />
+      Point Redemption: {pointRedemption}
+      <br />
+    </div>
+  );
 }

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import messages from './messages';
 import renderField from './renderField';
+import { Button } from '@material-ui/core'
 
 const LoginForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
@@ -33,12 +34,12 @@ const LoginForm = props => {
         </div>
       </div>
       <div>
-        <button type="submit" disabled={pristine || submitting}>
+        <Button type="submit" color="primary" disabled={pristine || submitting}>
           Login
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
+        </Button>
+        <Button disabled={pristine || submitting} onClick={reset}>
           Clear
-        </button>
+        </Button>
       </div>
     </form>
   );
