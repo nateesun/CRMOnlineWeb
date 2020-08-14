@@ -16,9 +16,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
-import { throttle } from 'lodash';
-import { loadState, saveState } from './localStorage';
-
 // Import root app
 import App from 'containers/App';
 
@@ -37,7 +34,7 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 
 // Create redux store with history
-const initialState = loadState();
+const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
@@ -48,12 +45,6 @@ const MOUNT_NODE = document.getElementById('app');
 //       store.getState().login.profile.loggedIn,
 //   ),
 // );
-
-store.subscribe(
-  throttle(() => {
-    saveState(store.getState());
-  }, 1000),
-);
 
 const render = messages => {
   ReactDOM.render(

@@ -17,8 +17,7 @@ import { makeSelectLogin } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-// import LoginForm from './LoginForm';
-import SignIn from './SignIn';
+import LoginForm from './LoginForm';
 import { checkLogin } from './actions';
 
 export function Login(props) {
@@ -27,8 +26,7 @@ export function Login(props) {
 
   return (
     <div>
-      {/* <LoginForm {...props} /> */}
-      <SignIn {...props} />
+      <LoginForm {...props} />
     </div>
   );
 }

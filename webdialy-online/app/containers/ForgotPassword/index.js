@@ -17,14 +17,15 @@ import makeSelectForgotPassword from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import ForgotForm from './ForgotForm';
 
-export function ForgotPassword() {
+export function ForgotPassword(props) {
   useInjectReducer({ key: 'forgotPassword', reducer });
   useInjectSaga({ key: 'forgotPassword', saga });
 
   return (
     <div>
-      <FormattedMessage {...messages.header} />
+      <ForgotForm {...props} />
     </div>
   );
 }

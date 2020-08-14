@@ -1,9 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,9 +8,10 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import ButtonLink from 'components/ButtonLink';
+import RenderField from 'components/RenderField';
 import messages from './messages';
 import LoginLogo from 'images/Login.png';
-import renderField from './renderField';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -41,7 +39,7 @@ const ImgLogo = styled.img`
   border-radius: 5px 25px 5px 25px;
 `;
 
-const SignIn = props => {
+const ForgotForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting } = props;
 
@@ -50,30 +48,17 @@ const SignIn = props => {
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
-          Sign in
+          Forgot Password
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field
             name="email"
-            component={renderField}
+            component={RenderField}
             type="email"
             margin="normal"
             label="Email Address"
             required
             fullWidth
-          />
-          <Field
-            name="password"
-            component={renderField}
-            type="password"
-            label="Password"
-            margin="normal"
-            required
-            fullWidth
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"
@@ -83,7 +68,7 @@ const SignIn = props => {
             className={classes.submit}
             disabled={pristine || submitting}
           >
-            Sign In
+            Send Email
           </Button>
           <Button
             fullWidth
@@ -95,14 +80,7 @@ const SignIn = props => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <ButtonLink to="/login">Back to Login?</ButtonLink>
             </Grid>
           </Grid>
         </form>
@@ -111,7 +89,7 @@ const SignIn = props => {
   );
 };
 
-SignIn.propTypes = {
+ForgotForm.propTypes = {
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   reset: PropTypes.func,
@@ -127,16 +105,10 @@ const validate = formValues => {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
 
-  if (!formValues.password) {
-    errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
-  } else if (formValues.password.length < 6) {
-    errors.password = <FormattedMessage {...messages.passwordTooShort} />;
-  }
-
   return errors;
 };
 
 export default reduxForm({
-  form: 'loginForm',
+  form: 'fogotForm',
   validate,
-})(SignIn);
+})(ForgotForm);

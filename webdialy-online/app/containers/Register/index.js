@@ -17,14 +17,15 @@ import makeSelectRegister from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import RegisterForm from './RegisterForm';
 
-export function Register() {
+export function Register(props) {
   useInjectReducer({ key: 'register', reducer });
   useInjectSaga({ key: 'register', saga });
 
   return (
     <div>
-      <FormattedMessage {...messages.header} />
+      <RegisterForm {...props} />
     </div>
   );
 }

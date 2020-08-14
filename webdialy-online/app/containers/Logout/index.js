@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -17,15 +17,10 @@ import makeSelectLogout from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { clearState } from '../../localStorage';
 
 export function Logout() {
   useInjectReducer({ key: 'logout', reducer });
   useInjectSaga({ key: 'logout', saga });
-
-  useEffect(() => {
-    clearState();
-  });
 
   return (
     <div>

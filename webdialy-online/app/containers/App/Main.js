@@ -150,7 +150,7 @@ export default function Main() {
           >
             Web dialy online
           </Typography>
-          <ButtonLink>Sign In</ButtonLink>
+          <ButtonLink to="/login" color="white">Sign In</ButtonLink>
         </Toolbar>
       </AppBar>
       <Drawer

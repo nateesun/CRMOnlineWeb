@@ -8,10 +8,10 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import ButtonLink from 'components/ButtonLink';
+import RenderField from 'components/RenderField';
 import messages from './messages';
 import LoginLogo from 'images/Login.png';
-import renderField from 'components/RenderField';
-import ButtonLink from 'components/ButtonLink';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -39,7 +39,7 @@ const ImgLogo = styled.img`
   border-radius: 5px 25px 5px 25px;
 `;
 
-const LoginForm = props => {
+const RegisterForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting } = props;
 
@@ -48,24 +48,15 @@ const LoginForm = props => {
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
-          Sign in
+          Register
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field
             name="email"
-            component={renderField}
+            component={RenderField}
             type="email"
             margin="normal"
             label="Email Address"
-            required
-            fullWidth
-          />
-          <Field
-            name="password"
-            component={renderField}
-            type="password"
-            label="Password"
-            margin="normal"
             required
             fullWidth
           />
@@ -77,7 +68,7 @@ const LoginForm = props => {
             className={classes.submit}
             disabled={pristine || submitting}
           >
-            Sign In
+            Confirm Register
           </Button>
           <Button
             fullWidth
@@ -89,14 +80,7 @@ const LoginForm = props => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <ButtonLink to="/forgot-password">
-                Forgot password?
-              </ButtonLink>
-            </Grid>
-            <Grid item>
-              <ButtonLink to="/register">
-                {"Don't have an account? Sign Up"}
-              </ButtonLink>
+              <ButtonLink to="/login">Back to Login?</ButtonLink>
             </Grid>
           </Grid>
         </form>
@@ -105,7 +89,7 @@ const LoginForm = props => {
   );
 };
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   reset: PropTypes.func,
@@ -121,16 +105,10 @@ const validate = formValues => {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
 
-  if (!formValues.password) {
-    errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
-  } else if (formValues.password.length < 6) {
-    errors.password = <FormattedMessage {...messages.passwordTooShort} />;
-  }
-
   return errors;
 };
 
 export default reduxForm({
-  form: 'loginForm',
+  form: 'registerForm',
   validate,
-})(LoginForm);
+})(RegisterForm);
