@@ -28,7 +28,7 @@ const LeftMenu = props => {
   const mainListItems = (
     <div>
       <Link to="/dashboard" className={classes.listMenu}>
-        <ListItem button>
+        <ListItem button selected>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

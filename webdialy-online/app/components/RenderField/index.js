@@ -7,7 +7,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-function RenderField({ input, label, type, meta: { touched, error } }) {
+function RenderField({ input, label, type, required, autoFocus, meta: { touched, error } }) {
   return (
     <div>
       <TextField
@@ -15,10 +15,10 @@ function RenderField({ input, label, type, meta: { touched, error } }) {
         variant="outlined"
         margin="normal"
         type={type}
-        required
         fullWidth
         label={label}
-        autoFocus
+        required={required}
+        autoFocus={autoFocus}
       />
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
     </div>

@@ -10,7 +10,7 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import LoginLogo from 'images/Login.png';
-import renderField from 'components/RenderField';
+import RenderField from 'components/RenderField';
 import ButtonLink from 'components/ButtonLink';
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  loginFooter: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -53,16 +56,17 @@ const LoginForm = props => {
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field
             name="email"
-            component={renderField}
+            component={RenderField}
             type="email"
             margin="normal"
             label="Email Address"
             required
             fullWidth
+            autoFocus
           />
           <Field
             name="password"
-            component={renderField}
+            component={RenderField}
             type="password"
             label="Password"
             margin="normal"
@@ -87,14 +91,14 @@ const LoginForm = props => {
           >
             Clear
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <ButtonLink to="/forgot-password">
+          <Grid container className={classes.loginFooter}>
+            <Grid item xs={12} lg={4}>
+              <ButtonLink color="purple" to="/forgot-password">
                 Forgot password?
               </ButtonLink>
             </Grid>
-            <Grid item>
-              <ButtonLink to="/register">
+            <Grid item xs={12} lg={8}>
+              <ButtonLink color="purple" to="/register">
                 {"Don't have an account? Sign Up"}
               </ButtonLink>
             </Grid>
@@ -123,8 +127,6 @@ const validate = formValues => {
 
   if (!formValues.password) {
     errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
-  } else if (formValues.password.length < 6) {
-    errors.password = <FormattedMessage {...messages.passwordTooShort} />;
   }
 
   return errors;

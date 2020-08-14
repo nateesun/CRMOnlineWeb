@@ -5,15 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import styled from 'styled-components';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
+import SelectField from 'components/RenderField/Select';
 import messages from './messages';
-import LoginLogo from 'images/Login.png';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -33,53 +37,129 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ImgLogo = styled.img`
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 5px 25px 5px 25px;
-`;
-
 const RegisterForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting } = props;
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="lg">
       <div className={classes.paper}>
-        <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
-          Register
+          Register Member
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Field
-            name="email"
-            component={RenderField}
-            type="email"
-            margin="normal"
-            label="Email Address"
-            required
-            fullWidth
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            disabled={pristine || submitting}
-          >
-            Confirm Register
-          </Button>
-          <Button
-            fullWidth
-            variant="contained"
-            disabled={pristine || submitting}
-            onClick={reset}
-          >
-            Clear
-          </Button>
-          <Grid container>
-            <Grid item xs>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={3}>
+              <Field
+                name="prefix"
+                component={SelectField}
+                type="text"
+                margin="normal"
+                label="Prefix"
+                required
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} lg={3}>
+              <Field
+                name="firstName"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label="First Name"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="lastName"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label="Last Name"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="dateOfBirth"
+                component={RenderField}
+                type="date"
+                margin="normal"
+                label="Date of Birth"
+              />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="mobile"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label="Mobile Number"
+                required
+              />
+            </Grid>
+
+            <Grid item xs={12} lg={12}>
+              <Field
+                name="email"
+                component={RenderField}
+                type="email"
+                margin="normal"
+                label="Email Address"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="password"
+                component={RenderField}
+                type="password"
+                label="Password"
+                margin="normal"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="rePassword"
+                component={RenderField}
+                type="password"
+                label="Re-Password"
+                margin="normal"
+                required
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="Accept term and condition"
+              />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={pristine || submitting}
+              >
+                Register
+              </Button>
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <Button
+                fullWidth
+                variant="contained"
+                disabled={pristine || submitting}
+                onClick={reset}
+              >
+                Clear
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
               <ButtonLink to="/login">Back to Login?</ButtonLink>
             </Grid>
           </Grid>
