@@ -158,12 +158,6 @@ const RegisterForm = props => {
             </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Accept term and condition"
-              />
-            </Grid>
             <Grid item xs={6} lg={3}>
               <Button
                 type="submit"
@@ -206,10 +200,31 @@ RegisterForm.propTypes = {
 const validate = formValues => {
   const errors = {};
 
+  if (!formValues.firstName) {
+    errors.firstName = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
+  }
+  if (!formValues.lastName) {
+    errors.lastName = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+  }
+  if (!formValues.mobile) {
+    errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
+  }
+  if (!formValues.dateOfBirth) {
+    errors.dateOfBirth = <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />;
+  }
   if (typeof formValues.email === 'undefined') {
     errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
   } else if (!formValues.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
+  }
+  if (!formValues.password) {
+    errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
+  }
+  if (!formValues.rePassword) {
+    errors.rePassword = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
+  }
+  if (formValues.password !== formValues.rePassword) {
+    errors.rePassword = <FormattedMessage {...messages.passwordConfirmShouldEqual} />;
   }
 
   return errors;

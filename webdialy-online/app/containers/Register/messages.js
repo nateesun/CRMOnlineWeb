@@ -37,4 +37,28 @@ export default defineMessages({
     id: `${scope}.loginErrorMessage`,
     defaultMessage: 'Incorrect email or password.',
   },
+  passwordShouldNotEmpty: {
+    id: `${scope}.passwordShouldNotEmpty`,
+    defaultMessage: 'Password should not be blank.',
+  },
+  passwordConfirmShouldEqual: {
+    id: `${scope}.passwordConfirmShouldEqual`,
+    defaultMessage: 'Password and Re-password should be equal.',
+  },
+  dateOfBirthShouldNotEmpty: {
+    id: `${scope}.dateOfBirthShouldNotEmpty`,
+    defaultMessage: 'Date of Birth should not be blank.',
+  },
+  firstNameShouldNotEmpty: {
+    id: `${scope}.firstNameShouldNotEmpty`,
+    defaultMessage: 'First name should not be blank.',
+  },
+  lastNameShouldNotEmpty: {
+    id: `${scope}.lastNameShouldNotEmpty`,
+    defaultMessage: 'Last name should not be blank.',
+  },
+  mobileShouldNotEmpty: {
+    id: `${scope}.mobileShouldNotEmpty`,
+    defaultMessage: 'Mobile should not be blank.',
+  },
 });
