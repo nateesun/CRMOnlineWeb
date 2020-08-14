@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Grid from '@material-ui/core/Grid';
 import { Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LeftMenu from './LeftMenu';
@@ -26,6 +27,7 @@ import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
+import LocaleToggle from 'containers/LocaleToggle';
 
 import ButtonLink from 'components/ButtonLink';
 
@@ -148,9 +150,14 @@ export default function Main() {
             noWrap
             className={classes.title}
           >
-            Web dialy online
+            <ButtonLink to="/" color="white">
+              Web dialy online
+            </ButtonLink>
           </Typography>
-          <ButtonLink to="/login" color="white">Sign In</ButtonLink>
+          <LocaleToggle />
+          <ButtonLink to="/login" color="white">
+            Sign In
+          </ButtonLink>
         </Toolbar>
       </AppBar>
       <Drawer
