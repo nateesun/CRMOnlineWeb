@@ -15,10 +15,6 @@ export default function ProfileContent(props) {
       <h3>{`${prefix}${firstName} ${lastName}`}</h3>
       <span>Picture</span><br />
       <span>Detail</span><br />
-      Point Balance: {pointBalance}
-      <br />
-      Point Redemption: {pointRedemption}
-      <br />
     </div>
   );
 }

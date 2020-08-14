@@ -3,31 +3,31 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LeftMenu from './LeftMenu';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Login from 'containers/Login/Loadable';
+import Logout from 'containers/Logout/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
 import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
+
+import ButtonLink from 'components/ButtonLink';
 
 const drawerWidth = 240;
 
@@ -148,13 +148,9 @@ export default function Main() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            Web dialy online
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <ButtonLink>Sign In</ButtonLink>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -178,6 +174,7 @@ export default function Main() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
             <Route path="/forgot-password" component={ForgotPassword} />

@@ -48,11 +48,13 @@ router.post("/login", (req, res, next) => {
           status: response.status,
           msg: "Success",
           data: {
+            username: data.Username,
             prefix: data.Member_TitleNameThai,
             firstName: data.Member_FirstName,
             lastName: data.Member_LastName,
             pointBalance: data.Member_TotalScore,
             pointRedemption: data.Member_TotalPurchase,
+            loggedIn: true,
           },
         })
       }

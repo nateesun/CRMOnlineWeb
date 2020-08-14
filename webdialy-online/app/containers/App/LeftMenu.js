@@ -97,7 +97,7 @@ const LeftMenu = props => {
           <ListItemText primary="Profile" />
         </ListItem>
       </Link>
-      <Link to="/login" className={classes.listMenu}>
+      <Link to="/logout" className={classes.listMenu}>
         <ListItem button>
           <ListItemIcon>
             <ExitToApp />

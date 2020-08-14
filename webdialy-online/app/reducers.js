@@ -17,6 +17,9 @@ export default function createReducer(injectedReducers = {}) {
     language: languageProviderReducer,
     router: connectRouter(history),
     form: formReducer,
+    // login: (state = {}) => state,
+    // dashboard: (state = {}) => state,
+    // profile: (state = {}) => state,
     ...injectedReducers,
   });
 
