@@ -15,11 +15,16 @@ const selectRegisterDomain = state => state.register || initialState;
  * Default selector used by Register
  */
 
-const makeSelectRegister = () =>
+const makeSelectMember = () =>
   createSelector(
     selectRegisterDomain,
-    substate => substate,
+    registerState => registerState.member,
   );
 
-export default makeSelectRegister;
-export { selectRegisterDomain };
+const makeRegisterStatus = () =>
+  createSelector(
+    selectRegisterDomain,
+    registerState => registerState.status,
+  );
+
+export { selectRegisterDomain, makeSelectMember, makeRegisterStatus };

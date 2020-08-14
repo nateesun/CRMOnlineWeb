@@ -39,7 +39,10 @@ const useStyles = makeStyles(theme => ({
 
 const RegisterForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting, onRegister } = props;
+  const onValidated = formValues => {
+    onRegister({ member: formValues });
+  };
 
   return (
     <Container component="main" maxWidth="lg">
@@ -47,7 +50,7 @@ const RegisterForm = props => {
         <Typography component="h1" variant="h5">
           Register Member
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={3}>
               <Field
@@ -174,6 +177,7 @@ RegisterForm.propTypes = {
   pristine: PropTypes.bool,
   reset: PropTypes.func,
   submitting: PropTypes.bool,
+  onRegister: PropTypes.func,
 };
 
 const validate = formValues => {

@@ -13,34 +13,37 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectRegister from './selectors';
+import { makeRegisterStatus } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import RegisterForm from './RegisterForm';
+import { addRegisterMember } from "./actions"
 
 export function Register(props) {
   useInjectReducer({ key: 'register', reducer });
   useInjectSaga({ key: 'register', saga });
 
+  const { onRegisterMember } = props;
+
   return (
     <div>
-      <RegisterForm {...props} />
+      <RegisterForm {...props} onRegister={onRegisterMember} />
     </div>
   );
 }
 
 Register.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+  onRegisterMember: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  register: makeSelectRegister(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onRegisterMember: (member) => dispatch(addRegisterMember(member)),
   };
 }
 

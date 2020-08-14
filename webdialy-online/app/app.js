@@ -45,6 +45,7 @@ const MOUNT_NODE = document.getElementById('app');
 //       store.getState().login.profile.loggedIn,
 //   ),
 // );
+// store.subscribe(() => console.log(store.getState()));
 
 const render = messages => {
   ReactDOM.render(
