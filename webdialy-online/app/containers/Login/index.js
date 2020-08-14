@@ -7,18 +7,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectLogin } from './selectors';
+import { makeSelectLogin, makeLoginError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import LoginForm from './LoginForm';
-import { checkLogin } from './actions';
+import { checkLogin, defaultAction } from './actions';
 
 export function Login(props) {
   useInjectReducer({ key: 'login', reducer });
@@ -38,6 +36,7 @@ Login.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
+  errorLogin: makeLoginError(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -46,6 +45,9 @@ function mapDispatchToProps(dispatch) {
     onSubmit: ({ email, password }) => {
       dispatch(checkLogin(email, password));
     },
+    clearData: () => {
+      dispatch(defaultAction());
+    }
   };
 }
 

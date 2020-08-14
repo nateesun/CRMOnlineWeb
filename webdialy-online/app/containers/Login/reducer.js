@@ -18,10 +18,10 @@ import {
 
 export const initialState = {
   loginForm: {
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   },
-  profile: null,
+  profile: {},
   loggedIn: false,
   error: '',
 };
@@ -31,6 +31,10 @@ const loginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
+        draft.loginForm = {};
+        draft.profile = {};
+        draft.loggedIn = false;
+        draft.error = '';
         break;
       case CHECK_LOGIN:
         draft.loginForm.email = action.payload.email;

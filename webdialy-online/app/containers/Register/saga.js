@@ -1,5 +1,6 @@
 import { put, select, takeLatest, call } from 'redux-saga/effects';
 import moment from 'moment';
+import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { ADD_REGISTER_MEMBER } from './constants';
 import { addRegisterMemberSuccess, addRegisterMemberError } from './actions';
@@ -9,8 +10,6 @@ export function* onAddRegisterMember() {
   try {
     const requestURL = 'http://localhost:5000/api/member';
     const member = yield select(makeSelectMember());
-    console.log(member);
-    console.log(requestURL);
     const {
       prefix,
       firstName,
@@ -51,14 +50,9 @@ export function* onAddRegisterMember() {
         Member_Brithday: dateOfBirth,
       }),
     });
-    console.log('saga:', response);
-    if (response.status === 'Success') {
-      yield put(addRegisterMemberSuccess());
-    } else {
-      yield put(addRegisterMemberError('Cannot save data !!!'));
-    }
+    yield put(addRegisterMemberSuccess());
+    yield put(push('/login'));
   } catch (err) {
-    console.log(err);
     yield put(addRegisterMemberError(err));
   }
 }

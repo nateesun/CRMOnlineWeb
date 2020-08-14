@@ -7,18 +7,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeRegisterStatus } from './selectors';
+import {
+  makeErrorRegister,
+  makeSelectMember,
+  makeRegisterStatus,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import RegisterForm from './RegisterForm';
-import { addRegisterMember } from "./actions"
+import { defaultAction, addRegisterMember } from './actions';
 
 export function Register(props) {
   useInjectReducer({ key: 'register', reducer });
@@ -39,11 +41,15 @@ Register.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  member: makeSelectMember(),
+  registerStatus: makeRegisterStatus(),
+  errorRegister: makeErrorRegister(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRegisterMember: (member) => dispatch(addRegisterMember(member)),
+    onRegisterMember: member => dispatch(addRegisterMember(member)),
+    clearData: () => dispatch(defaultAction()),
   };
 }
 

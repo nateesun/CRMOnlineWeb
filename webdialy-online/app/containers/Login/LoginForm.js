@@ -12,6 +12,7 @@ import messages from './messages';
 import LoginLogo from 'images/Login.png';
 import RenderField from 'components/RenderField';
 import ButtonLink from 'components/ButtonLink';
+import SweetAlert from 'sweetalert2-react';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -44,10 +45,24 @@ const ImgLogo = styled.img`
 
 const LoginForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    errorLogin,
+    clearData,
+  } = props;
 
   return (
     <Container component="main" maxWidth="xs">
+      <SweetAlert
+        show={errorLogin}
+        title="Login Error"
+        type="error"
+        text={errorLogin}
+        onConfirm={clearData}
+      />
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
@@ -110,6 +125,7 @@ const LoginForm = props => {
 };
 
 LoginForm.propTypes = {
+  errorLogin: PropTypes.string,
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   reset: PropTypes.func,

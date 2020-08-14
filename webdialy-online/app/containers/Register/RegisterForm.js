@@ -13,6 +13,7 @@ import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
 import SelectField from 'components/RenderField/Select';
 import messages from './messages';
+import SweetAlert from 'sweetalert2-react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,13 +40,35 @@ const useStyles = makeStyles(theme => ({
 
 const RegisterForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, onRegister } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    onRegister,
+    errorRegister,
+    registerStatus,
+    clearData,
+  } = props;
   const onValidated = formValues => {
     onRegister({ member: formValues });
   };
 
   return (
     <Container component="main" maxWidth="lg">
+      <SweetAlert
+        show={errorRegister}
+        title="Register Error"
+        type="error"
+        text={errorRegister}
+      />
+      <SweetAlert
+        show={registerStatus==='Success'}
+        title="Register Success"
+        type="success"
+        text="You can login into system"
+        onConfirm={clearData}
+      />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Register Member

@@ -27,4 +27,10 @@ const makeRegisterStatus = () =>
     registerState => registerState.status,
   );
 
-export { selectRegisterDomain, makeSelectMember, makeRegisterStatus };
+const makeErrorRegister = () =>
+  createSelector(
+    selectRegisterDomain,
+    registerState => registerState.error,
+  );
+
+export { selectRegisterDomain, makeSelectMember, makeRegisterStatus, makeErrorRegister };

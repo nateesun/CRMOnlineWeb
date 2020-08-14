@@ -22,6 +22,7 @@ export const initialState = {
     dateOfBirth: '',
   },
   status: '',
+  error: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -29,6 +30,9 @@ const registerReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case DEFAULT_ACTION:
+        draft.member = {}
+        draft.status = '';
+        draft.error= '';
         break;
       case ADD_REGISTER_MEMBER:
         draft.member.prefix = action.payload.member.prefix;
@@ -43,7 +47,7 @@ const registerReducer = (state = initialState, action) =>
         draft.status = 'Success';
         break;
       case ADD_REGISTER_MEMBER_ERROR:
-        draft.status = action.error;
+        draft.error = action.payload;
         break;
     }
   });
