@@ -21,7 +21,11 @@ function Toggle(props) {
   }
 
   return (
-    <Select value={props.value} onChange={props.onToggle} style={{ color: "white" }}>
+    <Select
+      value={props.value}
+      onChange={props.onToggle}
+      style={{ color: 'white' }}
+    >
       {content}
     </Select>
   );

@@ -15,14 +15,14 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   listMenu: {
     textDecoration: 'none',
     color: 'black',
   },
 }));
 
-const LeftMenu = props => {
+const LeftMenu = () => {
   const classes = useStyles();
 
   const mainListItems = (

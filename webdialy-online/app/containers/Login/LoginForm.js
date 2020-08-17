@@ -8,15 +8,15 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import LoginLogo from 'images/Login.png';
 import RenderField from 'components/RenderField';
 import ButtonLink from 'components/ButtonLink';
 import SweetAlert from 'sweetalert2-react';
+import messages from './messages';
+import LoginLogo from '../../images/login.png';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ImgLogo = styled.img`
-  border: 1px solid white;
+  border: 1px solid #bbbbbb;
   padding: 10px;
   border-radius: 5px 25px 5px 25px;
 `;
@@ -130,6 +130,7 @@ LoginForm.propTypes = {
   pristine: PropTypes.bool,
   reset: PropTypes.func,
   submitting: PropTypes.bool,
+  clearData: PropTypes.func,
 };
 
 const validate = formValues => {

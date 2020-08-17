@@ -8,14 +8,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Grid from '@material-ui/core/Grid';
 import { Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import LeftMenu from './LeftMenu';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -31,6 +27,7 @@ import Members from 'containers/Members/Loadable';
 import LocaleToggle from 'containers/LocaleToggle';
 
 import ButtonLink from 'components/ButtonLink';
+import LeftMenu from './LeftMenu';
 
 const drawerWidth = 240;
 
@@ -122,7 +119,6 @@ export default function Main() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>

@@ -27,12 +27,12 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const registerReducer = (state = initialState, action) =>
-  produce(state, (draft) => {
+  produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
-        draft.member = {}
+        draft.member = {};
         draft.status = '';
-        draft.error= '';
+        draft.error = '';
         break;
       case ADD_REGISTER_MEMBER:
         draft.member.prefix = action.payload.member.prefix;

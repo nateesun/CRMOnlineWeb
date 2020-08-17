@@ -47,7 +47,7 @@ function mapDispatchToProps(dispatch) {
     },
     clearData: () => {
       dispatch(defaultAction());
-    }
+    },
   };
 }
 

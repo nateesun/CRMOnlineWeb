@@ -5,41 +5,35 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 
-function RenderField({
-  input,
-  label,
-  type,
-  required,
-  autoFocus,
-  meta: { touched, error },
-}) {
+function DateInput({ input, label, required, meta: { touched, error } }) {
   return (
     <div>
       <TextField
         {...input}
         variant="outlined"
         margin="normal"
-        type={type}
+        defaultValue="2017-05-24"
+        type="date"
         fullWidth
         label={label}
         required={required}
-        autoFocus={autoFocus}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
     </div>
   );
 }
 
-RenderField.propTypes = {
+DateInput.propTypes = {
   input: PropTypes.any,
   label: PropTypes.string,
-  type: PropTypes.string,
   required: PropTypes.bool,
-  autoFocus: PropTypes.bool,
   meta: PropTypes.object,
 };
 
-export default RenderField;
+export default DateInput;

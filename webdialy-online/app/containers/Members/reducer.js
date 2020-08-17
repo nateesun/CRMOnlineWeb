@@ -3,8 +3,8 @@
  * Members reducer
  *
  */
-import produce, { isDraft } from 'immer';
-import { 
+import produce from 'immer';
+import {
   DEFAULT_ACTION,
   LOAD_MEMBERS,
   LOAD_MEMBERS_SUCCESS,
@@ -14,7 +14,7 @@ import {
   DELETE_MEMBER_ERROR,
   EDIT_MEMBER,
   EDIT_MEMBER_SUCCESS,
-  EDIT_MEMBER_ERROR
+  EDIT_MEMBER_ERROR,
 } from './constants';
 
 export const initialState = {

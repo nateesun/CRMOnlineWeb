@@ -1,3 +1,5 @@
+import logger from '../logger';
+
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
@@ -6,7 +8,7 @@ export const loadState = () => {
     }
     return JSON.parse(serializedState);
   } catch (e) {
-    console.log('loadStorage error = ', e);
+    logger.log('error', e);
     return undefined;
   }
 };
@@ -16,14 +18,14 @@ export const saveState = state => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (e) {
-    console.log('saveState error = ', e);
+    logger.log('error', e);
   }
 };
 
-export const clearState = state => {
+export const clearState = () => {
   try {
-    localStorage.removeItem('state')
+    localStorage.removeItem('state');
   } catch (e) {
-    console.log('clearState error = ', e);
+    logger.log('error', e);
   }
 };

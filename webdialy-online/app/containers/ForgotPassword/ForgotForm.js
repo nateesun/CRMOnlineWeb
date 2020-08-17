@@ -11,7 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
 import messages from './messages';
-import LoginLogo from 'images/Login.png';
+import LoginLogo from '../../images/login.png';
 
 const useStyles = makeStyles(theme => ({
   paper: {

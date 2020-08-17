@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -16,7 +15,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectForgotPassword from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import ForgotForm from './ForgotForm';
 
 export function ForgotPassword(props) {

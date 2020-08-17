@@ -19,7 +19,7 @@ export function defaultAction() {
 export function addRegisterMember(payload) {
   return {
     type: ADD_REGISTER_MEMBER,
-    payload: payload,
+    payload,
   };
 }
 

@@ -25,7 +25,7 @@ export function defaultAction() {
 export function clearLogin() {
   return {
     type: CLEAR_LOGIN,
-  }
+  };
 }
 
 export function checkLogin(email, password) {
@@ -35,45 +35,45 @@ export function checkLogin(email, password) {
       email,
       password,
     },
-  }
+  };
 }
 
 export function checkLoginSuccess(payload) {
   return {
     type: CHECK_LOGIN_SUCCESS,
     payload,
-  }
+  };
 }
 
 export function checkLoginError(error) {
   return {
     type: CHECK_LOGIN_ERROR,
     payload: error,
-  }
+  };
 }
 
 export function checkLogout() {
   return {
     type: CHECK_LOGOUT,
-  }
+  };
 }
 
 export function checkLogoutSuccess() {
   return {
     type: CHECK_LOGOUT_SUCCESS,
-  }
+  };
 }
 
 export function checkLogoutError(error) {
   return {
     type: CHECK_LOGOUT_ERROR,
     payload: error,
-  }
+  };
 }
 
 export function loadProfileFromToken(token) {
   return {
     type: LOAD_PROFILE_TOKEN,
     payload: token,
-  }
+  };
 }

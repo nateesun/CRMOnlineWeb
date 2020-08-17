@@ -1,14 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function DahboardContent(props) {
   const { profile } = props;
-  const {
-    prefix,
-    firstName,
-    lastName,
-    pointBalance,
-    pointRedemption,
-  } = profile;
+  const { pointBalance, pointRedemption } = profile;
+
+  DahboardContent.propTypes = {
+    profile: PropTypes.object,
+  };
 
   return (
     <div>

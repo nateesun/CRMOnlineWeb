@@ -4,7 +4,7 @@
  *
  */
 
-import { 
+import {
   DEFAULT_ACTION,
   LOAD_MEMBERS,
   LOAD_MEMBERS_SUCCESS,
@@ -14,7 +14,7 @@ import {
   DELETE_MEMBER_ERROR,
   EDIT_MEMBER,
   EDIT_MEMBER_SUCCESS,
-  EDIT_MEMBER_ERROR
+  EDIT_MEMBER_ERROR,
 } from './constants';
 
 export function defaultAction() {
@@ -30,13 +30,13 @@ export function loadMembers() {
 export function loadMemberSuccess(payload) {
   return {
     type: LOAD_MEMBERS_SUCCESS,
-    payload: payload,
+    payload,
   };
 }
 export function loadMemberError(payload) {
   return {
     type: LOAD_MEMBERS_ERROR,
-    payload: payload,
+    payload,
   };
 }
 export function deleteMember(payload) {
@@ -48,13 +48,13 @@ export function deleteMember(payload) {
 export function deleteMemberSuccess(payload) {
   return {
     type: DELETE_MEMBER_SUCCESS,
-    payload: payload,
+    payload,
   };
 }
 export function deleteMemberError(payload) {
   return {
     type: DELETE_MEMBER_ERROR,
-    payload: payload,
+    payload,
   };
 }
 
@@ -67,12 +67,12 @@ export function editMember(member) {
 export function editMemberSuccess(payload) {
   return {
     type: EDIT_MEMBER_SUCCESS,
-    payload: payload,
+    payload,
   };
 }
 export function editMemberError(payload) {
   return {
     type: EDIT_MEMBER_ERROR,
-    payload: payload,
+    payload,
   };
 }

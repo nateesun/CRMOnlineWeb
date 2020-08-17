@@ -7,7 +7,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -16,7 +15,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectMembers from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import MemberTable from './MemberTable';
 import { loadMembers, deleteMember, editMember } from './actions';
 
@@ -50,7 +48,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onInitLoad: () => dispatch(loadMembers()),
     onEdit: member => dispatch(editMember(member)),
-    onDelete: member_code => dispatch(deleteMember(member_code)),
+    onDelete: memberCode => dispatch(deleteMember(memberCode)),
   };
 }
 

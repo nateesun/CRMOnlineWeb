@@ -1,19 +1,18 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
+import DateInput from 'components/RenderField/DateInput';
 import SelectField from 'components/RenderField/Select';
-import messages from './messages';
 import SweetAlert from 'sweetalert2-react';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,6 +53,12 @@ const RegisterForm = props => {
     onRegister({ member: formValues });
   };
 
+  RegisterForm.propTypes = {
+    errorRegister: PropTypes.string,
+    registerStatus: PropTypes.string,
+    clearData: PropTypes.func,
+  };
+
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert
@@ -63,7 +68,7 @@ const RegisterForm = props => {
         text={errorRegister}
       />
       <SweetAlert
-        show={registerStatus==='Success'}
+        show={registerStatus === 'Success'}
         title="Register Success"
         type="success"
         text="You can login into system"
@@ -109,7 +114,7 @@ const RegisterForm = props => {
             <Grid item xs={12} lg={6}>
               <Field
                 name="dateOfBirth"
-                component={RenderField}
+                component={DateInput}
                 type="date"
                 margin="normal"
                 label="Date of Birth"
@@ -205,7 +210,9 @@ const validate = formValues => {
   }
 
   if (!formValues.firstName) {
-    errors.firstName = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
+    errors.firstName = (
+      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
+    );
   }
   if (!formValues.lastName) {
     errors.lastName = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
@@ -214,7 +221,9 @@ const validate = formValues => {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (!formValues.dateOfBirth) {
-    errors.dateOfBirth = <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />;
+    errors.dateOfBirth = (
+      <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
+    );
   }
   if (typeof formValues.email === 'undefined') {
     errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
@@ -225,10 +234,14 @@ const validate = formValues => {
     errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
   }
   if (!formValues.rePassword) {
-    errors.rePassword = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
+    errors.rePassword = (
+      <FormattedMessage {...messages.passwordShouldNotEmpty} />
+    );
   }
   if (formValues.password !== formValues.rePassword) {
-    errors.rePassword = <FormattedMessage {...messages.passwordConfirmShouldEqual} />;
+    errors.rePassword = (
+      <FormattedMessage {...messages.passwordConfirmShouldEqual} />
+    );
   }
 
   return errors;

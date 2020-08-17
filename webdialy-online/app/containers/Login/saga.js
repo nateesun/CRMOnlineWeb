@@ -23,13 +23,13 @@ export function* onValidLogin() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email,
+        password,
       }),
     });
     if (response.status === 'Success') {
       yield put(checkLoginSuccess(response));
-      yield put(push('/dashboard'))
+      yield put(push('/dashboard'));
     } else {
       yield put(checkLoginError('Email or password invalid'));
     }

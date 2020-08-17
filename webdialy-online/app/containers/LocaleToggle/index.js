@@ -6,26 +6,15 @@
 
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
 import Toggle from 'components/Toggle';
+import { changeLocale } from 'containers/LanguageProvider/actions';
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import Wrapper from './Wrapper';
 import messages from './messages';
 import { appLocales } from '../../i18n';
-import { changeLocale } from 'containers/LanguageProvider/actions';
-import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(1),
-  },
-}));
 
 export function LocaleToggle(props) {
   const { locale, onLocaleToggle } = props;
