@@ -19,7 +19,7 @@ export function* onAddRegisterMember() {
       email,
       password,
     } = member;
-    const response = yield call(request, requestURL, {
+    yield call(request, requestURL, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

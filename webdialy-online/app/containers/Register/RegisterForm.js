@@ -200,6 +200,10 @@ RegisterForm.propTypes = {
 const validate = formValues => {
   const errors = {};
 
+  if (!formValues.prefix) {
+    errors.prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
+  }
+
   if (!formValues.firstName) {
     errors.firstName = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }

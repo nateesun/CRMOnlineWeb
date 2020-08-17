@@ -88,7 +88,7 @@ const MemMaster = {
       Member_TotalPurchase,
       Member_Active,
       Member_BranchCode,
-      Member_Code
+      Member_Code,
     } = MemmasterModel
     try {
       const sql = `update ${table_name} set 
@@ -104,8 +104,18 @@ const MemMaster = {
         Member_Active,
         Member_BranchCode,
         System_Updated,
-        Member_Code
+        Member_Code,
       ])
+      callback(null, { status: "Success", data: result.affectedRows })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
+  delete: async (member_code, callback) => {
+    try {
+      const sql = `delete from ${table_name} WHERE Member_Code=?`;
+      console.log(sql, member_code)
+      const result = await pool.query(sql, [member_code]);
       callback(null, { status: "Success", data: result.affectedRows })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })

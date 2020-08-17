@@ -36,6 +36,7 @@ function SelectField({ input, label, meta: { touched, error } }) {
         onChange={handleChange}
         label={label}
       >
+        <option value=""></option>
         <option value="คุณ">คุณ</option>
         <option value="นาย">นาย</option>
         <option value="นาง">นาง</option>

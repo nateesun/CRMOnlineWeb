@@ -17,6 +17,10 @@ export default defineMessages({
     id: `${scope}.enterEmail`,
     defaultMessage: 'Email',
   },
+  prefixShouldNotEmpty: {
+    id: `${scope}.prefixShouldNotEmpty`,
+    defaultMessage: 'Prefix should not be blank.',
+  },
   emailShouldNotEmpty: {
     id: `${scope}.emailShouldNotEmpty`,
     defaultMessage: 'Email should not be blank.',

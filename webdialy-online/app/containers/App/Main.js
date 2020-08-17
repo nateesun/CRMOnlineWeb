@@ -27,6 +27,7 @@ import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
+import Members from 'containers/Members/Loadable';
 import LocaleToggle from 'containers/LocaleToggle';
 
 import ButtonLink from 'components/ButtonLink';
@@ -187,6 +188,7 @@ export default function Main() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/recover-password" component={RecoverPassword} />
             <Route path="/profile" component={Profile} />
+            <Route path="/members" component={Members} />
             <Route component={NotFoundPage} />
           </Switch>
         </Container>

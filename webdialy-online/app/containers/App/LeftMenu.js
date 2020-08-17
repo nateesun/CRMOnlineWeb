@@ -41,12 +41,14 @@ const LeftMenu = props => {
         </ListItemIcon>
         <ListItemText primary="Orders" />
       </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Customers" />
-      </ListItem>
+      <Link to="/members" className={classes.listMenu}>
+        <ListItem button>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Members" />
+        </ListItem>
+      </Link>
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
