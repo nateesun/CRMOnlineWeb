@@ -24,11 +24,10 @@ import ButtonLink from 'components/ButtonLink';
 
 const categories = [
   {
-    id: 'Settings',
+    id: 'Account',
     children: [
-      { id: 'Authentication', icon: <PeopleIcon />, to: '', active: true },
-      { id: 'Database', icon: <DnsRoundedIcon />, to: '' },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: '' },
+      { id: 'Profile', icon: <PersonIcon />, to: '/profile' },
+      { id: 'Logout', icon: <ExitToApp />, to: '/logout' },
     ],
   },
   {
@@ -48,12 +47,13 @@ const categories = [
     ],
   },
   {
-    id: 'Account',
+    id: 'Settings',
     children: [
-      { id: 'Profile', icon: <PersonIcon />, to: '/profile' },
-      { id: 'Logout', icon: <ExitToApp />, to: '/logout' },
+      { id: 'Authentication', icon: <PeopleIcon />, to: '', active: true },
+      { id: 'Database', icon: <DnsRoundedIcon />, to: '' },
+      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: '' },
     ],
-  },
+  }
 ];
 
 const styles = theme => ({
@@ -119,7 +119,7 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            Project Overview
+            Dashboard
           </ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (
@@ -134,7 +134,7 @@ function Navigator(props) {
               </ListItemText>
             </ListItem>
             {children.map(({ id: childId, icon, active, to }) => (
-              <ButtonLink to={to} key={`menu${id}`}>
+              <ButtonLink to={to} key={`menu${childId}`}>
                 <ListItem
                   key={childId}
                   button

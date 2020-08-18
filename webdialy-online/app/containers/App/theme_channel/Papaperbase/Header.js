@@ -41,7 +41,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <AppBar position="sticky" elevation={0} style={{ background: '#e17622' }}>
+      <AppBar position="sticky" elevation={0} style={{ background: 'chocolate' }}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Hidden smUp>

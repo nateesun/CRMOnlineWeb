@@ -15,7 +15,6 @@ function DateInput({ input, label, required, meta: { touched, error } }) {
         {...input}
         variant="outlined"
         margin="normal"
-        defaultValue="2017-05-24"
         type="date"
         fullWidth
         label={label}
