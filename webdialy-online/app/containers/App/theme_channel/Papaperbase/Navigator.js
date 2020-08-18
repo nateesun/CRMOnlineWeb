@@ -119,7 +119,9 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            Dashboard
+            <ButtonLink to="/dashboard" color="white">
+            Home
+            </ButtonLink>
           </ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (

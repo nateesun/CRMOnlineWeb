@@ -54,6 +54,10 @@ router.post("/login", (req, res, next) => {
             lastName: data.Member_LastName,
             pointBalance: data.Member_TotalScore,
             pointRedemption: data.Member_TotalPurchase,
+            code: data.Member_Code,
+            email: data.Member_Email,
+            brithday: data.Member_Brithday,
+            mobile: data.Member_Mobile,
             loggedIn: true,
           },
         })
