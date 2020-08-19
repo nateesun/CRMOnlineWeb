@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   height: 100%;
   padding: 10px;
   text-align: center;
-  margin-top: 50%;
+  margin-top: 50px;
 `;
 
 export function Logout(props) {
