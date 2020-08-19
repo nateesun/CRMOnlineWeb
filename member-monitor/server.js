@@ -9,10 +9,8 @@ const config = require("./config/local-db.json")[0]
 const timeToFetch = 10 * 1000
 logger.info(`Wating update for ${timeToFetch / 1000} seconds`)
 
-const apiUrlPull = `http://124.121.35.251:5000/api/member`
-const apiUrlPush = `http://124.121.35.251:5000/api/member`
-// const apiUrlPull = `http://localhost:5000/api/member`
-// const apiUrlPush = `http://localhost:5000/api/member`
+const apiUrlPull = `http://183.88.210.11:5000/api/member`
+const apiUrlPush = `http://183.88.210.11:5000/api/member`
 
 const pullArr = []
 
