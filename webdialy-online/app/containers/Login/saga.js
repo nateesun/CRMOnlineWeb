@@ -13,7 +13,7 @@ import { makeSelectLogin } from './selectors';
 
 export function* onValidLogin() {
   try {
-    const requestURL = 'http://localhost:5000/api/member/login';
+    const requestURL = '/api/member/login';
     const loginForm = yield select(makeSelectLogin());
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {

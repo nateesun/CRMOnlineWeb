@@ -53,7 +53,7 @@ const categories = [
       { id: 'Database', icon: <DnsRoundedIcon />, to: '' },
       { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: '' },
     ],
-  }
+  },
 ];
 
 const styles = theme => ({
@@ -120,7 +120,7 @@ function Navigator(props) {
             }}
           >
             <ButtonLink to="/dashboard" color="white">
-            Home
+              Home
             </ButtonLink>
           </ListItemText>
         </ListItem>

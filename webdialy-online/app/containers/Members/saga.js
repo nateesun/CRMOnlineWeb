@@ -11,7 +11,7 @@ import {
 
 export function* onLoadMembers() {
   try {
-    const requestURL = 'http://localhost:5000/api/member';
+    const requestURL = '/api/member';
     const response = yield call(request, requestURL, {
       method: 'GET',
       headers: {
@@ -26,7 +26,7 @@ export function* onLoadMembers() {
 }
 export function* onDeleteMember({ payload }) {
   try {
-    const requestURL = 'http://localhost:5000/api/member';
+    const requestURL = '/api/member';
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       headers: {
@@ -44,7 +44,7 @@ export function* onDeleteMember({ payload }) {
 }
 export function* onEditMember() {
   try {
-    const requestURL = 'http://localhost:5000/api/member';
+    const requestURL = '/api/member';
     const response = yield call(request, requestURL, {
       method: 'PATCH',
       headers: {

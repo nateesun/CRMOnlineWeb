@@ -14,8 +14,18 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+const httpRequest = require('./infra/httpRequest/usecases')();
+const envConfig = require('../config/envConfig');
+const serviceApiHost = envConfig('SERVICE_API_HOST');
+
+const options = {
+  serviceApiHost,
+  httpRequest,
+};
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+app.use('/api/member/login', require('./routes/login')(options));
+app.use('/api', require('./routes/api')(options));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

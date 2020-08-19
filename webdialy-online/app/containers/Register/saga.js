@@ -8,7 +8,7 @@ import { makeSelectMember } from './selectors';
 
 export function* onAddRegisterMember() {
   try {
-    const requestURL = 'http://localhost:5000/api/member';
+    const requestURL = '/api/member';
     const member = yield select(makeSelectMember());
     const {
       prefix,

@@ -84,11 +84,11 @@ export default function ProfileContent(props) {
           </Grid>
           <Grid item xs={6}>
             <Typography>
-              ( Point Balance ) {' '}
+              ( Point Balance ){' '}
               <NumberFormat
                 value={pointBalance}
-                displayType={'text'}
-                thousandSeparator={true}
+                displayType="text"
+                thousandSeparator
               />
             </Typography>
           </Grid>
@@ -97,8 +97,8 @@ export default function ProfileContent(props) {
               ( Point Redemption ){' '}
               <NumberFormat
                 value={pointRedemption}
-                displayType={'text'}
-                thousandSeparator={true}
+                displayType="text"
+                thousandSeparator
               />
             </Typography>
           </Grid>

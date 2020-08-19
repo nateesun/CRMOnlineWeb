@@ -1,0 +1,5 @@
+---
+# environment: default
+APP_BASE_PATH: /webdialy-online
+APP_NAME: webdialy-online
+PORT: 3000
