@@ -6,6 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import LockIcon from '@material-ui/icons/Lock';
 import MenuIcon from '@material-ui/icons/Menu';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -37,7 +38,7 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle } = props;
+  const { classes, onDrawerToggle, loggedIn } = props;
 
   return (
     <React.Fragment>
@@ -65,11 +66,19 @@ function Header(props) {
               <LocaleToggle />
             </Grid>
             <Grid item>
-              <ButtonLink to="/login">
-                <Button size="large" startIcon={<LockIcon />}>
-                  Login
-                </Button>
-              </ButtonLink>
+              {loggedIn ? (
+                <ButtonLink to="/logout">
+                  <Button size="large" startIcon={<ExitToApp />}>
+                    Logout
+                  </Button>
+                </ButtonLink>
+              ) : (
+                <ButtonLink to="/login">
+                  <Button size="large" startIcon={<LockIcon />}>
+                    Login
+                  </Button>
+                </ButtonLink>
+              )}
             </Grid>
           </Grid>
         </Toolbar>

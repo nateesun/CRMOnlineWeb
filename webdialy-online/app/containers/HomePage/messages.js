@@ -10,6 +10,6 @@ export const scope = 'app.containers.HomePage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Home Page',
+    defaultMessage: 'Welcome to Web Dialy Online',
   },
 });

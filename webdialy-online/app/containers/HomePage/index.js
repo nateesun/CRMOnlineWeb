@@ -7,16 +7,22 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 import messages from './messages';
+import intro from '../../images/welcome.png';
+import styled from 'styled-components';
+
+const Img = styled.img`
+  border-radius: 2px 10px 2px 10px;
+  box-shadow: 7px 5px;
+`;
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>
+    <div style={{ textAlign: 'center', verticalAlign: 'middle', adding: '20px' }}>
+      <h2>
         <FormattedMessage {...messages.header} />
-      </h1>
-      <Link to="/login">Login Page</Link>
+      </h2>
+      <Img src={intro} width={300} />
     </div>
   );
 }

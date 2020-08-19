@@ -22,6 +22,9 @@ const useStyles = makeStyles({
     maxHeight: 440,
     padding: '10px',
   },
+  table: {
+    minWidth: 690,
+  },
 });
 
 export default function MemberTable(props) {
@@ -69,7 +72,9 @@ export default function MemberTable(props) {
         <Typography color="textSecondary" variant="h6">
           Member tables
         </Typography>
+
         <Table
+          className={classes.table}
           stickyHeader
           aria-label="sticky table"
           style={{ padding: '5px' }}

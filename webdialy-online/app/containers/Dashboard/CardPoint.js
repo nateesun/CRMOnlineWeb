@@ -27,7 +27,7 @@ export default function CardPoint(props) {
 
   CardPoint.propTypes = {
     label: PropTypes.string,
-    point: PropTypes.string,
+    point: PropTypes.number,
     bg: PropTypes.string,
     fbg: PropTypes.string,
   };

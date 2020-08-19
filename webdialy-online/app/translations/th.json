@@ -9,7 +9,7 @@
   "app.containers.ForgotPassword.header": "",
   "app.containers.ForgotPassword.loginErrorMessage": "",
   "app.containers.ForgotPassword.submit": "",
-  "app.containers.HomePage.header": "สวัสดีชาวโลก",
+  "app.containers.HomePage.header": "ยินดีต้อนรับเข้าสู่เว็บสำหรับสมาชิก",
   "app.containers.Login.emailIncorrectPattern": "",
   "app.containers.Login.emailShouldNotEmpty": "",
   "app.containers.Login.enterEmail": "",

@@ -9,6 +9,21 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
+import styled from 'styled-components';
+
+const Label = styled.span`
+  border: 0px solid;
+  padding: 5px;
+  color: black;
+  width: 150px;
+  float: left;
+`;
+const LabelContent = styled.span`
+  border: 0px solid;
+  padding: 5px;
+  color: black;
+  float: left;
+`;
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +40,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  item: {
+    background: '#eee',
+    border: '0px solid',
+  }
 });
 
 export default function ProfileContent(props) {
@@ -56,57 +75,73 @@ export default function ProfileContent(props) {
               {`${prefix}${firstName} ${lastName}`}
             </Typography>
           </Grid>
-          <Grid item xs={12} style={{ background: '#fef7ee' }}>
+          <Grid item xs={12} className={classes.item}>
             Member Detail
           </Grid>
           <Grid item xs={12}>
-            <Typography>( Code ) {code}</Typography>
+            <Typography>
+              <Label>Code</Label>
+              <LabelContent>{code}</LabelContent>
+            </Typography>
           </Grid>
-          <Grid item xs={12} style={{ background: '#fef7ee' }}>
+          <Grid item xs={12} className={classes.item}>
             Contacts
           </Grid>
-          <Grid item xs={6}>
-            <Typography>( Email ) {email}</Typography>
+          <Grid item xs={12} md={6}>
+            <Typography>
+              <Label>Email</Label> <LabelContent>{email}</LabelContent>
+            </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Typography>( Mobile ) {mobile}</Typography>
+          <Grid item xs={12} md={6}>
+            <Typography>
+              <Label>Mobile</Label> <LabelContent>{mobile}</LabelContent>
+            </Typography>
           </Grid>
-          <Grid item xs={12} style={{ background: '#fef7ee' }}>
+          <Grid item xs={12} className={classes.item}>
             Personal
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              ( Birthday ) {moment(brithday).format('DD/MM/YYYY')}
+              <Label>Birth Day</Label>{' '}
+              <LabelContent>
+                {moment(brithday).format('DD/MM/YYYY')}
+              </LabelContent>
             </Typography>
           </Grid>
-          <Grid item xs={12} style={{ background: '#fef7ee' }}>
+          <Grid item xs={12} className={classes.item}>
             Point Collection
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
-              ( Point Balance ){' '}
-              <NumberFormat
-                value={pointBalance}
-                displayType="text"
-                thousandSeparator
-              />
+              <Label>Point Balance</Label>{' '}
+              <LabelContent>
+                <NumberFormat
+                  value={pointBalance}
+                  displayType="text"
+                  thousandSeparator
+                />
+              </LabelContent>
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography>
-              ( Point Redemption ){' '}
-              <NumberFormat
-                value={pointRedemption}
-                displayType="text"
-                thousandSeparator
-              />
+              <Label>Point Redemption</Label>{' '}
+              <LabelContent>
+                <NumberFormat
+                  value={pointRedemption}
+                  displayType="text"
+                  thousandSeparator
+                />
+              </LabelContent>
             </Typography>
           </Grid>
-          <Grid item xs={12} style={{ background: '#fef7ee' }}>
+          <Grid item xs={12} className={classes.item}>
             Login System
           </Grid>
           <Grid item xs={12}>
-            <Typography>( Username ) {username}</Typography>
+            <Typography>
+              <Label>Username</Label> <LabelContent>{username}</LabelContent>
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>
