@@ -27,7 +27,12 @@ const categories = [
   {
     id: 'Account',
     children: [
-      { id: 'Overview', icon: <CardGiftcardIcon />, to: '/dashboard', active: true },
+      {
+        id: 'Overview',
+        icon: <CardGiftcardIcon />,
+        to: '/dashboard',
+        active: true,
+      },
       { id: 'Profile', icon: <PersonIcon />, to: '/profile' },
     ],
   },
@@ -102,7 +107,6 @@ const styles = theme => ({
 
 function Navigator(props) {
   const { classes, username, ...other } = props;
-  console.log(username);
   leftMenus.length = 0;
   categories.forEach((item, index) => {
     if (item.id === 'Members' || item.id === 'Settings') {
@@ -110,7 +114,13 @@ function Navigator(props) {
         leftMenus.push(item);
       }
     } else {
-      leftMenus.push(item);
+      if (item.id === 'Orders') {
+        if (username !== 'softpos@gmail.com') {
+          leftMenus.push(item);
+        }
+      } else {
+        leftMenus.push(item);
+      }
     }
   });
 

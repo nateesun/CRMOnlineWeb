@@ -10,6 +10,8 @@ import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 const Label = styled.span`
   border: 0px solid;
@@ -43,7 +45,7 @@ const useStyles = makeStyles({
   item: {
     background: '#eee',
     border: '0px solid',
-  }
+  },
 });
 
 export default function ProfileContent(props) {
@@ -76,44 +78,56 @@ export default function ProfileContent(props) {
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            Member Detail
+            <FormattedMessage {...messages.memberTopic} />
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Label>Code</Label>
+              <Label>
+                <FormattedMessage {...messages.code} />
+              </Label>
               <LabelContent>{code}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            Contacts
+            <FormattedMessage {...messages.contactsTopic} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography>
-              <Label>Email</Label> <LabelContent>{email}</LabelContent>
+              <Label>
+                <FormattedMessage {...messages.email} />
+              </Label>{' '}
+              <LabelContent>{email}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography>
-              <Label>Mobile</Label> <LabelContent>{mobile}</LabelContent>
+              <Label>
+                <FormattedMessage {...messages.mobile} />
+              </Label>{' '}
+              <LabelContent>{mobile}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            Personal
+            <FormattedMessage {...messages.personalTopic} />
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Label>Birth Day</Label>{' '}
+              <Label>
+                <FormattedMessage {...messages.birthDay} />
+              </Label>
               <LabelContent>
                 {moment(brithday).format('DD/MM/YYYY')}
               </LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            Point Collection
+            <FormattedMessage {...messages.pointTopic} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography>
-              <Label>Point Balance</Label>{' '}
+              <Label>
+                <FormattedMessage {...messages.pointBalance} />
+              </Label>
               <LabelContent>
                 <NumberFormat
                   value={pointBalance}
@@ -125,7 +139,9 @@ export default function ProfileContent(props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography>
-              <Label>Point Redemption</Label>{' '}
+              <Label>
+                <FormattedMessage {...messages.pointRedemption} />
+              </Label>
               <LabelContent>
                 <NumberFormat
                   value={pointRedemption}
@@ -136,18 +152,21 @@ export default function ProfileContent(props) {
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            Login System
+            <FormattedMessage {...messages.loginTopic} />
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Label>Username</Label> <LabelContent>{username}</LabelContent>
+              <Label>
+                <FormattedMessage {...messages.username} />
+              </Label>{' '}
+              <LabelContent>{username}</LabelContent>
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
         <Button variant="contained" color="secondary" size="small">
-          Change password
+          <FormattedMessage {...messages.btnChangePassword} />
         </Button>
       </CardActions>
     </Card>

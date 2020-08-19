@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import { FormattedMessage } from 'react-intl';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -8,6 +9,7 @@ import ArrowRight from '@material-ui/icons/ArrowRight';
 import Typography from '@material-ui/core/Typography';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
+import messages from './messages';
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +28,7 @@ export default function CardPoint(props) {
   const { label, point, bg, fbg } = props;
 
   CardPoint.propTypes = {
-    label: PropTypes.string,
+    label: PropTypes.object,
     point: PropTypes.number,
     bg: PropTypes.string,
     fbg: PropTypes.string,
@@ -44,7 +46,7 @@ export default function CardPoint(props) {
       </CardContent>
       <CardActions style={{ background: `${fbg}`, color: 'white' }}>
         <Button endIcon={<ArrowRight />} style={{ color: 'white' }}>
-          More info
+          <FormattedMessage {...messages.moreInfo} />
         </Button>
       </CardActions>
     </Card>
