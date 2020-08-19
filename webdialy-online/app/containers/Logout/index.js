@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -18,6 +19,15 @@ import makeSelectLogout from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import LogoutIcon from '../../images/logout.png';
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  text-align: center;
+  margin-top: 50%;
+`;
 
 export function Logout(props) {
   useInjectReducer({ key: 'logout', reducer });
@@ -28,9 +38,12 @@ export function Logout(props) {
   }, []);
 
   return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
+    <Wrapper>
+      <img src={LogoutIcon} border={0} width={100} />
+      <h4>
+        <FormattedMessage {...messages.header} />
+      </h4>
+    </Wrapper>
   );
 }
 
