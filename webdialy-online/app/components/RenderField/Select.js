@@ -50,7 +50,7 @@ function SelectField({ input, label, meta: { touched, error } }) {
 
 SelectField.propTypes = {
   input: PropTypes.any,
-  label: PropTypes.string,
+  label: PropTypes.object,
   required: PropTypes.bool,
   autoFocus: PropTypes.bool,
   meta: PropTypes.object,

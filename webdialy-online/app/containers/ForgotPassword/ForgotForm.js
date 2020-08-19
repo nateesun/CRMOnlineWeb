@@ -31,10 +31,13 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  footer: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const ImgLogo = styled.img`
-  border: 1px solid white;
+  border: 1px solid #bbbbbb;
   padding: 10px;
   border-radius: 5px 25px 5px 25px;
 `;
@@ -48,7 +51,7 @@ const ForgotForm = props => {
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
-          Forgot Password
+          <FormattedMessage {...messages.header} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field
@@ -56,7 +59,7 @@ const ForgotForm = props => {
             component={RenderField}
             type="email"
             margin="normal"
-            label="Email Address"
+            label={<FormattedMessage {...messages.emailAddress} />}
             required
             fullWidth
           />
@@ -68,7 +71,7 @@ const ForgotForm = props => {
             className={classes.submit}
             disabled={pristine || submitting}
           >
-            Send Email
+            <FormattedMessage {...messages.sendEmail} />
           </Button>
           <Button
             fullWidth
@@ -76,11 +79,13 @@ const ForgotForm = props => {
             disabled={pristine || submitting}
             onClick={reset}
           >
-            Clear
+            <FormattedMessage {...messages.clear} />
           </Button>
-          <Grid container>
+          <Grid container className={classes.footer}>
             <Grid item xs>
-              <ButtonLink to="/login">Back to Login?</ButtonLink>
+              <ButtonLink to="/login">
+                <FormattedMessage {...messages.backToLogin} />
+              </ButtonLink>
             </Grid>
           </Grid>
         </form>

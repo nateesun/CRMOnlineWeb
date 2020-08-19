@@ -10,8 +10,10 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
+import messages from '../../messages';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -69,13 +71,13 @@ function Header(props) {
               {loggedIn ? (
                 <ButtonLink to="/logout">
                   <Button size="large" startIcon={<ExitToApp />}>
-                    Logout
+                    <FormattedMessage {...messages.headerLogout} />
                   </Button>
                 </ButtonLink>
               ) : (
                 <ButtonLink to="/login">
                   <Button size="large" startIcon={<LockIcon />}>
-                    Login
+                  <FormattedMessage {...messages.headerLogin} />
                   </Button>
                 </ButtonLink>
               )}

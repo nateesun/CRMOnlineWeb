@@ -11,7 +11,7 @@ export const scope = 'app.containers.ForgotPassword';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the ForgotPassword container!',
+    defaultMessage: 'Forgot Password',
   },
 
   enterEmail: {
@@ -37,5 +37,21 @@ export default defineMessages({
   loginErrorMessage: {
     id: `${scope}.loginErrorMessage`,
     defaultMessage: 'Incorrect email or password.',
+  },
+  emailAddress: {
+    id: `${scope}.emailAddress`,
+    defaultMessage: 'Email Address',
+  },
+  sendEmail: {
+    id: `${scope}.sendEmail`,
+    defaultMessage: 'Send Email',
+  },
+  clear: {
+    id: `${scope}.clear`,
+    defaultMessage: 'Clear',
+  },
+  backToLogin: {
+    id: `${scope}.backToLogin`,
+    defaultMessage: 'Back to Login?',
   },
 });

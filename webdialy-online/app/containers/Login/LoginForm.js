@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
   loginFooter: {
     marginTop: theme.spacing(1),
   },
+  loginTopic: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const ImgLogo = styled.img`
@@ -65,8 +68,8 @@ const LoginForm = props => {
       />
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography variant="h5" className={classes.loginTopic}>
+          <FormattedMessage {...messages.signIn} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field
@@ -74,7 +77,7 @@ const LoginForm = props => {
             component={RenderField}
             type="email"
             margin="normal"
-            label="Email Address"
+            label={<FormattedMessage {...messages.email} />}
             required
             fullWidth
             autoFocus
@@ -83,7 +86,7 @@ const LoginForm = props => {
             name="password"
             component={RenderField}
             type="password"
-            label="Password"
+            label={<FormattedMessage {...messages.password} />}
             margin="normal"
             required
             fullWidth
@@ -96,7 +99,7 @@ const LoginForm = props => {
             className={classes.submit}
             disabled={pristine || submitting}
           >
-            Sign In
+            {<FormattedMessage {...messages.submit} />}
           </Button>
           <Button
             fullWidth
@@ -104,17 +107,17 @@ const LoginForm = props => {
             disabled={pristine || submitting}
             onClick={reset}
           >
-            Clear
+            {<FormattedMessage {...messages.clear} />}
           </Button>
           <Grid container className={classes.loginFooter}>
             <Grid item xs={12} lg={4}>
               <ButtonLink color="purple" to="/forgot-password">
-                Forgot password?
+                {<FormattedMessage {...messages.forgotPassword} />}
               </ButtonLink>
             </Grid>
             <Grid item xs={12} lg={8}>
               <ButtonLink color="purple" to="/register">
-                {"Don't have an account? Sign Up"}
+                {<FormattedMessage {...messages.register} />}
               </ButtonLink>
             </Grid>
           </Grid>

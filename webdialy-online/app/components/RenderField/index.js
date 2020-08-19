@@ -35,7 +35,7 @@ function RenderField({
 
 RenderField.propTypes = {
   input: PropTypes.any,
-  label: PropTypes.string,
+  label: PropTypes.object,
   type: PropTypes.string,
   required: PropTypes.bool,
   autoFocus: PropTypes.bool,

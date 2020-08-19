@@ -30,7 +30,7 @@ function DateInput({ input, label, required, meta: { touched, error } }) {
 
 DateInput.propTypes = {
   input: PropTypes.any,
-  label: PropTypes.string,
+  label: PropTypes.object,
   required: PropTypes.bool,
   meta: PropTypes.object,
 };

@@ -12,7 +12,14 @@ import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import SelectField from 'components/RenderField/Select';
 import SweetAlert from 'sweetalert2-react';
+import styled from 'styled-components';
 import messages from './messages';
+import RegisterLogo from '../../images/register.png';
+
+const ImgLogo = styled.img`
+  border: 0px solid #bbbbbb;
+  border-radius: 5px 5px 5px 5px;
+`;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,6 +41,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  loginTopic: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -75,8 +85,9 @@ const RegisterForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Register Member
+        <ImgLogo src={RegisterLogo} width="100" />
+        <Typography variant="h5" className={classes.loginTopic}>
+          <FormattedMessage {...messages.header} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
@@ -86,7 +97,7 @@ const RegisterForm = props => {
                 component={SelectField}
                 type="text"
                 margin="normal"
-                label="Prefix"
+                label={<FormattedMessage {...messages.prefix} />}
                 required
                 autoFocus
               />
@@ -97,7 +108,7 @@ const RegisterForm = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label="First Name"
+                label={<FormattedMessage {...messages.firstName} />}
                 required
               />
             </Grid>
@@ -107,7 +118,7 @@ const RegisterForm = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label="Last Name"
+                label={<FormattedMessage {...messages.lastName} />}
                 required
               />
             </Grid>
@@ -117,7 +128,7 @@ const RegisterForm = props => {
                 component={DateInput}
                 type="date"
                 margin="normal"
-                label="Date of Birth"
+                label={<FormattedMessage {...messages.dateOfBirth} />}
               />
             </Grid>
             <Grid item xs={12} lg={6}>
@@ -126,7 +137,7 @@ const RegisterForm = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label="Mobile Number"
+                label={<FormattedMessage {...messages.mobile} />}
                 required
               />
             </Grid>
@@ -137,7 +148,7 @@ const RegisterForm = props => {
                 component={RenderField}
                 type="email"
                 margin="normal"
-                label="Email Address"
+                label={<FormattedMessage {...messages.email} />}
                 required
               />
             </Grid>
@@ -146,7 +157,7 @@ const RegisterForm = props => {
                 name="password"
                 component={RenderField}
                 type="password"
-                label="Password"
+                label={<FormattedMessage {...messages.password} />}
                 margin="normal"
                 required
               />
@@ -156,7 +167,7 @@ const RegisterForm = props => {
                 name="rePassword"
                 component={RenderField}
                 type="password"
-                label="Re-Password"
+                label={<FormattedMessage {...messages.rePassword} />}
                 margin="normal"
                 required
               />
@@ -171,7 +182,7 @@ const RegisterForm = props => {
                 color="primary"
                 disabled={pristine || submitting}
               >
-                Register
+                <FormattedMessage {...messages.btnRegister} />
               </Button>
             </Grid>
             <Grid item xs={6} lg={3}>
@@ -181,11 +192,13 @@ const RegisterForm = props => {
                 disabled={pristine || submitting}
                 onClick={reset}
               >
-                Clear
+                <FormattedMessage {...messages.btnClear} />
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <ButtonLink to="/login">Back to Login?</ButtonLink>
+              <ButtonLink to="/login">
+                <FormattedMessage {...messages.backLogin} />
+              </ButtonLink>
             </Grid>
           </Grid>
         </form>

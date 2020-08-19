@@ -45,4 +45,28 @@ export default defineMessages({
     id: `${scope}.loginErrorMessage`,
     defaultMessage: 'Incorrect email or password.',
   },
+  signIn: {
+    id: `${scope}.signIn`,
+    defaultMessage: 'Sign In',
+  },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email',
+  },
+  password: {
+    id: `${scope}.password`,
+    defaultMessage: 'Password',
+  },
+  clear: {
+    id: `${scope}.clear`,
+    defaultMessage: 'Clear',
+  },
+  forgotPassword: {
+    id: `${scope}.forgotPassword`,
+    defaultMessage: 'Forgot password?',
+  },
+  register: {
+    id: `${scope}.register`,
+    defaultMessage: `Don't have an account? Sign Up`,
+  },
 });

@@ -9,18 +9,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import PeopleIcon from '@material-ui/icons/People';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
-import SettingsEthernetIcon from '@material-ui/icons/Timeline';
+import TimeLineIcon from '@material-ui/icons/Timeline';
 import HistoryIcon from '@material-ui/icons/History';
-import TimerIcon from '@material-ui/icons/Storefront';
-import SettingsIcon from '@material-ui/icons/People';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import PeopleIcon from '@material-ui/icons/People';
 import LockIcon from '@material-ui/icons/Lock';
-import PersonIcon from '@material-ui/icons/RecentActors';
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import PhonelinkSetupIcon from '@material-ui/icons/StoreMallDirectory';
+import StoreMallDirectory from '@material-ui/icons/StoreMallDirectory';
 import ButtonLink from 'components/ButtonLink';
 
 const categories = [
@@ -33,23 +32,23 @@ const categories = [
         to: '/dashboard',
         active: true,
       },
-      { id: 'Profile', icon: <PersonIcon />, to: '/profile' },
+      { id: 'Profile', icon: <RecentActorsIcon />, to: '/profile' },
     ],
   },
   {
     id: 'Orders',
     children: [
       { id: 'Online', icon: <LocalMallIcon />, to: '' },
-      { id: 'Transaction', icon: <SettingsEthernetIcon />, to: '' },
+      { id: 'Transaction', icon: <TimeLineIcon />, to: '' },
       { id: 'History', icon: <HistoryIcon />, to: '' },
     ],
   },
   {
     id: 'Members',
     children: [
-      { id: 'All', icon: <SettingsIcon />, to: '/members' },
-      { id: 'Branch', icon: <TimerIcon />, to: '' },
-      { id: 'Shop', icon: <PhonelinkSetupIcon />, to: '' },
+      { id: 'All', icon: <PeopleIcon />, to: '/members' },
+      { id: 'Branch', icon: <StorefrontIcon />, to: '' },
+      { id: 'Shop', icon: <StoreMallDirectory />, to: '' },
     ],
   },
   {

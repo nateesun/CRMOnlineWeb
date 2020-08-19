@@ -11,7 +11,7 @@ export const scope = 'app.containers.Register';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Register container!',
+    defaultMessage: 'Register Member',
   },
   enterEmail: {
     id: `${scope}.enterEmail`,
@@ -64,5 +64,49 @@ export default defineMessages({
   mobileShouldNotEmpty: {
     id: `${scope}.mobileShouldNotEmpty`,
     defaultMessage: 'Mobile should not be blank.',
+  },
+  prefix: {
+    id: `${scope}.prefix`,
+    defaultMessage: 'Prefix',
+  },
+  firstName: {
+    id: `${scope}.firstName`,
+    defaultMessage: 'First Name',
+  },
+  lastName: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last Name',
+  },
+  dateOfBirth: {
+    id: `${scope}.dateOfBirth`,
+    defaultMessage: 'Date of Birth',
+  },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile Number',
+  },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email Address',
+  },
+  password: {
+    id: `${scope}.password`,
+    defaultMessage: 'Password',
+  },
+  rePassword: {
+    id: `${scope}.rePassword`,
+    defaultMessage: 'Re-Password',
+  },
+  btnRegister: {
+    id: `${scope}.btnRegister`,
+    defaultMessage: 'Register',
+  },
+  btnClear: {
+    id: `${scope}.btnClear`,
+    defaultMessage: 'Clear',
+  },
+  backLogin: {
+    id: `${scope}.backLogin`,
+    defaultMessage: 'Back to Login?',
   },
 });
