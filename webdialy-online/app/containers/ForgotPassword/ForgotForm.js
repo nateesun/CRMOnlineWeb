@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +12,7 @@ import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
+import SweetAlert from 'sweetalert2-react';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -45,15 +46,25 @@ const ImgLogo = styled.img`
 const ForgotForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting } = props;
+  const [show, setShow] = useState(false);
+  const showAlert = () => {
+    setShow(true);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
+      <SweetAlert
+        show={show}
+        title="Operation Warning"
+        type="warning"
+        text="Service not available"
+      />
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
         <Typography component="h1" variant="h5">
           <FormattedMessage {...messages.header} />
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit(showAlert)}>
           <Field
             name="email"
             component={RenderField}

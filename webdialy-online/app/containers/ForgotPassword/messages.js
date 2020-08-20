@@ -44,7 +44,7 @@ export default defineMessages({
   },
   sendEmail: {
     id: `${scope}.sendEmail`,
-    defaultMessage: 'Send Email',
+    defaultMessage: 'Request password',
   },
   clear: {
     id: `${scope}.clear`,

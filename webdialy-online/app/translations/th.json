@@ -10,7 +10,7 @@
   "app.containers.ForgotPassword.loginErrorMessage": "",
   "app.containers.ForgotPassword.submit": "",
   "app.containers.ForgotPassword.emailAddress": "อีเมล์",
-  "app.containers.ForgotPassword.sendEmail": "ส่งอีเมล์",
+  "app.containers.ForgotPassword.sendEmail": "ร้องขอรหัสผ่าน",
   "app.containers.ForgotPassword.clear": "ล้างข้อความ",
   "app.containers.ForgotPassword.backToLogin": "กลับสู่หน้า Login",
   "app.containers.HomePage.header": "ยินดีต้อนรับเข้าสู่เว็บสำหรับสมาชิก",
