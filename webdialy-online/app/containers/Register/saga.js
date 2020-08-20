@@ -24,6 +24,7 @@ export function* onAddRegisterMember() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
       body: JSON.stringify({
         Member_Code: Math.random()

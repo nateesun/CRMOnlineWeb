@@ -23,7 +23,7 @@ const MemMaster = {
   validLogin: async (username, password, callback) => {
     try {
       const sql = `select * from ${table_name} where username = ? and password = ?`
-      const user = await pool.query(sql, [username, password])
+      const user = await pool.query(sql, [username, Buffer.from(password).toString('base64')])
       if (user.length === 0) {
         return callback(null, { status: "Invalid" })
       } else {
@@ -68,7 +68,7 @@ const MemMaster = {
         Member_Mobile,
         Member_Email,
         Username,
-        Password,
+        Buffer.from(Password).toString('base64'),
         System_Created,
         System_Updated,
         Member_TotalScore,

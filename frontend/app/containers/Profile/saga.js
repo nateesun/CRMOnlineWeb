@@ -11,6 +11,7 @@ export function* onLoadProfile(username) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     })
     yield put(loadProfileSuccess(response))

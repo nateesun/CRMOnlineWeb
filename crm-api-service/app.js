@@ -3,13 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const basicAuth = require('express-basic-auth')
 
 const indexRouter = require('./routes/index');
 const memberRouter = require('./routes/memmaster');
 
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express();
+app.use(basicAuth({
+  users: { 'admin': 'softpos2013' }
+}));
 app.use(cors())
 
 // view engine setup

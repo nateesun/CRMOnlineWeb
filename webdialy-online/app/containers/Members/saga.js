@@ -17,6 +17,7 @@ export function* onLoadMembers() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     });
     yield put(loadMemberSuccess(response));
@@ -32,6 +33,7 @@ export function* onDeleteMember({ payload }) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
       body: JSON.stringify({
         member_code: payload,
@@ -50,6 +52,7 @@ export function* onEditMember() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     });
     yield put(loadMemberSuccess(response));
