@@ -1,6 +1,6 @@
 # Setting Up Your Editor
 
-You can edit Web Dialy Online using any editor or IDE, but there are a few extra steps that you can take to make sure your coding experience is as good as it can be.
+You can edit Web Daily Online using any editor or IDE, but there are a few extra steps that you can take to make sure your coding experience is as good as it can be.
 
 ## VS Code
 

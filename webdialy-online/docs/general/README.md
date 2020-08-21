@@ -5,7 +5,7 @@ overwhelming. So, instead of you having to stay on top of every new tool,
 feature and technique to hit the headlines, this project aims to lighten the
 load by providing a curated baseline of the most valuable ones.
 
-Using Web Dialy Online, you get to start your app with our community's current
+Using Web Daily Online, you get to start your app with our community's current
 ideas on what represents optimal developer experience, best practice, most
 efficient tooling and cleanest project structure.
 

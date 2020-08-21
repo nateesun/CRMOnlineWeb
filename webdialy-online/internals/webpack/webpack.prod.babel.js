@@ -116,9 +116,9 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'Web Dialy Online',
+      name: 'Web Daily Online',
       short_name: 'React BP',
-      description: 'My Web Dialy Online-based project!',
+      description: 'My Web Daily Online-based project!',
       background_color: '#fafafa',
       theme_color: '#b1624d',
       inject: true,

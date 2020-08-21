@@ -148,7 +148,7 @@ export default function Main() {
             className={classes.title}
           >
             <ButtonLink to="/" color="white">
-              Web dialy online
+              Web daily online
             </ButtonLink>
           </Typography>
           <LocaleToggle />

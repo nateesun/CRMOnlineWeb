@@ -49,7 +49,7 @@ To get you started on a login flow, there's a great example [here](https://githu
 
 ## Removing redux
 
-There are a few reasons why we chose to bundle redux with Web Dialy Online, the
+There are a few reasons why we chose to bundle redux with Web Daily Online, the
 biggest being that it is widely regarded as the current best Flux implementation
 in terms of architecture, support and documentation.
 
@@ -73,7 +73,7 @@ See above.
 
 ### I prefer `(Alt|MobX|SomethingElse)`!
 
-Web Dialy Online is a baseline for _your_ app: go for it!
+Web Daily Online is a baseline for _your_ app: go for it!
 
 If you feel that we should take a closer look at supporting your preference
 out of the box, please let us know.

@@ -130,7 +130,7 @@ function Navigator(props) {
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
           <ButtonLink to="/" color="white">
-            Web Dialy Online
+            Web Daily Online
           </ButtonLink>
         </ListItem>
         <ListItem className={clsx(classes.item, classes.itemCategory)}>

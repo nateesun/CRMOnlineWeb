@@ -4,9 +4,9 @@
 
 ### News
 
-Web Dialy Online v4.0.0 is out and it's a doozy! Here are the highlights:
+Web Daily Online v4.0.0 is out and it's a doozy! Here are the highlights:
 
-- React has added many new features and it's time for Web Dialy Online to embrace them.
+- React has added many new features and it's time for Web Daily Online to embrace them.
   - We now use `React.lazy` and `Suspense` for component lazy-loading instead of an external library.
   - We've added `useInjectSaga` and `useInjectReducer` hooks to manage saga and reducer injection. They're integrated into the generators and thus become the new defaults. (Should you need them, the HOCs are still there.)
   - The generators don't support classes anymore. The `PureComponent` vs `Component` choice was replaced with an option to wrap your component inside `React.memo`.
@@ -72,7 +72,7 @@ We hope you enjoy this release and welcome any feedback, bug reports or feature 
 
 ### News
 
-Welcome to a new Web Dialy Online release with improvements aplenty, bug fixes and major dependency upgrades! Big thanks to @gretzky, @justingreenberg, @jwinn and everyone who helped review and submit PRs for this release!
+Welcome to a new Web Daily Online release with improvements aplenty, bug fixes and major dependency upgrades! Big thanks to @gretzky, @justingreenberg, @jwinn and everyone who helped review and submit PRs for this release!
 
 For existing projects, the only way to upgrade from `3.6.0` is to manually apply the changes from #2403 to your project. Please be careful when doing so as it isn't officially supported and could break things on your end.
 
@@ -151,9 +151,9 @@ Next steps for us will be revisiting the dev branch, revisiting outstanding PRs 
 
 ### News
 
-So, a few things have changed in the JS ecosystem since the original release of Web Dialy Online, and there was a discussion in #1776 around the it's future. TLDR; we had two incompatible PRs — one for server-side rendering, and another for react-router v4. The community decided that we would keep our dependencies up to date (upgrade react-router) and establish a clear mission for Web Dialy Online:
+So, a few things have changed in the JS ecosystem since the original release of Web Daily Online, and there was a discussion in #1776 around the it's future. TLDR; we had two incompatible PRs — one for server-side rendering, and another for react-router v4. The community decided that we would keep our dependencies up to date (upgrade react-router) and establish a clear mission for Web Daily Online:
 
-**Web Dialy Online is a rock-solid foundation for crafting large, high-performance enterprise-grade frontend web applications that have advanced/custom requirements.**
+**Web Daily Online is a rock-solid foundation for crafting large, high-performance enterprise-grade frontend web applications that have advanced/custom requirements.**
 
 - Static output designed for CDN and edge caches
 - Extreme Developer Ergonomics
@@ -272,7 +272,7 @@ This release was made possible by [Fullstack React](https://www.fullstackreact.c
 
 ## RBP v3.0: The "JS Fatigue Antivenin" Edition
 
-Web Dialy Online (RBP) v3.0.0 is out, and it's a _complete_ rewrite! :tada:
+Web Daily Online (RBP) v3.0.0 is out, and it's a _complete_ rewrite! :tada:
 
 We've focused on becoming a rock-solid foundation to start your next project
 with, no matter what its scale. You get to focus on writing your app because we
