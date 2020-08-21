@@ -15,14 +15,31 @@ router.get("/", (req, res, next) => {
 })
 
 router.get("/:member_code", (req, res, next) => {
-  const member_code = req.params.member_code;
+  const member_code = req.params.member_code
   Task.find(member_code, (err, response) => {
     if (err) {
       res
         .status(500)
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      res.status(200).json(JSON.parse(response.data))
+      const data = JSON.parse(response.data)[0]
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data: {
+          username: data.Username,
+          prefix: data.Member_TitleNameThai,
+          firstName: data.Member_FirstName,
+          lastName: data.Member_LastName,
+          pointBalance: data.Member_TotalScore,
+          pointRedemption: data.Member_TotalPurchase,
+          code: data.Member_Code,
+          email: data.Member_Email,
+          brithday: data.Member_Brithday,
+          mobile: data.Member_Mobile,
+          loggedIn: true,
+        },
+      })
     }
   })
 })
@@ -91,7 +108,7 @@ router.patch("/", (req, res, next) => {
 })
 
 router.delete("/", (req, res, next) => {
-  const { member_code } = req.body;
+  const { member_code } = req.body
   Task.delete(member_code, (err, rows) => {
     if (err) {
       res

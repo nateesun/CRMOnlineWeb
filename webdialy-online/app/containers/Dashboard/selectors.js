@@ -20,6 +20,10 @@ const makeSelectDashboard = () =>
     selectDashboardDomain,
     substate => substate,
   );
+const makeSelectProfile = () =>
+  createSelector(
+    selectDashboardDomain,
+    substate => substate.profile,
+  );
 
-export default makeSelectDashboard;
-export { selectDashboardDomain };
+export { selectDashboardDomain, makeSelectDashboard, makeSelectProfile };

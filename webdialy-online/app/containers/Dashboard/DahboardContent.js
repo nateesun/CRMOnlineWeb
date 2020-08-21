@@ -4,10 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
 import CardPoint from './CardPoint';
 import messages from './messages';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import { Button } from '@material-ui/core';
 
 export default function DahboardContent(props) {
-  const { profile } = props;
-  const { pointBalance, pointRedemption } = profile;
+  const { profile, onRefresh } = props;
+  const { pointBalance, pointRedemption, code } = profile;
 
   DahboardContent.propTypes = {
     profile: PropTypes.object,
@@ -15,6 +17,15 @@ export default function DahboardContent(props) {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Button
+          variant="outlined"
+          startIcon={<RefreshIcon />}
+          onClick={() => onRefresh(code)}
+        >
+          <FormattedMessage {...messages.btnRefresh} />
+        </Button>
+      </Grid>
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointBalance} />}

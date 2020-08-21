@@ -25,4 +25,8 @@ export default defineMessages({
     id: `${scope}.moreInfo`,
     defaultMessage: 'More info',
   },
+  btnRefresh: {
+    id: `${scope}.btnRefresh`,
+    defaultMessage: 'Refresh point'
+  }
 });
