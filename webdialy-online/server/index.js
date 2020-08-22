@@ -16,7 +16,12 @@ const app = express();
 
 const httpRequest = require('./infra/httpRequest/usecases')();
 const envConfig = require('../config/envConfig');
-const serviceApiHost = envConfig('SERVICE_API_HOST');
+
+let serviceApiHost = envConfig('SERVICE_API_HOST');
+const isDemo = process.env.NODE_ENV === 'demo';
+if (isDemo) {
+  serviceApiHost = envConfig('SERVICE_API_HOST_DEMO');
+}
 
 const options = {
   serviceApiHost,

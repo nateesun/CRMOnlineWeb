@@ -1,6 +1,6 @@
 const util = require("util");
 const mysql = require("mysql")
-const path = `./${process.env.SERVER||'local'}-db.json`
+const path = `./${process.env.API_SERVER||'local'}-db.json`
 const data = require(path)
 console.log('config file from ', path)
 

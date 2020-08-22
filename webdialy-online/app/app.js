@@ -32,6 +32,7 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+import WaterMark from 'components/WaterMark';
 
 // Create redux store with history
 const initialState = {};
@@ -47,12 +48,24 @@ const MOUNT_NODE = document.getElementById('app');
 // );
 // store.subscribe(() => console.log(store.getState()));
 
+const AppMain = () => {
+  if (process.env.NODE_ENV === 'demo') {
+    return (
+      <WaterMark>
+        <App />
+      </WaterMark>
+    );
+  } else {
+    return <App />;
+  }
+};
+
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <AppMain />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
