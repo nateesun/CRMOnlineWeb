@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core';
 
 export default function DahboardContent(props) {
   const { profile, onRefresh } = props;
-  const { pointBalance, pointRedemption, code } = profile;
+  const { pointBalance = 0, pointRedemption = 0, code } = profile;
 
   DahboardContent.propTypes = {
     profile: PropTypes.object,

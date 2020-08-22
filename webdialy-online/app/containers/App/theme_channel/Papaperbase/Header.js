@@ -11,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
+import Typography from '@material-ui/core/Typography';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import messages from '../../messages';
@@ -40,7 +41,8 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle, loggedIn } = props;
+  const { classes, onDrawerToggle, loggedIn, profile } = props;
+  const { firstName, lastName } = profile;
 
   return (
     <React.Fragment>
@@ -63,7 +65,9 @@ function Header(props) {
                 </IconButton>
               </Grid>
             </Hidden>
-            <Grid item xs />
+            <Grid item xs>
+              <ButtonLink to="/" color="white">WEB DAILY ONLINE</ButtonLink>
+            </Grid>
             <Grid item>
               <LocaleToggle />
             </Grid>
@@ -77,13 +81,18 @@ function Header(props) {
               ) : (
                 <ButtonLink to="/login">
                   <Button size="large" startIcon={<LockIcon />}>
-                  <FormattedMessage {...messages.headerLogin} />
+                    <FormattedMessage {...messages.headerLogin} />
                   </Button>
                 </ButtonLink>
               )}
             </Grid>
           </Grid>
         </Toolbar>
+        {loggedIn === true && (
+          <Typography component="span" style={{textAlign: 'right', fontSize: '12px', paddingRight: '26px', paddingBottom: '5px'}}>
+            <ButtonLink to="/profile" color="white">สมาชิก: {firstName} {lastName}</ButtonLink>
+          </Typography>
+        )}
       </AppBar>
     </React.Fragment>
   );

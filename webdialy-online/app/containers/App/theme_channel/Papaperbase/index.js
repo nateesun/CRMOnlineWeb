@@ -210,7 +210,7 @@ function Paperbase(props) {
           </nav>
         )}
         <div className={classes.app}>
-          <Header loggedIn={loggedIn} onDrawerToggle={handleDrawerToggle} />
+          <Header loggedIn={loggedIn} profile={profile} onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
             <Switch>
               <Route exact path="/" component={HomePage} />
