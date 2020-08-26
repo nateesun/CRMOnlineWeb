@@ -2,16 +2,16 @@ const { Router, response } = require('express');
 const { json, urlencoded } = require('body-parser');
 
 module.exports = args => {
-  const { serviceApiHost, httpRequest } = args;
+  const { appName, serviceApiHost, httpRequest } = args;
   const router = Router();
 
   router.use(json());
   router.use(urlencoded({ extended: false }));
 
   router.post('/', (req, res) => {
-    const { method, originalUrl } = req;
+    const { method, baseUrl, path } = req;
     const options = {
-      url: `${serviceApiHost}${originalUrl}`,
+      url: `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`,
       method,
       headers: {
         ...req.headers,

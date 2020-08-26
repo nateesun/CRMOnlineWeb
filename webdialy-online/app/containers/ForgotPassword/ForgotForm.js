@@ -13,6 +13,7 @@ import RenderField from 'components/RenderField';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
 import SweetAlert from 'sweetalert2-react';
+import { publicPath } from './constants';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -94,7 +95,7 @@ const ForgotForm = props => {
           </Button>
           <Grid container className={classes.footer}>
             <Grid item xs>
-              <ButtonLink to="/login">
+              <ButtonLink to={`${publicPath}/login`}>
                 <FormattedMessage {...messages.backToLogin} />
               </ButtonLink>
             </Grid>

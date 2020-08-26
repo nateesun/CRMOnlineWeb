@@ -3,7 +3,7 @@
  * Members constants
  *
  */
-
+export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 export const DEFAULT_ACTION = 'app/Members/DEFAULT_ACTION';
 export const LOAD_MEMBERS = 'app/Members/LOAD_MEMBERS';
 export const LOAD_MEMBERS_SUCCESS = 'app/Members/LOAD_MEMBERS_SUCCESS';

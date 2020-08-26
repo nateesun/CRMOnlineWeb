@@ -22,6 +22,7 @@ import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import Members from 'containers/Members/Loadable';
+import * as path from '../../constants';
 
 import Navigator from './Navigator';
 import Header from './Header';
@@ -210,18 +211,22 @@ function Paperbase(props) {
           </nav>
         )}
         <div className={classes.app}>
-          <Header loggedIn={loggedIn} profile={profile} onDrawerToggle={handleDrawerToggle} />
+          <Header
+            loggedIn={loggedIn}
+            profile={profile}
+            onDrawerToggle={handleDrawerToggle}
+          />
           <main className={classes.main}>
             <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/register" component={Register} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-              <Route path="/recover-password" component={RecoverPassword} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/members" component={Members} />
+              <Route exact path={`${path.publicPath}/`} component={HomePage} />
+              <Route path={path.PATH_LOGIN} component={Login} />
+              <Route path={path.PATH_LOGOUT} component={Logout} />
+              <Route path={path.PATH_DASHBOARD} component={Dashboard} />
+              <Route path={path.PATH_REGISTER} component={Register} />
+              <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
+              <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
+              <Route path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_MEMBER} component={Members} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

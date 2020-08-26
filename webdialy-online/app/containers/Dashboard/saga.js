@@ -7,7 +7,7 @@ import * as selects from './selectors';
 export function* initLoad() {
   try {
     const { memberCode } = yield select(selects.makeSelectDashboard());
-    const requestURL = `/api/member/${memberCode}`;
+    const requestURL = `${types.publicPath}/api/member/${memberCode}`;
     const response = yield call(request, requestURL, {
       method: 'GET',
       headers: {

@@ -2,26 +2,24 @@ const { Router, response } = require('express');
 const { json, urlencoded } = require('body-parser');
 
 module.exports = args => {
-  const { appName, serviceApiHost, httpRequest } = args;
+  const { serviceApiHost, httpRequest } = args;
   const router = Router();
 
   router.use(json());
   router.use(urlencoded({ extended: false }));
 
-  const serviceProvider = (req, res) => {
-    const { method, baseUrl, path } = req;
+  router.get('/', (req, res) => {
+    const { method, originalUrl } = req;
     const options = {
-      url: `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`,
+      url: `${serviceApiHost}${originalUrl}`,
       method,
       headers: {
         ...req.headers,
       },
     };
 
-    if (method !== 'GET') {
-      options.body = req.body;
-      options.json = true;
-    }
+    options.body = req.body;
+    options.json = true;
 
     try {
       return httpRequest(options, (error, resposne, body) => {
@@ -35,13 +33,7 @@ module.exports = args => {
     } catch (e) {
       return res.status(500).json({ Error: e });
     }
-  };
-
-  router.get('*', serviceProvider);
-  router.post('*', serviceProvider);
-  router.put('*', serviceProvider);
-  router.patch('*', serviceProvider);
-  router.delete('*', serviceProvider);
+  });
 
   return router;
 };

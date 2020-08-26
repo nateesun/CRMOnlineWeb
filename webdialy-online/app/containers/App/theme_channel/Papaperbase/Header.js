@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import messages from '../../messages';
+import { publicPath } from '../../constants';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -66,20 +67,20 @@ function Header(props) {
               </Grid>
             </Hidden>
             <Grid item xs>
-              <ButtonLink to="/" color="white">WEB DAILY ONLINE</ButtonLink>
+              <ButtonLink to={`${publicPath}/`} color="white">WEB DAILY ONLINE</ButtonLink>
             </Grid>
             <Grid item>
               <LocaleToggle />
             </Grid>
             <Grid item>
               {loggedIn ? (
-                <ButtonLink to="/logout">
+                <ButtonLink to={`${publicPath}/logout`}>
                   <Button size="large" startIcon={<ExitToApp />}>
                     <FormattedMessage {...messages.headerLogout} />
                   </Button>
                 </ButtonLink>
               ) : (
-                <ButtonLink to="/login">
+                <ButtonLink to={`${publicPath}/login`}>
                   <Button size="large" startIcon={<LockIcon />}>
                     <FormattedMessage {...messages.headerLogin} />
                   </Button>
@@ -90,7 +91,7 @@ function Header(props) {
         </Toolbar>
         {loggedIn === true && (
           <Typography component="span" style={{textAlign: 'right', fontSize: '12px', paddingRight: '26px', paddingBottom: '5px'}}>
-            <ButtonLink to="/profile" color="white">สมาชิก: {firstName} {lastName}</ButtonLink>
+            <ButtonLink to={`${publicPath}/profile`} color="white">สมาชิก: {firstName} {lastName}</ButtonLink>
           </Typography>
         )}
       </AppBar>

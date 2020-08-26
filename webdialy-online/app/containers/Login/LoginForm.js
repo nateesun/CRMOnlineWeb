@@ -13,6 +13,7 @@ import ButtonLink from 'components/ButtonLink';
 import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
+import { publicPath } from './constants';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -111,12 +112,12 @@ const LoginForm = props => {
           </Button>
           <Grid container className={classes.loginFooter}>
             <Grid item xs={12} lg={4}>
-              <ButtonLink color="purple" to="/forgot-password">
+              <ButtonLink color="purple" to={`${publicPath}/forgot-password`}>
                 {<FormattedMessage {...messages.forgotPassword} />}
               </ButtonLink>
             </Grid>
             <Grid item xs={12} lg={8}>
-              <ButtonLink color="purple" to="/register">
+              <ButtonLink color="purple" to={`${publicPath}/register`}>
                 {<FormattedMessage {...messages.register} />}
               </ButtonLink>
             </Grid>

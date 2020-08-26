@@ -172,6 +172,15 @@ const RegisterForm = props => {
                 required
               />
             </Grid>
+            <Grid item xs={12} lg={6}>
+              <Field
+                name="lineId"
+                component={RenderField}
+                type="text"
+                label={<FormattedMessage {...messages.lineId} />}
+                margin="normal"
+              />
+            </Grid>
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={6} lg={3}>

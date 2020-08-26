@@ -20,6 +20,7 @@ export const initialState = {
     email: '',
     password: '',
     dateOfBirth: '',
+    lineId: '',
   },
   status: '',
   error: '',
@@ -42,6 +43,7 @@ const registerReducer = (state = initialState, action) =>
         draft.member.dateOfBirth = action.payload.member.dateOfBirth;
         draft.member.email = action.payload.member.email;
         draft.member.password = action.payload.member.password;
+        draft.member.lineId = action.payload.member.lineId;
         break;
       case ADD_REGISTER_MEMBER_SUCCESS:
         draft.status = 'Success';

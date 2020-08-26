@@ -7,7 +7,7 @@ import * as selects from './selectors';
 
 export function* onValidLogin() {
   try {
-    const requestURL = '/api/member/login';
+    const requestURL = `${types.publicPath}/api/member/login`;
     const loginForm = yield select(selects.makeSelectLogin());
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {
@@ -24,7 +24,7 @@ export function* onValidLogin() {
     });
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));
-      yield put(push('/dashboard'));
+      yield put(push(`${types.publicPath}/dashboard`));
     } else {
       yield put(actions.checkLoginError('Email or password invalid'));
     }

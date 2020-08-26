@@ -21,6 +21,7 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import StoreMallDirectory from '@material-ui/icons/StoreMallDirectory';
 import ButtonLink from 'components/ButtonLink';
+import { publicPath } from '../../constants';
 
 const categories = [
   {
@@ -29,34 +30,38 @@ const categories = [
       {
         id: 'Overview',
         icon: <CardGiftcardIcon />,
-        to: '/dashboard',
+        to: `${publicPath}/dashboard`,
         active: true,
       },
-      { id: 'Profile', icon: <RecentActorsIcon />, to: '/profile' },
+      {
+        id: 'Profile',
+        icon: <RecentActorsIcon />,
+        to: `${publicPath}/profile`,
+      },
     ],
   },
   {
     id: 'Orders',
     children: [
-      { id: 'Online', icon: <LocalMallIcon />, to: '' },
-      { id: 'Transaction', icon: <TimeLineIcon />, to: '' },
-      { id: 'History', icon: <HistoryIcon />, to: '' },
+      { id: 'Online', icon: <LocalMallIcon />, to: `${publicPath}` },
+      { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}` },
+      { id: 'History', icon: <HistoryIcon />, to: `${publicPath}` },
     ],
   },
   {
     id: 'Members',
     children: [
-      { id: 'All', icon: <PeopleIcon />, to: '/members' },
-      { id: 'Branch', icon: <StorefrontIcon />, to: '' },
-      { id: 'Shop', icon: <StoreMallDirectory />, to: '' },
+      { id: 'All', icon: <PeopleIcon />, to: `${publicPath}/members` },
+      { id: 'Branch', icon: <StorefrontIcon />, to: `${publicPath}` },
+      { id: 'Shop', icon: <StoreMallDirectory />, to: `${publicPath}` },
     ],
   },
   {
     id: 'Settings',
     children: [
-      { id: 'Roles', icon: <LockIcon />, to: '' },
-      { id: 'Database', icon: <DnsRoundedIcon />, to: '' },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: '' },
+      { id: 'Roles', icon: <LockIcon />, to: `${publicPath}` },
+      { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}` },
+      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
     ],
   },
 ];
@@ -129,7 +134,7 @@ function Navigator(props) {
         <ListItem
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
-          <ButtonLink to="/" color="white">
+          <ButtonLink to={`${publicPath}/`} color="white">
             Main Menu
           </ButtonLink>
         </ListItem>
@@ -142,7 +147,7 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            <ButtonLink to="/" color="white">
+            <ButtonLink to={`${publicPath}/`} color="white">
               Home
             </ButtonLink>
           </ListItemText>

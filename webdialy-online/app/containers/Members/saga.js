@@ -1,17 +1,12 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 
 import request from 'utils/request';
-import { LOAD_MEMBERS, DELETE_MEMBER, EDIT_MEMBER } from './constants';
-import {
-  loadMemberSuccess,
-  loadMemberError,
-  deleteMemberSuccess,
-  deleteMemberError,
-} from './actions';
+import * as types from './constants';
+import * as actions from './actions';
 
 export function* onLoadMembers() {
   try {
-    const requestURL = '/api/member';
+    const requestURL = `${types.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       method: 'GET',
       headers: {
@@ -20,14 +15,14 @@ export function* onLoadMembers() {
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     });
-    yield put(loadMemberSuccess(response));
+    yield put(actions.loadMemberSuccess(response));
   } catch (err) {
-    yield put(loadMemberError(err));
+    yield put(actions.loadMemberError(err));
   }
 }
 export function* onDeleteMember({ payload }) {
   try {
-    const requestURL = '/api/member';
+    const requestURL = `${types.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       headers: {
@@ -39,14 +34,14 @@ export function* onDeleteMember({ payload }) {
         member_code: payload,
       }),
     });
-    yield put(deleteMemberSuccess(response));
+    yield put(actions.deleteMemberSuccess(response));
   } catch (err) {
-    yield put(deleteMemberError(err));
+    yield put(actions.deleteMemberError(err));
   }
 }
 export function* onEditMember() {
   try {
-    const requestURL = '/api/member';
+    const requestURL = `${types.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       method: 'PATCH',
       headers: {
@@ -55,14 +50,14 @@ export function* onEditMember() {
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     });
-    yield put(loadMemberSuccess(response));
+    yield put(actions.loadMemberSuccess(response));
   } catch (err) {
-    yield put(loadMemberError(err));
+    yield put(actions.loadMemberError(err));
   }
 }
 
 export default function* membersSaga() {
-  yield takeLatest(LOAD_MEMBERS, onLoadMembers);
-  yield takeEvery(DELETE_MEMBER, onDeleteMember);
-  yield takeEvery(EDIT_MEMBER, onEditMember);
+  yield takeLatest(types.LOAD_MEMBERS, onLoadMembers);
+  yield takeEvery(types.DELETE_MEMBER, onDeleteMember);
+  yield takeEvery(types.EDIT_MEMBER, onEditMember);
 }

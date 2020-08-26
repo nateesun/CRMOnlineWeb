@@ -17,6 +17,8 @@ const app = express();
 const httpRequest = require('./infra/httpRequest/usecases')();
 const envConfig = require('../config/envConfig');
 
+const appBasePath = envConfig('APP_BASE_PATH');
+const appName = envConfig('APP_NAME');
 let serviceApiHost = envConfig('SERVICE_API_HOST');
 const isDemo = process.env.NODE_ENV === 'demo';
 if (isDemo) {
@@ -25,17 +27,21 @@ if (isDemo) {
 
 const options = {
   serviceApiHost,
+  appBasePath,
+  appName,
   httpRequest,
 };
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
-app.use('/api/member/login', require('./routes/login')(options));
-app.use('/api', require('./routes/api')(options));
+const basePathForAPI = appBasePath.replace(/\/*$/, '');
+app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
+app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
+app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/',
+  publicPath: `${appBasePath}`,
 });
 
 // get the intended host and port number, use localhost and port 3000 if not provided

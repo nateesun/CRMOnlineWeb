@@ -65,4 +65,8 @@ export default defineMessages({
     id: `${scope}.loginTopic`,
     defaultMessage: 'Login System',
   },
+  lineId: {
+    id: `${scope}.lineId`,
+    defaultMessage: 'Line Id',
+  },
 });

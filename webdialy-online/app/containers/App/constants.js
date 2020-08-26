@@ -6,5 +6,13 @@
  * reducers accidentally picking up actions they shouldn't.
  *
  * Follow this format:
- * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
+export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const PATH_LOGIN = `${publicPath}/login`;
+export const PATH_LOGOUT = `${publicPath}/logout`;
+export const PATH_DASHBOARD = `${publicPath}/dashboard`;
+export const PATH_REGISTER = `${publicPath}/register`;
+export const PATH_FORGOT_PWD = `${publicPath}/forgot-password`;
+export const PATH_RECOVER_PWD = `${publicPath}/recover-password`;
+export const PATH_PROFILE = `${publicPath}/profile`;
+export const PATH_MEMBER = `${publicPath}/members`;

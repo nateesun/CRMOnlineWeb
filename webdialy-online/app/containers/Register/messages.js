@@ -109,4 +109,8 @@ export default defineMessages({
     id: `${scope}.backLogin`,
     defaultMessage: 'Back to Login?',
   },
+  lineId: {
+    id: `${scope}.lineId`,
+    defaultMessage: 'Line ID',
+  },
 });

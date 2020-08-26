@@ -61,6 +61,7 @@ export default function ProfileContent(props) {
     email,
     brithday,
     mobile,
+    lineId,
   } = profile;
   const classes = useStyles();
 
@@ -160,6 +161,14 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.username} />
               </Label>{' '}
               <LabelContent>{username}</LabelContent>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>
+              <Label>
+                <FormattedMessage {...messages.lineId} />
+              </Label>{' '}
+              <LabelContent>{lineId}</LabelContent>
             </Typography>
           </Grid>
         </Grid>

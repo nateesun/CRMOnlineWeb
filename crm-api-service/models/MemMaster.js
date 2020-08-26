@@ -51,14 +51,15 @@ const MemMaster = {
       Member_PointExpiredDate,
       Member_ExpiredDate,
       Member_Brithday,
+      Line_Id,
     } = MemmasterModel
     try {
       const sql = `insert into ${table_name} (
         Member_Code, Member_TitleNameThai, Member_FirstName, Member_LastName,
         Member_HomeTel, Member_Mobile, Member_Email, Username,
         Password, System_Created, System_Updated, Member_TotalScore,
-        Member_TotalPurchase, Member_PointExpiredDate, Member_ExpiredDate, Member_Brithday) 
-        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        Member_TotalPurchase, Member_PointExpiredDate, Member_ExpiredDate, Member_Brithday, Line_Id) 
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       const result = await pool.query(sql, [
         Member_Code,
         Member_TitleNameThai,
@@ -76,6 +77,7 @@ const MemMaster = {
         Member_PointExpiredDate,
         Member_ExpiredDate,
         Member_Brithday,
+        Line_Id,
       ])
       callback(null, { status: "Success", data: result.affectedRows })
     } catch (err) {

@@ -38,6 +38,7 @@ router.get("/:member_code", (req, res, next) => {
           brithday: data.Member_Brithday,
           mobile: data.Member_Mobile,
           loggedIn: true,
+          line_id: data.Line_Id,
         },
       })
     }
@@ -76,6 +77,7 @@ router.post("/login", (req, res, next) => {
             brithday: data.Member_Brithday,
             mobile: data.Member_Mobile,
             loggedIn: true,
+            lineId: data.Line_Id,
           },
         })
       }

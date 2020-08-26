@@ -2,13 +2,13 @@ import { put, select, takeLatest, call } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
-import { ADD_REGISTER_MEMBER } from './constants';
-import { addRegisterMemberSuccess, addRegisterMemberError } from './actions';
+import * as types from './constants';
+import * as actions from './actions';
 import { makeSelectMember } from './selectors';
 
 export function* onAddRegisterMember() {
   try {
-    const requestURL = '/api/member';
+    const requestURL = `${types.publicPath}/api/member`;
     const member = yield select(makeSelectMember());
     const {
       prefix,
@@ -18,6 +18,7 @@ export function* onAddRegisterMember() {
       dateOfBirth,
       email,
       password,
+      lineId,
     } = member;
     yield call(request, requestURL, {
       method: 'POST',
@@ -49,15 +50,16 @@ export function* onAddRegisterMember() {
           .add(10, 'years')
           .format('YYYY-MM-DD'),
         Member_Brithday: dateOfBirth,
+        Line_Id: lineId,
       }),
     });
-    yield put(addRegisterMemberSuccess());
-    yield put(push('/login'));
+    yield put(actions.addRegisterMemberSuccess());
+    yield put(push(`${types.publicPath}/login`));
   } catch (err) {
-    yield put(addRegisterMemberError(err));
+    yield put(actions.addRegisterMemberError(err));
   }
 }
 
 export default function* registerSaga() {
-  yield takeLatest(ADD_REGISTER_MEMBER, onAddRegisterMember);
+  yield takeLatest(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
 }
