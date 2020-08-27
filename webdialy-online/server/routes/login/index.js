@@ -1,5 +1,6 @@
 const { Router, response } = require('express');
 const { json, urlencoded } = require('body-parser');
+const ip = require('ip');
 
 module.exports = args => {
   const { appName, serviceApiHost, httpRequest } = args;
@@ -15,6 +16,9 @@ module.exports = args => {
       method,
       headers: {
         ...req.headers,
+        pragma: 'no-cache',
+        'cache-control': 'no-cache',
+        'x-forwarded-for': req.headers['x-forwarded-for'] || ip.address(),
       },
     };
 
