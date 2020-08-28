@@ -16,3 +16,4 @@ export const PATH_FORGOT_PWD = `${publicPath}/forgot-password`;
 export const PATH_RECOVER_PWD = `${publicPath}/recover-password`;
 export const PATH_PROFILE = `${publicPath}/profile`;
 export const PATH_MEMBER = `${publicPath}/members`;
+export const PATH_SHOPPING = `${publicPath}/shopping`;
