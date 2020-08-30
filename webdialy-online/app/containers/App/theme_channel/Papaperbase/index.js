@@ -23,6 +23,7 @@ import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
+import CheckoutOrder from 'containers/Checkout/Loadable';
 import * as path from '../../constants';
 
 import Navigator from './Navigator';
@@ -171,7 +172,7 @@ const styles = {
   },
   main: {
     flex: 1,
-    padding: theme.spacing(4),
+    padding: theme.spacing(1),
     background: '#eaeff1',
   },
   footer: {
@@ -229,6 +230,7 @@ function Paperbase(props) {
               <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
+              <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

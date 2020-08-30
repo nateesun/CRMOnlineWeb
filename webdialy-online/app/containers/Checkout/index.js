@@ -1,38 +1,39 @@
 /**
  *
- * Shopping
+ * Checkout
  *
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ShoppingContent from './ShoppingContent';
+
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectShopping from './selectors';
+import makeSelectCheckout from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
+import CheckoutContent from './Checkout';
 
-export function Shopping() {
-  useInjectReducer({ key: 'shopping', reducer });
-  useInjectSaga({ key: 'shopping', saga });
+export function Checkout() {
+  useInjectReducer({ key: 'checkout', reducer });
+  useInjectSaga({ key: 'checkout', saga });
 
   return (
-    <div style={{width: '100%'}}>
-      <ShoppingContent />
-    </div>
+    <CheckoutContent />
   );
 }
 
-Shopping.propTypes = {
+Checkout.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  shopping: makeSelectShopping(),
+  checkout: makeSelectCheckout(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -46,4 +47,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Shopping);
+export default compose(withConnect)(Checkout);
