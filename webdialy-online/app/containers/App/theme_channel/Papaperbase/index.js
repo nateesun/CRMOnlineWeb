@@ -24,6 +24,7 @@ import Profile from 'containers/Profile/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
+import MasterUI from 'containers/MasterUI/Loadable';
 import * as path from '../../constants';
 
 import Navigator from './Navigator';
@@ -231,6 +232,7 @@ function Paperbase(props) {
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
+              <Route path={path.PATH_MASTER_UI} component={MasterUI} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

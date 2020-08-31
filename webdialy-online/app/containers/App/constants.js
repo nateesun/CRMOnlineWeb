@@ -18,3 +18,4 @@ export const PATH_PROFILE = `${publicPath}/profile`;
 export const PATH_MEMBER = `${publicPath}/members`;
 export const PATH_SHOPPING = `${publicPath}/shopping`;
 export const PATH_CHECKOUT_ORDER = `${publicPath}/checkout-orders`;
+export const PATH_MASTER_UI = `${publicPath}/master-ui`;
