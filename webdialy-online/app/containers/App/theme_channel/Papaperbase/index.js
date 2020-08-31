@@ -23,7 +23,7 @@ import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
-import CheckoutOrder from 'containers/Checkout/Loadable';
+import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import * as path from '../../constants';
 
 import Navigator from './Navigator';

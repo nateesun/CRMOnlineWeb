@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
 
 export default function AddressForm() {
   return (
@@ -11,6 +12,7 @@ export default function AddressForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      <Divider style={{ border: '1px solid #eee' }} />
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
