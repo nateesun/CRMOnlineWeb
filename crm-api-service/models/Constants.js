@@ -1,0 +1,7 @@
+const DATABASE_ERROR = "DATABASE_ERROR"
+const NOT_FOUND = "NOT_FOUND"
+
+module.exports = {
+  DATABASE_ERROR,
+  NOT_FOUND,
+}

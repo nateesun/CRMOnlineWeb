@@ -62,6 +62,7 @@ const categories = [
       { id: 'Roles', icon: <LockIcon />, to: `${publicPath}` },
       { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}` },
       { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
+      { id: 'Master', icon: <PermMediaOutlinedIcon />, to: `${publicPath}/master-ui` },
     ],
   },
 ];

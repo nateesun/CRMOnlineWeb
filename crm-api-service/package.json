@@ -8,9 +8,11 @@
     "start:demo": "cross-env API_PORT=8080 API_SERVER=demo node ./bin/www",
     "start:demo:pm2": "cross-env API_PORT=8080 API_SERVER=demo pm2 start ./bin/www --name crm-api-service -i 4",
     "watch": "nodemon ./bin/www",
-    "watch:demo": "cross-env API_PORT=8080 API_SERVER=demo nodemon ./bin/www"
+    "watch:demo": "cross-env API_PORT=8080 API_SERVER=demo nodemon ./bin/www",
+    "test": "mocha ./__tests__ --exit"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
@@ -25,5 +27,10 @@
     "nocache": "^2.1.0",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.1.3"
   }
 }

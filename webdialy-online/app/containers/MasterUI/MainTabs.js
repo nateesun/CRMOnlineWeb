@@ -6,7 +6,12 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Tables from './Tables';
+import CompanyTable from './CompanyTable';
+import BranchTable from './BranchTable';
+import ProductTable from './ProductTable';
+import EmployeeTable from './EmployeeTable';
+import StockTable from './StockTable';
+import PromotionTable from './PromotionTable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,22 +91,22 @@ export default function MainTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Tables name="Company" />
+        <CompanyTable name="Company" />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Tables name="Branch" />
+        <BranchTable name="Branch" />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Tables name="Product" />
+        <ProductTable name="Product" />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Tables name="Employee" />
+        <EmployeeTable name="Employee" />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Tables name="Stock" />
+        <StockTable name="Stock" />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <Tables name="Promotion" />
+        <PromotionTable name="Promotion" />
       </TabPanel>
     </div>
   );

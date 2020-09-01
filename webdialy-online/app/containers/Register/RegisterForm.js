@@ -173,6 +173,7 @@ const RegisterForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
+              <span style={{color: 'green'}}>* กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL เท่านั้น</span>
               <Field
                 name="lineId"
                 component={RenderField}

@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
 })
 
 router.get("/version", (req, res, next) => {
-  res.status(200).send("API CRM Online V-1.0")
+  res.status(200).send({ type: "SUCCESS", message: "1.0.0" })
   next()
 })
 

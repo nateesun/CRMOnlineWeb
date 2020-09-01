@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Button } from '@material-ui/core';
+import HeaderTable from './HeaderTable';
+import ButtonCreateNew from './ButtonCreateNew';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -68,7 +70,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Tables(props) {
+export default function ProductTable(props) {
   const { name } = props;
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -85,10 +87,8 @@ export default function Tables(props) {
 
   return (
     <div>
-      <h3>Menu / {name}</h3>
-      <Button variant="contained" color="primary" style={{ marginBottom: '10px', background: "green" }}>
-        Create Items
-      </Button>
+      <HeaderTable name="Promotion" />
+      <ButtonCreateNew name="Create New Promotion" />
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
