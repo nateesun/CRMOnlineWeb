@@ -17,7 +17,7 @@ export function* onLoadMembers() {
     });
     yield put(actions.loadMemberSuccess(response));
   } catch (err) {
-    yield put(actions.loadMemberError(err));
+    yield put(actions.loadMemberError("Cannot connect to API Server"));
   }
 }
 export function* onDeleteMember({ payload }) {
@@ -36,7 +36,7 @@ export function* onDeleteMember({ payload }) {
     });
     yield put(actions.deleteMemberSuccess(response));
   } catch (err) {
-    yield put(actions.deleteMemberError(err));
+    yield put(actions.deleteMemberError("Cannot connect to API Server"));
   }
 }
 export function* onEditMember() {
@@ -52,7 +52,7 @@ export function* onEditMember() {
     });
     yield put(actions.loadMemberSuccess(response));
   } catch (err) {
-    yield put(actions.loadMemberError(err));
+    yield put(actions.loadMemberError("Cannot connect to API Server"));
   }
 }
 

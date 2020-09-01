@@ -56,7 +56,7 @@ export function* onAddRegisterMember() {
     yield put(actions.addRegisterMemberSuccess());
     yield put(push(`${types.publicPath}/login`));
   } catch (err) {
-    yield put(actions.addRegisterMemberError(err));
+    yield put(actions.addRegisterMemberError("Cannot connect to API Server"));
   }
 }
 
