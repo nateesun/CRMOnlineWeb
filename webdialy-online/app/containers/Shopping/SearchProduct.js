@@ -14,10 +14,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0,
     marginTop: '10px',
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
+    border: '1px solid #ddd',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),

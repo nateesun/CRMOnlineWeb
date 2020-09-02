@@ -8,7 +8,7 @@ export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} style={{marginTop: '1px'}}>
       <Grid item xs={12}>
         <ProductTopic label={topic} bgColor="blue" textColor="white" />
       </Grid>

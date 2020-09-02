@@ -40,10 +40,10 @@ function Media(props) {
 
   return (
     <div style={{ width: '100%' }}>
-      <SearchProduct />
       <TopPromotion type="fade" />
       <GridCategory />
       <GroupProduct />
+      <SearchProduct />
       <ProductList handleClickOpen={()=>handleClickOpen()} data={data} topic="Product all items 2020" />
       <OrderFooter />
       <DialogDetail
