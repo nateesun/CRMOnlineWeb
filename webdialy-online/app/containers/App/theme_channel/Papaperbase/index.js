@@ -17,6 +17,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Login from 'containers/Login/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
+import LineLogin from 'containers/LineLogin/Loadable';
 import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
@@ -233,6 +234,7 @@ function Paperbase(props) {
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
               <Route path={path.PATH_MASTER_UI} component={MasterUI} />
+              <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

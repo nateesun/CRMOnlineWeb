@@ -7,6 +7,7 @@ const basicAuth = require("express-basic-auth")
 const indexRouter = require("./routes/index")
 const memberRouter = require("./routes/memmaster")
 const stockRouter = require("./routes/stock")
+const lineLoginRouter = require("./routes/line_login")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -45,6 +46,7 @@ app.use(
 app.use("/api/", indexRouter)
 app.use("/api/member", memberRouter)
 app.use("/api/stock", stockRouter)
+app.use("/api/line", lineLoginRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

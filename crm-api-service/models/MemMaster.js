@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken")
 const pool = require("../config")
 const table_name = "memmaster"
 
@@ -119,6 +120,34 @@ const MemMaster = {
       console.log(sql, member_code)
       const result = await pool.query(sql, [member_code]);
       callback(null, { status: "Success", data: result.affectedRows })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
+  getLineId: async (lineId, callback) => {
+    try {
+      const sql = `select * from ${table_name} where Line_Id=?`
+      const member = await pool.query(sql, [lineId])
+      if(member.length==0){
+        callback(null, { status: "Not Found", data: [] })
+      }else{
+        callback(null, { status: "Success", data: JSON.stringify(member) })
+      }
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
+  verifyTokenLine: async (token, callback) => {
+    try {
+      const verifyPass = jwt.verify(token, 'softpos2013');
+      if(verifyPass){
+        const { lineId } = jwt.decode(token);
+        const sql = `select * from ${table_name} where Line_Id=?`
+        const member = await pool.query(sql, [lineId])
+        callback(null, { status: "Success", data: JSON.stringify(member) })
+      }else {
+        callback(null, { status: "Error", msg: 'Verify Token Error' })
+      }
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }

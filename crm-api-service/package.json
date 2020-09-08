@@ -22,6 +22,7 @@
     "express-basic-auth": "^1.2.0",
     "helmet": "^4.1.0",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
     "nocache": "^2.1.0",

@@ -8,7 +8,7 @@ const type = {
 router.post("/", async (req, res, next) => {
   try {
     const respo = await Task.create(req.body)
-    res.json({ status: type.SUCCESSS, data: respo })
+    res.json({ status: type.SUCCESSS, data: respo.data })
   } catch (err) {
     res.json({ type: err.type, message: err.message })
   }
@@ -16,7 +16,7 @@ router.post("/", async (req, res, next) => {
 router.put("/", async (req, res, next) => {
   try {
     const respo = await Task.update(req.body)
-    res.json({ status: type.SUCCESSS, data: respo })
+    res.json({ status: type.SUCCESSS, data: respo.data })
   } catch (err) {
     res.json({ type: err.type, message: err.message })
   }

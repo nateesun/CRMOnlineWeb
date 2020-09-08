@@ -9,6 +9,7 @@
  */
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 export const PATH_LOGIN = `${publicPath}/login`;
+export const PATH_LINE_LOGIN = `${publicPath}/line_login/:token`;
 export const PATH_LOGOUT = `${publicPath}/logout`;
 export const PATH_DASHBOARD = `${publicPath}/dashboard`;
 export const PATH_REGISTER = `${publicPath}/register`;
