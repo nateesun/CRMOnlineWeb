@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,12 @@ import { Button } from '@material-ui/core';
 export default function DahboardContent(props) {
   const { profile, onRefresh } = props;
   const { pointBalance = 0, pointRedemption = 0, code } = profile;
+
+  useEffect(() => {
+    if (code) {
+      onRefresh(code);
+    }
+  }, []);
 
   DahboardContent.propTypes = {
     profile: PropTypes.object,
@@ -29,7 +35,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointBalance} />}
-          point={pointBalance}
+          point={pointBalance || 0}
           bg="#1aa4b4"
           fbg="#17828f"
         />
@@ -37,7 +43,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointRedemption} />}
-          point={pointRedemption}
+          point={pointRedemption || 0}
           bg="#07B975"
           fbg="#028A57"
         />

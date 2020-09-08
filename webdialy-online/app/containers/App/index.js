@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import GlobalStyle from '../../global-styles';
 import Main from './theme_channel/Papaperbase';
-import { makeLoggedIn, makeSelectProfile } from 'containers/Login/selectors';
+import { makeSelectProfile } from 'containers/Login/selectors';
 
 export function App(props) {
   return (
@@ -17,7 +17,6 @@ export function App(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loggedIn: makeLoggedIn(),
   profile: makeSelectProfile(),
 });
 

@@ -2,6 +2,7 @@ import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
+import * as actions from './actions';
 import * as types from './constants';
 
 export function* onVerifyTokenLogin(data) {
@@ -36,6 +37,7 @@ export function* onVerifyTokenLogin(data) {
       });
       if (response.status === 'Success') {
         yield put(checkLoginSuccess(response));
+        // yield put(actions.verifyTokenSuccess(response));
         yield put(push(`${types.publicPath}/dashboard`));
       } else {
         yield put(checkLoginError('Email or password invalid'));

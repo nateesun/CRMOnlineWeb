@@ -12,7 +12,8 @@ import {
 } from './constants';
 
 export const initialState = {
-  token: null
+  token: null,
+  profile: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -25,8 +26,7 @@ const lineLoginReducer = (state = initialState, action) =>
         draft.token = action.payload.token;
         break;
       case VERIFY_TOKEN_SUCCESS:
-        draft.username = action.payload.username;
-        draft.password = action.payload.password;
+        draft.profile = action.payload.data;
         break;
       case VERIFY_TOKEN_ERROR:
         draft.error = action.payload;

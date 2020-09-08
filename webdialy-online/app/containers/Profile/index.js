@@ -11,7 +11,7 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectProfile, makeLoggedIn } from 'containers/Login/selectors';
+import { makeSelectProfile } from 'containers/Login/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ProfileContent from './ProfileContent';
@@ -20,7 +20,9 @@ export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
-  if (!props.loggedIn) {
+  const { loggedIn } = props.profile;
+
+  if (!loggedIn) {
     return <Redirect push to="/login" />;
   }
 
@@ -34,7 +36,6 @@ export function Profile(props) {
 Profile.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
-  loggedIn: makeLoggedIn(),
   profile: makeSelectProfile(),
 });
 

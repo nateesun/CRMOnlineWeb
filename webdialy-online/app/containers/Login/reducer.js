@@ -22,7 +22,6 @@ export const initialState = {
     password: '',
   },
   profile: {},
-  loggedIn: false,
   error: '',
 };
 
@@ -33,42 +32,36 @@ const loginReducer = (state = initialState, action) =>
       case DEFAULT_ACTION:
         draft.loginForm = {};
         draft.profile = {};
-        draft.loggedIn = false;
         draft.error = '';
         break;
       case CHECK_LOGIN:
         draft.loginForm.email = action.payload.email;
         draft.loginForm.password = action.payload.password;
-        draft.loggedIn = false;
         break;
       case CHECK_LOGIN_SUCCESS:
-        draft.loggedIn = true;
         draft.profile = action.payload.data;
         break;
       case CHECK_LOGIN_ERROR:
         draft.error = action.payload;
-        draft.loggedIn = false;
         break;
       case CHECK_LOGOUT:
+        draft.profile = {}
         break;
       case CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
         draft.loginForm.password = '';
-        draft.loggedIn = false;
         break;
       case CHECK_LOGOUT_ERROR:
         draft.error = action.error;
         break;
       case CLEAR_LOGIN:
         draft.error = '';
-        draft.loggedIn = false;
         draft.loginForm = {
           email: '',
           password: '',
         };
         break;
       case LOAD_PROFILE_TOKEN:
-        draft.loggedIn = true;
         draft.profile = action.payload;
         break;
     }

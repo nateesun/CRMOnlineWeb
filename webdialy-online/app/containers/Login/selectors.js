@@ -19,12 +19,6 @@ const makeSelectProfile = () =>
     loginState => loginState.profile,
   );
 
-const makeLoggedIn = () =>
-  createSelector(
-    selectLogin,
-    loginState => loginState.loggedIn,
-  );
-
 const makeLoginError = () =>
   createSelector(
     selectLogin,
@@ -35,6 +29,5 @@ export {
   selectLogin,
   makeSelectLogin,
   makeSelectProfile,
-  makeLoggedIn,
   makeLoginError,
 };

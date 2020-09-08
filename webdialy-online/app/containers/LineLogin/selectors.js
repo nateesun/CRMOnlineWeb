@@ -21,5 +21,10 @@ const makeSelectLineLogin = () =>
     substate => substate,
   );
 
-export default makeSelectLineLogin;
-export { selectLineLoginDomain };
+const makeSelectLineLoginProfile = () =>
+  createSelector(
+    selectLineLoginDomain,
+    substate => substate.profile,
+  );
+
+export { selectLineLoginDomain, makeSelectLineLogin, makeSelectLineLoginProfile };
