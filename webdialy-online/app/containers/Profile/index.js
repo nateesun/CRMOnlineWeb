@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -15,11 +16,14 @@ import { makeSelectProfile } from 'containers/Login/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ProfileContent from './ProfileContent';
+import { editMember } from './actions';
+import { makeUpdateStatus, makeErrorUpdate } from './selectors';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
+  const { onEditMember } = props;
   const { loggedIn } = props.profile;
 
   if (!loggedIn) {
@@ -28,20 +32,24 @@ export function Profile(props) {
 
   return (
     <div>
-      <ProfileContent {...props} />
+      <ProfileContent {...props} onEditMember={onEditMember} />
     </div>
   );
 }
 
-Profile.propTypes = {};
+Profile.propTypes = {
+  onEditMember: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   profile: makeSelectProfile(),
+  updateStatus: makeUpdateStatus(),
+  errorUpdate: makeErrorUpdate(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onEditMember: member => dispatch(editMember(member)),
   };
 }
 

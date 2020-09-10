@@ -96,6 +96,17 @@ router.post("/", (req, res, next) => {
     }
   })
 })
+router.put("/", (req, res, next) => {
+  Task.updateProfile(req.body, (err, rows) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      res.status(200).json({ data: rows.affectedRows })
+    }
+  })
+})
 
 router.patch("/", (req, res, next) => {
   Task.update(req.body, (err, rows) => {

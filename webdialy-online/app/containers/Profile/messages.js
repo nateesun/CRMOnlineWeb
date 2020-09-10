@@ -69,4 +69,20 @@ export default defineMessages({
     id: `${scope}.lineId`,
     defaultMessage: 'Line Id',
   },
+  btnEditProfile: {
+    id: `${scope}.btnEditProfile`,
+    defaultMessage: 'Edit Profile',
+  },
+  btnSaveProfile: {
+    id: `${scope}.btnSaveProfile`,
+    defaultMessage: 'Save Data',
+  },
+  headerEditForm: {
+    id: `${scope}.headerEditForm`,
+    defaultMessage: 'Edit Member',
+  },
+  btnResetForm: {
+    id: `${scope}.btnResetForm`,
+    defaultMessage: 'Reset',
+  },
 });

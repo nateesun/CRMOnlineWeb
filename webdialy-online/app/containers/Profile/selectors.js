@@ -14,6 +14,23 @@ const selectProfileDomain = state => state.profile || initialState;
 /**
  * Default selector used by Profile
  */
+const makeSelectMember = () =>
+  createSelector(
+    selectProfileDomain,
+    editState => editState.member,
+  );
+
+const makeUpdateStatus = () =>
+  createSelector(
+    selectProfileDomain,
+    editState => editState.status,
+  );
+
+const makeErrorUpdate = () =>
+  createSelector(
+    selectProfileDomain,
+    editState => editState.error,
+  );
 
 const makeSelectProfile = () =>
   createSelector(
@@ -21,5 +38,10 @@ const makeSelectProfile = () =>
     substate => substate,
   );
 
-export default makeSelectProfile;
-export { selectProfileDomain };
+export {
+  selectProfileDomain,
+  makeSelectMember,
+  makeUpdateStatus,
+  makeErrorUpdate,
+  makeSelectProfile,
+};

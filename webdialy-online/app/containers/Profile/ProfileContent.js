@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Slide from '@material-ui/core/Slide';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -11,7 +12,12 @@ import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import ProfileEditForm from './ProfileEditForm';
 import messages from './messages';
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Label = styled.span`
   border: 0px solid;
@@ -50,6 +56,7 @@ const useStyles = makeStyles({
 
 export default function ProfileContent(props) {
   const { profile } = props;
+  const [open, setOpen] = useState(false);
   const {
     prefix,
     firstName,
@@ -64,6 +71,14 @@ export default function ProfileContent(props) {
     lineId,
   } = profile;
   const classes = useStyles();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   ProfileContent.propTypes = {
     profile: PropTypes.object,
@@ -177,7 +192,16 @@ export default function ProfileContent(props) {
         <Button variant="contained" color="secondary" size="small">
           <FormattedMessage {...messages.btnChangePassword} />
         </Button>
+        <Button variant="contained" color="primary" size="small" onClick={()=>handleClickOpen()}>
+          <FormattedMessage {...messages.btnEditProfile} />
+        </Button>
       </CardActions>
+      <ProfileEditForm
+       {...props}
+        open={open}
+        handleClose={() => handleClose()}
+        Transition={Transition}
+      />
     </Card>
   );
 }

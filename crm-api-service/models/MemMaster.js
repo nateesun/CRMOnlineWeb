@@ -85,6 +85,43 @@ const MemMaster = {
       callback(err, { status: "Error", msg: err.message })
     }
   },
+  updateProfile: async (MemmasterModel, callback) => {
+    const {
+      Member_Code,
+      Member_TitleNameThai,
+      Member_FirstName,
+      Member_LastName,
+      Member_HomeTel,
+      Member_Mobile,
+      Member_Brithday,
+      Line_Id,
+    } = MemmasterModel
+    try {
+      const sql = `update ${table_name} set 
+        Member_TitleNameThai = ?,
+        Member_FirstName = ?,
+        Member_LastName = ?,
+        Member_HomeTel = ?,
+        Member_Mobile = ?,
+        System_Updated = now(),
+        Member_Brithday = ?,
+        Line_Id = ? 
+        WHERE Member_Code=?`
+      const result = await pool.query(sql, [
+        Member_TitleNameThai,
+        Member_FirstName,
+        Member_LastName,
+        Member_HomeTel,
+        Member_Mobile,
+        Member_Brithday,
+        Line_Id,
+        Member_Code,
+      ])
+      callback(null, { status: "Success", data: result.affectedRows })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   update: async (MemmasterModel, callback) => {
     const {
       Member_TotalScore,

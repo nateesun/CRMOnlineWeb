@@ -14,6 +14,7 @@ function RenderField({
   type,
   required,
   autoFocus,
+  disabled,
   meta: { touched, error },
 }) {
   return (
@@ -27,6 +28,7 @@ function RenderField({
         label={label}
         required={required}
         autoFocus={autoFocus}
+        disabled={disabled}
       />
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
     </div>
