@@ -43,7 +43,7 @@ const categories = [
   {
     id: 'Orders',
     children: [
-      { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
+      // { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
       { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}` },
       { id: 'History', icon: <HistoryIcon />, to: `${publicPath}` },
     ],
