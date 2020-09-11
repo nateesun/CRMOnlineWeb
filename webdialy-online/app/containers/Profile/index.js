@@ -16,14 +16,11 @@ import { makeSelectProfile } from 'containers/Login/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ProfileContent from './ProfileContent';
-import { editMember } from './actions';
-import { makeUpdateStatus, makeErrorUpdate } from './selectors';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
-  const { onEditMember } = props;
   const { loggedIn } = props.profile;
 
   if (!loggedIn) {
@@ -32,25 +29,19 @@ export function Profile(props) {
 
   return (
     <div>
-      <ProfileContent {...props} onEditMember={onEditMember} />
+      <ProfileContent {...props} />
     </div>
   );
 }
 
-Profile.propTypes = {
-  onEditMember: PropTypes.func,
-};
+Profile.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   profile: makeSelectProfile(),
-  updateStatus: makeUpdateStatus(),
-  errorUpdate: makeErrorUpdate(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    onEditMember: member => dispatch(editMember(member)),
-  };
+  return {};
 }
 
 const withConnect = connect(

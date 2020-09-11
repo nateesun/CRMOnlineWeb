@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as types from './constants';
 import * as actions from './actions';
@@ -24,5 +24,5 @@ export function* initLoad() {
 
 // Individual exports for testing
 export default function* dashboardSaga() {
-  yield takeLatest(types.INIT_LOAD, initLoad);
+  yield takeEvery(types.INIT_LOAD, initLoad);
 }

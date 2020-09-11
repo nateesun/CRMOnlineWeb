@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import * as types from './constants';
@@ -42,6 +42,6 @@ export function* onLogout() {
 }
 
 export default function* loginSaga() {
-  yield takeLatest(types.CHECK_LOGIN, onValidLogin);
-  yield takeLatest(types.CHECK_LOGOUT, onLogout);
+  yield takeEvery(types.CHECK_LOGIN, onValidLogin);
+  yield takeEvery(types.CHECK_LOGOUT, onLogout);
 }

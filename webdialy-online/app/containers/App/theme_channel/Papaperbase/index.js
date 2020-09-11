@@ -22,6 +22,7 @@ import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
+import ProfileEdit from 'containers/ProfileEdit/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
@@ -228,7 +229,8 @@ function Paperbase(props) {
               <Route path={path.PATH_REGISTER} component={Register} />
               <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
-              <Route path={path.PATH_PROFILE} component={Profile} />
+              <Route exact path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />

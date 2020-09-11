@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
@@ -61,5 +61,5 @@ export function* onAddRegisterMember() {
 }
 
 export default function* registerSaga() {
-  yield takeLatest(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
+  yield takeEvery(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
 }

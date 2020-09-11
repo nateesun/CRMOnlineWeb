@@ -8,12 +8,19 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button } from '@material-ui/core';
 
 export default function DahboardContent(props) {
-  const { profile, onRefresh } = props;
-  const { pointBalance = 0, pointRedemption = 0, code } = profile;
+  const { profile } = props;
+  let pointBalance = 0;
+  let pointRedemption = 0
+  let code = '';
+  if(profile){
+    pointBalance = profile.pointBalance || 0;
+    pointRedemption = profile.pointRedemption || 0;
+    code = profile.code || props.code || '';
+  }
 
   useEffect(() => {
     if (code) {
-      onRefresh(code);
+      props.onRefresh(code);
     }
   }, []);
 
@@ -27,7 +34,7 @@ export default function DahboardContent(props) {
         <Button
           variant="outlined"
           startIcon={<RefreshIcon />}
-          onClick={() => onRefresh(code)}
+          onClick={() => props.onRefresh(code)}
         >
           <FormattedMessage {...messages.btnRefresh} />
         </Button>
@@ -35,7 +42,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointBalance} />}
-          point={pointBalance || 0}
+          point={profile && profile.pointBalance || 0}
           bg="#1aa4b4"
           fbg="#17828f"
         />
@@ -43,7 +50,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointRedemption} />}
-          point={pointRedemption || 0}
+          point={profile && profile.pointRedemption || 0}
           bg="#07B975"
           fbg="#028A57"
         />

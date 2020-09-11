@@ -37,7 +37,7 @@ export function Dashboard(props) {
 
   return (
     <div>
-      <DashboardContent {...props} />
+      <DashboardContent code={props.login.code} {...props} />
     </div>
   );
 }

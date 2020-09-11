@@ -11,8 +11,8 @@ import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
+import ButtonLink from 'components/ButtonLink';
 import { FormattedMessage } from 'react-intl';
-import ProfileEditForm from './ProfileEditForm';
 import messages from './messages';
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -71,14 +71,6 @@ export default function ProfileContent(props) {
     lineId,
   } = profile;
   const classes = useStyles();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   ProfileContent.propTypes = {
     profile: PropTypes.object,
@@ -192,16 +184,12 @@ export default function ProfileContent(props) {
         <Button variant="contained" color="secondary" size="small">
           <FormattedMessage {...messages.btnChangePassword} />
         </Button>
-        <Button variant="contained" color="primary" size="small" onClick={()=>handleClickOpen()}>
-          <FormattedMessage {...messages.btnEditProfile} />
-        </Button>
+        <ButtonLink to={`/profile/${code}/edit`}>
+          <Button variant="contained" color="primary" size="small">
+            <FormattedMessage {...messages.btnEditProfile} />
+          </Button>
+        </ButtonLink>
       </CardActions>
-      <ProfileEditForm
-       {...props}
-        open={open}
-        handleClose={() => handleClose()}
-        Transition={Transition}
-      />
     </Card>
   );
 }

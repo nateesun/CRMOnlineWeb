@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const moment = require('moment')
 const Task = require("../models/MemMaster")
 
 router.get("/", (req, res, next) => {
@@ -23,6 +24,7 @@ router.get("/:member_code", (req, res, next) => {
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)[0]
+      const date1 = new Date(data.Member_Brithday);
       res.status(200).json({
         status: response.status,
         msg: "Success",
@@ -35,7 +37,7 @@ router.get("/:member_code", (req, res, next) => {
           pointRedemption: data.Member_TotalPurchase,
           code: data.Member_Code,
           email: data.Member_Email,
-          brithday: data.Member_Brithday,
+          brithday: moment(new Date(data.Member_Brithday)).format('YYYY-MM-DD'),
           mobile: data.Member_Mobile,
           loggedIn: true,
           line_id: data.Line_Id,
