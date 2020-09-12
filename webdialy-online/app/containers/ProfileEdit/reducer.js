@@ -15,7 +15,7 @@ export const initialState = {
     mobile: '',
     email: '',
     password: '',
-    dateOfBirth: '',
+    birthday: '',
     lineId: '',
     loggedIn: false,
   },
@@ -38,7 +38,7 @@ const profileEditReducer = (state = initialState, action) =>
           mobile: '',
           email: '',
           password: '',
-          dateOfBirth: '',
+          birthday: '',
           lineId: '',
         }
         break;
@@ -46,16 +46,7 @@ const profileEditReducer = (state = initialState, action) =>
         draft.member.code = action.payload;
         break;
       case types.INIT_LOAD_PROFILE_MEMBER_SUCCESS:
-        draft.member.code = action.payload.code;
-        draft.member.prefix = action.payload.prefix;
-        draft.member.firstName = action.payload.firstName;
-        draft.member.lastName = action.payload.lastName;
-        draft.member.mobile = action.payload.mobile;
-        draft.member.dateOfBirth = action.payload.brithday;
-        draft.member.email = action.payload.email;
-        draft.member.password = action.payload.password;
-        draft.member.lineId = action.payload.line_id;
-        draft.member.loggedIn = true;
+        draft.member = action.payload;
         break;
       case types.INIT_LOAD_PROFILE_MEMBER_ERROR:
         console.log('error loading:', action.payload);
@@ -66,10 +57,10 @@ const profileEditReducer = (state = initialState, action) =>
         draft.member.firstName = action.payload.member.firstName;
         draft.member.lastName = action.payload.member.lastName;
         draft.member.mobile = action.payload.member.mobile;
-        draft.member.dateOfBirth = action.payload.member.dateOfBirth;
+        draft.member.birthday = action.payload.member.birthday;
         draft.member.email = action.payload.member.email;
         draft.member.password = action.payload.member.password;
-        draft.member.lineId = action.payload.member.lineId;
+        draft.member.lineId = action.payload.member.line_id;
         break;
       case types.EDIT_MEMBER_SUCCESS:
         draft.status = 'Success';

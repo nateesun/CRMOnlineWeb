@@ -12,8 +12,8 @@ import { compose } from 'redux';
 import ButtonLink from 'components/ButtonLink';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { makeSelectProfile } from 'containers/Login/selectors';
 import {
-  makeSelectProfileEdit,
   makeUpdateStatus,
   makeErrorUpdate,
 } from './selectors';
@@ -26,28 +26,7 @@ export function ProfileEdit(props) {
   useInjectReducer({ key: 'profileEdit', reducer });
   useInjectSaga({ key: 'profileEdit', saga });
 
-  useEffect(() => {
-    if (props.match.params.id !== '') {
-      props.initLoad(props.match.params.id);
-    }
-    return () => {
-      props.clearData();
-    };
-  }, []);
-
-  if (
-    props.profile.member.email &&
-    props.profile.member.code === props.match.params.id
-  ) {
-    return <EditForm {...props} />;
-  } else {
-    return (
-    <div>
-      <h1>Loading...</h1>
-      <ButtonLink to={`/profile`}>Refresh</ButtonLink>
-    </div>
-    );
-  }
+  return <EditForm {...props} />;
 }
 
 ProfileEdit.propTypes = {
@@ -56,7 +35,7 @@ ProfileEdit.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  profile: makeSelectProfileEdit(),
+  login: makeSelectProfile(),
   updateStatus: makeUpdateStatus(),
   errorUpdate: makeErrorUpdate(),
 });

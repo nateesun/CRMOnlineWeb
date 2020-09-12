@@ -66,9 +66,9 @@ export default function ProfileContent(props) {
     pointRedemption,
     code,
     email,
-    brithday,
+    birthday,
     mobile,
-    lineId,
+    line_id,
   } = profile;
   const classes = useStyles();
 
@@ -124,7 +124,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.birthDay} />
               </Label>
               <LabelContent>
-                {moment(brithday).format('DD/MM/YYYY')}
+                {moment(birthday).format('DD/MM/YYYY')}
               </LabelContent>
             </Typography>
           </Grid>
@@ -175,7 +175,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.lineId} />
               </Label>{' '}
-              <LabelContent>{lineId}</LabelContent>
+              <LabelContent>{line_id}</LabelContent>
             </Typography>
           </Grid>
         </Grid>

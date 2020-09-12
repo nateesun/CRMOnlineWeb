@@ -19,7 +19,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
-import { makeSelectMember } from './selectors';
+import { makeSelectProfile } from 'containers/Login/selectors';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -173,7 +173,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Field
-                name="dateOfBirth"
+                name="birthday"
                 component={DateInput}
                 type="date"
                 margin="normal"
@@ -219,7 +219,7 @@ const EditForm = props => {
                 เท่านั้น
               </span>
               <Field
-                name="lineId"
+                name="line_id"
                 component={RenderField}
                 type="text"
                 label={<FormattedMessage {...messages.lineId} />}
@@ -283,8 +283,8 @@ const validate = formValues => {
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
-  if (!formValues.dateOfBirth) {
-    errors.dateOfBirth = (
+  if (!formValues.birthday) {
+    errors.birthday = (
       <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
     );
   }
@@ -298,7 +298,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectMember(),
+  initialValues: makeSelectProfile(),
 });
 
 export default connect(mapStateToProps)(

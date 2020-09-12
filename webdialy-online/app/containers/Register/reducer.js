@@ -19,7 +19,7 @@ export const initialState = {
     mobile: '',
     email: '',
     password: '',
-    dateOfBirth: '',
+    birthday: '',
     lineId: '',
   },
   status: '',
@@ -40,7 +40,7 @@ const registerReducer = (state = initialState, action) =>
         draft.member.firstName = action.payload.member.firstName;
         draft.member.lastName = action.payload.member.lastName;
         draft.member.mobile = action.payload.member.mobile;
-        draft.member.dateOfBirth = action.payload.member.dateOfBirth;
+        draft.member.birthday = action.payload.member.birthday;
         draft.member.email = action.payload.member.email;
         draft.member.password = action.payload.member.password;
         draft.member.lineId = action.payload.member.lineId;

@@ -124,7 +124,7 @@ const RegisterForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Field
-                name="dateOfBirth"
+                name="birthday"
                 component={DateInput}
                 type="date"
                 margin="normal"
@@ -243,8 +243,8 @@ const validate = formValues => {
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
-  if (!formValues.dateOfBirth) {
-    errors.dateOfBirth = (
+  if (!formValues.birthday) {
+    errors.birthday = (
       <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
     );
   }

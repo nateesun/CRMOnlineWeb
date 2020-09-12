@@ -15,7 +15,7 @@ export function* onAddRegisterMember() {
       firstName,
       lastName,
       mobile,
-      dateOfBirth,
+      birthday,
       email,
       password,
       lineId,
@@ -49,7 +49,7 @@ export function* onAddRegisterMember() {
         Member_ExpiredDate: moment()
           .add(10, 'years')
           .format('YYYY-MM-DD'),
-        Member_Brithday: dateOfBirth,
+        Member_Brithday: birthday,
         Line_Id: lineId,
       }),
     });

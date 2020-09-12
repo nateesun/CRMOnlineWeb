@@ -2,6 +2,7 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as types from './constants';
 import * as actions from './actions';
+import * as loginActions from './actions';
 import * as selects from './selectors';
 
 export function* initLoadProfileMember() {
@@ -39,10 +40,10 @@ export function* onEditMember() {
       firstName,
       lastName,
       mobile,
-      dateOfBirth,
+      birthday,
       lineId,
     } = member;
-    yield call(request, requestURL, {
+    const response = yield call(request, requestURL, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -56,13 +57,18 @@ export function* onEditMember() {
         Member_LastName: lastName,
         Member_HomeTel: mobile,
         Member_Mobile: mobile,
-        Member_Brithday: dateOfBirth,
+        Member_Brithday: birthday,
         Line_Id: lineId,
       }),
     });
-    yield put(actions.editMemberSuccess());
+    if (response.status === 'Success') {
+      yield put(actions.editMemberSuccess());
+    } else {
+      yield put(actions.editMemberError(response.msg));  
+    }
   } catch (err) {
-    yield put(actions.editMemberError("Cannot connect to API Server: "+err));
+    console.log('onEditMember:err', err);
+    yield put(actions.editMemberError("Cannot connect to API Server: " + err));
   }
 }
 
