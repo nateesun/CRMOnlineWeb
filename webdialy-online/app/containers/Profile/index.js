@@ -21,12 +21,6 @@ export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
-  const { loggedIn } = props.profile;
-
-  if (!loggedIn) {
-    return <Redirect push to="/login" />;
-  }
-
   return (
     <div>
       <ProfileContent {...props} />

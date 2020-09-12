@@ -105,15 +105,7 @@ const EditForm = props => {
   const onValidated = formValues => {
     onEditMember({ member: formValues });
   };
-  useEffect(() => {
-    console.log('useEffect')
-    if (props.match.params.id !== '') {
-      props.initLoad(props.match.params.id);
-    }
-    return () => {
-      clearData();
-    };
-  }, []);
+  
 
   EditForm.propTypes = {
     errorUpdate: PropTypes.string,
@@ -141,7 +133,7 @@ const EditForm = props => {
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
-        <form className={classes.form} initialValues={props.initLoad(props.match.params.id)} onSubmit={handleSubmit(onValidated)}>
+        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={3}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
@@ -270,7 +262,7 @@ EditForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
-  initialValues: PropTypes.func,
+  initialValues: PropTypes.object,
 };
 
 const validate = formValues => {

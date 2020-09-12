@@ -185,7 +185,7 @@ const styles = {
 };
 
 function Paperbase(props) {
-  const { classes, profile } = props;
+  const { classes, login } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -196,11 +196,11 @@ function Paperbase(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {profile.loggedIn && (
+        {login && login.loggedIn && (
           <nav className={classes.drawer}>
             <Hidden smUp implementation="js">
               <Navigator
-                username={profile.username}
+                username={login.username}
                 PaperProps={{ style: { width: drawerWidth } }}
                 variant="temporary"
                 open={mobileOpen}
@@ -209,7 +209,7 @@ function Paperbase(props) {
             </Hidden>
             <Hidden xsDown implementation="css">
               <Navigator
-                username={profile.username}
+                username={login.username}
                 PaperProps={{ style: { width: drawerWidth } }}
               />
             </Hidden>
@@ -217,7 +217,7 @@ function Paperbase(props) {
         )}
         <div className={classes.app}>
           <Header
-            profile={profile}
+            login={login}
             onDrawerToggle={handleDrawerToggle}
           />
           <main className={classes.main}>

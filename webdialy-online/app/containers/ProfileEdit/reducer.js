@@ -30,6 +30,17 @@ const profileEditReducer = (state = initialState, action) =>
       case types.DEFAULT_ACTION:
         draft.status = '';
         draft.error = '';
+        draft.member = {
+          code: '',
+          prefix: '',
+          firstName: '',
+          lastName: '',
+          mobile: '',
+          email: '',
+          password: '',
+          dateOfBirth: '',
+          lineId: '',
+        }
         break;
       case types.INIT_LOAD_PROFILE_MEMBER:
         draft.member.code = action.payload;

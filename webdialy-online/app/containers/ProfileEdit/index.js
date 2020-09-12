@@ -9,10 +9,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
+import ButtonLink from 'components/ButtonLink';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectProfileEdit, makeUpdateStatus, makeErrorUpdate } from './selectors';
+import {
+  makeSelectProfileEdit,
+  makeUpdateStatus,
+  makeErrorUpdate,
+} from './selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -22,9 +26,28 @@ export function ProfileEdit(props) {
   useInjectReducer({ key: 'profileEdit', reducer });
   useInjectSaga({ key: 'profileEdit', saga });
 
-  return (
-      <EditForm {...props} />
-  );
+  useEffect(() => {
+    if (props.match.params.id !== '') {
+      props.initLoad(props.match.params.id);
+    }
+    return () => {
+      props.clearData();
+    };
+  }, []);
+
+  if (
+    props.profile.member.email &&
+    props.profile.member.code === props.match.params.id
+  ) {
+    return <EditForm {...props} />;
+  } else {
+    return (
+    <div>
+      <h1>Loading...</h1>
+      <ButtonLink to={`/profile`}>Refresh</ButtonLink>
+    </div>
+    );
+  }
 }
 
 ProfileEdit.propTypes = {

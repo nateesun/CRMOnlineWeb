@@ -19,12 +19,6 @@ const dashboardReducer = (state = initialState, action) =>
       case types.INIT_LOAD:
         draft.memberCode = action.payload;
         break;
-      case types.INIT_LOAD_SUCCESS:
-        draft.profile = action.payload.data;
-        break;
-      case types.INIT_LOAD_ERROR:
-        draft.error = action.payload;
-        break;
     }
   });
 
