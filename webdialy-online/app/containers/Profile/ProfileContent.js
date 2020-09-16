@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Slide from '@material-ui/core/Slide';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -10,8 +11,13 @@ import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
+import ButtonLink from 'components/ButtonLink';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const Label = styled.span`
   border: 0px solid;
@@ -50,6 +56,7 @@ const useStyles = makeStyles({
 
 export default function ProfileContent(props) {
   const { profile } = props;
+  const [open, setOpen] = useState(false);
   const {
     prefix,
     firstName,
@@ -59,9 +66,9 @@ export default function ProfileContent(props) {
     pointRedemption,
     code,
     email,
-    brithday,
+    birthday,
     mobile,
-    lineId,
+    line_id,
   } = profile;
   const classes = useStyles();
 
@@ -117,7 +124,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.birthDay} />
               </Label>
               <LabelContent>
-                {moment(brithday).format('DD/MM/YYYY')}
+                {moment(birthday).format('DD/MM/YYYY')}
               </LabelContent>
             </Typography>
           </Grid>
@@ -168,7 +175,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.lineId} />
               </Label>{' '}
-              <LabelContent>{lineId}</LabelContent>
+              <LabelContent>{line_id}</LabelContent>
             </Typography>
           </Grid>
         </Grid>
@@ -177,6 +184,11 @@ export default function ProfileContent(props) {
         <Button variant="contained" color="secondary" size="small">
           <FormattedMessage {...messages.btnChangePassword} />
         </Button>
+        <ButtonLink to={`/profile/${code}/edit`}>
+          <Button variant="contained" color="primary" size="small">
+            <FormattedMessage {...messages.btnEditProfile} />
+          </Button>
+        </ButtonLink>
       </CardActions>
     </Card>
   );

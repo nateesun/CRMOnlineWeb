@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
@@ -51,5 +51,5 @@ export function* onVerifyTokenLogin(data) {
 }
 
 export default function* lineLoginSaga() {
-  yield takeLatest(types.VERIFY_TOKEN, onVerifyTokenLogin);
+  yield takeEvery(types.VERIFY_TOKEN, onVerifyTokenLogin);
 }

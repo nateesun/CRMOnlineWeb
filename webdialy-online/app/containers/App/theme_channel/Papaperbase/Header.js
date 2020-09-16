@@ -42,8 +42,8 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle, profile } = props;
-  const { firstName, lastName } = profile;
+  const { classes, onDrawerToggle, login } = props;
+  const { loggedIn, firstName, lastName } = login;
 
   return (
     <React.Fragment>
@@ -73,7 +73,7 @@ function Header(props) {
               <LocaleToggle />
             </Grid>
             <Grid item>
-              {profile.loggedIn ? (
+              {loggedIn ? (
                 <ButtonLink to={`${publicPath}/logout`}>
                   <Button size="large" startIcon={<ExitToApp />}>
                     <FormattedMessage {...messages.headerLogout} />
@@ -89,7 +89,7 @@ function Header(props) {
             </Grid>
           </Grid>
         </Toolbar>
-        {profile.loggedIn === true && (
+        {login.loggedIn === true && (
           <Typography component="span" style={{textAlign: 'right', fontSize: '12px', paddingRight: '26px', paddingBottom: '5px'}}>
             <ButtonLink to={`${publicPath}/profile`} color="white">สมาชิก: {firstName} {lastName}</ButtonLink>
           </Typography>

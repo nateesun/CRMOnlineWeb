@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const moment = require('moment')
 const Task = require("../models/MemMaster")
 
 router.get("/", (req, res, next) => {
@@ -23,6 +24,7 @@ router.get("/:member_code", (req, res, next) => {
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)[0]
+      const dateStr = new Date(data.Member_Brithday);
       res.status(200).json({
         status: response.status,
         msg: "Success",
@@ -35,7 +37,7 @@ router.get("/:member_code", (req, res, next) => {
           pointRedemption: data.Member_TotalPurchase,
           code: data.Member_Code,
           email: data.Member_Email,
-          brithday: data.Member_Brithday,
+          birthday: moment(dateStr).format('YYYY-MM-DD'),
           mobile: data.Member_Mobile,
           loggedIn: true,
           line_id: data.Line_Id,
@@ -62,6 +64,7 @@ router.post("/login", (req, res, next) => {
         })
       } else {
         const data = JSON.parse(response.data)[0]
+        const dateStr = new Date(data.Member_Brithday);
         res.status(200).json({
           status: response.status,
           msg: "Success",
@@ -74,10 +77,10 @@ router.post("/login", (req, res, next) => {
             pointRedemption: data.Member_TotalPurchase,
             code: data.Member_Code,
             email: data.Member_Email,
-            brithday: data.Member_Brithday,
+            birthday: moment(dateStr).format('YYYY-MM-DD'),
             mobile: data.Member_Mobile,
             loggedIn: true,
-            lineId: data.Line_Id,
+            line_id: data.Line_Id,
           },
         })
       }
@@ -93,6 +96,17 @@ router.post("/", (req, res, next) => {
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       res.status(200).json({ data: rows.affectedRows })
+    }
+  })
+})
+router.put("/", (req, res, next) => {
+  Task.updateProfile(req.body, (err, rows) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      res.status(200).json({ status: 'Success', data: rows.affectedRows })
     }
   })
 })

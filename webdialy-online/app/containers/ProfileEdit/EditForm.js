@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -6,20 +6,63 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import ButtonLink from 'components/ButtonLink';
+import { createStructuredSelector } from 'reselect';
+import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
-import SelectField from 'components/RenderField/Select';
-import SweetAlert from 'sweetalert2-react';
 import styled from 'styled-components';
+import SweetAlert from 'sweetalert2-react';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
 import messages from './messages';
-import RegisterLogo from '../../images/register.png';
+import EditProfileLogo from '../../images/edit_profile.png';
+import { makeSelectProfile } from 'containers/Login/selectors';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
   border-radius: 5px 5px 5px 5px;
 `;
+
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+    return;
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>;
+  }
+};
+
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => (
+  <FormControl
+    variant="outlined"
+    error={touched && error}
+    style={{ width: '100%' }}
+  >
+    <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
+    <Select
+      labelId="demo-simple-select-outlined-label"
+      native
+      {...input}
+      {...custom}
+      inputProps={{
+        name: 'age',
+        id: 'age-native-simple',
+      }}
+      label={label}
+    >
+      {children}
+    </Select>
+    {renderFromHelper({ touched, error })}
+  </FormControl>
+);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,60 +90,66 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RegisterForm = props => {
+const EditForm = props => {
   const classes = useStyles();
   const {
     handleSubmit,
     pristine,
     reset,
     submitting,
-    onRegister,
-    errorRegister,
-    registerStatus,
+    onEditMember,
+    errorUpdate,
+    updateStatus,
     clearData,
   } = props;
   const onValidated = formValues => {
-    onRegister({ member: formValues });
+    onEditMember({ member: formValues });
   };
+  
 
-  RegisterForm.propTypes = {
-    errorRegister: PropTypes.string,
-    registerStatus: PropTypes.string,
+  EditForm.propTypes = {
+    errorUpdate: PropTypes.string,
+    updateStatus: PropTypes.string,
     clearData: PropTypes.func,
   };
 
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert
-        show={errorRegister}
-        title="Register Error"
+        show={errorUpdate}
+        title="Update data error"
         type="error"
-        text={errorRegister}
+        text={errorUpdate}
       />
       <SweetAlert
-        show={registerStatus === 'Success'}
-        title="Register Success"
+        show={updateStatus === 'Success'}
+        title="Update data success"
         type="success"
-        text="You can login into system"
+        text="Back to profile detail"
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={RegisterLogo} width="100" />
+        <ImgLogo src={EditProfileLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
-          <FormattedMessage {...messages.header} />
+          <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={3}>
-              <Field
-                name="prefix"
-                component={SelectField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.prefix} />}
-                required
-                autoFocus
-              />
+              <div style={{ width: '100%', paddingTop: '14px' }}>
+                <Field
+                  name="prefix"
+                  component={renderSelectField}
+                  label={<FormattedMessage {...messages.prefix} />}
+                  required
+                >
+                  <option value="" />
+                  <option value="คุณ">คุณ</option>
+                  <option value="นาย">นาย</option>
+                  <option value="นาง">นาง</option>
+                  <option value="นางสาว">นางสาว</option>
+                </Field>
+              </div>
             </Grid>
             <Grid item xs={12} lg={3}>
               <Field
@@ -142,40 +191,35 @@ const RegisterForm = props => {
               />
             </Grid>
 
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} md={6}>
+              <Field
+                name="code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.code} />}
+                disabled={true}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <Field
                 name="email"
                 component={RenderField}
                 type="email"
                 margin="normal"
                 label={<FormattedMessage {...messages.email} />}
-                required
+                disabled={true}
               />
             </Grid>
+
             <Grid item xs={12} lg={6}>
+              <span style={{ color: 'green' }}>
+                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
+                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
+                เท่านั้น
+              </span>
               <Field
-                name="password"
-                component={RenderField}
-                type="password"
-                label={<FormattedMessage {...messages.password} />}
-                margin="normal"
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Field
-                name="rePassword"
-                component={RenderField}
-                type="password"
-                label={<FormattedMessage {...messages.rePassword} />}
-                margin="normal"
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <span style={{color: 'green'}}>* กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL เท่านั้น</span>
-              <Field
-                name="lineId"
+                name="line_id"
                 component={RenderField}
                 type="text"
                 label={<FormattedMessage {...messages.lineId} />}
@@ -192,7 +236,7 @@ const RegisterForm = props => {
                 color="primary"
                 disabled={pristine || submitting}
               >
-                <FormattedMessage {...messages.btnRegister} />
+                <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
             <Grid item xs={6} lg={3}>
@@ -202,13 +246,8 @@ const RegisterForm = props => {
                 disabled={pristine || submitting}
                 onClick={reset}
               >
-                <FormattedMessage {...messages.btnClear} />
+                <FormattedMessage {...messages.btnResetForm} />
               </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <ButtonLink to="/login">
-                <FormattedMessage {...messages.backLogin} />
-              </ButtonLink>
             </Grid>
           </Grid>
         </form>
@@ -217,12 +256,13 @@ const RegisterForm = props => {
   );
 };
 
-RegisterForm.propTypes = {
+EditForm.propTypes = {
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
+  initialValues: PropTypes.object,
 };
 
 const validate = formValues => {
@@ -253,24 +293,18 @@ const validate = formValues => {
   } else if (!formValues.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
-  if (!formValues.password) {
-    errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
-  }
-  if (!formValues.rePassword) {
-    errors.rePassword = (
-      <FormattedMessage {...messages.passwordShouldNotEmpty} />
-    );
-  }
-  if (formValues.password !== formValues.rePassword) {
-    errors.rePassword = (
-      <FormattedMessage {...messages.passwordConfirmShouldEqual} />
-    );
-  }
 
   return errors;
 };
 
-export default reduxForm({
-  form: 'registerForm',
-  validate,
-})(RegisterForm);
+const mapStateToProps = createStructuredSelector({
+  initialValues: makeSelectProfile(),
+});
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: 'editForm',
+    validate,
+    enableReinitialize: true,
+  })(EditForm)
+);

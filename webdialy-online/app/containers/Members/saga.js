@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import request from 'utils/request';
 import * as types from './constants';
@@ -57,7 +57,7 @@ export function* onEditMember() {
 }
 
 export default function* membersSaga() {
-  yield takeLatest(types.LOAD_MEMBERS, onLoadMembers);
+  yield takeEvery(types.LOAD_MEMBERS, onLoadMembers);
   yield takeEvery(types.DELETE_MEMBER, onDeleteMember);
   yield takeEvery(types.EDIT_MEMBER, onEditMember);
 }

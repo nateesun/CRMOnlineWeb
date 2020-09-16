@@ -4,12 +4,11 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -25,26 +24,10 @@ export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
   useInjectSaga({ key: 'dashboard', saga });
 
-  const code = props.login.code || props.lineProfile.code;
-
-  if (!code) {
-    return <Redirect push to="/login" />;
-  }
-
-  useEffect(() => {
-    props.onRefresh(code);
-  }, []);
-
-  return (
-    <div>
-      <DashboardContent {...props} />
-    </div>
-  );
+  return props.login && <DashboardContent {...props} />
 }
 
-Dashboard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+Dashboard.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectProfile(),
@@ -54,7 +37,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
     onRefresh: code => {
       dispatch(actions.initLoad(code));
     },

@@ -22,6 +22,7 @@ import Register from 'containers/Register/Loadable';
 import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
+import ProfileEdit from 'containers/ProfileEdit/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
@@ -184,7 +185,7 @@ const styles = {
 };
 
 function Paperbase(props) {
-  const { classes, profile } = props;
+  const { classes, login } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -195,11 +196,11 @@ function Paperbase(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {profile.loggedIn && (
+        {login && login.loggedIn && (
           <nav className={classes.drawer}>
             <Hidden smUp implementation="js">
               <Navigator
-                username={profile.username}
+                username={login.username}
                 PaperProps={{ style: { width: drawerWidth } }}
                 variant="temporary"
                 open={mobileOpen}
@@ -208,7 +209,7 @@ function Paperbase(props) {
             </Hidden>
             <Hidden xsDown implementation="css">
               <Navigator
-                username={profile.username}
+                username={login.username}
                 PaperProps={{ style: { width: drawerWidth } }}
               />
             </Hidden>
@@ -216,7 +217,7 @@ function Paperbase(props) {
         )}
         <div className={classes.app}>
           <Header
-            profile={profile}
+            login={login}
             onDrawerToggle={handleDrawerToggle}
           />
           <main className={classes.main}>
@@ -228,7 +229,8 @@ function Paperbase(props) {
               <Route path={path.PATH_REGISTER} component={Register} />
               <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
-              <Route path={path.PATH_PROFILE} component={Profile} />
+              <Route exact path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />

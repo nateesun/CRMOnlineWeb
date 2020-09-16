@@ -1,4 +1,4 @@
-import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
@@ -15,7 +15,7 @@ export function* onAddRegisterMember() {
       firstName,
       lastName,
       mobile,
-      dateOfBirth,
+      birthday,
       email,
       password,
       lineId,
@@ -49,7 +49,7 @@ export function* onAddRegisterMember() {
         Member_ExpiredDate: moment()
           .add(10, 'years')
           .format('YYYY-MM-DD'),
-        Member_Brithday: dateOfBirth,
+        Member_Brithday: birthday,
         Line_Id: lineId,
       }),
     });
@@ -61,5 +61,5 @@ export function* onAddRegisterMember() {
 }
 
 export default function* registerSaga() {
-  yield takeLatest(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
+  yield takeEvery(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
 }

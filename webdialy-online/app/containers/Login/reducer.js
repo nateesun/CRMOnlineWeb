@@ -15,6 +15,7 @@ import {
   CLEAR_LOGIN,
   LOAD_PROFILE_TOKEN,
 } from './constants';
+import { INIT_LOAD_SUCCESS } from 'containers/Dashboard/constants';
 
 export const initialState = {
   loginForm: {
@@ -45,7 +46,7 @@ const loginReducer = (state = initialState, action) =>
         draft.error = action.payload;
         break;
       case CHECK_LOGOUT:
-        draft.profile = {}
+        draft.profile = {};
         break;
       case CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
@@ -63,6 +64,11 @@ const loginReducer = (state = initialState, action) =>
         break;
       case LOAD_PROFILE_TOKEN:
         draft.profile = action.payload;
+        break;
+      case INIT_LOAD_SUCCESS:
+        if (action.payload.data) {
+          draft.profile = action.payload.data;
+        }
         break;
     }
   });

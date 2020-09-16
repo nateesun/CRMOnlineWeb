@@ -17,7 +17,7 @@ export function App(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  profile: makeSelectProfile(),
+  login: makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

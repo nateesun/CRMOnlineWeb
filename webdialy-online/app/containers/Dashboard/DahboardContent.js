@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
@@ -8,17 +8,18 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button } from '@material-ui/core';
 
 export default function DahboardContent(props) {
-  const { profile, onRefresh } = props;
-  const { pointBalance = 0, pointRedemption = 0, code } = profile;
+  const { onRefresh } = props;
+  const { code, pointBalance, pointRedemption } = props.login;
 
-  useEffect(() => {
-    if (code) {
-      onRefresh(code);
-    }
-  }, []);
+  const refreshDataInit = (code) => {
+    onRefresh(code);
+  }
 
   DahboardContent.propTypes = {
-    profile: PropTypes.object,
+    code: PropTypes.string,
+    pointBalance: PropTypes.number,
+    pointRedemption: PropTypes.number,
+    onRefresh: PropTypes.func,
   };
 
   return (
@@ -27,7 +28,7 @@ export default function DahboardContent(props) {
         <Button
           variant="outlined"
           startIcon={<RefreshIcon />}
-          onClick={() => onRefresh(code)}
+          onClick={() => refreshDataInit(code)}
         >
           <FormattedMessage {...messages.btnRefresh} />
         </Button>
@@ -35,7 +36,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointBalance} />}
-          point={pointBalance || 0}
+          point={pointBalance}
           bg="#1aa4b4"
           fbg="#17828f"
         />
@@ -43,7 +44,7 @@ export default function DahboardContent(props) {
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
           label={<FormattedMessage {...messages.pointRedemption} />}
-          point={pointRedemption || 0}
+          point={pointRedemption}
           bg="#07B975"
           fbg="#028A57"
         />
