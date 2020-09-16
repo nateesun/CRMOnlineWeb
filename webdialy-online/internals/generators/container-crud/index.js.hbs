@@ -29,6 +29,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
+import * as actions from './actions';
+import ContentPage from './ContentPage';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
@@ -37,7 +39,7 @@ import saga from './saga';
 import messages from './messages';
 {{/if}}
 
-export function {{ properCase name }}() {
+export function {{ properCase name }}(props) {
   {{#if wantActionsAndReducer}}
   useInjectReducer({ key: '{{ camelCase name }}', reducer });
   {{/if}}
@@ -55,13 +57,18 @@ export function {{ properCase name }}() {
     {{/if}}
     {{#if wantMessages}}
       <FormattedMessage {...messages.header} />
+      <ContentPage {...props} />
     {{/if}}
     </div>
   );
 }
 
 {{ properCase name }}.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onInitLoad: PropTypes.func,
+  onCreateItem: PropTypes.func,
+  onUpdateItem: PropTypes.func,
+  onDeleteItem: PropTypes.func,
+  onGetItem: PropTypes.func,
 };
 
 {{#if wantActionsAndReducer}}
@@ -72,7 +79,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onInitLoad: () => dispatch(actions.initLoad()),
+    onCreateItem: (data) => dispatch(actions.createItem(data)),
+    onUpdateItem: (data) => dispatch(actions.updateItem(data)),
+    onDeleteItem: (id) => dispatch(actions.deleteItem(id)),
+    onGetItem: (id) => dispatch(actions.getItem(id)),
   };
 }
 

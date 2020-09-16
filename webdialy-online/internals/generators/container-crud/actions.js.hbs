@@ -26,22 +26,22 @@ export function initLoadError(payload) {
   };
 }
 
-export function saveItem() {
+export function createItem() {
   return {
-    type: constants.SAVE_ITEM,
+    type: constants.CREATE_ITEM,
   };
 }
 
-export function saveItemSuccess(payload) {
+export function createItemSuccess(payload) {
   return {
-    type: constants.SAVE_ITEM_SUCCESS,
+    type: constants.CREATE_ITEM_SUCCESS,
     payload,
   };
 }
 
-export function saveItemError(payload) {
+export function createItemError(payload) {
   return {
-    type: constants.SAVE_ITEM_ERROR,
+    type: constants.CREATE_ITEM_ERROR,
     payload,
   };
 }
@@ -82,6 +82,26 @@ export function deleteItemSuccess(payload) {
 export function deleteItemError(payload) {
   return {
     type: constants.DELETE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function getItem() {
+  return {
+    type: constants.GET_ITEM,
+  };
+}
+
+export function getItemSuccess(payload) {
+  return {
+    type: constants.GET_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function getItemError(payload) {
+  return {
+    type: constants.GET_ITEM_ERROR,
     payload,
   };
 }

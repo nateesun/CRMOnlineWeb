@@ -66,13 +66,13 @@ module.exports = {
       {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/index.js',
-        templateFile: './container/index.js.hbs',
+        templateFile: './container-crud/index.js.hbs',
         abortOnFail: true,
       },
       {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/index.test.js',
-        templateFile: './container/test.js.hbs',
+        templateFile: './container-crud/test.js.hbs',
         abortOnFail: true,
       },
     ];
@@ -82,7 +82,7 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/messages.js',
-        templateFile: './container/messages.js.hbs',
+        templateFile: './container-crud/messages.js.hbs',
         abortOnFail: true,
       });
     }
@@ -94,13 +94,13 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/actions.js',
-        templateFile: './container/actions.js.hbs',
+        templateFile: './container-crud/actions.js.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/actions.test.js',
-        templateFile: './container/actions.test.js.hbs',
+        templateFile: './container-crud/actions.test.js.hbs',
         abortOnFail: true,
       });
 
@@ -108,7 +108,7 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/constants.js',
-        templateFile: './container/constants.js.hbs',
+        templateFile: './container-crud/constants.js.hbs',
         abortOnFail: true,
       });
 
@@ -116,14 +116,14 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/selectors.js',
-        templateFile: './container/selectors.js.hbs',
+        templateFile: './container-crud/selectors.js.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'add',
         path:
           '../../app/containers/{{properCase name}}/tests/selectors.test.js',
-        templateFile: './container/selectors.test.js.hbs',
+        templateFile: './container-crud/selectors.test.js.hbs',
         abortOnFail: true,
       });
 
@@ -131,13 +131,13 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/reducer.js',
-        templateFile: './container/reducer.js.hbs',
+        templateFile: './container-crud/reducer.js.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/reducer.test.js',
-        templateFile: './container/reducer.test.js.hbs',
+        templateFile: './container-crud/reducer.test.js.hbs',
         abortOnFail: true,
       });
     }
@@ -147,13 +147,13 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/saga.js',
-        templateFile: './container/saga.js.hbs',
+        templateFile: './container-crud/saga.js.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'add',
         path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
-        templateFile: './container/saga.test.js.hbs',
+        templateFile: './container-crud/saga.test.js.hbs',
         abortOnFail: true,
       });
     }
@@ -170,6 +170,36 @@ module.exports = {
     actions.push({
       type: 'prettify',
       path: '/containers/',
+    });
+
+    // add crud containers other
+    // ContentPage
+    actions.push({
+      type: 'add',
+      path: '../../app/containers/{{properCase name}}/ContentPage.js',
+      templateFile: './container-crud/ContentPage.js.hbs',
+      abortOnFail: true,
+    });
+    // NewItem
+    actions.push({
+      type: 'add',
+      path: '../../app/containers/{{properCase name}}/NewItem.js',
+      templateFile: './container-crud/NewItem.js.hbs',
+      abortOnFail: true,
+    });
+    // EditItem
+    actions.push({
+      type: 'add',
+      path: '../../app/containers/{{properCase name}}/EditItem.js',
+      templateFile: './container-crud/EditItem.js.hbs',
+      abortOnFail: true,
+    });
+    // TableItems
+    actions.push({
+      type: 'add',
+      path: '../../app/containers/{{properCase name}}/TableItems.js',
+      templateFile: './container-crud/TableItems.js.hbs',
+      abortOnFail: true,
     });
 
     return actions;
