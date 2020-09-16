@@ -12,18 +12,14 @@ const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
 
+const fixPassword = 'softpos2013';
+
 const app = express()
 app.use(helmet())
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard());
 app.use(nocache());
 app.use(helmet.hidePoweredBy({ setTo: 'SOFTPOS' }));
-
-app.use(
-  basicAuth({
-    users: { admin: "softpos2013" },
-  })
-)
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
@@ -44,9 +40,9 @@ app.use(
 );
 
 app.use("/api/", indexRouter)
-app.use("/api/member", memberRouter)
-app.use("/api/stock", stockRouter)
-app.use("/api/line", lineLoginRouter)
+app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
+app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
+app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
