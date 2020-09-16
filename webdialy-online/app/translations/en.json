@@ -20,7 +20,7 @@
   "app.containers.Login.passwordShouldNotEmpty": "Password should not be blank.",
   "app.containers.Login.submit": "Sign in",
   "app.containers.Logout.header": "You have successfully logged out.",
-  "app.containers.NotFoundPage.header": "This is the NotFoundPage container!",
+  "app.containers.NotFoundPage.header": "404 - Page Not Found !",
   "app.containers.Profile.header": "Profile container!",
   "app.containers.RecoverPassword.header": "This is the RecoverPassword container!",
   "app.containers.Register.dateOfBirthShouldNotEmpty": "Date of Birth should not be blank.",

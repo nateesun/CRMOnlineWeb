@@ -65,6 +65,17 @@ const categories = [
       { id: 'Master', icon: <PermMediaOutlinedIcon />, to: `${publicPath}/master-ui` },
     ],
   },
+  {
+    id: 'Master',
+    children: [
+      { id: 'Company', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/company` },
+      { id: 'Branch', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/branch` },
+      { id: 'Product', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/product` },
+      { id: 'Employee', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/employee` },
+      { id: 'Stock', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/stock` },
+      { id: 'Promotion', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/promotion` },
+    ],
+  },
 ];
 
 const leftMenus = [];
@@ -114,7 +125,7 @@ function Navigator(props) {
   const { classes, username, ...other } = props;
   leftMenus.length = 0;
   categories.forEach((item, index) => {
-    if (item.id === 'Members' || item.id === 'Settings') {
+    if (item.id === 'Members' || item.id === 'Settings' || item.id === 'Master') {
       if (username === 'softpos@gmail.com') {
         leftMenus.push(item);
       }

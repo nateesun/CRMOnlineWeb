@@ -29,7 +29,7 @@
   "app.containers.Login.email": "อีเมล์",
   "app.containers.Login.password": "รหัสผ่าน",
   "app.containers.Logout.header": "ออกจากระบบเรียบร้อยแล้ว",
-  "app.containers.NotFoundPage.header": "",
+  "app.containers.NotFoundPage.header": "ไม่พบข้อมูลหน้านี้",
   "app.containers.Profile.header": "",
   "app.containers.RecoverPassword.header": "",
   "app.containers.Register.dateOfBirthShouldNotEmpty": "กรุณาระบุข้อมูลวันเกิด",

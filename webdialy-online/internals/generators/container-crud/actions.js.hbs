@@ -1,0 +1,87 @@
+/*
+ *
+ * {{ properCase name }} actions
+ *
+ */
+
+import * as constants from './constants';
+
+export function initLoad() {
+  return {
+    type: constants.INIT_LOAD,
+  };
+}
+
+export function initLoadSuccess(payload) {
+  return {
+    type: constants.INIT_LOAD_SUCCESS,
+    payload,
+  };
+}
+
+export function initLoadError(payload) {
+  return {
+    type: constants.INIT_LOAD_ERROR,
+    payload,
+  };
+}
+
+export function saveItem() {
+  return {
+    type: constants.SAVE_ITEM,
+  };
+}
+
+export function saveItemSuccess(payload) {
+  return {
+    type: constants.SAVE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function saveItemError(payload) {
+  return {
+    type: constants.SAVE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function updateItem() {
+  return {
+    type: constants.UPDATE_ITEM,
+  };
+}
+
+export function updateItemSuccess(payload) {
+  return {
+    type: constants.UPDATE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function updateItemError(payload) {
+  return {
+    type: constants.UPDATE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function deleteItem() {
+  return {
+    type: constants.DELETE_ITEM,
+  };
+}
+
+export function deleteItemSuccess(payload) {
+  return {
+    type: constants.DELETE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function deleteItemError(payload) {
+  return {
+    type: constants.DELETE_ITEM_ERROR,
+    payload,
+  };
+}
