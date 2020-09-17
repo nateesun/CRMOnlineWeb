@@ -8,7 +8,6 @@ import messages from './messages';
 export default function ContentPage(props) {
     return (
         <div>
-            <FormattedMessage {...messages.headerContentPage} />
             {props.getPage==='LIST' && <TableItems {...props} />}
             {props.getPage==='NEW' && <NewItem {...props} />}
             {props.getPage==='EDIT' && <EditItem {...props} />}

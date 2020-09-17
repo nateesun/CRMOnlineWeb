@@ -236,7 +236,13 @@ function Paperbase(props) {
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
               <Route path={path.PATH_MASTER_UI} component={MasterUI} />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
-              <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
+              <Route path={path.PATH_MS_COMPANY} component={null} />
+              <Route path={path.PATH_MS_BRANCH} component={null} />
+              <Route path={path.PATH_MS_PRODUCT} component={null} />
+              <Route path={path.PATH_MS_EMPLOYEE} component={null} />
+              <Route path={path.PATH_MS_STOCK} component={null} />
+              <Route path={path.PATH_MS_PROMOTION} component={null} />
+              <Route component={NotFoundPage} />
             </Switch>
           </main>
           <footer className={classes.footer}>
