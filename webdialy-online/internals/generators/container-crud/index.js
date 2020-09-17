@@ -59,6 +59,30 @@ module.exports = {
       default: true,
       message: 'Do you want to load resources asynchronously?',
     },
+    {
+      type: 'confirm',
+      name: 'contentPage',
+      default: true,
+      message: 'Do you want to load ContentPage?',
+    },
+    {
+      type: 'confirm',
+      name: 'newItem',
+      default: true,
+      message: 'Do you want to load New Item Form?',
+    },
+    {
+      type: 'confirm',
+      name: 'editItem',
+      default: true,
+      message: 'Do you want to load Edit Item Form?',
+    },
+    {
+      type: 'confirm',
+      name: 'listItem',
+      default: true,
+      message: 'Do you want to load List Item?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
@@ -167,39 +191,47 @@ module.exports = {
       });
     }
 
+    // add crud containers other
+    // ContentPage
+    if (data.contentPage) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/ContentPage.js',
+        templateFile: './container-crud/ContentPage.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // NewItem
+    if (data.newItem) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/NewItem.js',
+        templateFile: './container-crud/NewItem.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // EditItem
+    if (data.editItem) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/EditItem.js',
+        templateFile: './container-crud/EditItem.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // TableItems
+    if (data.listItem) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/TableItems.js',
+        templateFile: './container-crud/TableItems.js.hbs',
+        abortOnFail: false,
+      });
+    }
+
     actions.push({
       type: 'prettify',
       path: '/containers/',
-    });
-
-    // add crud containers other
-    // ContentPage
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/ContentPage.js',
-      templateFile: './container-crud/ContentPage.js.hbs',
-      abortOnFail: true,
-    });
-    // NewItem
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/NewItem.js',
-      templateFile: './container-crud/NewItem.js.hbs',
-      abortOnFail: true,
-    });
-    // EditItem
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/EditItem.js',
-      templateFile: './container-crud/EditItem.js.hbs',
-      abortOnFail: true,
-    });
-    // TableItems
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/TableItems.js',
-      templateFile: './container-crud/TableItems.js.hbs',
-      abortOnFail: true,
     });
 
     return actions;

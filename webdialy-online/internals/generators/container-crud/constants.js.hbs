@@ -4,9 +4,16 @@
  *
  */
 
+export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const CHANGE_PAGE = 'app/{{ properCase name }}/CHANGE_PAGE';
+
 export const INIT_LOAD = 'app/{{ properCase name }}/INIT_LOAD';
 export const INIT_LOAD_SUCCESS = 'app/{{ properCase name }}/INIT_LOAD_SUCCESS';
 export const INIT_LOAD_ERROR = 'app/{{ properCase name }}/INIT_LOAD_ERROR';
+
+export const LOAD_EDIT = 'app/{{ properCase name }}/LOAD_EDIT';
+export const LOAD_EDIT_SUCCESS = 'app/{{ properCase name }}/LOAD_EDIT_SUCCESS';
+export const LOAD_EDIT_ERROR = 'app/{{ properCase name }}/LOAD_EDIT_ERROR';
 
 export const CREATE_ITEM = 'app/{{ properCase name }}/CREATE_ITEM';
 export const CREATE_ITEM_SUCCESS = 'app/{{ properCase name }}/CREATE_ITEM_SUCCESS';

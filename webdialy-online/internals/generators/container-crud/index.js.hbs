@@ -7,7 +7,7 @@
 {{#if memo}}
 import React, { memo } from 'react';
 {{else}}
-import React from 'react';
+import React, { useEffect } from 'react';
 {{/if}}
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -27,7 +27,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelect{{properCase name}} from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
@@ -47,6 +47,10 @@ export function {{ properCase name }}(props) {
   useInjectSaga({ key: '{{ camelCase name }}', saga });
   {{/if}}
 
+  useEffect(() => {
+    props.onInitLoad();
+  }, []);
+
   return (
     <div>
     {{#if wantHeaders}}
@@ -64,7 +68,9 @@ export function {{ properCase name }}(props) {
 }
 
 {{ properCase name }}.propTypes = {
+  onChangePage: PropTypes.func,
   onInitLoad: PropTypes.func,
+  onLoadEdit: PropTypes.func,
   onCreateItem: PropTypes.func,
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
@@ -73,17 +79,21 @@ export function {{ properCase name }}(props) {
 
 {{#if wantActionsAndReducer}}
 const mapStateToProps = createStructuredSelector({
-  {{ camelCase name }}: makeSelect{{properCase name}}(),
+  getPage: selectors.makeSelectPage(),
+  getList: selectors.makeSelectListItems(),
+  getData: selectors.makeSelectForm(),
 });
 {{/if}}
 
 function mapDispatchToProps(dispatch) {
   return {
     onInitLoad: () => dispatch(actions.initLoad()),
-    onCreateItem: (data) => dispatch(actions.createItem(data)),
-    onUpdateItem: (data) => dispatch(actions.updateItem(data)),
-    onDeleteItem: (id) => dispatch(actions.deleteItem(id)),
-    onGetItem: (id) => dispatch(actions.getItem(id)),
+    onCreateItem: data => dispatch(actions.createItem(data)),
+    onUpdateItem: data => dispatch(actions.updateItem(data)),
+    onDeleteItem: id => dispatch(actions.deleteItem(id)),
+    onGetItem: id => dispatch(actions.getItem(id)),
+    onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
+    onLoadEdit: item => dispatch(actions.loadEdit(item)),
   };
 }
 

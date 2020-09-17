@@ -16,7 +16,37 @@ const select{{ properCase name }}Domain = state => state.{{ camelCase name }} ||
  */
 
 const makeSelect{{ properCase name }} = () =>
-  createSelector(select{{ properCase name }}Domain, substate => substate);
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate,
+  );
 
-export default makeSelect{{ properCase name }};
-export { select{{ properCase name }}Domain };
+const makeSelectCurrentId = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.currentId,
+  );
+const makeSelectPage = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.page,
+  );
+const makeSelectListItems = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.list,
+  );
+const makeSelectForm = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.data,
+  );
+
+export {
+  select{{ properCase name }}Domain,
+  makeSelect{{ properCase name }},
+  makeSelectPage,
+  makeSelectListItems,
+  makeSelectForm,
+  makeSelectCurrentId,
+};

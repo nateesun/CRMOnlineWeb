@@ -46,7 +46,7 @@ export function* onVerifyTokenLogin(data) {
       yield put(checkLoginError('Invalid token or expired'));
     }
   } catch (err) {
-    yield put(checkLoginError('Cannot connect to API Server'));
+    yield put(checkLoginError(err));
   }
 }
 

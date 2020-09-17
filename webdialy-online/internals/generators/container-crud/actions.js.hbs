@@ -6,9 +6,16 @@
 
 import * as constants from './constants';
 
-export function initLoad() {
+export function changePage(payload) {
+  return {
+    type: constants.CHANGE_PAGE,
+    payload,
+  };
+}
+export function initLoad(payload) {
   return {
     type: constants.INIT_LOAD,
+    payload,
   };
 }
 
@@ -25,10 +32,31 @@ export function initLoadError(payload) {
     payload,
   };
 }
+export function loadEdit(payload) {
+  return {
+    type: constants.LOAD_EDIT,
+    payload,
+  };
+}
 
-export function createItem() {
+export function loadEditSuccess(payload) {
+  return {
+    type: constants.LOAD_EDIT_SUCCESS,
+    payload,
+  };
+}
+
+export function loadEditError(payload) {
+  return {
+    type: constants.LOAD_EDIT_ERROR,
+    payload,
+  };
+}
+
+export function createItem(payload) {
   return {
     type: constants.CREATE_ITEM,
+    payload,
   };
 }
 
@@ -46,9 +74,10 @@ export function createItemError(payload) {
   };
 }
 
-export function updateItem() {
+export function updateItem(payload) {
   return {
     type: constants.UPDATE_ITEM,
+    payload,
   };
 }
 
@@ -66,9 +95,10 @@ export function updateItemError(payload) {
   };
 }
 
-export function deleteItem() {
+export function deleteItem(payload) {
   return {
     type: constants.DELETE_ITEM,
+    payload,
   };
 }
 
@@ -86,9 +116,10 @@ export function deleteItemError(payload) {
   };
 }
 
-export function getItem() {
+export function getItem(payload) {
   return {
     type: constants.GET_ITEM,
+    payload,
   };
 }
 

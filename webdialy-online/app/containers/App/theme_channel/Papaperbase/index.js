@@ -236,7 +236,7 @@ function Paperbase(props) {
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
               <Route path={path.PATH_MASTER_UI} component={MasterUI} />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
-              <Route component={NotFoundPage} />
+              <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
             </Switch>
           </main>
           <footer className={classes.footer}>

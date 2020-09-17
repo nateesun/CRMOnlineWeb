@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index")
 const memberRouter = require("./routes/memmaster")
 const stockRouter = require("./routes/stock")
 const lineLoginRouter = require("./routes/line_login")
+const crudRouter = require("./routes/table_crud")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -20,6 +21,7 @@ app.use(helmet.xssFilter());
 app.use(helmet.frameguard());
 app.use(nocache());
 app.use(helmet.hidePoweredBy({ setTo: 'SOFTPOS' }));
+app.disable('etag');
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
@@ -43,6 +45,7 @@ app.use("/api/", indexRouter)
 app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRouter)
+app.use("/api/crud", crudRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,11 +1,58 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+// import { FormattedMessage } from 'react-intl';
+// import messages from './messages';
 
 export default function TableItems(props) {
+    const { getList } = props;
+
+    const onEditItem = (item) => {
+        props.onChangePage('EDIT');
+        props.onLoadEdit(item);
+    }
+    const removeItem = (id) => {
+        props.onDeleteItem(id);
+        props.onInitLoad();
+    }
     return (
         <div>
-            <FormattedMessage {...messages.headerTableItems} />
+            {/* <FormattedMessage {...messages.headerTableItems} /> */}
+            <div>
+                <button onClick={()=>props.onChangePage('NEW')}>New Items</button>
+                <button onClick={()=>props.onInitLoad()}>Refresh</button>
+            </div>
+            <table width="100%" border="1">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th width="20%">Col - 1</th>
+                        <th width="20%">Col - 2</th>
+                        <th width="20%">Col - 3</th>
+                        <th width="20%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {getList && getList.map((item, index)=>(
+                        <tr id={index}>
+                            <td align="center">{index+1}</td>
+                            <td align="center">{item.Column1}</td>
+                            <td align="center">{item.Column2}</td>
+                            <td align="center">{item.Column3}</td>
+                            <td align="center">
+                                <div>
+                                    <button onClick={()=>onEditItem(item)}>Edit</button>
+                                    <button onClick={()=>removeItem(item.uuid_index)}>Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan={5} align="center">Footer</td>
+                    </tr>
+                </tfoot>
+            </table>
+            
         </div>
     )
 }
