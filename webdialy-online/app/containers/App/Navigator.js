@@ -21,7 +21,7 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import StoreMallDirectory from '@material-ui/icons/StoreMallDirectory';
 import ButtonLink from 'components/ButtonLink';
-import { publicPath } from '../../constants';
+import { publicPath } from './constants';
 
 const categories = [
   {

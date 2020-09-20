@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   createMuiTheme,
@@ -27,8 +27,8 @@ import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import MasterUI from 'containers/MasterUI/Loadable';
-import * as path from '../../constants';
-
+// import MsCompany from 'containers/MsCompany/Loadable';
+import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
 
@@ -36,7 +36,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="http://softcrmpkh.dyndns.org:3000/">
         webdaily-online.com
       </Link>{' '}
       {new Date().getFullYear()}
@@ -184,9 +184,9 @@ const styles = {
   },
 };
 
-function Paperbase(props) {
+function Layouts(props) {
   const { classes, login } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -254,8 +254,8 @@ function Paperbase(props) {
   );
 }
 
-Paperbase.propTypes = {
+Layouts.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Paperbase);
+export default withStyles(styles)(Layouts);
