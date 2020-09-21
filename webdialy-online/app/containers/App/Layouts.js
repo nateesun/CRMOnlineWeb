@@ -28,6 +28,7 @@ import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import MasterUI from 'containers/MasterUI/Loadable';
 // import MsCompany from 'containers/MsCompany/Loadable';
+// import MsBranch from 'containers/MsBranch/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';

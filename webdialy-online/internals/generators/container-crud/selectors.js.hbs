@@ -41,6 +41,11 @@ const makeSelectForm = () =>
     select{{ properCase name }}Domain,
     substate => substate.data,
   );
+const makeSelectResponse = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.response,
+  );
 
 export {
   select{{ properCase name }}Domain,
@@ -49,4 +54,5 @@ export {
   makeSelectListItems,
   makeSelectForm,
   makeSelectCurrentId,
+  makeSelectResponse,
 };
