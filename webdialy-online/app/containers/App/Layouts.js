@@ -26,9 +26,6 @@ import ProfileEdit from 'containers/ProfileEdit/Loadable';
 import Members from 'containers/Members/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
-import MasterUI from 'containers/MasterUI/Loadable';
-// import MsCompany from 'containers/MsCompany/Loadable';
-// import MsBranch from 'containers/MsBranch/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -235,7 +232,6 @@ function Layouts(props) {
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
-              <Route path={path.PATH_MASTER_UI} component={MasterUI} />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
               <Route path={path.PATH_MS_COMPANY} component={null} />
               <Route path={path.PATH_MS_BRANCH} component={null} />

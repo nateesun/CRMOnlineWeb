@@ -11,7 +11,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
 import TimeLineIcon from '@material-ui/icons/Timeline';
 import HistoryIcon from '@material-ui/icons/History';
 import StorefrontIcon from '@material-ui/icons/Storefront';
@@ -62,7 +61,6 @@ const categories = [
       { id: 'Roles', icon: <LockIcon />, to: `${publicPath}` },
       { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}` },
       { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
-      { id: 'Master', icon: <PermMediaOutlinedIcon />, to: `${publicPath}/master-ui` },
     ],
   },
   {
