@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import TimeLineIcon from '@material-ui/icons/Timeline';
@@ -42,7 +43,7 @@ const categories = [
   {
     id: 'Orders',
     children: [
-      // { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
+      { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
       { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}` },
       { id: 'History', icon: <HistoryIcon />, to: `${publicPath}` },
     ],
