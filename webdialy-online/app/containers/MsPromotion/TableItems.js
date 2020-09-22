@@ -80,7 +80,7 @@ export default function TableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-          {{properCase name }} Table List
+          Promotion Table List
         </Typography>
         <div className={classes.wrapButtonAction}>
           <Button

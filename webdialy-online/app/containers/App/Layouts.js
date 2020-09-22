@@ -24,6 +24,12 @@ import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import ProfileEdit from 'containers/ProfileEdit/Loadable';
 import Members from 'containers/Members/Loadable';
+import MsCompany from 'containers/MsCompany/Loadable';
+import MsBranch from 'containers/MsBranch/Loadable';
+import MsProduct from 'containers/MsProduct/Loadable';
+import MsEmployee from 'containers/MsEmployee/Loadable';
+import MsStock from 'containers/MsStock/Loadable';
+import MsPromotion from 'containers/MsPromotion/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import * as path from './constants';
@@ -233,12 +239,12 @@ function Layouts(props) {
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
-              <Route path={path.PATH_MS_COMPANY} component={null} />
-              <Route path={path.PATH_MS_BRANCH} component={null} />
-              <Route path={path.PATH_MS_PRODUCT} component={null} />
-              <Route path={path.PATH_MS_EMPLOYEE} component={null} />
-              <Route path={path.PATH_MS_STOCK} component={null} />
-              <Route path={path.PATH_MS_PROMOTION} component={null} />
+              <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
+              <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
+              <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
+              <Route path={path.PATH_MS_EMPLOYEE} component={MsEmployee} />
+              <Route path={path.PATH_MS_STOCK} component={MsStock} />
+              <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>
