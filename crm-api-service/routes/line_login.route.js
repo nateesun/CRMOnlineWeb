@@ -2,7 +2,7 @@ const express = require("express")
 const jwt = require("jsonwebtoken")
 
 const router = express.Router()
-const Task = require("../models/MemMaster")
+const Task = require("../models/MemMaster.model")
 
 router.get("/:line_id", (req, res, next) => {
   const lineId = req.params.line_id

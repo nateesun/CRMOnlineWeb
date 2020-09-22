@@ -5,10 +5,11 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
 const indexRouter = require("./routes/index")
-const memberRouter = require("./routes/memmaster")
-const stockRouter = require("./routes/stock")
-const lineLoginRouter = require("./routes/line_login")
-const crudRouter = require("./routes/table_crud")
+const memberRouter = require("./routes/memmaster.route")
+const stockRouter = require("./routes/stock.route")
+const lineLoginRouter = require("./routes/line_login.route")
+const crudRouter = require("./routes/table_crud.route")
+const companyRouter = require("./routes/company.route")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -46,6 +47,9 @@ app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRoute
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRouter)
 app.use("/api/crud", crudRouter)
+
+// master
+app.use("/api/company", companyRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

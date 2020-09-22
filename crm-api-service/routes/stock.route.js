@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Task = require("../models/Stock")
+const Task = require("../models/Stock.model")
 const type = {
   SUCCESSS: 'Success'
 }

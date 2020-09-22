@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const moment = require('moment')
-const Task = require("../models/MemMaster")
+const Task = require("../models/MemMaster.model")
 
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {
