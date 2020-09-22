@@ -51,11 +51,7 @@ const NewItem = props => {
   }
 
   const saveData = (data) => {
-    props.onCreateItem({
-      col1: data.col1,
-      col2: data.col2,
-      col3: data.col3,
-    });
+    props.onCreateItem(data);
   };
 
   NewItem.propTypes = {

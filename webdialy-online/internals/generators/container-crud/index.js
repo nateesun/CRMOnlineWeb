@@ -83,6 +83,12 @@ module.exports = {
       default: true,
       message: 'Do you want to load List Item?',
     },
+    {
+      type: 'confirm',
+      name: 'subListItem',
+      default: true,
+      message: 'Do you want to load Sub List Item?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
@@ -225,6 +231,15 @@ module.exports = {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/TableItems.js',
         templateFile: './container-crud/TableItems.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // SubTableItems
+    if (data.subListItem) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/SubTableItems.js',
+        templateFile: './container-crud/SubTableItems.js.hbs',
         abortOnFail: false,
       });
     }
