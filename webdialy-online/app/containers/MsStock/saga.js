@@ -6,7 +6,7 @@ import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/stock`;
     const response = yield call(request, requestURL);
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
@@ -21,7 +21,7 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/stock`;
     const response = yield call(request, requestURL, {
       method: 'POST',
       headers: {
@@ -44,7 +44,7 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/stock`;
     const response = yield call(request, requestURL, {
       method: 'PUT',
       headers: {
@@ -67,7 +67,7 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud/${data.uuid_index}`;
+    const requestURL = `${constants.publicPath}/api/stock/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       headers: {

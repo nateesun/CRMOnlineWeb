@@ -1,51 +1,90 @@
 const express = require("express")
 const router = express.Router()
 const Task = require("../models/Stock.model")
-const type = {
-  SUCCESSS: 'Success'
-}
 
-router.post("/", async (req, res, next) => {
-  try {
-    const respo = await Task.create(req.body)
-    res.json({ status: type.SUCCESSS, data: respo.data })
-  } catch (err) {
-    res.json({ type: err.type, message: err.message })
-  }
+router.get("/", (req, res, next) => {
+  Task.findAll((err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
 })
-router.put("/", async (req, res, next) => {
-  try {
-    const respo = await Task.update(req.body)
-    res.json({ status: type.SUCCESSS, data: respo.data })
-  } catch (err) {
-    res.json({ type: err.type, message: err.message })
-  }
+
+router.get("/:id", (req, res, next) => {
+  Task.findById(req.params.id, (err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
 })
-router.delete("/:index_uuid", async (req, res, next) => {
-  const { index_uuid } = req.params
-  try {
-    const row = await Task.delete(index_uuid)
-    res.json({ status: type.SUCCESSS, message: `delete ${row.data} row(s)` })
-  } catch (err) {
-    res.json({ type: err.type, message: err.message })
-  }
+
+router.post("/", (req, res, next) => {
+  Task.create(req.body, (err, response)=>{
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
 })
-router.get("/", async (req, res, next) => {
-  try {
-    const respo = await Task.findAll()
-    res.json({ status: type.SUCCESSS, data: respo })
-  } catch (err) {
-    res.json({ type: err.type, message: err.message })
-  }
+
+router.put("/", (req, res, next) => {
+  Task.update(req.body, (err, response)=>{
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
 })
-router.get("/:index_uuid", async (req, res, next) => {
-  const { index_uuid } = req.params
-  try {
-    const respo = await Task.findById(index_uuid)
-    res.json({ status: type.SUCCESSS, data: respo })
-  } catch (err) {
-    res.json({ type: err.type, message: err.message })
-  }
+
+router.delete("/:id", (req, res, next) => {
+  Task.delete(req.params.id, (err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
 })
 
 module.exports = router
