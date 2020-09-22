@@ -13,6 +13,7 @@ const branchRouter = require("./routes/branch.route")
 const employeeRouter = require("./routes/employee.route")
 const productRouter = require("./routes/product.route")
 const stockRouter = require("./routes/stock.route")
+const promotionRouter = require("./routes/promotion.route")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -51,11 +52,12 @@ app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRout
 app.use("/api/crud", crudRouter)
 
 // master
-app.use("/api/company", companyRouter)
-app.use("/api/branch", branchRouter)
-app.use("/api/employee", employeeRouter)
-app.use("/api/product", productRouter)
-app.use("/api/stock", stockRouter)
+app.use("/api/company", basicAuth({ users: { admin: fixPassword } }), companyRouter)
+app.use("/api/branch", basicAuth({ users: { admin: fixPassword } }), branchRouter)
+app.use("/api/employee", basicAuth({ users: { admin: fixPassword } }), employeeRouter)
+app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRouter)
+app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
+app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

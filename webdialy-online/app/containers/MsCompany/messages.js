@@ -39,11 +39,11 @@ export default defineMessages({
   },
   col1ShouldNotEmpty: {
     id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Code should not empty',
+    defaultMessage: 'Company code should not empty',
   },
   col2ShouldNotEmpty: {
     id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Name should not empty',
+    defaultMessage: 'Company name should not empty',
   },
   col3ShouldNotEmpty: {
     id: `${scope}.col3ShouldNotEmpty`,
@@ -51,11 +51,11 @@ export default defineMessages({
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Code',
+    defaultMessage: 'Company Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Name',
+    defaultMessage: 'Company Name',
   },
   col3: {
     id: `${scope}.col3`,

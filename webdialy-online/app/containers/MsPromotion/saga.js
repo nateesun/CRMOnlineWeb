@@ -6,8 +6,15 @@ import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/crud`;
-    const response = yield call(request, requestURL);
+    const requestURL = `${constants.publicPath}/api/promotion`;
+    const response = yield call(request, requestURL, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+      },
+    });
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
     } else {
@@ -21,7 +28,7 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/promotion`;
     const response = yield call(request, requestURL, {
       method: 'POST',
       headers: {
@@ -44,7 +51,7 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/promotion`;
     const response = yield call(request, requestURL, {
       method: 'PUT',
       headers: {
@@ -67,7 +74,7 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/crud/${data.uuid_index}`;
+    const requestURL = `${constants.publicPath}/api/promotion/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       headers: {

@@ -7,7 +7,14 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/branch`;
-    const response = yield call(request, requestURL);
+    const response = yield call(request, requestURL, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+      },
+    });
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
     } else {

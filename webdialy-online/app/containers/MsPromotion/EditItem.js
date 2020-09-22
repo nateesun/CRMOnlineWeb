@@ -77,10 +77,10 @@ const EditItem = props => {
           <FormattedMessage {...messages.headerEditItem} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+          <Grid container spacing={1}>
+            <Grid item xs={3}>
               <Field
-                name="col1"
+                name="code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -88,23 +88,13 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={8}>
               <Field
-                name="col2"
+                name="name"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col2} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={3}>
-              <Field
-                name="col3"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
                 required
               />
             </Grid>
@@ -158,14 +148,11 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.code) {
+    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
-  }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.name) {
+    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   return errors;
 };

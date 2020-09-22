@@ -39,27 +39,19 @@ export default defineMessages({
   },
   col1ShouldNotEmpty: {
     id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Column1 should not empty',
+    defaultMessage: 'Promotion code should not empty',
   },
   col2ShouldNotEmpty: {
     id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Column2 should not empty',
-  },
-  col3ShouldNotEmpty: {
-    id: `${scope}.col3ShouldNotEmpty`,
-    defaultMessage: 'Column3 should not empty',
+    defaultMessage: 'Promotion name should not empty',
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Column1',
+    defaultMessage: 'Promotion Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Column2',
-  },
-  col3: {
-    id: `${scope}.col3`,
-    defaultMessage: 'Column3',
+    defaultMessage: 'Promotion Name',
   },
   btnSave: {
     id: `${scope}.btnSave`,
