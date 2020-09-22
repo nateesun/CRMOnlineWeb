@@ -103,9 +103,10 @@ export default function TableItems(props) {
           <TableHead>
             <TableRow>
               <TableCell align="center">No</TableCell>
-              <TableCell align="center">Column1</TableCell>
-              <TableCell align="center">Column2</TableCell>
-              <TableCell align="center">Column3</TableCell>
+              <TableCell align="center">Code</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Unit</TableCell>
+              <TableCell align="center">Group</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -116,9 +117,10 @@ export default function TableItems(props) {
                 .map((item, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.col1}</TableCell>
-                    <TableCell align="center">{item.col2}</TableCell>
-                    <TableCell align="center">{item.col3}</TableCell>
+                    <TableCell align="center">{item["code"]}</TableCell>
+                    <TableCell align="center">{item["name"]}</TableCell>
+                    <TableCell align="center">{item["unit_sale"]}</TableCell>
+                    <TableCell align="center">{item["group_code"]}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>

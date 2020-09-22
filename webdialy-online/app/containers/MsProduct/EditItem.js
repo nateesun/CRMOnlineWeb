@@ -78,9 +78,9 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={6}>
               <Field
-                name="col1"
+                name="code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -88,9 +88,9 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={6}>
               <Field
-                name="col2"
+                name="name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -98,13 +98,23 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={6}>
               <Field
-                name="col3"
+                name="unit_sale"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Field
+                name="group_code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col4} />}
                 required
               />
             </Grid>
@@ -158,14 +168,17 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.code) {
+    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.name) {
+    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.unit_sale) {
+    errors.unit_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  }
+  if (!formValues.group_code) {
+    errors.group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
   }
   return errors;
 };

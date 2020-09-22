@@ -39,27 +39,35 @@ export default defineMessages({
   },
   col1ShouldNotEmpty: {
     id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Column1 should not empty',
+    defaultMessage: 'Product code should not empty',
   },
   col2ShouldNotEmpty: {
     id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Column2 should not empty',
+    defaultMessage: 'Product name should not empty',
   },
   col3ShouldNotEmpty: {
     id: `${scope}.col3ShouldNotEmpty`,
-    defaultMessage: 'Column3 should not empty',
+    defaultMessage: 'Unit sale should not empty',
+  },
+  col4ShouldNotEmpty: {
+    id: `${scope}.col4ShouldNotEmpty`,
+    defaultMessage: 'Group code should not empty',
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Column1',
+    defaultMessage: 'Product Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Column2',
+    defaultMessage: 'Product Name',
   },
   col3: {
     id: `${scope}.col3`,
-    defaultMessage: 'Column3',
+    defaultMessage: 'Unit Sale',
+  },
+  col4: {
+    id: `${scope}.col4`,
+    defaultMessage: 'Group Code',
   },
   btnSave: {
     id: `${scope}.btnSave`,

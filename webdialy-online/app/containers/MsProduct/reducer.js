@@ -11,9 +11,10 @@ export const initialState = {
   list: [],
   data: {
     uuid_index: '',
-    col1: '',
-    col2: '',
-    col3: '',
+    code: '',
+    name: '',
+    unit_sale: '',
+    group_code: '',
   },
   page: 'LIST',
   status: null,
