@@ -80,7 +80,7 @@ const EditItem = props => {
           <Grid container spacing={3}>
             <Grid item xs={12} lg={3}>
               <Field
-                name="col1"
+                name="code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -90,7 +90,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={12} lg={3}>
               <Field
-                name="col2"
+                name="name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -100,7 +100,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={12} lg={3}>
               <Field
-                name="col3"
+                name="line_official_id"
                 component={RenderField}
                 type="text"
                 margin="normal"

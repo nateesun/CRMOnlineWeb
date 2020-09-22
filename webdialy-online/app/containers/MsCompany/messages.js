@@ -39,27 +39,27 @@ export default defineMessages({
   },
   col1ShouldNotEmpty: {
     id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Column1 should not empty',
+    defaultMessage: 'Code should not empty',
   },
   col2ShouldNotEmpty: {
     id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Column2 should not empty',
+    defaultMessage: 'Name should not empty',
   },
   col3ShouldNotEmpty: {
     id: `${scope}.col3ShouldNotEmpty`,
-    defaultMessage: 'Column3 should not empty',
+    defaultMessage: 'Line Official should not empty',
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Column1',
+    defaultMessage: 'Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Column2',
+    defaultMessage: 'Name',
   },
   col3: {
     id: `${scope}.col3`,
-    defaultMessage: 'Column3',
+    defaultMessage: 'Line Official',
   },
   btnSave: {
     id: `${scope}.btnSave`,
