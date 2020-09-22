@@ -51,11 +51,7 @@ const NewItem = props => {
   };
 
   const saveData = data => {
-    props.onCreateItem({
-      col1: data.col1,
-      col2: data.col2,
-      col3: data.col3,
-    });
+    props.onCreateItem(data);
   };
 
   NewItem.propTypes = {
@@ -89,7 +85,7 @@ const NewItem = props => {
           <Grid container spacing={1}>
             <Grid item xs={12} lg={4}>
               <Field
-                name="col1"
+                name="code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -100,7 +96,7 @@ const NewItem = props => {
             </Grid>
             <Grid item xs={12} lg={4}>
               <Field
-                name="col2"
+                name="name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -110,7 +106,7 @@ const NewItem = props => {
             </Grid>
             <Grid item xs={12} lg={4}>
               <Field
-                name="col3"
+                name="role_code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -159,14 +155,14 @@ const NewItem = props => {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.code) {
+    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.name) {
+    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.role_code) {
+    errors.role_code = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   return errors;
 };
