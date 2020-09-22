@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Task = require("../models/{{properCase name}}.model")
+const Task = require("../models/Branch.model")
 
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {

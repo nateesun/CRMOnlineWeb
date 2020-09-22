@@ -10,6 +10,7 @@ const stockRouter = require("./routes/stock.route")
 const lineLoginRouter = require("./routes/line_login.route")
 const crudRouter = require("./routes/table_crud.route")
 const companyRouter = require("./routes/company.route")
+const branchRouter = require("./routes/branch.route")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -50,6 +51,7 @@ app.use("/api/crud", crudRouter)
 
 // master
 app.use("/api/company", companyRouter)
+app.use("/api/branch", branchRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
