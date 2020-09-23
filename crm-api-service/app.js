@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
 const indexRouter = require("./routes/index")
-const memberRouter = require("./routes/memmaster.route")
+
+const memberMasterRouter = require("./routes/login.route")
 const lineLoginRouter = require("./routes/line_login.route")
 const crudRouter = require("./routes/table_crud.route")
 const companyRouter = require("./routes/company.route")
@@ -15,6 +16,8 @@ const productRouter = require("./routes/product.route")
 const stockRouter = require("./routes/stock.route")
 const promotionRouter = require("./routes/promotion.route")
 const roleRouter = require("./routes/role.route")
+const memberRouter = require("./routes/member.route")
+
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -48,7 +51,7 @@ app.use(
 );
 
 app.use("/api/", indexRouter)
-app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
+app.use("/api/login", basicAuth({ users: { admin: fixPassword } }), memberMasterRouter)
 app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRouter)
 app.use("/api/crud", crudRouter)
 
@@ -60,6 +63,7 @@ app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRou
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
+app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

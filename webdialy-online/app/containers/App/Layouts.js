@@ -190,7 +190,7 @@ const styles = {
 };
 
 function Layouts(props) {
-  const { classes, login } = props;
+  const { classes, login, loggedIn } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -201,11 +201,11 @@ function Layouts(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {login && login.loggedIn && (
+        {loggedIn && (
           <nav className={classes.drawer}>
             <Hidden smUp implementation="js">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
                 variant="temporary"
                 open={mobileOpen}
@@ -214,17 +214,14 @@ function Layouts(props) {
             </Hidden>
             <Hidden xsDown implementation="css">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
               />
             </Hidden>
           </nav>
         )}
         <div className={classes.app}>
-          <Header
-            login={login}
-            onDrawerToggle={handleDrawerToggle}
-          />
+          <Header login={login} loggedIn={loggedIn} onDrawerToggle={handleDrawerToggle}  />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />
