@@ -49,7 +49,6 @@ const profileEditReducer = (state = initialState, action) =>
         draft.member = action.payload;
         break;
       case types.INIT_LOAD_PROFILE_MEMBER_ERROR:
-        console.log('error loading:', action.payload);
         break;
       case types.EDIT_MEMBER:
         draft.member.code = action.payload.member.code;

@@ -18,7 +18,7 @@ export function* initLoad() {
     });
     yield put(actions.initLoadSuccess(response));
   } catch (err) {
-    yield put(actions.initLoadError("Cannot connect to API Server"));
+    yield put(actions.initLoadError(err));
   }
 }
 
