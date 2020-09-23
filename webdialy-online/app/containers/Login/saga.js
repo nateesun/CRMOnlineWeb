@@ -29,7 +29,7 @@ export function* onValidLogin() {
       yield put(actions.checkLoginError('Email or password invalid'));
     }
   } catch (err) {
-    yield put(actions.checkLoginError("Cannot connect to API Server"));
+    yield put(actions.checkLoginError(err));
   }
 }
 
@@ -37,7 +37,7 @@ export function* onLogout() {
   try {
     yield put(actions.checkLogoutSuccess());
   } catch (err) {
-    yield put(actions.checkLogoutError());
+    yield put(actions.checkLogoutError(err));
   }
 }
 

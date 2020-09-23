@@ -1,0 +1,58 @@
+import { createSelector } from 'reselect';
+import { initialState } from './reducer';
+
+/**
+ * Direct selector to the {{ camelCase name }} state domain
+ */
+
+const select{{ properCase name }}Domain = state => state.{{ camelCase name }} || initialState;
+
+/**
+ * Other specific selectors
+ */
+
+/**
+ * Default selector used by {{ properCase name }}
+ */
+
+const makeSelect{{ properCase name }} = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate,
+  );
+
+const makeSelectCurrentId = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.currentId,
+  );
+const makeSelectPage = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.page,
+  );
+const makeSelectListItems = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.list,
+  );
+const makeSelectForm = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.data,
+  );
+const makeSelectResponse = () =>
+  createSelector(
+    select{{ properCase name }}Domain,
+    substate => substate.response,
+  );
+
+export {
+  select{{ properCase name }}Domain,
+  makeSelect{{ properCase name }},
+  makeSelectPage,
+  makeSelectListItems,
+  makeSelectForm,
+  makeSelectCurrentId,
+  makeSelectResponse,
+};
