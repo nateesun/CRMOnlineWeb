@@ -9,7 +9,8 @@
     "start:demo:pm2": "cross-env API_PORT=8080 API_SERVER=demo pm2 start ./bin/www --name crm-api-service -i 4",
     "watch": "nodemon ./bin/www",
     "watch:demo": "cross-env API_PORT=8080 API_SERVER=demo nodemon ./bin/www",
-    "test": "mocha ./__tests__ --exit"
+    "test": "mocha ./__tests__ --exit",
+    "generate": "plop --plopfile internals/generators/index.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -28,7 +29,8 @@
     "mysql": "^2.18.1",
     "nocache": "^2.1.0",
     "nodemailer": "^6.4.11",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "plop": "^2.7.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",

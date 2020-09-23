@@ -3,9 +3,9 @@ import 'fontsource-roboto';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import GlobalStyle from '../../global-styles';
-import Main from './theme_channel/Papaperbase';
 import { makeSelectProfile } from 'containers/Login/selectors';
+import GlobalStyle from '../../global-styles';
+import Main from './Layouts';
 
 export function App(props) {
   return (

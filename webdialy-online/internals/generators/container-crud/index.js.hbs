@@ -1,0 +1,111 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
+import React, { useEffect } from 'react';
+{{/if}}
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+{{#if wantHeaders}}
+import { Helmet } from 'react-helmet';
+{{/if}}
+{{#if wantMessages}}
+import { FormattedMessage } from 'react-intl';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import { createStructuredSelector } from 'reselect';
+{{/if}}
+import { compose } from 'redux';
+
+{{#if wantSaga}}
+import { useInjectSaga } from 'utils/injectSaga';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import { useInjectReducer } from 'utils/injectReducer';
+import * as selectors from './selectors';
+import reducer from './reducer';
+import * as actions from './actions';
+import ContentPage from './ContentPage';
+{{/if}}
+{{#if wantSaga}}
+import saga from './saga';
+{{/if}}
+{{#if wantMessages}}
+import messages from './messages';
+{{/if}}
+
+export function {{ properCase name }}(props) {
+  {{#if wantActionsAndReducer}}
+  useInjectReducer({ key: '{{ camelCase name }}', reducer });
+  {{/if}}
+  {{#if wantSaga}}
+  useInjectSaga({ key: '{{ camelCase name }}', saga });
+  {{/if}}
+
+  useEffect(() => {
+    props.onInitLoad();
+  }, []);
+
+  return (
+    <div>
+    {{#if wantHeaders}}
+      <Helmet>
+        <title>{{properCase name}}</title>
+        <meta name="description" content="Description of {{properCase name}}" />
+      </Helmet>
+    {{/if}}
+    {{#if wantMessages}}
+      <ContentPage {...props} />
+    {{/if}}
+    </div>
+  );
+}
+
+{{ properCase name }}.propTypes = {
+  onChangePage: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onLoadEdit: PropTypes.func,
+  onCreateItem: PropTypes.func,
+  onUpdateItem: PropTypes.func,
+  onDeleteItem: PropTypes.func,
+  onGetItem: PropTypes.func,
+};
+
+{{#if wantActionsAndReducer}}
+const mapStateToProps = createStructuredSelector({
+  getPage: selectors.makeSelectPage(),
+  getList: selectors.makeSelectListItems(),
+  getData: selectors.makeSelectForm(),
+  response: selectors.makeSelectResponse(),
+});
+{{/if}}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onInitLoad: () => dispatch(actions.initLoad()),
+    onCreateItem: data => dispatch(actions.createItem(data)),
+    onUpdateItem: data => dispatch(actions.updateItem(data)),
+    onDeleteItem: id => dispatch(actions.deleteItem(id)),
+    onGetItem: id => dispatch(actions.getItem(id)),
+    onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
+    onLoadEdit: item => dispatch(actions.loadEdit(item)),
+  };
+}
+
+{{#if wantActionsAndReducer}}
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+{{else}}
+const withConnect = connect(null, mapDispatchToProps);
+{{/if}}
+
+export default compose(
+  withConnect,
+{{#if memo}}
+  memo,
+{{/if}}
+)({{ properCase name }});

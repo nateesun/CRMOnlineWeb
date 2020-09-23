@@ -1,0 +1,32 @@
+/*
+ *
+ * MsProduct constants
+ *
+ */
+
+export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const CHANGE_PAGE = 'app/MsProduct/CHANGE_PAGE';
+
+export const INIT_LOAD = 'app/MsProduct/INIT_LOAD';
+export const INIT_LOAD_SUCCESS = 'app/MsProduct/INIT_LOAD_SUCCESS';
+export const INIT_LOAD_ERROR = 'app/MsProduct/INIT_LOAD_ERROR';
+
+export const LOAD_EDIT = 'app/MsProduct/LOAD_EDIT';
+export const LOAD_EDIT_SUCCESS = 'app/MsProduct/LOAD_EDIT_SUCCESS';
+export const LOAD_EDIT_ERROR = 'app/MsProduct/LOAD_EDIT_ERROR';
+
+export const CREATE_ITEM = 'app/MsProduct/CREATE_ITEM';
+export const CREATE_ITEM_SUCCESS = 'app/MsProduct/CREATE_ITEM_SUCCESS';
+export const CREATE_ITEM_ERROR = 'app/MsProduct/CREATE_ITEM_ERROR';
+
+export const UPDATE_ITEM = 'app/MsProduct/UPDATE_ITEM';
+export const UPDATE_ITEM_SUCCESS = 'app/MsProduct/UPDATE_ITEM_SUCCESS';
+export const UPDATE_ITEM_ERROR = 'app/MsProduct/UPDATE_ITEM_ERROR';
+
+export const DELETE_ITEM = 'app/MsProduct/DELETE_ITEM';
+export const DELETE_ITEM_SUCCESS = 'app/MsProduct/DELETE_ITEM_SUCCESS';
+export const DELETE_ITEM_ERROR = 'app/MsProduct/DELETE_ITEM_ERROR';
+
+export const GET_ITEM = 'app/MsProduct/GET_ITEM';
+export const GET_ITEM_SUCCESS = 'app/MsProduct/GET_ITEM_SUCCESS';
+export const GET_ITEM_ERROR = 'app/MsProduct/GET_ITEM_ERROR';

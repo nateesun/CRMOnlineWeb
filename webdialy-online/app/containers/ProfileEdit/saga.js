@@ -22,11 +22,11 @@ export function* initLoadProfileMember() {
         });
         yield put(actions.initLoadProfileSuccess(response.data));
       } catch (error) {
-        console.log(error);
+        yield put(actions.initLoadProfileError(error));
       }
     }
   } catch (err) {
-    yield put(actions.initLoadProfileError("Cannot connect to API Server:"+err));
+    yield put(actions.initLoadProfileError(err));
   }
 }
 
@@ -67,8 +67,7 @@ export function* onEditMember() {
       yield put(actions.editMemberError(response.msg));  
     }
   } catch (err) {
-    console.log('onEditMember:err', err);
-    yield put(actions.editMemberError("Cannot connect to API Server: " + err));
+    yield put(actions.editMemberError(err));
   }
 }
 

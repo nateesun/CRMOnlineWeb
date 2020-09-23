@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -104,13 +104,6 @@ const EditForm = props => {
   } = props;
   const onValidated = formValues => {
     onEditMember({ member: formValues });
-  };
-  
-
-  EditForm.propTypes = {
-    errorUpdate: PropTypes.string,
-    updateStatus: PropTypes.string,
-    clearData: PropTypes.func,
   };
 
   return (
@@ -263,6 +256,9 @@ EditForm.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  errorUpdate: PropTypes.string,
+  updateStatus: PropTypes.string,
+  clearData: PropTypes.func,
 };
 
 const validate = formValues => {
