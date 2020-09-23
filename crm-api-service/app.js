@@ -14,6 +14,7 @@ const employeeRouter = require("./routes/employee.route")
 const productRouter = require("./routes/product.route")
 const stockRouter = require("./routes/stock.route")
 const promotionRouter = require("./routes/promotion.route")
+const roleRouter = require("./routes/role.route")
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
@@ -58,6 +59,7 @@ app.use("/api/employee", basicAuth({ users: { admin: fixPassword } }), employeeR
 app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRouter)
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
+app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

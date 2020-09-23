@@ -27,3 +27,4 @@ export const PATH_MS_PRODUCT = `${publicPath}/ms/product`;
 export const PATH_MS_EMPLOYEE = `${publicPath}/ms/employee`;
 export const PATH_MS_STOCK = `${publicPath}/ms/stock`;
 export const PATH_MS_PROMOTION = `${publicPath}/ms/promotion`;
+export const PATH_MS_ROLE = `${publicPath}/ms/role`;

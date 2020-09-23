@@ -30,6 +30,7 @@ import MsProduct from 'containers/MsProduct/Loadable';
 import MsEmployee from 'containers/MsEmployee/Loadable';
 import MsStock from 'containers/MsStock/Loadable';
 import MsPromotion from 'containers/MsPromotion/Loadable';
+import MsRole from 'containers/MsRole/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import * as path from './constants';
@@ -244,6 +245,7 @@ function Layouts(props) {
               <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
               <Route path={path.PATH_MS_EMPLOYEE} component={MsEmployee} />
               <Route path={path.PATH_MS_STOCK} component={MsStock} />
+              <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
               <Route component={NotFoundPage} />
             </Switch>
