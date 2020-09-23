@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selects from './selectors';
-import { makeSelectProfile } from 'containers/Login/selectors';
+import { makeSelectLogin } from 'containers/Login/selectors';
 import { makeSelectLineLoginProfile } from 'containers/LineLogin/selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -23,6 +23,10 @@ import DashboardContent from './DahboardContent';
 export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
   useInjectSaga({ key: 'dashboard', saga });
+  
+  useEffect(() => {
+    props.onRefresh(props.login.email);
+  }, [])
 
   return props.login && <DashboardContent {...props} />
 }
@@ -30,15 +34,15 @@ export function Dashboard(props) {
 Dashboard.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectProfile(),
+  login: makeSelectLogin(),
   profile: selects.makeSelectProfile(),
   lineProfile: makeSelectLineLoginProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRefresh: code => {
-      dispatch(actions.initLoad(code));
+    onRefresh: email => {
+      dispatch(actions.initLoad(email));
     },
   };
 }

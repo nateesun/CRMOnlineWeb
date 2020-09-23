@@ -3,6 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as types from './constants';
 import * as actions from './actions';
+import * as selectors from './selectors';
 
 export function* onLoadMembers() {
   try {
@@ -15,14 +16,18 @@ export function* onLoadMembers() {
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
     });
-    yield put(actions.loadMemberSuccess(response));
+    if(response.status === 'Success'){
+      yield put(actions.loadMemberSuccess(response.data));
+    }else{
+      yield put(actions.loadMemberError("ไม่สามารถโหลดข้อมูลได้"));
+    }
   } catch (err) {
     yield put(actions.loadMemberError(err));
   }
 }
 export function* onDeleteMember({ payload }) {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
+    const requestURL = `${types.publicPath}/api/member/${payload}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       headers: {
@@ -30,11 +35,12 @@ export function* onDeleteMember({ payload }) {
         'Content-Type': 'application/json',
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
-      body: JSON.stringify({
-        member_code: payload,
-      }),
     });
-    yield put(actions.deleteMemberSuccess(response));
+    if(response.status==='Success'){
+      yield put(actions.deleteMemberSuccess(response));
+    }else{
+      yield put(actions.deleteMemberError('ไม่สามารถบันทึกข้อมูลได้'));  
+    }
   } catch (err) {
     yield put(actions.deleteMemberError(err));
   }

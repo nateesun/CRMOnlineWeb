@@ -18,6 +18,7 @@ import {
 } from './constants';
 
 export const initialState = {
+  id: null,
   data: [],
   status: '',
   error: '',
@@ -38,10 +39,10 @@ const membersReducer = (state = initialState, action) =>
         draft.error = action.payload;
         break;
       case DELETE_MEMBER:
-        draft.member_code = action.payload;
+        draft.id = action.payload;
         break;
       case DELETE_MEMBER_SUCCESS:
-        draft.status = action.payload;
+        draft.status = 'DELETE_SUCCESS';
         break;
       case DELETE_MEMBER_ERROR:
         draft.error = action.payload;
@@ -50,7 +51,7 @@ const membersReducer = (state = initialState, action) =>
         draft.member_code = action.payload;
         break;
       case EDIT_MEMBER_SUCCESS:
-        draft.status = action.payload;
+        draft.status = 'UPDATE_SUCCESS';
         break;
       case EDIT_MEMBER_ERROR:
         draft.error = action.payload;

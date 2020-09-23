@@ -1,5 +1,8 @@
 const pool = require("../mysql-connect")
+const Task = require('./Member.model');
 const table_name = "member"
+
+const zeroPad = (num, places) => String(num).padStart(places, '0')
 
 module.exports = {
   findById: async (id, callback) => {
@@ -12,22 +15,36 @@ module.exports = {
       callback(err, { status: "Error", msg: err.message })
     }
   },
+  findByEmail: async (email, callback) => {
+    console.log("findByEmail method start:")
+    try {
+      const sql = `select * from ${table_name} where email=?;`
+      const result = await pool.query(sql, [email])
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select * from ${table_name}`
+      const sql = `select * from ${table_name} where email !='softpos@gmail.com'`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }
   },
-  create: async (params, callback) => {
+  create: async (data, callback) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
+        const config = await pool.query(`select member_running, prefix_running, size_running from company c limit 0,1;`)
+        const { prefix_running, member_running, size_running } = config[0];
         const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        data.code = prefix_running + zeroPad(member_running, size_running);
+        const result = await pool.query(query, data)
+        await pool.query('update company set member_running=member_running+1')
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })
@@ -38,12 +55,12 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET col1=?, col2=?, col3=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} SET  
+        prefix = ?, first_name = ?, last_name = ?, birthday = ?, mobile = ?, line_id = ?, system_updated = now() 
+        WHERE email=? `
         const result = await pool.query(query, [
-          data.col1,
-          data.col2,
-          data.col3,
-          data.uuid_index
+          data.prefix, data.first_name, data.last_name, data.birthday, data.mobile, data.line_id,
+          data.email
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -51,12 +68,14 @@ module.exports = {
       }
     })
   },
-  delete: (id, callback) => {
-    console.log("delete method start:")
+  delete: (email, callback) => {
+    console.log("delete method start")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
-        const result = await pool.query(query, [id])
+        const query = `DELETE FROM ${table_name} WHERE email = ? `
+        const qDelLogin = `DELETE FROM login WHERE username = ? `
+        const result = await pool.query(query, [email])
+        const result2 = await pool.query(qDelLogin, [email])
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })

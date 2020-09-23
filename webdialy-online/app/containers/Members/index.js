@@ -12,11 +12,11 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectMembers from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import MemberTable from './MemberTable';
-import { loadMembers, deleteMember, editMember } from './actions';
+import * as selectors from './selectors';
+import * as actions from './actions';
 
 export function Members(props) {
   useInjectReducer({ key: 'members', reducer });
@@ -27,28 +27,27 @@ export function Members(props) {
   }, []);
 
   return (
-    <div>
-      <MemberTable {...props} />
-    </div>
+    <MemberTable {...props} />
   );
 }
 
 Members.propTypes = {
-  listMembers: PropTypes.array,
+  members: PropTypes.array,
   onInitLoad: PropTypes.func,
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  members: makeSelectMembers(),
+  members: selectors.makeSelectMembers(),
+  status: selectors.makeSelectStatus(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitLoad: () => dispatch(loadMembers()),
-    onEdit: member => dispatch(editMember(member)),
-    onDelete: memberCode => dispatch(deleteMember(memberCode)),
+    onInitLoad: () => dispatch(actions.loadMembers()),
+    onEdit: member => dispatch(actions.editMember(member)),
+    onDelete: id => dispatch(actions.deleteMember(id)),
   };
 }
 

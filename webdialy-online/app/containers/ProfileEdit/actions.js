@@ -32,23 +32,23 @@ export function editMemberError(error) {
   };
 }
 
-export function initLoadProfile(payload) {
+export function initLoad(payload) {
   return {
-    type: types.INIT_LOAD_PROFILE_MEMBER,
+    type: types.INIT_LOAD,
     payload,
   };
 }
 
-export function initLoadProfileSuccess(payload) {
+export function initLoadSuccess(payload) {
   return {
-    type: types.INIT_LOAD_PROFILE_MEMBER_SUCCESS,
+    type: types.INIT_LOAD_SUCCESS,
     payload,
   };
 }
 
-export function initLoadProfileError(error) {
+export function initLoadError(error) {
   return {
-    type: types.INIT_LOAD_PROFILE_MEMBER_ERROR,
+    type: types.INIT_LOAD_ERROR,
     payload: error,
   };
 }

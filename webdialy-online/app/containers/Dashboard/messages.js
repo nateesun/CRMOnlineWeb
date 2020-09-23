@@ -13,13 +13,13 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Dashboard container!',
   },
-  pointBalance: {
-    id: `${scope}.pointBalance`,
-    defaultMessage: 'Point Balance',
+  totalScore: {
+    id: `${scope}.totalScore`,
+    defaultMessage: 'Total Score',
   },
-  pointRedemption: {
-    id: `${scope}.pointRedemption`,
-    defaultMessage: 'Point Redemption',
+  totalPurchase: {
+    id: `${scope}.totalPurchase`,
+    defaultMessage: 'Total Purchase',
   },
   moreInfo: {
     id: `${scope}.moreInfo`,

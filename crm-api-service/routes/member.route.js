@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const Task = require("../models/Member.model")
+const TaskLogin = require("../models/Login.model")
+const moment = require("moment")
 
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {
@@ -19,35 +21,57 @@ router.get("/", (req, res, next) => {
   })
 })
 
-router.get("/:id", (req, res, next) => {
-  Task.findById(req.params.id, (err, response) => {
+router.get("/:email", (req, res, next) => {
+  Task.findByEmail(req.params.email, (err, response) => {
     if (err) {
       res
         .status(500)
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      const data = JSON.parse(response.data)
+      const respData = JSON.parse(response.data)
       res.status(200).json({
         status: response.status,
         msg: "Success",
-        data,
+        data: {
+          ...respData[0],
+          birthday: moment(new Date(respData[0].birthday)).format('YYYY-MM-DD'),
+        },
       })
     }
   })
 })
 
 router.post("/", (req, res, next) => {
-  Task.create(req.body, (err, response)=>{
+  const { 
+    code, uuid_index, prefix, first_name, last_name, mobile, email, username, password,
+    system_created, system_updated, total_score, total_purchase, point_expired_date, 
+    expired_date, birthday, line_id
+  } = req.body;
+  const memberModel = {
+    code, uuid_index, prefix, first_name, last_name, mobile, email,
+    system_created, system_updated, total_score, total_purchase, point_expired_date, 
+    expired_date, birthday, line_id
+  }
+  const loginModel = {
+    username,
+    password: Buffer.from(password).toString('base64'),
+    member_active: 'Y'
+  }
+  Task.create(memberModel, (err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      const data = JSON.parse(response.data)
-      res.status(200).json({
-        status: response.status,
-        msg: "Success",
-        data,
+      TaskLogin.create(loginModel, (err1, response1) => {
+        if (err1) {
+          res1.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
+        } else {
+          const data = JSON.parse(response.data)
+          res.status(200).json({
+            status: response1.status,
+            msg: "Success",
+            data,
+          })
+        }
       })
     }
   })

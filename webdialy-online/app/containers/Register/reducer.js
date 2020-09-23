@@ -10,9 +10,10 @@ import {
   ADD_REGISTER_MEMBER_ERROR,
   ADD_REGISTER_MEMBER_SUCCESS,
 } from './constants';
+const { v4 } = require('uuid');
 
 export const initialState = {
-  member: {
+  data: {
     prefix: '',
     firstName: '',
     lastName: '',
@@ -36,14 +37,8 @@ const registerReducer = (state = initialState, action) =>
         draft.error = '';
         break;
       case ADD_REGISTER_MEMBER:
-        draft.member.prefix = action.payload.member.prefix;
-        draft.member.firstName = action.payload.member.firstName;
-        draft.member.lastName = action.payload.member.lastName;
-        draft.member.mobile = action.payload.member.mobile;
-        draft.member.birthday = action.payload.member.birthday;
-        draft.member.email = action.payload.member.email;
-        draft.member.password = action.payload.member.password;
-        draft.member.lineId = action.payload.member.lineId;
+        draft.data = action.payload;
+        draft.data.uuid_index = v4();
         break;
       case ADD_REGISTER_MEMBER_SUCCESS:
         draft.status = 'Success';

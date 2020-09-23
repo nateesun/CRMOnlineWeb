@@ -18,7 +18,7 @@ const selectRegisterDomain = state => state.register || initialState;
 const makeSelectMember = () =>
   createSelector(
     selectRegisterDomain,
-    registerState => registerState.member,
+    registerState => registerState.data,
   );
 
 const makeRegisterStatus = () =>

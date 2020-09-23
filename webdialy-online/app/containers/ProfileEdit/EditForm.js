@@ -17,9 +17,11 @@ import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
-import { makeSelectProfile } from 'containers/Login/selectors';
+import * as selectors from './selectors';
+import { Link } from 'react-router-dom';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -102,8 +104,9 @@ const EditForm = props => {
     updateStatus,
     clearData,
   } = props;
+
   const onValidated = formValues => {
-    onEditMember({ member: formValues });
+    onEditMember(formValues);
   };
 
   return (
@@ -146,7 +149,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={3}>
               <Field
-                name="firstName"
+                name="first_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -156,7 +159,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Field
-                name="lastName"
+                name="last_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -221,7 +224,7 @@ const EditForm = props => {
             </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item xs={6} lg={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 type="submit"
                 fullWidth
@@ -232,7 +235,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={6} lg={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 fullWidth
                 variant="contained"
@@ -241,6 +244,17 @@ const EditForm = props => {
               >
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
+            </Grid>
+            <Grid item xs={2} md={3}>
+              <ButtonLink to="/profile">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={reset}
+                >
+                  <FormattedMessage {...messages.btnBack} />
+                </Button>
+              </ButtonLink>
             </Grid>
           </Grid>
         </form>
@@ -268,13 +282,13 @@ const validate = formValues => {
     errors.prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
   }
 
-  if (!formValues.firstName) {
-    errors.firstName = (
+  if (!formValues.first_name) {
+    errors.first_name = (
       <FormattedMessage {...messages.firstNameShouldNotEmpty} />
     );
   }
-  if (!formValues.lastName) {
-    errors.lastName = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+  if (!formValues.last_name) {
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
@@ -294,7 +308,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectProfile(),
+  initialValues: selectors.makeSelectProfileInit(),
 });
 
 export default connect(mapStateToProps)(

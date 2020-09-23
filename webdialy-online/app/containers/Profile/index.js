@@ -4,38 +4,46 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectProfile } from 'containers/Login/selectors';
+import { makeSelectLogin } from 'containers/Login/selectors';
 import reducer from './reducer';
 import saga from './saga';
+import * as actions from './actions';
 import ProfileContent from './ProfileContent';
+import * as selects from './selectors';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
+  useEffect(() => {
+    props.initLoad(props.login.email);
+  }, [])
+
   return (
-    <div>
       <ProfileContent {...props} />
-    </div>
   );
 }
 
 Profile.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
-  profile: makeSelectProfile(),
+  login: makeSelectLogin(),
+  profile: selects.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    initLoad: email => {
+      dispatch(actions.initLoad(email));
+    },
+  };
 }
 
 const withConnect = connect(

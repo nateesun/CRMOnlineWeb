@@ -20,6 +20,10 @@ const makeSelectMembers = () =>
     selectMembersDomain,
     substate => substate.data,
   );
+const makeSelectStatus = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.status,
+  );
 
-export default makeSelectMembers;
-export { selectMembersDomain };
+export { selectMembersDomain, makeSelectMembers, makeSelectStatus };
