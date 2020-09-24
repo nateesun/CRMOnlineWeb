@@ -9,7 +9,29 @@ const Login = {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, data)
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        if(result.affectedRows > 0) {
+          callback(null, { status: "Success", data: JSON.stringify(result) })
+        }else{
+          callback(err, { status: "Error", msg: "Cannot update password" })
+        }
+      } catch (err) {
+        callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  },
+  update: (data, callback) => {
+    console.log("update method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} SET password = ? WHERE username=? `
+        const result = await pool.query(query, [ 
+          Buffer.from(data.password).toString('base64'), 
+          data.username ])
+        if(result.affectedRows > 0) {
+          callback(null, { status: "Success", data: JSON.stringify(result) })
+        }else{
+          callback(err, { status: "Error", msg: "Cannot update password" })
+        }
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })
       }
@@ -36,21 +58,6 @@ const Login = {
         callback(null, { status: "Not Found", data: [] })
       }else{
         callback(null, { status: "Success", data: JSON.stringify(member) })
-      }
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  },
-  verifyTokenLine: async (token, callback) => {
-    try {
-      const verifyPass = jwt.verify(token, 'softpos2013');
-      if(verifyPass){
-        const { lineId } = jwt.decode(token);
-        const sql = `select * from ${table_name} where Line_Id=?`
-        const member = await pool.query(sql, [lineId])
-        callback(null, { status: "Success", data: JSON.stringify(member) })
-      }else {
-        callback(null, { status: "Error", msg: 'Verify Token Error' })
       }
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })

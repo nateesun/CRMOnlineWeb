@@ -1,6 +1,5 @@
 const express = require("express")
 const router = express.Router()
-const moment = require('moment')
 const Task = require("../models/Login.model")
 
 router.post("/", (req, res, next) => {
@@ -23,6 +22,23 @@ router.post("/", (req, res, next) => {
           msg: "Success"
         })
       }
+    }
+  })
+})
+
+router.put("/", (req, res, next) => {
+  Task.update(req.body, (err, response)=>{
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
     }
   })
 })

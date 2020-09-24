@@ -162,9 +162,11 @@ export default function ProfileContent(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button variant="contained" color="secondary" size="small">
-          <FormattedMessage {...messages.btnChangePassword} />
-        </Button>
+        <ButtonLink to={`/profile-change-pwd`}>
+          <Button variant="contained" color="secondary" size="small">
+            <FormattedMessage {...messages.btnChangePassword} />
+          </Button>
+        </ButtonLink>
         <ButtonLink to={`/profile-edit`}>
           <Button variant="contained" color="primary" size="small">
             <FormattedMessage {...messages.btnEditProfile} />

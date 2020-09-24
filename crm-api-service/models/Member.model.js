@@ -82,4 +82,19 @@ module.exports = {
       }
     })
   },
+  verifyTokenLine: async (token, callback) => {
+    try {
+      const verifyPass = jwt.verify(token, 'softpos2013');
+      if(verifyPass){
+        const { lineId } = jwt.decode(token);
+        const sql = `select * from ${table_name} where line_id=?`
+        const member = await pool.query(sql, [lineId])
+        callback(null, { status: "Success", data: JSON.stringify(member) })
+      }else {
+        callback(null, { status: "Error", msg: 'Verify Token Error' })
+      }
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
 }
