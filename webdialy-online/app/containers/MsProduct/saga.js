@@ -9,11 +9,6 @@ export function* initLoad() {
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
     });
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
@@ -31,11 +26,6 @@ export function* saveData() {
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {
@@ -54,11 +44,6 @@ export function* updateData() {
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {
@@ -77,11 +62,6 @@ export function* deleteData() {
     const requestURL = `${constants.publicPath}/api/product/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {

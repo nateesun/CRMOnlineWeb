@@ -12,11 +12,6 @@ export function* onVerifyTokenLogin(data) {
     const reqURL = `${types.publicPath}/api/line/login`;
     const responseToken = yield call(request, reqURL, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify({ token }),
     });
     if (responseToken.status === 'Success') {
@@ -25,11 +20,6 @@ export function* onVerifyTokenLogin(data) {
       const requestURL = `${types.publicPath}/api/member/login`;
       const response = yield call(request, requestURL, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-        },
         body: JSON.stringify({
           email: Username,
           password: new Buffer(Password, 'base64').toString(),

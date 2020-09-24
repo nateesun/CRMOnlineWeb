@@ -41,7 +41,12 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
+  }
+  return fetch(url, {...options, headers })
     .then(checkStatus)
     .then(parseJSON);
 }

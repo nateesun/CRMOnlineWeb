@@ -12,11 +12,6 @@ export function* onAddRegisterMember() {
     const data = yield select(makeSelectMember());
     const response = yield call(request, requestURL, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
       body: JSON.stringify({
         code: '',
         uuid_index: data.uuid_index,

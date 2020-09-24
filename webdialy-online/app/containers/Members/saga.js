@@ -9,12 +9,7 @@ export function* onLoadMembers() {
   try {
     const requestURL = `${types.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
+      method: 'GET'
     });
     if(response.status === 'Success'){
       yield put(actions.loadMemberSuccess(response.data));
@@ -30,11 +25,6 @@ export function* onDeleteMember({ payload }) {
     const requestURL = `${types.publicPath}/api/member/${payload}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
     });
     if(response.status==='Success'){
       yield put(actions.deleteMemberSuccess(response));
@@ -50,11 +40,6 @@ export function* onEditMember() {
     const requestURL = `${types.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
     });
     yield put(actions.loadMemberSuccess(response));
   } catch (err) {

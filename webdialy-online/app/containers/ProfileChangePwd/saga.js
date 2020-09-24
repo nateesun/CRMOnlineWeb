@@ -11,11 +11,6 @@ export function* initLoad() {
     try {
       const response = yield call(request, requestURL, {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-        },
       });
       yield put(actions.initLoadSuccess(response.data));
     } catch (error) {
@@ -32,11 +27,6 @@ export function* onUpdatePassword() {
     const profile = yield select(selects.makeSelectProfile());
     const response = yield call(request, requestURL, {
       method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
       body: JSON.stringify({
         username: profile.data.email,
         password: profile.data.new_password,
