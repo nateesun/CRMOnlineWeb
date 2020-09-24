@@ -26,9 +26,9 @@ export function* initLoad() {
   }
 }
 
-export function* onEditMember() {
+export function* onUpdatePassword() {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
+    const requestURL = `${types.publicPath}/api/login`;
     const profile = yield select(selects.makeSelectProfile());
     const response = yield call(request, requestURL, {
       method: 'PUT',
@@ -37,20 +37,23 @@ export function* onEditMember() {
         'Content-Type': 'application/json',
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
-      body: JSON.stringify(profile.data),
+      body: JSON.stringify({
+        username: profile.data.email,
+        password: profile.data.new_password,
+      }),
     });
     if (response.status === 'Success') {
-      yield put(actions.editMemberSuccess());
+      yield put(actions.updatePasswordSuccess());
     } else {
-      yield put(actions.editMemberError(response.msg));  
+      yield put(actions.updatePasswordError(response.msg));  
     }
   } catch (err) {
-    yield put(actions.editMemberError(err));
+    yield put(actions.updatePasswordError(err));
   }
 }
 
 // Individual exports for testing
-export default function* profileEditSaga() {
+export default function* profileChangePwdSaga() {
   yield takeEvery(types.INIT_LOAD, initLoad);
-  yield takeEvery(types.EDIT_MEMBER, onEditMember);
+  yield takeEvery(types.UPDATE_PASSWORD, onUpdatePassword);
 }

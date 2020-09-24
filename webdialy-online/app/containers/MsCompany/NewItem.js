@@ -94,7 +94,7 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={8}>
               <Field
                 name="name"
                 component={RenderField}
@@ -111,6 +111,36 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <Field
+                name="prefix_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col5} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Field
+                name="member_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col4} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Field
+                name="size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
                 required
               />
             </Grid>
@@ -163,6 +193,15 @@ const validate = formValues => {
   }
   if (!formValues.line_official_id) {
     errors.line_official_id = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  }
+  if (!formValues.member_running) {
+    errors.member_running = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  }
+  if (!formValues.prefix_running) {
+    errors.prefix_running = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+  }
+  if (!formValues.size_running) {
+    errors.size_running = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   return errors;
 };

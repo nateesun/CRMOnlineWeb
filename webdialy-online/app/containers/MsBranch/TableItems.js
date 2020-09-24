@@ -38,7 +38,6 @@ const useStyles = makeStyles({
 
 export default function TableItems(props) {
   const { getList } = props;
-  console.log(getList);
   const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',

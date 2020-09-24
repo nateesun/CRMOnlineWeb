@@ -8,18 +8,15 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button } from '@material-ui/core';
 
 export default function DahboardContent(props) {
-  const { onRefresh } = props;
-  const { code, pointBalance, pointRedemption } = props.login;
+  const { onRefresh, login, profile } = props;
 
-  const refreshDataInit = (code) => {
-    onRefresh(code);
+  const refreshDataInit = () => {
+    onRefresh(login.email);
   }
 
   DahboardContent.propTypes = {
-    code: PropTypes.string,
-    pointBalance: PropTypes.number,
-    pointRedemption: PropTypes.number,
     onRefresh: PropTypes.func,
+    email: PropTypes.string,
   };
 
   return (
@@ -28,23 +25,23 @@ export default function DahboardContent(props) {
         <Button
           variant="outlined"
           startIcon={<RefreshIcon />}
-          onClick={() => refreshDataInit(code)}
+          onClick={() => refreshDataInit()}
         >
           <FormattedMessage {...messages.btnRefresh} />
         </Button>
       </Grid>
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
-          label={<FormattedMessage {...messages.pointBalance} />}
-          point={pointBalance}
+          label={<FormattedMessage {...messages.totalScore} />}
+          point={profile.total_score}
           bg="#1aa4b4"
           fbg="#17828f"
         />
       </Grid>
       <Grid item xs={12} md={6} lg={3}>
         <CardPoint
-          label={<FormattedMessage {...messages.pointRedemption} />}
-          point={pointRedemption}
+          label={<FormattedMessage {...messages.totalPurchase} />}
+          point={profile.total_purchase}
           bg="#07B975"
           fbg="#028A57"
         />

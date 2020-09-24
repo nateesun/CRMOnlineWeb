@@ -6,8 +6,8 @@ import * as selects from './selectors';
 
 export function* initLoad() {
   try {
-    const { memberCode } = yield select(selects.makeSelectDashboard());
-    const requestURL = `${types.publicPath}/api/member/${memberCode}`;
+    const { email } = yield select(selects.makeSelectDashboard());
+    const requestURL = `${types.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
       method: 'GET',
       headers: {
@@ -16,7 +16,11 @@ export function* initLoad() {
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
       },
     });
-    yield put(actions.initLoadSuccess(response));
+    if (response.status === 'Success') {
+      yield put(actions.initLoadSuccess(response.data));
+    } else {
+      yield put(actions.initLoadError('Cannot load data'));
+    }
   } catch (err) {
     yield put(actions.initLoadError(err));
   }

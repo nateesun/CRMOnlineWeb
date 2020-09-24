@@ -2,42 +2,42 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the profileEdit state domain
+ * Direct selector to the profileChangePwd state domain
  */
 
-const selectProfileEditDomain = state => state.profileEdit || initialState;
+const selectProfileChangePwdDomain = state => state.profileChangePwd || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by ProfileEdit
+ * Default selector used by ProfileChangePwd
  */
 
 const makeSelectProfile = () =>
   createSelector(
-    selectProfileEditDomain,
+    selectProfileChangePwdDomain,
     substate => substate,
   );
 const makeSelectProfileInit = () =>
   createSelector(
-    selectProfileEditDomain,
+    selectProfileChangePwdDomain,
     substate => substate.data,
   );
 const makeUpdateStatus = () =>
   createSelector(
-    selectProfileEditDomain,
+    selectProfileChangePwdDomain,
     substate => substate.status,
   );
 const makeErrorUpdate = () =>
   createSelector(
-    selectProfileEditDomain,
+    selectProfileChangePwdDomain,
     substate => substate.error,
   );
 
 export {
-  selectProfileEditDomain,
+  selectProfileChangePwdDomain,
   makeSelectProfile,
   makeUpdateStatus,
   makeErrorUpdate,

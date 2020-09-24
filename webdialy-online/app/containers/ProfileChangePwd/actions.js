@@ -1,6 +1,6 @@
 /*
  *
- * ProfileEdit actions
+ * ProfileChangePwd actions
  *
  */
 
@@ -12,22 +12,22 @@ export function defaultAction() {
   };
 }
 
-export function editMember(payload) {
+export function updatePassword(payload) {
   return {
-    type: types.EDIT_MEMBER,
+    type: types.UPDATE_PASSWORD,
     payload,
   };
 }
 
-export function editMemberSuccess() {
+export function updatePasswordSuccess() {
   return {
-    type: types.EDIT_MEMBER_SUCCESS,
+    type: types.UPDATE_PASSWORD_SUCCESS,
   };
 }
 
-export function editMemberError(error) {
+export function updatePasswordError(error) {
   return {
-    type: types.EDIT_MEMBER_ERROR,
+    type: types.UPDATE_PASSWORD_ERROR,
     payload: error,
   };
 }

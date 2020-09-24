@@ -88,7 +88,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={8}>
               <Field
                 name="name"
                 component={RenderField}
@@ -105,6 +105,36 @@ const EditItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <Field
+                name="prefix_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col5} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Field
+                name="member_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col4} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={12} lg={2}>
+              <Field
+                name="size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
                 required
               />
             </Grid>
@@ -158,14 +188,23 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.code) {
+    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.name) {
+    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.line_official_id) {
+    errors.line_official_id = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  }
+  if (!formValues.member_running) {
+    errors.member_running = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  }
+  if (!formValues.prefix_running) {
+    errors.prefix_running = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+  }
+  if (!formValues.size_running) {
+    errors.size_running = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   return errors;
 };

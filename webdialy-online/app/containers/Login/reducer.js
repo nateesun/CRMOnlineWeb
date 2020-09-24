@@ -22,8 +22,14 @@ export const initialState = {
     email: '',
     password: '',
   },
-  profile: {},
-  error: '',
+  response: {
+    status: null,
+    message: null,
+  },
+  profile: {
+
+  },
+  loggedIn: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -40,17 +46,18 @@ const loginReducer = (state = initialState, action) =>
         draft.loginForm.password = action.payload.password;
         break;
       case CHECK_LOGIN_SUCCESS:
-        draft.profile = action.payload.data;
+        draft.loggedIn = true;
         break;
       case CHECK_LOGIN_ERROR:
         draft.error = action.payload;
+        draft.loggedIn = false;
         break;
       case CHECK_LOGOUT:
-        draft.profile = {};
         break;
       case CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
         draft.loginForm.password = '';
+        draft.loggedIn = false;
         break;
       case CHECK_LOGOUT_ERROR:
         draft.error = action.error;

@@ -6,13 +6,24 @@
 import produce from 'immer';
 import * as types from './constants';
 
-export const initialState = {};
+export const initialState = {
+  data: {},
+  email: '',
+  error: '',
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const profileReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case types.INIT_LOAD:
+        draft.email = action.payload;
+        break;
+      case types.INIT_LOAD_SUCCESS:
+        draft.data = action.payload;
+        break;
+      case types.INIT_LOAD_ERROR:
+        draft.error = action.payload;
         break;
     }
   });

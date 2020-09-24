@@ -7,7 +7,7 @@ import * as selects from './selectors';
 
 export function* onValidLogin() {
   try {
-    const requestURL = `${types.publicPath}/api/member/login`;
+    const requestURL = `${types.publicPath}/api/login`;
     const loginForm = yield select(selects.makeSelectLogin());
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {
@@ -17,10 +17,7 @@ export function* onValidLogin() {
         'Content-Type': 'application/json',
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+      body: JSON.stringify({ email, password }),
     });
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));

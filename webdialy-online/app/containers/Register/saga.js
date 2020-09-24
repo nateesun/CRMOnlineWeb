@@ -9,18 +9,8 @@ import { makeSelectMember } from './selectors';
 export function* onAddRegisterMember() {
   try {
     const requestURL = `${types.publicPath}/api/member`;
-    const member = yield select(makeSelectMember());
-    const {
-      prefix,
-      firstName,
-      lastName,
-      mobile,
-      birthday,
-      email,
-      password,
-      lineId,
-    } = member;
-    yield call(request, requestURL, {
+    const data = yield select(makeSelectMember());
+    const response = yield call(request, requestURL, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -28,33 +18,35 @@ export function* onAddRegisterMember() {
         Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
       },
       body: JSON.stringify({
-        Member_Code: Math.random()
-          .toString(36)
-          .substr(2, 9),
-        Member_TitleNameThai: prefix,
-        Member_FirstName: firstName,
-        Member_LastName: lastName,
-        Member_HomeTel: mobile,
-        Member_Mobile: mobile,
-        Member_Email: email,
-        Username: email,
-        Password: password,
-        System_Created: moment().format('YYYY-MM-DD HH:mm:ss'),
-        System_Updated: moment().format('YYYY-MM-DD HH:mm:ss'),
-        Member_TotalScore: 0,
-        Member_TotalPurchase: 0,
-        Member_PointExpiredDate: moment()
+        code: '',
+        uuid_index: data.uuid_index,
+        prefix: data.prefix,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        mobile: data.mobile,
+        email: data.email,
+        username: data.email,
+        password: data.password,
+        system_created: moment().format('YYYY-MM-DD HH:mm:ss'),
+        system_updated: moment().format('YYYY-MM-DD HH:mm:ss'),
+        total_score: 0,
+        total_purchase: 0,
+        point_expired_date: moment()
           .add(10, 'years')
           .format('YYYY-MM-DD'),
-        Member_ExpiredDate: moment()
+        expired_date: moment()
           .add(10, 'years')
           .format('YYYY-MM-DD'),
-        Member_Brithday: birthday,
-        Line_Id: lineId,
+        birthday: data.birthday,
+        line_id: data.line_id,
       }),
     });
-    yield put(actions.addRegisterMemberSuccess());
-    yield put(push(`${types.publicPath}/login`));
+    if (response.status==='Success') {
+      yield put(actions.addRegisterMemberSuccess());
+      yield put(push(`${types.publicPath}/login`));
+    } else {
+      yield put(actions.addRegisterMemberError("ไม่สามารถบันทึกข้อมูลได้"));
+    }
   } catch (err) {
     yield put(actions.addRegisterMemberError(err));
   }

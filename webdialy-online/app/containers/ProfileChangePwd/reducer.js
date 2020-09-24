@@ -1,6 +1,6 @@
 /*
  *
- * ProfileEdit reducer
+ * ProfileChangePwd reducer
  *
  */
 import produce from 'immer';
@@ -13,13 +13,15 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const profileEditReducer = (state = initialState, action) =>
+const profileChangePwdReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case types.DEFAULT_ACTION:
         draft.status = '';
         draft.error = '';
-        draft.data = {}
+        draft.data.old_password = '';
+        draft.data.new_password = '';
+        draft.data.confirm_password = '';
         break;
       case types.INIT_LOAD:
         draft.email = action.payload;
@@ -29,16 +31,16 @@ const profileEditReducer = (state = initialState, action) =>
         break;
       case types.INIT_LOAD_ERROR:
         break;
-      case types.EDIT_MEMBER:
+      case types.UPDATE_PASSWORD:
         draft.data = action.payload;
         break;
-      case types.EDIT_MEMBER_SUCCESS:
+      case types.UPDATE_PASSWORD_SUCCESS:
         draft.status = 'Success';
         break;
-      case types.EDIT_MEMBER_ERROR:
+      case types.UPDATE_PASSWORD_ERROR:
         draft.error = action.payload;
         break;
     }
   });
 
-export default profileEditReducer;
+export default profileChangePwdReducer;

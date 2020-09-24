@@ -23,6 +23,7 @@ import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import ProfileEdit from 'containers/ProfileEdit/Loadable';
+import ProfileChangePwd from 'containers/ProfileChangePwd/Loadable';
 import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
 import MsBranch from 'containers/MsBranch/Loadable';
@@ -190,7 +191,7 @@ const styles = {
 };
 
 function Layouts(props) {
-  const { classes, login } = props;
+  const { classes, login, loggedIn } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -201,11 +202,11 @@ function Layouts(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {login && login.loggedIn && (
+        {loggedIn && (
           <nav className={classes.drawer}>
             <Hidden smUp implementation="js">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
                 variant="temporary"
                 open={mobileOpen}
@@ -214,17 +215,14 @@ function Layouts(props) {
             </Hidden>
             <Hidden xsDown implementation="css">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
               />
             </Hidden>
           </nav>
         )}
         <div className={classes.app}>
-          <Header
-            login={login}
-            onDrawerToggle={handleDrawerToggle}
-          />
+          <Header login={login} loggedIn={loggedIn} onDrawerToggle={handleDrawerToggle}  />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />
@@ -234,8 +232,9 @@ function Layouts(props) {
               <Route path={path.PATH_REGISTER} component={Register} />
               <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
-              <Route exact path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+              <Route path={path.PATH_PROFILE_CHANGE_PWD} component={ProfileChangePwd} />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
               <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />

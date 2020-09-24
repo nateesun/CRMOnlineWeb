@@ -1,5 +1,32 @@
-// import { put, select, takeLatest, call } from 'redux-saga/effects';
+import { put, select, takeEvery, call } from 'redux-saga/effects';
+import request from 'utils/request';
+import * as types from './constants';
+import * as actions from './actions';
+import * as selects from './selectors';
 
+export function* initLoad() {
+  try {
+    const { email } = yield select(selects.makeSelectProfile());
+    const requestURL = `${types.publicPath}/api/member/${email}`;
+    const response = yield call(request, requestURL, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+      },
+    });
+    if (response.status === 'Success') {
+      yield put(actions.initLoadSuccess(response.data));
+    } else {
+      yield put(actions.initLoadError('Cannot load data'));
+    }
+  } catch (err) {
+    yield put(actions.initLoadError(err));
+  }
+}
+
+// Individual exports for testing
 export default function* profileSaga() {
-  // See example in containers/HomePage/saga.js
+  yield takeEvery(types.INIT_LOAD, initLoad);
 }

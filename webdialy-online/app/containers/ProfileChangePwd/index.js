@@ -1,6 +1,6 @@
 /**
  *
- * ProfileEdit
+ * ProfileChangePwd
  *
  */
 
@@ -18,9 +18,9 @@ import saga from './saga';
 import EditForm from './EditForm';
 import * as selects from './selectors';
 
-export function ProfileEdit(props) {
-  useInjectReducer({ key: 'profileEdit', reducer });
-  useInjectSaga({ key: 'profileEdit', saga });
+export function ProfileChangePwd(props) {
+  useInjectReducer({ key: 'profileChangePwd', reducer });
+  useInjectSaga({ key: 'profileChangePwd', saga });
 
   useEffect(() => {
     props.initLoad(props.login.email);
@@ -29,7 +29,7 @@ export function ProfileEdit(props) {
   return <EditForm {...props} />;
 }
 
-ProfileEdit.propTypes = {
+ProfileChangePwd.propTypes = {
   dispatch: PropTypes.func,
   clearData: PropTypes.func,
 };
@@ -44,7 +44,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoad: email => dispatch(actions.initLoad(email)),
-    onEditMember: member => dispatch(actions.editMember(member)),
+    onEditMember: member => dispatch(actions.updatePassword(member)),
     clearData: () => dispatch(actions.defaultAction()),
   };
 }
@@ -54,4 +54,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(ProfileEdit);
+export default compose(withConnect)(ProfileChangePwd);

@@ -28,8 +28,8 @@ const useStyles = makeStyles({
 });
 
 export default function MemberTable(props) {
-  const { members, onInitLoad, onDelete } = props;
-  const handleDelete = memberCode => {
+  const { members, status } = props;
+  const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
       text: 'Confirm to delete this member!',
@@ -40,8 +40,8 @@ export default function MemberTable(props) {
       confirmButtonText: 'Yes, delete it!',
     }).then(result => {
       if (result.value) {
-        onDelete(memberCode);
-        onInitLoad();
+        props.onDelete(id);
+        props.onInitLoad();
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
@@ -97,14 +97,14 @@ export default function MemberTable(props) {
                   hover
                   role="checkbox"
                   tabIndex={-1}
-                  key={row.Member_Code}
+                  key={row.uuid_index}
                 >
                   <TableCell align="center">{index + 1}</TableCell>
-                  <TableCell align="center">{row.Member_Code}</TableCell>
-                  <TableCell align="left">{row.Member_Email}</TableCell>
-                  <TableCell align="right">{row.Member_TotalScore}</TableCell>
+                  <TableCell align="center">{row.code}</TableCell>
+                  <TableCell align="left">{row.email}</TableCell>
+                  <TableCell align="right">{row.total_score}</TableCell>
                   <TableCell align="right">
-                    {row.Member_TotalPurchase}
+                    {row.total_purchase}
                   </TableCell>
                   <TableCell align="right">
                     <Grid container spacing={1} justify="center">
@@ -115,7 +115,7 @@ export default function MemberTable(props) {
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={() => handleDelete(row.Member_Code)}
+                          onClick={() => handleDelete(row.email)}
                         >
                           Delete
                         </Button>

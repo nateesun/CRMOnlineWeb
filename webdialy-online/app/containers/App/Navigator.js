@@ -121,16 +121,16 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-  const { classes, username, ...other } = props;
+  const { classes, email, ...other } = props;
   leftMenus.length = 0;
   categories.forEach((item, index) => {
     if (item.id === 'Members' || item.id === 'Settings' || item.id === 'Master') {
-      if (username === 'softpos@gmail.com') {
+      if (email === 'softpos@gmail.com') {
         leftMenus.push(item);
       }
     } else {
       if (item.id === 'Orders') {
-        if (username !== 'softpos@gmail.com') {
+        if (email !== 'softpos@gmail.com') {
           leftMenus.push(item);
         }
       } else {
