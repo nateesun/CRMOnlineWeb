@@ -33,7 +33,6 @@ import MsStock from 'containers/MsStock/Loadable';
 import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
-import Database from 'containers/Database/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
