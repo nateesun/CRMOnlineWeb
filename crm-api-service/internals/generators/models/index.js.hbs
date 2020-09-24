@@ -1,3 +1,5 @@
+/* {{properCase name}}.model code generator by automatic script */
+
 const pool = require("../mysql-connect")
 const table_name = "{{properCase name}}"
 
@@ -16,6 +18,19 @@ module.exports = {
     console.log("findAll method start:")
     try {
       const sql = `select * from ${table_name}`
+      const result = await pool.query(sql)
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
+  searchData: async (key, value, callback) => {
+    console.log("searchData method start:")
+    try {
+      let sql = `select * from ${table_name}`;
+      if(key!==''){
+        sql = `${sql} where ${key} like '%${value}%'`;
+      }
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {

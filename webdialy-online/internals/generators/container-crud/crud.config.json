@@ -1,0 +1,59 @@
+{
+    "crud_generation": [
+        {
+            "table_name": "product",
+            "columns": [
+                {
+                    "name": "Column1",
+                    "short_name": "col1",
+                    "type": "string",
+                    "size": 10,
+                    "reference": {
+                        "table_name": "group",
+                        "key_link": "group_code"
+                    },
+                    "primary_key": true
+                },
+                {
+                    "name": "Column2",
+                    "short_name": "col2",
+                    "type": "string",
+                    "component": "input_email",
+                    "size": 10,
+                    "primary_key": false
+                },
+                {
+                    "name": "Column3",
+                    "short_name": "col3",
+                    "type": "string",
+                    "component": "select_option",
+                    "size": 10,
+                    "primary_key": false
+                },
+                {
+                    "name": "Column4",
+                    "short_name": "col4",
+                    "type": "string",
+                    "component": "input_password",
+                    "size": 10,
+                    "primary_key": false
+                }
+            ]
+        }
+    ],
+    "config": {
+        "database": {
+            "host": "localhost",
+            "port": 3306,
+            "user": "root",
+            "password": "000000",
+            "database": "crmcenter"
+        },
+        "crud_type": {
+            "target_frontend": "all_table",
+            "target_backend": "all_table",
+            "api_type": "RESTapi|graphQL",
+            "architecture": "frontend+backend|backend|frontend"
+        }
+    }
+}

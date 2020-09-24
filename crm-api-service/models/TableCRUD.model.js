@@ -22,6 +22,19 @@ module.exports = {
       callback(err, { status: "Error", msg: err.message })
     }
   },
+  searchData: async (key, value, callback) => {
+    console.log("searchData method start:")
+    try {
+      let sql = `select * from ${table_name}`;
+      if(key!==''){
+        sql = `${sql} where ${key} like '%${value}%'`;
+      }
+      const result = await pool.query(sql)
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   create: async (params, callback) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {

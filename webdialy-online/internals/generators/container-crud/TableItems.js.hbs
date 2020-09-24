@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles({
   },
   wrapButtonAction: {
     marginTop: '15px',
+    marginBottom: '15px',
   },
 });
 
@@ -104,6 +106,7 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
+        <SearchBar {...props} />
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

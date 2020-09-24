@@ -95,6 +95,12 @@ module.exports = {
       default: true,
       message: 'Do you want to load View Item?',
     },
+    {
+      type: 'confirm',
+      name: 'searchBar',
+      default: true,
+      message: 'Do you want to load Search bar?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
@@ -255,6 +261,15 @@ module.exports = {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/ViewItem.js',
         templateFile: './container-crud/ViewItem.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // SearchBar
+    if (data.searchBar) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/SearchBar.js',
+        templateFile: './container-crud/SearchBar.js.hbs',
         abortOnFail: false,
       });
     }
