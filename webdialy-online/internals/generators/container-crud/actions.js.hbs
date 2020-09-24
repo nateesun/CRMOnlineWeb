@@ -52,7 +52,26 @@ export function loadEditError(payload) {
     payload,
   };
 }
+export function loadView(payload) {
+  return {
+    type: constants.LOAD_VIEW,
+    payload,
+  };
+}
 
+export function loadViewSuccess(payload) {
+  return {
+    type: constants.LOAD_VIEW_SUCCESS,
+    payload,
+  };
+}
+
+export function loadViewError(payload) {
+  return {
+    type: constants.LOAD_VIEW_ERROR,
+    payload,
+  };
+}
 export function createItem(payload) {
   return {
     type: constants.CREATE_ITEM,
@@ -133,6 +152,27 @@ export function getItemSuccess(payload) {
 export function getItemError(payload) {
   return {
     type: constants.GET_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function search(payload) {
+  return {
+    type: constants.SEARCH,
+    payload,
+  };
+}
+
+export function searchSuccess(payload) {
+  return {
+    type: constants.SEARCH_SUCCESS,
+    payload,
+  };
+}
+
+export function searchError(payload) {
+  return {
+    type: constants.SEARCH_ERROR,
     payload,
   };
 }

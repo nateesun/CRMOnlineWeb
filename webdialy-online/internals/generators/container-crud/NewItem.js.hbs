@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -50,7 +50,7 @@ const NewItem = props => {
     props.onChangePage('LIST');
   }
 
-  const saveData = (data) => {
+  const saveData = data => {
     props.onCreateItem(data);
   };
 

@@ -24,6 +24,28 @@ export function* initLoad() {
     yield put(actions.initLoadError(err));
   }
 }
+export function* searchItem({ payload }) {
+  const { key, value } = payload;
+  try {
+    const requestURL = `${constants.publicPath}/api/crud/search`;
+    const response = yield call(request, requestURL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+      },
+      body: JSON.stringify({ key, value })
+    });
+    if (response.data) {
+      yield put(actions.searchSuccess(response.data));
+    } else {
+      yield put(actions.searchError('Not found data'));
+    }
+  } catch (err) {
+    yield put(actions.searchError(err));
+  }
+}
 
 export function* saveData() {
   try {
@@ -99,4 +121,5 @@ export default function* {{ camelCase name }}Saga() {
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
+  yield takeEvery(constants.SEARCH, searchItem);
 }

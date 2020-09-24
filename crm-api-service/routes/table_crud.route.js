@@ -1,9 +1,29 @@
+/* Code make from generation */
+
 const express = require("express")
 const router = express.Router()
 const Task = require("../models/TableCRUD.model")
 
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
+})
+
+router.post("/search", (req, res, next) => {
+  const { key, value } = req.body;
+  Task.searchData(key, value, (err, response) => {
     if (err) {
       res
         .status(500)

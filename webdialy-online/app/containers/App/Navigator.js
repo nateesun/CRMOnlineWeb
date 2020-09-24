@@ -60,7 +60,7 @@ const categories = [
     id: 'Settings',
     children: [
       { id: 'Roles', icon: <LockIcon />, to: `${publicPath}/ms/role` },
-      { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}` },
+      { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}/database` },
       { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
     ],
   },
