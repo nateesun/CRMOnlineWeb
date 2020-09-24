@@ -70,6 +70,7 @@ export function {{ properCase name }}(props) {
   onChangePage: PropTypes.func,
   onInitLoad: PropTypes.func,
   onLoadEdit: PropTypes.func,
+  onLoadView: PropTypes.func,
   onCreateItem: PropTypes.func,
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
@@ -94,6 +95,7 @@ function mapDispatchToProps(dispatch) {
     onGetItem: id => dispatch(actions.getItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
+    onLoadView: item => dispatch(actions.loadView(item)),
   };
 }
 

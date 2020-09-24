@@ -1,9 +1,8 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import TableItems from './TableItems';
 import NewItem from './NewItem';
 import EditItem from './EditItem';
-import messages from './messages';
+import ViewItem from './ViewItem';
 
 export default function ContentPage(props) {
     return (
@@ -11,6 +10,7 @@ export default function ContentPage(props) {
             {props.getPage==='LIST' && <TableItems {...props} />}
             {props.getPage==='NEW' && <NewItem {...props} />}
             {props.getPage==='EDIT' && <EditItem {...props} />}
+            {props.getPage === 'VIEW' && <ViewItem {...props} />}
         </div>
     )
 }

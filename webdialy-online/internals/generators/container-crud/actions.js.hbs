@@ -52,7 +52,26 @@ export function loadEditError(payload) {
     payload,
   };
 }
+export function loadView(payload) {
+  return {
+    type: constants.LOAD_VIEW,
+    payload,
+  };
+}
 
+export function loadViewSuccess(payload) {
+  return {
+    type: constants.LOAD_VIEW_SUCCESS,
+    payload,
+  };
+}
+
+export function loadViewError(payload) {
+  return {
+    type: constants.LOAD_VIEW_ERROR,
+    payload,
+  };
+}
 export function createItem(payload) {
   return {
     type: constants.CREATE_ITEM,

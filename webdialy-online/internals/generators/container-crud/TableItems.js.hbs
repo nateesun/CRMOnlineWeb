@@ -69,6 +69,11 @@ export default function TableItems(props) {
     setPage(0);
   };
 
+  const onViewItem = item => {
+    props.onChangePage('VIEW');
+    props.onLoadView(item);
+  };
+
   const onEditItem = item => {
     props.onChangePage('EDIT');
     props.onLoadEdit(item);
@@ -121,6 +126,14 @@ export default function TableItems(props) {
                     <TableCell align="center">{item["col3"]}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
+                        <Grid item>
+                          <Button
+                            variant="outlined"
+                            onClick={() => onViewItem(item)}
+                          >
+                            View
+                          </Button>
+                        </Grid>
                         <Grid item>
                           <Button
                             variant="outlined"
