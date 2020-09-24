@@ -26,7 +26,3 @@ export const UPDATE_ITEM_ERROR = 'app/MsRole/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsRole/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsRole/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsRole/DELETE_ITEM_ERROR';
-
-export const GET_ITEM = 'app/MsRole/GET_ITEM';
-export const GET_ITEM_SUCCESS = 'app/MsRole/GET_ITEM_SUCCESS';
-export const GET_ITEM_ERROR = 'app/MsRole/GET_ITEM_ERROR';
