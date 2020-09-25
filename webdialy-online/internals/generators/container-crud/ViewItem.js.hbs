@@ -81,20 +81,7 @@ ViewItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
-};
-
-const validate = formValues => {
-  const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
-  }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
-  }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
-  }
-  return errors;
+  onChangePage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
