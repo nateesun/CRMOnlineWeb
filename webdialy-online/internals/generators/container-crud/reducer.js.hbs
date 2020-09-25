@@ -87,14 +87,6 @@ const {{ camelCase name }}Reducer = (state = initialState, action) =>
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
         break;
-      case constants.GET_ITEM:
-        break;
-      case constants.GET_ITEM_SUCCESS:
-        break;
-      case constants.GET_ITEM_ERROR:
-        draft.response.status = 'Error';
-        draft.response.message = 'Get data error!';
-        break;
       case constants.SEARCH:
         break;
       case constants.SEARCH_SUCCESS:
@@ -104,6 +96,16 @@ const {{ camelCase name }}Reducer = (state = initialState, action) =>
         draft.response.status = 'Error';
         draft.response.message = 'Search data error!';
         break;
+      case constants.LOAD_VIEW:
+        draft.data = action.payload;
+        break;
+      case constants.LOAD_VIEW_SUCCESS:
+        draft.list = action.payload;
+        break;
+      case constants.LOAD_VIEW_ERROR:
+        draft.response.status = 'Error';
+        draft.response.message = 'Load data to view error!';
+        break;        
     }
   });
 

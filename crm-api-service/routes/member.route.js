@@ -21,6 +21,24 @@ router.get("/", (req, res, next) => {
   })
 })
 
+router.post("/search", (req, res, next) => {
+  const { key, value } = req.body;
+  Task.searchData(key, value, (err, response) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
+})
+
 router.get("/:email", (req, res, next) => {
   Task.findByEmail(req.params.email, (err, response) => {
     if (err) {

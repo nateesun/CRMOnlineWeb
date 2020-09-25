@@ -24,7 +24,7 @@ export function ProfileChangePwd(props) {
 
   useEffect(() => {
     props.initLoad(props.login.email);
-  }, [])
+  }, []);
 
   return <EditForm {...props} />;
 }
@@ -32,6 +32,8 @@ export function ProfileChangePwd(props) {
 ProfileChangePwd.propTypes = {
   dispatch: PropTypes.func,
   clearData: PropTypes.func,
+  initLoad: PropTypes.func,
+  login: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

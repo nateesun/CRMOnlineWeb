@@ -12,11 +12,11 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import reducer from './reducer';
-import saga from './saga';
-import MemberTable from './MemberTable';
 import * as selectors from './selectors';
+import reducer from './reducer';
 import * as actions from './actions';
+import ContentPage from './ContentPage';
+import saga from './saga';
 
 export function Members(props) {
   useInjectReducer({ key: 'members', reducer });
@@ -26,28 +26,37 @@ export function Members(props) {
     props.onInitLoad();
   }, []);
 
-  return (
-    <MemberTable {...props} />
-  );
+  return <ContentPage {...props} />;
 }
 
 Members.propTypes = {
-  members: PropTypes.array,
+  onChangePage: PropTypes.func,
   onInitLoad: PropTypes.func,
-  onDelete: PropTypes.func,
-  onEdit: PropTypes.func,
+  onLoadEdit: PropTypes.func,
+  onLoadView: PropTypes.func,
+  onCreateItem: PropTypes.func,
+  onUpdateItem: PropTypes.func,
+  onDeleteItem: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  members: selectors.makeSelectMembers(),
-  status: selectors.makeSelectStatus(),
+  getPage: selectors.makeSelectPage(),
+  getList: selectors.makeSelectListItems(),
+  getData: selectors.makeSelectForm(),
+  response: selectors.makeSelectResponse(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitLoad: () => dispatch(actions.loadMembers()),
-    onEdit: member => dispatch(actions.editMember(member)),
-    onDelete: id => dispatch(actions.deleteMember(id)),
+    onInitLoad: () => dispatch(actions.initLoad()),
+    onCreateItem: data => dispatch(actions.createItem(data)),
+    onUpdateItem: data => dispatch(actions.updateItem(data)),
+    onDeleteItem: id => dispatch(actions.deleteItem(id)),
+    onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
+    onLoadEdit: item => dispatch(actions.loadEdit(item)),
+    onLoadView: item => dispatch(actions.loadView(item)),
+    onSearch: (key, value) => dispatch(actions.search({ key, value })),
   };
 }
 

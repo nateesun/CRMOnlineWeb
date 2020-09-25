@@ -13,7 +13,7 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
@@ -73,8 +73,12 @@ export default function Checkout() {
           <Typography component="h1" variant="h4" align="center">
             Confirm Order
           </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
-            {steps.map((label) => (
+          <Stepper
+            activeStep={activeStep}
+            className={classes.stepper}
+            alternativeLabel
+          >
+            {steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -87,12 +91,21 @@ export default function Checkout() {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  Your order number is #2001539. We have emailed your order
+                  confirmation, and will send you an update when your order has
+                  shipped.
                 </Typography>
-                <Divider style={{ border: '1px solid #eee', marginBottom: '10px', marginTop: '10px' }} />
+                <Divider
+                  style={{
+                    border: '1px solid #eee',
+                    marginBottom: '10px',
+                    marginTop: '10px',
+                  }}
+                />
                 <ButtonLink to="/shopping">
-                  <Button color="primary" variant="contained">Back to Shopping</Button>
+                  <Button color="primary" variant="contained">
+                    Back to Shopping
+                  </Button>
                 </ButtonLink>
               </React.Fragment>
             ) : (

@@ -7,9 +7,9 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
 import messages from './messages';
 import intro from '../../images/welcome.png';
-import styled from 'styled-components';
 
 const Img = styled.img`
   border-radius: 2px 10px 2px 10px;
@@ -18,7 +18,9 @@ const Img = styled.img`
 
 export default function HomePage() {
   return (
-    <div style={{ textAlign: 'center', verticalAlign: 'middle', adding: '20px' }}>
+    <div
+      style={{ textAlign: 'center', verticalAlign: 'middle', adding: '20px' }}
+    >
       <h2>
         <FormattedMessage {...messages.header} />
       </h2>

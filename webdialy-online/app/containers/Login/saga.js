@@ -12,11 +12,6 @@ export function* onValidLogin() {
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
       body: JSON.stringify({ email, password }),
     });
     if (response.status === 'Success') {

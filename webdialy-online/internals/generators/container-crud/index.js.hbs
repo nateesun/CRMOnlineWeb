@@ -39,7 +39,6 @@ export function {{ properCase name }}(props) {
   onCreateItem: PropTypes.func,
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
-  onGetItem: PropTypes.func,
   onSearch: PropTypes.func,
 };
 
@@ -56,7 +55,6 @@ function mapDispatchToProps(dispatch) {
     onCreateItem: data => dispatch(actions.createItem(data)),
     onUpdateItem: data => dispatch(actions.updateItem(data)),
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
-    onGetItem: id => dispatch(actions.getItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onLoadView: item => dispatch(actions.loadView(item)),

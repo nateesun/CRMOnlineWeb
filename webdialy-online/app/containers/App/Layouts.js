@@ -222,7 +222,11 @@ function Layouts(props) {
           </nav>
         )}
         <div className={classes.app}>
-          <Header login={login} loggedIn={loggedIn} onDrawerToggle={handleDrawerToggle}  />
+          <Header
+            login={login}
+            loggedIn={loggedIn}
+            onDrawerToggle={handleDrawerToggle}
+          />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />
@@ -234,10 +238,16 @@ function Layouts(props) {
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
               <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
-              <Route path={path.PATH_PROFILE_CHANGE_PWD} component={ProfileChangePwd} />
+              <Route
+                path={path.PATH_PROFILE_CHANGE_PWD}
+                component={ProfileChangePwd}
+              />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
-              <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
+              <Route
+                path={path.PATH_CHECKOUT_ORDER}
+                component={CheckoutOrder}
+              />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
               <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
               <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
@@ -261,6 +271,8 @@ function Layouts(props) {
 
 Layouts.propTypes = {
   classes: PropTypes.object.isRequired,
+  loggedIn: PropTypes.bool,
+  login: PropTypes.object,
 };
 
 export default withStyles(styles)(Layouts);

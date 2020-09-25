@@ -10,11 +10,6 @@ export function* initLoad() {
     const requestURL = `${types.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
     });
     if (response.status === 'Success') {
       yield put(actions.initLoadSuccess(response.data));

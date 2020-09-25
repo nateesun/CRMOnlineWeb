@@ -27,4 +27,8 @@ const makeSelectLineLoginProfile = () =>
     substate => substate.profile,
   );
 
-export { selectLineLoginDomain, makeSelectLineLogin, makeSelectLineLoginProfile };
+export {
+  selectLineLoginDomain,
+  makeSelectLineLogin,
+  makeSelectLineLoginProfile,
+};

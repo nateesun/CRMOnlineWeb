@@ -164,6 +164,10 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {

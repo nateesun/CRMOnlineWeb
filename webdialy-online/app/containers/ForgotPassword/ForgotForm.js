@@ -10,9 +10,9 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
+import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
-import SweetAlert from 'sweetalert2-react';
 import { publicPath } from './constants';
 
 const useStyles = makeStyles(theme => ({

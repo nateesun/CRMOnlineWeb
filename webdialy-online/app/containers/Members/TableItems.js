@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
   },
   wrapButtonAction: {
     marginTop: '15px',
+    marginBottom: '15px',
   },
 });
 
@@ -70,6 +72,11 @@ export default function TableItems(props) {
     setPage(0);
   };
 
+  const onViewItem = item => {
+    props.onChangePage('VIEW');
+    props.onLoadView(item);
+  };
+
   const onEditItem = item => {
     props.onChangePage('EDIT');
     props.onLoadEdit(item);
@@ -78,8 +85,9 @@ export default function TableItems(props) {
   TableItems.propTypes = {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,
-    onLoadEdit: PropTypes.func,
+    onLoadView: PropTypes.func,
     onChangePage: PropTypes.func,
+    onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
   };
 
@@ -87,16 +95,9 @@ export default function TableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-          Employee Table List
+          Members Table List
         </Typography>
         <div className={classes.wrapButtonAction}>
-          <Button
-            variant="contained"
-            className={classes.buttonNew}
-            onClick={() => props.onChangePage('NEW')}
-          >
-            CREATE
-          </Button>
           <Button
             variant="contained"
             color="primary"
@@ -106,13 +107,15 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
+        <SearchBar {...props} />
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="center">No</TableCell>
               <TableCell align="center">Code</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Role Code</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="right">Point</TableCell>
+              <TableCell align="right">Redemption</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -129,10 +132,19 @@ export default function TableItems(props) {
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.code}</TableCell>
-                    <TableCell align="center">{item.name}</TableCell>
-                    <TableCell align="center">{item.role_code}</TableCell>
+                    <TableCell align="center">{item.email}</TableCell>
+                    <TableCell align="center">{item.total_score}</TableCell>
+                    <TableCell align="center">{item.total_purchase}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
+                        <Grid item>
+                          <Button
+                            variant="outlined"
+                            onClick={() => onViewItem(item)}
+                          >
+                            View
+                          </Button>
+                        </Grid>
                         <Grid item>
                           <Button
                             variant="outlined"

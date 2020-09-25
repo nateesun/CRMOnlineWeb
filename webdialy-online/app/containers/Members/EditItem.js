@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
+import Typography from '@material-ui/core/Typography';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
+import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import messages from './messages';
+import { makeSelectForm } from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -32,39 +35,26 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  topic: {
+  loginTopic: {
     marginTop: theme.spacing(1),
   },
 }));
 
-const NewItem = props => {
+const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
 
   const onValidated = formValues => {
-    saveData(formValues);
+    updateData(formValues);
+  };
+
+  const updateData = data => {
+    props.onUpdateItem(data);
   };
 
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
-  };
-
-  const saveData = data => {
-    props.onCreateItem(data);
-  };
-
-  NewItem.propTypes = {
-    handleSubmit: PropTypes.func,
-    pristine: PropTypes.bool,
-    reset: PropTypes.func,
-    submitting: PropTypes.bool,
-    onRegister: PropTypes.func,
-    response: PropTypes.object,
-    onUpdateItem: PropTypes.func,
-    onInitLoad: PropTypes.func,
-    onChangePage: PropTypes.func,
-    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -83,12 +73,12 @@ const NewItem = props => {
         text={response.message}
       />
       <div className={classes.paper}>
-        <Typography variant="h5" className={classes.topic}>
-          <FormattedMessage {...messages.newItemHeader} />
+        <Typography variant="h5" className={classes.updateItemHeader}>
+          <FormattedMessage {...messages.headerEditItem} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -96,12 +86,11 @@ const NewItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
-                autoFocus
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={3}>
               <Field
-                name="name"
+                name="email"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -109,33 +98,28 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={3}>
               <Field
-                name="map_latitude"
+                name="total_score"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={3}>
               <Field
-                name="map_longitude"
+                name="total_purchase"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
                 required
               />
             </Grid>
-            <Grid item xs={12}>
-              <div align="center">
-                <h3>Google map here...</h3>
-              </div>
-            </Grid>
           </Grid>
-          <Grid container spacing={1}>
+          <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>
               <Button
                 type="submit"
@@ -173,26 +157,46 @@ const NewItem = props => {
   );
 };
 
+EditItem.propTypes = {
+  handleSubmit: PropTypes.func,
+  pristine: PropTypes.bool,
+  reset: PropTypes.func,
+  submitting: PropTypes.bool,
+  onRegister: PropTypes.func,
+  initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
+};
+
 const validate = formValues => {
   const errors = {};
   if (!formValues.code) {
     errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.name) {
-    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.email) {
+    errors.email = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.map_latitude) {
-    errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (formValues.total_score < 0) {
+    errors.total_score = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
-  if (!formValues.map_longitude) {
-    errors.map_longitude = (
-      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+  if (!formValues.total_purchase < 0) {
+    errors.total_purchase = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
     );
   }
   return errors;
 };
 
-export default reduxForm({
-  form: 'newForm',
-  validate,
-})(NewItem);
+const mapStateToProps = createStructuredSelector({
+  initialValues: makeSelectForm(),
+});
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: 'editItem',
+    validate,
+    enableReinitialize: true,
+  })(EditItem),
+);

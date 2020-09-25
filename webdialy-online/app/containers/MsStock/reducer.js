@@ -86,14 +86,6 @@ const msStockReducer = (state = initialState, action) =>
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
         break;
-      case constants.GET_ITEM:
-        break;
-      case constants.GET_ITEM_SUCCESS:
-        break;
-      case constants.GET_ITEM_ERROR:
-        draft.response.status = 'Error';
-        draft.response.message = 'Get data error!';
-        break;
     }
   });
 

@@ -12,7 +12,10 @@ module.exports = args => {
   router.post('/', (req, res) => {
     const { method, baseUrl, path } = req;
     const options = {
-      url: `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`,
+      url: `${serviceApiHost}${baseUrl.replace(
+        new RegExp(`/${appName}`),
+        '',
+      )}${path}`,
       method,
       headers: {
         ...req.headers,

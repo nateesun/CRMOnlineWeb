@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -162,12 +162,12 @@ export default function ProfileContent(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <ButtonLink to={`/profile-change-pwd`}>
+        <ButtonLink to="/profile-change-pwd">
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />
           </Button>
         </ButtonLink>
-        <ButtonLink to={`/profile-edit`}>
+        <ButtonLink to="/profile-edit">
           <Button variant="contained" color="primary" size="small">
             <FormattedMessage {...messages.btnEditProfile} />
           </Button>

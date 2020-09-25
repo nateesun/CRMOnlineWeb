@@ -1,69 +1,100 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
-import * as types from './constants';
-import * as actions from './actions';
 import * as selectors from './selectors';
+import * as constants from './constants';
+import * as actions from './actions';
 
-export function* onLoadMembers() {
+export function* initLoad() {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
+    const requestURL = `${constants.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
     });
-    if(response.status === 'Success'){
-      yield put(actions.loadMemberSuccess(response.data));
-    }else{
-      yield put(actions.loadMemberError("ไม่สามารถโหลดข้อมูลได้"));
+    if (response.data) {
+      yield put(actions.initLoadSuccess(response.data));
+    } else {
+      yield put(actions.initLoadError('Not found data'));
     }
   } catch (err) {
-    yield put(actions.loadMemberError(err));
+    yield put(actions.initLoadError(err));
   }
 }
-export function* onDeleteMember({ payload }) {
+export function* searchItem({ payload }) {
+  const { key, value } = payload;
   try {
-    const requestURL = `${types.publicPath}/api/member/${payload}`;
+    const requestURL = `${constants.publicPath}/api/member/search`;
+    const response = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify({ key, value }),
+    });
+    if (response.data) {
+      yield put(actions.searchSuccess(response.data));
+    } else {
+      yield put(actions.searchError('Not found data'));
+    }
+  } catch (err) {
+    yield put(actions.searchError(err));
+  }
+}
+
+export function* saveData() {
+  try {
+    const data = yield select(selectors.makeSelectForm());
+    const requestURL = `${constants.publicPath}/api/member`;
+    const response = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    if (response) {
+      yield put(actions.createItemSuccess(response));
+    } else {
+      yield put(actions.createItemError('Cannot create data'));
+    }
+  } catch (err) {
+    yield put(actions.createItemError(err));
+  }
+}
+
+export function* updateData() {
+  try {
+    const data = yield select(selectors.makeSelectForm());
+    const requestURL = `${constants.publicPath}/api/member`;
+    const response = yield call(request, requestURL, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+    if (response) {
+      yield put(actions.updateItemSuccess(response));
+    } else {
+      yield put(actions.updateItemError('Cannot update data'));
+    }
+  } catch (err) {
+    yield put(actions.updateItemError(err));
+  }
+}
+
+export function* deleteData() {
+  try {
+    const data = yield select(selectors.makeSelectForm());
+    const requestURL = `${constants.publicPath}/api/member/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
+      body: JSON.stringify(data),
     });
-    if(response.status==='Success'){
-      yield put(actions.deleteMemberSuccess(response));
-    }else{
-      yield put(actions.deleteMemberError('ไม่สามารถบันทึกข้อมูลได้'));  
+    if (response) {
+      yield put(actions.deleteItemSuccess(response));
+    } else {
+      yield put(actions.deleteItemError('Cannot update data'));
     }
   } catch (err) {
-    yield put(actions.deleteMemberError(err));
-  }
-}
-export function* onEditMember() {
-  try {
-    const requestURL = `${types.publicPath}/api/member`;
-    const response = yield call(request, requestURL, {
-      method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
-    });
-    yield put(actions.loadMemberSuccess(response));
-  } catch (err) {
-    yield put(actions.loadMemberError(err));
+    yield put(actions.deleteItemError(err));
   }
 }
 
 export default function* membersSaga() {
-  yield takeEvery(types.LOAD_MEMBERS, onLoadMembers);
-  yield takeEvery(types.DELETE_MEMBER, onDeleteMember);
-  yield takeEvery(types.EDIT_MEMBER, onEditMember);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
+  yield takeEvery(constants.CREATE_ITEM, saveData);
+  yield takeEvery(constants.UPDATE_ITEM, updateData);
+  yield takeEvery(constants.DELETE_ITEM, deleteData);
+  yield takeEvery(constants.SEARCH, searchItem);
 }

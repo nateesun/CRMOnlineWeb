@@ -88,7 +88,7 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={4}>
               <Field
                 name="code"
                 component={RenderField}
@@ -99,9 +99,9 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={4}>
               <Field
-                name="name"
+                name="email"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -109,30 +109,25 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={4}>
               <Field
-                name="map_latitude"
+                name="total_score"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={4}>
               <Field
-                name="map_longitude"
+                name="total_purchase"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
+                label={<FormattedMessage {...messages.col3} />}
                 required
               />
-            </Grid>
-            <Grid item xs={12}>
-              <div align="center">
-                <h3>Google map here...</h3>
-              </div>
             </Grid>
           </Grid>
           <Grid container spacing={1}>
@@ -178,15 +173,15 @@ const validate = formValues => {
   if (!formValues.code) {
     errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.name) {
-    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.email) {
+    errors.email = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.map_latitude) {
-    errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (formValues.total_score < 0) {
+    errors.total_score = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
-  if (!formValues.map_longitude) {
-    errors.map_longitude = (
-      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+  if (formValues.total_purchase < 0) {
+    errors.total_purchase = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
     );
   }
   return errors;

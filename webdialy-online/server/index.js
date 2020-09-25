@@ -34,8 +34,14 @@ const options = {
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 const basePathForAPI = appBasePath.replace(/\/*$/, '');
-app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
-app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
+app.use(
+  `${basePathForAPI}/api/verifyUser`,
+  require('./routes/verifyUser')(options),
+);
+app.use(
+  `${basePathForAPI}/api/member/login`,
+  require('./routes/login')(options),
+);
 app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
 
 // In production we need to pass these values in instead of relying on webpack

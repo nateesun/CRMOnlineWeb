@@ -18,12 +18,41 @@ const selectMembersDomain = state => state.members || initialState;
 const makeSelectMembers = () =>
   createSelector(
     selectMembersDomain,
-    substate => substate.data,
-  );
-const makeSelectStatus = () =>
-  createSelector(
-    selectMembersDomain,
-    substate => substate.status,
+    substate => substate,
   );
 
-export { selectMembersDomain, makeSelectMembers, makeSelectStatus };
+const makeSelectCurrentId = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.currentId,
+  );
+const makeSelectPage = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.page,
+  );
+const makeSelectListItems = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.list,
+  );
+const makeSelectForm = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.data,
+  );
+const makeSelectResponse = () =>
+  createSelector(
+    selectMembersDomain,
+    substate => substate.response,
+  );
+
+export {
+  selectMembersDomain,
+  makeSelectMembers,
+  makeSelectPage,
+  makeSelectListItems,
+  makeSelectForm,
+  makeSelectCurrentId,
+  makeSelectResponse,
+};

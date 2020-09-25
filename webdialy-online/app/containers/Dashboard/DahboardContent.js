@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
-import CardPoint from './CardPoint';
-import messages from './messages';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button } from '@material-ui/core';
+import CardPoint from './CardPoint';
+import messages from './messages';
 
 export default function DahboardContent(props) {
   const { onRefresh, login, profile } = props;
 
   const refreshDataInit = () => {
     onRefresh(login.email);
-  }
+  };
 
   DahboardContent.propTypes = {
     onRefresh: PropTypes.func,
     email: PropTypes.string,
+    login: PropTypes.object,
+    profile: PropTypes.object,
   };
 
   return (

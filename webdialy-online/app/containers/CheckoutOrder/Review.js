@@ -14,7 +14,13 @@ const products = [
   { name: 'Product 4', desc: 'Best thing of all', price: '14.11' },
   { name: 'Shipping', desc: '', price: 'Free' },
 ];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+const addresses = [
+  '1 Material-UI Drive',
+  'Reactville',
+  'Anytown',
+  '99999',
+  'USA',
+];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
   { name: 'Card holder', detail: 'Mr John Smith' },
@@ -22,7 +28,7 @@ const payments = [
   { name: 'Expiry date', detail: '04/2024' },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   listItem: {
     padding: theme.spacing(1, 0),
   },
@@ -44,7 +50,7 @@ export default function Review() {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {products.map((product) => (
+        {products.map(product => (
           <ListItem className={classes.listItem} key={product.name}>
             <ListItemText primary={product.name} secondary={product.desc} />
             <Typography variant="body2">{product.price}</Typography>
@@ -72,7 +78,7 @@ export default function Review() {
             Payment details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
+            {payments.map(payment => (
               <React.Fragment key={payment.name}>
                 <Grid item xs={6}>
                   <Typography gutterBottom>{payment.name}</Typography>

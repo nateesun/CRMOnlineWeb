@@ -115,24 +115,3 @@ export function deleteItemError(payload) {
     payload,
   };
 }
-
-export function getItem(payload) {
-  return {
-    type: constants.GET_ITEM,
-    payload,
-  };
-}
-
-export function getItemSuccess(payload) {
-  return {
-    type: constants.GET_ITEM_SUCCESS,
-    payload,
-  };
-}
-
-export function getItemError(payload) {
-  return {
-    type: constants.GET_ITEM_ERROR,
-    payload,
-  };
-}

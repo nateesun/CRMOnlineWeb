@@ -12,11 +12,6 @@ export function* onAddRegisterMember() {
     const data = yield select(makeSelectMember());
     const response = yield call(request, requestURL, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
       body: JSON.stringify({
         code: '',
         uuid_index: data.uuid_index,
@@ -41,11 +36,11 @@ export function* onAddRegisterMember() {
         line_id: data.line_id,
       }),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.addRegisterMemberSuccess());
       yield put(push(`${types.publicPath}/login`));
     } else {
-      yield put(actions.addRegisterMemberError("ไม่สามารถบันทึกข้อมูลได้"));
+      yield put(actions.addRegisterMemberError('ไม่สามารถบันทึกข้อมูลได้'));
     }
   } catch (err) {
     yield put(actions.addRegisterMemberError(err));

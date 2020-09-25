@@ -1,5 +1,4 @@
 import React, { useState, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 import sampleImg from '../../images/example/food1.jpg';
@@ -17,17 +16,17 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const data = [];
-for (let i = 0; i < 40; i++) {
-  const imgShow = i % 2 == 0 ? beef1Img : sampleImg;
+for (let i = 0; i < 40; i += 1) {
+  const imgShow = i % 2 === 0 ? beef1Img : sampleImg;
   data.push({
     id: i + 1,
     src: imgShow,
-    title: 'โบโลน่าธรรมดา' + (i + 1),
+    title: `โบโลน่าธรรมดา ${i + 1}`,
     price: i + 20,
   });
 }
 
-function Media(props) {
+function Media() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -44,7 +43,11 @@ function Media(props) {
       <GridCategory />
       <GroupProduct />
       <SearchProduct />
-      <ProductList handleClickOpen={()=>handleClickOpen()} data={data} topic="Product all items 2020" />
+      <ProductList
+        handleClickOpen={() => handleClickOpen()}
+        data={data}
+        topic="Product all items 2020"
+      />
       <OrderFooter />
       <DialogDetail
         open={open}
@@ -54,10 +57,6 @@ function Media(props) {
     </div>
   );
 }
-
-Media.propTypes = {
-  loading: PropTypes.bool,
-};
 
 export default function ShoppingContent() {
   return (

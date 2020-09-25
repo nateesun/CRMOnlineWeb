@@ -11,11 +11,6 @@ export function* initLoad() {
     try {
       const response = yield call(request, requestURL, {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-        },
       });
       yield put(actions.initLoadSuccess(response.data));
     } catch (error) {
@@ -32,17 +27,12 @@ export function* onEditMember() {
     const profile = yield select(selects.makeSelectProfile());
     const response = yield call(request, requestURL, {
       method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
       body: JSON.stringify(profile.data),
     });
     if (response.status === 'Success') {
       yield put(actions.editMemberSuccess());
     } else {
-      yield put(actions.editMemberError(response.msg));  
+      yield put(actions.editMemberError(response.msg));
     }
   } catch (err) {
     yield put(actions.editMemberError(err));
