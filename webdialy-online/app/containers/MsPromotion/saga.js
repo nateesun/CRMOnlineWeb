@@ -1,4 +1,4 @@
-import { take, call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as selectors from './selectors';
 import * as constants from './constants';
@@ -59,7 +59,9 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/promotion/${data.uuid_index}`;
+    const requestURL = `${constants.publicPath}/api/promotion/${
+      data.uuid_index
+    }`;
     const response = yield call(request, requestURL, {
       method: 'DELETE',
       body: JSON.stringify(data),

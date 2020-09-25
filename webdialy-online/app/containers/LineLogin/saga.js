@@ -1,8 +1,7 @@
-import { put, select, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
-import * as actions from './actions';
 import * as types from './constants';
 
 export function* onVerifyTokenLogin(data) {
@@ -22,12 +21,11 @@ export function* onVerifyTokenLogin(data) {
         method: 'POST',
         body: JSON.stringify({
           email: Username,
-          password: new Buffer(Password, 'base64').toString(),
+          password: Buffer.from(Password, 'base64').toString(),
         }),
       });
       if (response.status === 'Success') {
         yield put(checkLoginSuccess(response));
-        // yield put(actions.verifyTokenSuccess(response));
         yield put(push(`${types.publicPath}/dashboard`));
       } else {
         yield put(checkLoginError('Email or password invalid'));

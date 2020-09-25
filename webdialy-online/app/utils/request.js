@@ -9,7 +9,10 @@ function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
-  if (response.status === 200 && parseInt(response.headers.get('content-length'), 10) === 0) {
+  if (
+    response.status === 200 &&
+    parseInt(response.headers.get('content-length'), 10) === 0
+  ) {
     return {};
   }
   return response.json();
@@ -44,9 +47,9 @@ export default function request(url, options) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-  }
-  return fetch(url, {...options, headers })
+    Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+  };
+  return fetch(url, { ...options, headers })
     .then(checkStatus)
     .then(parseJSON);
 }

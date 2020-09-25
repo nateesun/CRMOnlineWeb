@@ -24,14 +24,15 @@ export function Profile(props) {
 
   useEffect(() => {
     props.initLoad(props.login.email);
-  }, [])
+  }, []);
 
-  return (
-      <ProfileContent {...props} />
-  );
+  return <ProfileContent {...props} />;
 }
 
-Profile.propTypes = {};
+Profile.propTypes = {
+  initLoad: PropTypes.func,
+  login: PropTypes.object,
+};
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),

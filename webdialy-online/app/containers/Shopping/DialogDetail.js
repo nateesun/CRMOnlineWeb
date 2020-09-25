@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import sampleImg from '../../images/example/food1.jpg';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -17,25 +17,31 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import sampleImg from '../../images/example/food1.jpg';
 
 const useStyles = makeStyles(theme => ({
-    appBar: {
-      position: 'relative',
-      background: 'white',
-      border: '0px',
-    },
-    title: {
-      marginLeft: theme.spacing(2),
-      flex: 1,
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-  }));
+  appBar: {
+    position: 'relative',
+    background: 'white',
+    border: '0px',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function DialogDetail(props) {
   const { open, handleClose, Transition } = props;
   const classes = useStyles();
+  DialogDetail.propTypes = {
+    open: PropTypes.any,
+    handleClose: PropTypes.func,
+    Transition: PropTypes.any,
+  };
 
   return (
     <Dialog
@@ -56,7 +62,7 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={sampleImg} width="50%" />
+        <img src={sampleImg} width="50%" alt="" />
       </Typography>
       <List>
         <ListItem button>
@@ -151,7 +157,8 @@ export default function DialogDetail(props) {
                     background: '#76bd5f',
                     color: 'white',
                     width: '80%',
-                  }} onClick={()=>handleClose()}
+                  }}
+                  onClick={() => handleClose()}
                 >
                   ใส่ตระกร้า 36.00 บาท
                 </Button>

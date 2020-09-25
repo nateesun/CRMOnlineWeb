@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import ShoppingIcon from '@material-ui/icons/ShoppingCart';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
@@ -10,26 +11,33 @@ const GroupItem = styled.div`
   text-align: center;
 `;
 
-function Item(props) {
+const Item = props => {
   let showIcon = null;
-  if(props.type==='shopping'){
+  if (props.type === 'shopping') {
     showIcon = <ShoppingIcon />;
-  }else if(props.type==='basket'){
+  } else if (props.type === 'basket') {
     showIcon = <ShoppingBasket />;
-  }else{
+  } else {
     showIcon = <RemoveShoppingCart />;
   }
+  Item.propTypes = {
+    type: PropTypes.string,
+    description: PropTypes.string,
+  };
   return (
-    <div style={{paddingTop: '5px'}}>
-      {showIcon}<br />
+    <div style={{ paddingTop: '5px' }}>
+      {showIcon}
+      <br />
       <span>{props.description}</span>
     </div>
   );
-}
+};
 
-export default function GridCategory(props) {
+const GridCategory = props => {
   const { type } = props;
-
+  GridCategory.propTypes = {
+    type: PropTypes.string,
+  };
   return (
     <div
       style={{
@@ -168,4 +176,6 @@ export default function GridCategory(props) {
       </Carousel>
     </div>
   );
-}
+};
+
+export default GridCategory;

@@ -35,7 +35,7 @@ export function* onUpdatePassword() {
     if (response.status === 'Success') {
       yield put(actions.updatePasswordSuccess());
     } else {
-      yield put(actions.updatePasswordError(response.msg));  
+      yield put(actions.updatePasswordError(response.msg));
     }
   } catch (err) {
     yield put(actions.updatePasswordError(err));

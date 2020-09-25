@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -60,6 +60,11 @@ const NewItem = props => {
     reset: PropTypes.func,
     submitting: PropTypes.bool,
     onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -180,7 +185,9 @@ const validate = formValues => {
     errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.map_longitude = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   return errors;
 };

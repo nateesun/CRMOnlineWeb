@@ -3,7 +3,10 @@ import 'fontsource-roboto';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { makeSelectLogin, makeSelectLoggedIn } from 'containers/Login/selectors';
+import {
+  makeSelectLogin,
+  makeSelectLoggedIn,
+} from 'containers/Login/selectors';
 import GlobalStyle from '../../global-styles';
 import Layout from './Layouts';
 
@@ -21,7 +24,7 @@ const mapStateToProps = createStructuredSelector({
   loggedIn: makeSelectLoggedIn(),
 });
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
   return {};
 }
 

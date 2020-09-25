@@ -1,4 +1,4 @@
-import { take, call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as selectors from './selectors';
 import * as constants from './constants';

@@ -66,7 +66,9 @@ function Header(props) {
               </Grid>
             </Hidden>
             <Grid item xs>
-              <ButtonLink to={`${publicPath}/`} color="white">WEB DAILY ONLINE</ButtonLink>
+              <ButtonLink to={`${publicPath}/`} color="white">
+                WEB DAILY ONLINE
+              </ButtonLink>
             </Grid>
             <Grid item>
               <LocaleToggle />
@@ -89,8 +91,18 @@ function Header(props) {
           </Grid>
         </Toolbar>
         {loggedIn === true && (
-          <Typography component="span" style={{textAlign: 'right', fontSize: '12px', paddingRight: '26px', paddingBottom: '5px'}}>
-            <ButtonLink to={`${publicPath}/profile`} color="white">สมาชิก: {login.email}</ButtonLink>
+          <Typography
+            component="span"
+            style={{
+              textAlign: 'right',
+              fontSize: '12px',
+              paddingRight: '26px',
+              paddingBottom: '5px',
+            }}
+          >
+            <ButtonLink to={`${publicPath}/profile`} color="white">
+              สมาชิก: {login.email}
+            </ButtonLink>
           </Typography>
         )}
       </AppBar>
@@ -101,6 +113,8 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool,
+  login: PropTypes.object,
 };
 
 export default withStyles(styles)(Header);

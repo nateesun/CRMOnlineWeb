@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SubTableItems(props) {
+export default function SubTableItems() {
   const itemList = [];
 
   const classes = useStyles();
@@ -71,11 +71,16 @@ export default function SubTableItems(props) {
               itemList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item, index) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={item.uuid_index}
+                  >
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item['col1']}</TableCell>
-                    <TableCell align="center">{item['col2']}</TableCell>
-                    <TableCell align="center">{item['col3']}</TableCell>
+                    <TableCell align="center">{item.col1}</TableCell>
+                    <TableCell align="center">{item.col2}</TableCell>
+                    <TableCell align="center">{item.col3}</TableCell>
                   </TableRow>
                 ))}
           </TableBody>

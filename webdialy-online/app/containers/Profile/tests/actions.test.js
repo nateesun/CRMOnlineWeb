@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import { initLoad } from '../actions';
+import { INIT_LOAD } from '../constants';
 
 describe('Profile actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('initLoad', () => {
+    it('has a type of INIT_LOAD', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: INIT_LOAD,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(initLoad()).toEqual(expected);
     });
   });
 });

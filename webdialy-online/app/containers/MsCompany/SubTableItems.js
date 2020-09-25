@@ -33,14 +33,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SubTableItems(props) {
+export default function SubTableItems() {
   const itemList = [];
 
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = newPage => {
     setPage(newPage);
   };
 
@@ -55,7 +55,7 @@ export default function SubTableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-        Sub Table List
+          Sub Table List
         </Typography>
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
@@ -71,11 +71,16 @@ export default function SubTableItems(props) {
               itemList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item, index) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={item.uuid_index}
+                  >
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item["col1"]}</TableCell>
-                    <TableCell align="center">{item["col2"]}</TableCell>
-                    <TableCell align="center">{item["col3"]}</TableCell>
+                    <TableCell align="center">{item.col1}</TableCell>
+                    <TableCell align="center">{item.col2}</TableCell>
+                    <TableCell align="center">{item.col3}</TableCell>
                   </TableRow>
                 ))}
           </TableBody>

@@ -1,11 +1,13 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import TableItems from './TableItems';
 import NewItem from './NewItem';
 import EditItem from './EditItem';
-import messages from './messages';
 
 export default function ContentPage(props) {
+  ContentPage.propTypes = {
+    getPage: PropTypes.string,
+  };
   return (
     <div>
       {props.getPage === 'LIST' && <TableItems {...props} />}

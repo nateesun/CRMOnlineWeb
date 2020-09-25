@@ -169,6 +169,11 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
+  onCreateItem: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -183,7 +188,9 @@ const validate = formValues => {
     errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.map_longitude = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   return errors;
 };

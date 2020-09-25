@@ -12,7 +12,11 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectLogin, makeLoginError, makeSelectProfile } from './selectors';
+import {
+  makeSelectLogin,
+  makeLoginError,
+  makeSelectProfile,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './LoginForm';

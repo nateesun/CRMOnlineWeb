@@ -5,13 +5,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ShoppingContent from './ShoppingContent';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import ShoppingContent from './ShoppingContent';
 import makeSelectShopping from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -21,24 +20,20 @@ export function Shopping() {
   useInjectSaga({ key: 'shopping', saga });
 
   return (
-    <div style={{width: '100%'}}>
+    <div style={{ width: '100%' }}>
       <ShoppingContent />
     </div>
   );
 }
 
-Shopping.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+Shopping.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   shopping: makeSelectShopping(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+function mapDispatchToProps() {
+  return {};
 }
 
 const withConnect = connect(

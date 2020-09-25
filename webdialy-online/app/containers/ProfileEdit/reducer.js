@@ -19,7 +19,7 @@ const profileEditReducer = (state = initialState, action) =>
       case types.DEFAULT_ACTION:
         draft.status = '';
         draft.error = '';
-        draft.data = {}
+        draft.data = {};
         break;
       case types.INIT_LOAD:
         draft.email = action.payload;

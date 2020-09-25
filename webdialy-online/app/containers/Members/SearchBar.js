@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -42,8 +43,12 @@ export default function SearchBar(props) {
   const [key, setKey] = useState('code');
   const [value, setValue] = useState('');
 
-  const onSearchData = (key, value) => {
+  const onSearchData = () => {
     props.onSearch(key, value);
+  };
+
+  SearchBar.propTypes = {
+    onSearch: PropTypes.func,
   };
 
   return (
@@ -57,9 +62,7 @@ export default function SearchBar(props) {
         value={value}
         onChange={e => setValue(e.target.value)}
       />
-      <ButtonSearch onClick={() => onSearchData(key, value)}>
-        Search
-      </ButtonSearch>
+      <ButtonSearch onClick={() => onSearchData()}>Search</ButtonSearch>
     </Wrapper>
   );
 }

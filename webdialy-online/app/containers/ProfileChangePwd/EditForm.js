@@ -9,13 +9,9 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel from '@material-ui/core/InputLabel';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
@@ -25,44 +21,6 @@ const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
   border-radius: 5px 5px 5px 5px;
 `;
-
-const renderFromHelper = ({ touched, error }) => {
-  if (!(touched && error)) {
-    return;
-  } else {
-    return <FormHelperText>{touched && error}</FormHelperText>;
-  }
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <FormControl
-    variant="outlined"
-    error={touched && error}
-    style={{ width: '100%' }}
-  >
-    <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
-    <Select
-      labelId="demo-simple-select-outlined-label"
-      native
-      {...input}
-      {...custom}
-      inputProps={{
-        name: 'age',
-        id: 'age-native-simple',
-      }}
-      label={label}
-    >
-      {children}
-    </Select>
-    {renderFromHelper({ touched, error })}
-  </FormControl>
-);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -136,7 +94,7 @@ const EditForm = props => {
                 type="email"
                 margin="normal"
                 label={<FormattedMessage {...messages.email} />}
-                disabled={true}
+                disabled
               />
             </Grid>
             <Grid item xs={4}>
@@ -191,11 +149,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={3}>
               <ButtonLink to="/profile">
-                <Button
-                  fullWidth
-                  variant="contained"
-                  onClick={reset}
-                >
+                <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>
               </ButtonLink>
@@ -217,13 +171,22 @@ EditForm.propTypes = {
   errorUpdate: PropTypes.string,
   updateStatus: PropTypes.string,
   clearData: PropTypes.func,
+  input: PropTypes.any,
+  label: PropTypes.any,
+  meta: PropTypes.any,
+  children: PropTypes.any,
+  onEditMember: PropTypes.func,
+  touched: PropTypes.any,
+  error: PropTypes.any,
 };
 
 const validate = formValues => {
   const errors = {};
 
   if (!formValues.old_password) {
-    errors.old_password = <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />;
+    errors.old_password = (
+      <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />
+    );
   }
 
   if (!formValues.new_password) {
@@ -232,10 +195,14 @@ const validate = formValues => {
     );
   }
   if (!formValues.confirm_password) {
-    errors.confirm_password = <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />;
+    errors.confirm_password = (
+      <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />
+    );
   }
   if (formValues.new_password !== formValues.confirm_password) {
-    errors.confirm_password = <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />;
+    errors.confirm_password = (
+      <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />
+    );
   }
 
   return errors;
@@ -250,5 +217,5 @@ export default connect(mapStateToProps)(
     form: 'editForm',
     validate,
     enableReinitialize: true,
-  })(EditForm)
+  })(EditForm),
 );

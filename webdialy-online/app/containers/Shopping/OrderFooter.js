@@ -46,7 +46,10 @@ export default function OrderFooter() {
         <Grid container>
           <Grid item xs={12}>
             <div align="right">
-              <ShoppingBasket /> (1) - <ButtonLink to="/checkout-orders" color="white">รวม: 36.00 บาท</ButtonLink>
+              <ShoppingBasket /> (1) -{' '}
+              <ButtonLink to="/checkout-orders" color="white">
+                รวม: 36.00 บาท
+              </ButtonLink>
             </div>
           </Grid>
         </Grid>

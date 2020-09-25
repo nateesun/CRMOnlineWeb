@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -81,7 +82,14 @@ export default function TableItems(props) {
     props.onLoadEdit(item);
   };
 
-  TableItems.propTypes = {};
+  TableItems.propTypes = {
+    getList: PropTypes.array,
+    onDeleteItem: PropTypes.func,
+    onLoadView: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onLoadEdit: PropTypes.func,
+    onInitLoad: PropTypes.func,
+  };
 
   return (
     <Paper className={classes.root}>
@@ -116,12 +124,17 @@ export default function TableItems(props) {
               getList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item, index) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={item.uuid_index}
+                  >
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item['code']}</TableCell>
-                    <TableCell align="center">{item['email']}</TableCell>
-                    <TableCell align="center">{item['total_score']}</TableCell>
-                    <TableCell align="center">{item['total_purchase']}</TableCell>
+                    <TableCell align="center">{item.code}</TableCell>
+                    <TableCell align="center">{item.email}</TableCell>
+                    <TableCell align="center">{item.total_score}</TableCell>
+                    <TableCell align="center">{item.total_purchase}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>

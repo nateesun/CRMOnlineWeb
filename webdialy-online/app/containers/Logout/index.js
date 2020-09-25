@@ -39,7 +39,7 @@ export function Logout(props) {
 
   return (
     <Wrapper>
-      <img src={LogoutIcon} border={0} width={100} />
+      <img src={LogoutIcon} border={0} width={100} alt="" />
       <h4>
         <FormattedMessage {...messages.header} />
       </h4>

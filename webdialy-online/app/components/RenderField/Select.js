@@ -38,10 +38,18 @@ function SelectField({ input, label, meta: { touched, error } }) {
         label={label}
       >
         <option value="" />
-        <option value="คุณ" key="คุณ">คุณ</option>
-        <option value="นาย" key="นาย">นาย</option>
-        <option value="นาง" key="นาง">นาง</option>
-        <option value="นางสาว" key="นางสาว">นางสาว</option>
+        <option value="คุณ" key="คุณ">
+          คุณ
+        </option>
+        <option value="นาย" key="นาย">
+          นาย
+        </option>
+        <option value="นาง" key="นาง">
+          นาง
+        </option>
+        <option value="นางสาว" key="นางสาว">
+          นางสาว
+        </option>
       </Select>
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
     </FormControl>

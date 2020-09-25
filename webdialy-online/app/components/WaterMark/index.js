@@ -5,12 +5,8 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import ReactWaterMark from 'react-watermark-component';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 
 const options = {
   chunkWidth: 200,
@@ -34,6 +30,8 @@ function WaterMark(props) {
   );
 }
 
-WaterMark.propTypes = {};
+WaterMark.propTypes = {
+  children: PropTypes.any,
+};
 
 export default WaterMark;

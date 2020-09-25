@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -21,23 +20,17 @@ export function Checkout() {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
 
-  return (
-    <CheckoutContent />
-  );
+  return <CheckoutContent />;
 }
 
-Checkout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+Checkout.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   checkout: makeSelectCheckout(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+function mapDispatchToProps() {
+  return {};
 }
 
 const withConnect = connect(

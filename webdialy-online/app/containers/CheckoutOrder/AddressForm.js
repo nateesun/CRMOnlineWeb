@@ -64,7 +64,12 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+          <TextField
+            id="state"
+            name="state"
+            label="State/Province/Region"
+            fullWidth
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -88,7 +93,9 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            control={
+              <Checkbox color="secondary" name="saveAddress" value="yes" />
+            }
             label="Use this address for payment details"
           />
         </Grid>

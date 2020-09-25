@@ -32,7 +32,7 @@ export function* onEditMember() {
     if (response.status === 'Success') {
       yield put(actions.editMemberSuccess());
     } else {
-      yield put(actions.editMemberError(response.msg));  
+      yield put(actions.editMemberError(response.msg));
     }
   } catch (err) {
     yield put(actions.editMemberError(err));

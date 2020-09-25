@@ -164,6 +164,10 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -178,7 +182,9 @@ const validate = formValues => {
     errors.total_score = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.total_purchase < 0) {
-    errors.total_purchase = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+    errors.total_purchase = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
   }
   return errors;
 };

@@ -36,11 +36,11 @@ export function* onAddRegisterMember() {
         line_id: data.line_id,
       }),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.addRegisterMemberSuccess());
       yield put(push(`${types.publicPath}/login`));
     } else {
-      yield put(actions.addRegisterMemberError("ไม่สามารถบันทึกข้อมูลได้"));
+      yield put(actions.addRegisterMemberError('ไม่สามารถบันทึกข้อมูลได้'));
     }
   } catch (err) {
     yield put(actions.addRegisterMemberError(err));

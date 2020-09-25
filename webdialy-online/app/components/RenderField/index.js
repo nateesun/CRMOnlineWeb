@@ -41,6 +41,7 @@ RenderField.propTypes = {
   type: PropTypes.string,
   required: PropTypes.bool,
   autoFocus: PropTypes.bool,
+  disabled: PropTypes.bool,
   meta: PropTypes.object,
 };
 

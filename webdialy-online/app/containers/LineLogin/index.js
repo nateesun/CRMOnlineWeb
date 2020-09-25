@@ -37,6 +37,7 @@ export function LineLogin(props) {
 LineLogin.propTypes = {
   dispatch: PropTypes.func.isRequired,
   verifyTokenLogin: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -47,8 +48,8 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     verifyTokenLogin: token => {
-      dispatch(verifyToken(token))
-    }
+      dispatch(verifyToken(token));
+    },
   };
 }
 

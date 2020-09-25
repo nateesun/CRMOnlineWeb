@@ -21,7 +21,6 @@ import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
 import * as selectors from './selectors';
-import { Link } from 'react-router-dom';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -29,11 +28,14 @@ const ImgLogo = styled.img`
 `;
 
 const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
   if (!(touched && error)) {
-    return;
-  } else {
-    return <FormHelperText>{touched && error}</FormHelperText>;
+    return <span />;
   }
+  return <FormHelperText>{touched && error}</FormHelperText>;
 };
 
 const renderSelectField = ({
@@ -42,29 +44,37 @@ const renderSelectField = ({
   meta: { touched, error },
   children,
   ...custom
-}) => (
-  <FormControl
-    variant="outlined"
-    error={touched && error}
-    style={{ width: '100%' }}
-  >
-    <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
-    <Select
-      labelId="demo-simple-select-outlined-label"
-      native
-      {...input}
-      {...custom}
-      inputProps={{
-        name: 'age',
-        id: 'age-native-simple',
-      }}
-      label={label}
+}) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+  return (
+    <FormControl
+      variant="outlined"
+      error={touched && error}
+      style={{ width: '100%' }}
     >
-      {children}
-    </Select>
-    {renderFromHelper({ touched, error })}
-  </FormControl>
-);
+      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: 'age-native-simple',
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -194,7 +204,7 @@ const EditForm = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.code} />}
-                disabled={true}
+                disabled
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -204,7 +214,7 @@ const EditForm = props => {
                 type="email"
                 margin="normal"
                 label={<FormattedMessage {...messages.email} />}
-                disabled={true}
+                disabled
               />
             </Grid>
 
@@ -247,11 +257,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={2} md={3}>
               <ButtonLink to="/profile">
-                <Button
-                  fullWidth
-                  variant="contained"
-                  onClick={reset}
-                >
+                <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>
               </ButtonLink>
@@ -273,6 +279,7 @@ EditForm.propTypes = {
   errorUpdate: PropTypes.string,
   updateStatus: PropTypes.string,
   clearData: PropTypes.func,
+  onEditMember: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -288,7 +295,9 @@ const validate = formValues => {
     );
   }
   if (!formValues.last_name) {
-    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+    errors.last_name = (
+      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
+    );
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
@@ -316,5 +325,5 @@ export default connect(mapStateToProps)(
     form: 'editForm',
     validate,
     enableReinitialize: true,
-  })(EditForm)
+  })(EditForm),
 );

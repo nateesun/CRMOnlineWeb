@@ -27,6 +27,6 @@ export default defineMessages({
   },
   btnRefresh: {
     id: `${scope}.btnRefresh`,
-    defaultMessage: 'Refresh point'
-  }
+    defaultMessage: 'Refresh point',
+  },
 });

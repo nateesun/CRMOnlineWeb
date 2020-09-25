@@ -60,6 +60,11 @@ const NewItem = props => {
     reset: PropTypes.func,
     submitting: PropTypes.bool,
     onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -171,11 +176,13 @@ const validate = formValues => {
   if (!formValues.email) {
     errors.email = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (formValues.total_score<0) {
+  if (formValues.total_score < 0) {
     errors.total_score = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
-  if (formValues.total_purchase<0) {
-    errors.total_purchase = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (formValues.total_purchase < 0) {
+    errors.total_purchase = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
   }
   return errors;
 };

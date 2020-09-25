@@ -60,6 +60,11 @@ const NewItem = props => {
     reset: PropTypes.func,
     submitting: PropTypes.bool,
     onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -192,13 +197,19 @@ const validate = formValues => {
     errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   if (!formValues.line_official_id) {
-    errors.line_official_id = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+    errors.line_official_id = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
   }
   if (!formValues.member_running) {
-    errors.member_running = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.member_running = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   if (!formValues.prefix_running) {
-    errors.prefix_running = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+    errors.prefix_running = (
+      <FormattedMessage {...messages.col5ShouldNotEmpty} />
+    );
   }
   if (!formValues.size_running) {
     errors.size_running = <FormattedMessage {...messages.col6ShouldNotEmpty} />;

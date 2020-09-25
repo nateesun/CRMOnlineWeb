@@ -36,7 +36,12 @@ const useStyles = makeStyles(theme => ({
 
 const ViewItem = props => {
   const classes = useStyles();
-  const { code, email, total_score, total_purchase } = props.initialValues;
+  const {
+    code,
+    email,
+    total_score: totalScore,
+    total_purchase: totalPurchase,
+  } = props.initialValues;
 
   return (
     <Container component="main" maxWidth="lg">
@@ -61,13 +66,13 @@ const ViewItem = props => {
             <FormattedMessage {...messages.col3} />
           </Grid>
           <Grid item xs={6}>
-            {total_score}
+            {totalScore}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col4} />
           </Grid>
           <Grid item xs={6}>
-            {total_purchase}
+            {totalPurchase}
           </Grid>
         </Grid>
         <Grid container spacing={3}>
@@ -93,20 +98,7 @@ ViewItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
-};
-
-const validate = formValues => {
-  const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
-  }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
-  }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
-  }
-  return errors;
+  onChangePage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
