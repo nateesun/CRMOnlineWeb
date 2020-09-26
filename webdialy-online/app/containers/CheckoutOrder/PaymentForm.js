@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import Slip from '../../images/example/slip.jpg';
 
 export default function PaymentForm() {
   return (
@@ -27,7 +28,7 @@ export default function PaymentForm() {
           <TextField
             required
             id="cardNumber"
-            label="Card number"
+            label="เลขที่บัญชีผู้โอน"
             fullWidth
             autoComplete="cc-number"
           />
@@ -36,7 +37,7 @@ export default function PaymentForm() {
           <TextField
             required
             id="expDate"
-            label="Expiry date"
+            label="เลขที่บัญชีผู้รับโอน"
             fullWidth
             autoComplete="cc-exp"
           />
@@ -45,17 +46,20 @@ export default function PaymentForm() {
           <TextField
             required
             id="cvv"
-            label="CVV"
-            helperText="Last three digits on signature strip"
+            label="วันที่ เวลาที่โอน"
+            helperText="ข้อมูลนี้จะถูกตรวจสอบโดยพนักงานอีกครั้ง"
             fullWidth
             autoComplete="cc-csc"
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
-          />
+          อัพโหลดไฟล์ Slip <input type="file" />
+        </Grid>
+        <Grid item xs={12}>
+          <div align="center">
+            <img src={Slip} width={150} alt="" /><br /><br />
+            ตัวอย่าง Slip ที่โอนเงิน<br />
+          </div>
         </Grid>
       </Grid>
     </React.Fragment>

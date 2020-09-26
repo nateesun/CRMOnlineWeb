@@ -14,17 +14,17 @@ const products = [
   { name: 'ค่าบริการขนส่ง', desc: '', price: 'Free' },
 ];
 const addresses = [
-  '1 Material-UI Drive',
-  'Reactville',
-  'Anytown',
-  '99999',
-  'USA',
+  'The Line Condo',
+  '1333/494',
+  'บางซื่อ',
+  'จอมพล',
+  'กรุงเทพฯ 10900',
 ];
 const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
+  { name: 'ประเภทรับชำระ', detail: 'เงินโอน' },
+  { name: 'บัญชีผู้โอน', detail: 'นายสมชาย เข็มกลัด' },
+  { name: 'เลขที่บัญชี', detail: 'xxxx-xxxx-xxxx-1234' },
+  { name: 'วันที่โอน', detail: '30/01/2020 เวลา 14:50:15น.' },
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -69,7 +69,7 @@ export default function Review() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             ที่อยู่สำหรับจัดส่ง
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>นายสมชาย เข็มกลัด</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

@@ -62,7 +62,7 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={sampleImg} width="50%" alt="" />
+        <img src={sampleImg} width="250" alt="" />
       </Typography>
       <List>
         <ListItem button>

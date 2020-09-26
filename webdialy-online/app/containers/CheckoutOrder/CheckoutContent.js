@@ -73,7 +73,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            ขั้นตอนการสั่งสินค้า
+            ขั้นตอนการสั่งซื้อสินค้า
           </Typography>
           <Stepper
             activeStep={activeStep}
@@ -122,7 +122,7 @@ export default function Checkout() {
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
-                      Back
+                      ย้อนกลับ
                     </Button>
                   )}
                   <Button
@@ -131,7 +131,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                   </Button>
                 </div>
               </React.Fragment>
