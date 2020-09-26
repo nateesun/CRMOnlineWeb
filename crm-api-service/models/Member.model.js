@@ -28,7 +28,7 @@ module.exports = {
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select * from ${table_name} where email !='softpos@gmail.com'`
+      const sql = `select * from ${table_name} where email !='softpos@gmail.com' order by code;`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
