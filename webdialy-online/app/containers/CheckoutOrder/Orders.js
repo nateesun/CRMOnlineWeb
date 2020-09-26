@@ -11,11 +11,9 @@ import PlusIcon from '@material-ui/icons/AddCircleOutlined';
 import IconButton from '@material-ui/core/IconButton';
 
 const products = [
-  { name: 'Product 1', desc: 'One thing', price: '9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
+  { name: 'Product 1', desc: 'One thing', price: '15.00' },
+  { name: 'Product 2', desc: 'Another thing', price: '10.00' },
+  { name: 'Product 3', desc: 'Something else', price: '5.00' },
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +34,7 @@ export default function Orders() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order list
+        รายการสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
@@ -62,9 +60,9 @@ export default function Orders() {
         ))}
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
+          <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>
-            34.06
+            30.00
           </Typography>
         </ListItem>
       </List>

@@ -10,7 +10,7 @@ export default function AddressForm() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <Grid container spacing={3}>

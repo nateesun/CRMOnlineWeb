@@ -23,6 +23,8 @@ for (let i = 0; i < 40; i += 1) {
     src: imgShow,
     title: `โบโลน่าธรรมดา ${i + 1}`,
     price: i + 20,
+    point: 10,
+    inStock: '9/10'
   });
 }
 
@@ -39,9 +41,9 @@ function Media() {
 
   return (
     <div style={{ width: '100%' }}>
-      <TopPromotion type="fade" />
-      <GridCategory />
-      <GroupProduct />
+      {/* <TopPromotion type="fade" /> */}
+      {/* <GridCategory /> */}
+      {/* <GroupProduct /> */}
       <SearchProduct />
       <ProductList
         handleClickOpen={() => handleClickOpen()}

@@ -50,126 +50,126 @@ const GridCategory = props => {
         <Grid container key={1}>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G1" type="shopping" />
+              <Item description="Group product #1" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G2" type="shopping" />
+              <Item description="Group product #2" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G3" type="shopping" />
+              <Item description="Group product #3" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G4" type="shopping" />
+              <Item description="Group product #4" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G5" type="shopping" />
+              <Item description="Group product #5" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G6" type="shopping" />
+              <Item description="Group product #6" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G7" type="shopping" />
+              <Item description="Group product #7" type="shopping" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G8" type="shopping" />
-            </GroupItem>
-          </Grid>
-        </Grid>
-        <Grid container key={1}>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G1" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G2" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G3" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G4" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G5" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G6" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G7" type="remove" />
-            </GroupItem>
-          </Grid>
-          <Grid item xs={3}>
-            <GroupItem>
-              <Item description="G8" type="remove" />
+              <Item description="Group product #8" type="shopping" />
             </GroupItem>
           </Grid>
         </Grid>
         <Grid container key={1}>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G1" type="basket" />
+              <Item description="Group product #1" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G2" type="basket" />
+              <Item description="Group product #2" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G3" type="basket" />
+              <Item description="Group product #3" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G4" type="basket" />
+              <Item description="Group product #4" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G5" type="basket" />
+              <Item description="Group product #5" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G6" type="basket" />
+              <Item description="Group product #6" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G7" type="basket" />
+              <Item description="Group product #7" type="remove" />
             </GroupItem>
           </Grid>
           <Grid item xs={3}>
             <GroupItem>
-              <Item description="G8" type="basket" />
+              <Item description="Group product #8" type="remove" />
+            </GroupItem>
+          </Grid>
+        </Grid>
+        <Grid container key={1}>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #1" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #2" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #3" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #4" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #5" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #6" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #7" type="basket" />
+            </GroupItem>
+          </Grid>
+          <Grid item xs={3}>
+            <GroupItem>
+              <Item description="Group product #8" type="basket" />
             </GroupItem>
           </Grid>
         </Grid>

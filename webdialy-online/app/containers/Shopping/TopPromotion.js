@@ -8,11 +8,11 @@ function Item(props) {
     item: PropTypes.object,
   };
   return (
-    <div>
+    <div style={{padding: 10}}>
       <h2>{props.item.name}</h2>
       <p>{props.item.description}</p>
 
-      <Button className="CheckButton">Check it out!</Button>
+      <Button variant="outlined" className="CheckButton">ดูรายละเอียด</Button>
     </div>
   );
 }
@@ -20,13 +20,13 @@ function Item(props) {
 const items = [
   {
     id: 1,
-    name: 'Random Name #1',
-    description: 'Probably the most random thing you have ever seen!',
+    name: 'แสดงโปรโมชั่น #1',
+    description: 'รายละเอียดโปรโมชั่นที่ต้องการแสดง',
   },
   {
     id: 2,
-    name: 'Random Name #2',
-    description: 'Probably the most',
+    name: 'แสดงโปรโมชั่น #2',
+    description: 'รายละเอียดโปรโมชั่นที่ต้องการแสดง',
   },
 ];
 

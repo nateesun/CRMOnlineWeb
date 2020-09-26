@@ -19,7 +19,7 @@ export default function ProductTopic(props) {
   };
   return (
     <Wrapper bg={bgColor} color={textColor}>
-      {label}
+      <b>{label}</b>
     </Wrapper>
   );
 }
