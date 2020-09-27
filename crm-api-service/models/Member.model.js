@@ -69,7 +69,13 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const query = `UPDATE ${table_name} SET  
-        prefix = ?, first_name = ?, last_name = ?, birthday = ?, mobile = ?, line_id = ?, system_updated = now() 
+        prefix = ?, 
+        first_name = ?, 
+        last_name = ?, 
+        birthday = ?, 
+        mobile = ?, 
+        line_id = ?, 
+        system_updated = now() 
         WHERE email=? `
         const result = await pool.query(query, [
           data.prefix, data.first_name, data.last_name, data.birthday, data.mobile, data.line_id,

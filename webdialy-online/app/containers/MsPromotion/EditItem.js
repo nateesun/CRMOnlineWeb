@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
+import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
 
@@ -80,7 +81,7 @@ const EditItem = props => {
           <Grid container spacing={1}>
             <Grid item xs={3}>
               <Field
-                name="code"
+                name="redeem_code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -89,13 +90,63 @@ const EditItem = props => {
                 disabled
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={3}>
               <Field
-                name="name"
+                name="product_code"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col2} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Field
+                name="product_name"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col3} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="point_to_redeem"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col4} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="start_time"
+                component={DateTimeInput}
+                type="date"
+                margin="normal"
+                label={<FormattedMessage {...messages.col5} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="finish_time"
+                component={DateTimeInput}
+                type="date"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="qty_in_stock"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
                 required
               />
             </Grid>

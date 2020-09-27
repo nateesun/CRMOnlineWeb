@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
   },
   tagStyle: {
     padding: '10px',
-    background: '#fadfad',
+    background: '#478bf3',
+    color: 'white',
     borderRadius: '10px 0px 10px 0px',
     fontWeight: 'bold',
     border: '1px solid #ccc',

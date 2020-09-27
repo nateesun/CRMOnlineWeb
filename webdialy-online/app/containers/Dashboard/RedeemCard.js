@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     listStyle: 'none',
   },
   buttonFooter: {
-    background: '#478bf3 ',
+    background: '#478bf3',
     color: 'white',
     width: '80%',
     marginBottom: '10px',
@@ -74,7 +74,7 @@ export default function RedeemCard(props) {
         title="Paella dish" style={{borderRadius: '150px'}}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component="span">
           <div align="center">
             <u className={classes.options}>
               <li>{options.pointUse}</li>

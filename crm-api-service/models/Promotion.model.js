@@ -5,7 +5,10 @@ module.exports = {
   findById: async (id, callback) => {
     console.log("findById method start:")
     try {
-      const sql = `select * from ${table_name} where uuid_index=?;`
+      const sql = `select *,
+      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
+      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
+      from ${table_name} where uuid_index=?;`
       const result = await pool.query(sql, [id])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
@@ -15,7 +18,10 @@ module.exports = {
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select * from ${table_name}`
+      const sql = `select *,
+      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
+      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
+      from ${table_name};`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
@@ -38,10 +44,23 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET code=?, name=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} SET 
+        redeem_code=?,
+        product_code=?,
+        product_name=?,
+        point_to_redeem=?,
+        start_time=?,
+        finish_time=?,
+        qty_in_stock=? 
+        WHERE uuid_index=? `
         const result = await pool.query(query, [
-          data.code,
-          data.name,
+          data.redeem_code,
+          data.product_code,
+          data.product_name,
+          data.point_to_redeem,
+          data.start_time,
+          data.finish_time,
+          data.qty_in_stock,
           data.uuid_index
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })
