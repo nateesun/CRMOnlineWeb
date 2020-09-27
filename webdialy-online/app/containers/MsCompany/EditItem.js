@@ -78,7 +78,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -86,9 +86,10 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
-            <Grid item xs={12} lg={8}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}
@@ -98,7 +99,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12}>
               <Field
                 name="line_official_id"
                 component={RenderField}
@@ -108,7 +109,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={4}>
               <Field
                 name="prefix_running"
                 component={RenderField}
@@ -118,7 +119,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={4}>
               <Field
                 name="member_running"
                 component={RenderField}
@@ -128,13 +129,73 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={2}>
+            <Grid item xs={4}>
               <Field
                 name="size_running"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_prefix"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_prefix"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col11} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col12} />}
                 required
               />
             </Grid>

@@ -89,7 +89,7 @@ const categories = [
       },
       { id: 'Stock', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/stock` },
       {
-        id: 'Promotion',
+        id: 'Redeem',
         icon: <DnsRoundedIcon />,
         to: `${publicPath}/ms/promotion`,
       },

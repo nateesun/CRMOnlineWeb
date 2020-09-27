@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import image from '../../images/example/beef1.jpg';
+import image from '../../images/example/food1.jpg';
 import ProductTopic from './ProductTopic';
 
 const useStyles = makeStyles(theme => ({
@@ -34,37 +34,49 @@ const tileData = [
     author: 'author',
   },
   {
-    id: 1,
+    id: 2,
     img: image,
     title: 'Image',
     author: 'author',
   },
   {
-    id: 1,
+    id: 3,
     img: image,
     title: 'Image',
     author: 'author',
   },
   {
-    id: 1,
+    id: 4,
     img: image,
     title: 'Image',
     author: 'author',
   },
   {
-    id: 1,
+    id: 5,
     img: image,
     title: 'Image',
     author: 'author',
   },
   {
-    id: 1,
+    id: 6,
     img: image,
     title: 'Image',
     author: 'author',
   },
   {
-    id: 1,
+    id: 7,
+    img: image,
+    title: 'Image',
+    author: 'author',
+  },
+  {
+    id: 8,
+    img: image,
+    title: 'Image',
+    author: 'author',
+  },
+  {
+    id: 9,
     img: image,
     title: 'Image',
     author: 'author',

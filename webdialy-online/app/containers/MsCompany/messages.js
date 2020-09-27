@@ -85,6 +85,30 @@ export default defineMessages({
     id: `${scope}.col6`,
     defaultMessage: 'Size Running',
   },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Order Running',
+  },
+  col8: {
+    id: `${scope}.col8`,
+    defaultMessage: 'Order Prefix',
+  },
+  col9: {
+    id: `${scope}.col9`,
+    defaultMessage: 'Order Size Running',
+  },
+  col10: {
+    id: `${scope}.col10`,
+    defaultMessage: 'Cart Running',
+  },
+  col11: {
+    id: `${scope}.col11`,
+    defaultMessage: 'Cart Prefix',
+  },
+  col12: {
+    id: `${scope}.col12`,
+    defaultMessage: 'Cart Size Running',
+  },
   btnSave: {
     id: `${scope}.btnSave`,
     defaultMessage: 'Save',

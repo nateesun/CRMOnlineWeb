@@ -9,7 +9,7 @@ export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
 
   ProductList.propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.array,
     topic: PropTypes.string,
     handleClickOpen: PropTypes.func,
   };
@@ -17,7 +17,7 @@ export default function ProductList(props) {
   return (
     <Grid container spacing={3} style={{ marginTop: '1px' }}>
       <Grid item xs={12}>
-        <ProductTopic label={topic} bgColor="blue" textColor="white" />
+        <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>
       {data &&
         data.map(item => (
@@ -54,10 +54,41 @@ export default function ProductList(props) {
                         marginRight: '2px',
                       }}
                     >
-                      {item.price}
+                      ราคา {item.price} บาท
                     </span>
-                    <span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                      บาท
+                  </Typography>
+                  <Typography
+                    display="block"
+                    variant="caption"
+                    color="textSecondary"
+                    align="center"
+                  >
+                    <span
+                      style={{
+                        color: 'white',
+                        padding: '5px 20px 3px 20px',
+                        fontSize: '12px',
+                        marginRight: '2px',
+                        background: "green"
+                      }}
+                    >
+                      {item.point} point
+                    </span>
+                  </Typography>
+                  <Typography
+                    display="block"
+                    variant="caption"
+                    color="textSecondary"
+                    align="center"
+                  >
+                    <span
+                      style={{
+                        color: 'green',
+                        fontSize: '12px',
+                        marginRight: '2px',
+                      }}
+                    >
+                      คงเหลือ ({item.inStock})
                     </span>
                   </Typography>
                 </Box>

@@ -8,24 +8,23 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
 const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
+  { name: 'Product 1', desc: 'A nice thing', price: '10.00' },
+  { name: 'Product 2', desc: 'Another thing', price: '15.00' },
+  { name: 'Product 3', desc: 'Something else', price: '5.00' },
+  { name: 'ค่าบริการขนส่ง', desc: '', price: 'Free' },
 ];
 const addresses = [
-  '1 Material-UI Drive',
-  'Reactville',
-  'Anytown',
-  '99999',
-  'USA',
+  'The Line Condo',
+  '1333/494',
+  'บางซื่อ',
+  'จอมพล',
+  'กรุงเทพฯ 10900',
 ];
 const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
+  { name: 'ประเภทรับชำระ', detail: 'เงินโอน' },
+  { name: 'บัญชีผู้โอน', detail: 'นายสมชาย เข็มกลัด' },
+  { name: 'เลขที่บัญชี', detail: 'xxxx-xxxx-xxxx-1234' },
+  { name: 'วันที่โอน', detail: '30/01/2020 เวลา 14:50:15น.' },
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -46,7 +45,7 @@ export default function Review() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order summary
+        สรุปยอดสั่งซื้อสินค้า และที่อยู่จัดส่ง
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
@@ -58,9 +57,9 @@ export default function Review() {
         ))}
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
+          <ListItemText primary="ยอดรวมสินค้า" />
           <Typography variant="subtitle1" className={classes.total}>
-            34.06
+            30.00
           </Typography>
         </ListItem>
       </List>
@@ -68,14 +67,14 @@ export default function Review() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Shipping
+            ที่อยู่สำหรับจัดส่ง
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>นายสมชาย เข็มกลัด</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Payment details
+            รายละเอียดการชำระเงิน
           </Typography>
           <Grid container>
             {payments.map(payment => (

@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const useStyles = makeStyles({
   root: {
@@ -35,6 +36,9 @@ const useStyles = makeStyles({
   wrapButtonAction: {
     marginTop: '15px',
   },
+  colRow: {
+    whiteSpace: 'nowrap',
+  }
 });
 
 export default function TableItems(props) {
@@ -87,7 +91,7 @@ export default function TableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-          Promotion Table List
+          Promotion Redeem Point
         </Typography>
         <div className={classes.wrapButtonAction}>
           <Button
@@ -108,10 +112,15 @@ export default function TableItems(props) {
         </div>
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.colRow}>
               <TableCell align="center">No</TableCell>
-              <TableCell align="center">Code</TableCell>
-              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Redeem Code</TableCell>
+              <TableCell align="center">Product Code</TableCell>
+              <TableCell align="center">Product Name</TableCell>
+              <TableCell align="center">Point Redeem</TableCell>
+              <TableCell align="center">Start Time</TableCell>
+              <TableCell align="center">Finish Time</TableCell>
+              <TableCell align="center">Qty Stock</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -125,10 +134,16 @@ export default function TableItems(props) {
                     role="checkbox"
                     tabIndex={-1}
                     key={item.uuid_index}
+                    className={classes.colRow}
                   >
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.code}</TableCell>
-                    <TableCell align="center">{item.name}</TableCell>
+                    <TableCell align="center">{item.redeem_code}</TableCell>
+                    <TableCell align="center">{item.product_code}</TableCell>
+                    <TableCell align="center">{item.product_name}</TableCell>
+                    <TableCell align="center">{item.point_to_redeem}</TableCell>
+                    <TableCell align="center">{moment(item.start_time).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                    <TableCell align="center">{moment(item.finish_time).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                    <TableCell align="center">{item.qty_in_stock}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>

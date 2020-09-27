@@ -6,6 +6,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button } from '@material-ui/core';
 import CardPoint from './CardPoint';
 import messages from './messages';
+import RedeemPage from './RedeemPage';
 
 export default function DahboardContent(props) {
   const { onRefresh, login, profile } = props;
@@ -47,6 +48,9 @@ export default function DahboardContent(props) {
           bg="#07B975"
           fbg="#028A57"
         />
+      </Grid>
+      <Grid item xs={12}>
+        <RedeemPage {...props} />
       </Grid>
     </Grid>
   );

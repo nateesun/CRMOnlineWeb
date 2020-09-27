@@ -10,7 +10,7 @@ export default function AddressForm() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <Grid container spacing={3}>
@@ -19,7 +19,7 @@ export default function AddressForm() {
             required
             id="firstName"
             name="firstName"
-            label="First name"
+            label="ชื่อ"
             fullWidth
             autoComplete="given-name"
           />
@@ -29,7 +29,7 @@ export default function AddressForm() {
             required
             id="lastName"
             name="lastName"
-            label="Last name"
+            label="นามสกุล"
             fullWidth
             autoComplete="family-name"
           />
@@ -39,7 +39,7 @@ export default function AddressForm() {
             required
             id="address1"
             name="address1"
-            label="Address line 1"
+            label="ที่อยู่บรรทัด 1"
             fullWidth
             autoComplete="shipping address-line1"
           />
@@ -48,7 +48,7 @@ export default function AddressForm() {
           <TextField
             id="address2"
             name="address2"
-            label="Address line 2"
+            label="ที่อยู่บรรทัด 2"
             fullWidth
             autoComplete="shipping address-line2"
           />
@@ -58,7 +58,7 @@ export default function AddressForm() {
             required
             id="city"
             name="city"
-            label="City"
+            label="แขวง"
             fullWidth
             autoComplete="shipping address-level2"
           />
@@ -67,7 +67,7 @@ export default function AddressForm() {
           <TextField
             id="state"
             name="state"
-            label="State/Province/Region"
+            label="เขต"
             fullWidth
           />
         </Grid>
@@ -76,7 +76,7 @@ export default function AddressForm() {
             required
             id="zip"
             name="zip"
-            label="Zip / Postal code"
+            label="รหัสไปรษณีย์"
             fullWidth
             autoComplete="shipping postal-code"
           />
@@ -86,7 +86,7 @@ export default function AddressForm() {
             required
             id="country"
             name="country"
-            label="Country"
+            label="จังหวัด"
             fullWidth
             autoComplete="shipping country"
           />
@@ -96,7 +96,7 @@ export default function AddressForm() {
             control={
               <Checkbox color="secondary" name="saveAddress" value="yes" />
             }
-            label="Use this address for payment details"
+            label="ใช้ที่อยู่นี้ กับข้อมูลที่อยู่สำหรับรับชำระ"
           />
         </Grid>
       </Grid>

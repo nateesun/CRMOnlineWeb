@@ -48,7 +48,7 @@ export default function OrderFooter() {
             <div align="right">
               <ShoppingBasket /> (1) -{' '}
               <ButtonLink to="/checkout-orders" color="white">
-                รวม: 36.00 บาท
+                รวม: 30.00 บาท
               </ButtonLink>
             </div>
           </Grid>

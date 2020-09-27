@@ -12,6 +12,8 @@ import Orders from './Orders';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import Thanks from './images/thanks.jpg';
+const QRCode = require("qrcode.react")
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -37,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Orders', 'Address', 'Payment', 'Review'];
+const steps = ['สินค้าที่สั่ง', 'ที่อยู่จัดส่ง', 'ข้อมูลชำระ', 'รีวิว'];
 
 function getStepContent(step) {
   switch (step) {
@@ -71,7 +73,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Confirm Order
+            ขั้นตอนการสั่งซื้อสินค้า
           </Typography>
           <Stepper
             activeStep={activeStep}
@@ -87,26 +89,31 @@ export default function Checkout() {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-                <Divider
-                  style={{
-                    border: '1px solid #eee',
-                    marginBottom: '10px',
-                    marginTop: '10px',
-                  }}
-                />
-                <ButtonLink to="/shopping">
-                  <Button color="primary" variant="contained">
-                    Back to Shopping
-                  </Button>
-                </ButtonLink>
+                <div align="center">
+                  <Typography variant="h5" gutterBottom>
+                    ขอบคุณสำหรับคำสั่งซื้อสินค้า
+                  </Typography>
+                  <img src={Thanks} width="270" height="150" alt="thank for your support" style={{borderRadius: '15px'}} />
+                  <Typography variant="subtitle1" style={{border: '1px solid #eee', padding: '25px', marginTop: '10px'}}>
+                    เลขที่ Order ของคุณคือ <span style={{background: 'yellow', color: 'black'}}>#OD000001</span> <br />
+                    <QRCode value={`http://localhost:3000/orders/OD000001`} /><br />
+                    ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
+                    และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ<br />
+                    ขอขอบคุณค่ะ
+                  </Typography>
+                  <Divider
+                    style={{
+                      border: '1px solid #eee',
+                      marginBottom: '10px',
+                      marginTop: '10px',
+                    }}
+                  />
+                  <ButtonLink to="/shopping">
+                    <Button color="primary" variant="contained">
+                      กลับหน้าสั่งสินค้า
+                    </Button>
+                  </ButtonLink>
+                </div>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -115,7 +122,7 @@ export default function Checkout() {
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
-                      Back
+                      ย้อนกลับ
                     </Button>
                   )}
                   <Button
@@ -124,7 +131,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                   </Button>
                 </div>
               </React.Fragment>

@@ -47,11 +47,31 @@ export default defineMessages({
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Promotion Code',
+    defaultMessage: 'Redeem Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Promotion Name',
+    defaultMessage: 'Product Code',
+  },
+  col3: {
+    id: `${scope}.col3`,
+    defaultMessage: 'Product Name',
+  },
+  col4: {
+    id: `${scope}.col4`,
+    defaultMessage: 'Point Redeem',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Start Time',
+  },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Finish Time',
+  },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Qty in Stock',
   },
   btnSave: {
     id: `${scope}.btnSave`,

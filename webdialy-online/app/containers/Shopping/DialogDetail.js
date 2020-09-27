@@ -62,11 +62,11 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={sampleImg} width="50%" alt="" />
+        <img src={sampleImg} width="250" alt="" />
       </Typography>
       <List>
         <ListItem button>
-          <ListItemText primary="โบโลน่าธรรมดา" secondary="36.00 บาท" />
+          <ListItemText primary="ชื่อสินค้า Product 01" secondary="30.00 บาท" />
         </ListItem>
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem button>
@@ -80,12 +80,12 @@ export default function DialogDetail(props) {
               <FormControlLabel
                 value="warm"
                 control={<Radio color="primary" />}
-                label="อุ่น"
+                label="Option 1"
               />
               <FormControlLabel
                 value="nowarm"
                 control={<Radio color="primary" />}
-                label="ไม่อุ่น"
+                label="Option 2"
               />
             </RadioGroup>
           </FormControl>
@@ -160,7 +160,7 @@ export default function DialogDetail(props) {
                   }}
                   onClick={() => handleClose()}
                 >
-                  ใส่ตระกร้า 36.00 บาท
+                  ใส่ตระกร้า 30.00 บาท
                 </Button>
               </Typography>
             </Grid>
