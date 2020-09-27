@@ -45,7 +45,6 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const query = `UPDATE ${table_name} SET 
-        redeem_code=?,
         product_code=?,
         product_name=?,
         point_to_redeem=?,
@@ -54,7 +53,6 @@ module.exports = {
         qty_in_stock=? 
         WHERE uuid_index=? `
         const result = await pool.query(query, [
-          data.redeem_code,
           data.product_code,
           data.product_name,
           data.point_to_redeem,

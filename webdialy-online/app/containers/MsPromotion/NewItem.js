@@ -91,17 +91,6 @@ const NewItem = props => {
           <Grid container spacing={1}>
             <Grid item xs={3}>
               <Field
-                name="redeem_code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
-                required
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Field
                 name="product_code"
                 component={RenderField}
                 type="text"

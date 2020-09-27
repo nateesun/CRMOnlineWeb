@@ -28,7 +28,7 @@ export function* saveData() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
     } else {
       yield put(actions.createItemError('Cannot create data'));
@@ -46,7 +46,7 @@ export function* updateData() {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.updateItemSuccess(response));
     } else {
       yield put(actions.updateItemError('Cannot update data'));
@@ -66,7 +66,7 @@ export function* deleteData() {
       method: 'DELETE',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.deleteItemSuccess(response));
     } else {
       yield put(actions.deleteItemError('Cannot update data'));
