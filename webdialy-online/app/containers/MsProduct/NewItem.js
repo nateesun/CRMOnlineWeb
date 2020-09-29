@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 
@@ -35,11 +36,18 @@ const useStyles = makeStyles(theme => ({
   topic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa'
+  }
 }));
 
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [img_host, setImgHost] = useState('http://localhost:5000/images')
+  const [file, setFile] = useState(null);
+  const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -65,6 +73,16 @@ const NewItem = props => {
     onInitLoad: PropTypes.func,
     onChangePage: PropTypes.func,
     onCreateItem: PropTypes.func,
+  };
+
+  const onChangeHandler = event => {
+    setShowImg(false);
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
+    setShowImg(true);
   };
 
   return (
@@ -218,6 +236,25 @@ const NewItem = props => {
                 label={<FormattedMessage {...messages.col5} />}
                 required
               />
+            </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} />
+            </Grid>
+            <Grid item xs={6}>
+              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Upload
+              </Button>}
+            </Grid>
+            <Grid item xs={12}>
+            {showImg && (
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img
+                    src={`${img_host}/${file.name}`}
+                    width="250"
+                    alt=""
+                  />
+                </Paper>
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={1}>

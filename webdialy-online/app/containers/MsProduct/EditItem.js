@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
@@ -38,11 +39,17 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa',
+  },
 }));
 
 const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [file, setFile] = useState(null);
+  const { img_path } = props.initialValues;
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -55,6 +62,14 @@ const EditItem = props => {
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
+  };
+
+  const onChangeHandler = event => {
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
   };
 
   return (
@@ -209,6 +224,25 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} />
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => onUploadImageFile()}
+              >
+                Upload
+              </Button>
+            </Grid>
+            {img_path && (
+              <Grid item xs={12}>
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img src={img_path} width="250" alt="" />
+                </Paper>
+              </Grid>
+            )}
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>
