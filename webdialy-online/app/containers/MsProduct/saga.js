@@ -26,10 +26,11 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const file = yield select(selectors.makeSelectFileUpload());
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify({...data, img_path: `${host_upload}/images/${file.name}`}),
     });
     if (response) {
       yield put(actions.createItemSuccess(response));

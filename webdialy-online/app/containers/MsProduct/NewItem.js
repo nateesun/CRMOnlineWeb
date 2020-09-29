@@ -227,16 +227,6 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="img_path"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col5} />}
-                required
-              />
-            </Grid>
             <Grid item xs={6}>
               <input type="file" name="file" onChange={onChangeHandler} />
             </Grid>

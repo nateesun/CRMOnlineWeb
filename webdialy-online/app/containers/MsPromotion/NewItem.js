@@ -131,7 +131,7 @@ const NewItem = props => {
               <Field
                 name="point_to_redeem"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
                 required
@@ -161,7 +161,7 @@ const NewItem = props => {
               <Field
                 name="qty_in_stock"
                 component={RenderField}
-                type="text"
+                type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col6} />}
                 required
@@ -233,7 +233,7 @@ const validate = formValues => {
   if (!formValues.product_name) {
     errors.product_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.point_to_redeem) {
+  if (!formValues.point_to_redeem && formValues.point_to_redeem < 0) {
     errors.point_to_redeem = (
       <FormattedMessage {...messages.col3ShouldNotEmpty} />
     );
@@ -244,7 +244,7 @@ const validate = formValues => {
   if (!formValues.finish_time) {
     errors.finish_time = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
   }
-  if (!formValues.qty_in_stock) {
+  if (!formValues.qty_in_stock && formValues.qty_in_stock < 0) {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   return errors;
