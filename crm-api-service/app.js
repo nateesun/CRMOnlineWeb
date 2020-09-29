@@ -17,6 +17,7 @@ const stockRouter = require("./routes/stock.route")
 const promotionRouter = require("./routes/promotion.route")
 const roleRouter = require("./routes/role.route")
 const memberRouter = require("./routes/member.route")
+const redeemRouter = require("./routes/redeem.route")
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -63,6 +64,7 @@ app.use("/api/employee", basicAuth({ users: { admin: fixPassword } }), employeeR
 app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRouter)
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
+app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter)
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
 app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
 

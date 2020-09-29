@@ -21,7 +21,24 @@ export function* initLoad() {
   }
 }
 
+export function* loadRedeem() {
+  try {
+    const requestURL = `${types.publicPath}/api/redeem`;
+    const response = yield call(request, requestURL, {
+      method: 'GET',
+    });
+    if (response.status === 'Success') {
+      yield put(actions.loadRedeemSuccess(response.data));
+    } else {
+      yield put(actions.loadRedeemError('Not found data'));
+    }
+  } catch (err) {
+    yield put(actions.loadRedeemError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* dashboardSaga() {
   yield takeEvery(types.INIT_LOAD, initLoad);
+  yield takeEvery(types.LOAD_REDEEM, loadRedeem);
 }

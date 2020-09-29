@@ -8,6 +8,7 @@ import * as types from './constants';
 
 export const initialState = {
   profile: {},
+  redeem: [],
   email: '',
   error: '',
 };
@@ -23,6 +24,14 @@ const dashboardReducer = (state = initialState, action) =>
         draft.profile = action.payload;
         break;
       case types.INIT_LOAD_ERROR:
+        draft.error = action.payload;
+        break;
+      case types.LOAD_REDEEM:
+        break;
+      case types.LOAD_REDEEM_SUCCESS:
+        draft.redeem = action.payload;
+        break;
+      case types.LOAD_REDEEM_ERROR:
         draft.error = action.payload;
         break;
     }

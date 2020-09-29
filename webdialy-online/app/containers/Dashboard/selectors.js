@@ -25,5 +25,10 @@ const makeSelectProfile = () =>
     selectDashboardDomain,
     substate => substate.profile,
   );
+const makeSelectRedeem = () =>
+  createSelector(
+    selectDashboardDomain,
+    substate => substate.redeem,
+  );
 
-export { selectDashboardDomain, makeSelectDashboard, makeSelectProfile };
+export { selectDashboardDomain, makeSelectDashboard, makeSelectProfile, makeSelectRedeem };

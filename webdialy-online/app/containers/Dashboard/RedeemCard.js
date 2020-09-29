@@ -14,8 +14,7 @@ import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-  },
+  root: {},
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -46,6 +45,12 @@ const useStyles = makeStyles(theme => ({
       background: '#123456',
     },
   },
+  freeTemplate: {
+    background: '#bde39e',
+  },
+  notFree: {
+    background: '#ffe9d2',
+  },
 }));
 
 export default function RedeemCard(props) {
@@ -71,7 +76,8 @@ export default function RedeemCard(props) {
       <CardMedia
         className={classes.media}
         image={props.img}
-        title="Paella dish" style={{borderRadius: '150px'}}
+        title="Paella dish"
+        style={{ borderRadius: '150px' }}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="span">
@@ -79,16 +85,31 @@ export default function RedeemCard(props) {
             <u className={classes.options}>
               <li>{options.pointUse}</li>
               <li>{options.inStock}</li>
-              <li>{options.status}</li>
+
+              {props.free ? (
+                <li className={classes.freeTemplate}>{options.status}</li>
+              ) : (
+                <li className={classes.notFree}>{options.status}</li>
+              )}
             </u>
           </div>
         </Typography>
       </CardContent>
       <CardActions>
         <Grid container justify="center">
-          <Button variant="contained" className={classes.buttonFooter}>
-            แลกเลย
-          </Button>
+          {props.free ? (
+            <Button variant="contained" className={classes.buttonFooter}>
+              แลกเลย
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              className={classes.buttonFooter}
+              disabled
+            >
+              แลกเลย
+            </Button>
+          )}
         </Grid>
       </CardActions>
     </Card>

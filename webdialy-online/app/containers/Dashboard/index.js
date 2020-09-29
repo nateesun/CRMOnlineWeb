@@ -26,6 +26,7 @@ export function Dashboard(props) {
 
   useEffect(() => {
     props.onRefresh(props.login.email);
+    props.onLoadRedeem();
   }, []);
 
   return props.login && <DashboardContent {...props} />;
@@ -37,6 +38,7 @@ const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
   profile: selects.makeSelectProfile(),
   lineProfile: makeSelectLineLoginProfile(),
+  listRedeem: selects.makeSelectRedeem(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -44,6 +46,9 @@ function mapDispatchToProps(dispatch) {
     onRefresh: email => {
       dispatch(actions.initLoad(email));
     },
+    onLoadRedeem: () => {
+      dispatch(actions.loadRedeem());
+    }
   };
 }
 

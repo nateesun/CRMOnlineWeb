@@ -28,6 +28,20 @@ module.exports = {
       callback(err, { status: "Error", msg: err.message })
     }
   },
+  findShowUser: async (callback) => {
+    console.log("findAll method start:")
+    try {
+      const sql = `select *,
+      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
+      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
+      from ${table_name} 
+      where start_time >= curdate() and finish_time > curdate();`
+      const result = await pool.query(sql)
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   create: async (params, callback) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
