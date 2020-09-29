@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
+import DialogRedeemCode from './DialogRedeemCode';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -56,6 +57,11 @@ const useStyles = makeStyles(theme => ({
 export default function RedeemCard(props) {
   const classes = useStyles();
   const { options } = props;
+  const [showDialog, setShowDialog] = useState(false);
+
+  const showRedeemCode = () => {
+    setShowDialog(true);
+  }
 
   return (
     <Card className={classes.root}>
@@ -98,7 +104,7 @@ export default function RedeemCard(props) {
       <CardActions>
         <Grid container justify="center">
           {props.free ? (
-            <Button variant="contained" className={classes.buttonFooter}>
+            <Button variant="contained" className={classes.buttonFooter} onClick={()=>showRedeemCode()}>
               แลกเลย
             </Button>
           ) : (
@@ -112,6 +118,7 @@ export default function RedeemCard(props) {
           )}
         </Grid>
       </CardActions>
+      {showDialog && <DialogRedeemCode {...props} code={options.code} handleClose={()=>setShowDialog(false)} />}
     </Card>
   );
 }

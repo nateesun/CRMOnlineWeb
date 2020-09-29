@@ -45,10 +45,11 @@ export default function RedeemPage(props) {
               <Grid item xs={12} md={4} key={item.product_code}>
                 <RedeemCard
                   options={{
+                    code: item.product_code,
                     label: item.product_name,
                     expiredPro: 'หมดเขต: '+moment(item.finish_time).format('DD/MM/YYYY'),
                     pointUse: 'ใช้คะแนน: ' + item.point_to_redeem + ' คะแนน',
-                    inStock: 'สินค้าคงเหลือ: ' + item.qty_in_stock,
+                    inStock: 'คงเหลือ: ' + item.qty_in_stock,
                     status:
                       profile.total_score >= item.point_to_redeem
                         ? 'สถานะ: สามารถแลกได้'
@@ -60,21 +61,6 @@ export default function RedeemPage(props) {
                 />
               </Grid>
             ))}
-          {/* <Grid item xs={12} md={4}>
-            <RedeemCard options={options} img={Food1} {...props} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <RedeemCard options={options} img={Food2} {...props} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <RedeemCard options={options} img={Food3} {...props} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <RedeemCard options={options} img={Food4} {...props} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <RedeemCard options={options} img={Food1} {...props} />
-          </Grid> */}
         </Grid>
       </Grid>
     </Grid>

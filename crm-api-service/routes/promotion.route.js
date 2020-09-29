@@ -5,9 +5,7 @@ const Task = require("../models/Promotion.model")
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({
@@ -39,9 +37,7 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
   Task.create(req.body, (err, response)=>{
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({
@@ -56,9 +52,7 @@ router.post("/", (req, res, next) => {
 router.put("/", (req, res, next) => {
   Task.update(req.body, (err, response)=>{
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({
@@ -73,9 +67,7 @@ router.put("/", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   Task.delete(req.params.id, (err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({

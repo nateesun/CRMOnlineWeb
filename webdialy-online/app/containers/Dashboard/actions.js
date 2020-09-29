@@ -43,3 +43,22 @@ export function loadRedeemError(error) {
     error,
   };
 }
+
+export function createRedeem(payload) {
+  return {
+    type: types.CREATE_REDEEM,
+    payload,
+  };
+}
+export function createRedeemSuccess(payload) {
+  return {
+    type: types.CREATE_REDEEM_SUCCESS,
+    payload,
+  };
+}
+export function createRedeemError(error) {
+  return {
+    type: types.CREATE_REDEEM_ERROR,
+    error,
+  };
+}

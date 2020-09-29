@@ -8,14 +8,14 @@ import CardPoint from './CardPoint';
 import messages from './messages';
 import RedeemPage from './RedeemPage';
 
-export default function DahboardContent(props) {
+export default function DashboardContent(props) {
   const { onRefresh, login, profile } = props;
 
   const refreshDataInit = () => {
     onRefresh(login.email);
   };
 
-  DahboardContent.propTypes = {
+  DashboardContent.propTypes = {
     onRefresh: PropTypes.func,
     email: PropTypes.string,
     login: PropTypes.object,
