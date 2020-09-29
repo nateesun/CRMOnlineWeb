@@ -41,6 +41,11 @@ const makeSelectForm = () =>
     selectMsPromotionDomain,
     substate => substate.data,
   );
+const makeSelectFileUpload = () =>
+  createSelector(
+    selectMsPromotionDomain,
+    substate => substate.img_upload,
+  );
 const makeSelectResponse = () =>
   createSelector(
     selectMsPromotionDomain,
@@ -55,4 +60,5 @@ export {
   makeSelectForm,
   makeSelectCurrentId,
   makeSelectResponse,
+  makeSelectFileUpload,
 };

@@ -29,4 +29,8 @@ export default defineMessages({
     id: `${scope}.btnRefresh`,
     defaultMessage: 'Refresh point',
   },
+  topicRedeem: {
+    id: `${scope}.topicRedeem`,
+    defaultMessage: 'Redeem Promotion List Item',
+  },
 });

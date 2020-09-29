@@ -26,3 +26,7 @@ export const UPDATE_ITEM_ERROR = 'app/MsPromotion/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsPromotion/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsPromotion/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsPromotion/DELETE_ITEM_ERROR';
+
+export const UPLOAD_IMG = 'app/MsPromotion/UPLOAD_IMG';
+export const UPLOAD_IMG_SUCCESS = 'app/MsPromotion/UPLOAD_IMG_SUCCESS';
+export const UPLOAD_IMG_ERROR = 'app/MsPromotion/UPLOAD_IMG_ERROR';

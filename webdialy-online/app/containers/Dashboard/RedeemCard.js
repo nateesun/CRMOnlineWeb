@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
@@ -12,10 +12,10 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
+import DialogRedeemCode from './DialogRedeemCode';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-  },
+  root: {},
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -46,11 +46,22 @@ const useStyles = makeStyles(theme => ({
       background: '#123456',
     },
   },
+  freeTemplate: {
+    background: '#bde39e',
+  },
+  notFree: {
+    background: '#ffe9d2',
+  },
 }));
 
 export default function RedeemCard(props) {
   const classes = useStyles();
   const { options } = props;
+  const [showDialog, setShowDialog] = useState(false);
+
+  const showRedeemCode = () => {
+    setShowDialog(true);
+  }
 
   return (
     <Card className={classes.root}>
@@ -71,7 +82,8 @@ export default function RedeemCard(props) {
       <CardMedia
         className={classes.media}
         image={props.img}
-        title="Paella dish" style={{borderRadius: '150px'}}
+        title="Paella dish"
+        style={{ borderRadius: '150px' }}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="span">
@@ -79,18 +91,34 @@ export default function RedeemCard(props) {
             <u className={classes.options}>
               <li>{options.pointUse}</li>
               <li>{options.inStock}</li>
-              <li>{options.status}</li>
+
+              {props.free ? (
+                <li className={classes.freeTemplate}>{options.status}</li>
+              ) : (
+                <li className={classes.notFree}>{options.status}</li>
+              )}
             </u>
           </div>
         </Typography>
       </CardContent>
       <CardActions>
         <Grid container justify="center">
-          <Button variant="contained" className={classes.buttonFooter}>
-            แลกเลย
-          </Button>
+          {props.free ? (
+            <Button variant="contained" className={classes.buttonFooter} onClick={()=>showRedeemCode()}>
+              แลกเลย
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              className={classes.buttonFooter}
+              disabled
+            >
+              แลกเลย
+            </Button>
+          )}
         </Grid>
       </CardActions>
+      {showDialog && <DialogRedeemCode {...props} code={options.code} handleClose={()=>setShowDialog(false)} />}
     </Card>
   );
 }

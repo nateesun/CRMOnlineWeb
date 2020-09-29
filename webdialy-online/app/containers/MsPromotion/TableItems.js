@@ -114,7 +114,6 @@ export default function TableItems(props) {
           <TableHead>
             <TableRow className={classes.colRow}>
               <TableCell align="center">No</TableCell>
-              <TableCell align="center">Redeem Code</TableCell>
               <TableCell align="center">Product Code</TableCell>
               <TableCell align="center">Product Name</TableCell>
               <TableCell align="center">Point Redeem</TableCell>
@@ -137,12 +136,11 @@ export default function TableItems(props) {
                     className={classes.colRow}
                   >
                     <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.redeem_code}</TableCell>
                     <TableCell align="center">{item.product_code}</TableCell>
                     <TableCell align="center">{item.product_name}</TableCell>
                     <TableCell align="center">{item.point_to_redeem}</TableCell>
-                    <TableCell align="center">{moment(item.start_time).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
-                    <TableCell align="center">{moment(item.finish_time).format('DD/MM/YYYY HH:mm:ss')}</TableCell>
+                    <TableCell align="center">{moment(item.start_time).format('DD/MM/YYYY')}</TableCell>
+                    <TableCell align="center">{moment(item.finish_time).format('DD/MM/YYYY')}</TableCell>
                     <TableCell align="center">{item.qty_in_stock}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
