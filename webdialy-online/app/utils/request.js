@@ -5,6 +5,8 @@
  *
  * @return {object}          The parsed JSON from the request
  */
+import fetchWithTimeout from './fetchWithTimeout';
+
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
@@ -44,11 +46,14 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  const headers = {
+  let headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
   };
+  if (options.headers) {
+    headers = options.headers;
+  }
   return fetch(url, { ...options, headers })
     .then(checkStatus)
     .then(parseJSON);

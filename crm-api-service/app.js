@@ -24,6 +24,7 @@ const nocache = require('nocache');
 
 const fixPassword = 'softpos2013';
 
+
 const app = express()
 app.use(helmet())
 app.use(helmet.xssFilter());

@@ -50,7 +50,8 @@ module.exports = {
         point_to_redeem=?,
         start_time=?,
         finish_time=?,
-        qty_in_stock=? 
+        qty_in_stock=?,
+        img_path=? 
         WHERE uuid_index=? `
         const result = await pool.query(query, [
           data.product_code,
@@ -59,6 +60,7 @@ module.exports = {
           data.start_time,
           data.finish_time,
           data.qty_in_stock,
+          data.img_path,
           data.uuid_index
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })

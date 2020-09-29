@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import messages from './messages';
@@ -36,11 +37,18 @@ const useStyles = makeStyles(theme => ({
   topic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa'
+  }
 }));
 
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [img_host, setImgHost] = useState('http://localhost:5000/images')
+  const [file, setFile] = useState(null);
+  const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -68,6 +76,16 @@ const NewItem = props => {
     onCreateItem: PropTypes.func,
   };
 
+  const onChangeHandler = event => {
+    setShowImg(false);
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
+    setShowImg(true);
+  };
+
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert
@@ -89,9 +107,19 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={3}>
+            <Grid item xs={4} md={3}>
               <Field
                 name="product_code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col1} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <Field
+                name="product_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -99,9 +127,9 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4} md={3}>
               <Field
-                name="product_name"
+                name="point_to_redeem"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -109,19 +137,19 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
-                name="point_to_redeem"
-                component={RenderField}
-                type="text"
+                name="start_time"
+                component={DateInput}
+                type="date"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
-                name="start_time"
+                name="finish_time"
                 component={DateInput}
                 type="date"
                 margin="normal"
@@ -129,25 +157,34 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
-              <Field
-                name="finish_time"
-                component={DateInput}
-                type="date"
-                margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="qty_in_stock"
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col7} />}
+                label={<FormattedMessage {...messages.col6} />}
                 required
               />
+            </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} />
+            </Grid>
+            <Grid item xs={6}>
+              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Upload
+              </Button>}
+            </Grid>
+            <Grid item xs={12}>
+            {showImg && (
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img
+                    src={`${img_host}/${file.name}`}
+                    width="250"
+                    alt=""
+                  />
+                </Paper>
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={1}>
@@ -190,11 +227,25 @@ const NewItem = props => {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.code) {
-    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.product_code) {
+    errors.product_code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.name) {
-    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.product_name) {
+    errors.product_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  }
+  if (!formValues.point_to_redeem) {
+    errors.point_to_redeem = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
+  }
+  if (!formValues.start_time) {
+    errors.start_time = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  }
+  if (!formValues.finish_time) {
+    errors.finish_time = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+  }
+  if (!formValues.qty_in_stock) {
+    errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   return errors;
 };
