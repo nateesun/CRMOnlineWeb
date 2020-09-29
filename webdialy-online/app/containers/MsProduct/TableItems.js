@@ -35,6 +35,9 @@ const useStyles = makeStyles({
   wrapButtonAction: {
     marginTop: '15px',
   },
+  colRow: {
+    whiteSpace: 'nowrap',
+  }
 });
 
 export default function TableItems(props) {
@@ -108,12 +111,21 @@ export default function TableItems(props) {
         </div>
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.colRow}>
               <TableCell align="center">No</TableCell>
               <TableCell align="center">Code</TableCell>
-              <TableCell align="center">Name</TableCell>
+              <TableCell align="left">Name</TableCell>
               <TableCell align="center">Unit</TableCell>
               <TableCell align="center">Group</TableCell>
+              <TableCell align="right">Point</TableCell>
+              <TableCell align="center">Stock</TableCell>
+              <TableCell align="right">Price_E</TableCell>
+              <TableCell align="right">Price_T</TableCell>
+              <TableCell align="right">Price_D</TableCell>
+              <TableCell align="right">Max Stock</TableCell>
+              <TableCell align="right">Min Stock</TableCell>
+              <TableCell align="center">Unit Stock</TableCell>
+              <TableCell align="center">Path</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -126,13 +138,22 @@ export default function TableItems(props) {
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={item.uuid_index}
+                    key={item.uuid_index} className={classes.colRow}
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.code}</TableCell>
                     <TableCell align="center">{item.name}</TableCell>
-                    <TableCell align="center">{item.unit_sale}</TableCell>
-                    <TableCell align="center">{item.group_code}</TableCell>
+                    <TableCell align="center">{item.unit_code_sale}</TableCell>
+                    <TableCell align="center">{item.product_group_code}</TableCell>
+                    <TableCell align="center">{item.point}</TableCell>
+                    <TableCell align="center">{item.stock_code}</TableCell>
+                    <TableCell align="center">{item.price_e}</TableCell>
+                    <TableCell align="center">{item.price_t}</TableCell>
+                    <TableCell align="center">{item.price_d}</TableCell>
+                    <TableCell align="center">{item.max_stock}</TableCell>
+                    <TableCell align="center">{item.min_stock}</TableCell>
+                    <TableCell align="center">{item.unit_code_stock}</TableCell>
+                    <TableCell align="center">{item.img_path}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>
