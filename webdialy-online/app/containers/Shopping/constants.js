@@ -13,3 +13,7 @@ export const LOAD_PRODUCT_ERROR = 'app/Shopping/LOAD_PRODUCT_ERROR';
 export const CREATE_ITEM_CART = 'app/Shopping/CREATE_ITEM_CART';
 export const CREATE_ITEM_CART_SUCCESS = 'app/Shopping/CREATE_ITEM_CART_SUCCESS';
 export const CREATE_ITEM_CART_ERROR = 'app/Shopping/CREATE_ITEM_CART_ERROR';
+
+export const UPDATE_ITEM_CART = 'app/Shopping/UPDATE_ITEM_CART';
+export const UPDATE_ITEM_CART_SUCCESS = 'app/Shopping/UPDATE_ITEM_CART_SUCCESS';
+export const UPDATE_ITEM_CART_ERROR = 'app/Shopping/UPDATE_ITEM_CART_ERROR';

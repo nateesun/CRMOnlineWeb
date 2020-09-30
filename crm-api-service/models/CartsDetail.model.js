@@ -4,6 +4,16 @@ const pool = require("../mysql-connect")
 const table_name = "carts_detail"
 
 module.exports = {
+  findByProduct: async (product_code, cart_no, callback) => {
+    console.log("findByProduct method start:")
+    try {
+      const sql = `select * from ${table_name} where product_code=? and cart_no=?;`
+      const result = await pool.query(sql, [product_code, cart_no])
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   findById: async (id, callback) => {
     console.log("findById method start:")
     try {
@@ -53,11 +63,30 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET col1=?, col2=?, col3=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} 
+        SET 
+        cart_no=?,
+        product_code=?,
+        product_name=?,
+        product_price=?,
+        product_unit=?,
+        qty=?,
+        total_amount=?,
+        options=?,
+        special_text=?,
+        point =? 
+        WHERE uuid_index=? `
         const result = await pool.query(query, [
-          data.col1,
-          data.col2,
-          data.col3,
+          data.cart_no,
+          data.product_code,
+          data.product_name,
+          data.product_price,
+          data.product_unit,
+          data.qty,
+          data.total_amount,
+          data.options,
+          data.special_text,
+          data.point,
           data.uuid_index
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })

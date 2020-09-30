@@ -93,6 +93,33 @@ const shoppingReducer = (state = initialState, action) =>
         draft.response.status = 'Create_Cart_Error';
         draft.response.message = 'Create cart error!';
         break;
+      case constants.UPDATE_ITEM_CART:
+        draft.itemCart.carts = {
+          cart_no: action.payload.cart_no, // generate at service
+        };
+        draft.itemCart.carts_detail = {
+          uuid_index: v4(),
+          cart_no: action.payload.cart_no,
+          product_code: action.payload.code,
+          product_name: action.payload.name,
+          product_price: action.payload.price_d,
+          product_unit: action.payload.unit_code_sale,
+          qty: action.payload.qty,
+          total_amount: action.payload.total_amount,
+          options: action.payload.options,
+          special_text: action.payload.special_text,
+          point: action.payload.point_total,
+        }
+        break;
+      case constants.UPDATE_ITEM_CART_SUCCESS:
+        draft.cart = action.payload;
+        draft.response.status = 'Update_Cart_Success';
+        draft.response.message = 'Update cart success';
+        break;
+      case constants.UPDATE_ITEM_CART_ERROR:
+        draft.response.status = 'Update_Cart_Error';
+        draft.response.message = 'Update cart error!';
+        break;
     }
   });
 

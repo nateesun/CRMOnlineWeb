@@ -45,26 +45,26 @@ export default function OrderFooter(props) {
       <Toolbar>
         <Grid container>
           <Grid item xs={12}>
-            <div align="right">
-              <ShoppingBasket style={{ marginRight: '5px' }} />
-              <span style={{ marginRight: '10px' }}>
-                รหัสสั่งซื้อสินค้า:
-                <span
-                  style={{
-                    background: 'yellow',
-                    padding: '5px',
-                    color: 'black',
-                  }}
-                >
-                  {props.cart.cart_no}
+            <ButtonLink to="/checkout-orders" color="white">
+              <div align="right">
+                <ShoppingBasket style={{ marginRight: '5px' }} />
+                <span style={{ marginRight: '10px' }}>
+                  รหัสสั่งซื้อสินค้า:
+                  <span
+                    style={{
+                      background: 'yellow',
+                      padding: '5px',
+                      color: 'black',
+                    }}
+                  >
+                    {props.cart.cart_no}
+                  </span>
+                  |
                 </span>
-                |
-              </span>
-              <span>QTY {props.cart.total_item} | </span>
-              <ButtonLink to="/checkout-orders" color="white">
+                <span>QTY {props.cart.total_item} | </span>
                 TOTAL: {props.cart.total_amount} บาท
-              </ButtonLink>
-            </div>
+              </div>
+            </ButtonLink>
           </Grid>
         </Grid>
       </Toolbar>

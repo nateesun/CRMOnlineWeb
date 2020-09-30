@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DialogDetail(props) {
-  const { open, handleClose, Transition, item, profile } = props;
+  const { open, handleClose, Transition, item, profile, cart } = props;
   const [qty, setQty] = useState(1);
   const [options, setOptions] = useState('');
   const [special_text, setSpecialText] = useState('');
@@ -46,21 +46,34 @@ export default function DialogDetail(props) {
   };
 
   const saveCartItem = () => {
-    props.onAddCartItem({
-      ...item, 
-      qty, 
-      options, 
-      special_text,
-      total_amount: item.price_d * qty,
-      point_total: item.point * qty,
-      member_code: profile.code,
-    });
-    handleClose();
+    if (cart.cart_no) {
+      props.onUpdateCartItem({
+        ...item,
+        qty,
+        options,
+        special_text,
+        total_amount: item.price_d * qty,
+        point_total: item.point * qty,
+        member_code: profile.code,
+        cart_no: cart.cart_no,
+      });
+    } else {
+      props.onAddCartItem({
+        ...item,
+        qty,
+        options,
+        special_text,
+        total_amount: item.price_d * qty,
+        point_total: item.point * qty,
+        member_code: profile.code,
+      });
+    }
+    handleCloseDialog();
   };
 
   const handleQty = qtyAmt => {
     setQty(qtyAmt);
-  }
+  };
 
   const addQty = qtyAmt => {
     setQty(qtyAmt + 1);
@@ -101,9 +114,12 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={item.img_path} width="250" alt="" /><br />
-        options: {options}<br />
-        special_text: {special_text}<br />
+        <img src={item.img_path} width="250" alt="" />
+        <br />
+        options: {options}
+        <br />
+        special_text: {special_text}
+        <br />
       </Typography>
       <List>
         <ListItem button>
@@ -115,10 +131,29 @@ export default function DialogDetail(props) {
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem button>
           <FormControl component="fieldset">
-            <RadioGroup row aria-label="position" name="position" defaultValue="top" value={options} onChange={e=>setOptions(e.target.value)}>
-              <FormControlLabel value="" control={<Radio color="primary" />} label="No option" />
-              <FormControlLabel value="opt1" control={<Radio color="primary" />} label="Option 1" />
-              <FormControlLabel value="opt2" control={<Radio color="primary" />} label="Option 2" />
+            <RadioGroup
+              row
+              aria-label="position"
+              name="position"
+              defaultValue="top"
+              value={options}
+              onChange={e => setOptions(e.target.value)}
+            >
+              <FormControlLabel
+                value=""
+                control={<Radio color="primary" />}
+                label="No option"
+              />
+              <FormControlLabel
+                value="opt1"
+                control={<Radio color="primary" />}
+                label="Option 1"
+              />
+              <FormControlLabel
+                value="opt2"
+                control={<Radio color="primary" />}
+                label="Option 2"
+              />
             </RadioGroup>
           </FormControl>
         </ListItem>
@@ -129,7 +164,7 @@ export default function DialogDetail(props) {
             label="ข้อความพิเศษ"
             style={{ width: '100%' }}
             value={special_text}
-            onChange={e=>setSpecialText(e.target.value)}
+            onChange={e => setSpecialText(e.target.value)}
           />
         </ListItem>
         <ListItem>
@@ -154,7 +189,7 @@ export default function DialogDetail(props) {
               <Typography align="center">
                 <input
                   type="number"
-                  value={qty||1}
+                  value={qty || 1}
                   style={{
                     border: '0px solid #eee',
                     width: '100px',
