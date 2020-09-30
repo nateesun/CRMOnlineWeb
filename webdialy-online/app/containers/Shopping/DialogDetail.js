@@ -17,7 +17,6 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import sampleImg from '../../images/example/food1.jpg';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -62,7 +61,7 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={sampleImg} width="250" alt="" />
+        <img src="http://localhost:5000/images/food1.jpg" width="250" alt="" />
       </Typography>
       <List>
         <ListItem button>

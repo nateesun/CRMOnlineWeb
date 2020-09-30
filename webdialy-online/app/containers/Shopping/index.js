@@ -15,13 +15,13 @@ import makeSelectShopping from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function Shopping() {
+export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });
   useInjectSaga({ key: 'shopping', saga });
 
   return (
     <div style={{ width: '100%' }}>
-      <ShoppingContent />
+      <ShoppingContent {...props} />
     </div>
   );
 }

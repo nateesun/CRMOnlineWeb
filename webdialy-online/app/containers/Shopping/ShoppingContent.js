@@ -15,15 +15,15 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const getImageRandom = (id) => {
   if(id === 0) {
-    return require(`../../images/example/food1.jpg`);
+    return `http://localhost:5000/images/food1.jpg`;
   }
-  return require(`../../images/example/food${id}.jpg`);
+  return `http://localhost:5000/images/food${id}.jpg`;
 }
 
 const data = [];
 for (let i = 0; i < 40; i += 1) {
   const randomNumber = Math.floor(Math.random() * Math.floor(7));
-  let imgShow = getImageRandom(randomNumber);
+  const imgShow = getImageRandom(randomNumber);
   data.push({
     id: i + 1,
     src: imgShow,
@@ -34,7 +34,7 @@ for (let i = 0; i < 40; i += 1) {
   });
 }
 
-function Media() {
+const Media = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -50,14 +50,16 @@ function Media() {
       {/* <TopPromotion type="fade" /> */}
       {/* <GridCategory /> */}
       {/* <GroupProduct /> */}
-      <SearchProduct />
-      <ProductList
+      <SearchProduct {...props} />
+      <ProductList 
+        {...props}
         handleClickOpen={() => handleClickOpen()}
         data={data}
         topic="Product all items 2020"
       />
-      <OrderFooter />
+      <OrderFooter {...props} />
       <DialogDetail
+        {...props}
         open={open}
         handleClose={() => handleClose()}
         Transition={Transition}
@@ -66,10 +68,10 @@ function Media() {
   );
 }
 
-export default function ShoppingContent() {
+export default function ShoppingContent(props) {
   return (
     <Box overflow="hidden">
-      <Media />
+      <Media {...props} />
     </Box>
   );
 }

@@ -6,7 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import food1 from '../../images/example/food1.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +36,7 @@ export default function RecipeReviewCard() {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image={food1} title="Paella dish" />
+      <CardMedia className={classes.media} image="http://localhost:5000/images/food1.jpg" title="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           aaa
