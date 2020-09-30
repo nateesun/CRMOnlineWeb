@@ -31,10 +31,28 @@ const makeSelectCartsNo = () =>
     selectCheckoutDomain,
     substate => substate.cart_no,
   );
-
+const makeSelectMemberCode = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.member_code,
+  );
+const makeSelectMemberShipping = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.memberShipping,
+  );
+const makeSelectFileUpload = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.img_upload,
+  );
+  
 export {
   selectCheckoutDomain,
   makeSelectCheckout,
   makeSelectCarts,
   makeSelectCartsNo,
+  makeSelectMemberCode,
+  makeSelectMemberShipping,
+  makeSelectFileUpload,
 };

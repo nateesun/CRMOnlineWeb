@@ -1,14 +1,14 @@
-/* {{properCase name}}.model code generator by automatic script */
+/* MemberShipping.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
-const table_name = "{{lowerCase name}}"
+const table_name = "member_shipping"
 
 module.exports = {
-  findById: async (id, callback) => {
+  findByMemberCode: async (member_code, callback) => {
     console.log("findById method start:")
     try {
-      const sql = `select * from ${table_name} where uuid_index=?;`
-      const result = await pool.query(sql, [id])
+      const sql = `select * from ${table_name} where member_code=?;`
+      const result = await pool.query(sql, [member_code])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })

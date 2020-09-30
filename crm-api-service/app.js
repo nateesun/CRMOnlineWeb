@@ -21,6 +21,7 @@ const redeemRouter = require("./routes/redeem.route")
 
 // router for shopping
 const cartsRouter = require("./routes/carts.route")
+const memberShippingRouter = require("./routes/member_shipping.route")
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -73,6 +74,7 @@ app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRoute
 
 // order shopping
 app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)
+app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

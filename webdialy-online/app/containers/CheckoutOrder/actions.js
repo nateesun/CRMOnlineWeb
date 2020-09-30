@@ -24,3 +24,42 @@ export function loadCartError(payload) {
     payload,
   };
 }
+export function loadMemberShipping(payload) {
+  return {
+    type: constants.LOAD_MEMBER_SHIPPING,
+    payload,
+  };
+}
+export function loadMemberShippingSuccess(payload) {
+  return {
+    type: constants.LOAD_MEMBER_SHIPPING_SUCCESS,
+    payload,
+  };
+}
+export function loadMemberShippingError(payload) {
+  return {
+    type: constants.LOAD_MEMBER_SHIPPING_ERROR,
+    payload,
+  };
+}
+
+export function uploadImage(payload) {
+  return {
+    type: constants.UPLOAD_IMG,
+    payload,
+  };
+}
+
+export function uploadImageSuccess(payload) {
+  return {
+    type: constants.UPLOAD_IMG_SUCCESS,
+    payload,
+  };
+}
+
+export function uploadImageError(payload) {
+  return {
+    type: constants.UPLOAD_IMG_ERROR,
+    payload,
+  };
+}

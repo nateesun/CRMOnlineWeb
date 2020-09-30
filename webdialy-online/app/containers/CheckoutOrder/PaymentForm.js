@@ -1,67 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
-import Slip from '../../images/example/slip.jpg';
+import { Field, reduxForm } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+import { makeStyles } from '@material-ui/core/styles';
+import RenderField from 'components/RenderField';
+import messages from './messages';
 
-export default function PaymentForm() {
+const useStyles = makeStyles(theme => ({
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+}));
+
+const PaymentForm = (props) => {
+  const classes = useStyles();
+  const { handleSubmit, pristine, reset, submitting } = props;
+  const [img_host, setImgHost] = useState('http://localhost:5000/images')
+  const [file, setFile] = useState(null);
+  const [showImg, setShowImg] = useState(false);
+
+  const onValidated = formValues => {
+    
+  };
+
+  const onChangeHandler = event => {
+    setShowImg(false);
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
+    setShowImg(true);
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         ข้อมูลการรับชำระ
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardName"
-            label="Name on card"
-            fullWidth
-            autoComplete="cc-name"
-          />
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="from_account_no"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="เลขที่บัญชีผู้โอน"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="to_account_no"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="เลขที่บัญชีผู้รับโอน"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="transfer_date"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="วันที่ เวลาที่โอน dd/MM/yyyy HH:mm:ss"
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            อัพโหลดไฟล์ Slip <input type="file" name="file" onChange={onChangeHandler} />
+            <button onClick={() => onUploadImageFile()}>Upload Slip</button>
+          </Grid>
+          <Grid item xs={12}>
+            {showImg && <div align="center">
+              <img src={`${img_host}/${file.name}`} width={150} alt="" /><br /><br />
+               รูปสลิปที่โอนเงิน<br /><br />
+            </div>}
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="เลขที่บัญชีผู้โอน"
-            fullWidth
-            autoComplete="cc-number"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="expDate"
-            label="เลขที่บัญชีผู้รับโอน"
-            fullWidth
-            autoComplete="cc-exp"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="วันที่ เวลาที่โอน"
-            helperText="ข้อมูลนี้จะถูกตรวจสอบโดยพนักงานอีกครั้ง"
-            fullWidth
-            autoComplete="cc-csc"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          อัพโหลดไฟล์ Slip <input type="file" />
-        </Grid>
-        <Grid item xs={12}>
-          <div align="center">
-            <img src={Slip} width={150} alt="" /><br /><br />
-            ตัวอย่าง Slip ที่โอนเงิน<br />
-          </div>
-        </Grid>
-      </Grid>
+      </form>
     </React.Fragment>
   );
 }
+
+const validate = formValues => {
+  const errors = {};
+  if (!formValues.from_account_no) {
+    errors.from_account_no = <FormattedMessage {...messages.fromAccShouldNotEmpty} />;
+  }
+  if (!formValues.to_account_no) {
+    errors.to_account_no = <FormattedMessage {...messages.toAccShouldNotEmpty} />;
+  }
+  if (!formValues.transfer_date) {
+    errors.transfer_date = <FormattedMessage {...messages.transferDateShouldNotEmpty} />;
+  }
+  return errors;
+};
+
+export default reduxForm({
+    form: 'paymentForm',
+    validate,
+  })(PaymentForm);

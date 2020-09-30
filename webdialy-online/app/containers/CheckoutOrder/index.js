@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -23,21 +24,28 @@ export function Checkout(props) {
 
   useEffect(()=>{
     props.initLoadCart('SP00031');
-  }, [])
+    props.initLoadMemberShipping('M00001');
+  }, []);
 
   return <CheckoutContent {...props} />;
 }
 
-Checkout.propTypes = {};
+Checkout.propTypes = {
+  initLoadCart: PropTypes.func,
+  initLoadMemberShipping: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   checkout: selectors.makeSelectCheckout(),
   cartList: selectors.makeSelectCarts(),
+  shipping: selectors.makeSelectMemberShipping(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
+    initLoadMemberShipping: member_code => dispatch(actions.loadMemberShipping(member_code)),
+    onUploadImage: (file) => dispatch(actions.uploadImage(file)),
   };
 }
 

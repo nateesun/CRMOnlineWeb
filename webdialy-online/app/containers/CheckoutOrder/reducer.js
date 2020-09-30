@@ -9,6 +9,9 @@ import * as constants from './constants';
 export const initialState = {
   cart_no: '',
   cartList: [],
+  member_code: '',
+  memberShipping: {},
+  img_upload: null,
   response: {
     status: '',
     message: '',
@@ -30,6 +33,29 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.LOAD_CART_ERROR:
         draft.response.status = 'Load_Order_Error';
         draft.response.message = 'Load order error!';
+        break;
+      case constants.LOAD_MEMBER_SHIPPING:
+        draft.member_code = action.payload;
+        break;
+      case constants.LOAD_MEMBER_SHIPPING_SUCCESS:
+        draft.memberShipping = action.payload;
+        draft.response.status = 'Load_Member_Shipping_Success';
+        draft.response.message = 'Load member shipping success';
+        break;
+      case constants.LOAD_MEMBER_SHIPPING_ERROR:
+        draft.response.status = 'Load_Member_Shipping_Error';
+        draft.response.message = 'Load member shipping error!';
+        break;
+      case constants.UPLOAD_IMG:
+        draft.img_upload = action.payload;
+        break;
+      case constants.UPLOAD_IMG_SUCCESS:
+        draft.response.status = 'Upload_Success';
+        draft.response.message = 'Upload file image success';
+        break;
+      case constants.UPLOAD_IMG_ERROR:
+        draft.response.status = 'Upload_Error';
+        draft.response.message = 'Upload file image error!';
         break;
     }
   });

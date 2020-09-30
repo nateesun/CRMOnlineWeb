@@ -32,7 +32,7 @@ module.exports = {
     const actions = [
       {
         type: 'add',
-        path: '../../routes/{{properCase name}}.route.js',
+        path: '../../routes/{{lowerCase name}}.route.js',
         templateFile: './routes/index.js.hbs',
         abortOnFail: true,
       }
