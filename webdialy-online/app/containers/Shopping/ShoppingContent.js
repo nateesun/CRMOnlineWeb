@@ -15,9 +15,11 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const Media = (props) => {
   const [open, setOpen] = useState(false);
+  const [item, setItem] = useState(null);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (item) => {
     setOpen(true);
+    setItem(item);
   };
 
   const handleClose = () => {
@@ -32,17 +34,18 @@ const Media = (props) => {
       <SearchProduct {...props} />
       <ProductList 
         {...props}
-        handleClickOpen={() => handleClickOpen()}
+        handleClickOpen={item => handleClickOpen(item)}
         data={props.productList}
         topic="Product all items 2020"
       />
       <OrderFooter {...props} />
-      <DialogDetail
+      {item && <DialogDetail
         {...props}
         open={open}
+        item={item}
         handleClose={() => handleClose()}
         Transition={Transition}
-      />
+      />}
     </div>
   );
 }

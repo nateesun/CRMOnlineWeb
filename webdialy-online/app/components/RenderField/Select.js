@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function SelectField({ input, label, meta: { touched, error } }) {
   const classes = useStyles();
-  const [prefix, setPrefix] = React.useState('');
+  const [prefix, setPrefix] = useState('');
 
   const handleChange = event => {
     setPrefix(event.target.value);

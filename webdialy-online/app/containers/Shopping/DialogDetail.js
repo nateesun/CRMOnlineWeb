@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -34,26 +34,51 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DialogDetail(props) {
-  const { open, handleClose, Transition } = props;
+  const { open, handleClose, Transition, item } = props;
+  const [qty, setQty] = useState(1);
   const classes = useStyles();
+
+  const handleCloseDialog = () => {
+    handleClose();
+    setQty(1);
+  };
+
+  const handleQty = qtyAmt => {
+    setQty(qtyAmt);
+  }
+
+  const addQty = qtyAmt => {
+    setQty(qtyAmt + 1);
+    if (item.in_stock && qtyAmt + 1 > item.in_stock) {
+      setQty(item.in_stock);
+    }
+  };
+  const minusQty = qtyAmt => {
+    setQty(qtyAmt - 1);
+    if (qtyAmt - 1 < 1) {
+      setQty(1);
+    }
+  };
+
   DialogDetail.propTypes = {
     open: PropTypes.any,
     handleClose: PropTypes.func,
     Transition: PropTypes.any,
+    item: PropTypes.object,
   };
 
   return (
     <Dialog
       fullScreen
       open={open}
-      onClose={handleClose}
+      onClose={() => handleCloseDialog()}
       TransitionComponent={Transition}
     >
       <Toolbar>
         <Typography variant="h6" className={classes.title} />
         <IconButton
           edge="start"
-          onClick={handleClose}
+          onClick={() => handleCloseDialog()}
           aria-label="close"
           style={{ color: 'black' }}
         >
@@ -61,11 +86,14 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src="http://localhost:5000/images/food1.jpg" width="250" alt="" />
+        <img src={item.img_path} width="250" alt="" />
       </Typography>
       <List>
         <ListItem button>
-          <ListItemText primary="ชื่อสินค้า Product 01" secondary="30.00 บาท" />
+          <ListItemText
+            primary={item.name}
+            secondary={`ราคา ${item.price_d} บาท`}
+          />
         </ListItem>
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem button>
@@ -109,6 +137,7 @@ export default function DialogDetail(props) {
                     fontSize: '18px',
                     fontWeight: 'bold',
                   }}
+                  onClick={() => minusQty(qty)}
                 >
                   -
                 </Button>
@@ -118,7 +147,7 @@ export default function DialogDetail(props) {
               <Typography align="center">
                 <input
                   type="number"
-                  value="1"
+                  value={qty||1}
                   style={{
                     border: '0px solid #eee',
                     width: '100px',
@@ -127,6 +156,7 @@ export default function DialogDetail(props) {
                     fontSize: '22px',
                     fontWeight: 'bold',
                   }}
+                  onChange={e => handleQty(e.target.value)}
                 />
               </Typography>
             </Grid>
@@ -140,6 +170,7 @@ export default function DialogDetail(props) {
                     fontSize: '18px',
                     fontWeight: 'bold',
                   }}
+                  onClick={() => addQty(qty)}
                 >
                   +
                 </Button>
@@ -157,9 +188,9 @@ export default function DialogDetail(props) {
                     color: 'white',
                     width: '80%',
                   }}
-                  onClick={() => handleClose()}
+                  onClick={() => handleCloseDialog()}
                 >
-                  ใส่ตระกร้า 30.00 บาท
+                  ใส่ตระกร้า {qty} รายการ = {item.price_d * qty} บาท
                 </Button>
               </Typography>
             </Grid>

@@ -25,7 +25,7 @@ export default function ProductList(props) {
           <Grid item xs={6} sm={4} md={3} lg={2} key={item.code}>
             <div align="center" style={{marginBottom: '4px'}}>
               <Paper elevation={3}>
-                <Box key={item.code} onClick={() => handleClickOpen()}>
+                <Box key={item.code} onClick={() => handleClickOpen(item)}>
                   <img
                     style={{ height: 118, width: '150px', marginBottom: '8px' }}
                     alt={item.name}
@@ -90,7 +90,7 @@ export default function ProductList(props) {
                           marginRight: '2px',
                         }}
                       >
-                        คงเหลือ ({`${item.in_stock}/${item.max_stock}`})
+                        คงเหลือ ({`${item.in_stock|0}/${item.max_stock}`})
                       </span>
                     </Typography>
                   </Box>
