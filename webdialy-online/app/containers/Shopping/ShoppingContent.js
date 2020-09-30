@@ -13,27 +13,6 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const getImageRandom = (id) => {
-  if(id === 0) {
-    return `http://localhost:5000/images/food1.jpg`;
-  }
-  return `http://localhost:5000/images/food${id}.jpg`;
-}
-
-const data = [];
-for (let i = 0; i < 40; i += 1) {
-  const randomNumber = Math.floor(Math.random() * Math.floor(7));
-  const imgShow = getImageRandom(randomNumber);
-  data.push({
-    id: i + 1,
-    src: imgShow,
-    title: `ตัวอย่างสินค้า ${i + 1}`,
-    price: i + 20,
-    point: 10,
-    inStock: '9/10'
-  });
-}
-
 const Media = (props) => {
   const [open, setOpen] = useState(false);
 
@@ -54,7 +33,7 @@ const Media = (props) => {
       <ProductList 
         {...props}
         handleClickOpen={() => handleClickOpen()}
-        data={data}
+        data={props.productList}
         topic="Product all items 2020"
       />
       <OrderFooter {...props} />

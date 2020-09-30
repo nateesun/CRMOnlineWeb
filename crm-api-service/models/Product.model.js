@@ -15,7 +15,9 @@ module.exports = {
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select * from ${table_name}`
+      const sql = `select *,
+      (select in_stock from stock_product sp where sp.product_code=p.code) in_stock 
+      from ${table_name} p;`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {

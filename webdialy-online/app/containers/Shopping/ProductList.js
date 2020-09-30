@@ -22,14 +22,14 @@ export default function ProductList(props) {
       </Grid>
       {data &&
         data.map(item => (
-          <Grid item xs={6} sm={4} md={3} lg={2} key={item.id}>
-            <div align="center">
+          <Grid item xs={6} sm={4} md={3} lg={2} key={item.code}>
+            <div align="center" style={{marginBottom: '4px'}}>
               <Paper elevation={3}>
-                <Box key={item.id} onClick={() => handleClickOpen()}>
+                <Box key={item.code} onClick={() => handleClickOpen()}>
                   <img
                     style={{ height: 118, width: '150px', marginBottom: '8px' }}
-                    alt={item.title}
-                    src={item.src}
+                    alt={item.name}
+                    src={item.img_path}
                   />
                   <Box pr={2}>
                     <Typography
@@ -41,7 +41,7 @@ export default function ProductList(props) {
                         fontWeight: 'bold',
                       }}
                     >
-                      {item.title}
+                      {item.name}
                     </Typography>
                     <Typography
                       display="block"
@@ -56,7 +56,7 @@ export default function ProductList(props) {
                           marginRight: '2px',
                         }}
                       >
-                        ราคา {item.price} บาท
+                        ราคา {item.price_d} บาท
                       </span>
                     </Typography>
                     <Typography
@@ -90,7 +90,7 @@ export default function ProductList(props) {
                           marginRight: '2px',
                         }}
                       >
-                        คงเหลือ ({item.inStock})
+                        คงเหลือ ({`${item.in_stock}/${item.max_stock}`})
                       </span>
                     </Typography>
                   </Box>

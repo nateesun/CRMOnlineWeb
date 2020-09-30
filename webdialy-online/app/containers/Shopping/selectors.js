@@ -21,5 +21,10 @@ const makeSelectShopping = () =>
     substate => substate,
   );
 
-export default makeSelectShopping;
-export { selectShoppingDomain };
+const makeSelectProductList = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.productList,
+  );
+
+export { makeSelectShopping, selectShoppingDomain, makeSelectProductList };
