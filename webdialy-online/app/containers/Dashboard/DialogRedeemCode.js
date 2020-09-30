@@ -40,7 +40,6 @@ const DivFooter = styled.div`
 export default function DialogRedeemCode(props) {
   const [open, setOpen] = useState(true);
   const { redeemPoint, code } = props;
-  console.log('get redeem_code', redeemPoint);
 
   useEffect(() => {
     props.onCreateRedeem(code);

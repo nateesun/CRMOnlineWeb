@@ -27,4 +27,21 @@ const makeSelectProductList = () =>
     substate => substate.productList,
   );
 
-export { makeSelectShopping, selectShoppingDomain, makeSelectProductList };
+const makeSelectItemCart = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.itemCart,
+  );
+const makeSelectCart = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.cart,
+  );
+
+export {
+  makeSelectShopping,
+  selectShoppingDomain,
+  makeSelectProductList,
+  makeSelectItemCart,
+  makeSelectCart,
+};

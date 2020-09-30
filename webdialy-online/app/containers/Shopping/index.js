@@ -10,6 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as dashboardSelectors from 'containers/Dashboard/selectors'
 import ShoppingContent from './ShoppingContent';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -36,11 +37,14 @@ Shopping.propTypes = {};
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),
   productList: selectors.makeSelectProductList(),
+  profile: dashboardSelectors.makeSelectProfile(),
+  cart: selectors.makeSelectCart(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onLoadProduct: ()=> dispatch(actions.loadProduct()),
+    onAddCartItem: item => dispatch(actions.createItemCart(item)),
   };
 }
 

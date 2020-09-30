@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function OrderFooter() {
+export default function OrderFooter(props) {
   const classes = useStyles();
 
   return (
@@ -46,9 +46,23 @@ export default function OrderFooter() {
         <Grid container>
           <Grid item xs={12}>
             <div align="right">
-              <ShoppingBasket /> (1) -{' '}
+              <ShoppingBasket style={{ marginRight: '5px' }} />
+              <span style={{ marginRight: '10px' }}>
+                รหัสสั่งซื้อสินค้า:
+                <span
+                  style={{
+                    background: 'yellow',
+                    padding: '5px',
+                    color: 'black',
+                  }}
+                >
+                  {props.cart.cart_no}
+                </span>
+                |
+              </span>
+              <span>QTY {props.cart.total_item} | </span>
               <ButtonLink to="/checkout-orders" color="white">
-                รวม: 30.00 บาท
+                TOTAL: {props.cart.total_amount} บาท
               </ButtonLink>
             </div>
           </Grid>

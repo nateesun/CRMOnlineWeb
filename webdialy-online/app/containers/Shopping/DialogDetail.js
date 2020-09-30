@@ -34,13 +34,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DialogDetail(props) {
-  const { open, handleClose, Transition, item } = props;
+  const { open, handleClose, Transition, item, profile } = props;
   const [qty, setQty] = useState(1);
+  const [options, setOptions] = useState('');
+  const [special_text, setSpecialText] = useState('');
   const classes = useStyles();
 
   const handleCloseDialog = () => {
     handleClose();
     setQty(1);
+  };
+
+  const saveCartItem = () => {
+    props.onAddCartItem({
+      ...item, 
+      qty, 
+      options, 
+      special_text,
+      total_amount: item.price_d * qty,
+      point_total: item.point * qty,
+      member_code: profile.code,
+    });
+    handleClose();
   };
 
   const handleQty = qtyAmt => {
@@ -86,7 +101,9 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={item.img_path} width="250" alt="" />
+        <img src={item.img_path} width="250" alt="" /><br />
+        options: {options}<br />
+        special_text: {special_text}<br />
       </Typography>
       <List>
         <ListItem button>
@@ -98,22 +115,10 @@ export default function DialogDetail(props) {
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem button>
           <FormControl component="fieldset">
-            <RadioGroup
-              row
-              aria-label="position"
-              name="position"
-              defaultValue="top"
-            >
-              <FormControlLabel
-                value="warm"
-                control={<Radio color="primary" />}
-                label="Option 1"
-              />
-              <FormControlLabel
-                value="nowarm"
-                control={<Radio color="primary" />}
-                label="Option 2"
-              />
+            <RadioGroup row aria-label="position" name="position" defaultValue="top" value={options} onChange={e=>setOptions(e.target.value)}>
+              <FormControlLabel value="" control={<Radio color="primary" />} label="No option" />
+              <FormControlLabel value="opt1" control={<Radio color="primary" />} label="Option 1" />
+              <FormControlLabel value="opt2" control={<Radio color="primary" />} label="Option 2" />
             </RadioGroup>
           </FormControl>
         </ListItem>
@@ -123,6 +128,8 @@ export default function DialogDetail(props) {
             id="standard-basic"
             label="ข้อความพิเศษ"
             style={{ width: '100%' }}
+            value={special_text}
+            onChange={e=>setSpecialText(e.target.value)}
           />
         </ListItem>
         <ListItem>
@@ -188,7 +195,7 @@ export default function DialogDetail(props) {
                     color: 'white',
                     width: '80%',
                   }}
-                  onClick={() => handleCloseDialog()}
+                  onClick={() => saveCartItem()}
                 >
                   ใส่ตระกร้า {qty} รายการ = {item.price_d * qty} บาท
                 </Button>

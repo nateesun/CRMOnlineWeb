@@ -24,3 +24,22 @@ export function loadProductError(payload) {
     payload,
   };
 }
+
+export function createItemCart(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART,
+    payload,
+  };
+}
+export function createItemCartSuccess(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+export function createItemCartError(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART_ERROR,
+    payload,
+  };
+}
