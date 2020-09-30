@@ -4,6 +4,16 @@ const pool = require("../mysql-connect")
 const table_name = "carts_detail"
 
 module.exports = {
+  findByCartNo: async (cart_no, callback) => {
+    console.log("findByProduct method start:")
+    try {
+      const sql = `select * from ${table_name} where cart_no=?;`
+      const result = await pool.query(sql, [cart_no])
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
   findByProduct: async (product_code, cart_no, callback) => {
     console.log("findByProduct method start:")
     try {

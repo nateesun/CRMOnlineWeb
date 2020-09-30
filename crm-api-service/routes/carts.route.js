@@ -8,9 +8,7 @@ const TaskDetail = require("../models/CartsDetail.model")
 router.get("/", (req, res, next) => {
   Task.findAll((err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({
@@ -26,9 +24,7 @@ router.post("/search", (req, res, next) => {
   const { key, value } = req.body;
   Task.searchData(key, value, (err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
       const data = JSON.parse(response.data)
       res.status(200).json({
@@ -40,18 +36,26 @@ router.post("/search", (req, res, next) => {
   })
 })
 
-router.get("/:id", (req, res, next) => {
-  Task.findById(req.params.id, (err, response) => {
+router.get("/:cart_no", (req, res, next) => {
+  Task.findByCartNo(req.params.cart_no, (err, response) => {
     if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      const data = JSON.parse(response.data)
-      res.status(200).json({
-        status: response.status,
-        msg: "Success",
-        data,
+      const carts = JSON.parse(response.data)
+      TaskDetail.findByCartNo(req.params.cart_no, (err2, response2)=>{
+        if (err2) {
+          res.status(500).json({ status: "Error", msg: err2.sqlMessage || err2.errno })
+        }else{
+          const carts_detail = JSON.parse(response2.data);
+          res.status(200).json({
+            status: response.status,
+            msg: "Success",
+            data: {
+              carts,
+              carts_detail,
+            },
+          })
+        }
       })
     }
   })

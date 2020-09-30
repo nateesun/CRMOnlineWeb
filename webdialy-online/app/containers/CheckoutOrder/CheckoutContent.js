@@ -41,22 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['สินค้าที่สั่ง', 'ที่อยู่จัดส่ง', 'ข้อมูลชำระ', 'รีวิว'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Orders />;
-    case 1:
-      return <AddressForm />;
-    case 2:
-      return <PaymentForm />;
-    case 3:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
-export default function Checkout() {
+export default function CheckoutContent(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -67,6 +52,21 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const getStepContent = step => {
+    switch (step) {
+      case 0:
+        return <Orders {...props} />;
+      case 1:
+        return <AddressForm {...props} />;
+      case 2:
+        return <PaymentForm {...props} />;
+      case 3:
+        return <Review {...props} />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   return (
     <React.Fragment>

@@ -10,12 +10,6 @@ import MinusIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import PlusIcon from '@material-ui/icons/AddCircleOutlined';
 import IconButton from '@material-ui/core/IconButton';
 
-const products = [
-  { name: 'Product 1', desc: 'One thing', price: '15.00' },
-  { name: 'Product 2', desc: 'Another thing', price: '10.00' },
-  { name: 'Product 3', desc: 'Something else', price: '5.00' },
-];
-
 const useStyles = makeStyles(theme => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -28,7 +22,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Orders() {
+export default function Orders(props) {
+  const { carts, carts_detail } = props.cartList;
   const classes = useStyles();
 
   return (
@@ -38,11 +33,11 @@ export default function Orders() {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {products.map(product => (
-          <ListItem className={classes.listItem} key={product.name}>
+        {carts_detail && carts_detail.map(product => (
+          <ListItem className={classes.listItem} key={product.product_code}>
             <ListItemText
-              primary={product.name}
-              secondary={`${product.price} บาท`}
+              primary={product.product_name}
+              secondary={`${product.product_price} บาท`}
             />
             <IconButton aria-label="delete">
               <RemoveIcon style={{ color: 'red' }} />
@@ -62,7 +57,7 @@ export default function Orders() {
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>
-            30.00
+            {carts[0].total_amount}
           </Typography>
         </ListItem>
       </List>

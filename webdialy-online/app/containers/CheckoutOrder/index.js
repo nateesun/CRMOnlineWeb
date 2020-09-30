@@ -4,33 +4,41 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectCheckout from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
+import * as actions from './actions';
 
-export function Checkout() {
+export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
 
-  return <CheckoutContent />;
+  useEffect(()=>{
+    props.initLoadCart('SP00031');
+  }, [])
+
+  return <CheckoutContent {...props} />;
 }
 
 Checkout.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout(),
+  checkout: selectors.makeSelectCheckout(),
+  cartList: selectors.makeSelectCarts(),
 });
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return {
+    initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
+  };
 }
 
 const withConnect = connect(
