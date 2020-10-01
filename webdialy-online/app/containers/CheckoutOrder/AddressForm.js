@@ -42,7 +42,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="Member Name"
+              label={<FormattedMessage {...messages.memberName} />}
               required
             />
           </Grid>
@@ -52,7 +52,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="Member LastName"
+              label={<FormattedMessage {...messages.memberLastname} />}
               required
             />
           </Grid>
@@ -62,7 +62,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="Address 1"
+              label={<FormattedMessage {...messages.address1} />}
               required
             />
           </Grid>
@@ -72,7 +72,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="Address 2"
+              label={<FormattedMessage {...messages.address2} />}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -81,7 +81,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="แขวง"
+              label={<FormattedMessage {...messages.subDistrict} />}
               required
             />
           </Grid>
@@ -91,7 +91,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="เขต"
+              label={<FormattedMessage {...messages.district} />}
               required
             />
           </Grid>
@@ -101,7 +101,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="จังหวัด"
+              label={<FormattedMessage {...messages.province} />}
               required
             />
           </Grid>
@@ -111,7 +111,7 @@ const AddressForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="รหัสไปรษณีย์"
+              label={<FormattedMessage {...messages.postcode} />}
               required
             />
           </Grid>
@@ -120,7 +120,7 @@ const AddressForm = (props) => {
               control={
                 <Checkbox color="secondary" name="saveAddress" value="yes" />
               }
-              label="ใช้ที่อยู่นี้ กับข้อมูลที่อยู่สำหรับรับชำระ"
+              label={<FormattedMessage {...messages.useForShpping} />}
             />
           </Grid>
         </Grid>

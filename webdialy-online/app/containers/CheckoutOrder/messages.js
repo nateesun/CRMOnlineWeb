@@ -73,4 +73,68 @@ export default defineMessages({
     id: `${scope}.postcodeShouldNotEmpty`,
     defaultMessage: 'Postcode should not empty',
   },
+  memberName: {
+    id: `${scope}.memberName`,
+    defaultMessage: 'Member Name',
+  },
+  memberLastname: {
+    id: `${scope}.memberLastname`,
+    defaultMessage: 'Member LastName',
+  },
+  address1: {
+    id: `${scope}.address1`,
+    defaultMessage: 'Address 1',
+  },
+  address2: {
+    id: `${scope}.address2`,
+    defaultMessage: 'Address 2',
+  },
+  subDistrict: {
+    id: `${scope}.subDistrict`,
+    defaultMessage: 'Sub District',
+  },
+  district: {
+    id: `${scope}.district`,
+    defaultMessage: 'District',
+  },
+  province: {
+    id: `${scope}.province`,
+    defaultMessage: 'Province',
+  },
+  postcode: {
+    id: `${scope}.postcode`,
+    defaultMessage: 'Post Code',
+  },
+  useForShpping: {
+    id: `${scope}.useForShpping`,
+    defaultMessage: 'ใช้ที่อยู่นี้ กับข้อมูลที่อยู่สำหรับรับชำระ',
+  },
+  accountFromName: {
+    id: `${scope}.accountFromName`,
+    defaultMessage: 'ชื่อบัญชีต้นทาง',
+  },
+  accountToName: {
+    id: `${scope}.accountToName`,
+    defaultMessage: 'ชื่อบัญชีปลายทาง',
+  },
+  fromAccountNo: {
+    id: `${scope}.fromAccountNo`,
+    defaultMessage: 'เลขที่บัญชีต้นทาง (4 ตัวท้าย)',
+  },
+  toAccountNo: {
+    id: `${scope}.toAccountNo`,
+    defaultMessage: 'เลขที่บัญชีปลายทาง (4 ตัวท้าย)',
+  },
+  transferDate: {
+    id: `${scope}.transferDate`,
+    defaultMessage: 'วันที่ เวลาที่โอน dd/MM/yyyy HH:mm',
+  },
+  transferFef: {
+    id: `${scope}.transferFef`,
+    defaultMessage: 'เลขที่รายการ/อ้างอิง',
+  },
+  transferAmount: {
+    id: `${scope}.transferAmount`,
+    defaultMessage: 'จำนวนเงิน (บาท)',
+  },
 });

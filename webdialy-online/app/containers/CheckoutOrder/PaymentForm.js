@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import QrCodeReader from "qrcode-reader";
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
@@ -57,7 +56,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="ชื่อบัญชีต้นทาง"
+              label={<FormattedMessage {...messages.accountFromName} />}
               required
             />
           </Grid>
@@ -67,7 +66,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="ชื่อบัญชีปลายทาง"
+              label={<FormattedMessage {...messages.accountToName} />}
               required
             />
           </Grid>
@@ -77,7 +76,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="เลขที่บัญชีต้นทาง (4 ตัวท้าย)"
+              label={<FormattedMessage {...messages.fromAccountNo} />}
               required
             />
           </Grid>
@@ -87,7 +86,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="เลขที่บัญชีปลายทาง (4 ตัวท้าย)"
+              label={<FormattedMessage {...messages.toAccountNo} />}
               required
             />
           </Grid>
@@ -97,7 +96,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="วันที่ เวลาที่โอน dd/MM/yyyy HH:mm"
+              label={<FormattedMessage {...messages.transferDate} />}
               required
             />
           </Grid>
@@ -107,7 +106,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="เลขที่รายการ/อ้างอิง"
+              label={<FormattedMessage {...messages.transferFef} />}
               required
             />
           </Grid>
@@ -117,7 +116,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="number"
               margin="normal"
-              label="จำนวนเงิน (บาท)"
+              label={<FormattedMessage {...messages.transferAmount} />}
               required
             />
           </Grid>
