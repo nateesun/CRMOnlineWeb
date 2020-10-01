@@ -60,8 +60,25 @@ export function* uploadFile() {
       yield put(actions.uploadImageError('Cannot update data'));
     }
   } catch (err) {
-    console.log('upload file:', err);
     yield put(actions.uploadImageError(err));
+  }
+}
+
+export function* validateSlipUpload() {
+  try {
+    const img_file = yield select(selectors.makeSelectSlipFile());
+    const requestURL = `${constants.publicPath}/api/validate_slip`;
+    const response = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify({img_file: ''+img_file}),
+    });
+    if (response.data) {
+      yield put(actions.checkSlipSuccess(response.data));
+    } else {
+      yield put(actions.checkSlipError('Image uploaded is invalid'));
+    }
+  } catch (err) {
+    yield put(actions.checkSlipError(err));
   }
 }
 
@@ -69,4 +86,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
+  yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
 }

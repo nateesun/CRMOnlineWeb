@@ -21,3 +21,7 @@ export const UPLOAD_IMG_ERROR = 'app/Checkout/UPLOAD_IMG_ERROR';
 export const SET_PAYMENT_DATA = 'app/Checkout/SET_PAYMENT_DATA';
 export const SET_PAYMENT_DATA_SUCCESS = 'app/Checkout/SET_PAYMENT_DATA_SUCCESS';
 export const SET_PAYMENT_DATA_ERROR = 'app/Checkout/SET_PAYMENT_DATA_ERROR';
+
+export const CHECK_SLIP = 'app/Checkout/CHECK_SLIP';
+export const CHECK_SLIP_SUCCESS = 'app/Checkout/CHECK_SLIP_SUCCESS';
+export const CHECK_SLIP_ERROR = 'app/Checkout/CHECK_SLIP_ERROR';

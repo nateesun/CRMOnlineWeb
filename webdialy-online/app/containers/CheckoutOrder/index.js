@@ -42,6 +42,7 @@ const mapStateToProps = createStructuredSelector({
   shipping: selectors.makeSelectMemberShipping(),
   cart: shoppingSelectors.makeSelectCart(),
   paymentData: selectors.makeSelectPaymentData(),
+  imgValid: selectors.makeSelectSlipValidateStatus(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -50,6 +51,7 @@ function mapDispatchToProps(dispatch) {
     initLoadMemberShipping: member_code => dispatch(actions.loadMemberShipping(member_code)),
     onUploadImage: (file) => dispatch(actions.uploadImage(file)),
     setPaymentData: (data) => dispatch(actions.setPaymentData(data)),
+    checkSlipImage: (image) => dispatch(actions.checkSlip(image)),
   };
 }
 

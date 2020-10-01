@@ -13,6 +13,8 @@ export const initialState = {
   memberShipping: {},
   paymentData: {},
   img_upload: null,
+  slipFileName: '',
+  slipValidateStatus: '',
   response: {
     status: '',
     message: '',
@@ -64,6 +66,22 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.SET_PAYMENT_DATA_SUCCESS:
         break;
       case constants.SET_PAYMENT_DATA_ERROR:
+        break;
+      case constants.CHECK_SLIP:
+        draft.slipFileName = action.payload;
+        break;
+      case constants.CHECK_SLIP_SUCCESS:
+        if (action.payload.length > 40) {
+          draft.slipValidateStatus = 'Success';
+          draft.response.message = 'Validate slip file image success';
+        } else {
+          draft.slipValidateStatus = 'Warning';
+          draft.response.message = 'Data in slip incorrect format';
+        }
+        break;
+      case constants.CHECK_SLIP_ERROR:
+        draft.slipValidateStatus = 'Error';
+        draft.response.message = 'Validate slip file image error!';
         break;
     }
   });

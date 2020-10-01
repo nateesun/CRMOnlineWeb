@@ -84,3 +84,24 @@ export function setPaymentDataError(payload) {
     payload,
   };
 }
+
+export function checkSlip(payload) {
+  return {
+    type: constants.CHECK_SLIP,
+    payload,
+  };
+}
+
+export function checkSlipSuccess(payload) {
+  return {
+    type: constants.CHECK_SLIP_SUCCESS,
+    payload,
+  };
+}
+
+export function checkSlipError(payload) {
+  return {
+    type: constants.CHECK_SLIP_ERROR,
+    payload,
+  };
+}

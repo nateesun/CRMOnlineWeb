@@ -51,6 +51,16 @@ const makeSelectPaymentData = () =>
     selectCheckoutDomain,
     substate => substate.paymentData,
   );
+const makeSelectSlipFile = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.slipFileName,
+  );
+const makeSelectSlipValidateStatus = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.slipValidateStatus,
+  );
   
 export {
   selectCheckoutDomain,
@@ -61,4 +71,6 @@ export {
   makeSelectMemberShipping,
   makeSelectFileUpload,
   makeSelectPaymentData,
+  makeSelectSlipFile,
+  makeSelectSlipValidateStatus,
 };
