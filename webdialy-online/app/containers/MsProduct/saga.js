@@ -4,6 +4,9 @@ import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
+const fetch = require('node-fetch');
+const host_upload = 'http://localhost:5000';
+
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/product`;
@@ -23,10 +26,11 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const file = yield select(selectors.makeSelectFileUpload());
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify({...data, img_path: `${host_upload}/images/${file.name}`}),
     });
     if (response) {
       yield put(actions.createItemSuccess(response));
@@ -74,9 +78,33 @@ export function* deleteData() {
   }
 }
 
+export function* uploadFile() {
+  try {
+    const file = yield select(selectors.makeSelectFileUpload());
+    const formdata = new FormData();
+    formdata.append('file', file, file.name);
+    const options = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+    }
+    const response = yield fetch(`${host_upload}/api/upload`, options)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+    if (response.status === 'Success') {
+      yield put(actions.uploadImageSuccess(response));
+    } else {
+      yield put(actions.uploadImageError('Cannot update data'));
+    }
+  } catch (err) {
+    yield put(actions.uploadImageError(err));
+  }
+}
+
 export default function* msProductSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
+  yield takeEvery(constants.UPLOAD_IMG, uploadFile);
 }

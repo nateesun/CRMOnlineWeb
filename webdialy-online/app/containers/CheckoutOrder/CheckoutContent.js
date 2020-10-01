@@ -41,22 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['สินค้าที่สั่ง', 'ที่อยู่จัดส่ง', 'ข้อมูลชำระ', 'รีวิว'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Orders />;
-    case 1:
-      return <AddressForm />;
-    case 2:
-      return <PaymentForm />;
-    case 3:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
-export default function Checkout() {
+export default function CheckoutContent(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -67,6 +52,21 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const getStepContent = step => {
+    switch (step) {
+      case 0:
+        return <Orders {...props} />;
+      case 1:
+        return <AddressForm {...props} />;
+      case 2:
+        return <PaymentForm {...props} />;
+      case 3:
+        return <Review {...props} />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   return (
     <React.Fragment>
@@ -95,8 +95,8 @@ export default function Checkout() {
                   </Typography>
                   <img src={Thanks} width="270" height="150" alt="thank for your support" style={{borderRadius: '15px'}} />
                   <Typography variant="subtitle1" style={{border: '1px solid #eee', padding: '25px', marginTop: '10px'}}>
-                    เลขที่ Order ของคุณคือ <span style={{background: 'yellow', color: 'black'}}>#OD000001</span> <br />
-                    <QRCode value={`http://localhost:3000/orders/OD000001`} /><br />
+                    เลขที่ Order ของคุณคือ <span style={{background: 'yellow', color: 'black'}}>#{props.cart && props.cart.cart_no || ''}</span> <br />
+                    <QRCode value={`http://localhost:3000/orders/${props.cart && props.cart.cart_no || ''}?token=`} /><br />
                     ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
                     และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ<br />
                     ขอขอบคุณค่ะ

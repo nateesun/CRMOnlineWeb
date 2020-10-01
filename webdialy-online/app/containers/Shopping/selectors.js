@@ -21,5 +21,27 @@ const makeSelectShopping = () =>
     substate => substate,
   );
 
-export default makeSelectShopping;
-export { selectShoppingDomain };
+const makeSelectProductList = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.productList,
+  );
+
+const makeSelectItemCart = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.itemCart,
+  );
+const makeSelectCart = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.cart,
+  );
+
+export {
+  makeSelectShopping,
+  selectShoppingDomain,
+  makeSelectProductList,
+  makeSelectItemCart,
+  makeSelectCart,
+};

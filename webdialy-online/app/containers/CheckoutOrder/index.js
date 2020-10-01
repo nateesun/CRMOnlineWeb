@@ -4,33 +4,55 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectCheckout from './selectors';
+import * as selectors from './selectors';
+import * as shoppingSelectors from '../Shopping/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
+import * as actions from './actions';
 
-export function Checkout() {
+export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
 
-  return <CheckoutContent />;
+  useEffect(()=>{
+    props.initLoadCart(props.cart.cart_no);
+    props.initLoadMemberShipping(props.cart.member_code);
+  }, []);
+
+  return <CheckoutContent {...props} />;
 }
 
-Checkout.propTypes = {};
+Checkout.propTypes = {
+  initLoadCart: PropTypes.func,
+  initLoadMemberShipping: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout(),
+  checkout: selectors.makeSelectCheckout(),
+  cartList: selectors.makeSelectCarts(),
+  shipping: selectors.makeSelectMemberShipping(),
+  cart: shoppingSelectors.makeSelectCart(),
+  paymentData: selectors.makeSelectPaymentData(),
+  imgValid: selectors.makeSelectSlipValidateStatus(),
 });
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return {
+    initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
+    initLoadMemberShipping: member_code => dispatch(actions.loadMemberShipping(member_code)),
+    onUploadImage: (file) => dispatch(actions.uploadImage(file)),
+    setPaymentData: (data) => dispatch(actions.setPaymentData(data)),
+    checkSlipImage: (image) => dispatch(actions.checkSlip(image)),
+  };
 }
 
 const withConnect = connect(

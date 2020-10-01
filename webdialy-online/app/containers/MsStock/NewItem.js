@@ -88,7 +88,7 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -99,7 +99,7 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}

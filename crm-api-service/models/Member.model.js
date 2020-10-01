@@ -54,9 +54,12 @@ module.exports = {
       try {
         const config = await pool.query(`select member_running, prefix_running, size_running from company c limit 0,1;`)
         const { prefix_running, member_running, size_running } = config[0];
+        data.code = prefix_running + zeroPad(member_running, size_running); // generate prefix running
+        
         const query = `INSERT INTO ${table_name} SET ? `
-        data.code = prefix_running + zeroPad(member_running, size_running);
         const result = await pool.query(query, data)
+
+        // update running +1
         await pool.query('update company set member_running=member_running+1')
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {

@@ -33,7 +33,7 @@ export default function DashboardContent(props) {
           <FormattedMessage {...messages.btnRefresh} />
         </Button>
       </Grid>
-      <Grid item xs={12} md={6} lg={3}>
+      <Grid item xs={12} md={6} lg={4}>
         <CardPoint
           label={<FormattedMessage {...messages.totalScore} />}
           point={profile.total_score}
@@ -41,7 +41,7 @@ export default function DashboardContent(props) {
           fbg="#17828f"
         />
       </Grid>
-      <Grid item xs={12} md={6} lg={3}>
+      <Grid item xs={12} md={6} lg={4}>
         <CardPoint
           label={<FormattedMessage {...messages.totalPurchase} />}
           point={profile.total_purchase}

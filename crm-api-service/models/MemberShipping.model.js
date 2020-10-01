@@ -1,28 +1,14 @@
+/* MemberShipping.model code generator by automatic script */
+
 const pool = require("../mysql-connect")
-const table_name = "promotion"
+const table_name = "member_shipping"
 
 module.exports = {
-  findByCode: async (code, callback) => {
-    console.log("findByCode method start:")
-    try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} where product_code=?;`
-      const result = await pool.query(sql, [code])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  },
-  findById: async (id, callback) => {
+  findByMemberCode: async (member_code, callback) => {
     console.log("findById method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} where uuid_index=?;`
-      const result = await pool.query(sql, [id])
+      const sql = `select * from ${table_name} where member_code=?;`
+      const result = await pool.query(sql, [member_code])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
@@ -31,24 +17,20 @@ module.exports = {
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name};`
+      const sql = `select * from ${table_name}`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }
   },
-  findShowUser: async (callback) => {
-    console.log("findAll method start:")
+  searchData: async (key, value, callback) => {
+    console.log("searchData method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} 
-      where (curdate() between start_time  and finish_time) and qty_in_stock > 0;`
+      let sql = `select * from ${table_name}`;
+      if(key!==''){
+        sql = `${sql} where ${key} like '%${value}%'`;
+      }
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
@@ -71,23 +53,11 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET 
-        product_code=?,
-        product_name=?,
-        point_to_redeem=?,
-        start_time=?,
-        finish_time=?,
-        qty_in_stock=?,
-        img_path=? 
-        WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} SET col1=?, col2=?, col3=? WHERE uuid_index=? `
         const result = await pool.query(query, [
-          data.product_code,
-          data.product_name,
-          data.point_to_redeem,
-          data.start_time,
-          data.finish_time,
-          data.qty_in_stock,
-          data.img_path,
+          data.col1,
+          data.col2,
+          data.col3,
           data.uuid_index
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })

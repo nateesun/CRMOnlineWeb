@@ -1,15 +1,24 @@
+/* CartsDetail.model code generator by automatic script */
+
 const pool = require("../mysql-connect")
-const table_name = "promotion"
+const table_name = "carts_detail"
 
 module.exports = {
-  findByCode: async (code, callback) => {
-    console.log("findByCode method start:")
+  findByCartNo: async (cart_no, callback) => {
+    console.log("findByProduct method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} where product_code=?;`
-      const result = await pool.query(sql, [code])
+      const sql = `select * from ${table_name} where cart_no=?;`
+      const result = await pool.query(sql, [cart_no])
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  },
+  findByProduct: async (product_code, cart_no, callback) => {
+    console.log("findByProduct method start:")
+    try {
+      const sql = `select * from ${table_name} where product_code=? and cart_no=?;`
+      const result = await pool.query(sql, [product_code, cart_no])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
@@ -18,10 +27,7 @@ module.exports = {
   findById: async (id, callback) => {
     console.log("findById method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} where uuid_index=?;`
+      const sql = `select * from ${table_name} where uuid_index=?;`
       const result = await pool.query(sql, [id])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
@@ -31,24 +37,20 @@ module.exports = {
   findAll: async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name};`
+      const sql = `select * from ${table_name}`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }
   },
-  findShowUser: async (callback) => {
-    console.log("findAll method start:")
+  searchData: async (key, value, callback) => {
+    console.log("searchData method start:")
     try {
-      const sql = `select *,
-      DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
-      DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-      from ${table_name} 
-      where (curdate() between start_time  and finish_time) and qty_in_stock > 0;`
+      let sql = `select * from ${table_name}`;
+      if(key!==''){
+        sql = `${sql} where ${key} like '%${value}%'`;
+      }
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
@@ -71,23 +73,30 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET 
+        const query = `UPDATE ${table_name} 
+        SET 
+        cart_no=?,
         product_code=?,
         product_name=?,
-        point_to_redeem=?,
-        start_time=?,
-        finish_time=?,
-        qty_in_stock=?,
-        img_path=? 
+        product_price=?,
+        product_unit=?,
+        qty=?,
+        total_amount=?,
+        options=?,
+        special_text=?,
+        point =? 
         WHERE uuid_index=? `
         const result = await pool.query(query, [
+          data.cart_no,
           data.product_code,
           data.product_name,
-          data.point_to_redeem,
-          data.start_time,
-          data.finish_time,
-          data.qty_in_stock,
-          data.img_path,
+          data.product_price,
+          data.product_unit,
+          data.qty,
+          data.total_amount,
+          data.options,
+          data.special_text,
+          data.point,
           data.uuid_index
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })

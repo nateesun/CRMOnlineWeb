@@ -19,12 +19,19 @@ const roleRouter = require("./routes/role.route")
 const memberRouter = require("./routes/member.route")
 const redeemRouter = require("./routes/redeem.route")
 
+// router for shopping
+const cartsRouter = require("./routes/carts.route")
+const memberShippingRouter = require("./routes/member_shipping.route")
+const slipImageRouter = require("./routes/slip_image.route")
+
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
 
 const fixPassword = 'softpos2013';
-
+const options = {
+  imagePath: __dirname + '/public/images',
+}
 
 const app = express()
 app.use(helmet())
@@ -67,6 +74,11 @@ app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotio
 app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter)
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
 app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
+
+// order shopping
+app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)
+app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
+app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter(options))
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

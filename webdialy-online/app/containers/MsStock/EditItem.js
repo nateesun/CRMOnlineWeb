@@ -78,7 +78,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -89,7 +89,7 @@ const EditItem = props => {
                 disabled
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}

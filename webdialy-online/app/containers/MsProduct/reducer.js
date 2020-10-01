@@ -17,6 +17,7 @@ export const initialState = {
     group_code: '',
   },
   page: 'LIST',
+  img_upload: null,
   status: null,
   message: null,
   currentId: '',
@@ -87,6 +88,17 @@ const msProductReducer = (state = initialState, action) =>
       case constants.DELETE_ITEM_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
+        break;
+      case constants.UPLOAD_IMG:
+        draft.img_upload = action.payload;
+        break;
+      case constants.UPLOAD_IMG_SUCCESS:
+        draft.response.status = 'Upload_Success';
+        draft.response.message = 'Upload file image success';
+        break;
+      case constants.UPLOAD_IMG_ERROR:
+        draft.response.status = 'Upload_Error';
+        draft.response.message = 'Upload file image error!';
         break;
     }
   });

@@ -1,105 +1,168 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import { createStructuredSelector } from 'reselect';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { FormattedMessage } from 'react-intl';
+import RenderField from 'components/RenderField';
+import * as selectors from './selectors';
+import messages from './messages';
 
-export default function AddressForm() {
+const useStyles = makeStyles(theme => ({
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+}));
+
+const AddressForm = (props) => {
+  const classes = useStyles();
+  const { handleSubmit, pristine, reset, submitting, shipping } = props;
+
+  const onValidated = formValues => {
+    
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="ชื่อ"
-            fullWidth
-            autoComplete="given-name"
-          />
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4}>
+            <Field
+              name="member_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.memberName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Field
+              name="member_lastname"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.memberLastname} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Field
+              name="address1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address1} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Field
+              name="address2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address2} />}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="sub_district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.subDistrict} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.district} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="province"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.province} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="postcode"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.postcode} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox color="secondary" name="saveAddress" value="yes" />
+              }
+              label={<FormattedMessage {...messages.useForShpping} />}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="นามสกุล"
-            fullWidth
-            autoComplete="family-name"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="ที่อยู่บรรทัด 1"
-            fullWidth
-            autoComplete="shipping address-line1"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="ที่อยู่บรรทัด 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="แขวง"
-            fullWidth
-            autoComplete="shipping address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="เขต"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="รหัสไปรษณีย์"
-            fullWidth
-            autoComplete="shipping postal-code"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="จังหวัด"
-            fullWidth
-            autoComplete="shipping country"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox color="secondary" name="saveAddress" value="yes" />
-            }
-            label="ใช้ที่อยู่นี้ กับข้อมูลที่อยู่สำหรับรับชำระ"
-          />
-        </Grid>
-      </Grid>
+      </form>
     </React.Fragment>
   );
 }
+
+const validate = formValues => {
+  const errors = {};
+  if (!formValues.member_name) {
+    errors.member_name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
+  }
+  if (!formValues.member_lastname) {
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+  }
+  if (!formValues.address1) {
+    errors.address1 = <FormattedMessage {...messages.address1ShouldNotEmpty} />;
+  }
+  if (!formValues.sub_district) {
+    errors.sub_district = <FormattedMessage {...messages.subDistrictShouldNotEmpty} />;
+  }
+  if (!formValues.district) {
+    errors.district = <FormattedMessage {...messages.districtShouldNotEmpty} />;
+  }
+  if (!formValues.province) {
+    errors.province = <FormattedMessage {...messages.provinceShouldNotEmpty} />;
+  }
+  if (!formValues.postcode) {
+    errors.postcode = <FormattedMessage {...messages.postcodeShouldNotEmpty} />;
+  }
+  return errors;
+};
+
+const mapStateToProps = createStructuredSelector({
+  initialValues: selectors.makeSelectMemberShipping(),
+});
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: 'addressForm',
+    validate,
+    enableReinitialize: true,
+  })(AddressForm),
+);

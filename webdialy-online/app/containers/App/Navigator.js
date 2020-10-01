@@ -44,16 +44,20 @@ const categories = [
     id: 'Orders',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
-      { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}` },
-      { id: 'History', icon: <HistoryIcon />, to: `${publicPath}` },
+      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/track` },
+      { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}/transaction` },
+    ],
+  },
+  {
+    id: 'Transportation',
+    children: [
+      { id: 'Order List', icon: <LocalMallIcon />, to: `${publicPath}/transportation` },
     ],
   },
   {
     id: 'Members',
     children: [
-      { id: 'All', icon: <PeopleIcon />, to: `${publicPath}/members` },
-      { id: 'Branch', icon: <StorefrontIcon />, to: `${publicPath}` },
-      { id: 'Shop', icon: <StoreMallDirectory />, to: `${publicPath}` },
+      { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
     ],
   },
   {
@@ -65,7 +69,6 @@ const categories = [
         icon: <DnsRoundedIcon />,
         to: `${publicPath}/database`,
       },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
     ],
   },
   {

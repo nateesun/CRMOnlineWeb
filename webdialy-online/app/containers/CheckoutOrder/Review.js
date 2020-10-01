@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -7,19 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '10.00' },
-  { name: 'Product 2', desc: 'Another thing', price: '15.00' },
-  { name: 'Product 3', desc: 'Something else', price: '5.00' },
-  { name: 'ค่าบริการขนส่ง', desc: '', price: 'Free' },
-];
-const addresses = [
-  'The Line Condo',
-  '1333/494',
-  'บางซื่อ',
-  'จอมพล',
-  'กรุงเทพฯ 10900',
-];
 const payments = [
   { name: 'ประเภทรับชำระ', detail: 'เงินโอน' },
   { name: 'บัญชีผู้โอน', detail: 'นายสมชาย เข็มกลัด' },
@@ -39,8 +26,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Review() {
+export default function Review(props) {
   const classes = useStyles();
+  const { carts, carts_detail } = props.cartList;
+  const {
+    member_prefix,
+    member_name,
+    member_lastname,
+    address1,
+    address2,
+    sub_district,
+    district,
+    province,
+    postcode,
+  } = props.shipping;
+  const { paymentData: payment } = props;
 
   return (
     <React.Fragment>
@@ -49,17 +49,28 @@ export default function Review() {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {products.map(product => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
-          </ListItem>
-        ))}
+        {carts_detail &&
+          carts_detail.map(product => (
+            <ListItem className={classes.listItem} key={product.product_code}>
+              <ListItemText
+                primary={product.product_name}
+                secondary={product.desc}
+              />
+              <Typography variant="body2">{product.total_amount}</Typography>
+            </ListItem>
+          ))}
+        <Divider style={{ border: '1px solid #eee' }} />
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="ค่าจัดส่ง" />
+          <Typography variant="subtitle1" className={classes.total}>
+            0
+          </Typography>
+        </ListItem>
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวมสินค้า" />
           <Typography variant="subtitle1" className={classes.total}>
-            30.00
+            {carts && carts[0].total_amount}
           </Typography>
         </ListItem>
       </List>
@@ -69,24 +80,82 @@ export default function Review() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             ที่อยู่สำหรับจัดส่ง
           </Typography>
-          <Typography gutterBottom>นายสมชาย เข็มกลัด</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography
+            gutterBottom
+          >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
+          <Typography
+            gutterBottom
+          >{`${address1} ${address2} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             รายละเอียดการชำระเงิน
           </Typography>
           <Grid container>
-            {payments.map(payment => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>ประเภทรับชำระ</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>เงินโอน</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>บัญชีต้นทาง</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.account_from_name}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>เลขที่บัญชีต้นทาง</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.from_account_no}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>ชื่อบัญชีปลายทาง</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.account_to_name}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>เลขที่บัญชีปลายทาง</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.to_account_no}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>เลขที่อ้างอิงการโอนเงิน</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.transfer_ref}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>จำนวนเงินที่โอน</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.transfer_amount}</Typography>
+              </Grid>
+            </React.Fragment>
+            <React.Fragment>
+              <Grid item xs={6}>
+                <Typography gutterBottom>วันที่/เวลา ที่โอนเงิน</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography gutterBottom>{payment.transfer_date}</Typography>
+              </Grid>
+            </React.Fragment>
           </Grid>
         </Grid>
       </Grid>

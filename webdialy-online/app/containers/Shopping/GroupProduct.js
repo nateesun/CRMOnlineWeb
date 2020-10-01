@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import image from '../../images/example/food1.jpg';
 import ProductTopic from './ProductTopic';
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const image = "http://localhost:5000/images/food1.jpg";
 const tileData = [
   {
     id: 1,
@@ -91,7 +91,7 @@ export default function GroupProduct() {
       <ProductTopic label="กลุ่มสินค้า" bgColor="#f9f972" textColor="black" />
       <GridList className={classes.gridList}>
         {tileData.map(tile => (
-          <img src={tile.img} alt={tile.title} />
+          <img src="http://localhost:5000/images/food1.jpg" alt={tile.title} />
         ))}
       </GridList>
     </div>

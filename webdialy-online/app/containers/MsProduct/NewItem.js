@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 
@@ -35,11 +36,18 @@ const useStyles = makeStyles(theme => ({
   topic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa'
+  }
 }));
 
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [img_host, setImgHost] = useState('http://localhost:5000/images')
+  const [file, setFile] = useState(null);
+  const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -67,6 +75,16 @@ const NewItem = props => {
     onCreateItem: PropTypes.func,
   };
 
+  const onChangeHandler = event => {
+    setShowImg(false);
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
+    setShowImg(true);
+  };
+
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert
@@ -88,7 +106,7 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -99,7 +117,7 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Field
                 name="name"
                 component={RenderField}
@@ -109,9 +127,9 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={2}>
               <Field
-                name="unit_sale"
+                name="unit_code_sale"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -119,15 +137,114 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={2}>
               <Field
-                name="group_code"
+                name="product_group_code"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
                 required
               />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="point"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="stock_code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_e"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_t"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_d"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="max_stock"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col11} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="min_stock"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col12} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="unit_code_stock"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col13} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} />
+            </Grid>
+            <Grid item xs={6}>
+              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Upload
+              </Button>}
+            </Grid>
+            <Grid item xs={12}>
+            {showImg && (
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img
+                    src={`${img_host}/${file.name}`}
+                    width="250"
+                    alt=""
+                  />
+                </Paper>
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={1}>
@@ -176,11 +293,38 @@ const validate = formValues => {
   if (!formValues.name) {
     errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.unit_sale) {
-    errors.unit_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.unit_code_sale) {
+    errors.unit_code_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
-  if (!formValues.group_code) {
-    errors.group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  if (!formValues.product_group_code) {
+    errors.product_group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  }
+  if (!formValues.point || formValues.point < 0) {
+    errors.point = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+  }
+  if (!formValues.stock_code) {
+    errors.stock_code = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
+  }
+  if (!formValues.price_e || formValues.price_e < 0) {
+    errors.price_e = <FormattedMessage {...messages.col7ShouldNotEmpty} />;
+  }
+  if (!formValues.price_t || formValues.price_t < 0) {
+    errors.price_t = <FormattedMessage {...messages.col8ShouldNotEmpty} />;
+  }
+  if (!formValues.price_d || formValues.price_d < 0) {
+    errors.price_d = <FormattedMessage {...messages.col9ShouldNotEmpty} />;
+  }
+  if (!formValues.max_stock || formValues.max_stock < 0) {
+    errors.max_stock = <FormattedMessage {...messages.col10ShouldNotEmpty} />;
+  }
+  if (!formValues.min_stock || formValues.min_stock < 0) {
+    errors.min_stock = <FormattedMessage {...messages.col11ShouldNotEmpty} />;
+  }
+  if (!formValues.unit_code_stock) {
+    errors.unit_code_stock = <FormattedMessage {...messages.col12ShouldNotEmpty} />;
+  }
+  if (!formValues.img_path) {
+    errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
   }
   return errors;
 };
