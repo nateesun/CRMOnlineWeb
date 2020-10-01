@@ -39,6 +39,7 @@ export default function RedeemPage(props) {
         </div>
       </Grid>
       <Grid item xs={12}>
+        {listRedeem && listRedeem.length===0 && <h1>ไม่พบข้อมูลโปรโมชั่น</h1>}
         <Grid container justify="center" spacing={1}>
           {listRedeem &&
             listRedeem.map((item, index) => (

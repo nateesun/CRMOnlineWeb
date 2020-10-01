@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import QrCodeReader from "qrcode-reader";
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import messages from './messages';

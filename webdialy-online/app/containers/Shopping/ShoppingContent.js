@@ -38,7 +38,7 @@ const Media = (props) => {
         data={props.productList}
         topic="Product all items 2020"
       />
-      <OrderFooter {...props} />
+      {props.cart && props.cart.cart_no !== '' && <OrderFooter {...props} />}
       {item && <DialogDetail
         {...props}
         open={open}
