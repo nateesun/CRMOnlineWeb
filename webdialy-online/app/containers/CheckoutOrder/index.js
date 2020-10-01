@@ -13,6 +13,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
+import * as shoppingSelectors from '../Shopping/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
@@ -23,8 +24,8 @@ export function Checkout(props) {
   useInjectSaga({ key: 'checkout', saga });
 
   useEffect(()=>{
-    props.initLoadCart('SP00031');
-    props.initLoadMemberShipping('M00001');
+    props.initLoadCart(props.cart.cart_no);
+    props.initLoadMemberShipping(props.cart.member_code);
   }, []);
 
   return <CheckoutContent {...props} />;
@@ -39,6 +40,8 @@ const mapStateToProps = createStructuredSelector({
   checkout: selectors.makeSelectCheckout(),
   cartList: selectors.makeSelectCarts(),
   shipping: selectors.makeSelectMemberShipping(),
+  cart: shoppingSelectors.makeSelectCart(),
+  paymentData: selectors.makeSelectPaymentData(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -46,6 +49,7 @@ function mapDispatchToProps(dispatch) {
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
     initLoadMemberShipping: member_code => dispatch(actions.loadMemberShipping(member_code)),
     onUploadImage: (file) => dispatch(actions.uploadImage(file)),
+    setPaymentData: (data) => dispatch(actions.setPaymentData(data)),
   };
 }
 

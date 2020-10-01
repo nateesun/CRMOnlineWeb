@@ -48,7 +48,7 @@ module.exports = {
       DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
       DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
       from ${table_name} 
-      where start_time >= curdate() and finish_time >= curdate() and qty_in_stock > 0;`
+      where (curdate() between start_time  and finish_time) and qty_in_stock > 0;`
       const result = await pool.query(sql)
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {

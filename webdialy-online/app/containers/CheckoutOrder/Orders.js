@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Orders(props) {
-  const { carts, carts_detail } = props.cartList;
   const classes = useStyles();
+  const { carts, carts_detail } = props.cartList;
 
   return (
     <React.Fragment>
@@ -37,7 +37,7 @@ export default function Orders(props) {
           <ListItem className={classes.listItem} key={product.product_code}>
             <ListItemText
               primary={product.product_name}
-              secondary={`${product.product_price} บาท`}
+              secondary={`${product.total_amount} บาท`}
             />
             <IconButton aria-label="delete">
               <RemoveIcon style={{ color: 'red' }} />
@@ -46,7 +46,7 @@ export default function Orders(props) {
               <IconButton aria-label="delete">
                 <MinusIcon style={{ color: 'red' }} />
               </IconButton>
-              1
+              {product.qty}
               <IconButton aria-label="delete">
                 <PlusIcon style={{ color: 'green' }} />
               </IconButton>

@@ -11,6 +11,7 @@ export const initialState = {
   cartList: [],
   member_code: '',
   memberShipping: {},
+  paymentData: {},
   img_upload: null,
   response: {
     status: '',
@@ -56,6 +57,13 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPLOAD_IMG_ERROR:
         draft.response.status = 'Upload_Error';
         draft.response.message = 'Upload file image error!';
+        break;
+      case constants.SET_PAYMENT_DATA:
+        draft.paymentData = action.payload;
+        break;
+      case constants.SET_PAYMENT_DATA_SUCCESS:
+        break;
+      case constants.SET_PAYMENT_DATA_ERROR:
         break;
     }
   });

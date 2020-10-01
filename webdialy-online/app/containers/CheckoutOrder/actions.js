@@ -63,3 +63,24 @@ export function uploadImageError(payload) {
     payload,
   };
 }
+
+export function setPaymentData(payload) {
+  return {
+    type: constants.SET_PAYMENT_DATA,
+    payload,
+  };
+}
+
+export function setPaymentDataSuccess(payload) {
+  return {
+    type: constants.SET_PAYMENT_DATA_SUCCESS,
+    payload,
+  };
+}
+
+export function setPaymentDataError(payload) {
+  return {
+    type: constants.SET_PAYMENT_DATA_ERROR,
+    payload,
+  };
+}

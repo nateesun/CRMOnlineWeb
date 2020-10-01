@@ -46,6 +46,11 @@ const makeSelectFileUpload = () =>
     selectCheckoutDomain,
     substate => substate.img_upload,
   );
+const makeSelectPaymentData = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.paymentData,
+  );
   
 export {
   selectCheckoutDomain,
@@ -55,4 +60,5 @@ export {
   makeSelectMemberCode,
   makeSelectMemberShipping,
   makeSelectFileUpload,
+  makeSelectPaymentData,
 };

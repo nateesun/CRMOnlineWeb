@@ -17,3 +17,7 @@ export const LOAD_MEMBER_SHIPPING_ERROR = 'app/Checkout/LOAD_MEMBER_SHIPPING_ERR
 export const UPLOAD_IMG = 'app/Checkout/UPLOAD_IMG';
 export const UPLOAD_IMG_SUCCESS = 'app/Checkout/UPLOAD_IMG_SUCCESS';
 export const UPLOAD_IMG_ERROR = 'app/Checkout/UPLOAD_IMG_ERROR';
+
+export const SET_PAYMENT_DATA = 'app/Checkout/SET_PAYMENT_DATA';
+export const SET_PAYMENT_DATA_SUCCESS = 'app/Checkout/SET_PAYMENT_DATA_SUCCESS';
+export const SET_PAYMENT_DATA_ERROR = 'app/Checkout/SET_PAYMENT_DATA_ERROR';

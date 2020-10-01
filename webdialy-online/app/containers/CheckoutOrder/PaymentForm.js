@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -24,7 +25,7 @@ const PaymentForm = (props) => {
   const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
-    
+    props.setPaymentData(formValues);
   };
 
   const onChangeHandler = event => {
@@ -47,11 +48,31 @@ const PaymentForm = (props) => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Field
+              name="account_from_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="ชื่อบัญชีต้นทาง"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="account_to_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="ชื่อบัญชีปลายทาง"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
               name="from_account_no"
               component={RenderField}
               type="text"
               margin="normal"
-              label="เลขที่บัญชีผู้โอน"
+              label="เลขที่บัญชีต้นทาง (4 ตัวท้าย)"
               required
             />
           </Grid>
@@ -61,7 +82,7 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="เลขที่บัญชีผู้รับโอน"
+              label="เลขที่บัญชีปลายทาง (4 ตัวท้าย)"
               required
             />
           </Grid>
@@ -71,7 +92,27 @@ const PaymentForm = (props) => {
               component={RenderField}
               type="text"
               margin="normal"
-              label="วันที่ เวลาที่โอน dd/MM/yyyy HH:mm:ss"
+              label="วันที่ เวลาที่โอน dd/MM/yyyy HH:mm"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="transfer_ref"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label="เลขที่รายการ/อ้างอิง"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="transfer_amount"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label="จำนวนเงิน (บาท)"
               required
             />
           </Grid>
@@ -82,8 +123,19 @@ const PaymentForm = (props) => {
           <Grid item xs={12}>
             {showImg && <div align="center">
               <img src={`${img_host}/${file.name}`} width={150} alt="" /><br /><br />
-               รูปสลิปที่โอนเงิน<br /><br />
+               รูปสลิปที่โอนเงิน<br />
             </div>}
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting} style={{marginBottom: '20px'}}
+            >
+              บันทึกข้อมูล
+            </Button>
           </Grid>
         </Grid>
       </form>
@@ -93,6 +145,12 @@ const PaymentForm = (props) => {
 
 const validate = formValues => {
   const errors = {};
+  if (!formValues.account_from_name) {
+    errors.account_from_name = <FormattedMessage {...messages.accFromNameShouldNotEmpty} />;
+  }
+  if (!formValues.account_to_name) {
+    errors.account_to_name = <FormattedMessage {...messages.accToNameShouldNotEmpty} />;
+  }
   if (!formValues.from_account_no) {
     errors.from_account_no = <FormattedMessage {...messages.fromAccShouldNotEmpty} />;
   }
@@ -101,6 +159,15 @@ const validate = formValues => {
   }
   if (!formValues.transfer_date) {
     errors.transfer_date = <FormattedMessage {...messages.transferDateShouldNotEmpty} />;
+  }
+  if (!formValues.transfer_ref) {
+    errors.transfer_ref = <FormattedMessage {...messages.transferRefShouldNotEmpty} />;
+  }
+  if (!formValues.transfer_amount) {
+    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldNotEmpty} />;
+  }
+  if (formValues.transfer_amount < 1) {
+    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldMoreZero} />;
   }
   return errors;
 };

@@ -13,6 +13,14 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the Checkout container!',
   },
+  accFromNameShouldNotEmpty: {
+    id: `${scope}.AccFromNameShouldNotEmpty`,
+    defaultMessage: 'Account from name should not empty',
+  },
+  accToNameShouldNotEmpty: {
+    id: `${scope}.accToNameShouldNotEmpty`,
+    defaultMessage: 'Account to name should not empty',
+  },
   fromAccShouldNotEmpty: {
     id: `${scope}.fromAccShouldNotEmpty`,
     defaultMessage: 'From account number should not empty',
@@ -24,6 +32,18 @@ export default defineMessages({
   transferDateShouldNotEmpty: {
     id: `${scope}.transferDateShouldNotEmpty`,
     defaultMessage: 'Transfer date should not empty',
+  },
+  transferRefShouldNotEmpty: {
+    id: `${scope}.transferRefShouldNotEmpty`,
+    defaultMessage: 'Transfer ref should not empty',
+  },
+  transferAmtShouldNotEmpty: {
+    id: `${scope}.transferAmtShouldNotEmpty`,
+    defaultMessage: 'Transfer amount should not empty',
+  },
+  transferAmtShouldMoreZero: {
+    id: `${scope}.transferAmtShouldMoreZero`,
+    defaultMessage: 'Transfer amount should more than 1',
   },
   nameShouldNotEmpty: {
     id: `${scope}.nameShouldNotEmpty`,
