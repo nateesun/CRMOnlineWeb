@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-const {
-  compose,
-  withProps,
-  withStateHandlers,
-} = require('recompose');
+const { compose, withProps, withStateHandlers } = require('recompose');
 const {
   withScriptjs,
   withGoogleMap,
@@ -34,22 +30,17 @@ const MapMarker = compose(
   withGoogleMap,
 )(props => {
   console.log('MapMarker init:', props);
-  const [latitude, setLatitude] = useState(props.origin.position.lat());
-  const [longitude, setLongitude] = useState(props.origin.position.lng());
+  const [latitude, setLatitude] = useState(props.lat);
+  const [longitude, setLongitude] = useState(props.lng);
 
-  if (latitude){
+  if (latitude) {
     props.onExit(latitude, longitude);
   }
 
   return (
     <GoogleMap
-      defaultZoom={7}
-      defaultCenter={
-        new google.maps.LatLng(
-          props.origin.position.lat(),
-          props.origin.position.lng(),
-        )
-      }
+      defaultZoom={18}
+      defaultCenter={new google.maps.LatLng(props.lat, props.lng)}
       onClick={e => {
         setLatitude(e.latLng.lat());
         setLongitude(e.latLng.lng());

@@ -47,7 +47,7 @@ export function GoogleMap() {
   return (
     <div>
       {/* <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} /> */}
-      <MapMarker origin={origin} onExit={handlePlace} />
+      <MapMarker lat={13.844903} lng={100.525943} onExit={handlePlace} />
     </div>
   );
 }

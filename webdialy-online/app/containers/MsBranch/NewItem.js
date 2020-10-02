@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +41,8 @@ const useStyles = makeStyles(theme => ({
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [latitude, setLatitude] = useState(13.752434);
+  const [longitude, setLongitude] = useState(100.494122);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -52,6 +55,11 @@ const NewItem = props => {
 
   const saveData = data => {
     props.onCreateItem(data);
+  };
+
+  const handlePlace = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
   };
 
   NewItem.propTypes = {
@@ -116,6 +124,7 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                onChange={e => setLatitude(e.target.value)}
                 required
               />
             </Grid>
@@ -126,12 +135,24 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
+                onChange={e => setLongitude(e.target.value)}
                 required
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center">
-                <h3>Google map here...</h3>
+              <div align="center" style={{marginBottom: '25px'}}>
+                {latitude && longitude && (
+                  <MapMarker
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
+                    onExit={handlePlace}
+                  />
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
               </div>
             </Grid>
           </Grid>
