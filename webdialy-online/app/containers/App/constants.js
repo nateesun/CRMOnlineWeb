@@ -30,3 +30,4 @@ export const PATH_MS_STOCK = `${publicPath}/ms/stock`;
 export const PATH_MS_PROMOTION = `${publicPath}/ms/promotion`;
 export const PATH_MS_ROLE = `${publicPath}/ms/role`;
 export const PATH_DATABASE = `${publicPath}/database`;
+export const PATH_TEST_GOOGLE_MAP = `${publicPath}/googlemap`;

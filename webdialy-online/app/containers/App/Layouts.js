@@ -34,6 +34,7 @@ import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
+import GoogleMap from 'containers/GoogleMap/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -257,6 +258,7 @@ function Layouts(props) {
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
               <Route path={path.PATH_DATABASE} component={null} />
+              <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>
