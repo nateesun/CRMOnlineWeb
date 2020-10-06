@@ -12,6 +12,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import { makeSelectProfileData } from 'containers/Profile/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -23,7 +24,7 @@ export function AddressShipping(props) {
   useInjectSaga({ key: 'addressShipping', saga });
 
   useEffect(() => {
-    props.initLoad(props.login.email);
+    props.initLoad(props.profile.code);
   }, []);
 
   return <EditForm {...props} />;
@@ -38,15 +39,17 @@ AddressShipping.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selects.makeSelectAddressShipping,
+  profile: makeSelectProfileData(),
+  shipping: selects.makeSelectAddressShipping,
   updateStatus: selects.makeUpdateStatus(),
   errorUpdate: selects.makeErrorUpdate(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    initLoad: email => dispatch(actions.initLoad(email)),
-    onEditShipping: member => dispatch(actions.editShipping(member)),
+    initLoad: memberCode => dispatch(actions.initLoad(memberCode)),
+    onEditShipping: address => dispatch(actions.editShipping(address)),
+    onChangeMapsValue: mapsData => dispatch(actions.changeMapsValue(mapsData)),
     clearData: () => dispatch(actions.defaultAction()),
   };
 }

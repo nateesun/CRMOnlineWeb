@@ -114,8 +114,6 @@ const EditForm = props => {
     updateStatus,
     clearData,
   } = props;
-  const [latitude, setLatitude] = useState(13.752434);
-  const [longitude, setLongitude] = useState(100.494122);
 
   const onValidated = formValues => {
     onEditMember(formValues);

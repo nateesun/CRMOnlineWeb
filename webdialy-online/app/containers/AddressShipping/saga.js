@@ -6,13 +6,13 @@ import * as selects from './selectors';
 
 export function* initLoad() {
   try {
-    const { email } = yield select(selects.makeSelectAddressShipping());
-    const requestURL = `${types.publicPath}/api/member/${email}`;
+    const { member_code } = yield select(selects.makeSelectAddressShipping());
+    const requestURL = `${types.publicPath}/api/shipping/${member_code}`;
     try {
       const response = yield call(request, requestURL, {
         method: 'GET',
       });
-      yield put(actions.initLoadSuccess(response.data));
+      yield put(actions.initLoadSuccess(response.data[0]));
     } catch (error) {
       yield put(actions.initLoadError(error));
     }
@@ -23,11 +23,11 @@ export function* initLoad() {
 
 export function* onEditShipping() {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
-    const profile = yield select(selects.makeSelectAddressShipping());
+    const requestURL = `${types.publicPath}/api/shipping`;
+    const addressData = yield select(selects.makeSelectAddressData());
     const response = yield call(request, requestURL, {
       method: 'PUT',
-      body: JSON.stringify(profile.data),
+      body: JSON.stringify(addressData),
     });
     if (response.status === 'Success') {
       yield put(actions.editShippingSuccess());

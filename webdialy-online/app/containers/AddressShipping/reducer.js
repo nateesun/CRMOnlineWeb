@@ -8,6 +8,7 @@ import * as types from './constants';
 
 export const initialState = {
   data: {},
+  address: {},
   status: '',
   error: '',
 };
@@ -22,7 +23,7 @@ const addressShippingReducer = (state = initialState, action) =>
         draft.data = {};
         break;
       case types.INIT_LOAD:
-        draft.email = action.payload;
+        draft.member_code = action.payload;
         break;
       case types.INIT_LOAD_SUCCESS:
         draft.data = action.payload;
@@ -30,13 +31,17 @@ const addressShippingReducer = (state = initialState, action) =>
       case types.INIT_LOAD_ERROR:
         break;
       case types.EDIT_SHIPPING:
-        draft.data = action.payload;
+        draft.address = action.payload;
         break;
       case types.EDIT_SHIPPING_SUCCESS:
         draft.status = 'Success';
         break;
       case types.EDIT_SHIPPING_ERROR:
         draft.error = action.payload;
+        break;
+      case types.CHANGE_MAPS_VALUE:
+        draft.data.map_latitude = action.payload.map_latitude;
+        draft.data.map_longitude = action.payload.map_longitude;
         break;
     }
   });

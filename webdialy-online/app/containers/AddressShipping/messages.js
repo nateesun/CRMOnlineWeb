@@ -77,25 +77,41 @@ export default defineMessages({
     id: `${scope}.lastName`,
     defaultMessage: 'Last Name',
   },
-  dateOfBirth: {
-    id: `${scope}.dateOfBirth`,
-    defaultMessage: 'Date of Birth',
+  addressType: {
+    id: `${scope}.addressType`,
+    defaultMessage: 'Address Type',
   },
-  mobile: {
-    id: `${scope}.mobile`,
-    defaultMessage: 'Mobile Number',
+  address1: {
+    id: `${scope}.address1`,
+    defaultMessage: 'Address 1',
   },
-  email: {
-    id: `${scope}.email`,
-    defaultMessage: 'Email Address',
+  address2: {
+    id: `${scope}.address2`,
+    defaultMessage: 'Address 2',
   },
-  password: {
-    id: `${scope}.password`,
-    defaultMessage: 'Password',
+  province: {
+    id: `${scope}.province`,
+    defaultMessage: 'Province',
   },
-  rePassword: {
-    id: `${scope}.rePassword`,
-    defaultMessage: 'Re-Password',
+  district: {
+    id: `${scope}.district`,
+    defaultMessage: 'District',
+  },
+  subDistrict: {
+    id: `${scope}.subDistrict`,
+    defaultMessage: 'Sub District',
+  },
+  postcode: {
+    id: `${scope}.postcode`,
+    defaultMessage: 'Post Code',
+  },
+  mapLatitude: {
+    id: `${scope}.mapLatitude`,
+    defaultMessage: 'Map Latitude',
+  },
+  mapLongitude: {
+    id: `${scope}.mapLongitude`,
+    defaultMessage: 'Map Longitude',
   },
   btnRegister: {
     id: `${scope}.btnRegister`,
@@ -127,7 +143,7 @@ export default defineMessages({
   },
   code: {
     id: `${scope}.code`,
-    defaultMessage: 'Code',
+    defaultMessage: 'Member Code',
   },
   btnSaveProfile: {
     id: `${scope}.btnSaveProfile`,

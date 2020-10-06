@@ -52,3 +52,10 @@ export function initLoadError(error) {
     payload: error,
   };
 }
+
+export function changeMapsValue(payload) {
+  return {
+    type: types.CHANGE_MAPS_VALUE,
+    payload,
+  };
+}

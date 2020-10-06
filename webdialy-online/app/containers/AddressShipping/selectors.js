@@ -25,6 +25,11 @@ const makeSelectAddressShippingInit = () =>
     selectAddressShippingDomain,
     substate => substate.data,
   );
+const makeSelectAddressData = () =>
+  createSelector(
+    selectAddressShippingDomain,
+    substate => substate.address,
+  );
 const makeUpdateStatus = () =>
   createSelector(
     selectAddressShippingDomain,
@@ -42,4 +47,5 @@ export {
   makeUpdateStatus,
   makeErrorUpdate,
   makeSelectAddressShippingInit,
+  makeSelectAddressData,
 };

@@ -12,3 +12,4 @@ export const EDIT_SHIPPING_ERROR = 'containers/AddressShipping/EDIT_SHIPPING_ERR
 export const INIT_LOAD = 'containers/AddressShipping/INIT_LOAD';
 export const INIT_LOAD_SUCCESS = 'containers/AddressShipping/INIT_LOAD_SUCCESS';
 export const INIT_LOAD_ERROR = 'containers/AddressShipping/INIT_LOAD_ERROR';
+export const CHANGE_MAPS_VALUE = 'containers/AddressShipping/CHANGE_MAPS_VALUE';

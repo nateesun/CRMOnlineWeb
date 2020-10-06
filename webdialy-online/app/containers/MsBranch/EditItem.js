@@ -130,10 +130,10 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>
-                {map_latitude && map_longitude && (
+                {latitude && longitude && (
                   <MapMarker
-                    lat={parseFloat(map_latitude)}
-                    lng={parseFloat(map_longitude)}
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
                     onExit={handlePlace}
                   />
                 )}
@@ -141,7 +141,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>
-                Position: {map_latitude},{map_longitude}
+                Position: {latitude},{longitude}
               </div>
             </Grid>
           </Grid>
