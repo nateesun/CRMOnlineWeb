@@ -17,9 +17,10 @@ import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import EditProfileLogo from '../../images/edit_profile.png';
+import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
 
 const ImgLogo = styled.img`
@@ -109,7 +110,7 @@ const EditForm = props => {
     pristine,
     reset,
     submitting,
-    onEditMember,
+    onEditShipping,
     errorUpdate,
     updateStatus,
     clearData,
@@ -118,7 +119,7 @@ const EditForm = props => {
   const [longitude, setLongitude] = useState(100.494122);
 
   const onValidated = formValues => {
-    onEditMember(formValues);
+    onEditShipping(formValues);
   };
 
   const handlePlace = (latitude, longitude) => {
@@ -142,7 +143,7 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={EditProfileLogo} width="100" />
+        <ImgLogo src={LocationLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
@@ -239,9 +240,23 @@ const EditForm = props => {
                 margin="normal"
               />
             </Grid>
+            <Grid item xs={12}>
+              {latitude && longitude && (
+                <MapMarker
+                  lat={parseFloat(latitude)}
+                  lng={parseFloat(longitude)}
+                  onExit={handlePlace}
+                />
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
+              </div>
+            </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 type="submit"
                 fullWidth
@@ -252,7 +267,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 fullWidth
                 variant="contained"
@@ -262,7 +277,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <ButtonLink to="/profile">
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
@@ -286,7 +301,7 @@ EditForm.propTypes = {
   errorUpdate: PropTypes.string,
   updateStatus: PropTypes.string,
   clearData: PropTypes.func,
-  onEditMember: PropTypes.func,
+  onEditShipping: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -324,7 +339,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileInit(),
+  initialValues: selectors.makeSelectAddressShippingInit(),
 });
 
 export default connect(mapStateToProps)(

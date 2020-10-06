@@ -6,6 +6,20 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
+
+const origin = {
+  position: {
+    lat: () => 13.809992,
+    lng: () => 100.413130,
+  },
+};
+const destination = {
+  position: {
+    lat: () => 13.828941,
+    lng: () => 100.525943,
+  },
+};
 
 const payments = [
   { name: 'ประเภทรับชำระ', detail: 'เงินโอน' },
@@ -41,6 +55,15 @@ export default function Review(props) {
     postcode,
   } = props.shipping;
   const { paymentData: payment } = props;
+  const [distance, setDistance] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const handleDirection = (distance, duration) => {
+    console.log('distance:', distance)
+    console.log('duration:', duration)
+    setDistance(distance/1000);
+    setDuration(duration/60);
+  }
 
   return (
     <React.Fragment>
@@ -157,6 +180,17 @@ export default function Review(props) {
               </Grid>
             </React.Fragment>
           </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <div align="center" style={{marginBottom: '25px'}}>
+            <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
+          </div>
+        </Grid>
+        <Grid item xs={12}>
+          <div align="center" style={{marginBottom: '25px'}}>
+            ระยะทาง {distance} กิโลเมตร<br />
+            ระยะเวลา {duration} นาที
+          </div>
         </Grid>
       </Grid>
     </React.Fragment>

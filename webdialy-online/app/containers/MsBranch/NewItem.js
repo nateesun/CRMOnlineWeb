@@ -41,8 +41,8 @@ const useStyles = makeStyles(theme => ({
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
-  const [latitude, setLatitude] = useState(13.752434);
-  const [longitude, setLongitude] = useState(100.494122);
+  const [latitude, setLatitude] = useState(13.809992);
+  const [longitude, setLongitude] = useState(100.413130);
 
   const onValidated = formValues => {
     saveData(formValues);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -9,6 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import RenderField from 'components/RenderField';
 import * as selectors from './selectors';
 import messages from './messages';
@@ -23,9 +24,16 @@ const useStyles = makeStyles(theme => ({
 const AddressForm = (props) => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, shipping } = props;
+  const [latitude, setLatitude] = useState(13.809992);
+  const [longitude, setLongitude] = useState(100.413130);
 
   const onValidated = formValues => {
     
+  };
+
+  const handlePlace = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
   };
 
   return (
@@ -123,6 +131,22 @@ const AddressForm = (props) => {
               label={<FormattedMessage {...messages.useForShpping} />}
             />
           </Grid>
+          <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                {latitude && longitude && (
+                  <MapMarker
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
+                    onExit={handlePlace}
+                  />
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
+              </div>
+            </Grid>
         </Grid>
       </form>
     </React.Fragment>

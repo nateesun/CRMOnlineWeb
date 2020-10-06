@@ -23,6 +23,7 @@ import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import ProfileEdit from 'containers/ProfileEdit/Loadable';
+import AddressShipping from 'containers/AddressShipping/Loadable';
 import ProfileChangePwd from 'containers/ProfileChangePwd/Loadable';
 import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
@@ -239,6 +240,7 @@ function Layouts(props) {
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
               <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+              <Route path={path.PATH_ADDRESS_SHIPPING} component={AddressShipping} />
               <Route
                 path={path.PATH_PROFILE_CHANGE_PWD}
                 component={ProfileChangePwd}
