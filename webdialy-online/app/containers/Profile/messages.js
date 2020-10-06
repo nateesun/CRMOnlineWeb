@@ -81,6 +81,10 @@ export default defineMessages({
     id: `${scope}.headerEditForm`,
     defaultMessage: 'Edit Member',
   },
+  headerEditShipping: {
+    id: `${scope}.headerEditShipping`,
+    defaultMessage: 'Update Shipping',
+  },
   btnResetForm: {
     id: `${scope}.btnResetForm`,
     defaultMessage: 'Reset',

@@ -172,6 +172,11 @@ export default function ProfileContent(props) {
             <FormattedMessage {...messages.btnEditProfile} />
           </Button>
         </ButtonLink>
+        <ButtonLink to="/profile-shipping">
+          <Button variant="contained" size="small">
+            <FormattedMessage {...messages.headerEditShipping} />
+          </Button>
+        </ButtonLink>
       </CardActions>
     </Card>
   );

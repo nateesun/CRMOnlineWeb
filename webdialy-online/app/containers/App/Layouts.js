@@ -23,6 +23,7 @@ import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import ProfileEdit from 'containers/ProfileEdit/Loadable';
+import AddressShipping from 'containers/AddressShipping/Loadable';
 import ProfileChangePwd from 'containers/ProfileChangePwd/Loadable';
 import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
@@ -34,6 +35,7 @@ import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
+import GoogleMap from 'containers/GoogleMap/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -238,6 +240,7 @@ function Layouts(props) {
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
               <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+              <Route path={path.PATH_ADDRESS_SHIPPING} component={AddressShipping} />
               <Route
                 path={path.PATH_PROFILE_CHANGE_PWD}
                 component={ProfileChangePwd}
@@ -257,6 +260,7 @@ function Layouts(props) {
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
               <Route path={path.PATH_DATABASE} component={null} />
+              <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

@@ -53,12 +53,34 @@ module.exports = {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET col1=?, col2=?, col3=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} SET 
+        map_latitude=?,
+        map_longitude=?,
+        address_type=?,
+        member_name=?,
+        address1=?,
+        address2=?,
+        sub_district=?,
+        district=?,
+        province=?,
+        postcode=?,
+        member_lastname=?,
+        member_prefix =? 
+        WHERE member_code=? `
         const result = await pool.query(query, [
-          data.col1,
-          data.col2,
-          data.col3,
-          data.uuid_index
+          data.map_latitude,
+          data.map_longitude,
+          data.address_type,
+          data.member_name,
+          data.address1,
+          data.address2,
+          data.sub_district,
+          data.district,
+          data.province,
+          data.postcode,
+          data.member_lastname,
+          data.member_prefix,
+          data.member_code
         ])
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {

@@ -11,15 +11,15 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
-import DateInput from 'components/RenderField/DateInput';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import EditProfileLogo from '../../images/edit_profile.png';
+import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
 
 const ImgLogo = styled.img`
@@ -57,7 +57,7 @@ const renderSelectField = ({
       error={touched && error}
       style={{ width: '100%' }}
     >
-      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
+      <InputLabel htmlFor={input.id}>Prefix</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
         native
@@ -65,7 +65,7 @@ const renderSelectField = ({
         {...custom}
         inputProps={{
           name: 'age',
-          id: 'age-native-simple',
+          id: input.id,
         }}
         label={label}
       >
@@ -109,17 +109,32 @@ const EditForm = props => {
     pristine,
     reset,
     submitting,
-    onEditMember,
+    onEditShipping,
     errorUpdate,
     updateStatus,
     clearData,
+    onChangeMapsValue,
   } = props;
+  
+  const [latitude, setLatitude] = useState(13.752434);
+  const [longitude, setLongitude] = useState(100.494122);
+  const [loadMap, setLoadMap] = useState(false);
 
   const onValidated = formValues => {
-    onEditMember(formValues);
+    onEditShipping(formValues);
   };
 
+  const handleLoadMap = show => {
+    setLoadMap(show);
+    setLatitude(props.initialValues.map_latitude);
+    setLongitude(props.initialValues.map_longitude);
+  }
+
   const handlePlace = (latitude, longitude) => {
+    onChangeMapsValue({
+      map_latitude: latitude,
+      map_longitude: longitude,
+    });
     setLatitude(latitude);
     setLongitude(longitude);
   };
@@ -140,16 +155,32 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={EditProfileLogo} width="100" />
+        <ImgLogo src={LocationLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={4} lg={4}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
                 <Field
-                  name="prefix"
+                  id="address_type"
+                  name="address_type"
+                  component={renderSelectField}
+                  label={<FormattedMessage {...messages.addressType} />}
+                  required
+                >
+                  <option value="shipping">Shipping</option>
+                </Field>
+              </div>
+            </Grid>
+            <Grid item xs={4} lg={4} />
+            <Grid item xs={4} lg={4} />
+            <Grid item xs={6} lg={3}>
+              <div style={{ width: '100%', paddingTop: '14px' }}>
+                <Field
+                  id="member_prefix"
+                  name="member_prefix"
                   component={renderSelectField}
                   label={<FormattedMessage {...messages.prefix} />}
                   required
@@ -162,9 +193,19 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
+            <Grid item xs={6} lg={3}>
+              <Field
+                name="member_code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.code} />}
+                required
+              />
+            </Grid>
             <Grid item xs={12} lg={3}>
               <Field
-                name="first_name"
+                name="member_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -174,7 +215,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Field
-                name="last_name"
+                name="member_lastname"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -182,64 +223,114 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={12}>
               <Field
-                name="birthday"
-                component={DateInput}
-                type="date"
-                margin="normal"
-                label={<FormattedMessage {...messages.dateOfBirth} />}
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Field
-                name="mobile"
+                name="address1"
                 component={RenderField}
-                type="number"
+                type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.mobile} />}
+                label={<FormattedMessage {...messages.address1} />}
                 required
               />
             </Grid>
-
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} lg={12}>
               <Field
-                name="code"
+                name="address2"
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.code} />}
-                disabled
+                label={<FormattedMessage {...messages.address2} />}
+                required
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={3} lg={6}>
               <Field
-                name="email"
-                component={RenderField}
-                type="email"
-                margin="normal"
-                label={<FormattedMessage {...messages.email} />}
-                disabled
-              />
-            </Grid>
-
-            <Grid item xs={12} lg={6}>
-              <span style={{ color: 'green' }}>
-                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
-                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
-                เท่านั้น
-              </span>
-              <Field
-                name="line_id"
+                name="province"
                 component={RenderField}
                 type="text"
-                label={<FormattedMessage {...messages.lineId} />}
                 margin="normal"
+                label={<FormattedMessage {...messages.province} />}
+                required
               />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Field
+                name="district"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.district} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Field
+                name="sub_district"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.subDistrict} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Field
+                name="postcode"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.postcode} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Field
+                name="map_latitude"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mapLatitude} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Field
+                name="map_longitude"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mapLongitude} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3} lg={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleLoadMap(true)}
+              >
+                Show Maps
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              {loadMap && (
+                <MapMarker
+                  lat={parseFloat(latitude)}
+                  lng={parseFloat(longitude)}
+                  onExit={handlePlace}
+                />
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              {loadMap && (
+                <div align="center" style={{ marginBottom: '25px' }}>
+                  Position: {latitude}, {longitude}
+                </div>
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 type="submit"
                 fullWidth
@@ -250,7 +341,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <Button
                 fullWidth
                 variant="contained"
@@ -260,7 +351,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={2} md={3}>
               <ButtonLink to="/profile">
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
@@ -279,55 +370,44 @@ EditForm.propTypes = {
   pristine: PropTypes.bool,
   reset: PropTypes.func,
   submitting: PropTypes.bool,
-  onRegister: PropTypes.func,
   initialValues: PropTypes.object,
   errorUpdate: PropTypes.string,
   updateStatus: PropTypes.string,
   clearData: PropTypes.func,
-  onEditMember: PropTypes.func,
+  onEditShipping: PropTypes.func,
+  onChangeMapsValue: PropTypes.func,
 };
 
 const validate = formValues => {
   const errors = {};
 
-  if (!formValues.prefix) {
-    errors.prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
+  if (!formValues.member_prefix) {
+    errors.member_prefix = (
+      <FormattedMessage {...messages.prefixShouldNotEmpty} />
+    );
   }
 
-  if (!formValues.first_name) {
-    errors.first_name = (
+  if (!formValues.member_name) {
+    errors.member_name = (
       <FormattedMessage {...messages.firstNameShouldNotEmpty} />
     );
   }
-  if (!formValues.last_name) {
-    errors.last_name = (
+  if (!formValues.member_lastname) {
+    errors.member_lastname = (
       <FormattedMessage {...messages.lastNameShouldNotEmpty} />
     );
-  }
-  if (!formValues.mobile) {
-    errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
-  }
-  if (!formValues.birthday) {
-    errors.birthday = (
-      <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
-    );
-  }
-  if (typeof formValues.email === 'undefined') {
-    errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
-  } else if (!formValues.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
-    errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
 
   return errors;
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileInit(),
+  initialValues: selectors.makeSelectAddressShippingInit(),
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
-    form: 'editForm',
+    form: 'addressForm',
     validate,
     enableReinitialize: true,
   })(EditForm),
