@@ -16,7 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLineLogin } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { verifyToken } from './actions';
+import * as actions from './actions';
 import messages from './messages';
 
 export function LineLogin(props) {
@@ -48,7 +48,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     verifyTokenLogin: token => {
-      dispatch(verifyToken(token));
+      dispatch(actions.verifyToken(token));
     },
   };
 }

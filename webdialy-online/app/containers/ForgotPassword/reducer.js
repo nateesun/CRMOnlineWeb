@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { INIT_STATE } from './constants';
+import * as constants from './constants';
 
 export const initialState = {};
 
@@ -12,7 +12,7 @@ export const initialState = {};
 const forgotPasswordReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case INIT_STATE:
+      case constants.INIT_STATE:
         break;
     }
   });

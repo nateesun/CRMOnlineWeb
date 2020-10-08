@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import * as types from './constants';
+import * as constants from './constants';
 
 export const initialState = {
   data: {},
@@ -16,26 +16,26 @@ export const initialState = {
 const profileChangePwdReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.INIT_STATE:
+      case constants.INIT_STATE:
         draft.status = '';
         draft.error = '';
         draft.data = {};
         break;
-      case types.INIT_LOAD:
+      case constants.INIT_LOAD:
         draft.email = action.payload;
         break;
-      case types.INIT_LOAD_SUCCESS:
+      case constants.INIT_LOAD_SUCCESS:
         draft.data = action.payload;
         break;
-      case types.INIT_LOAD_ERROR:
+      case constants.INIT_LOAD_ERROR:
         break;
-      case types.UPDATE_PASSWORD:
+      case constants.UPDATE_PASSWORD:
         draft.data = action.payload;
         break;
-      case types.UPDATE_PASSWORD_SUCCESS:
+      case constants.UPDATE_PASSWORD_SUCCESS:
         draft.status = 'Success';
         break;
-      case types.UPDATE_PASSWORD_ERROR:
+      case constants.UPDATE_PASSWORD_ERROR:
         draft.error = action.payload;
         break;
     }

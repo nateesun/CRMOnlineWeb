@@ -2,13 +2,13 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
-import * as types from './constants';
+import * as constants from './constants';
 import * as actions from './actions';
 import { makeSelectMember } from './selectors';
 
 export function* onAddRegisterMember() {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
+    const requestURL = `${constants.publicPath}/api/member`;
     const data = yield select(makeSelectMember());
     const response = yield call(request, requestURL, {
       method: 'POST',
@@ -38,7 +38,7 @@ export function* onAddRegisterMember() {
     });
     if (response.status === 'Success') {
       yield put(actions.addRegisterMemberSuccess());
-      yield put(push(`${types.publicPath}/login`));
+      yield put(push(`${constants.publicPath}/login`));
     } else {
       yield put(actions.addRegisterMemberError('ไม่สามารถบันทึกข้อมูลได้'));
     }
@@ -48,5 +48,5 @@ export function* onAddRegisterMember() {
 }
 
 export default function* registerSaga() {
-  yield takeEvery(types.ADD_REGISTER_MEMBER, onAddRegisterMember);
+  yield takeEvery(constants.ADD_REGISTER_MEMBER, onAddRegisterMember);
 }

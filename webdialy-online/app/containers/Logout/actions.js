@@ -4,10 +4,10 @@
  *
  */
 
-import { INIT_STATE } from './constants';
+import * as constants from './constants';
 
 export function initState() {
   return {
-    type: INIT_STATE,
+    type: constants.INIT_STATE,
   };
 }

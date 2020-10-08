@@ -1,14 +1,13 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
-import { makeSelectLineLoginProfile } from 'containers/LineLogin/selectors';
-import * as types from './constants';
+import * as constants from './constants';
 import * as actions from './actions';
 import * as selects from './selectors';
 
 export function* initLoad() {
   try {
     const { email } = yield select(selects.makeSelectDashboard());
-    const requestURL = `${types.publicPath}/api/member/${email}`;
+    const requestURL = `${constants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
       method: 'GET',
     });
@@ -24,7 +23,7 @@ export function* initLoad() {
 
 export function* loadRedeem() {
   try {
-    const requestURL = `${types.publicPath}/api/redeem`;
+    const requestURL = `${constants.publicPath}/api/redeem`;
     const response = yield call(request, requestURL, {
       method: 'GET',
     });
@@ -42,7 +41,7 @@ export function* createRedeemCode() {
   try {
     const { code } = yield select(selects.makeSelectProfile());
     const { uuid_index, product_code } = yield select(selects.makeSelectRedeemPoint());
-    const requestURL = `${types.publicPath}/api/redeem`;
+    const requestURL = `${constants.publicPath}/api/redeem`;
     const response = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify({
@@ -63,7 +62,7 @@ export function* createRedeemCode() {
 
 // Individual exports for testing
 export default function* dashboardSaga() {
-  yield takeEvery(types.INIT_LOAD, initLoad);
-  yield takeEvery(types.LOAD_REDEEM, loadRedeem);
-  yield takeEvery(types.CREATE_REDEEM, createRedeemCode);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
+  yield takeEvery(constants.LOAD_REDEEM, loadRedeem);
+  yield takeEvery(constants.CREATE_REDEEM, createRedeemCode);
 }

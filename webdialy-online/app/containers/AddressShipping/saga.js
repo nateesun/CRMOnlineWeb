@@ -1,13 +1,13 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
-import * as types from './constants';
+import * as constants from './constants';
 import * as actions from './actions';
 import * as selects from './selectors';
 
 export function* initLoad() {
   try {
     const { member_code } = yield select(selects.makeSelectAddressShipping());
-    const requestURL = `${types.publicPath}/api/shipping/${member_code}`;
+    const requestURL = `${constants.publicPath}/api/shipping/${member_code}`;
     try {
       const response = yield call(request, requestURL, {
         method: 'GET',
@@ -23,7 +23,7 @@ export function* initLoad() {
 
 export function* onEditShipping() {
   try {
-    const requestURL = `${types.publicPath}/api/shipping`;
+    const requestURL = `${constants.publicPath}/api/shipping`;
     const addressData = yield select(selects.makeSelectAddressData());
     const response = yield call(request, requestURL, {
       method: 'PUT',
@@ -41,6 +41,6 @@ export function* onEditShipping() {
 
 // Individual exports for testing
 export default function* addressShippingSaga() {
-  yield takeEvery(types.INIT_LOAD, initLoad);
-  yield takeEvery(types.EDIT_SHIPPING, onEditShipping);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
+  yield takeEvery(constants.EDIT_SHIPPING, onEditShipping);
 }

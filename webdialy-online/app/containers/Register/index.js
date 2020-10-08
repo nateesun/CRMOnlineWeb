@@ -20,7 +20,7 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import RegisterForm from './RegisterForm';
-import { initState, addRegisterMember } from './actions';
+import * as actions from './actions';
 
 export function Register(props) {
   useInjectReducer({ key: 'register', reducer });
@@ -48,8 +48,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRegisterMember: member => dispatch(addRegisterMember(member)),
-    clearData: () => dispatch(initState()),
+    onRegisterMember: member => dispatch(actions.addRegisterMember(member)),
+    clearData: () => dispatch(actions.initState()),
   };
 }
 

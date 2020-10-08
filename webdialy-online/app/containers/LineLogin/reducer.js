@@ -4,12 +4,7 @@
  *
  */
 import produce from 'immer';
-import {
-  INIT_STATE,
-  VERIFY_TOKEN,
-  VERIFY_TOKEN_SUCCESS,
-  VERIFY_TOKEN_ERROR,
-} from './constants';
+import * as constants from './constants';
 
 export const initialState = {
   token: null,
@@ -20,17 +15,17 @@ export const initialState = {
 const lineLoginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case INIT_STATE:
+      case constants.INIT_STATE:
         draft.token = null;
         draft.profile = {};
         break;
-      case VERIFY_TOKEN:
+      case constants.VERIFY_TOKEN:
         draft.token = action.payload.token;
         break;
-      case VERIFY_TOKEN_SUCCESS:
+      case constants.VERIFY_TOKEN_SUCCESS:
         draft.profile = action.payload.data;
         break;
-      case VERIFY_TOKEN_ERROR:
+      case constants.VERIFY_TOKEN_ERROR:
         draft.error = action.payload;
         break;
     }
