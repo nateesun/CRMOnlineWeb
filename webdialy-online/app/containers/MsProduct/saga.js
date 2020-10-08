@@ -1,16 +1,18 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
 const fetch = require('node-fetch');
-const host_upload = 'http://localhost:5000';
 
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/product`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.data) {
@@ -27,10 +29,12 @@ export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const file = yield select(selectors.makeSelectFileUpload());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: `${host_upload}/images/${file.name}`}),
+      body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
     });
     if (response) {
       yield put(actions.createItemSuccess(response));
@@ -45,8 +49,10 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'PUT',
       body: JSON.stringify(data),
     });
@@ -63,8 +69,10 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/product/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'DELETE',
       body: JSON.stringify(data),
     });
@@ -88,7 +96,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${host_upload}/api/upload`, options)
+    const response = yield fetch(`/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {

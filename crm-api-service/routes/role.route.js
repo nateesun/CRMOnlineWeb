@@ -3,7 +3,7 @@ const router = express.Router()
 const Task = require("../models/Role.model")
 
 router.get("/", (req, res, next) => {
-  Task.findAll((err, response) => {
+  Task(req.headers.database).findAll((err, response) => {
     if (err) {
       res
         .status(500)
@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
 })
 
 router.get("/:id", (req, res, next) => {
-  Task.findById(req.params.id, (err, response) => {
+  Task(req.headers.database).findById(req.params.id, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -37,7 +37,7 @@ router.get("/:id", (req, res, next) => {
 })
 
 router.post("/", (req, res, next) => {
-  Task.create(req.body, (err, response)=>{
+  Task(req.headers.database).create(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
@@ -54,7 +54,7 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/", (req, res, next) => {
-  Task.update(req.body, (err, response)=>{
+  Task(req.headers.database).update(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
@@ -71,7 +71,7 @@ router.put("/", (req, res, next) => {
 })
 
 router.delete("/:id", (req, res, next) => {
-  Task.delete(req.params.id, (err, response) => {
+  Task(req.headers.database).delete(req.params.id, (err, response) => {
     if (err) {
       res
         .status(500)

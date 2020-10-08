@@ -50,6 +50,7 @@ export default function request(url, options) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+    database: options.database || '',
   };
   if (options.headers) {
     headers = options.headers;

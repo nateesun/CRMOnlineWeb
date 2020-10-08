@@ -45,7 +45,6 @@ const useStyles = makeStyles(theme => ({
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
-  const [img_host, setImgHost] = useState('http://localhost:5000/images')
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
 
@@ -239,7 +238,7 @@ const NewItem = props => {
             {showImg && (
                 <Paper elevation={3} className={classes.paddingImg}>
                   <img
-                    src={`${img_host}/${file.name}`}
+                    src={`/images/${file.name}`}
                     width="250"
                     alt=""
                   />

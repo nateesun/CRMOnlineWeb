@@ -6,7 +6,7 @@ const Task = require("../models/Login.model")
 
 router.get("/:line_id", (req, res, next) => {
   const lineId = req.params.line_id
-  Task.getLineId(lineId, (err, response) => {
+  Task(req.headers.database).getLineId(lineId, (err, response) => {
     if (err) {
       res
         .status(500)

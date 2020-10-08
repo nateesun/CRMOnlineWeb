@@ -21,7 +21,6 @@ const PaymentForm = (props) => {
   const classes = useStyles();
   const { carts, carts_detail } = props.cartList;
   const { handleSubmit, pristine, reset, submitting } = props;
-  const [img_host, setImgHost] = useState('http://localhost:5000/images')
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
 
@@ -127,7 +126,7 @@ const PaymentForm = (props) => {
           </Grid>
           <Grid item xs={12}>
             {showImg && <div align="center">
-              <img src={`${img_host}/${file.name}`} width={150} alt="" /><br /><br />
+              <img src={`/images/${file.name}`} width={150} alt="" /><br /><br />
                รูปสลิปที่โอนเงิน<br />
             </div>}
           </Grid>

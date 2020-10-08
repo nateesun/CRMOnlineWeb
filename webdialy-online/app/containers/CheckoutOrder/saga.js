@@ -1,17 +1,19 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
 const fetch = require('node-fetch');
-const host_upload = 'http://localhost:5000';
 
 export function* loadCartList() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/carts/${cart_no}`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.data) {
@@ -27,8 +29,10 @@ export function* loadCartList() {
 export function* loadMemberShipping() {
   try {
     const member_code = yield select(selectors.makeSelectMemberCode());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/shipping/${member_code}`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.data) {
@@ -51,7 +55,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${host_upload}/api/upload`, options)
+    const response = yield fetch(`/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {
@@ -86,8 +90,10 @@ export function* onDeleteItemCart() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
     const { product_code } = yield select(selectors.makeSelectProduct());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
+      database,
       method: 'DELETE',
       body: JSON.stringify({ cart_no, product_code }),
     });
@@ -104,9 +110,11 @@ export function* onDeleteItemCart() {
 export function* onUpdateItemCart() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const { product_code, qty } = yield select(selectors.makeSelectProduct());
     const requestURL = `${constants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
+      database,
       method: 'PATCH',
       body: JSON.stringify({ cart_no, product_code, qty }),
     });

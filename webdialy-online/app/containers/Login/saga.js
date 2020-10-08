@@ -3,14 +3,16 @@ import { push } from 'connected-react-router';
 import request from 'utils/request';
 import * as constants from './constants';
 import * as actions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function* onValidLogin() {
   try {
     const requestURL = `${constants.publicPath}/api/login`;
-    const loginForm = yield select(selects.makeSelectLogin());
+    const loginForm = yield select(selectors.makeSelectLogin());
+    const database = yield select(selectors.makeSelectDatabase());
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });

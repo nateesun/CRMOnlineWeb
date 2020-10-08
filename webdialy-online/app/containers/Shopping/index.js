@@ -16,6 +16,7 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import * as constants from './constants';
 
 export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });

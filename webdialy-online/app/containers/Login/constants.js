@@ -6,6 +6,7 @@
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 
 export const INIT_STATE = 'app/Login/INIT_STATE';
+export const INIT_DATABASE = 'app/Login/INIT_DATABASE';
 
 export const CHECK_LOGIN = 'containers/Login/CHECK_LOGIN';
 export const CHECK_LOGIN_SUCCESS = 'containers/Login/CHECK_LOGIN_SUCCESS';

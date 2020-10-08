@@ -24,66 +24,46 @@ const useStyles = makeStyles(theme => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));
-
-const image = "http://localhost:5000/images/food1.jpg";
 const tileData = [
   {
     id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image1',
   },
   {
     id: 2,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image2',
   },
   {
     id: 3,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image3',
   },
   {
     id: 4,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image4',
   },
   {
     id: 5,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image5',
   },
   {
     id: 6,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image6',
   },
   {
     id: 7,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image7',
   },
   {
     id: 8,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image8',
   },
   {
     id: 9,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image9',
   },
 ];
 
-export default function GroupProduct() {
+export default function GroupProduct(props) {
   const classes = useStyles();
 
   return (
@@ -91,7 +71,7 @@ export default function GroupProduct() {
       <ProductTopic label="กลุ่มสินค้า" bgColor="#f9f972" textColor="black" />
       <GridList className={classes.gridList}>
         {tileData.map(tile => (
-          <img src="http://localhost:5000/images/food1.jpg" alt={tile.title} />
+          <img src={`/images/food1.jpg`} alt={tile.title} />
         ))}
       </GridList>
     </div>

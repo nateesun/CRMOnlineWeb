@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
@@ -34,9 +34,9 @@ Dashboard.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selects.makeSelectProfile(),
-  listRedeem: selects.makeSelectRedeem(),
-  redeemPoint: selects.makeSelectRedeemPoint(),
+  profile: selectors.makeSelectProfile(),
+  listRedeem: selectors.makeSelectRedeem(),
+  redeemPoint: selectors.makeSelectRedeemPoint(),
 });
 
 function mapDispatchToProps(dispatch) {

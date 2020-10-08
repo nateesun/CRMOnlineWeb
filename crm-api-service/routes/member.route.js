@@ -5,7 +5,7 @@ const TaskLogin = require("../models/Login.model")
 const moment = require("moment")
 
 router.get("/", (req, res, next) => {
-  Task.findAll((err, response) => {
+  Task(req.headers.database).findAll((err, response) => {
     if (err) {
       res
         .status(500)
@@ -23,7 +23,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/search", (req, res, next) => {
   const { key, value } = req.body;
-  Task.searchData(key, value, (err, response) => {
+  Task(req.headers.database).searchData(key, value, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -40,7 +40,7 @@ router.post("/search", (req, res, next) => {
 })
 
 router.get("/:email", (req, res, next) => {
-  Task.findByEmail(req.params.email, (err, response) => {
+  Task(req.headers.database).findByEmail(req.params.email, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -75,11 +75,11 @@ router.post("/", (req, res, next) => {
     password: Buffer.from(password).toString('base64'),
     member_active: 'Y'
   }
-  Task.create(memberModel, (err, response) => {
+  Task(req.headers.database).create(memberModel, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      TaskLogin.create(loginModel, (err1, response1) => {
+      TaskLogin(req.headers.database).create(loginModel, (err1, response1) => {
         if (err1) {
           res1.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
         } else {
@@ -96,7 +96,7 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/", (req, res, next) => {
-  Task.update(req.body, (err, response)=>{
+  Task(req.headers.database).update(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
@@ -113,7 +113,7 @@ router.put("/", (req, res, next) => {
 })
 
 router.delete("/:id", (req, res, next) => {
-  Task.delete(req.params.id, (err, response) => {
+  Task(req.headers.database).delete(req.params.id, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -131,7 +131,7 @@ router.delete("/:id", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   const { token } = req.body
-  Task.verifyTokenLine(token, (err, response) => {
+  Task(req.headers.database).verifyTokenLine(token, (err, response) => {
     if (err) {
       res
         .status(500)

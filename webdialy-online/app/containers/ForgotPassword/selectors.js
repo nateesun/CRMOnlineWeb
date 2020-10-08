@@ -22,5 +22,4 @@ const makeSelectForgotPassword = () =>
     substate => substate,
   );
 
-export default makeSelectForgotPassword;
-export { selectForgotPasswordDomain };
+export { selectForgotPasswordDomain, makeSelectForgotPassword };

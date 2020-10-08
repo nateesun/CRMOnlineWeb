@@ -7,11 +7,12 @@ const data = require(path);
 console.log('config file from ', path);
 
 data.map(config => {
+    console.log('mysql-connect call:');
+    
     const pool = mysql.createPool({
       host: config.host,
       user: config.user,
       password: config.password,
-      database: config.database,
       port: config.port,
       connectionLimit: config.connectionLimit,
       connectTimeout: config.connectTimeout,

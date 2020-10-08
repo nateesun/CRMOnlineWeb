@@ -16,7 +16,7 @@ import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import EditForm from './EditForm';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function ProfileEdit(props) {
   useInjectReducer({ key: 'profileEdit', reducer });
@@ -38,9 +38,9 @@ ProfileEdit.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selects.makeSelectProfile(),
-  updateStatus: selects.makeUpdateStatus(),
-  errorUpdate: selects.makeErrorUpdate(),
+  profile: selectors.makeSelectProfile(),
+  updateStatus: selectors.makeUpdateStatus(),
+  errorUpdate: selectors.makeErrorUpdate(),
 });
 
 function mapDispatchToProps(dispatch) {

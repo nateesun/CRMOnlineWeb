@@ -12,7 +12,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectForgotPassword from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ForgotForm from './ForgotForm';
@@ -33,7 +33,7 @@ ForgotPassword.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  forgotPassword: makeSelectForgotPassword(),
+  forgotPassword: selectors.makeSelectForgotPassword(),
 });
 
 function mapDispatchToProps(dispatch) {
