@@ -23,9 +23,9 @@ export function Login(props) {
   useInjectSaga({ key: 'login', saga });
 
   useEffect(()=>{
-    const db = new URLSearchParams(props.location.search).get('db')||'';
-    if(db){
-      props.initDatabase(db);
+    const data = new URLSearchParams(props.location.search).get('data')||'';
+    if(data){
+      props.initDatabase(data);
     }
   }, [])
 

@@ -126,7 +126,7 @@ const PaymentForm = (props) => {
           </Grid>
           <Grid item xs={12}>
             {showImg && <div align="center">
-              <img src={`${props.imgHost}/images/${file.name}`} width={150} alt="" /><br /><br />
+              <img src={`/images/${file.name}`} width={150} alt="" /><br /><br />
                รูปสลิปที่โอนเงิน<br />
             </div>}
           </Grid>

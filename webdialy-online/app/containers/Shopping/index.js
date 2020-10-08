@@ -40,7 +40,6 @@ const mapStateToProps = createStructuredSelector({
   productList: selectors.makeSelectProductList(),
   profile: dashboardSelectors.makeSelectProfile(),
   cart: selectors.makeSelectCart(),
-  imgHost: constants.apiHostService,
 });
 
 function mapDispatchToProps(dispatch) {

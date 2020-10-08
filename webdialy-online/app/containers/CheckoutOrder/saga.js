@@ -55,7 +55,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${constants.apiHostService}/api/upload`, options)
+    const response = yield fetch(`/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {

@@ -44,7 +44,6 @@ const mapStateToProps = createStructuredSelector({
   cart: shoppingSelectors.makeSelectCart(),
   paymentData: selectors.makeSelectPaymentData(),
   imgValid: selectors.makeSelectSlipValidateStatus(),
-  imgHost: constants.apiHostService,
 });
 
 function mapDispatchToProps(dispatch) {

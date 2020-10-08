@@ -1,13 +1,22 @@
 module.exports = () => {
-    const module = {};
+  const module = {}
 
-    module.getDB = (db, table) => {
-        const database = db ? `${db}.`: '';
-        const table_name = `${database}${table}`;
-        return table_name;
-    }
+  const encodeBase64 = (data) => {
+    return Buffer.from(data).toString("base64")
+  }
 
-    module.zeroPad = (num, places) => String(num).padStart(places, '0')
+  const decodeBase64 = (data) => {
+    return Buffer.from(data, "base64").toString("utf-8")
+  }
 
-    return module
+  module.getDB = (dbTarget, table) => {
+    const db = decodeBase64(dbTarget)
+    const database = db ? `${db}.` : ""
+    const table_name = `${database}${table}`
+    return table_name
+  }
+
+  module.zeroPad = (num, places) => String(num).padStart(places, "0")
+
+  return module
 }

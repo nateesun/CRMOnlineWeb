@@ -34,7 +34,7 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: `${constants.apiHostService}/images/${file.name}`}),
+      body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
     });
     if (response) {
       yield put(actions.createItemSuccess(response));
@@ -96,7 +96,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${constants.apiHostService}/api/upload`, options)
+    const response = yield fetch(`/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {

@@ -17,7 +17,6 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
-import * as constants from './constants';
 
 export function MsPromotion(props) {
   useInjectReducer({ key: 'msPromotion', reducer });
@@ -48,7 +47,6 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
-  imgHost: constants.apiHostService,
 });
 
 function mapDispatchToProps(dispatch) {

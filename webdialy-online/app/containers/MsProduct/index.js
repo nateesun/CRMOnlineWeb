@@ -48,7 +48,6 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
-  imgHost: constants.apiHostService,
 });
 
 function mapDispatchToProps(dispatch) {

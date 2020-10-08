@@ -31,13 +31,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  const { imgHost } = props;
   const classes = useStyles();
   const [expanded] = useState(false);
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image={`${imgHost}/images/food1.jpg`} title="Paella dish" />
+      <CardMedia className={classes.media} image={`/images/food1.jpg`} title="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           aaa
