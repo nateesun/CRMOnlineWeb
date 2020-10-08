@@ -14,6 +14,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import Thanks from './images/thanks.jpg';
 const QRCode = require("qrcode.react")
+import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -108,7 +109,7 @@ export default function CheckoutContent(props) {
                       marginTop: '10px',
                     }}
                   />
-                  <ButtonLink to="/shopping">
+                  <ButtonLink to={`${constants.publicPath}/shopping`}>
                     <Button color="primary" variant="contained">
                       กลับหน้าสั่งสินค้า
                     </Button>
@@ -134,7 +135,7 @@ export default function CheckoutContent(props) {
                     {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                   </Button>
                 </div>
-                <ButtonLink to="/shopping">
+                <ButtonLink to={`${constants.publicPath}/shopping`}>
                   <Button variant="contained">
                     กลับหน้าสั่งสินค้า
                   </Button>

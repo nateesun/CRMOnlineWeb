@@ -1,5 +1,5 @@
 ---
 # environment: default
-APP_BASE_PATH: /company001
-APP_NAME: company001
+APP_BASE_PATH: /web-daily-online
+APP_NAME: web-daily-online
 PORT: 3000

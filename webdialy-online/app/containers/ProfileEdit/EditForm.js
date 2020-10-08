@@ -21,6 +21,7 @@ import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
 import * as selectors from './selectors';
+import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -261,7 +262,7 @@ const EditForm = props => {
               </Button>
             </Grid>
             <Grid item xs={3} md={3}>
-              <ButtonLink to="/profile">
+              <ButtonLink to={`${constants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>

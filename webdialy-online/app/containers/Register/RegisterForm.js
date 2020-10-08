@@ -15,6 +15,7 @@ import SweetAlert from 'sweetalert2-react';
 import styled from 'styled-components';
 import messages from './messages';
 import RegisterLogo from '../../images/register.png';
+import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -210,7 +211,7 @@ const RegisterForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <ButtonLink to="/login">
+              <ButtonLink to={`${constants.publicPath}/login`}>
                 <FormattedMessage {...messages.backLogin} />
               </ButtonLink>
             </Grid>

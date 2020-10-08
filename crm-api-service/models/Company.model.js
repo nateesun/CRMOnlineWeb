@@ -71,5 +71,5 @@ module.exports = db => {
     })
   }
 
-  return mudule
+  return module
 }

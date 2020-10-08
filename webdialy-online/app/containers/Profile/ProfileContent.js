@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import ButtonLink from 'components/ButtonLink';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import * as constants from './constants';
 
 const Label = styled.span`
   border: 0px solid;
@@ -162,17 +163,17 @@ export default function ProfileContent(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <ButtonLink to="/profile-change-pwd">
+        <ButtonLink to={`${constants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />
           </Button>
         </ButtonLink>
-        <ButtonLink to="/profile-edit">
+        <ButtonLink to={`${constants.publicPath}/profile-edit`}>
           <Button variant="contained" color="primary" size="small">
             <FormattedMessage {...messages.btnEditProfile} />
           </Button>
         </ButtonLink>
-        <ButtonLink to="/profile-shipping">
+        <ButtonLink to={`${constants.publicPath}/profile-shipping`}>
           <Button variant="contained" size="small">
             <FormattedMessage {...messages.headerEditShipping} />
           </Button>
