@@ -6,6 +6,7 @@
 import produce from 'immer';
 const { v4 } = require('uuid');
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   profile: {},
@@ -23,6 +24,7 @@ export const initialState = {
 const dashboardReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
         draft.profile= {};
         draft.redeem= [];

@@ -5,6 +5,7 @@
  */
 import produce from 'immer';
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {};
 
@@ -12,6 +13,7 @@ export const initialState = {};
 const googleMapReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
         break;
     }
