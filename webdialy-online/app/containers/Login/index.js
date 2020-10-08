@@ -20,7 +20,7 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './LoginForm';
-import { checkLogin, defaultAction } from './actions';
+import { checkLogin, initState } from './actions';
 
 export function Login(props) {
   useInjectReducer({ key: 'login', reducer });
@@ -51,7 +51,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(checkLogin(email, password));
     },
     clearData: () => {
-      dispatch(defaultAction());
+      dispatch(initState());
     },
   };
 }

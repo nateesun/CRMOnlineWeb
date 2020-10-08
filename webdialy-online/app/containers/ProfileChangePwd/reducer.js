@@ -16,12 +16,10 @@ export const initialState = {
 const profileChangePwdReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case types.INIT_STATE:
         draft.status = '';
         draft.error = '';
-        draft.data.old_password = '';
-        draft.data.new_password = '';
-        draft.data.confirm_password = '';
+        draft.data = {};
         break;
       case types.INIT_LOAD:
         draft.email = action.payload;

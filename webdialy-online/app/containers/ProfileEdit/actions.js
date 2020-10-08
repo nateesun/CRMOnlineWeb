@@ -6,9 +6,9 @@
 
 import * as types from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: types.DEFAULT_ACTION,
+    type: types.INIT_STATE,
   };
 }
 

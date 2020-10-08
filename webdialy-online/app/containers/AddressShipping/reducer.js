@@ -17,7 +17,7 @@ export const initialState = {
 const addressShippingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case types.INIT_STATE:
         draft.status = '';
         draft.error = '';
         draft.data = {};

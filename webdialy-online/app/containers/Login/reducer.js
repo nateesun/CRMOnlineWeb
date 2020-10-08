@@ -24,9 +24,11 @@ export const initialState = {
 const loginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case types.INIT_STATE:
         draft.loginForm = {};
+        draft.response = {};
         draft.profile = {};
+        draft.loggedIn = false;
         draft.error = '';
         break;
       case types.CHECK_LOGIN:

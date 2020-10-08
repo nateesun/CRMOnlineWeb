@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import {
-  DEFAULT_ACTION,
+  INIT_STATE,
   VERIFY_TOKEN,
   VERIFY_TOKEN_SUCCESS,
   VERIFY_TOKEN_ERROR,
@@ -20,7 +20,9 @@ export const initialState = {
 const lineLoginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case INIT_STATE:
+        draft.token = null;
+        draft.profile = {};
         break;
       case VERIFY_TOKEN:
         draft.token = action.payload.token;

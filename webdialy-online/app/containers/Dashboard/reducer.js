@@ -23,6 +23,13 @@ export const initialState = {
 const dashboardReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case types.INIT_STATE:
+        draft.profile= {};
+        draft.redeem= [];
+        draft.redeemPoint= {};
+        draft.email= '';
+        draft.error= '';
+        break;
       case types.INIT_LOAD:
         draft.email = action.payload;
         break;

@@ -5,15 +5,15 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  INIT_STATE,
   VERIFY_TOKEN,
   VERIFY_TOKEN_SUCCESS,
   VERIFY_TOKEN_ERROR,
 } from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: INIT_STATE,
   };
 }
 

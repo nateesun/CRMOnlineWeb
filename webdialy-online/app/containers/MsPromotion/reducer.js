@@ -32,6 +32,14 @@ export const initialState = {
 const msPromotionReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.INIT_STATE:
+        draft.list= [];
+        draft.data= {};
+        draft.page= 'LIST';
+        draft.img_upload= null;
+        draft.currentId= '';
+        draft.response= {};
+        break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;
         draft.response.status = '';

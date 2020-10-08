@@ -29,6 +29,18 @@ export const initialState = {
 const checkoutReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.INIT_STATE:
+        draft.cartList = [];
+        draft.cart_no = '';
+        draft.product = {};
+        draft.member_code = '';
+        draft.memberShipping= {};
+        draft.paymentData= {};
+        draft.img_upload= null;
+        draft.slipFileName= '';
+        draft.slipValidateStatus= '';
+        draft.response = {};
+        break;
       case constants.LOAD_CART:
         draft.cart_no = action.payload;
         break;

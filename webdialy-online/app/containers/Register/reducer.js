@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import {
-  DEFAULT_ACTION,
+  INIT_STATE,
   ADD_REGISTER_MEMBER,
   ADD_REGISTER_MEMBER_ERROR,
   ADD_REGISTER_MEMBER_SUCCESS,
@@ -31,8 +31,8 @@ export const initialState = {
 const registerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
-        draft.member = {};
+      case INIT_STATE:
+        draft.data = {};
         draft.status = '';
         draft.error = '';
         break;

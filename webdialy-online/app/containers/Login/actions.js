@@ -5,7 +5,7 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  INIT_STATE,
   CHECK_LOGIN,
   CHECK_LOGIN_SUCCESS,
   CHECK_LOGIN_ERROR,
@@ -16,9 +16,9 @@ import {
   LOAD_PROFILE_TOKEN,
 } from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: INIT_STATE,
   };
 }
 

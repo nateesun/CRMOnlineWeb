@@ -5,15 +5,15 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  INIT_STATE,
   ADD_REGISTER_MEMBER,
   ADD_REGISTER_MEMBER_SUCCESS,
   ADD_REGISTER_MEMBER_ERROR,
 } from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: INIT_STATE,
   };
 }
 export function addRegisterMember(payload) {

@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import { initState } from '../actions';
+import { INIT_STATE } from '../constants';
 
 describe('AddressShipping actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('Initial state Action', () => {
+    it('has a type of INIT_STATE', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: INIT_STATE,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(initState()).toEqual(expected);
     });
   });
 });

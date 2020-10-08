@@ -47,6 +47,12 @@ export const initialState = {
 const shoppingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.INIT_STATE:
+        draft.productList= [];
+        draft.cart= {};
+        draft.itemCart= {};
+        draft.response= {};
+        break;
       case constants.LOAD_PRODUCT:
         break;
       case constants.LOAD_PRODUCT_SUCCESS:

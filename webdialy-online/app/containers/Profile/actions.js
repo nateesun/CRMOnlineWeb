@@ -6,6 +6,11 @@
 
 import * as types from './constants';
 
+export function initState() {
+  return {
+    type: types.INIT_STATE,
+  };
+}
 export function initLoad(payload) {
   return {
     type: types.INIT_LOAD,
