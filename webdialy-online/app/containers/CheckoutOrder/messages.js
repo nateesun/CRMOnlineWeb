@@ -45,6 +45,10 @@ export default defineMessages({
     id: `${scope}.transferAmtShouldMoreZero`,
     defaultMessage: 'Transfer amount should more than 1',
   },
+  transferAmtShouldEqualAmount: {
+    id: `${scope}.transferAmtShouldEqualAmount`,
+    defaultMessage: 'Amount should equal Net total amount',
+  },
   nameShouldNotEmpty: {
     id: `${scope}.nameShouldNotEmpty`,
     defaultMessage: 'Name should not empty',

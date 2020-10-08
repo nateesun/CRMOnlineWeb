@@ -25,3 +25,11 @@ export const SET_PAYMENT_DATA_ERROR = 'app/Checkout/SET_PAYMENT_DATA_ERROR';
 export const CHECK_SLIP = 'app/Checkout/CHECK_SLIP';
 export const CHECK_SLIP_SUCCESS = 'app/Checkout/CHECK_SLIP_SUCCESS';
 export const CHECK_SLIP_ERROR = 'app/Checkout/CHECK_SLIP_ERROR';
+
+export const DELETE_ITEM_CART = 'app/Checkout/DELETE_ITEM_CART';
+export const DELETE_ITEM_CART_SUCCESS = 'app/Checkout/DELETE_ITEM_CART_SUCCESS';
+export const DELETE_ITEM_CART_ERROR = 'app/Checkout/DELETE_ITEM_CART_ERROR';
+
+export const UPDATE_ITEM_CART = 'app/Checkout/UPDATE_ITEM_CART';
+export const UPDATE_ITEM_CART_SUCCESS = 'app/Checkout/UPDATE_ITEM_CART_SUCCESS';
+export const UPDATE_ITEM_CART_ERROR = 'app/Checkout/UPDATE_ITEM_CART_ERROR';

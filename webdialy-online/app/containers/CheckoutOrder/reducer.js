@@ -8,6 +8,10 @@ import * as constants from './constants';
 
 export const initialState = {
   cart_no: '',
+  product: {
+    product_code: '',
+    qty: 0,
+  },
   cartList: [],
   member_code: '',
   memberShipping: {},
@@ -82,6 +86,14 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.CHECK_SLIP_ERROR:
         draft.slipValidateStatus = 'Error';
         draft.response.message = 'Validate slip file image error!';
+        break;
+      case constants.DELETE_ITEM_CART:
+        draft.product.product_code = action.payload;
+      case constants.DELETE_ITEM_CART_ERROR:
+        break;
+      case constants.UPDATE_ITEM_CART:
+        draft.product = action.payload;
+      case constants.UPDATE_ITEM_CART_ERROR:
         break;
     }
   });

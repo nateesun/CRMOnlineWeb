@@ -105,3 +105,45 @@ export function checkSlipError(payload) {
     payload,
   };
 }
+
+export function deleteItemCart(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART,
+    payload,
+  };
+}
+
+export function deleteItemCartSuccess(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+
+export function deleteItemCartError(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART_ERROR,
+    payload,
+  };
+}
+
+export function updateItemCart(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART,
+    payload,
+  };
+}
+
+export function updateItemCartSuccess(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+
+export function updateItemCartError(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_ERROR,
+    payload,
+  };
+}

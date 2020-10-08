@@ -82,9 +82,49 @@ export function* validateSlipUpload() {
   }
 }
 
+export function* onDeleteItemCart() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const { product_code } = yield select(selectors.makeSelectProduct());
+    const requestURL = `${constants.publicPath}/api/carts_detail`;
+    let response = yield call(request, requestURL, {
+      method: 'DELETE',
+      body: JSON.stringify({ cart_no, product_code }),
+    });
+    if (response.status === 'Success') {
+      yield loadCartList();
+    } else {
+      yield put(actions.deleteItemCartError('Delete item cart success'));
+    }
+  } catch (err) {
+    yield put(actions.deleteItemCartError(err));
+  }
+}
+
+export function* onUpdateItemCart() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const { product_code, qty } = yield select(selectors.makeSelectProduct());
+    const requestURL = `${constants.publicPath}/api/carts_detail`;
+    let response = yield call(request, requestURL, {
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no, product_code, qty }),
+    });
+    if (response.status === 'Success') {
+      yield loadCartList();
+    } else {
+      yield put(actions.updateItemCartError('Update item cart success'));
+    }
+  } catch (err) {
+    yield put(actions.updateItemCartError(err));
+  }
+}
+
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
+  yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
+  yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
 }

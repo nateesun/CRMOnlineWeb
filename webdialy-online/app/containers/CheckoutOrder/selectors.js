@@ -31,6 +31,11 @@ const makeSelectCartsNo = () =>
     selectCheckoutDomain,
     substate => substate.cart_no,
   );
+const makeSelectProduct = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.product,
+  );
 const makeSelectMemberCode = () =>
   createSelector(
     selectCheckoutDomain,
@@ -73,4 +78,5 @@ export {
   makeSelectPaymentData,
   makeSelectSlipFile,
   makeSelectSlipValidateStatus,
+  makeSelectProduct,
 };

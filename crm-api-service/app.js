@@ -21,6 +21,7 @@ const redeemRouter = require("./routes/redeem.route")
 
 // router for shopping
 const cartsRouter = require("./routes/carts.route")
+const cartsDetailRouter = require("./routes/carts_detail.route")
 const memberShippingRouter = require("./routes/member_shipping.route")
 const slipImageRouter = require("./routes/slip_image.route")
 
@@ -77,6 +78,7 @@ app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRoute
 
 // order shopping
 app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)
+app.use("/api/carts_detail", basicAuth({ users: { admin: fixPassword } }), cartsDetailRouter)
 app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
 app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter(options))
 
