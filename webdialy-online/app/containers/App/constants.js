@@ -8,6 +8,7 @@
  * Follow this format:
  */
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const apiHostService = process.env.API_HOST_SERVICE || 'http://localhost:5000';
 
 export const PATH_LOGIN = `${publicPath}/login`;
 export const PATH_LINE_LOGIN = `${publicPath}/line_login/:token`;

@@ -6,7 +6,6 @@ import * as constants from './constants';
 import * as actions from './actions';
 
 const fetch = require('node-fetch');
-const host_upload = 'http://localhost:5000';
 
 export function* initLoad() {
   try {
@@ -35,7 +34,7 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: `${host_upload}/images/${file.name}`}),
+      body: JSON.stringify({...data, img_path: `${constants.apiHostService}/images/${file.name}`}),
     });
     if (response) {
       yield put(actions.createItemSuccess(response));
@@ -97,7 +96,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${host_upload}/api/upload`, options)
+    const response = yield fetch(`${constants.apiHostService}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {

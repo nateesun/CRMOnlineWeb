@@ -18,6 +18,7 @@ import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
 import * as actions from './actions';
+import * as constants from './constants';
 
 export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
@@ -43,6 +44,7 @@ const mapStateToProps = createStructuredSelector({
   cart: shoppingSelectors.makeSelectCart(),
   paymentData: selectors.makeSelectPaymentData(),
   imgValid: selectors.makeSelectSlipValidateStatus(),
+  imgHost: constants.apiHostService,
 });
 
 function mapDispatchToProps(dispatch) {

@@ -6,7 +6,6 @@ import * as constants from './constants';
 import * as actions from './actions';
 
 const fetch = require('node-fetch');
-const host_upload = 'http://localhost:5000';
 
 export function* loadCartList() {
   try {
@@ -56,7 +55,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${host_upload}/api/upload`, options)
+    const response = yield fetch(`${constants.apiHostService}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {
