@@ -10,7 +10,7 @@ const generateRedeemCode = () => {
 }
 
 router.get("/", (req, res, next) => {
-  Task.findShowUser((err, response) => {
+  Task(req.headers.database).findShowUser((err, response) => {
     if (err) {
       res
         .status(500)
@@ -28,7 +28,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/", (req, res, next) => {
   const { uuid_index, product_code, member_code_use } = req.body;
-  Task.findByCode(product_code, (err1, response) => {
+  Task(req.headers.database).findByCode(product_code, (err1, response) => {
     if(err1) {
       res.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
     }
@@ -49,7 +49,7 @@ router.post("/", (req, res, next) => {
       status_use: 'in_progress',// in_progress|success|expired
       active: 'Y',// Y|N
     }
-    TaskRedeem.create(payload, (err, response) => {
+    TaskRedeem(req.headers.database).create(payload, (err, response) => {
       if (err) {
         res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
       } else {

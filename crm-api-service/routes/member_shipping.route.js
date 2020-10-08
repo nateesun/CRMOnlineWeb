@@ -5,7 +5,7 @@ const router = express.Router()
 const Task = require("../models/MemberShipping.model")
 
 router.get("/", (req, res, next) => {
-  Task.findAll((err, response) => {
+  Task(req.headers.database).findAll((err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
@@ -21,7 +21,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/search", (req, res, next) => {
   const { key, value } = req.body;
-  Task.searchData(key, value, (err, response) => {
+  Task(req.headers.database).searchData(key, value, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
@@ -36,7 +36,7 @@ router.post("/search", (req, res, next) => {
 })
 
 router.get("/:member_code", (req, res, next) => {
-  Task.findByMemberCode(req.params.member_code, (err, response) => {
+  Task(req.headers.database).findByMemberCode(req.params.member_code, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
@@ -51,7 +51,7 @@ router.get("/:member_code", (req, res, next) => {
 })
 
 router.post("/", (req, res, next) => {
-  Task.create(req.body, (err, response)=>{
+  Task(req.headers.database).create(req.body, (err, response)=>{
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
@@ -66,7 +66,7 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/", (req, res, next) => {
-  Task.update(req.body, (err, response)=>{
+  Task(req.headers.database).update(req.body, (err, response)=>{
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
@@ -81,7 +81,7 @@ router.put("/", (req, res, next) => {
 })
 
 router.delete("/:id", (req, res, next) => {
-  Task.delete(req.params.id, (err, response) => {
+  Task(req.headers.database).delete(req.params.id, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {

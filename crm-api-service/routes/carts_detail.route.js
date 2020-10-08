@@ -6,7 +6,7 @@ const Task = require("../models/CartsDetail.model")
 const CartsTask = require('../models/Carts.model');
 
 router.get("/", (req, res, next) => {
-  Task.findAll((err, response) => {
+  Task(req.headers.database).findAll((err, response) => {
     if (err) {
       res
         .status(500)
@@ -24,7 +24,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/search", (req, res, next) => {
   const { key, value } = req.body;
-  Task.searchData(key, value, (err, response) => {
+  Task(req.headers.database).searchData(key, value, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -41,7 +41,7 @@ router.post("/search", (req, res, next) => {
 })
 
 router.get("/:id", (req, res, next) => {
-  Task.findById(req.params.id, (err, response) => {
+  Task(req.headers.database).findById(req.params.id, (err, response) => {
     if (err) {
       res
         .status(500)
@@ -58,7 +58,7 @@ router.get("/:id", (req, res, next) => {
 })
 
 router.post("/", (req, res, next) => {
-  Task.create(req.body, (err, response)=>{
+  Task(req.headers.database).create(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
@@ -75,7 +75,7 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/", (req, res, next) => {
-  Task.update(req.body, (err, response)=>{
+  Task(req.headers.database).update(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
@@ -92,13 +92,13 @@ router.put("/", (req, res, next) => {
 })
 
 router.patch("/", (req, res, next) => {
-  Task.updateQty(req.body, (err, response)=>{
+  Task(req.headers.database).updateQty(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)
         .json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      CartsTask.updateSummary({cart_no: req.body.cart_no}, (err1, response1) => {
+      CartsTask(req.headers.database).updateSummary({cart_no: req.body.cart_no}, (err1, response1) => {
         if (err1) {
           res.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
         }else{
@@ -115,11 +115,11 @@ router.patch("/", (req, res, next) => {
 })
 
 router.delete("/", (req, res, next) => {
-  Task.delete(req.body, (err, response) => {
+  Task(req.headers.database).delete(req.body, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {
-      CartsTask.updateSummary({cart_no: req.body.cart_no}, (err1, response1) => {
+      CartsTask(req.headers.database).updateSummary({cart_no: req.body.cart_no}, (err1, response1) => {
         if (err1) {
           res.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
         }else{

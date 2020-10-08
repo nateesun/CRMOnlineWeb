@@ -6,6 +6,12 @@
 
 import * as constants from './constants';
 
+export function initDatabase(payload) {
+  return {
+    type: constants.INIT_DATABASE,
+    payload,
+  };
+}
 export function initState() {
   return {
     type: constants.INIT_STATE,

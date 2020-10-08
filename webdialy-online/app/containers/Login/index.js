@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,11 +12,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import {
-  makeSelectLogin,
-  makeLoginError,
-  makeSelectProfile,
-} from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './LoginForm';
@@ -26,10 +22,15 @@ export function Login(props) {
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
 
+  useEffect(()=>{
+    const db = new URLSearchParams(props.location.search).get('db')||'';
+    if(db){
+      props.initDatabase(db);
+    }
+  }, [])
+
   return (
-    <div>
-      <LoginForm {...props} />
-    </div>
+    <LoginForm {...props} />
   );
 }
 
@@ -39,9 +40,9 @@ Login.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectLogin(),
-  errorLogin: makeLoginError(),
-  profile: makeSelectProfile(),
+  login: selectors.makeSelectLogin(),
+  errorLogin: selectors.makeLoginError(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -53,6 +54,9 @@ function mapDispatchToProps(dispatch) {
     clearData: () => {
       dispatch(actions.initState());
     },
+    initDatabase: (db) => {
+      dispatch(actions.initDatabase(db))
+    }
   };
 }
 

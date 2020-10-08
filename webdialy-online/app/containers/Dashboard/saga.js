@@ -1,14 +1,17 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { email } = yield select(selects.makeSelectDashboard());
+    const { email } = yield select(selectors.makeSelectDashboard());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.status === 'Success') {
@@ -24,7 +27,9 @@ export function* initLoad() {
 export function* loadRedeem() {
   try {
     const requestURL = `${constants.publicPath}/api/redeem`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.status === 'Success') {
@@ -39,10 +44,12 @@ export function* loadRedeem() {
 
 export function* createRedeemCode() {
   try {
-    const { code } = yield select(selects.makeSelectProfile());
-    const { uuid_index, product_code } = yield select(selects.makeSelectRedeemPoint());
+    const { code } = yield select(selectors.makeSelectProfile());
+    const { uuid_index, product_code } = yield select(selectors.makeSelectRedeemPoint());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/redeem`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
       body: JSON.stringify({
         uuid_index,

@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -340,7 +340,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

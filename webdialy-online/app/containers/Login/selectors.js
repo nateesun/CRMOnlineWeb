@@ -30,6 +30,11 @@ const makeSelectLoggedIn = () =>
     selectLogin,
     loginState => loginState.loggedIn,
   );
+const makeSelectDatabase = () =>
+  createSelector(
+    selectLogin,
+    loginState => loginState.queryDb,
+  );
 
 export {
   selectLogin,
@@ -37,4 +42,5 @@ export {
   makeSelectProfile,
   makeLoginError,
   makeSelectLoggedIn,
+  makeSelectDatabase,
 };

@@ -13,7 +13,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import MapDirectionAB from './MapDirectionAB';
 import MapMarker from './MapMarker';
-import makeSelectGoogleMap from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -57,7 +57,7 @@ GoogleMap.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  googleMap: makeSelectGoogleMap(),
+  googleMap: selectors.makeSelectGoogleMap(),
 });
 
 function mapDispatchToProps(dispatch) {

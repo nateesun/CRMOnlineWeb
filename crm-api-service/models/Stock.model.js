@@ -1,8 +1,11 @@
 const pool = require("../mysql-connect")
-const table_name = "stock"
+const { getDB } = require('./FuncUtil')();
 
-module.exports = {
-  findById: async (id, callback) => {
+module.exports = db => {
+  const module = {}
+  const table_name = getDB(db, 'stock');
+
+  module.findById = async (id, callback) => {
     console.log("findById method start:")
     try {
       const sql = `select * from ${table_name} where uuid_index=?;`
@@ -11,8 +14,9 @@ module.exports = {
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }
-  },
-  findAll: async (callback) => {
+  }
+
+  module.findAll = async (callback) => {
     console.log("findAll method start:")
     try {
       const sql = `select * from ${table_name}`
@@ -21,8 +25,9 @@ module.exports = {
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })
     }
-  },
-  create: async (params, callback) => {
+  }
+
+  module.create = async (params, callback) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -33,8 +38,9 @@ module.exports = {
         callback(err, { status: "Error", msg: err.message })
       }
     })
-  },
-  update: (data, callback) => {
+  }
+
+  module.update = (data, callback) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -49,8 +55,9 @@ module.exports = {
         callback(err, { status: "Error", msg: err.message })
       }
     })
-  },
-  delete: (id, callback) => {
+  }
+
+  module.delete = (id, callback) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -61,5 +68,7 @@ module.exports = {
         callback(err, { status: "Error", msg: err.message })
       }
     })
-  },
+  }
+
+  return module
 }

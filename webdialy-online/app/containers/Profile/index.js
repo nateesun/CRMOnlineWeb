@@ -16,7 +16,7 @@ import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import ProfileContent from './ProfileContent';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
@@ -36,7 +36,7 @@ Profile.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selects.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -1,15 +1,18 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { email } = yield select(selects.makeSelectProfile());
+    const { email } = yield select(selectors.makeSelectProfile());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member/${email}`;
     try {
       const response = yield call(request, requestURL, {
+        database,
         method: 'GET',
       });
       yield put(actions.initLoadSuccess(response.data));
@@ -23,9 +26,11 @@ export function* initLoad() {
 
 export function* onEditMember() {
   try {
+    const profile = yield select(selectors.makeSelectProfile());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member`;
-    const profile = yield select(selects.makeSelectProfile());
     const response = yield call(request, requestURL, {
+      database,
       method: 'PUT',
       body: JSON.stringify(profile.data),
     });

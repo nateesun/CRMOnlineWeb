@@ -21,5 +21,4 @@ const makeSelectGoogleMap = () =>
     substate => substate,
   );
 
-export default makeSelectGoogleMap;
-export { selectGoogleMapDomain };
+export { selectGoogleMapDomain, makeSelectGoogleMap };

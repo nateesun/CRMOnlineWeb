@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectRecoverPassword from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -34,7 +34,7 @@ RecoverPassword.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  recoverPassword: makeSelectRecoverPassword(),
+  recoverPassword: selectors.makeSelectRecoverPassword(),
 });
 
 function mapDispatchToProps(dispatch) {

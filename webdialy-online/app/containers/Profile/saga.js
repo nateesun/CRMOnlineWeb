@@ -1,14 +1,17 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { email } = yield select(selects.makeSelectProfile());
+    const { email } = yield select(selectors.makeSelectProfile());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
     });
     if (response.status === 'Success') {

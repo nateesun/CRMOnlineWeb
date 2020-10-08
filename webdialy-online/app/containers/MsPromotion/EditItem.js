@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -261,7 +261,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

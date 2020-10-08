@@ -21,5 +21,4 @@ const makeSelectLogout = () =>
     substate => substate,
   );
 
-export default makeSelectLogout;
-export { selectLogoutDomain };
+export { selectLogoutDomain, makeSelectLogout };

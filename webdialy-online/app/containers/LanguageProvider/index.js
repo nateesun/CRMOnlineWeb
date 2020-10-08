@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
 
-import { makeSelectLocale } from './selectors';
+import * as selectors from './selectors';
 
 export function LanguageProvider(props) {
   return (
@@ -33,7 +33,7 @@ LanguageProvider.propTypes = {
 };
 
 const mapStateToProps = createSelector(
-  makeSelectLocale(),
+  selectors.makeSelectLocale(),
   locale => ({
     locale,
   }),

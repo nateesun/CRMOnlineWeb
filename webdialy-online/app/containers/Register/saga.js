@@ -2,15 +2,18 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
-import { makeSelectMember } from './selectors';
+import * as selectors from './selectors';
 
 export function* onAddRegisterMember() {
   try {
     const requestURL = `${constants.publicPath}/api/member`;
-    const data = yield select(makeSelectMember());
+    const data = yield select(selectors.makeSelectMember());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
       body: JSON.stringify({
         code: '',

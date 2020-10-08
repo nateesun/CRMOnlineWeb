@@ -1,11 +1,11 @@
 const express = require("express")
 const router = express.Router()
-const Task = require("../models/Login.model")
+const Task = require("../models/Login.model");
 
 router.post("/", (req, res, next) => {
   const username = req.body.email
   const password = req.body.password
-  Task.validLogin(username, password, (err, response) => {
+  Task(req.headers.database).validLogin(username, password, (err, response) => {
     if (err) {
       res.status(500).json({ 
         status: "Error", msg: err.sqlMessage || err.errno 
@@ -27,7 +27,7 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/", (req, res, next) => {
-  Task.update(req.body, (err, response)=>{
+  Task(req.headers.database).update(req.body, (err, response)=>{
     if (err) {
       res
         .status(500)

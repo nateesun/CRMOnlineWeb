@@ -15,7 +15,7 @@ import styled from 'styled-components';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
-import makeSelectLogout from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -53,7 +53,7 @@ Logout.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  logout: makeSelectLogout(),
+  logout: selectors.makeSelectLogout(),
 });
 
 function mapDispatchToProps(dispatch) {

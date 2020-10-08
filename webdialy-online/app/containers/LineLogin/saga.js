@@ -2,6 +2,7 @@ import { put, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 
 export function* onVerifyTokenLogin(data) {
@@ -9,7 +10,9 @@ export function* onVerifyTokenLogin(data) {
     // verify token for username, password
     const { token } = data.payload;
     const reqURL = `${constants.publicPath}/api/line/login`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const responseToken = yield call(request, reqURL, {
+      database,
       method: 'POST',
       body: JSON.stringify({ token }),
     });

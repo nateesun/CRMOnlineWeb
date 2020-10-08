@@ -18,12 +18,16 @@ export const initialState = {
   },
   profile: {},
   loggedIn: false,
+  queryDb: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const loginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case constants.INIT_DATABASE:
+        draft.queryDb = action.payload;
+        break;
       case constants.INIT_STATE:
         draft.loginForm = {};
         draft.response = {};
