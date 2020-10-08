@@ -5,6 +5,9 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+
+export const INIT_STATE = 'app/MsEmployee/INIT_STATE';
+
 export const CHANGE_PAGE = 'app/MsEmployee/CHANGE_PAGE';
 
 export const INIT_LOAD = 'app/MsEmployee/INIT_LOAD';

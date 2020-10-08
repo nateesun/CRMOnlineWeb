@@ -6,6 +6,11 @@
 
 import * as constants from './constants';
 
+export function initState() {
+  return {
+    type: constants.INIT_STATE,
+  };
+}
 export function loadCart(payload) {
   return {
     type: constants.LOAD_CART,
@@ -102,6 +107,48 @@ export function checkSlipSuccess(payload) {
 export function checkSlipError(payload) {
   return {
     type: constants.CHECK_SLIP_ERROR,
+    payload,
+  };
+}
+
+export function deleteItemCart(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART,
+    payload,
+  };
+}
+
+export function deleteItemCartSuccess(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+
+export function deleteItemCartError(payload) {
+  return {
+    type: constants.DELETE_ITEM_CART_ERROR,
+    payload,
+  };
+}
+
+export function updateItemCart(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART,
+    payload,
+  };
+}
+
+export function updateItemCartSuccess(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+
+export function updateItemCartError(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_ERROR,
     payload,
   };
 }

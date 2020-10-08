@@ -5,7 +5,9 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-export const DEFAULT_ACTION = 'app/ProfileChangePwd/DEFAULT_ACTION';
+
+export const INIT_STATE = 'app/ProfileChangePwd/INIT_STATE';
+
 export const UPDATE_PASSWORD = 'containers/ProfileChangePwd/UPDATE_PASSWORD';
 export const UPDATE_PASSWORD_SUCCESS =
   'containers/ProfileChangePwd/UPDATE_PASSWORD_SUCCESS';

@@ -134,6 +134,11 @@ export default function CheckoutContent(props) {
                     {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                   </Button>
                 </div>
+                <ButtonLink to="/shopping">
+                  <Button variant="contained">
+                    กลับหน้าสั่งสินค้า
+                  </Button>
+                </ButtonLink>
               </React.Fragment>
             )}
           </React.Fragment>

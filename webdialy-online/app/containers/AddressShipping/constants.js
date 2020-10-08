@@ -5,7 +5,9 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-export const DEFAULT_ACTION = 'app/AddressShipping/DEFAULT_ACTION';
+
+export const INIT_STATE = 'app/AddressShipping/INIT_STATE';
+
 export const EDIT_SHIPPING = 'containers/AddressShipping/EDIT_SHIPPING';
 export const EDIT_SHIPPING_SUCCESS = 'containers/AddressShipping/EDIT_SHIPPING_SUCCESS';
 export const EDIT_SHIPPING_ERROR = 'containers/AddressShipping/EDIT_SHIPPING_ERROR';

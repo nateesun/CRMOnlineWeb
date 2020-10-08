@@ -6,6 +6,11 @@
 
 import * as constants from './constants';
 
+export function initState() {
+  return {
+    type: constants.INIT_STATE,
+  };
+}
 export function changePage(payload) {
   return {
     type: constants.CHANGE_PAGE,

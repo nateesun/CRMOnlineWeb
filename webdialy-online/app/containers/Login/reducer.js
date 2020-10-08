@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import { INIT_LOAD_SUCCESS } from 'containers/Dashboard/constants';
-import * as types from './constants';
+import * as constants from './constants';
 
 export const initialState = {
   loginForm: {
@@ -24,40 +24,42 @@ export const initialState = {
 const loginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case constants.INIT_STATE:
         draft.loginForm = {};
+        draft.response = {};
         draft.profile = {};
+        draft.loggedIn = false;
         draft.error = '';
         break;
-      case types.CHECK_LOGIN:
+      case constants.CHECK_LOGIN:
         draft.loginForm.email = action.payload.email;
         draft.loginForm.password = action.payload.password;
         break;
-      case types.CHECK_LOGIN_SUCCESS:
+      case constants.CHECK_LOGIN_SUCCESS:
         draft.loggedIn = true;
         break;
-      case types.CHECK_LOGIN_ERROR:
+      case constants.CHECK_LOGIN_ERROR:
         draft.error = action.payload;
         draft.loggedIn = false;
         break;
-      case types.CHECK_LOGOUT:
+      case constants.CHECK_LOGOUT:
         break;
-      case types.CHECK_LOGOUT_SUCCESS:
+      case constants.CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
         draft.loginForm.password = '';
         draft.loggedIn = false;
         break;
-      case types.CHECK_LOGOUT_ERROR:
+      case constants.CHECK_LOGOUT_ERROR:
         draft.error = action.error;
         break;
-      case types.CLEAR_LOGIN:
+      case constants.CLEAR_LOGIN:
         draft.error = '';
         draft.loginForm = {
           email: '',
           password: '',
         };
         break;
-      case types.LOAD_PROFILE_TOKEN:
+      case constants.LOAD_PROFILE_TOKEN:
         draft.profile = action.payload;
         break;
       case INIT_LOAD_SUCCESS:

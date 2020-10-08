@@ -5,6 +5,7 @@
  */
 import produce from 'immer';
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 const { v4 } = require('uuid');
 
 export const initialState = {
@@ -32,6 +33,15 @@ export const initialState = {
 const msPromotionReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.list= [];
+        draft.data= {};
+        draft.page= 'LIST';
+        draft.img_upload= null;
+        draft.currentId= '';
+        draft.response= {};
+        break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;
         draft.response.status = '';

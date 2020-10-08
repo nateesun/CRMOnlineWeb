@@ -1,13 +1,13 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
-import * as types from './constants';
+import * as constants from './constants';
 import * as actions from './actions';
 import * as selects from './selectors';
 
 export function* initLoad() {
   try {
     const { email } = yield select(selects.makeSelectProfile());
-    const requestURL = `${types.publicPath}/api/member/${email}`;
+    const requestURL = `${constants.publicPath}/api/member/${email}`;
     try {
       const response = yield call(request, requestURL, {
         method: 'GET',
@@ -23,7 +23,7 @@ export function* initLoad() {
 
 export function* onUpdatePassword() {
   try {
-    const requestURL = `${types.publicPath}/api/login`;
+    const requestURL = `${constants.publicPath}/api/login`;
     const profile = yield select(selects.makeSelectProfile());
     const response = yield call(request, requestURL, {
       method: 'PUT',
@@ -44,6 +44,6 @@ export function* onUpdatePassword() {
 
 // Individual exports for testing
 export default function* profileChangePwdSaga() {
-  yield takeEvery(types.INIT_LOAD, initLoad);
-  yield takeEvery(types.UPDATE_PASSWORD, onUpdatePassword);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
+  yield takeEvery(constants.UPDATE_PASSWORD, onUpdatePassword);
 }

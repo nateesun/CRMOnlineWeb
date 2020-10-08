@@ -7,6 +7,7 @@ import produce from 'immer';
 import moment from 'moment';
 const { v4 } = require('uuid');
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   productList: [],
@@ -47,6 +48,13 @@ export const initialState = {
 const shoppingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.productList= [];
+        draft.cart= {};
+        draft.itemCart= {};
+        draft.response= {};
+        break;
       case constants.LOAD_PRODUCT:
         break;
       case constants.LOAD_PRODUCT_SUCCESS:

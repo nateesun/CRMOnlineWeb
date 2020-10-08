@@ -4,7 +4,8 @@
  *
  */
 import produce from 'immer';
-import * as types from './constants';
+import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   data: {},
@@ -17,29 +18,30 @@ export const initialState = {
 const addressShippingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
         draft.status = '';
         draft.error = '';
         draft.data = {};
         break;
-      case types.INIT_LOAD:
+      case constants.INIT_LOAD:
         draft.member_code = action.payload;
         break;
-      case types.INIT_LOAD_SUCCESS:
+      case constants.INIT_LOAD_SUCCESS:
         draft.data = action.payload;
         break;
-      case types.INIT_LOAD_ERROR:
+      case constants.INIT_LOAD_ERROR:
         break;
-      case types.EDIT_SHIPPING:
+      case constants.EDIT_SHIPPING:
         draft.address = action.payload;
         break;
-      case types.EDIT_SHIPPING_SUCCESS:
+      case constants.EDIT_SHIPPING_SUCCESS:
         draft.status = 'Success';
         break;
-      case types.EDIT_SHIPPING_ERROR:
+      case constants.EDIT_SHIPPING_ERROR:
         draft.error = action.payload;
         break;
-      case types.CHANGE_MAPS_VALUE:
+      case constants.CHANGE_MAPS_VALUE:
         draft.data.map_latitude = action.payload.map_latitude;
         draft.data.map_longitude = action.payload.map_longitude;
         break;

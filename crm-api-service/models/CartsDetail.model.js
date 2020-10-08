@@ -105,12 +105,26 @@ module.exports = {
       }
     })
   },
-  delete: (id, callback) => {
+  updateQty: (data, callback) => {
+    console.log("update method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} 
+        SET qty=?,total_amount=qty*product_price 
+        WHERE cart_no=? and product_code=? `
+        const result = await pool.query(query, [data.qty, data.cart_no, data.product_code])
+        callback(null, { status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  },
+  delete: ({cart_no, product_code}, callback) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
-        const result = await pool.query(query, [id])
+        const query = `DELETE FROM ${table_name} WHERE cart_no=? and product_code=?`
+        const result = await pool.query(query, [cart_no, product_code])
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })

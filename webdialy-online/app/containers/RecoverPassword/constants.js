@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/RecoverPassword/DEFAULT_ACTION';
+export const INIT_STATE = 'app/RecoverPassword/INIT_STATE';

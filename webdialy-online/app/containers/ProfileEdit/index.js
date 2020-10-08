@@ -47,7 +47,7 @@ function mapDispatchToProps(dispatch) {
   return {
     initLoad: email => dispatch(actions.initLoad(email)),
     onEditMember: member => dispatch(actions.editMember(member)),
-    clearData: () => dispatch(actions.defaultAction()),
+    clearData: () => dispatch(actions.initState()),
   };
 }
 

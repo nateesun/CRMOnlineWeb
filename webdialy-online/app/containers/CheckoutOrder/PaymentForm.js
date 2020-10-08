@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 const PaymentForm = (props) => {
   const classes = useStyles();
+  const { carts, carts_detail } = props.cartList;
   const { handleSubmit, pristine, reset, submitting } = props;
   const [img_host, setImgHost] = useState('http://localhost:5000/images')
   const [file, setFile] = useState(null);
@@ -45,7 +46,7 @@ const PaymentForm = (props) => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        ข้อมูลการรับชำระ
+        ข้อมูลการรับชำระ (จำนวนเงิน {carts && carts[0].total_amount} บาท)
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
@@ -180,6 +181,9 @@ const validate = formValues => {
   if (formValues.transfer_amount < 1) {
     errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldMoreZero} />;
   }
+  // if (formValues.transfer_amount !== carts[0].total_amount) {
+  //   errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldEqualAmount} />;
+  // }
   return errors;
 };
 

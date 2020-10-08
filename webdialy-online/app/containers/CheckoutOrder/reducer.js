@@ -5,9 +5,14 @@
  */
 import produce from 'immer';
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   cart_no: '',
+  product: {
+    product_code: '',
+    qty: 0,
+  },
   cartList: [],
   member_code: '',
   memberShipping: {},
@@ -25,6 +30,19 @@ export const initialState = {
 const checkoutReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.cartList = [];
+        draft.cart_no = '';
+        draft.product = {};
+        draft.member_code = '';
+        draft.memberShipping= {};
+        draft.paymentData= {};
+        draft.img_upload= null;
+        draft.slipFileName= '';
+        draft.slipValidateStatus= '';
+        draft.response = {};
+        break;
       case constants.LOAD_CART:
         draft.cart_no = action.payload;
         break;
@@ -82,6 +100,14 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.CHECK_SLIP_ERROR:
         draft.slipValidateStatus = 'Error';
         draft.response.message = 'Validate slip file image error!';
+        break;
+      case constants.DELETE_ITEM_CART:
+        draft.product.product_code = action.payload;
+      case constants.DELETE_ITEM_CART_ERROR:
+        break;
+      case constants.UPDATE_ITEM_CART:
+        draft.product = action.payload;
+      case constants.UPDATE_ITEM_CART_ERROR:
         break;
     }
   });

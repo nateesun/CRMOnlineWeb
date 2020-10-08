@@ -23,7 +23,7 @@ export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
 
-  useEffect(()=>{
+  useEffect(() => {
     props.initLoadCart(props.cart.cart_no);
     props.initLoadMemberShipping(props.cart.member_code);
   }, []);
@@ -48,10 +48,15 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
-    initLoadMemberShipping: member_code => dispatch(actions.loadMemberShipping(member_code)),
-    onUploadImage: (file) => dispatch(actions.uploadImage(file)),
-    setPaymentData: (data) => dispatch(actions.setPaymentData(data)),
-    checkSlipImage: (image) => dispatch(actions.checkSlip(image)),
+    initLoadMemberShipping: member_code =>
+      dispatch(actions.loadMemberShipping(member_code)),
+    onUploadImage: file => dispatch(actions.uploadImage(file)),
+    setPaymentData: data => dispatch(actions.setPaymentData(data)),
+    checkSlipImage: image => dispatch(actions.checkSlip(image)),
+    deleteItemCart: product_code =>
+      dispatch(actions.deleteItemCart(product_code)),
+    updateItemCart: (product_code, qty) =>
+      dispatch(actions.updateItemCart({product_code, qty})),
   };
 }
 
