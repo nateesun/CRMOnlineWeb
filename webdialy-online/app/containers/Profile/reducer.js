@@ -21,7 +21,7 @@ const profileReducer = (state = initialState, action) =>
         draft.email= '';
         draft.error= '';
         break;
-      case constants.INIT_LOAD=
+      case constants.INIT_LOAD:
         draft.email = action.payload;
         break;
       case constants.INIT_LOAD_SUCCESS:
