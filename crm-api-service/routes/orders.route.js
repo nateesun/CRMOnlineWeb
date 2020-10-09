@@ -1,8 +1,8 @@
-/* {{properCase name}}.route code generator by automatic script */
+/* Orders.route code generator by automatic script */
 
 const express = require("express")
 const router = express.Router()
-const Task = require("../models/{{properCase name}}.model")
+const Task = require("../models/Orders.model")
 
 router.get("/", (req, res) => {
   Task(req.headers.database).findAll((err, response) => {

@@ -7,7 +7,7 @@ import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/orders`;
     const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
       database,
@@ -25,7 +25,7 @@ export function* initLoad() {
 export function* searchItem({ payload }) {
   const { key, value } = payload;
   try {
-    const requestURL = `${constants.publicPath}/api/crud/search`;
+    const requestURL = `${constants.publicPath}/api/orders/search`;
     const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
       database,
@@ -46,7 +46,7 @@ export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/orders`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -66,7 +66,7 @@ export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/crud`;
+    const requestURL = `${constants.publicPath}/api/orders`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
@@ -86,7 +86,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/crud/${data.uuid_index}`;
+    const requestURL = `${constants.publicPath}/api/orders/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',

@@ -1,11 +1,11 @@
-/* {{properCase name}}.model code generator by automatic script */
+/* Orders.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
 const { getDB } = require('./FuncUtil')();
 
 module.exports = db => {
   const module = {}
-  const table_name = getDB(db, '{{lowerCase name}}');
+  const table_name = getDB(db, 'orders');
 
   module.findById = async (id, callback) => {
     console.log("findById method start:")

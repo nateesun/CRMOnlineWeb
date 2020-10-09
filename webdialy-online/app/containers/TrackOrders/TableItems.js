@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     width: '100%',
   },
   container: {
-    maxHeight: 550,
     padding: '10px',
   },
   table: {
@@ -36,6 +35,13 @@ const useStyles = makeStyles({
   wrapButtonAction: {
     marginTop: '15px',
     marginBottom: '15px',
+  },
+  colRow: {
+    whiteSpace: 'nowrap',
+  },
+  dataWidth: {
+    overflow: 'auto',
+    width: '750px',
   },
 });
 
@@ -98,13 +104,15 @@ export default function TableItems(props) {
           TrackOrders Table List
         </Typography>
         <div className={classes.wrapButtonAction}>
-        {showCommand && <Button
-            variant="contained"
-            className={classes.buttonNew}
-            onClick={() => props.onChangePage('NEW')}
-          >
-            CREATE
-          </Button>}
+          {showCommand && (
+            <Button
+              variant="contained"
+              className={classes.buttonNew}
+              onClick={() => props.onChangePage('NEW')}
+            >
+              CREATE
+            </Button>
+          )}
           <Button
             variant="contained"
             color="primary"
@@ -115,64 +123,93 @@ export default function TableItems(props) {
           </Button>
         </div>
         <SearchBar {...props} />
-        <Table className={classes.table} stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">No</TableCell>
-              <TableCell align="center">Column1</TableCell>
-              <TableCell align="center">Column2</TableCell>
-              <TableCell align="center">Column3</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {getList &&
-              getList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((item, index) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={item.uuid_index}
-                  >
-                    <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.col1}</TableCell>
-                    <TableCell align="center">{item.col2}</TableCell>
-                    <TableCell align="center">{item.col3}</TableCell>
-                    <TableCell align="center">
-                      {showCommand && <Grid container spacing={1} justify="center">
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onViewItem(item)}
-                          >
-                            View
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onEditItem(item)}
-                          >
-                            Edit
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => handleDelete(item.uuid_index)}
-                          >
-                            Delete
-                          </Button>
-                        </Grid>
-                      </Grid>}
-                    </TableCell>
-                  </TableRow>
-                ))}
-          </TableBody>
-        </Table>
+        <div className={classes.dataWidth}>
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
+            <TableHead>
+              <TableRow className={classes.colRow}>
+                <TableCell align="center">No</TableCell>
+                <TableCell align="center">Order</TableCell>
+                <TableCell align="center">Cart</TableCell>
+                <TableCell align="center">Create Date</TableCell>
+                <TableCell align="center">Member</TableCell>
+                <TableCell align="center">Item</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Status Act.</TableCell>
+                <TableCell align="center">Step</TableCell>
+                <TableCell align="center">Point</TableCell>
+                <TableCell align="center">Appr Sts.</TableCell>
+                <TableCell align="center">Not Appr Comm.</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {getList &&
+                getList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={item.uuid_index}
+                      className={classes.colRow}
+                    >
+                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">{item.order_no}</TableCell>
+                      <TableCell align="center">{item.cart_no}</TableCell>
+                      <TableCell align="center">
+                        {item.cart_create_date}
+                      </TableCell>
+                      <TableCell align="center">{item.member_code}</TableCell>
+                      <TableCell align="center">{item.total_item}</TableCell>
+                      <TableCell align="center">{item.total_amount}</TableCell>
+                      <TableCell align="center">{item.cart_active}</TableCell>
+                      <TableCell align="center">{item.shopping_step}</TableCell>
+                      <TableCell align="center">{item.total_point}</TableCell>
+                      <TableCell align="center">{item.cust_approve}</TableCell>
+                      <TableCell align="center">
+                        {item.cust_not_approve_reason}
+                      </TableCell>
+                      <TableCell align="center">
+                        {showCommand && (
+                          <Grid container spacing={1} justify="center">
+                            <Grid item>
+                              <Button
+                                variant="outlined"
+                                onClick={() => onViewItem(item)}
+                              >
+                                View
+                              </Button>
+                            </Grid>
+                            <Grid item>
+                              <Button
+                                variant="outlined"
+                                onClick={() => onEditItem(item)}
+                              >
+                                Edit
+                              </Button>
+                            </Grid>
+                            <Grid item>
+                              <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={() => handleDelete(item.uuid_index)}
+                              >
+                                Delete
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+            </TableBody>
+          </Table>
+        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}

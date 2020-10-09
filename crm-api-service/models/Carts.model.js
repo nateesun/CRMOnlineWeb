@@ -23,8 +23,19 @@ module.exports = db => {
   module.findAll = async (callback) => {
     console.log("findAll method start:")
     try {
-      const sql = `select * from ${table_name}`
+      const sql = `select * from ${table_name} order by cart_no`
       const result = await pool.query(sql)
+      callback(null, { status: "Success", data: JSON.stringify(result) })
+    } catch (err) {
+      callback(err, { status: "Error", msg: err.message })
+    }
+  }
+
+  module.findAllByMember = async (member_code, callback) => {
+    console.log("findAll method start:")
+    try {
+      const sql = `select * from ${table_name} where member_code = ? order by cart_no`
+      const result = await pool.query(sql, [member_code])
       callback(null, { status: "Success", data: JSON.stringify(result) })
     } catch (err) {
       callback(err, { status: "Error", msg: err.message })

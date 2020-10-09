@@ -40,7 +40,7 @@ const ButtonSearch = styled.button`
 `;
 
 export default function SearchBar(props) {
-  const [key, setKey] = useState('col1');
+  const [key, setKey] = useState('cart_no');
   const [value, setValue] = useState('');
 
   const onSearchData = () => {
@@ -54,9 +54,9 @@ export default function SearchBar(props) {
   return (
     <Wrapper>
       <SelectType value={key} onChange={e => setKey(e.target.value)}>
-        <option value="col1">Column1</option>
-        <option value="col2">Column2</option>
-        <option value="col3">Column3</option>
+        <option value="cart_no">Cart No</option>
+        <option value="member_code">Member Code</option>
+        <option value="cart_active">Status</option>
       </SelectType>
       <InputSearch
         type="text"

@@ -20,6 +20,22 @@ router.get("/", (req, res, next) => {
   })
 })
 
+router.get("/findByMember/:member_code", (req, res, next) => {
+  const member_code = req.params.member_code;
+  Task(req.headers.database).findAllByMember(member_code, (err, response) => {
+    if (err) {
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
+})
+
 router.post("/search", (req, res, next) => {
   const { key, value } = req.body;
   Task(req.headers.database).searchData(key, value, (err, response) => {
