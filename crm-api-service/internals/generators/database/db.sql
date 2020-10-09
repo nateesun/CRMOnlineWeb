@@ -25,7 +25,15 @@ CREATE TABLE `carts` (
   `shopping_step` varchar(20) DEFAULT NULL,
   `total_point` int(5) DEFAULT NULL,
   `emp_approve` varchar(10) DEFAULT NULL,
-  `emp_not_approve_reason` varchar(100) DEFAULT NULL
+  `emp_not_approve_reason` varchar(100) DEFAULT NULL,
+  `account_from_name` varchar(150) DEFAULT NULL,
+  `account_to_name` varchar(150) DEFAULT NULL,
+  `from_account_no` varchar(30) DEFAULT NULL,
+  `to_account_no` varchar(30) DEFAULT NULL,
+  `transfer_date` datetime DEFAULT NULL,
+  `transfer_ref` varchar(10) DEFAULT NULL,
+  `transfer_amount` float(10,2) DEFAULT NULL,
+  `slip_path` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `carts_detail` (
@@ -39,14 +47,7 @@ CREATE TABLE `carts_detail` (
   `total_amount` float(10,2) DEFAULT NULL,
   `options` varchar(100) DEFAULT NULL,
   `special_text` varchar(100) DEFAULT NULL,
-  `point` int(5) DEFAULT NULL,
-  `account_from_name` varchar(150) DEFAULT NULL,
-  `account_to_name` varchar(150) DEFAULT NULL,
-  `from_account_no` varchar(30) DEFAULT NULL,
-  `to_account_no` varchar(30) DEFAULT NULL,
-  `transfer_date` datetime DEFAULT NULL,
-  `transfer_ref` varchar(10) DEFAULT NULL,
-  `transfer_amount` float(10,2) DEFAULT NULL
+  `point` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `company` (
@@ -129,7 +130,15 @@ CREATE TABLE `orders` (
   `shopping_step` varchar(20) DEFAULT NULL,
   `total_point` int(5) DEFAULT NULL,
   `cust_approve` varchar(10) DEFAULT NULL,
-  `cust_not_approve_reason` varchar(100) DEFAULT NULL
+  `cust_not_approve_reason` varchar(100) DEFAULT NULL,
+  `account_from_name` varchar(150) DEFAULT NULL,
+  `account_to_name` varchar(150) DEFAULT NULL,
+  `from_account_no` varchar(30) DEFAULT NULL,
+  `to_account_no` varchar(30) DEFAULT NULL,
+  `transfer_date` datetime DEFAULT NULL,
+  `transfer_ref` varchar(10) DEFAULT NULL,
+  `transfer_amount` float(10,2) DEFAULT NULL,
+  `slip_path` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `orders_detail` (
@@ -144,14 +153,7 @@ CREATE TABLE `orders_detail` (
   `options` varchar(100) DEFAULT NULL,
   `special_text` varchar(100) DEFAULT NULL,
   `point` int(5) DEFAULT NULL,
-  `cart_no` varchar(100) DEFAULT NULL,
-  `account_from_name` varchar(150) DEFAULT NULL,
-  `account_to_name` varchar(150) DEFAULT NULL,
-  `from_account_no` varchar(30) DEFAULT NULL,
-  `to_account_no` varchar(30) DEFAULT NULL,
-  `transfer_date` datetime DEFAULT NULL,
-  `transfer_ref` varchar(10) DEFAULT NULL,
-  `transfer_amount` float(10,2) DEFAULT NULL
+  `cart_no` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `product` (

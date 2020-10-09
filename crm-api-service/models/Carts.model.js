@@ -94,6 +94,37 @@ module.exports = db => {
     })
   }
 
+  module.updatePayment = (data, callback) => {
+    console.log("updatePayment method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} SET 
+        account_from_name=?,
+        account_to_name=?,
+        from_account_no=?,
+        to_account_no=?,
+        transfer_date=?,
+        transfer_ref=?,
+        transfer_amount=? 
+        WHERE cart_no=? and member_code=?`
+        const result = await pool.query(query, [
+          data.account_from_name,
+          data.account_to_name,
+          data.from_account_no,
+          data.to_account_no,
+          data.transfer_date,
+          data.transfer_ref,
+          data.transfer_amount,
+          data.cart_no,
+          data.member_code
+        ])
+        callback(null, { status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.updateSummary = (data, callback) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {

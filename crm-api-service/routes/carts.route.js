@@ -51,6 +51,20 @@ router.post("/search", (req, res, next) => {
     }
   })
 })
+router.post("/payment", (req, res, next) => {
+  Task(req.headers.database).updatePayment(req.body, (err, response) => {
+    if (err) {
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
+})
 
 router.get("/:cart_no", (req, res, next) => {
   Task(req.headers.database).findByCartNo(req.params.cart_no, (err, response) => {

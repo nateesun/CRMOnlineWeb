@@ -4,6 +4,7 @@
  *
  */
 import produce from 'immer';
+import moment from 'moment';
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 const { v4 } = require('uuid');
@@ -82,8 +83,7 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.SET_PAYMENT_DATA:
         draft.paymentData = action.payload;
-        break;
-      case constants.SET_PAYMENT_DATA_SUCCESS:
+        draft.paymentData.transfer_date = moment().format('YYYY-MM-DD HH:mm:ss');
         break;
       case constants.SET_PAYMENT_DATA_ERROR:
         break;
