@@ -95,7 +95,7 @@ export default function TableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-          {{properCase name }} Table List
+          TrackCarts Table List
         </Typography>
         <div className={classes.wrapButtonAction}>
           {showCommand && <Button
@@ -130,7 +130,12 @@ export default function TableItems(props) {
               getList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item, index) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={item.uuid_index}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={item.uuid_index}
+                  >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.col1}</TableCell>
                     <TableCell align="center">{item.col2}</TableCell>

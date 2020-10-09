@@ -13,9 +13,9 @@ export function* initLoad() {
       database,
       method: 'GET',
     });
-    if(response.data){
+    if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
-    }else{
+    } else {
       yield put(actions.initLoadError('Not found data'));
     }
   } catch (err) {
@@ -30,7 +30,7 @@ export function* searchItem({ payload }) {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ key, value })
+      body: JSON.stringify({ key, value }),
     });
     if (response.data) {
       yield put(actions.searchSuccess(response.data));
@@ -50,11 +50,11 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    if(response){
+    if (response) {
       yield put(actions.createItemSuccess(response));
-    }else{
+    } else {
       yield put(actions.createItemError('Cannot create data'));
     }
   } catch (err) {
@@ -70,11 +70,11 @@ export function* updateData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    if(response){
+    if (response) {
       yield put(actions.updateItemSuccess(response));
-    }else{
+    } else {
       yield put(actions.updateItemError('Cannot update data'));
     }
   } catch (err) {
@@ -90,11 +90,11 @@ export function* deleteData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    if(response){
+    if (response) {
       yield put(actions.deleteItemSuccess(response));
-    }else{
+    } else {
       yield put(actions.deleteItemError('Cannot update data'));
     }
   } catch (err) {
@@ -102,7 +102,7 @@ export function* deleteData() {
   }
 }
 
-export default function* {{ camelCase name }}Saga() {
+export default function* trackCartsSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
