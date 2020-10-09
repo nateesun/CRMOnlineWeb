@@ -27,9 +27,7 @@ export function MsCompany(props) {
   }, []);
 
   return (
-    <div>
-      <ContentPage {...props} />
-    </div>
+    <ContentPage {...props} />
   );
 }
 
