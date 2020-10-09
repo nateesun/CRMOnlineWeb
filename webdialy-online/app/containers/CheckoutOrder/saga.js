@@ -55,7 +55,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`/api/upload`, options)
+    const response = yield fetch(`${constants.apiServiceHost}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {
@@ -128,6 +128,27 @@ export function* onUpdateItemCart() {
   }
 }
 
+export function* onUpdateAddressForm() {
+  try {
+    const member_code = yield select(selectors.makeSelectMemberCode());
+    const addressFormData = yield select(selectors.makeSelectAddressForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/shipping`;
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'POST',
+      body: JSON.stringify({...addressFormData, member_code}),
+    });
+    if (response.status === 'Success') {
+      yield loadMemberShipping();
+    } else {
+      yield put(actions.updateAddressFormError('Update address form success'));
+    }
+  } catch (err) {
+    yield put(actions.updateAddressFormError(err));
+  }
+}
+
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
@@ -135,4 +156,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
   yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
 }

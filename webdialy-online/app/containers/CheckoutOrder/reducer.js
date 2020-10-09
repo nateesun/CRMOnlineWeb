@@ -6,6 +6,7 @@
 import produce from 'immer';
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
+const { v4 } = require('uuid');
 
 export const initialState = {
   cart_no: '',
@@ -20,6 +21,7 @@ export const initialState = {
   img_upload: null,
   slipFileName: '',
   slipValidateStatus: '',
+  addressForm: {},
   response: {
     status: '',
     message: '',
@@ -108,6 +110,12 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ITEM_CART:
         draft.product = action.payload;
       case constants.UPDATE_ITEM_CART_ERROR:
+        break;
+      case constants.UPDATE_ADDRESS_FORM:
+        draft.addressForm = action.payload;
+        draft.addressForm.uuid_index = v4();
+        draft.addressForm.member_prefix = '';
+      case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
     }
   });

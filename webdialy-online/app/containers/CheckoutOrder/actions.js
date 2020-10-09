@@ -152,3 +152,24 @@ export function updateItemCartError(payload) {
     payload,
   };
 }
+
+export function updateAddressForm(payload) {
+  return {
+    type: constants.UPDATE_ADDRESS_FORM,
+    payload,
+  };
+}
+
+export function updateAddressFormSuccess(payload) {
+  return {
+    type: constants.UPDATE_ADDRESS_FORM_SUCCESS,
+    payload,
+  };
+}
+
+export function updateAddressFormError(payload) {
+  return {
+    type: constants.UPDATE_ADDRESS_FORM_ERROR,
+    payload,
+  };
+}

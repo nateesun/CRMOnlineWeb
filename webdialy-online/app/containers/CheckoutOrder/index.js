@@ -58,6 +58,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(actions.deleteItemCart(product_code)),
     updateItemCart: (product_code, qty) =>
       dispatch(actions.updateItemCart({product_code, qty})),
+    onUpdateAddressForm: (data) => dispatch(actions.updateAddressForm(data)),
   };
 }
 
