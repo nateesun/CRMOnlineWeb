@@ -22,14 +22,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AddressForm = (props) => {
+const AddressForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, shipping } = props;
   const [latitude, setLatitude] = useState(13.809992);
   const [longitude, setLongitude] = useState(100.413130);
 
   const onValidated = formValues => {
-    props.onUpdateAddressForm(formValues);
+    props.onUpdateAddressForm({
+      ...formValues, 
+      map_latitude: latitude, 
+      map_longitude: longitude,
+      address_type: 'Shipping',
+      member_prefix: '',
+    });
   };
 
   const handlePlace = (latitude, longitude) => {

@@ -114,7 +114,6 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ADDRESS_FORM:
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
-        draft.addressForm.member_prefix = '';
       case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
     }
