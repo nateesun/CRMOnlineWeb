@@ -173,3 +173,24 @@ export function updateAddressFormError(payload) {
     payload,
   };
 }
+
+export function updateShoppingStep(payload) {
+  return {
+    type: constants.UPDATE_SHOPPING_STEP,
+    payload,
+  };
+}
+
+export function updateShoppingStepSuccess(payload) {
+  return {
+    type: constants.UPDATE_SHOPPING_STEP_SUCCESS,
+    payload,
+  };
+}
+
+export function updateShoppingStepError(payload) {
+  return {
+    type: constants.UPDATE_SHOPPING_STEP_ERROR,
+    payload,
+  };
+}

@@ -32,7 +32,7 @@ const PaymentForm = (props) => {
     if(file){
       props.checkSlipImage(file.name)
     }else{
-      console.log('Please upload file.');
+      // console.log('Please upload file.');
     }
   }
 

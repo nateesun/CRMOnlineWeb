@@ -8,11 +8,6 @@ import Thanks from './images/thanks.jpg';
 import * as constants from './constants';
 
 export default function FinishOrder(props) {
-  useEffect(() => {
-    console.log('init FinishOrder');
-    console.log(props);
-  }, []);
-
   return (
     <React.Fragment>
       <div align="center">
@@ -34,16 +29,12 @@ export default function FinishOrder(props) {
             marginTop: '10px',
           }}
         >
-          เลขที่ Order ของคุณคือ{' '}
+          เลขที่ใบสั่งซื้อสินค้า ของคุณคือ{' '}
           <span style={{ background: 'yellow', color: 'black' }}>
-            #{(props.cart && props.cart.cart_no) || ''}
+            #{props.currentCartNo}
           </span>{' '}
           <br />
-          <QRCode
-            value={`http://localhost:3000/orders/${(props.cart &&
-              props.cart.cart_no) ||
-              ''}?token=`}
-          />
+          <QRCode value={`${constants.publicPath}/orders/${props.currentCartNo}`} />
           <br />
           ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
           และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ

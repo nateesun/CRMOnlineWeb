@@ -53,8 +53,6 @@ export default function Review(props) {
   const [duration, setDuration] = useState(0);
 
   const handleDirection = (distance, duration) => {
-    console.log('distance:', distance);
-    console.log('duration:', duration);
     setDistance(distance / 1000);
     setDuration(duration / 60);
   };
@@ -102,7 +100,7 @@ export default function Review(props) {
           >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
           <Typography
             gutterBottom
-          >{`${address1} ${address2} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
+          >{`${address1} ${address2||''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>

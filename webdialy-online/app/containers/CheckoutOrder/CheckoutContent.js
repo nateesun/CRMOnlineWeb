@@ -46,21 +46,25 @@ export default function CheckoutContent(props) {
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
-    if(activeStep + 1 === 2){
-      if(props.shipping){
-        setActiveStep(activeStep + 1);
-      }else{
-        alert("กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน")
-      }
-    }else{
+    if(activeStep+1 === 4){
+      // if last step or finish step
       setActiveStep(activeStep + 1);
+      props.onUpdateShoppingStep();
+    } else {
+      if(activeStep + 1 === 2){
+        if(props.shipping){
+          setActiveStep(activeStep + 1);
+        }else{
+          alert("กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน")
+        }
+      }else{
+        setActiveStep(activeStep + 1);
+      }
     }
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
-    console.log('next:', activeStep-1);
-    console.log(props);
   };
 
   const getStepContent = step => {

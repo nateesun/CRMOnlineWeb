@@ -5,6 +5,11 @@ const router = express.Router()
 const Task = require("../models/Carts.model")
 const TaskDetail = require("../models/CartsDetail.model")
 
+router.use((req, res, next) => {
+  console.log(req.method, req.originalUrl);
+  next();
+})
+
 router.get("/", (req, res, next) => {
   Task(req.headers.database).findAll((err, response) => {
     if (err) {
@@ -53,6 +58,20 @@ router.post("/search", (req, res, next) => {
 })
 router.post("/payment", (req, res, next) => {
   Task(req.headers.database).updatePayment(req.body, (err, response) => {
+    if (err) {
+      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
+    } else {
+      const data = JSON.parse(response.data)
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data,
+      })
+    }
+  })
+})
+router.patch("/shopping_step", (req, res, next) => {
+  Task(req.headers.database).updateShoppingStep(req.body, (err, response) => {
     if (err) {
       res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
     } else {

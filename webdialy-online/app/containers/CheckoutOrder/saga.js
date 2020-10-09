@@ -171,6 +171,28 @@ export function* onUpdatePaymentForm() {
   }
 }
 
+export function* onUpdateShoppingStep() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const requestURL = `${constants.publicPath}/api/carts/shopping_step`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no, shopping_step: 'wait_confirm' }),
+    });
+    if (response.status === 'Success') {
+      yield loadMemberShipping();
+      yield put(actions.setPaymentDataSuccess('Finish checkout order step'));
+    } else {
+      yield put(actions.setPaymentDataError('Cannot update payment form'));
+    }
+  } catch (err) {
+    console.log(err);
+    yield put(actions.setPaymentDataError(err));
+  }
+}
+
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
@@ -180,4 +202,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
+  yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
 }

@@ -44,6 +44,7 @@ const mapStateToProps = createStructuredSelector({
   cart: shoppingSelectors.makeSelectCart(),
   paymentData: selectors.makeSelectPaymentData(),
   imgValid: selectors.makeSelectSlipValidateStatus(),
+  currentCartNo: selectors.makeSelectCartsNo(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -59,6 +60,7 @@ function mapDispatchToProps(dispatch) {
     updateItemCart: (product_code, qty) =>
       dispatch(actions.updateItemCart({product_code, qty})),
     onUpdateAddressForm: (data) => dispatch(actions.updateAddressForm(data)),
+    onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
   };
 }
 

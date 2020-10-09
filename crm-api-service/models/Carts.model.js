@@ -125,6 +125,22 @@ module.exports = db => {
     })
   }
 
+  module.updateShoppingStep = (data, callback) => {
+    console.log("updatePayment method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?`
+        const result = await pool.query(query, [
+          data.shopping_step,
+          data.cart_no
+        ])
+        callback(null, { status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.updateSummary = (data, callback) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
