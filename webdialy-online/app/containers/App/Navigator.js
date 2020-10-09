@@ -48,6 +48,12 @@ const categories = [
     ],
   },
   {
+    id: 'Request Order',
+    children: [
+      { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
+    ],
+  },
+  {
     id: 'Members',
     children: [
       { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
