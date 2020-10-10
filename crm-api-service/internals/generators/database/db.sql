@@ -24,16 +24,17 @@ CREATE TABLE `carts` (
   `cart_active` char(1) DEFAULT NULL,
   `shopping_step` varchar(20) DEFAULT NULL,
   `total_point` int(5) DEFAULT NULL,
-  `emp_approve` varchar(10) DEFAULT NULL,
-  `emp_not_approve_reason` varchar(100) DEFAULT NULL,
+  `emp_code_update` varchar(30) DEFAULT NULL,
+  `emp_reason` varchar(100) DEFAULT NULL,
   `account_from_name` varchar(150) DEFAULT NULL,
   `account_to_name` varchar(150) DEFAULT NULL,
   `from_account_no` varchar(30) DEFAULT NULL,
   `to_account_no` varchar(30) DEFAULT NULL,
-  `transfer_date` datetime DEFAULT NULL,
+  `transfer_date` varchar(20) DEFAULT NULL,
   `transfer_ref` varchar(10) DEFAULT NULL,
   `transfer_amount` float(10,2) DEFAULT NULL,
-  `slip_path` varchar(100) DEFAULT NULL
+  `slip_path` varchar(100) DEFAULT NULL,
+  `emp_update_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `carts_detail` (
@@ -129,16 +130,21 @@ CREATE TABLE `orders` (
   `cart_active` char(1) DEFAULT NULL,
   `shopping_step` varchar(20) DEFAULT NULL,
   `total_point` int(5) DEFAULT NULL,
-  `cust_approve` varchar(10) DEFAULT NULL,
-  `cust_not_approve_reason` varchar(100) DEFAULT NULL,
+  `emp_code_update` varchar(30) DEFAULT NULL,
+  `emp_reason` varchar(100) DEFAULT NULL,
   `account_from_name` varchar(150) DEFAULT NULL,
   `account_to_name` varchar(150) DEFAULT NULL,
   `from_account_no` varchar(30) DEFAULT NULL,
   `to_account_no` varchar(30) DEFAULT NULL,
-  `transfer_date` datetime DEFAULT NULL,
+  `transfer_date` varchar(20) DEFAULT NULL,
   `transfer_ref` varchar(10) DEFAULT NULL,
   `transfer_amount` float(10,2) DEFAULT NULL,
-  `slip_path` varchar(100) DEFAULT NULL
+  `slip_path` varchar(100) DEFAULT NULL,
+  `emp_update_date` datetime DEFAULT NULL,
+  `member_code_update` varchar(30) DEFAULT NULL,
+  `member_remark` varchar(100) DEFAULT NULL,
+  `order_update_date` datetime DEFAULT NULL,
+  `order_create_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `orders_detail` (

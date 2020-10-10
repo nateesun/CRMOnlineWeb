@@ -9,15 +9,17 @@ module.exports = db => {
   const tb_company = getDB(db, 'company');
   const tb_carts_detail = getDB(db, 'carts_detail');
 
-  module.findByCartNo = async (cart_no, callback) => {
+  module.findByCartNo = async (cart_no) => {
     console.log("findByCartNo method start:")
-    try {
-      const sql = `select * from ${table_name} where cart_no=?;`
-      const result = await pool.query(sql, [cart_no])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=?;`
+        const result = await pool.query(sql, [cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 
   module.findAll = async (callback) => {
@@ -65,7 +67,7 @@ module.exports = db => {
         params.cart_no = cart_prefix + zeroPad(cart_running, cart_size_running); // generate prefix running
 
         const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        await pool.query(query, params)
 
         // update running +1
         await pool.query(`update ${tb_company} set cart_running=cart_running+1`)
@@ -126,10 +128,10 @@ module.exports = db => {
   }
 
   module.updateShoppingStep = (data, callback) => {
-    console.log("updatePayment method start:")
+    console.log("updateShoppingStep method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?`
+        let query = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?`
         const result = await pool.query(query, [
           data.shopping_step,
           data.cart_no
@@ -137,6 +139,29 @@ module.exports = db => {
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.updateShoppingApprove = (data) => {
+    console.log("updateShoppingApprove method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        let query = `UPDATE ${table_name} 
+        SET shopping_step=?,
+        emp_code_update=?,
+        emp_reason=?,
+        emp_update_date=now() 
+        WHERE cart_no=?`
+        const result = await pool.query(query, [
+          data.shopping_step,
+          data.emp_code_update,
+          data.emp_reason,
+          data.cart_no
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
       }
     })
   }

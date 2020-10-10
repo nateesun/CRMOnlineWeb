@@ -2,8 +2,12 @@
 
 const express = require("express")
 const router = express.Router()
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
 const Task = require("../models/Carts.model")
 const TaskDetail = require("../models/CartsDetail.model")
+const TaskOrders = require('../models/Orders.model');
+const TaskOrdersDetail = require('../models/OrdersDetail.model');
 
 router.use((req, res, next) => {
   console.log(req.method, req.originalUrl);
@@ -56,6 +60,7 @@ router.post("/search", (req, res, next) => {
     }
   })
 })
+
 router.post("/payment", (req, res, next) => {
   Task(req.headers.database).updatePayment(req.body, (err, response) => {
     if (err) {
@@ -70,6 +75,7 @@ router.post("/payment", (req, res, next) => {
     }
   })
 })
+
 router.patch("/shopping_step", (req, res, next) => {
   Task(req.headers.database).updateShoppingStep(req.body, (err, response) => {
     if (err) {
@@ -83,6 +89,41 @@ router.patch("/shopping_step", (req, res, next) => {
       })
     }
   })
+})
+
+router.patch("/shopping_approve", async (req, res, next) => {
+  try {
+    await Task(req.headers.database).updateShoppingApprove(req.body);
+
+    // copy to orders tables
+    const Carts = await Task(req.headers.database).findByCartNo(req.body.cart_no);
+    const CartsParse = JSON.parse(Carts.data)[0];
+    const CartsData = {
+      ...CartsParse,
+      cart_create_date: moment(new Date(CartsParse.cart_create_date)).format('YYYY-MM-DD HH:mm:ss'),
+      emp_update_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+      uuid_index: uuidv4(),
+    };
+    const order_no = await TaskOrders(req.headers.database).create(CartsData);
+
+    // copy to orders_detail tables
+    const CartsDetail = await TaskDetail(req.headers.database).findByCartNo(req.body.cart_no);
+    const CartsDetailData = JSON.parse(CartsDetail.data);
+    for(let i=0;i<CartsDetailData.length;i+=1){
+      const dataIns = {
+        ...CartsDetailData[i],
+        order_no: order_no.data,
+      };
+      await TaskOrdersDetail(req.headers.database).create(dataIns);
+    }
+    res.status(200).json({
+      status: 'Success',
+      msg: "Create Order Success",
+    })
+  } catch (error) {
+    res.status(500).json({ status: "Error", msg: error.message })
+  }
+  
 })
 
 router.get("/:cart_no", (req, res, next) => {

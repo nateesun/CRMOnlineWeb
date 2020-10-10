@@ -24,6 +24,12 @@ export const initialState = {
     status: null,
     message: null,
   },
+  carts: {
+    cart_no: '',
+    cart_create_date: null,
+    approve: '',
+    reason: '',
+  }
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -116,6 +122,9 @@ const checkCartsReducer = (state = initialState, action) =>
       case constants.LOAD_VIEW_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Load data to view error!';
+        break;
+      case constants.UPDATE_SHOPPING_STEP:
+        draft.carts = action.payload;
         break;
     }
   });

@@ -179,17 +179,17 @@ export function* onUpdateShoppingStep() {
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cart_no, shopping_step: 'wait_confirm' }),
+      body: JSON.stringify({ cart_no, shopping_step: 'wait_confirm'}),
     });
     if (response.status === 'Success') {
       yield loadMemberShipping();
-      yield put(actions.setPaymentDataSuccess('Finish checkout order step'));
+      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
     } else {
-      yield put(actions.setPaymentDataError('Cannot update payment form'));
+      yield put(actions.updateShoppingStepError('Cannot update shopping step'));
     }
   } catch (err) {
     console.log(err);
-    yield put(actions.setPaymentDataError(err));
+    yield put(actions.updateShoppingStepError(err));
   }
 }
 

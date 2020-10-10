@@ -1,6 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 import * as loginSelectors from 'containers/Login/selectors';
+import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -102,10 +103,39 @@ export function* deleteData() {
   }
 }
 
+export function* onUpdateShoppingStep() {
+  try {
+    const { cart_no, approve, reason } = yield select(selectors.makeSelectCartStatus());
+    const requestURL = `${constants.publicPath}/api/carts/shopping_approve`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const { code } = yield select(dashboardSelectors.makeSelectProfile());
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ 
+        cart_no, 
+        shopping_step: approve, 
+        emp_code_update: code,
+        emp_reason: reason ,
+      }),
+    });
+    if (response.status === 'Success') {
+      yield initLoad();
+      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
+    } else {
+      yield put(actions.updateShoppingStepError('Cannot update shopping step'));
+    }
+  } catch (err) {
+    console.log(err);
+    yield put(actions.updateShoppingStepError(err));
+  }
+}
+
 export default function* checkCartsSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
+  yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
 }

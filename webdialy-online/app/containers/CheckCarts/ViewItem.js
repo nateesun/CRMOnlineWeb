@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Radio from '@material-ui/core/Radio';
@@ -49,6 +49,8 @@ const useStyles = makeStyles(theme => ({
 
 const ViewItem = props => {
   const classes = useStyles();
+  const [approve, setApprove] = useState('');
+  const [reason, setReason] = useState('');
   const {
     cart_no,
     cart_create_date,
@@ -131,23 +133,25 @@ const ViewItem = props => {
               >
                 <FormControlLabel
                   value="approve"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
                   label="Approve"
                 />
                 <FormControlLabel
                   value="not_approve"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
                   label="Not Approve"
                 />
               </RadioGroup>
             </FormControl>
           </Grid>
-
           <Grid item xs={10}>
             <TextField
               fullWidth
               id="standard-basic"
-              label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ"
+              label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ" disabled={approve!=='not_approve'}
+              required
+              value={reason}
+              onChange={e=>setReason(e.target.value)}
             />
           </Grid>
           <Grid item xs={3}>
@@ -164,7 +168,7 @@ const ViewItem = props => {
               color="primary"
               fullWidth
               variant="contained"
-              onClick={() => props.onChangePage('LIST')}
+              onClick={() => props.onUpdateShoppingStep({ cart_no, cart_create_date, approve, reason })}
             >
               <FormattedMessage {...messages.btnApprove} />
             </Button>

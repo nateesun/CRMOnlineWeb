@@ -36,3 +36,7 @@ export const DELETE_ITEM_ERROR = 'app/CheckCarts/DELETE_ITEM_ERROR';
 export const SEARCH = 'app/CheckCarts/SEARCH';
 export const SEARCH_SUCCESS = 'app/CheckCarts/SEARCH_SUCCESS';
 export const SEARCH_ERROR = 'app/CheckCarts/SEARCH_ERROR';
+
+export const UPDATE_SHOPPING_STEP = 'app/CheckCarts/UPDATE_SHOPPING_STEP';
+export const UPDATE_SHOPPING_STEP_SUCCESS = 'app/CheckCarts/UPDATE_SHOPPING_STEP_SUCCESS';
+export const UPDATE_SHOPPING_STEP_ERROR = 'app/CheckCarts/UPDATE_SHOPPING_STEP_ERROR';

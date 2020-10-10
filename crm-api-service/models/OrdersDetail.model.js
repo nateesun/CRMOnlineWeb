@@ -1,13 +1,11 @@
-/* Orders.model code generator by automatic script */
+/* OrderDetails.model code generator by automatic script */
 
-const moment = require('moment');
 const pool = require("../mysql-connect")
-const { getDB, zeroPad } = require('./FuncUtil')();
+const { getDB } = require('./FuncUtil')();
 
 module.exports = db => {
   const module = {}
-  const table_name = getDB(db, 'orders');
-  const tb_company = getDB(db, 'company');
+  const table_name = getDB(db, 'orders_detail');
 
   module.findById = async (id, callback) => {
     console.log("findById method start:")
@@ -49,17 +47,9 @@ module.exports = db => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const config = await pool.query(`select order_running, order_prefix, order_size_running from ${tb_company} c limit 0,1;`)
-        const { order_prefix, order_running, order_size_running } = config[0];
-        params.order_no = order_prefix + zeroPad(order_running, order_size_running); // generate prefix running
-        params.order_create_date = moment().format('YYYY-MM-DD HH:mm:ss');
-
         const query = `INSERT INTO ${table_name} SET ? `
         await pool.query(query, params)
-
-        // update running +1
-        await pool.query(`update ${tb_company} set order_running=order_running+1`)
-        resolve({ status: "Success", data: params.order_no })
+        resolve({ status: "Success", data: JSON.stringify(params.order_no) })
       } catch (err) {
         reject(err)
       }

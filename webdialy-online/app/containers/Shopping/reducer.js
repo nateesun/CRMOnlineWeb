@@ -50,7 +50,7 @@ const shoppingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
-      case checkoutOrderConstants.SET_PAYMENT_DATA_SUCCESS:
+      case checkoutOrderConstants.UPDATE_SHOPPING_STEP_SUCCESS:
       case constants.INIT_STATE:
         console.log('shoppingReducer INIT_STATE')
         draft.productList= [];
