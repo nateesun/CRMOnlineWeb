@@ -58,7 +58,7 @@ module.exports = db => {
     }
   }
 
-  module.create = async (params, callback) => {
+  module.create = async (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -71,9 +71,9 @@ module.exports = db => {
 
         // update running +1
         await pool.query(`update ${tb_company} set cart_running=cart_running+1`)
-        callback(null, { status: "Success", data: JSON.stringify(params.cart_no) })
+        resolve({ status: "Success", data: JSON.stringify(params.cart_no) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
@@ -166,8 +166,8 @@ module.exports = db => {
     })
   }
 
-  module.updateSummary = (data, callback) => {
-    console.log("update method start:")
+  module.updateSummary = (data) => {
+    console.log("updateSummary method start:")
     return new Promise(async (resolve, reject) => {
       // summary to carts
       try {
@@ -177,9 +177,9 @@ module.exports = db => {
         total_point=(select sum(point) from ${tb_carts_detail} cd where cd.cart_no=c.cart_no) 
         where cart_no=?`;
         const result = await pool.query(query, [data.cart_no])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err, { status: "Error", msg: err.message })
       }
     })
   }

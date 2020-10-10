@@ -67,15 +67,15 @@ module.exports = db => {
     }
   }
 
-  module.create = async (params, callback) => {
+  module.create = async (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, params)
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }

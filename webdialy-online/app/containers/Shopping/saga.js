@@ -34,7 +34,7 @@ export function* saveCartItem() {
       body: JSON.stringify(data),
     });
     if (response) {
-      yield put(actions.createItemCartSuccess(response.data));
+      yield put(actions.createItemCartSuccess(response.data[0]));
     } else {
       yield put(actions.createItemCartError('Cannot create data'));
     }

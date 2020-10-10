@@ -151,37 +151,18 @@ router.get("/:cart_no", (req, res, next) => {
   })
 })
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { carts, carts_detail } = req.body;
-  Task(req.headers.database).create(carts, (err, response)=>{
-    if (err) {
-      res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
-    } else {
-      // create cart_detail
-      TaskDetail(req.headers.database).create({...carts_detail, cart_no: JSON.parse(response.data)}, (err1, response1)=>{
-        if (err1) {
-          res.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
-        }
+  await Task(req.headers.database).create(carts);
 
-        // update summary carts
-        Task(req.headers.database).updateSummary({cart_no: JSON.parse(response.data)}, (err2, response2)=>{
-          if (err2) {
-            res.status(500).json({ status: "Error", msg: err2.sqlMessage || err2.errno })
-          }
+  // create cart_detail
+  await TaskDetail(req.headers.database).create({...carts_detail, cart_no: carts.cart_no});
 
-          Task(req.headers.database).findByCartNo(JSON.parse(response.data), (err3, response3)=>{
-            if (err3) {
-              res.status(500).json({ status: "Error", msg: err3.sqlMessage || err3.errno })
-            } else {
-              // return success create cart order
-              const data = JSON.parse(response3.data)[0]
-              res.status(200).json({ status: response3.status, msg: "Success", data })
-            }
-          })
-        })
-      })
-    }
-  })
+  // update summary carts
+  await Task(req.headers.database).updateSummary({cart_no: carts.cart_no});
+  let response = await Task(req.headers.database).findByCartNo(carts.cart_no);
+  // return success create cart order
+  res.status(200).json({ status: "Success", msg: "Success", data: JSON.parse(response.data) })
 })
 
 router.put("/", (req, res, next) => {
