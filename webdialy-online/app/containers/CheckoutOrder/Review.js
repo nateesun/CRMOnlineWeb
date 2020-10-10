@@ -11,22 +11,16 @@ import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
 const origin = {
   position: {
     lat: () => 13.809992,
-    lng: () => 100.413130,
+    lng: () => 100.41313,
   },
 };
+
 const destination = {
   position: {
     lat: () => 13.828941,
     lng: () => 100.525943,
   },
 };
-
-const payments = [
-  { name: 'ประเภทรับชำระ', detail: 'เงินโอน' },
-  { name: 'บัญชีผู้โอน', detail: 'นายสมชาย เข็มกลัด' },
-  { name: 'เลขที่บัญชี', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'วันที่โอน', detail: '30/01/2020 เวลา 14:50:15น.' },
-];
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -59,11 +53,9 @@ export default function Review(props) {
   const [duration, setDuration] = useState(0);
 
   const handleDirection = (distance, duration) => {
-    console.log('distance:', distance)
-    console.log('duration:', duration)
-    setDistance(distance/1000);
-    setDuration(duration/60);
-  }
+    setDistance(distance / 1000);
+    setDuration(duration / 60);
+  };
 
   return (
     <React.Fragment>
@@ -108,7 +100,7 @@ export default function Review(props) {
           >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
           <Typography
             gutterBottom
-          >{`${address1} ${address2} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
+          >{`${address1} ${address2||''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
@@ -128,7 +120,9 @@ export default function Review(props) {
                 <Typography gutterBottom>บัญชีต้นทาง</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography gutterBottom>{payment.account_from_name}</Typography>
+                <Typography gutterBottom>
+                  {payment.account_from_name}
+                </Typography>
               </Grid>
             </React.Fragment>
             <React.Fragment>
@@ -182,13 +176,18 @@ export default function Review(props) {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <div align="center" style={{marginBottom: '25px'}}>
-            <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
+          <div align="center" style={{ marginBottom: '25px' }}>
+            <MapDirectionAB
+              origin={origin}
+              destination={destination}
+              onExit={handleDirection}
+            />
           </div>
         </Grid>
         <Grid item xs={12}>
-          <div align="center" style={{marginBottom: '25px'}}>
-            ระยะทาง {distance} กิโลเมตร<br />
+          <div align="center" style={{ marginBottom: '25px' }}>
+            ระยะทาง {distance} กิโลเมตร
+            <br />
             ระยะเวลา {duration} นาที
           </div>
         </Grid>

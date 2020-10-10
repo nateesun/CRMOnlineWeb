@@ -24,6 +24,7 @@ const cartsRouter = require("./routes/carts.route")
 const cartsDetailRouter = require("./routes/carts_detail.route")
 const memberShippingRouter = require("./routes/member_shipping.route")
 const slipImageRouter = require("./routes/slip_image.route")
+const ordersRouter = require("./routes/orders.route")
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -55,7 +56,7 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(
   cors({
     origin: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
@@ -81,6 +82,7 @@ app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)
 app.use("/api/carts_detail", basicAuth({ users: { admin: fixPassword } }), cartsDetailRouter)
 app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
 app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter(options))
+app.use("/api/orders", basicAuth({ users: { admin: fixPassword } }), ordersRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -95,7 +97,9 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500)
-  res.render("error")
+  res.json({
+    status: 'Someting wrong with api request'
+  })
 })
 
 module.exports = app

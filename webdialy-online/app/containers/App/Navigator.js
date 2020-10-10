@@ -44,14 +44,13 @@ const categories = [
     id: 'Orders',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
-      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/track` },
-      { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}/transaction` },
+      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/tracking` },
     ],
   },
   {
-    id: 'Transportation',
+    id: 'Request Order',
     children: [
-      { id: 'Order List', icon: <LocalMallIcon />, to: `${publicPath}/transportation` },
+      { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
     ],
   },
   {

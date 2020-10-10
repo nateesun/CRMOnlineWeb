@@ -43,15 +43,15 @@ module.exports = db => {
     }
   }
 
-  module.create = async (params, callback) => {
+  module.create = async (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, params)
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) });
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject({ status: "Error", msg: err.message });
       }
     })
   }
@@ -105,6 +105,19 @@ module.exports = db => {
         callback(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         callback(err, { status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.deleteByMemberCode = (member_code) => {
+    console.log("delete by member_code method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `DELETE FROM ${table_name} WHERE member_code = ? `
+        await pool.query(query, [member_code])
+        resolve('Success');
+      } catch (err) {
+        reject(err);
       }
     })
   }

@@ -29,7 +29,11 @@ const PaymentForm = (props) => {
   };
 
   const validateSlipUpload = () => {
-    props.checkSlipImage(file.name)
+    if(file){
+      props.checkSlipImage(file.name)
+    }else{
+      // console.log('Please upload file.');
+    }
   }
 
   const onChangeHandler = event => {
@@ -122,7 +126,8 @@ const PaymentForm = (props) => {
           </Grid>
           <Grid item xs={12}>
             อัพโหลดไฟล์ Slip <input type="file" name="file" onChange={onChangeHandler} />
-            <button onClick={() => onUploadImageFile()}>Upload Slip</button>
+            <button onClick={() => onUploadImageFile()} style={{marginRight: '10px'}}>Upload Slip</button>
+            <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip</button>
           </Grid>
           <Grid item xs={12}>
             {showImg && <div align="center">
@@ -142,10 +147,9 @@ const PaymentForm = (props) => {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={()=>validateSlipUpload()}
               disabled={pristine || submitting} style={{marginBottom: '20px'}}
             >
-              ตรวจสอบข้อมูล
+              บันทึกข้อมูล
             </Button>
           </Grid>
         </Grid>

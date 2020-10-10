@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     width: '100%',
   },
   container: {
-    maxHeight: 550,
     padding: '10px',
   },
   table: {
@@ -36,6 +35,13 @@ const useStyles = makeStyles({
   wrapButtonAction: {
     marginTop: '15px',
     marginBottom: '15px',
+  },
+  colRow: {
+    whiteSpace: 'nowrap',
+  },
+  dataWidth: {
+    overflow: 'auto',
+    width: '750px',
   },
 });
 
@@ -108,66 +114,68 @@ export default function TableItems(props) {
           </Button>
         </div>
         <SearchBar {...props} />
-        <Table className={classes.table} stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">No</TableCell>
-              <TableCell align="center">Code</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="right">Point</TableCell>
-              <TableCell align="right">Redemption</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {getList &&
-              getList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((item, index) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={item.uuid_index}
-                  >
-                    <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.code}</TableCell>
-                    <TableCell align="center">{item.email}</TableCell>
-                    <TableCell align="center">{item.total_score}</TableCell>
-                    <TableCell align="center">{item.total_purchase}</TableCell>
-                    <TableCell align="center">
-                      <Grid container spacing={1} justify="center">
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onViewItem(item)}
-                          >
-                            View
-                          </Button>
+        <div className={classes.dataWidth}>
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow className={classes.colRow}>
+                <TableCell align="center">No</TableCell>
+                <TableCell align="center">Code</TableCell>
+                <TableCell align="left">Email</TableCell>
+                <TableCell align="right">Point</TableCell>
+                <TableCell align="right">Redemption</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {getList &&
+                getList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={item.uuid_index} className={classes.colRow}
+                    >
+                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">{item.code}</TableCell>
+                      <TableCell align="center">{item.email}</TableCell>
+                      <TableCell align="center">{item.total_score}</TableCell>
+                      <TableCell align="center">{item.total_purchase}</TableCell>
+                      <TableCell align="center">
+                        <Grid container spacing={1} justify="center">
+                          <Grid item>
+                            <Button
+                              variant="outlined"
+                              onClick={() => onViewItem(item)}
+                            >
+                              View
+                            </Button>
+                          </Grid>
+                          <Grid item>
+                            <Button
+                              variant="outlined"
+                              onClick={() => onEditItem(item)}
+                            >
+                              Edit
+                            </Button>
+                          </Grid>
+                          <Grid item>
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => handleDelete(item.uuid_index)}
+                            >
+                              Delete
+                            </Button>
+                          </Grid>
                         </Grid>
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onEditItem(item)}
-                          >
-                            Edit
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => handleDelete(item.uuid_index)}
-                          >
-                            Delete
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                ))}
-          </TableBody>
-        </Table>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+            </TableBody>
+          </Table>
+        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}

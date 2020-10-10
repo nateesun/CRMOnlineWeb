@@ -9,6 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
+import { Button } from '@material-ui/core'
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import RenderField from 'components/RenderField';
 import * as selectors from './selectors';
@@ -21,14 +22,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AddressForm = (props) => {
+const AddressForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, shipping } = props;
   const [latitude, setLatitude] = useState(13.809992);
   const [longitude, setLongitude] = useState(100.413130);
 
   const onValidated = formValues => {
-    
+    props.onUpdateAddressForm({
+      ...formValues, 
+      map_latitude: latitude, 
+      map_longitude: longitude,
+      address_type: 'Shipping',
+      member_prefix: '',
+    });
   };
 
   const handlePlace = (latitude, longitude) => {
@@ -123,13 +130,31 @@ const AddressForm = (props) => {
               required
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <FormControlLabel
               control={
                 <Checkbox color="secondary" name="saveAddress" value="yes" />
               }
               label={<FormattedMessage {...messages.useForShpping} />}
             />
+          </Grid>
+          <Grid item xs={6}>
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary"
+              disabled={pristine || submitting}
+              style={{marginRight: '10px'}}
+            >
+              Update data
+            </Button>
+            <Button 
+              variant="contained" 
+              disabled={pristine || submitting}
+              onClick={reset}
+            >
+              Reset
+            </Button>
           </Grid>
           <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>

@@ -42,17 +42,13 @@ const NewItem = props => {
   const { handleSubmit, pristine, reset, submitting, response } = props;
 
   const onValidated = formValues => {
-    saveData(formValues);
+    props.onCreateItem(formValues);
   };
 
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
   }
-
-  const saveData = data => {
-    props.onCreateItem(data);
-  };
 
   NewItem.propTypes = {
     handleSubmit: PropTypes.func,

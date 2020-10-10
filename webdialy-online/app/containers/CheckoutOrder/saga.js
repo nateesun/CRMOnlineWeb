@@ -55,13 +55,13 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`/api/upload`, options)
+    const response = yield fetch(`${constants.apiServiceHost}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {
-      yield put(actions.uploadImageError('Cannot update data'));
+      yield put(actions.uploadImageError('Cannot upload file'));
     }
   } catch (err) {
     yield put(actions.uploadImageError(err));
@@ -100,7 +100,7 @@ export function* onDeleteItemCart() {
     if (response.status === 'Success') {
       yield loadCartList();
     } else {
-      yield put(actions.deleteItemCartError('Delete item cart success'));
+      yield put(actions.deleteItemCartError('Cannot delete item cart'));
     }
   } catch (err) {
     yield put(actions.deleteItemCartError(err));
@@ -121,10 +121,75 @@ export function* onUpdateItemCart() {
     if (response.status === 'Success') {
       yield loadCartList();
     } else {
-      yield put(actions.updateItemCartError('Update item cart success'));
+      yield put(actions.updateItemCartError('Cannot update item cart'));
     }
   } catch (err) {
     yield put(actions.updateItemCartError(err));
+  }
+}
+
+export function* onUpdateAddressForm() {
+  try {
+    const member_code = yield select(selectors.makeSelectMemberCode());
+    const addressFormData = yield select(selectors.makeSelectAddressForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/shipping`;
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'POST',
+      body: JSON.stringify({...addressFormData, member_code}),
+    });
+    if (response.status === 'Success') {
+      yield loadMemberShipping();
+    } else {
+      yield put(actions.updateAddressFormError('Cannot update address form'));
+    }
+  } catch (err) {
+    yield put(actions.updateAddressFormError(err));
+  }
+}
+
+export function* onUpdatePaymentForm() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const member_code = yield select(selectors.makeSelectMemberCode());
+    const paymentData = yield select(selectors.makeSelectPaymentData());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/carts/payment`;
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'POST',
+      body: JSON.stringify({...paymentData, member_code, cart_no}),
+    });
+    if (response.status === 'Success') {
+      yield loadMemberShipping();
+    } else {
+      yield put(actions.setPaymentDataError('Cannot update payment form'));
+    }
+  } catch (err) {
+    yield put(actions.setPaymentDataError(err));
+  }
+}
+
+export function* onUpdateShoppingStep() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const requestURL = `${constants.publicPath}/api/carts/shopping_step`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no, shopping_step: 'wait_confirm'}),
+    });
+    if (response.status === 'Success') {
+      yield loadMemberShipping();
+      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
+    } else {
+      yield put(actions.updateShoppingStepError('Cannot update shopping step'));
+    }
+  } catch (err) {
+    console.log(err);
+    yield put(actions.updateShoppingStepError(err));
   }
 }
 
@@ -135,4 +200,7 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
   yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
+  yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
+  yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
 }

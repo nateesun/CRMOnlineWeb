@@ -5,6 +5,7 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const apiServiceHost = process.env.API_SERVICE_HOST || 'http://localhost:5000';
 
 export const INIT_STATE = 'app/Checkout/INIT_STATE';
 
@@ -35,3 +36,11 @@ export const DELETE_ITEM_CART_ERROR = 'app/Checkout/DELETE_ITEM_CART_ERROR';
 export const UPDATE_ITEM_CART = 'app/Checkout/UPDATE_ITEM_CART';
 export const UPDATE_ITEM_CART_SUCCESS = 'app/Checkout/UPDATE_ITEM_CART_SUCCESS';
 export const UPDATE_ITEM_CART_ERROR = 'app/Checkout/UPDATE_ITEM_CART_ERROR';
+
+export const UPDATE_ADDRESS_FORM = 'app/Checkout/UPDATE_ADDRESS_FORM';
+export const UPDATE_ADDRESS_FORM_SUCCESS = 'app/Checkout/UPDATE_ADDRESS_FORM_SUCCESS';
+export const UPDATE_ADDRESS_FORM_ERROR = 'app/Checkout/UPDATE_ADDRESS_FORM_ERROR';
+
+export const UPDATE_SHOPPING_STEP = 'app/Checkout/UPDATE_SHOPPING_STEP';
+export const UPDATE_SHOPPING_STEP_SUCCESS = 'app/Checkout/UPDATE_SHOPPING_STEP_SUCCESS';
+export const UPDATE_SHOPPING_STEP_ERROR = 'app/Checkout/UPDATE_SHOPPING_STEP_ERROR';

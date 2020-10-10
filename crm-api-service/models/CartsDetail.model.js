@@ -7,15 +7,17 @@ module.exports = db => {
   const module = {}
   const table_name = getDB(db, 'carts_detail');
 
-  module.findByCartNo = async (cart_no, callback) => {
+  module.findByCartNo = async cart_no => {
     console.log("findByProduct method start:")
-    try {
-      const sql = `select * from ${table_name} where cart_no=?;`
-      const result = await pool.query(sql, [cart_no])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=?;`
+        const result = await pool.query(sql, [cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 
   module.findByProduct = async (product_code, cart_no, callback) => {

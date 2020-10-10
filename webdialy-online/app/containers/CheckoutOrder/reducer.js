@@ -4,8 +4,10 @@
  *
  */
 import produce from 'immer';
+import moment from 'moment';
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
+const { v4 } = require('uuid');
 
 export const initialState = {
   cart_no: '',
@@ -20,6 +22,7 @@ export const initialState = {
   img_upload: null,
   slipFileName: '',
   slipValidateStatus: '',
+  addressForm: {},
   response: {
     status: '',
     message: '',
@@ -80,8 +83,7 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.SET_PAYMENT_DATA:
         draft.paymentData = action.payload;
-        break;
-      case constants.SET_PAYMENT_DATA_SUCCESS:
+        draft.paymentData.transfer_date = moment().format('YYYY-MM-DD HH:mm:ss');
         break;
       case constants.SET_PAYMENT_DATA_ERROR:
         break;
@@ -108,6 +110,11 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ITEM_CART:
         draft.product = action.payload;
       case constants.UPDATE_ITEM_CART_ERROR:
+        break;
+      case constants.UPDATE_ADDRESS_FORM:
+        draft.addressForm = action.payload;
+        draft.addressForm.uuid_index = v4();
+      case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
     }
   });
