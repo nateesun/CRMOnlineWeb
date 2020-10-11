@@ -4,21 +4,11 @@
  *
  */
 import produce from 'immer';
-import * as types from './constants';
+import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  member: {
-    code: '',
-    prefix: '',
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    email: '',
-    password: '',
-    birthday: '',
-    lineId: '',
-    loggedIn: false,
-  },
+  data: {},
   status: '',
   error: '',
 };
@@ -27,44 +17,27 @@ export const initialState = {
 const profileEditReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case types.DEFAULT_ACTION:
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
         draft.status = '';
         draft.error = '';
-        draft.member = {
-          code: '',
-          prefix: '',
-          firstName: '',
-          lastName: '',
-          mobile: '',
-          email: '',
-          password: '',
-          birthday: '',
-          lineId: '',
-        }
+        draft.data = {};
         break;
-      case types.INIT_LOAD_PROFILE_MEMBER:
-        draft.member.code = action.payload;
+      case constants.INIT_LOAD:
+        draft.email = action.payload;
         break;
-      case types.INIT_LOAD_PROFILE_MEMBER_SUCCESS:
-        draft.member = action.payload;
+      case constants.INIT_LOAD_SUCCESS:
+        draft.data = action.payload;
         break;
-      case types.INIT_LOAD_PROFILE_MEMBER_ERROR:
+      case constants.INIT_LOAD_ERROR:
         break;
-      case types.EDIT_MEMBER:
-        draft.member.code = action.payload.member.code;
-        draft.member.prefix = action.payload.member.prefix;
-        draft.member.firstName = action.payload.member.firstName;
-        draft.member.lastName = action.payload.member.lastName;
-        draft.member.mobile = action.payload.member.mobile;
-        draft.member.birthday = action.payload.member.birthday;
-        draft.member.email = action.payload.member.email;
-        draft.member.password = action.payload.member.password;
-        draft.member.lineId = action.payload.member.line_id;
+      case constants.EDIT_MEMBER:
+        draft.data = action.payload;
         break;
-      case types.EDIT_MEMBER_SUCCESS:
+      case constants.EDIT_MEMBER_SUCCESS:
         draft.status = 'Success';
         break;
-      case types.EDIT_MEMBER_ERROR:
+      case constants.EDIT_MEMBER_ERROR:
         draft.error = action.payload;
         break;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -60,6 +60,11 @@ const NewItem = props => {
     reset: PropTypes.func,
     submitting: PropTypes.bool,
     onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -83,7 +88,7 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -94,7 +99,7 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}

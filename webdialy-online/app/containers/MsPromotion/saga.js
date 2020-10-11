@@ -1,19 +1,19 @@
-import { take, call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
+const fetch = require('node-fetch');
+
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/promotion`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
     });
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
@@ -28,17 +28,15 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const file = yield select(selectors.makeSelectFileUpload());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/promotion`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
-      body: JSON.stringify(data),
+      body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
     } else {
       yield put(actions.createItemError('Cannot create data'));
@@ -51,17 +49,25 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const file = yield select(selectors.makeSelectFileUpload());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/promotion`;
-    const response = yield call(request, requestURL, {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
-      body: JSON.stringify(data),
-    });
-    if (response) {
+    let response;
+    if (file) {
+      response = yield call(request, requestURL, {
+        database,
+        method: 'PUT',
+        body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
+      });
+    } else {
+      response = yield call(request, requestURL, {
+        database,
+        method: 'PUT',
+        body: JSON.stringify(data),
+      });
+    }
+    
+    if (response.status === 'Success') {
       yield put(actions.updateItemSuccess(response));
     } else {
       yield put(actions.updateItemError('Cannot update data'));
@@ -74,17 +80,16 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/promotion/${data.uuid_index}`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/promotion/${
+      data.uuid_index
+    }`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.deleteItemSuccess(response));
     } else {
       yield put(actions.deleteItemError('Cannot update data'));
@@ -94,9 +99,33 @@ export function* deleteData() {
   }
 }
 
+export function* uploadFile() {
+  try {
+    const file = yield select(selectors.makeSelectFileUpload());
+    const formdata = new FormData();
+    formdata.append('file', file, file.name);
+    const options = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+    }
+    const response = yield fetch(`${constants.apiServiceHost}/api/upload`, options)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+    if (response.status === 'Success') {
+      yield put(actions.uploadImageSuccess(response));
+    } else {
+      yield put(actions.uploadImageError('Cannot update data'));
+    }
+  } catch (err) {
+    yield put(actions.uploadImageError(err));
+  }
+}
+
 export default function* msPromotionSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
+  yield takeEvery(constants.UPLOAD_IMG, uploadFile);
 }

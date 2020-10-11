@@ -1,44 +1,35 @@
-import { put, select, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
-import * as actions from './actions';
-import * as types from './constants';
+import * as loginSelectors from 'containers/Login/selectors';
+import * as constants from './constants';
 
 export function* onVerifyTokenLogin(data) {
   try {
     // verify token for username, password
     const { token } = data.payload;
-    const reqURL = `${types.publicPath}/api/line/login`;
+    const reqURL = `${constants.publicPath}/api/line/login`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const responseToken = yield call(request, reqURL, {
+      database,
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify({ token }),
     });
     if (responseToken.status === 'Success') {
       // send to login api
       const { Username, Password } = responseToken.data;
-      const requestURL = `${types.publicPath}/api/member/login`;
+      const requestURL = `${constants.publicPath}/api/member/login`;
       const response = yield call(request, requestURL, {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-        },
         body: JSON.stringify({
           email: Username,
-          password: new Buffer(Password, 'base64').toString(),
+          password: Buffer.from(Password, 'base64').toString(),
         }),
       });
       if (response.status === 'Success') {
         yield put(checkLoginSuccess(response));
-        // yield put(actions.verifyTokenSuccess(response));
-        yield put(push(`${types.publicPath}/dashboard`));
+        yield put(push(`${constants.publicPath}/dashboard`));
       } else {
         yield put(checkLoginError('Email or password invalid'));
       }
@@ -51,5 +42,5 @@ export function* onVerifyTokenLogin(data) {
 }
 
 export default function* lineLoginSaga() {
-  yield takeEvery(types.VERIFY_TOKEN, onVerifyTokenLogin);
+  yield takeEvery(constants.VERIFY_TOKEN, onVerifyTokenLogin);
 }

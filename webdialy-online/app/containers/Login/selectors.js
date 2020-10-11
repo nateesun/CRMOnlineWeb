@@ -25,9 +25,22 @@ const makeLoginError = () =>
     loginState => loginState.error,
   );
 
+const makeSelectLoggedIn = () =>
+  createSelector(
+    selectLogin,
+    loginState => loginState.loggedIn,
+  );
+const makeSelectDatabase = () =>
+  createSelector(
+    selectLogin,
+    loginState => loginState.queryDb,
+  );
+
 export {
   selectLogin,
   makeSelectLogin,
   makeSelectProfile,
   makeLoginError,
+  makeSelectLoggedIn,
+  makeSelectDatabase,
 };

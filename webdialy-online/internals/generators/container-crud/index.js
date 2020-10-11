@@ -89,6 +89,18 @@ module.exports = {
       default: true,
       message: 'Do you want to load Sub List Item?',
     },
+    {
+      type: 'confirm',
+      name: 'viewItem',
+      default: true,
+      message: 'Do you want to load View Item?',
+    },
+    {
+      type: 'confirm',
+      name: 'searchBar',
+      default: true,
+      message: 'Do you want to load Search bar?',
+    },
   ],
   actions: data => {
     // Generate index.js and index.test.js
@@ -240,6 +252,24 @@ module.exports = {
         type: 'add',
         path: '../../app/containers/{{properCase name}}/SubTableItems.js',
         templateFile: './container-crud/SubTableItems.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // ViewItem
+    if (data.viewItem) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/ViewItem.js',
+        templateFile: './container-crud/ViewItem.js.hbs',
+        abortOnFail: false,
+      });
+    }
+    // SearchBar
+    if (data.searchBar) {
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/SearchBar.js',
+        templateFile: './container-crud/SearchBar.js.hbs',
         abortOnFail: false,
       });
     }

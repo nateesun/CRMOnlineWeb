@@ -17,8 +17,8 @@ const app = express();
 const httpRequest = require('./infra/httpRequest/usecases')();
 const envConfig = require('../config/envConfig');
 
-const appBasePath = envConfig('APP_BASE_PATH');
-const appName = envConfig('APP_NAME');
+const appBasePath = process.env.REACT_APP_PUBLIC_PATH || envConfig('APP_BASE_PATH');
+const appName = process.env.REACT_APP_NAME || envConfig('APP_NAME');
 let serviceApiHost = envConfig('SERVICE_API_HOST');
 const isDemo = process.env.NODE_ENV === 'demo';
 if (isDemo) {
@@ -37,17 +37,21 @@ const basePathForAPI = appBasePath.replace(/\/*$/, '');
 app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
 app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
 app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
+app.get(`${basePathForAPI}/company/:company_code`, (req, res)=>{
+  res.redirect(`${basePathForAPI}/login?code=${req.params.company_code}`);
+})
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: `${appBasePath}`,
+  publicPath: `${basePathForAPI}/`,
 });
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
+const customPort = envConfig('PORT') || port;
 
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
@@ -57,7 +61,7 @@ app.get('*.js', (req, res, next) => {
 });
 
 // Start your app.
-app.listen(port, host, async err => {
+app.listen(customPort, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
@@ -66,12 +70,12 @@ app.listen(port, host, async err => {
   if (ngrok) {
     let url;
     try {
-      url = await ngrok.connect(port);
+      url = await ngrok.connect(customPort);
     } catch (e) {
       return logger.error(e);
     }
-    logger.appStarted(port, prettyHost, url);
+    logger.appStarted(customPort, prettyHost, url);
   } else {
-    logger.appStarted(port, prettyHost);
+    logger.appStarted(customPort, prettyHost);
   }
 });

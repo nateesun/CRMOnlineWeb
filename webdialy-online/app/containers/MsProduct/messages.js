@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
+    defaultMessage: 'Add new product',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Edit product',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
@@ -53,6 +53,42 @@ export default defineMessages({
     id: `${scope}.col4ShouldNotEmpty`,
     defaultMessage: 'Group code should not empty',
   },
+  col5ShouldNotEmpty: {
+    id: `${scope}.col5ShouldNotEmpty`,
+    defaultMessage: 'Point should not empty or < 0',
+  },
+  col6ShouldNotEmpty: {
+    id: `${scope}.col6ShouldNotEmpty`,
+    defaultMessage: 'Stock code should not empty',
+  },
+  col7ShouldNotEmpty: {
+    id: `${scope}.col7ShouldNotEmpty`,
+    defaultMessage: 'Price eat-in should not empty or < 0',
+  },
+  col8ShouldNotEmpty: {
+    id: `${scope}.col8ShouldNotEmpty`,
+    defaultMessage: 'Price takeaway should not empty or < 0',
+  },
+  col9ShouldNotEmpty: {
+    id: `${scope}.col9ShouldNotEmpty`,
+    defaultMessage: 'Price delivery should not empty or < 0',
+  },
+  col10ShouldNotEmpty: {
+    id: `${scope}.col10ShouldNotEmpty`,
+    defaultMessage: 'Max stock should not empty or < 0',
+  },
+  col11ShouldNotEmpty: {
+    id: `${scope}.col11ShouldNotEmpty`,
+    defaultMessage: 'Min stock should not empty or < 0',
+  },
+  col12ShouldNotEmpty: {
+    id: `${scope}.col12ShouldNotEmpty`,
+    defaultMessage: 'Unit in stock not empty',
+  },
+  col13ShouldNotEmpty: {
+    id: `${scope}.col13ShouldNotEmpty`,
+    defaultMessage: 'Image path not empty',
+  },
   col1: {
     id: `${scope}.col1`,
     defaultMessage: 'Product Code',
@@ -68,6 +104,42 @@ export default defineMessages({
   col4: {
     id: `${scope}.col4`,
     defaultMessage: 'Group Code',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Image Path',
+  },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Point',
+  },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Stock Code',
+  },
+  col8: {
+    id: `${scope}.col8`,
+    defaultMessage: 'EatIn Price',
+  },
+  col9: {
+    id: `${scope}.col9`,
+    defaultMessage: 'Takeaway Price',
+  },
+  col10: {
+    id: `${scope}.col10`,
+    defaultMessage: 'Delivery Price',
+  },
+  col11: {
+    id: `${scope}.col11`,
+    defaultMessage: 'Max Stock',
+  },
+  col12: {
+    id: `${scope}.col12`,
+    defaultMessage: 'Min Stock',
+  },
+  col13: {
+    id: `${scope}.col13`,
+    defaultMessage: 'Unit Code Stock',
   },
   btnSave: {
     id: `${scope}.btnSave`,

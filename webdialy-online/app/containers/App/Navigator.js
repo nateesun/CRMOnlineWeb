@@ -44,35 +44,57 @@ const categories = [
     id: 'Orders',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
-      { id: 'Transaction', icon: <TimeLineIcon />, to: `${publicPath}` },
-      { id: 'History', icon: <HistoryIcon />, to: `${publicPath}` },
+      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/tracking` },
+    ],
+  },
+  {
+    id: 'Request Order',
+    children: [
+      { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
     ],
   },
   {
     id: 'Members',
     children: [
-      { id: 'All', icon: <PeopleIcon />, to: `${publicPath}/members` },
-      { id: 'Branch', icon: <StorefrontIcon />, to: `${publicPath}` },
-      { id: 'Shop', icon: <StoreMallDirectory />, to: `${publicPath}` },
+      { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
     ],
   },
   {
     id: 'Settings',
     children: [
       { id: 'Roles', icon: <LockIcon />, to: `${publicPath}/ms/role` },
-      { id: 'Database', icon: <DnsRoundedIcon />, to: `${publicPath}` },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon />, to: `${publicPath}` },
+      {
+        id: 'Database',
+        icon: <DnsRoundedIcon />,
+        to: `${publicPath}/database`,
+      },
     ],
   },
   {
     id: 'Master',
     children: [
-      { id: 'Company', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/company` },
+      {
+        id: 'Company',
+        icon: <DnsRoundedIcon />,
+        to: `${publicPath}/ms/company`,
+      },
       { id: 'Branch', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/branch` },
-      { id: 'Product', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/product` },
-      { id: 'Employee', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/employee` },
+      {
+        id: 'Product',
+        icon: <DnsRoundedIcon />,
+        to: `${publicPath}/ms/product`,
+      },
+      {
+        id: 'Employee',
+        icon: <DnsRoundedIcon />,
+        to: `${publicPath}/ms/employee`,
+      },
       { id: 'Stock', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/stock` },
-      { id: 'Promotion', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/promotion` },
+      {
+        id: 'Redeem',
+        icon: <DnsRoundedIcon />,
+        to: `${publicPath}/ms/promotion`,
+      },
     ],
   },
 ];
@@ -121,21 +143,21 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-  const { classes, username, ...other } = props;
+  const { classes, email, ...other } = props;
   leftMenus.length = 0;
-  categories.forEach((item, index) => {
-    if (item.id === 'Members' || item.id === 'Settings' || item.id === 'Master') {
-      if (username === 'softpos@gmail.com') {
+  categories.forEach(item => {
+    if (
+      item.id === 'Members' ||
+      item.id === 'Settings' ||
+      item.id === 'Master'
+    ) {
+      if (email === 'softpos@gmail.com') {
         leftMenus.push(item);
       }
+    } else if (item.id === 'Orders' && email !== 'softpos@gmail.com') {
+      leftMenus.push(item);
     } else {
-      if (item.id === 'Orders') {
-        if (username !== 'softpos@gmail.com') {
-          leftMenus.push(item);
-        }
-      } else {
-        leftMenus.push(item);
-      }
+      leftMenus.push(item);
     }
   });
 
@@ -208,6 +230,7 @@ function Navigator(props) {
 
 Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
+  email: PropTypes.string,
 };
 
 export default withStyles(styles)(Navigator);

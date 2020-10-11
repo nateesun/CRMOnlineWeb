@@ -27,12 +27,12 @@ import LanguageProvider from 'containers/LanguageProvider';
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
+import WaterMark from 'components/WaterMark';
 
 import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
-import WaterMark from 'components/WaterMark';
 
 // Create redux store with history
 const initialState = {};
@@ -55,9 +55,8 @@ const AppMain = () => {
         <App />
       </WaterMark>
     );
-  } else {
-    return <App />;
   }
+  return <App />;
 };
 
 const render = messages => {

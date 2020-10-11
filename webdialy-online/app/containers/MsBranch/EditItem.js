@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -11,8 +11,9 @@ import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,6 +44,9 @@ const useStyles = makeStyles(theme => ({
 const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const { map_latitude, map_longitude } = props.initialValues;
+  const [latitude, setLatitude] = useState(map_latitude);
+  const [longitude, setLongitude] = useState(map_longitude);
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -55,6 +59,11 @@ const EditItem = props => {
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
+  };
+
+  const handlePlace = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
   };
 
   return (
@@ -86,6 +95,7 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
             <Grid item xs={6}>
@@ -119,8 +129,19 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center">
-                <h3>Google map here...</h3>
+              <div align="center" style={{marginBottom: '25px'}}>
+                {latitude && longitude && (
+                  <MapMarker
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
+                    onExit={handlePlace}
+                  />
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
               </div>
             </Grid>
           </Grid>
@@ -169,6 +190,11 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
+  onCreateItem: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -183,13 +209,15 @@ const validate = formValues => {
     errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.map_longitude = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   return errors;
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

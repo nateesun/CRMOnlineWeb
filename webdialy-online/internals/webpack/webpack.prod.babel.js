@@ -20,7 +20,9 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
-    publicPath: process.env.REACT_APP_PUBLIC_PATH ? `${process.env.REACT_APP_PUBLIC_PATH}/` : '',
+    publicPath: process.env.REACT_APP_PUBLIC_PATH
+      ? `${process.env.REACT_APP_PUBLIC_PATH}/`
+      : '',
   },
 
   optimization: {

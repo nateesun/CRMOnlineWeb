@@ -7,7 +7,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -18,7 +17,6 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
-import messages from './messages';
 
 export function MsCompany(props) {
   useInjectReducer({ key: 'msCompany', reducer });
@@ -29,9 +27,7 @@ export function MsCompany(props) {
   }, []);
 
   return (
-    <div>
-      <ContentPage {...props} />
-    </div>
+    <ContentPage {...props} />
   );
 }
 
@@ -42,7 +38,6 @@ MsCompany.propTypes = {
   onCreateItem: PropTypes.func,
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
-  onGetItem: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -58,7 +53,6 @@ function mapDispatchToProps(dispatch) {
     onCreateItem: data => dispatch(actions.createItem(data)),
     onUpdateItem: data => dispatch(actions.updateItem(data)),
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
-    onGetItem: id => dispatch(actions.getItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
   };

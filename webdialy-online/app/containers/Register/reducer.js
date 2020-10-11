@@ -4,15 +4,12 @@
  *
  */
 import produce from 'immer';
-import {
-  DEFAULT_ACTION,
-  ADD_REGISTER_MEMBER,
-  ADD_REGISTER_MEMBER_ERROR,
-  ADD_REGISTER_MEMBER_SUCCESS,
-} from './constants';
+import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
+const { v4 } = require('uuid');
 
 export const initialState = {
-  member: {
+  data: {
     prefix: '',
     firstName: '',
     lastName: '',
@@ -30,25 +27,20 @@ export const initialState = {
 const registerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
-        draft.member = {};
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.data = {};
         draft.status = '';
         draft.error = '';
         break;
-      case ADD_REGISTER_MEMBER:
-        draft.member.prefix = action.payload.member.prefix;
-        draft.member.firstName = action.payload.member.firstName;
-        draft.member.lastName = action.payload.member.lastName;
-        draft.member.mobile = action.payload.member.mobile;
-        draft.member.birthday = action.payload.member.birthday;
-        draft.member.email = action.payload.member.email;
-        draft.member.password = action.payload.member.password;
-        draft.member.lineId = action.payload.member.lineId;
+      case constants.ADD_REGISTER_MEMBER:
+        draft.data = action.payload;
+        draft.data.uuid_index = v4();
         break;
-      case ADD_REGISTER_MEMBER_SUCCESS:
+      case constants.ADD_REGISTER_MEMBER_SUCCESS:
         draft.status = 'Success';
         break;
-      case ADD_REGISTER_MEMBER_ERROR:
+      case constants.ADD_REGISTER_MEMBER_ERROR:
         draft.error = action.payload;
         break;
     }

@@ -1,30 +1,24 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
-import * as types from './constants';
+import * as constants from './constants';
 import * as actions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
 export function* onValidLogin() {
   try {
-    const requestURL = `${types.publicPath}/api/member/login`;
-    const loginForm = yield select(selects.makeSelectLogin());
+    const requestURL = `${constants.publicPath}/api/login`;
+    const loginForm = yield select(selectors.makeSelectLogin());
+    const database = yield select(selectors.makeSelectDatabase());
     const { email, password } = loginForm;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+      body: JSON.stringify({ email, password }),
     });
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));
-      yield put(push(`${types.publicPath}/dashboard`));
+      yield put(push(`${constants.publicPath}/dashboard`));
     } else {
       yield put(actions.checkLoginError('Email or password invalid'));
     }
@@ -42,6 +36,6 @@ export function* onLogout() {
 }
 
 export default function* loginSaga() {
-  yield takeEvery(types.CHECK_LOGIN, onValidLogin);
-  yield takeEvery(types.CHECK_LOGOUT, onLogout);
+  yield takeEvery(constants.CHECK_LOGIN, onValidLogin);
+  yield takeEvery(constants.CHECK_LOGOUT, onLogout);
 }

@@ -6,6 +6,11 @@
 
 import * as constants from './constants';
 
+export function initState() {
+  return {
+    type: constants.INIT_STATE,
+  };
+}
 export function changePage(payload) {
   return {
     type: constants.CHANGE_PAGE,
@@ -52,7 +57,26 @@ export function loadEditError(payload) {
     payload,
   };
 }
+export function loadView(payload) {
+  return {
+    type: constants.LOAD_VIEW,
+    payload,
+  };
+}
 
+export function loadViewSuccess(payload) {
+  return {
+    type: constants.LOAD_VIEW_SUCCESS,
+    payload,
+  };
+}
+
+export function loadViewError(payload) {
+  return {
+    type: constants.LOAD_VIEW_ERROR,
+    payload,
+  };
+}
 export function createItem(payload) {
   return {
     type: constants.CREATE_ITEM,
@@ -116,23 +140,23 @@ export function deleteItemError(payload) {
   };
 }
 
-export function getItem(payload) {
+export function search(payload) {
   return {
-    type: constants.GET_ITEM,
+    type: constants.SEARCH,
     payload,
   };
 }
 
-export function getItemSuccess(payload) {
+export function searchSuccess(payload) {
   return {
-    type: constants.GET_ITEM_SUCCESS,
+    type: constants.SEARCH_SUCCESS,
     payload,
   };
 }
 
-export function getItemError(payload) {
+export function searchError(payload) {
   return {
-    type: constants.GET_ITEM_ERROR,
+    type: constants.SEARCH_ERROR,
     payload,
   };
 }

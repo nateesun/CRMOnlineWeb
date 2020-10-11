@@ -9,6 +9,7 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
+import MapMarker from 'containers/GoogleMap/MapMarker';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +41,8 @@ const useStyles = makeStyles(theme => ({
 const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [latitude, setLatitude] = useState(13.809992);
+  const [longitude, setLongitude] = useState(100.413130);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -54,12 +57,22 @@ const NewItem = props => {
     props.onCreateItem(data);
   };
 
+  const handlePlace = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
+  };
+
   NewItem.propTypes = {
     handleSubmit: PropTypes.func,
     pristine: PropTypes.bool,
     reset: PropTypes.func,
     submitting: PropTypes.bool,
     onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
   };
 
   return (
@@ -111,6 +124,7 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                onChange={e => setLatitude(e.target.value)}
                 required
               />
             </Grid>
@@ -121,12 +135,24 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
+                onChange={e => setLongitude(e.target.value)}
                 required
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center">
-                <h3>Google map here...</h3>
+              <div align="center" style={{marginBottom: '25px'}}>
+                {latitude && longitude && (
+                  <MapMarker
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
+                    onExit={handlePlace}
+                  />
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
               </div>
             </Grid>
           </Grid>
@@ -180,7 +206,9 @@ const validate = formValues => {
     errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.map_longitude = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   return errors;
 };

@@ -4,75 +4,159 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-  LOAD_MEMBERS,
-  LOAD_MEMBERS_SUCCESS,
-  LOAD_MEMBERS_ERROR,
-  DELETE_MEMBER,
-  DELETE_MEMBER_SUCCESS,
-  DELETE_MEMBER_ERROR,
-  EDIT_MEMBER,
-  EDIT_MEMBER_SUCCESS,
-  EDIT_MEMBER_ERROR,
-} from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: constants.INIT_STATE,
   };
 }
-export function loadMembers() {
+export function changePage(payload) {
   return {
-    type: LOAD_MEMBERS,
-  };
-}
-export function loadMemberSuccess(payload) {
-  return {
-    type: LOAD_MEMBERS_SUCCESS,
+    type: constants.CHANGE_PAGE,
     payload,
   };
 }
-export function loadMemberError(payload) {
+export function initLoad(payload) {
   return {
-    type: LOAD_MEMBERS_ERROR,
-    payload,
-  };
-}
-export function deleteMember(payload) {
-  return {
-    type: DELETE_MEMBER,
-    payload,
-  };
-}
-export function deleteMemberSuccess(payload) {
-  return {
-    type: DELETE_MEMBER_SUCCESS,
-    payload,
-  };
-}
-export function deleteMemberError(payload) {
-  return {
-    type: DELETE_MEMBER_ERROR,
+    type: constants.INIT_LOAD,
     payload,
   };
 }
 
-export function editMember(member) {
+export function initLoadSuccess(payload) {
   return {
-    type: EDIT_MEMBER,
-    payload: member,
-  };
-}
-export function editMemberSuccess(payload) {
-  return {
-    type: EDIT_MEMBER_SUCCESS,
+    type: constants.INIT_LOAD_SUCCESS,
     payload,
   };
 }
-export function editMemberError(payload) {
+
+export function initLoadError(payload) {
   return {
-    type: EDIT_MEMBER_ERROR,
+    type: constants.INIT_LOAD_ERROR,
+    payload,
+  };
+}
+export function loadEdit(payload) {
+  return {
+    type: constants.LOAD_EDIT,
+    payload,
+  };
+}
+
+export function loadEditSuccess(payload) {
+  return {
+    type: constants.LOAD_EDIT_SUCCESS,
+    payload,
+  };
+}
+
+export function loadEditError(payload) {
+  return {
+    type: constants.LOAD_EDIT_ERROR,
+    payload,
+  };
+}
+export function loadView(payload) {
+  return {
+    type: constants.LOAD_VIEW,
+    payload,
+  };
+}
+
+export function loadViewSuccess(payload) {
+  return {
+    type: constants.LOAD_VIEW_SUCCESS,
+    payload,
+  };
+}
+
+export function loadViewError(payload) {
+  return {
+    type: constants.LOAD_VIEW_ERROR,
+    payload,
+  };
+}
+export function createItem(payload) {
+  return {
+    type: constants.CREATE_ITEM,
+    payload,
+  };
+}
+
+export function createItemSuccess(payload) {
+  return {
+    type: constants.CREATE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function createItemError(payload) {
+  return {
+    type: constants.CREATE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function updateItem(payload) {
+  return {
+    type: constants.UPDATE_ITEM,
+    payload,
+  };
+}
+
+export function updateItemSuccess(payload) {
+  return {
+    type: constants.UPDATE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function updateItemError(payload) {
+  return {
+    type: constants.UPDATE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function deleteItem(payload) {
+  return {
+    type: constants.DELETE_ITEM,
+    payload,
+  };
+}
+
+export function deleteItemSuccess(payload) {
+  return {
+    type: constants.DELETE_ITEM_SUCCESS,
+    payload,
+  };
+}
+
+export function deleteItemError(payload) {
+  return {
+    type: constants.DELETE_ITEM_ERROR,
+    payload,
+  };
+}
+
+export function search(payload) {
+  return {
+    type: constants.SEARCH,
+    payload,
+  };
+}
+
+export function searchSuccess(payload) {
+  return {
+    type: constants.SEARCH_SUCCESS,
+    payload,
+  };
+}
+
+export function searchError(payload) {
+  return {
+    type: constants.SEARCH_ERROR,
     payload,
   };
 }

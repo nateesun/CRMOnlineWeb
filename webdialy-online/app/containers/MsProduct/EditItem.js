@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -10,9 +10,10 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,11 +39,17 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa',
+  },
 }));
 
 const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [file, setFile] = useState(null);
+  const { img_path } = props.initialValues;
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -55,6 +62,14 @@ const EditItem = props => {
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
+  };
+
+  const onChangeHandler = event => {
+    setFile(event.target.files[0]);
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
   };
 
   return (
@@ -78,7 +93,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -86,9 +101,10 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Field
                 name="name"
                 component={RenderField}
@@ -98,9 +114,9 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={2}>
               <Field
-                name="unit_sale"
+                name="unit_code_sale"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -108,9 +124,9 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={2}>
               <Field
-                name="group_code"
+                name="product_group_code"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -118,6 +134,115 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="point"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="stock_code"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_e"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_t"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="price_d"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="max_stock"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col11} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <Field
+                name="min_stock"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col12} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="unit_code_stock"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col13} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="img_path"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col5} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} />
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => onUploadImageFile()}
+              >
+                Upload
+              </Button>
+            </Grid>
+            {img_path && (
+              <Grid item xs={12}>
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img src={img_path} width="250" alt="" />
+                </Paper>
+              </Grid>
+            )}
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>
@@ -164,6 +289,10 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -174,17 +303,44 @@ const validate = formValues => {
   if (!formValues.name) {
     errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.unit_sale) {
-    errors.unit_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.unit_code_sale) {
+    errors.unit_code_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
-  if (!formValues.group_code) {
-    errors.group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  if (!formValues.product_group_code) {
+    errors.product_group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+  }
+  if (!formValues.point || formValues.point < 0) {
+    errors.point = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+  }
+  if (!formValues.stock_code) {
+    errors.stock_code = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
+  }
+  if (!formValues.price_e || formValues.price_e < 0) {
+    errors.price_e = <FormattedMessage {...messages.col7ShouldNotEmpty} />;
+  }
+  if (!formValues.price_t || formValues.price_t < 0) {
+    errors.price_t = <FormattedMessage {...messages.col8ShouldNotEmpty} />;
+  }
+  if (!formValues.price_d || formValues.price_d < 0) {
+    errors.price_d = <FormattedMessage {...messages.col9ShouldNotEmpty} />;
+  }
+  if (!formValues.max_stock || formValues.max_stock < 0) {
+    errors.max_stock = <FormattedMessage {...messages.col10ShouldNotEmpty} />;
+  }
+  if (!formValues.min_stock || formValues.min_stock < 0) {
+    errors.min_stock = <FormattedMessage {...messages.col11ShouldNotEmpty} />;
+  }
+  if (!formValues.unit_code_stock) {
+    errors.unit_code_stock = <FormattedMessage {...messages.col12ShouldNotEmpty} />;
+  }
+  if (!formValues.img_path) {
+    errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
   }
   return errors;
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

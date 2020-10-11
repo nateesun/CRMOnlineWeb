@@ -22,5 +22,4 @@ const makeSelectRecoverPassword = () =>
     substate => substate,
   );
 
-export default makeSelectRecoverPassword;
-export { selectRecoverPasswordDomain };
+export { selectRecoverPasswordDomain, makeSelectRecoverPassword };

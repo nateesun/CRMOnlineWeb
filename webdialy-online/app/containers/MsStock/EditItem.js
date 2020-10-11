@@ -78,7 +78,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -86,9 +86,10 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}
@@ -144,6 +145,10 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {

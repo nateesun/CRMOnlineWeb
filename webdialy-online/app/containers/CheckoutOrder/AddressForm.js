@@ -1,98 +1,217 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import { createStructuredSelector } from 'reselect';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { FormattedMessage } from 'react-intl';
+import { Button } from '@material-ui/core'
+import MapMarker from 'containers/GoogleMap/MapMarker';
+import RenderField from 'components/RenderField';
+import * as selectors from './selectors';
+import messages from './messages';
 
-export default function AddressForm() {
+const useStyles = makeStyles(theme => ({
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+}));
+
+const AddressForm = props => {
+  const classes = useStyles();
+  const { handleSubmit, pristine, reset, submitting, shipping } = props;
+  const [latitude, setLatitude] = useState(13.809992);
+  const [longitude, setLongitude] = useState(100.413130);
+
+  const onValidated = formValues => {
+    props.onUpdateAddressForm({
+      ...formValues, 
+      map_latitude: latitude, 
+      map_longitude: longitude,
+      address_type: 'Shipping',
+      member_prefix: '',
+    });
+  };
+
+  const handlePlace = (latitude, longitude) => {
+    setLatitude(latitude);
+    setLongitude(longitude);
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-          />
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4}>
+            <Field
+              name="member_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.memberName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Field
+              name="member_lastname"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.memberLastname} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Field
+              name="address1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address1} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Field
+              name="address2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address2} />}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="sub_district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.subDistrict} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.district} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="province"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.province} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="postcode"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.postcode} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <FormControlLabel
+              control={
+                <Checkbox color="secondary" name="saveAddress" value="yes" />
+              }
+              label={<FormattedMessage {...messages.useForShpping} />}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary"
+              disabled={pristine || submitting}
+              style={{marginRight: '10px'}}
+            >
+              Update data
+            </Button>
+            <Button 
+              variant="contained" 
+              disabled={pristine || submitting}
+              onClick={reset}
+            >
+              Reset
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                {latitude && longitude && (
+                  <MapMarker
+                    lat={parseFloat(latitude)}
+                    lng={parseFloat(longitude)}
+                    onExit={handlePlace}
+                  />
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div align="center" style={{marginBottom: '25px'}}>
+                Position: {latitude},{longitude}
+              </div>
+            </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="shipping address-line1"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
-      </Grid>
+      </form>
     </React.Fragment>
   );
 }
+
+const validate = formValues => {
+  const errors = {};
+  if (!formValues.member_name) {
+    errors.member_name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
+  }
+  if (!formValues.member_lastname) {
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+  }
+  if (!formValues.address1) {
+    errors.address1 = <FormattedMessage {...messages.address1ShouldNotEmpty} />;
+  }
+  if (!formValues.sub_district) {
+    errors.sub_district = <FormattedMessage {...messages.subDistrictShouldNotEmpty} />;
+  }
+  if (!formValues.district) {
+    errors.district = <FormattedMessage {...messages.districtShouldNotEmpty} />;
+  }
+  if (!formValues.province) {
+    errors.province = <FormattedMessage {...messages.provinceShouldNotEmpty} />;
+  }
+  if (!formValues.postcode) {
+    errors.postcode = <FormattedMessage {...messages.postcodeShouldNotEmpty} />;
+  }
+  return errors;
+};
+
+const mapStateToProps = createStructuredSelector({
+  initialValues: selectors.makeSelectMemberShipping(),
+});
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: 'addressForm',
+    validate,
+    enableReinitialize: true,
+  })(AddressForm),
+);

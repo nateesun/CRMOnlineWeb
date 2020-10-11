@@ -15,15 +15,15 @@ const selectProfileEditDomain = state => state.profileEdit || initialState;
  * Default selector used by ProfileEdit
  */
 
-const makeSelectProfileEdit = () =>
+const makeSelectProfile = () =>
   createSelector(
     selectProfileEditDomain,
     substate => substate,
   );
-const makeSelectMember = () =>
+const makeSelectProfileInit = () =>
   createSelector(
     selectProfileEditDomain,
-    substate => substate.member,
+    substate => substate.data,
   );
 const makeUpdateStatus = () =>
   createSelector(
@@ -38,8 +38,8 @@ const makeErrorUpdate = () =>
 
 export {
   selectProfileEditDomain,
-  makeSelectProfileEdit,
-  makeSelectMember,
+  makeSelectProfile,
   makeUpdateStatus,
   makeErrorUpdate,
+  makeSelectProfileInit,
 };

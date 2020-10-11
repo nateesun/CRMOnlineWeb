@@ -49,6 +49,18 @@ export default defineMessages({
     id: `${scope}.col3ShouldNotEmpty`,
     defaultMessage: 'Line Official should not empty',
   },
+  col4ShouldNotEmpty: {
+    id: `${scope}.col4ShouldNotEmpty`,
+    defaultMessage: 'Member running should not empty',
+  },
+  col5ShouldNotEmpty: {
+    id: `${scope}.col5ShouldNotEmpty`,
+    defaultMessage: 'Prefix running should not empty',
+  },
+  col6ShouldNotEmpty: {
+    id: `${scope}.col6ShouldNotEmpty`,
+    defaultMessage: 'Size running should not empty',
+  },
   col1: {
     id: `${scope}.col1`,
     defaultMessage: 'Company Code',
@@ -60,6 +72,42 @@ export default defineMessages({
   col3: {
     id: `${scope}.col3`,
     defaultMessage: 'Line Official',
+  },
+  col4: {
+    id: `${scope}.col4`,
+    defaultMessage: 'Member Running',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Prefix Running',
+  },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Size Running',
+  },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Order Running',
+  },
+  col8: {
+    id: `${scope}.col8`,
+    defaultMessage: 'Order Prefix',
+  },
+  col9: {
+    id: `${scope}.col9`,
+    defaultMessage: 'Order Size Running',
+  },
+  col10: {
+    id: `${scope}.col10`,
+    defaultMessage: 'Cart Running',
+  },
+  col11: {
+    id: `${scope}.col11`,
+    defaultMessage: 'Cart Prefix',
+  },
+  col12: {
+    id: `${scope}.col12`,
+    defaultMessage: 'Cart Size Running',
   },
   btnSave: {
     id: `${scope}.btnSave`,

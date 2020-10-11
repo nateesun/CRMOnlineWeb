@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 export default function LoadingBackdrop() {
   const classes = useStyles();
   return (
-    <Backdrop className={classes.backdrop} open={true}>
+    <Backdrop className={classes.backdrop} open>
       <CircularProgress style={{ color: 'chocolate' }} />
     </Backdrop>
   );

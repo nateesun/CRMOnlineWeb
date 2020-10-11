@@ -15,7 +15,7 @@ import styled from 'styled-components';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
-import makeSelectLogout from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -39,7 +39,7 @@ export function Logout(props) {
 
   return (
     <Wrapper>
-      <img src={LogoutIcon} border={0} width={100} />
+      <img src={LogoutIcon} border={0} width={100} alt="" />
       <h4>
         <FormattedMessage {...messages.header} />
       </h4>
@@ -53,7 +53,7 @@ Logout.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  logout: makeSelectLogout(),
+  logout: selectors.makeSelectLogout(),
 });
 
 function mapDispatchToProps(dispatch) {

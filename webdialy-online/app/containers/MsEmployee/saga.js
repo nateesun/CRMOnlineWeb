@@ -1,5 +1,6 @@
-import { take, call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -7,13 +8,10 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/employee`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const response = yield call(request, requestURL, {
+      database,
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
     });
     if (response.data) {
       yield put(actions.initLoadSuccess(response.data));
@@ -28,14 +26,11 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/employee`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {
@@ -51,14 +46,11 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/employee`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {
@@ -74,14 +66,13 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const requestURL = `${constants.publicPath}/api/employee/${data.uuid_index}`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/employee/${
+      data.uuid_index
+    }`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-      },
       body: JSON.stringify(data),
     });
     if (response) {

@@ -9,6 +9,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const modelGenerator = require('./models/index.js');
 const routeGenerator = require('./routes/index.js');
+const databaseGenerator = require('./database/index.js');
 
 /**
  * Every generated backup file gets this extension
@@ -19,6 +20,7 @@ const BACKUPFILE_EXTENSION = 'rbgen';
 module.exports = plop => {
   plop.setGenerator('model', modelGenerator);
   plop.setGenerator('route', routeGenerator);
+  plop.setGenerator('database', databaseGenerator);
   plop.addHelper('directory', comp => {
     try {
       fs.accessSync(

@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import * as actions from '../actions';
+import * as constants from '../constants';
 
 describe('Members actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('initial load Action', () => {
+    it('has a type of INIT_LOAD', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: constants.INIT_LOAD,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(actions.initLoad()).toEqual(expected);
     });
   });
 });

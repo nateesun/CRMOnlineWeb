@@ -23,6 +23,8 @@ import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import RecoverPassword from 'containers/RecoverPassword/Loadable';
 import Profile from 'containers/Profile/Loadable';
 import ProfileEdit from 'containers/ProfileEdit/Loadable';
+import AddressShipping from 'containers/AddressShipping/Loadable';
+import ProfileChangePwd from 'containers/ProfileChangePwd/Loadable';
 import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
 import MsBranch from 'containers/MsBranch/Loadable';
@@ -33,6 +35,9 @@ import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
 import Shopping from 'containers/Shopping/Loadable';
 import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
+import GoogleMap from 'containers/GoogleMap/Loadable';
+import MemberTracking from 'containers/MemberTracking/Loadable';
+import CheckCarts from 'containers/CheckCarts/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -190,7 +195,7 @@ const styles = {
 };
 
 function Layouts(props) {
-  const { classes, login } = props;
+  const { classes, login, loggedIn } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -201,11 +206,11 @@ function Layouts(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {login && login.loggedIn && (
+        {loggedIn && (
           <nav className={classes.drawer}>
             <Hidden smUp implementation="js">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
                 variant="temporary"
                 open={mobileOpen}
@@ -214,7 +219,7 @@ function Layouts(props) {
             </Hidden>
             <Hidden xsDown implementation="css">
               <Navigator
-                username={login.username}
+                email={login.email}
                 PaperProps={{ style: { width: drawerWidth } }}
               />
             </Hidden>
@@ -223,6 +228,7 @@ function Layouts(props) {
         <div className={classes.app}>
           <Header
             login={login}
+            loggedIn={loggedIn}
             onDrawerToggle={handleDrawerToggle}
           />
           <main className={classes.main}>
@@ -234,11 +240,19 @@ function Layouts(props) {
               <Route path={path.PATH_REGISTER} component={Register} />
               <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
               <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
-              <Route exact path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_PROFILE} component={Profile} />
               <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+              <Route path={path.PATH_ADDRESS_SHIPPING} component={AddressShipping} />
+              <Route
+                path={path.PATH_PROFILE_CHANGE_PWD}
+                component={ProfileChangePwd}
+              />
               <Route path={path.PATH_MEMBER} component={Members} />
               <Route path={path.PATH_SHOPPING} component={Shopping} />
-              <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
+              <Route
+                path={path.PATH_CHECKOUT_ORDER}
+                component={CheckoutOrder}
+              />
               <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
               <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
               <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
@@ -247,6 +261,10 @@ function Layouts(props) {
               <Route path={path.PATH_MS_STOCK} component={MsStock} />
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
+              <Route path={path.PATH_DATABASE} component={null} />
+              <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
+              <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
+              <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>
@@ -261,6 +279,8 @@ function Layouts(props) {
 
 Layouts.propTypes = {
   classes: PropTypes.object.isRequired,
+  loggedIn: PropTypes.bool,
+  login: PropTypes.object,
 };
 
 export default withStyles(styles)(Layouts);

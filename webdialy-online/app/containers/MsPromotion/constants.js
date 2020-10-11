@@ -5,6 +5,10 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const apiServiceHost = process.env.API_SERVICE_HOST || 'http://localhost:5000';
+
+export const INIT_STATE = 'app/MsPromotion/INIT_STATE';
+
 export const CHANGE_PAGE = 'app/MsPromotion/CHANGE_PAGE';
 
 export const INIT_LOAD = 'app/MsPromotion/INIT_LOAD';
@@ -27,6 +31,6 @@ export const DELETE_ITEM = 'app/MsPromotion/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsPromotion/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsPromotion/DELETE_ITEM_ERROR';
 
-export const GET_ITEM = 'app/MsPromotion/GET_ITEM';
-export const GET_ITEM_SUCCESS = 'app/MsPromotion/GET_ITEM_SUCCESS';
-export const GET_ITEM_ERROR = 'app/MsPromotion/GET_ITEM_ERROR';
+export const UPLOAD_IMG = 'app/MsPromotion/UPLOAD_IMG';
+export const UPLOAD_IMG_SUCCESS = 'app/MsPromotion/UPLOAD_IMG_SUCCESS';
+export const UPLOAD_IMG_ERROR = 'app/MsPromotion/UPLOAD_IMG_ERROR';

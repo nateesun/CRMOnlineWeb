@@ -5,6 +5,7 @@
  */
 import produce from 'immer';
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 const { v4 } = require('uuid');
 
 export const initialState = {
@@ -28,6 +29,16 @@ export const initialState = {
 const msStockReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.list= [];
+        draft.data= {};
+        draft.page= 'LIST';
+        draft.status= null;
+        draft.message= null;
+        draft.currentId= '';
+        draft.response= {};
+        break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;
         draft.response.status = '';
@@ -85,14 +96,6 @@ const msStockReducer = (state = initialState, action) =>
       case constants.DELETE_ITEM_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
-        break;
-      case constants.GET_ITEM:
-        break;
-      case constants.GET_ITEM_SUCCESS:
-        break;
-      case constants.GET_ITEM_ERROR:
-        draft.response.status = 'Error';
-        draft.response.message = 'Get data error!';
         break;
     }
   });

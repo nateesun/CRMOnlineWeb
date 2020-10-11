@@ -42,8 +42,7 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle, login } = props;
-  const { loggedIn, firstName, lastName } = login;
+  const { classes, onDrawerToggle, login, loggedIn } = props;
 
   return (
     <React.Fragment>
@@ -67,13 +66,15 @@ function Header(props) {
               </Grid>
             </Hidden>
             <Grid item xs>
-              <ButtonLink to={`${publicPath}/`} color="white">WEB DAILY ONLINE</ButtonLink>
+              <ButtonLink to={`${publicPath}/`} color="white">
+                WEB DAILY ONLINE
+              </ButtonLink>
             </Grid>
             <Grid item>
               <LocaleToggle />
             </Grid>
             <Grid item>
-              {loggedIn ? (
+              {loggedIn === true ? (
                 <ButtonLink to={`${publicPath}/logout`}>
                   <Button size="large" startIcon={<ExitToApp />}>
                     <FormattedMessage {...messages.headerLogout} />
@@ -89,9 +90,19 @@ function Header(props) {
             </Grid>
           </Grid>
         </Toolbar>
-        {login.loggedIn === true && (
-          <Typography component="span" style={{textAlign: 'right', fontSize: '12px', paddingRight: '26px', paddingBottom: '5px'}}>
-            <ButtonLink to={`${publicPath}/profile`} color="white">สมาชิก: {firstName} {lastName}</ButtonLink>
+        {loggedIn === true && (
+          <Typography
+            component="span"
+            style={{
+              textAlign: 'right',
+              fontSize: '12px',
+              paddingRight: '26px',
+              paddingBottom: '5px',
+            }}
+          >
+            <ButtonLink to={`${publicPath}/profile`} color="white">
+              สมาชิก: {login.email}
+            </ButtonLink>
           </Typography>
         )}
       </AppBar>
@@ -102,6 +113,8 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool,
+  login: PropTypes.object,
 };
 
 export default withStyles(styles)(Header);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import image from '../../images/example/beef1.jpg';
 import ProductTopic from './ProductTopic';
 
 const useStyles = makeStyles(theme => ({
@@ -25,53 +24,46 @@ const useStyles = makeStyles(theme => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));
-
 const tileData = [
   {
     id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    title: 'Image1',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 2,
+    title: 'Image2',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 3,
+    title: 'Image3',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 4,
+    title: 'Image4',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 5,
+    title: 'Image5',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 6,
+    title: 'Image6',
   },
   {
-    id: 1,
-    img: image,
-    title: 'Image',
-    author: 'author',
+    id: 7,
+    title: 'Image7',
+  },
+  {
+    id: 8,
+    title: 'Image8',
+  },
+  {
+    id: 9,
+    title: 'Image9',
   },
 ];
 
-export default function GroupProduct() {
+export default function GroupProduct(props) {
   const classes = useStyles();
 
   return (
@@ -79,7 +71,7 @@ export default function GroupProduct() {
       <ProductTopic label="กลุ่มสินค้า" bgColor="#f9f972" textColor="black" />
       <GridList className={classes.gridList}>
         {tileData.map(tile => (
-          <img src={tile.img} alt={tile.title} />
+          <img src={`/images/food1.jpg`} alt={tile.title} />
         ))}
       </GridList>
     </div>

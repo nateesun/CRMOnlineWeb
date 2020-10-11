@@ -6,6 +6,11 @@
 
 import * as constants from './constants';
 
+export function initState() {
+  return {
+    type: constants.INIT_STATE,
+  };
+}
 export function changePage(payload) {
   return {
     type: constants.CHANGE_PAGE,
@@ -112,27 +117,6 @@ export function deleteItemSuccess(payload) {
 export function deleteItemError(payload) {
   return {
     type: constants.DELETE_ITEM_ERROR,
-    payload,
-  };
-}
-
-export function getItem(payload) {
-  return {
-    type: constants.GET_ITEM,
-    payload,
-  };
-}
-
-export function getItemSuccess(payload) {
-  return {
-    type: constants.GET_ITEM_SUCCESS,
-    payload,
-  };
-}
-
-export function getItemError(payload) {
-  return {
-    type: constants.GET_ITEM_ERROR,
     payload,
   };
 }

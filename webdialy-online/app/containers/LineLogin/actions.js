@@ -4,22 +4,17 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-  VERIFY_TOKEN,
-  VERIFY_TOKEN_SUCCESS,
-  VERIFY_TOKEN_ERROR,
-} from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: constants.INIT_STATE,
   };
 }
 
 export function verifyToken(token) {
   return {
-    type: VERIFY_TOKEN,
+    type: constants.VERIFY_TOKEN,
     payload: {
       token,
     },
@@ -28,14 +23,14 @@ export function verifyToken(token) {
 
 export function verifyTokenSuccess(payload) {
   return {
-    type: VERIFY_TOKEN_SUCCESS,
+    type: constants.VERIFY_TOKEN_SUCCESS,
     payload,
   };
 }
 
 export function verifyTokenError(error) {
   return {
-    type: VERIFY_TOKEN_ERROR,
+    type: constants.VERIFY_TOKEN_ERROR,
     payload: error,
   };
 }

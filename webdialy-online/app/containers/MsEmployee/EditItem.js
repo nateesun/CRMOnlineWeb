@@ -12,7 +12,7 @@ import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -86,6 +86,7 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
             <Grid item xs={12} lg={3}>
@@ -154,6 +155,10 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -171,7 +176,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

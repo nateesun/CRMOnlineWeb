@@ -12,15 +12,11 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import {
-  makeErrorRegister,
-  makeSelectMember,
-  makeRegisterStatus,
-} from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import RegisterForm from './RegisterForm';
-import { defaultAction, addRegisterMember } from './actions';
+import * as actions from './actions';
 
 export function Register(props) {
   useInjectReducer({ key: 'register', reducer });
@@ -41,15 +37,15 @@ Register.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  member: makeSelectMember(),
-  registerStatus: makeRegisterStatus(),
-  errorRegister: makeErrorRegister(),
+  member: selectors.makeSelectMember(),
+  registerStatus: selectors.makeRegisterStatus(),
+  errorRegister: selectors.makeErrorRegister(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRegisterMember: member => dispatch(addRegisterMember(member)),
-    clearData: () => dispatch(defaultAction()),
+    onRegisterMember: member => dispatch(actions.addRegisterMember(member)),
+    clearData: () => dispatch(actions.initState()),
   };
 }
 

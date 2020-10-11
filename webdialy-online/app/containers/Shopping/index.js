@@ -4,40 +4,49 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import ShoppingContent from './ShoppingContent';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectShopping from './selectors';
+import * as dashboardSelectors from 'containers/Dashboard/selectors'
+import ShoppingContent from './ShoppingContent';
+import * as selectors from './selectors';
+import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import * as constants from './constants';
 
-export function Shopping() {
+export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });
   useInjectSaga({ key: 'shopping', saga });
 
+  useEffect(() => {
+    props.onLoadProduct();
+  }, []);
+
   return (
-    <div style={{width: '100%'}}>
-      <ShoppingContent />
+    <div style={{ width: '100%' }}>
+      <ShoppingContent {...props} />
     </div>
   );
 }
 
-Shopping.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+Shopping.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
-  shopping: makeSelectShopping(),
+  shopping: selectors.makeSelectShopping(),
+  productList: selectors.makeSelectProductList(),
+  profile: dashboardSelectors.makeSelectProfile(),
+  cart: selectors.makeSelectCart(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLoadProduct: ()=> dispatch(actions.loadProduct()),
+    onAddCartItem: item => dispatch(actions.createItemCart(item)),
+    onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
   };
 }
 

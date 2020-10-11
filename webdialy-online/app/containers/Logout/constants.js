@@ -3,5 +3,6 @@
  * Logout constants
  *
  */
+export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 
-export const DEFAULT_ACTION = 'app/Logout/DEFAULT_ACTION';
+export const INIT_STATE = 'app/Logout/INIT_STATE';

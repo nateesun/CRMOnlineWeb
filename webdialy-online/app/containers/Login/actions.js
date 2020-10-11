@@ -4,33 +4,29 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-  CHECK_LOGIN,
-  CHECK_LOGIN_SUCCESS,
-  CHECK_LOGIN_ERROR,
-  CHECK_LOGOUT,
-  CHECK_LOGOUT_SUCCESS,
-  CHECK_LOGOUT_ERROR,
-  CLEAR_LOGIN,
-  LOAD_PROFILE_TOKEN,
-} from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function initDatabase(payload) {
   return {
-    type: DEFAULT_ACTION,
+    type: constants.INIT_DATABASE,
+    payload,
+  };
+}
+export function initState() {
+  return {
+    type: constants.INIT_STATE,
   };
 }
 
 export function clearLogin() {
   return {
-    type: CLEAR_LOGIN,
+    type: constants.CLEAR_LOGIN,
   };
 }
 
 export function checkLogin(email, password) {
   return {
-    type: CHECK_LOGIN,
+    type: constants.CHECK_LOGIN,
     payload: {
       email,
       password,
@@ -40,40 +36,40 @@ export function checkLogin(email, password) {
 
 export function checkLoginSuccess(payload) {
   return {
-    type: CHECK_LOGIN_SUCCESS,
+    type: constants.CHECK_LOGIN_SUCCESS,
     payload,
   };
 }
 
 export function checkLoginError(error) {
   return {
-    type: CHECK_LOGIN_ERROR,
+    type: constants.CHECK_LOGIN_ERROR,
     payload: error,
   };
 }
 
 export function checkLogout() {
   return {
-    type: CHECK_LOGOUT,
+    type: constants.CHECK_LOGOUT,
   };
 }
 
 export function checkLogoutSuccess() {
   return {
-    type: CHECK_LOGOUT_SUCCESS,
+    type: constants.CHECK_LOGOUT_SUCCESS,
   };
 }
 
 export function checkLogoutError(error) {
   return {
-    type: CHECK_LOGOUT_ERROR,
+    type: constants.CHECK_LOGOUT_ERROR,
     payload: error,
   };
 }
 
 export function loadProfileFromToken(token) {
   return {
-    type: LOAD_PROFILE_TOKEN,
+    type: constants.LOAD_PROFILE_TOKEN,
     payload: token,
   };
 }

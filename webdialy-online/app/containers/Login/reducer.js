@@ -4,65 +4,66 @@
  *
  */
 import produce from 'immer';
-import {
-  DEFAULT_ACTION,
-  CHECK_LOGIN,
-  CHECK_LOGIN_ERROR,
-  CHECK_LOGIN_SUCCESS,
-  CHECK_LOGOUT,
-  CHECK_LOGOUT_ERROR,
-  CHECK_LOGOUT_SUCCESS,
-  CLEAR_LOGIN,
-  LOAD_PROFILE_TOKEN,
-} from './constants';
 import { INIT_LOAD_SUCCESS } from 'containers/Dashboard/constants';
+import * as constants from './constants';
 
 export const initialState = {
   loginForm: {
     email: '',
     password: '',
   },
+  response: {
+    status: null,
+    message: null,
+  },
   profile: {},
-  error: '',
+  loggedIn: false,
+  queryDb: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const loginReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case constants.INIT_DATABASE:
+        draft.queryDb = action.payload;
+        break;
+      case constants.INIT_STATE:
         draft.loginForm = {};
+        draft.response = {};
         draft.profile = {};
+        draft.loggedIn = false;
         draft.error = '';
         break;
-      case CHECK_LOGIN:
+      case constants.CHECK_LOGIN:
         draft.loginForm.email = action.payload.email;
         draft.loginForm.password = action.payload.password;
         break;
-      case CHECK_LOGIN_SUCCESS:
-        draft.profile = action.payload.data;
+      case constants.CHECK_LOGIN_SUCCESS:
+        draft.loggedIn = true;
         break;
-      case CHECK_LOGIN_ERROR:
+      case constants.CHECK_LOGIN_ERROR:
         draft.error = action.payload;
+        draft.loggedIn = false;
         break;
-      case CHECK_LOGOUT:
-        draft.profile = {};
+      case constants.CHECK_LOGOUT:
         break;
-      case CHECK_LOGOUT_SUCCESS:
+      case constants.CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
         draft.loginForm.password = '';
+        draft.loggedIn = false;
         break;
-      case CHECK_LOGOUT_ERROR:
+      case constants.CHECK_LOGOUT_ERROR:
         draft.error = action.error;
         break;
-      case CLEAR_LOGIN:
+      case constants.CLEAR_LOGIN:
         draft.error = '';
         draft.loginForm = {
           email: '',
           password: '',
         };
         break;
-      case LOAD_PROFILE_TOKEN:
+      case constants.LOAD_PROFILE_TOKEN:
         draft.profile = action.payload;
         break;
       case INIT_LOAD_SUCCESS:

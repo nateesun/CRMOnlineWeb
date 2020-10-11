@@ -4,10 +4,28 @@
  *
  */
 
-import * as types from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: types.DEFAULT_ACTION,
+    type: constants.INIT_STATE,
+  };
+}
+export function initLoad(payload) {
+  return {
+    type: constants.INIT_LOAD,
+    payload,
+  };
+}
+export function initLoadSuccess(payload) {
+  return {
+    type: constants.INIT_LOAD_SUCCESS,
+    payload,
+  };
+}
+export function initLoadError(error) {
+  return {
+    type: constants.INIT_LOAD_ERROR,
+    error,
   };
 }

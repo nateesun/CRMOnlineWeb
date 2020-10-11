@@ -15,6 +15,7 @@ import SweetAlert from 'sweetalert2-react';
 import styled from 'styled-components';
 import messages from './messages';
 import RegisterLogo from '../../images/register.png';
+import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -60,7 +61,7 @@ const RegisterForm = props => {
     clearData,
   } = props;
   const onValidated = formValues => {
-    onRegister({ member: formValues });
+    onRegister(formValues);
   };
 
   RegisterForm.propTypes = {
@@ -104,7 +105,7 @@ const RegisterForm = props => {
             </Grid>
             <Grid item xs={12} lg={3}>
               <Field
-                name="firstName"
+                name="first_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -114,7 +115,7 @@ const RegisterForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Field
-                name="lastName"
+                name="last_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -173,9 +174,13 @@ const RegisterForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <span style={{color: 'green'}}>* กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL เท่านั้น</span>
+              <span style={{ color: 'green' }}>
+                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
+                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
+                เท่านั้น
+              </span>
               <Field
-                name="lineId"
+                name="line_id"
                 component={RenderField}
                 type="text"
                 label={<FormattedMessage {...messages.lineId} />}
@@ -206,7 +211,7 @@ const RegisterForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <ButtonLink to="/login">
+              <ButtonLink to={`${constants.publicPath}/login`}>
                 <FormattedMessage {...messages.backLogin} />
               </ButtonLink>
             </Grid>
@@ -232,13 +237,15 @@ const validate = formValues => {
     errors.prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
   }
 
-  if (!formValues.firstName) {
-    errors.firstName = (
+  if (!formValues.first_name) {
+    errors.first_name = (
       <FormattedMessage {...messages.firstNameShouldNotEmpty} />
     );
   }
-  if (!formValues.lastName) {
-    errors.lastName = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+  if (!formValues.last_name) {
+    errors.last_name = (
+      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
+    );
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;

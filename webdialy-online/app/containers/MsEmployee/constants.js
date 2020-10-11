@@ -5,6 +5,9 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+
+export const INIT_STATE = 'app/MsEmployee/INIT_STATE';
+
 export const CHANGE_PAGE = 'app/MsEmployee/CHANGE_PAGE';
 
 export const INIT_LOAD = 'app/MsEmployee/INIT_LOAD';
@@ -26,7 +29,3 @@ export const UPDATE_ITEM_ERROR = 'app/MsEmployee/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsEmployee/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsEmployee/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsEmployee/DELETE_ITEM_ERROR';
-
-export const GET_ITEM = 'app/MsEmployee/GET_ITEM';
-export const GET_ITEM_SUCCESS = 'app/MsEmployee/GET_ITEM_SUCCESS';
-export const GET_ITEM_ERROR = 'app/MsEmployee/GET_ITEM_ERROR';

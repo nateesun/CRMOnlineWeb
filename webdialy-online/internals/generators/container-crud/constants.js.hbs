@@ -5,6 +5,8 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+export const INIT_STATE = 'app/{{ properCase name }}/INIT_STATE';
+
 export const CHANGE_PAGE = 'app/{{ properCase name }}/CHANGE_PAGE';
 
 export const INIT_LOAD = 'app/{{ properCase name }}/INIT_LOAD';
@@ -23,10 +25,14 @@ export const UPDATE_ITEM = 'app/{{ properCase name }}/UPDATE_ITEM';
 export const UPDATE_ITEM_SUCCESS = 'app/{{ properCase name }}/UPDATE_ITEM_SUCCESS';
 export const UPDATE_ITEM_ERROR = 'app/{{ properCase name }}/UPDATE_ITEM_ERROR';
 
+export const LOAD_VIEW = 'app/{{ properCase name }}/LOAD_VIEW';
+export const LOAD_VIEW_SUCCESS = 'app/{{ properCase name }}/LOAD_VIEW_SUCCESS';
+export const LOAD_VIEW_ERROR = 'app/{{ properCase name }}/LOAD_VIEW_ERROR';
+
 export const DELETE_ITEM = 'app/{{ properCase name }}/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/{{ properCase name }}/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/{{ properCase name }}/DELETE_ITEM_ERROR';
 
-export const GET_ITEM = 'app/{{ properCase name }}/GET_ITEM';
-export const GET_ITEM_SUCCESS = 'app/{{ properCase name }}/GET_ITEM_SUCCESS';
-export const GET_ITEM_ERROR = 'app/{{ properCase name }}/GET_ITEM_ERROR';
+export const SEARCH = 'app/{{ properCase name }}/SEARCH';
+export const SEARCH_SUCCESS = 'app/{{ properCase name }}/SEARCH_SUCCESS';
+export const SEARCH_ERROR = 'app/{{ properCase name }}/SEARCH_ERROR';

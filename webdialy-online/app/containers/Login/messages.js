@@ -61,10 +61,6 @@ export default defineMessages({
     id: `${scope}.clear`,
     defaultMessage: 'Clear',
   },
-  forgotPassword: {
-    id: `${scope}.forgotPassword`,
-    defaultMessage: 'Forgot password?',
-  },
   register: {
     id: `${scope}.register`,
     defaultMessage: `Don't have an account? Sign Up`,

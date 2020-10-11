@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
+    defaultMessage: 'New Promotion',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Update Promotion',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
@@ -39,19 +39,55 @@ export default defineMessages({
   },
   col1ShouldNotEmpty: {
     id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Promotion code should not empty',
+    defaultMessage: 'Product code should not empty',
   },
   col2ShouldNotEmpty: {
     id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Promotion name should not empty',
+    defaultMessage: 'Product name should not empty',
+  },
+  col3ShouldNotEmpty: {
+    id: `${scope}.col3ShouldNotEmpty`,
+    defaultMessage: 'Point redeem should not empty',
+  },
+  col4ShouldNotEmpty: {
+    id: `${scope}.col4ShouldNotEmpty`,
+    defaultMessage: 'Start time should not empty',
+  },
+  col5ShouldNotEmpty: {
+    id: `${scope}.col5ShouldNotEmpty`,
+    defaultMessage: 'Finish time should not empty',
+  },
+  col6ShouldNotEmpty: {
+    id: `${scope}.col6ShouldNotEmpty`,
+    defaultMessage: 'Qty in stock should not empty',
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Promotion Code',
+    defaultMessage: 'Product Code',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Promotion Name',
+    defaultMessage: 'Product Name',
+  },
+  col3: {
+    id: `${scope}.col3`,
+    defaultMessage: 'Point Redeem',
+  },
+  col4: {
+    id: `${scope}.col4`,
+    defaultMessage: 'Start Time',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Finish Time',
+  },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Qty in Stock',
+  },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Image Path',
   },
   btnSave: {
     id: `${scope}.btnSave`,

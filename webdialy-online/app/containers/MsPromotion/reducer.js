@@ -5,18 +5,23 @@
  */
 import produce from 'immer';
 import * as constants from './constants';
+import * as loginConstants from 'containers/Login/constants';
 const { v4 } = require('uuid');
 
 export const initialState = {
   list: [],
   data: {
     uuid_index: '',
-    code: '',
-    name: '',
+    product_code: '',
+    product_name: '',
+    point_to_redeem: 0,
+    qty_in_stock: 0,
+    start_time: '',
+    finish_time: '',
+    img_path: '',
   },
   page: 'LIST',
-  status: null,
-  message: null,
+  img_upload: null,
   currentId: '',
   response: {
     status: null,
@@ -28,6 +33,15 @@ export const initialState = {
 const msPromotionReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case loginConstants.CHECK_LOGOUT:
+      case constants.INIT_STATE:
+        draft.list= [];
+        draft.data= {};
+        draft.page= 'LIST';
+        draft.img_upload= null;
+        draft.currentId= '';
+        draft.response= {};
+        break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;
         draft.response.status = '';
@@ -86,13 +100,16 @@ const msPromotionReducer = (state = initialState, action) =>
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
         break;
-      case constants.GET_ITEM:
+      case constants.UPLOAD_IMG:
+        draft.img_upload = action.payload;
         break;
-      case constants.GET_ITEM_SUCCESS:
+      case constants.UPLOAD_IMG_SUCCESS:
+        draft.response.status = 'Upload_Success';
+        draft.response.message = 'Upload file image success';
         break;
-      case constants.GET_ITEM_ERROR:
-        draft.response.status = 'Error';
-        draft.response.message = 'Get data error!';
+      case constants.UPLOAD_IMG_ERROR:
+        draft.response.status = 'Upload_Error';
+        draft.response.message = 'Upload file image error!';
         break;
     }
   });

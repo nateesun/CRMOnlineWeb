@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function SelectField({ input, label, meta: { touched, error } }) {
   const classes = useStyles();
-  const [prefix, setPrefix] = React.useState('');
+  const [prefix, setPrefix] = useState('');
 
   const handleChange = event => {
     setPrefix(event.target.value);
@@ -38,10 +38,18 @@ function SelectField({ input, label, meta: { touched, error } }) {
         label={label}
       >
         <option value="" />
-        <option value="คุณ" key="คุณ">คุณ</option>
-        <option value="นาย" key="นาย">นาย</option>
-        <option value="นาง" key="นาง">นาง</option>
-        <option value="นางสาว" key="นางสาว">นางสาว</option>
+        <option value="คุณ" key="คุณ">
+          คุณ
+        </option>
+        <option value="นาย" key="นาย">
+          นาย
+        </option>
+        <option value="นาง" key="นาง">
+          นาง
+        </option>
+        <option value="นางสาว" key="นางสาว">
+          นางสาว
+        </option>
       </Select>
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
     </FormControl>

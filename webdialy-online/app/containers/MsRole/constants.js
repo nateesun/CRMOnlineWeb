@@ -5,6 +5,9 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
+
+export const INIT_STATE = 'app/MsRole/INIT_STATE';
+
 export const CHANGE_PAGE = 'app/MsRole/CHANGE_PAGE';
 
 export const INIT_LOAD = 'app/MsRole/INIT_LOAD';
@@ -26,7 +29,3 @@ export const UPDATE_ITEM_ERROR = 'app/MsRole/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsRole/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsRole/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsRole/DELETE_ITEM_ERROR';
-
-export const GET_ITEM = 'app/MsRole/GET_ITEM';
-export const GET_ITEM_SUCCESS = 'app/MsRole/GET_ITEM_SUCCESS';
-export const GET_ITEM_ERROR = 'app/MsRole/GET_ITEM_ERROR';

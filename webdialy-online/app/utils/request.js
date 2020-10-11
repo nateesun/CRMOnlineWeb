@@ -5,11 +5,16 @@
  *
  * @return {object}          The parsed JSON from the request
  */
+import fetchWithTimeout from './fetchWithTimeout';
+
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
-  if (response.status === 200 && parseInt(response.headers.get('content-length'), 10) === 0) {
+  if (
+    response.status === 200 &&
+    parseInt(response.headers.get('content-length'), 10) === 0
+  ) {
     return {};
   }
   return response.json();
@@ -41,7 +46,16 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  let headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
+    database: options.database || '',
+  };
+  if (options.headers) {
+    headers = options.headers;
+  }
+  return fetch(url, { ...options, headers })
     .then(checkStatus)
     .then(parseJSON);
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -9,14 +9,6 @@ import RemoveIcon from '@material-ui/icons/Delete';
 import MinusIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
 import PlusIcon from '@material-ui/icons/AddCircleOutlined';
 import IconButton from '@material-ui/core/IconButton';
-
-const products = [
-  { name: 'Product 1', desc: 'One thing', price: '9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -30,31 +22,50 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Orders() {
+export default function Orders(props) {
   const classes = useStyles();
+  const { carts, carts_detail } = props.cartList;
+
+  const handleDelete = (product_code) => {
+    props.deleteItemCart(product_code);
+  }
+  const handleAdd = (product_code, qty) => {
+    if(qty===0){
+      handleDelete(product_code);
+    }else{
+      props.updateItemCart(product_code, qty);
+    }
+  }
+  const handleRemove = (product_code, qty) => {
+    if(qty===0){
+      handleDelete(product_code);
+    }else{
+      props.updateItemCart(product_code, qty);
+    }
+  }
 
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order list
+        รายการสินค้า
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {products.map(product => (
-          <ListItem className={classes.listItem} key={product.name}>
+        {carts_detail && carts_detail.map(product => (
+          <ListItem className={classes.listItem} key={product.uuid_index}>
             <ListItemText
-              primary={product.name}
-              secondary={`${product.price} บาท`}
+              primary={product.product_name}
+              secondary={`${product.total_amount} บาท`}
             />
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" onClick={()=>handleDelete(product.product_code)}>
               <RemoveIcon style={{ color: 'red' }} />
             </IconButton>
             <div>
-              <IconButton aria-label="delete">
+              <IconButton aria-label="Remove" onClick={()=>handleAdd(product.product_code, product.qty-1)}>
                 <MinusIcon style={{ color: 'red' }} />
               </IconButton>
-              1
-              <IconButton aria-label="delete">
+              {product.qty}
+              <IconButton aria-label="Add" onClick={()=>handleRemove(product.product_code, product.qty+1)}>
                 <PlusIcon style={{ color: 'green' }} />
               </IconButton>
             </div>
@@ -62,9 +73,9 @@ export default function Orders() {
         ))}
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
+          <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>
-            34.06
+            {carts && carts[0].total_amount}
           </Typography>
         </ListItem>
       </List>

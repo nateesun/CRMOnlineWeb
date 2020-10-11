@@ -121,6 +121,10 @@ export default defineMessages({
     id: `${scope}.btnResetForm`,
     defaultMessage: 'Reset',
   },
+  btnBack: {
+    id: `${scope}.btnBack`,
+    defaultMessage: 'Back',
+  },
   code: {
     id: `${scope}.code`,
     defaultMessage: 'Code',

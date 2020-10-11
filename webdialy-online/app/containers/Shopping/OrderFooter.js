@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import { Grid } from '@material-ui/core';
 import ButtonLink from 'components/ButtonLink';
+import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -37,17 +38,48 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function OrderFooter() {
+export default function OrderFooter(props) {
   const classes = useStyles();
+
+  if(Object.keys(props.cart).length===0){
+    return (
+      <AppBar position="fixed" color="primary" className={classes.appBar}>
+        <Toolbar>
+          <Grid container>
+            <Grid item xs={12}>
+              <div style={{color: 'black'}}>ไม่พบช้อมูลการสั่งซื้อ</div>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    )
+  }
 
   return (
     <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Toolbar>
         <Grid container>
           <Grid item xs={12}>
-            <div align="right">
-              <ShoppingBasket /> (1) - <ButtonLink to="/checkout-orders" color="white">รวม: 36.00 บาท</ButtonLink>
-            </div>
+            <ButtonLink to={`${constants.publicPath}/checkout-orders`} color="white">
+              <div align="right">
+                <ShoppingBasket style={{ marginRight: '5px' }} />
+                <span style={{ marginRight: '10px' }}>
+                  รหัสสั่งซื้อสินค้า:
+                  <span
+                    style={{
+                      background: 'yellow',
+                      padding: '5px',
+                      color: 'black',
+                    }}
+                  >
+                    {props.cart.cart_no}
+                  </span>
+                  |
+                </span>
+                <span>QTY {props.cart.total_item} | </span>
+                TOTAL: {props.cart.total_amount} บาท
+              </div>
+            </ButtonLink>
           </Grid>
         </Grid>
       </Toolbar>

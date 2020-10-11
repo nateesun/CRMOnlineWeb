@@ -4,29 +4,33 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectLogin, makeLoginError, makeSelectProfile } from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './LoginForm';
-import { checkLogin, defaultAction } from './actions';
+import * as actions from './actions';
 
 export function Login(props) {
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
 
+  useEffect(()=>{
+    const data = new URLSearchParams(props.location.search).get('data')||'';
+    if(data){
+      props.initDatabase(data);
+    }
+  }, [])
+
   return (
-    <div>
-      <LoginForm {...props} />
-    </div>
+    <LoginForm {...props} />
   );
 }
 
@@ -36,20 +40,23 @@ Login.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectLogin(),
-  errorLogin: makeLoginError(),
-  profile: makeSelectProfile(),
+  login: selectors.makeSelectLogin(),
+  errorLogin: selectors.makeLoginError(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     onSubmit: ({ email, password }) => {
-      dispatch(checkLogin(email, password));
+      dispatch(actions.checkLogin(email, password));
     },
     clearData: () => {
-      dispatch(defaultAction());
+      dispatch(actions.initState());
     },
+    initDatabase: (db) => {
+      dispatch(actions.initDatabase(db))
+    }
   };
 }
 

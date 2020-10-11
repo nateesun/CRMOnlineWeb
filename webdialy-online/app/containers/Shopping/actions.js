@@ -4,10 +4,66 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function initState() {
   return {
-    type: DEFAULT_ACTION,
+    type: constants.INIT_STATE,
+  };
+}
+export function loadProduct(payload) {
+  return {
+    type: constants.LOAD_PRODUCT,
+    payload,
+  };
+}
+export function loadProductSuccess(payload) {
+  return {
+    type: constants.LOAD_PRODUCT_SUCCESS,
+    payload,
+  };
+}
+export function loadProductError(payload) {
+  return {
+    type: constants.LOAD_PRODUCT_ERROR,
+    payload,
+  };
+}
+
+export function createItemCart(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART,
+    payload,
+  };
+}
+export function createItemCartSuccess(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+export function createItemCartError(payload) {
+  return {
+    type: constants.CREATE_ITEM_CART_ERROR,
+    payload,
+  };
+}
+
+export function updateItemCart(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART,
+    payload,
+  };
+}
+export function updateItemCartSuccess(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_SUCCESS,
+    payload,
+  };
+}
+export function updateItemCartError(payload) {
+  return {
+    type: constants.UPDATE_ITEM_CART_ERROR,
+    payload,
   };
 }

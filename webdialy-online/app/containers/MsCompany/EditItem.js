@@ -12,7 +12,7 @@ import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import messages from './messages';
-import { makeSelectForm } from './selectors';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -78,7 +78,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -86,9 +86,10 @@ const EditItem = props => {
                 margin="normal"
                 label={<FormattedMessage {...messages.col1} />}
                 required
+                disabled
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={9}>
               <Field
                 name="name"
                 component={RenderField}
@@ -98,13 +99,103 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12}>
               <Field
                 name="line_official_id"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="prefix_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col5} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="member_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col4} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_prefix"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="order_size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_prefix"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col11} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="cart_size_running"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col12} />}
                 required
               />
             </Grid>
@@ -154,24 +245,43 @@ EditItem.propTypes = {
   submitting: PropTypes.bool,
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
+  response: PropTypes.object,
+  onUpdateItem: PropTypes.func,
+  onInitLoad: PropTypes.func,
+  onChangePage: PropTypes.func,
 };
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.col1) {
-    errors.col1 = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+  if (!formValues.code) {
+    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
   }
-  if (!formValues.col2) {
-    errors.col2 = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  if (!formValues.name) {
+    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.col3) {
-    errors.col3 = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.line_official_id) {
+    errors.line_official_id = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
+  }
+  if (!formValues.member_running) {
+    errors.member_running = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
+  }
+  if (!formValues.prefix_running) {
+    errors.prefix_running = (
+      <FormattedMessage {...messages.col5ShouldNotEmpty} />
+    );
+  }
+  if (!formValues.size_running) {
+    errors.size_running = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   return errors;
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: makeSelectForm(),
+  initialValues: selectors.makeSelectForm(),
 });
 
 export default connect(mapStateToProps)(

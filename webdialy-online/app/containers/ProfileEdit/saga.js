@@ -1,70 +1,43 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import request from 'utils/request';
-import * as types from './constants';
+import * as loginSelectors from 'containers/Login/selectors';
+import * as constants from './constants';
 import * as actions from './actions';
-import * as loginActions from './actions';
-import * as selects from './selectors';
+import * as selectors from './selectors';
 
-export function* initLoadProfileMember() {
+export function* initLoad() {
   try {
-    const { member } = yield select(selects.makeSelectProfileEdit());
-    const { code } = member;
-    if(code){
-      const requestURL = `${types.publicPath}/api/member/${code}`;
-      try {
-        const response = yield call(request, requestURL, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-          },
-        });
-        yield put(actions.initLoadProfileSuccess(response.data));
-      } catch (error) {
-        yield put(actions.initLoadProfileError(error));
-      }
+    const { email } = yield select(selectors.makeSelectProfile());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/member/${email}`;
+    try {
+      const response = yield call(request, requestURL, {
+        database,
+        method: 'GET',
+      });
+      yield put(actions.initLoadSuccess(response.data));
+    } catch (error) {
+      yield put(actions.initLoadError(error));
     }
   } catch (err) {
-    yield put(actions.initLoadProfileError(err));
+    yield put(actions.initLoadError(err));
   }
 }
 
 export function* onEditMember() {
   try {
-    const requestURL = `${types.publicPath}/api/member`;
-    const member = yield select(selects.makeSelectMember());
-    const {
-      code,
-      prefix,
-      firstName,
-      lastName,
-      mobile,
-      birthday,
-      lineId,
-    } = member;
+    const profile = yield select(selectors.makeSelectProfile());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const requestURL = `${constants.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
+      database,
       method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`
-      },
-      body: JSON.stringify({
-        Member_Code: code,
-        Member_TitleNameThai: prefix,
-        Member_FirstName: firstName,
-        Member_LastName: lastName,
-        Member_HomeTel: mobile,
-        Member_Mobile: mobile,
-        Member_Brithday: birthday,
-        Line_Id: lineId,
-      }),
+      body: JSON.stringify(profile.data),
     });
     if (response.status === 'Success') {
       yield put(actions.editMemberSuccess());
     } else {
-      yield put(actions.editMemberError(response.msg));  
+      yield put(actions.editMemberError(response.msg));
     }
   } catch (err) {
     yield put(actions.editMemberError(err));
@@ -73,6 +46,6 @@ export function* onEditMember() {
 
 // Individual exports for testing
 export default function* profileEditSaga() {
-  yield takeEvery(types.INIT_LOAD_PROFILE_MEMBER, initLoadProfileMember);
-  yield takeEvery(types.EDIT_MEMBER, onEditMember);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
+  yield takeEvery(constants.EDIT_MEMBER, onEditMember);
 }

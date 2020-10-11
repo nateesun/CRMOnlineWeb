@@ -13,10 +13,10 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectLineLogin } from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { verifyToken } from './actions';
+import * as actions from './actions';
 import messages from './messages';
 
 export function LineLogin(props) {
@@ -37,18 +37,19 @@ export function LineLogin(props) {
 LineLogin.propTypes = {
   dispatch: PropTypes.func.isRequired,
   verifyTokenLogin: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  lineLogin: makeSelectLineLogin(),
+  lineLogin: selectors.makeSelectLineLogin(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     verifyTokenLogin: token => {
-      dispatch(verifyToken(token))
-    }
+      dispatch(actions.verifyToken(token));
+    },
   };
 }
 

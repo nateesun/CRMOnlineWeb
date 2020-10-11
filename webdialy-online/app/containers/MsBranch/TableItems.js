@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -18,7 +19,6 @@ const useStyles = makeStyles({
     width: '100%',
   },
   container: {
-    maxHeight: 550,
     padding: '10px',
   },
   table: {
@@ -34,11 +34,17 @@ const useStyles = makeStyles({
   wrapButtonAction: {
     marginTop: '15px',
   },
+  colRow: {
+    whiteSpace: 'nowrap',
+  },
+  dataWidth: {
+    overflow: 'auto',
+    width: '750px',
+  },
 });
 
 export default function TableItems(props) {
   const { getList } = props;
-  console.log(getList);
   const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
@@ -75,7 +81,13 @@ export default function TableItems(props) {
     props.onLoadEdit(item);
   };
 
-  TableItems.propTypes = {};
+  TableItems.propTypes = {
+    getList: PropTypes.array,
+    onDeleteItem: PropTypes.func,
+    onLoadEdit: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onInitLoad: PropTypes.func,
+  };
 
   return (
     <Paper className={classes.root}>
@@ -100,53 +112,60 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <Table className={classes.table} stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">No</TableCell>
-              <TableCell align="center">Code</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Map Latitude</TableCell>
-              <TableCell align="center">Map Longitude</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {getList &&
-              getList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((item, index) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item["code"]}</TableCell>
-                    <TableCell align="center">{item["name"]}</TableCell>
-                    <TableCell align="center">{item["map_latitude"]}</TableCell>
-                    <TableCell align="center">{item["map_longitude"]}</TableCell>
-                    <TableCell align="center">
-                      <Grid container spacing={1} justify="center">
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onEditItem(item)}
-                          >
-                            Edit
-                          </Button>
+        <div className={classes.dataWidth}>
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow className={classes.colRow}>
+                <TableCell align="center">No</TableCell>
+                <TableCell align="center">Code</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Map Latitude</TableCell>
+                <TableCell align="center">Map Longitude</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {getList &&
+                getList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={item.uuid_index} className={classes.colRow}
+                    >
+                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">{item.code}</TableCell>
+                      <TableCell align="center">{item.name}</TableCell>
+                      <TableCell align="center">{item.map_latitude}</TableCell>
+                      <TableCell align="center">{item.map_longitude}</TableCell>
+                      <TableCell align="center">
+                        <Grid container spacing={1} justify="center">
+                          <Grid item>
+                            <Button
+                              variant="outlined"
+                              onClick={() => onEditItem(item)}
+                            >
+                              Edit
+                            </Button>
+                          </Grid>
+                          <Grid item>
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => handleDelete(item.uuid_index)}
+                            >
+                              Delete
+                            </Button>
+                          </Grid>
                         </Grid>
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => handleDelete(item.uuid_index)}
-                          >
-                            Delete
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                ))}
-          </TableBody>
-        </Table>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+            </TableBody>
+          </Table>
+        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}

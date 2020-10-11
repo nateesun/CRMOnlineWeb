@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
+    defaultMessage: 'Add new stock',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Edit Stock',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
