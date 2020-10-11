@@ -16,86 +16,57 @@ import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import ButtonLink from 'components/ButtonLink';
-import { publicPath } from './constants';
+import * as constants from './constants';
 
-const categories = [
+const menuList = [
   {
     id: 'Account',
     role: 'admin|member|employee',
     children: [
-      {
-        id: 'Overview',
-        icon: <CardGiftcardIcon />,
-        to: `${publicPath}/dashboard`,
-        active: true,
-      },
-      {
-        id: 'Profile',
-        icon: <RecentActorsIcon />,
-        to: `${publicPath}/profile`,
-      },
+      { id: 'Overview', icon: <CardGiftcardIcon />, to: constants.PATH_DASHBOARD, active: true },
+      { id: 'Profile', icon: <RecentActorsIcon />, to: constants.PATH_PROFILE },
     ],
   },
   {
     id: 'Orders',
     role: 'admin|member|employee',
     children: [
-      { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
-      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/tracking` },
+      { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
+      { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
     ],
   },
   {
     id: 'Request Order',
     role: 'admin|employee',
     children: [
-      { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
+      { id: 'Check cart list', icon: <LocalMallIcon />, to: constants.PATH_CHECK_CARTS },
     ],
   },
   {
     id: 'Members',
     role: 'admin',
     children: [
-      { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
+      { id: 'Member List', icon: <PeopleIcon />, to: constants.PATH_MEMBER },
     ],
   },
   {
     id: 'Settings',
     role: 'admin',
     children: [
-      { id: 'Roles', icon: <LockIcon />, to: `${publicPath}/ms/role` },
-      {
-        id: 'Database',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/database`,
-      },
+      { id: 'Roles', icon: <LockIcon />, to: constants.PATH_MS_ROLE },
+      { id: 'Database', icon: <DnsRoundedIcon />, to: constants.PATH_DATABASE },
     ],
   },
   {
     id: 'Master',
     role: 'admin',
     children: [
-      {
-        id: 'Company',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/company`,
-      },
-      { id: 'Branch', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/branch` },
-      {
-        id: 'Product',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/product`,
-      },
-      {
-        id: 'Employee',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/employee`,
-      },
-      { id: 'Stock', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/stock` },
-      {
-        id: 'Redeem',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/promotion`,
-      },
+      { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
+      { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
+      { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
+      { id: 'Employee', icon: <DnsRoundedIcon />, to: constants.PATH_MS_EMPLOYEE },
+      { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
+      { id: 'Redeem', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
     ],
   },
 ];
@@ -148,7 +119,7 @@ function Navigator(props) {
   const { member_role } = profile;
   leftMenus.length = 0;
   if (profile) {
-    categories.forEach(item => {
+    menuList.forEach(item => {
       if(item.role.includes(member_role)){
         leftMenus.push(item);
       }
@@ -161,7 +132,7 @@ function Navigator(props) {
         <ListItem
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
-          <ButtonLink to={`${publicPath}/`} color="white">
+          <ButtonLink to={`${constants.publicPath}/`} color="white">
             Main Menu
           </ButtonLink>
         </ListItem>
@@ -174,7 +145,7 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            <ButtonLink to={`${publicPath}/`} color="white">
+            <ButtonLink to={`${constants.publicPath}/`} color="white">
               Home
             </ButtonLink>
           </ListItemText>

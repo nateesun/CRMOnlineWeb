@@ -115,6 +115,22 @@ module.exports = (db) => {
     })
   }
 
+  module.updateRole = (data) => {
+    console.log("update method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} SET  
+        member_role = ?, 
+        system_updated = now() 
+        WHERE email=? `
+        const result = await pool.query(query, [ data.member_role, data.email ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.delete = (email) => {
     console.log("delete method start")
     return new Promise(async (resolve, reject) => {

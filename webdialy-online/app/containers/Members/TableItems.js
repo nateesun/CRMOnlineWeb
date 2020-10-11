@@ -120,8 +120,9 @@ export default function TableItems(props) {
               <TableCell align="center">No</TableCell>
               <TableCell align="center">Code</TableCell>
               <TableCell align="left">Email</TableCell>
-              <TableCell align="right">Point</TableCell>
-              <TableCell align="right">Redemption</TableCell>
+              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">Surname</TableCell>
+              <TableCell align="right">Role</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -139,9 +140,10 @@ export default function TableItems(props) {
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.code}</TableCell>
-                    <TableCell align="center">{item.email}</TableCell>
-                    <TableCell align="center">{item.total_score}</TableCell>
-                    <TableCell align="center">{item.total_purchase}</TableCell>
+                    <TableCell align="left">{item.email}</TableCell>
+                    <TableCell align="left">{item.first_name}</TableCell>
+                    <TableCell align="left">{item.last_name}</TableCell>
+                    <TableCell align="center">{item.member_role}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>

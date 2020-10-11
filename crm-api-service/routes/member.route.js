@@ -115,6 +115,18 @@ router.put("/", async (req, res, next) => {
   }
 })
 
+router.patch("/", async (req, res, next) => {
+  try {
+    const response = await Task(req.headers.database).updateRole(req.body)
+    const data = JSON.parse(response.data)
+    res.status(200).json({ status: response.status, msg: "Success", data })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+  }
+})
+
 router.delete("/:id", async (req, res, next) => {
   try {
     const response = await Task(req.headers.database).delete(req.params.id)

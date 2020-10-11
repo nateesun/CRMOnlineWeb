@@ -62,14 +62,14 @@ export function* saveData() {
   }
 }
 
-export function* updateData() {
+export function* updateMemberData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       database,
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
     if (response) {
@@ -105,7 +105,7 @@ export function* deleteData() {
 export default function* membersSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
-  yield takeEvery(constants.UPDATE_ITEM, updateData);
+  yield takeEvery(constants.UPDATE_ITEM, updateMemberData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
 }

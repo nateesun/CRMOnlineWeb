@@ -59,15 +59,19 @@ export default defineMessages({
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Member Name',
+    defaultMessage: 'Email',
   },
   col3: {
     id: `${scope}.col3`,
-    defaultMessage: 'Point',
+    defaultMessage: 'Name',
   },
   col4: {
     id: `${scope}.col4`,
-    defaultMessage: 'Redemption',
+    defaultMessage: 'Last Name',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Role',
   },
   btnSave: {
     id: `${scope}.btnSave`,
