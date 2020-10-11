@@ -1,4 +1,4 @@
-const { Router, response } = require('express');
+const { Router } = require('express');
 const { json, urlencoded } = require('body-parser');
 
 module.exports = args => {
@@ -10,11 +10,9 @@ module.exports = args => {
 
   const serviceProvider = (req, res) => {
     const { method, baseUrl, path } = req;
+    const completeUrl = `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`;
     const options = {
-      url: `${serviceApiHost}${baseUrl.replace(
-        new RegExp(`/${appName}`),
-        '',
-      )}${path}`,
+      url: completeUrl,
       method,
       headers: {
         ...req.headers,
@@ -27,13 +25,12 @@ module.exports = args => {
     }
 
     try {
-      return httpRequest(options, (error, resposne, body) => {
-        if (response) {
-          if (response.statusCode === 200) {
-            return res.status(200).json(body);
-          }
+      return httpRequest(options, (error, response, body) => {
+        if (response.statusCode === 200) {
+          return res.status(200).json(body);
+        } else {
+          return res.status(response.statusCode).json({ Error: response.statusMessage });
         }
-        return res.status(500).json({ Error: 'error' });
       });
     } catch (e) {
       return res.status(500).json({ Error: e });
