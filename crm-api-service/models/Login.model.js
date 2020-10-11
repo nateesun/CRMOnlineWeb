@@ -46,10 +46,7 @@ module.exports = (db) => {
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where username = ? and password = ? and member_active='Y'`
-        const user = await pool.query(sql, [
-          username,
-          Buffer.from(password).toString("base64"),
-        ])
+        const user = await pool.query(sql, [username, password])
         if (user.length === 0) {
           return reject("Invalid")
         } else {

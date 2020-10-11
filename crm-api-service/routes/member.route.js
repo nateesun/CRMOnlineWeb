@@ -10,7 +10,9 @@ router.get("/", async (req, res, next) => {
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -21,7 +23,9 @@ router.post("/search", async (req, res, next) => {
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -39,7 +43,9 @@ router.get("/:email", async (req, res, next) => {
       },
     })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -89,9 +95,11 @@ router.post("/", async (req, res, next) => {
     const response = await Task(req.headers.database).create(memberMode)
     const response1 = await TaskLogin(req.headers.database).create(loginModel)
     const data = JSON.parse(response.data)
-    res.status(200).json({ status: response1.status, msg: "Success", data })    
+    res.status(200).json({ status: response1.status, msg: "Success", data })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -101,7 +109,9 @@ router.put("/", async (req, res, next) => {
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -111,7 +121,9 @@ router.delete("/:id", async (req, res, next) => {
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 
@@ -128,7 +140,9 @@ router.post("/login", async (req, res, next) => {
       },
     })
   } catch (error) {
-    return res.status(500).json({ status: 'Internal Server Error', msg: error.sqlMessage })
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 

@@ -24,7 +24,7 @@ export function* onVerifyTokenLogin(data) {
         method: 'POST',
         body: JSON.stringify({
           email: Username,
-          password: Buffer.from(Password, 'base64').toString(),
+          password: Password,
         }),
       });
       if (response.status === 'Success') {

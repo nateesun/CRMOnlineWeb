@@ -11,10 +11,11 @@ export function* onValidLogin() {
     const loginForm = yield select(selectors.makeSelectLogin());
     const database = yield select(selectors.makeSelectDatabase());
     const { email, password } = loginForm;
+    const encryptPassword = Buffer.from(password).toString('base64');
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password: encryptPassword }),
     });
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));
@@ -23,7 +24,7 @@ export function* onValidLogin() {
       yield put(actions.checkLoginError('Email or password invalid'));
     }
   } catch (err) {
-    yield put(actions.checkLoginError(err));
+    yield put(actions.checkLoginError(`${err}`));
   }
 }
 

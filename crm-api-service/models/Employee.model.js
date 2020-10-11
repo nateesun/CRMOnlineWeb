@@ -30,7 +30,6 @@ module.exports = (db) => {
       }
     })
   }
-
   ;(module.create = (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
