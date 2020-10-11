@@ -9,30 +9,16 @@ const generateRedeemCode = () => {
   return cc.generate()
 }
 
-router.get("/", (req, res, next) => {
-  Task(req.headers.database).findShowUser((err, response) => {
-    if (err) {
-      res
-        .status(500)
-        .json({ status: "Error", msg: err.sqlMessage || err.errno })
-    } else {
-      const data = JSON.parse(response.data)
-      res.status(200).json({
-        status: response.status,
-        msg: "Success",
-        data,
-      })
-    }
-  })
+router.get("/", async (req, res, next) => {
+  const response = await Task(req.headers.database).findShowUser();
+  const data = JSON.parse(response.data)
+  res.status(200).json({ status: response.status, msg: "Success", data })
 })
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { uuid_index, product_code, member_code_use } = req.body;
-  Task(req.headers.database).findByCode(product_code, (err1, response) => {
-    if(err1) {
-      res.status(500).json({ status: "Error", msg: err1.sqlMessage || err1.errno })
-    }
-    const promotion = JSON.parse(response.data)[0];
+  const response = await Task(req.headers.database).findByCode(product_code);
+  const promotion = JSON.parse(response.data)[0];
     const redeemCodeGen = generateRedeemCode();
     const payload = {
       uuid_index,
@@ -49,18 +35,8 @@ router.post("/", (req, res, next) => {
       status_use: 'in_progress',// in_progress|success|expired
       active: 'Y',// Y|N
     }
-    TaskRedeem(req.headers.database).create(payload, (err, response) => {
-      if (err) {
-        res.status(500).json({ status: "Error", msg: err.sqlMessage || err.errno })
-      } else {
-        res.status(200).json({
-          status: response.status,
-          msg: "Success",
-          data: ""+redeemCodeGen,
-        })
-      }
-    })
-  })
+    const response1 = await TaskRedeem(req.headers.database).create(payload);
+    res.status(200).json({ status: response1.status, msg: "Success", data: ""+redeemCodeGen })
 })
 
 module.exports = router

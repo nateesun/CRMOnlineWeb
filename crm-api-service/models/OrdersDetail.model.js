@@ -1,46 +1,52 @@
 /* OrderDetails.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
+const { getDB } = require("./FuncUtil")()
 
-module.exports = db => {
+module.exports = (db) => {
   const module = {}
-  const table_name = getDB(db, 'orders_detail');
+  const table_name = getDB(db, "orders_detail")
 
-  module.findById = async (id, callback) => {
+  module.findById = (id) => {
     console.log("findById method start:")
-    try {
-      const sql = `select * from ${table_name} where uuid_index=?;`
-      const result = await pool.query(sql, [id])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.findAll = async (callback) => {
-    console.log("findAll method start:")
-    try {
-      const sql = `select * from ${table_name}`
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.searchData = async (key, value, callback) => {
-    console.log("searchData method start:")
-    try {
-      let sql = `select * from ${table_name}`;
-      if(key!==''){
-        sql = `${sql} where ${key} like '%${value}%'`;
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where uuid_index=?;`
+        const result = await pool.query(sql, [id])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
       }
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    })
+  }
+
+  module.findAll = () => {
+    console.log("findAll method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name}`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.searchData = (key, value) => {
+    console.log("searchData method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `select * from ${table_name}`
+        if (key !== "") {
+          sql = `${sql} where ${key} like '%${value}%'`
+        }
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 
   module.create = async (params) => {
@@ -56,7 +62,7 @@ module.exports = db => {
     })
   }
 
-  module.update = (data, callback) => {
+  module.update = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -65,24 +71,24 @@ module.exports = db => {
           data.col1,
           data.col2,
           data.col3,
-          data.uuid_index
+          data.uuid_index,
         ])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.delete = (id, callback) => {
+  module.delete = (id) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
         const result = await pool.query(query, [id])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }

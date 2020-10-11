@@ -1,28 +1,28 @@
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
+const { getDB } = require("./FuncUtil")()
 
-module.exports = db => {
+module.exports = (db) => {
   const module = {}
-  const table_name = getDB(db, 'login');
+  const table_name = getDB(db, "login")
 
-  module.create = async (data, callback) => {
+  module.create = (data) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, data)
         if (result.affectedRows > 0) {
-          callback(null, { status: "Success", data: JSON.stringify(result) })
+          resolve({ status: "Success", data: JSON.stringify(result) })
         } else {
-          callback(err, { status: "Error", msg: "Cannot update password" })
+          reject("Cannot update password")
         }
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.update = (data, callback) => {
+  module.update = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -32,45 +32,49 @@ module.exports = db => {
           data.username,
         ])
         if (result.affectedRows > 0) {
-          callback(null, { status: "Success", data: JSON.stringify(result) })
+          resolve({ status: "Success", data: JSON.stringify(result) })
         } else {
-          callback(err, { status: "Error", msg: "Cannot update password" })
+          reject("Cannot update password")
         }
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.validLogin = async (username, password, callback) => {
-    try {
-      const sql = `select * from ${table_name} where username = ? and password = ? and member_active='Y'`
-      const user = await pool.query(sql, [
-        username,
-        Buffer.from(password).toString("base64"),
-      ])
-      if (user.length === 0) {
-        return callback(null, { status: "Invalid" })
-      } else {
-        return callback(null, { status: "Success", data: JSON.stringify(user) })
+  module.validLogin = (username, password) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where username = ? and password = ? and member_active='Y'`
+        const user = await pool.query(sql, [
+          username,
+          Buffer.from(password).toString("base64"),
+        ])
+        if (user.length === 0) {
+          return reject("Invalid")
+        } else {
+          return resolve({ status: "Success", data: JSON.stringify(user) })
+        }
+      } catch (err) {
+        reject(err)
       }
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    })
   }
 
-  module.getLineId = async (lineId, callback) => {
-    try {
-      const sql = `select * from ${table_name} where Line_Id=?`
-      const member = await pool.query(sql, [lineId])
-      if (member.length == 0) {
-        callback(null, { status: "Not Found", data: [] })
-      } else {
-        callback(null, { status: "Success", data: JSON.stringify(member) })
+  module.getLineId = (lineId) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where Line_Id=?`
+        const member = await pool.query(sql, [lineId])
+        if (member.length == 0) {
+          reject("Not Found")
+        } else {
+          resolve({ status: "Success", data: JSON.stringify(member) })
+        }
+      } catch (err) {
+        reject(err)
       }
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    })
   }
 
   return module
