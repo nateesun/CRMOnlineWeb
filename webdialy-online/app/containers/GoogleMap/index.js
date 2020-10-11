@@ -45,10 +45,10 @@ export function GoogleMap() {
   }
 
   return (
-    <div>
+    <React.Fragment>
       {/* <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} /> */}
       <MapMarker lat={13.844903} lng={100.525943} onExit={handlePlace} />
-    </div>
+    </React.Fragment>
   );
 }
 

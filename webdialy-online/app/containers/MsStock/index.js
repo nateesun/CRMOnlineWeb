@@ -27,9 +27,7 @@ export function MsStock(props) {
   }, []);
 
   return (
-    <div>
-      <ContentPage {...props} />
-    </div>
+    <ContentPage {...props} />
   );
 }
 

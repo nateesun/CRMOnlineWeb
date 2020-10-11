@@ -67,13 +67,6 @@ CREATE TABLE `company` (
   `cart_size_running` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `employee` (
-  `uuid_index` varchar(36) NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `role_code` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `login` (
   `member_active` char(1) NOT NULL DEFAULT 'Y',
   `username` varchar(50) NOT NULL,
@@ -99,7 +92,8 @@ CREATE TABLE `member` (
   `system_updated` datetime DEFAULT NULL,
   `line_id` varchar(50) DEFAULT NULL,
   `prefix` varchar(100) DEFAULT NULL,
-  `uuid_index` varchar(100) NOT NULL
+  `uuid_index` varchar(100) NOT NULL,
+  `member_role` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `member_shipping` (

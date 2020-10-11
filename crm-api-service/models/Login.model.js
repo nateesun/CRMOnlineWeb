@@ -48,7 +48,7 @@ module.exports = (db) => {
         const sql = `select * from ${table_name} where username = ? and password = ? and member_active='Y'`
         const user = await pool.query(sql, [username, password])
         if (user.length === 0) {
-          return reject("Invalid")
+          return resolve({ status: "Invalid", data: JSON.stringify("Invalid user") })
         } else {
           return resolve({ status: "Success", data: JSON.stringify(user) })
         }

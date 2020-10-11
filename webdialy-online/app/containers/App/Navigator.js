@@ -11,21 +11,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import TimeLineIcon from '@material-ui/icons/Timeline';
-import HistoryIcon from '@material-ui/icons/History';
-import StorefrontIcon from '@material-ui/icons/Storefront';
 import PeopleIcon from '@material-ui/icons/People';
 import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import StoreMallDirectory from '@material-ui/icons/StoreMallDirectory';
 import ButtonLink from 'components/ButtonLink';
 import { publicPath } from './constants';
 
 const categories = [
   {
     id: 'Account',
+    role: 'admin|member|employee',
     children: [
       {
         id: 'Overview',
@@ -42,6 +38,7 @@ const categories = [
   },
   {
     id: 'Orders',
+    role: 'admin|member|employee',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
       { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/tracking` },
@@ -49,18 +46,21 @@ const categories = [
   },
   {
     id: 'Request Order',
+    role: 'admin|employee',
     children: [
       { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
     ],
   },
   {
     id: 'Members',
+    role: 'admin',
     children: [
       { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
     ],
   },
   {
     id: 'Settings',
+    role: 'admin',
     children: [
       { id: 'Roles', icon: <LockIcon />, to: `${publicPath}/ms/role` },
       {
@@ -72,6 +72,7 @@ const categories = [
   },
   {
     id: 'Master',
+    role: 'admin',
     children: [
       {
         id: 'Company',
@@ -143,23 +144,16 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-  const { classes, email, ...other } = props;
+  const { classes, email, profile, ...other } = props;
+  const { member_role } = profile;
   leftMenus.length = 0;
-  categories.forEach(item => {
-    if (
-      item.id === 'Members' ||
-      item.id === 'Settings' ||
-      item.id === 'Master'
-    ) {
-      if (email === 'softpos@gmail.com') {
+  if (profile) {
+    categories.forEach(item => {
+      if(item.role.includes(member_role)){
         leftMenus.push(item);
       }
-    } else if (item.id === 'Orders' && email !== 'softpos@gmail.com') {
-      leftMenus.push(item);
-    } else {
-      leftMenus.push(item);
-    }
-  });
+    });
+  }
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -231,6 +225,7 @@ function Navigator(props) {
 Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
   email: PropTypes.string,
+  profile: PropTypes.object,
 };
 
 export default withStyles(styles)(Navigator);

@@ -92,7 +92,7 @@ router.post("/", async (req, res, next) => {
       password: Buffer.from(password).toString("base64"),
       member_active: "Y",
     }
-    const response = await Task(req.headers.database).create(memberMode)
+    const response = await Task(req.headers.database).create(memberModel)
     const response1 = await TaskLogin(req.headers.database).create(loginModel)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response1.status, msg: "Success", data })

@@ -60,7 +60,7 @@ export default function Orders(props) {
             <IconButton aria-label="delete" onClick={()=>handleDelete(product.product_code)}>
               <RemoveIcon style={{ color: 'red' }} />
             </IconButton>
-            <div>
+            <React.Fragment>
               <IconButton aria-label="Remove" onClick={()=>handleAdd(product.product_code, product.qty-1)}>
                 <MinusIcon style={{ color: 'red' }} />
               </IconButton>
@@ -68,7 +68,7 @@ export default function Orders(props) {
               <IconButton aria-label="Add" onClick={()=>handleRemove(product.product_code, product.qty+1)}>
                 <PlusIcon style={{ color: 'green' }} />
               </IconButton>
-            </div>
+            </React.Fragment>
           </ListItem>
         ))}
         <Divider style={{ border: '1px solid #eee' }} />

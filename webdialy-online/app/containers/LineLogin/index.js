@@ -28,9 +28,9 @@ export function LineLogin(props) {
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <FormattedMessage {...messages.header} />
-    </div>
+    </React.Fragment>
   );
 }
 

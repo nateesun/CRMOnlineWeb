@@ -37,6 +37,7 @@ export function* onAddRegisterMember() {
           .format('YYYY-MM-DD'),
         birthday: data.birthday,
         line_id: data.line_id,
+        member_role: '',
       }),
     });
     if (response.status === 'Success') {

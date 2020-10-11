@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
       return res.status(200).json({ status: response.status, msg: "Success" })
     }
     return res
-      .status(401)
+      .status(200)
       .json({ status: response.status, msg: "Username/Password invalid" })
   } catch (error) {
     return res
