@@ -1,13 +1,13 @@
 /* CartsDetail.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
+const { getDB } = require("./FuncUtil")()
 
-module.exports = db => {
+module.exports = (db) => {
   const module = {}
-  const table_name = getDB(db, 'carts_detail');
+  const table_name = getDB(db, "carts_detail")
 
-  module.findByCartNo = async cart_no => {
+  module.findByCartNo = (cart_no) => {
     console.log("findByProduct method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -20,67 +20,75 @@ module.exports = db => {
     })
   }
 
-  module.findByProduct = async (product_code, cart_no, callback) => {
+  module.findByProduct = (product_code, cart_no) => {
     console.log("findByProduct method start:")
-    try {
-      const sql = `select * from ${table_name} where product_code=? and cart_no=?;`
-      const result = await pool.query(sql, [product_code, cart_no])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.findById = async (id, callback) => {
-    console.log("findById method start:")
-    try {
-      const sql = `select * from ${table_name} where uuid_index=?;`
-      const result = await pool.query(sql, [id])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.findAll = async (callback) => {
-    console.log("findAll method start:")
-    try {
-      const sql = `select * from ${table_name}`
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.searchData = async (key, value, callback) => {
-    console.log("searchData method start:")
-    try {
-      let sql = `select * from ${table_name}`;
-      if(key!==''){
-        sql = `${sql} where ${key} like '%${value}%'`;
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where product_code=? and cart_no=?;`
+        const result = await pool.query(sql, [product_code, cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
       }
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    })
   }
 
-  module.create = async (params, callback) => {
+  module.findById = (id) => {
+    console.log("findById method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where uuid_index=?;`
+        const result = await pool.query(sql, [id])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.findAll = () => {
+    console.log("findAll method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name}`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.searchData = (key, value) => {
+    console.log("searchData method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `select * from ${table_name}`
+        if (key !== "") {
+          sql = `${sql} where ${key} like '%${value}%'`
+        }
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.create = (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, params)
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.update = (data, callback) => {
+  module.update = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -108,39 +116,43 @@ module.exports = db => {
           data.options,
           data.special_text,
           data.point,
-          data.uuid_index
+          data.uuid_index,
         ])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.updateQty = (data, callback) => {
+  module.updateQty = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `UPDATE ${table_name} 
         SET qty=?,total_amount=qty*product_price 
         WHERE cart_no=? and product_code=? `
-        const result = await pool.query(query, [data.qty, data.cart_no, data.product_code])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        const result = await pool.query(query, [
+          data.qty,
+          data.cart_no,
+          data.product_code,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.delete = ({cart_no, product_code}, callback) => {
+  module.delete = ({ cart_no, product_code }) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `DELETE FROM ${table_name} WHERE cart_no=? and product_code=?`
         const result = await pool.query(query, [cart_no, product_code])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }

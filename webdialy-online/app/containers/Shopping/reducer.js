@@ -52,7 +52,6 @@ const shoppingReducer = (state = initialState, action) =>
       case loginConstants.CHECK_LOGOUT:
       case checkoutOrderConstants.UPDATE_SHOPPING_STEP_SUCCESS:
       case constants.INIT_STATE:
-        console.log('shoppingReducer INIT_STATE')
         draft.productList= [];
         draft.cart= {};
         draft.itemCart= {};

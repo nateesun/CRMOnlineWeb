@@ -1,62 +1,68 @@
 /* MemberShipping.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
+const { getDB } = require("./FuncUtil")()
 
-module.exports = db => {
+module.exports = (db) => {
   const module = {}
-  const table_name = getDB(db, 'member_shipping');
+  const table_name = getDB(db, "member_shipping")
 
-  module.findByMemberCode = async (member_code, callback) => {
+  module.findByMemberCode = (member_code) => {
     console.log("findById method start:")
-    try {
-      const sql = `select * from ${table_name} where member_code=?;`
-      const result = await pool.query(sql, [member_code])
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.findAll = async (callback) => {
-    console.log("findAll method start:")
-    try {
-      const sql = `select * from ${table_name}`
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
-  }
-
-  module.searchData = async (key, value, callback) => {
-    console.log("searchData method start:")
-    try {
-      let sql = `select * from ${table_name}`;
-      if(key!==''){
-        sql = `${sql} where ${key} like '%${value}%'`;
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where member_code=?;`
+        const result = await pool.query(sql, [member_code])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
       }
-      const result = await pool.query(sql)
-      callback(null, { status: "Success", data: JSON.stringify(result) })
-    } catch (err) {
-      callback(err, { status: "Error", msg: err.message })
-    }
+    })
   }
 
-  module.create = async (params) => {
+  module.findAll = () => {
+    console.log("findAll method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name}`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.searchData = (key, value) => {
+    console.log("searchData method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `select * from ${table_name}`
+        if (key !== "") {
+          sql = `${sql} where ${key} like '%${value}%'`
+        }
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.create = (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `INSERT INTO ${table_name} SET ? `
         const result = await pool.query(query, params)
-        resolve({ status: "Success", data: JSON.stringify(result) });
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject({ status: "Error", msg: err.message });
+        reject(err)
       }
     })
   }
 
-  module.update = (data, callback) => {
+  module.update = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -87,24 +93,24 @@ module.exports = db => {
           data.postcode,
           data.member_lastname,
           data.member_prefix,
-          data.member_code
+          data.member_code,
         ])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve(null, { status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
 
-  module.delete = (id, callback) => {
+  module.delete = (id) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
         const result = await pool.query(query, [id])
-        callback(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        callback(err, { status: "Error", msg: err.message })
+        reject(err)
       }
     })
   }
@@ -115,9 +121,9 @@ module.exports = db => {
       try {
         const query = `DELETE FROM ${table_name} WHERE member_code = ? `
         await pool.query(query, [member_code])
-        resolve('Success');
+        resolve({ status: "Success", data: JSON.stringify(member_code) })
       } catch (err) {
-        reject(err);
+        reject(err)
       }
     })
   }
