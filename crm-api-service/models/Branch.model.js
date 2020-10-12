@@ -69,7 +69,7 @@ module.exports = (db) => {
       try {
         const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
         const result = await pool.query(query, [id])
-        resolve(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err, { status: "Error", msg: err.message })
       }
