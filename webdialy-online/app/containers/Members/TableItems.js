@@ -166,7 +166,7 @@ export default function TableItems(props) {
                           <Button
                             variant="contained"
                             color="secondary"
-                            onClick={() => handleDelete(item.email)}
+                            onClick={() => handleDelete(item.uuid_index)}
                           >
                             Delete
                           </Button>

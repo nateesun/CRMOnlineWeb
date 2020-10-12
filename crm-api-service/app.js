@@ -4,6 +4,36 @@ const path = require("path")
 const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
+
+// api document
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json');
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'CRM API SERVICE',
+      description: 'Support Web Daily Online Web',
+      contact: {
+        name: 'Nathee Sungthong-ngam'
+      },
+      servers: ['http://localhost:5000']
+    },
+    basePath: '/api',
+    securityDefinitions: {
+      auth: {
+        type: 'basic'
+      }
+    },
+    security: [
+      { 
+        auth: [] 
+      }
+    ]
+  },
+  apis: ['./routes/*.js']
+}
+
 const indexRouter = require("./routes/index")
 
 const memberMasterRouter = require("./routes/login.route")
@@ -59,6 +89,10 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
+
+// swagger api document
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/", indexRouter)
 app.use("/api/login", basicAuth({ users: { admin: fixPassword } }), memberMasterRouter)

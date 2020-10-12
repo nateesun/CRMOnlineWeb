@@ -66,7 +66,7 @@ export function* updateMemberData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/member`;
+    const requestURL = `${constants.publicPath}/api/member/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
