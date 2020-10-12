@@ -55,7 +55,7 @@ module.exports = (db) => {
         const user = await pool.query(sql, [username, password])
         if (user.length === 0) {
           return resolve({ status: "Invalid", data: JSON.stringify("Invalid user") })
-        } else if (user[0].member_role === ''){
+        } else if (user[0].member_role === '' || user[0].member_role === null){
           return resolve({ status: "Missing Role", data: JSON.stringify("Invalid user") })
         } else {
           return resolve({ status: "Success", data: JSON.stringify(user) })
