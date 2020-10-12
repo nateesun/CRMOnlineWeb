@@ -14,8 +14,9 @@ export const initialState = {
     uuid_index: '',
     code: '',
     email: '',
-    total_score: 0,
-    total_purchase: 0,
+    first_name: '',
+    last_name: '',
+    member_role: '',
   },
   page: 'LIST',
   status: null,
@@ -89,7 +90,7 @@ const membersReducer = (state = initialState, action) =>
         draft.response.message = 'Update data error!';
         break;
       case constants.DELETE_ITEM:
-        draft.data.uuid_index = action.payload;
+        draft.data.email = action.payload;
         break;
       case constants.DELETE_ITEM_SUCCESS:
         draft.response.status = 'Success';

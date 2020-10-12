@@ -95,7 +95,7 @@ module.exports = (db) => {
           data.member_prefix,
           data.member_code,
         ])
-        resolve(null, { status: "Success", data: JSON.stringify(result) })
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)
       }

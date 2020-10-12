@@ -52,7 +52,7 @@ export function* saveData() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
     } else {
       yield put(actions.createItemError('Cannot create data'));
@@ -62,17 +62,17 @@ export function* saveData() {
   }
 }
 
-export function* updateData() {
+export function* updateMemberData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
     const requestURL = `${constants.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       database,
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.updateItemSuccess(response));
     } else {
       yield put(actions.updateItemError('Cannot update data'));
@@ -86,13 +86,13 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/member/${data.uuid_index}`;
+    const requestURL = `${constants.publicPath}/api/member/${data.email}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status === 'Success') {
       yield put(actions.deleteItemSuccess(response));
     } else {
       yield put(actions.deleteItemError('Cannot update data'));
@@ -105,7 +105,7 @@ export function* deleteData() {
 export default function* membersSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
-  yield takeEvery(constants.UPDATE_ITEM, updateData);
+  yield takeEvery(constants.UPDATE_ITEM, updateMemberData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
 }

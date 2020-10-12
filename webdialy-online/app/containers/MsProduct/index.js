@@ -28,9 +28,7 @@ export function MsProduct(props) {
   }, []);
 
   return (
-    <div>
-      <ContentPage {...props} />
-    </div>
+    <ContentPage {...props} />
   );
 }
 

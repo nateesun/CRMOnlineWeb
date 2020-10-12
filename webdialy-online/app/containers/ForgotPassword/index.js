@@ -22,9 +22,7 @@ export function ForgotPassword(props) {
   useInjectSaga({ key: 'forgotPassword', saga });
 
   return (
-    <div>
-      <ForgotForm {...props} />
-    </div>
+    <ForgotForm {...props} />
   );
 }
 

@@ -4,6 +4,7 @@ const { getDB } = require("./FuncUtil")()
 module.exports = (db) => {
   const module = {}
   const table_name = getDB(db, "login")
+  const tb_member = getDB(db, "member")
 
   module.create = (data) => {
     console.log("create method start:")
@@ -45,13 +46,17 @@ module.exports = (db) => {
   module.validLogin = (username, password) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where username = ? and password = ? and member_active='Y'`
-        const user = await pool.query(sql, [
-          username,
-          Buffer.from(password).toString("base64"),
-        ])
+        const sql = `select l.*, m.member_role 
+        from ${table_name} l 
+        inner join ${tb_member} m on l.username=m.email 
+        where l.username=? 
+        and l.password=? 
+        and member_active = 'Y'`;
+        const user = await pool.query(sql, [username, password])
         if (user.length === 0) {
-          return reject("Invalid")
+          return resolve({ status: "Invalid", data: JSON.stringify("Invalid user") })
+        } else if (user[0].member_role === '' || user[0].member_role === null){
+          return resolve({ status: "Missing Role", data: JSON.stringify("Invalid user") })
         } else {
           return resolve({ status: "Success", data: JSON.stringify(user) })
         }

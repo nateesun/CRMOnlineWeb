@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 function DateTimeInput({ input, label, required, meta: { touched, error } }) {
   return (
-    <div>
+    <React.Fragment>
       <TextField
         {...input}
         variant="outlined"
@@ -24,7 +24,7 @@ function DateTimeInput({ input, label, required, meta: { touched, error } }) {
         }}
       />
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
-    </div>
+    </React.Fragment>
   );
 }
 

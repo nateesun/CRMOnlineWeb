@@ -10,12 +10,18 @@ module.exports = (args) => {
     try {
       const response = await Task.validateImage(imagePath + "/" + img_file)
       if (response) {
-        res.status(200).json({ status: "Success", msg: "Validate success", data: response })
+        res
+          .status(200)
+          .json({ status: "Success", msg: "Validate success", data: response })
       } else {
-        res.status(200).json({ status: "Notfound", msg: "Not found data", data: "" })
+        res
+          .status(200)
+          .json({ status: "Notfound", msg: "Not found data", data: "" })
       }
     } catch (err) {
-      res.status(500).json({ status: "Error", msg: "Validate image error: " + err })
+      res
+        .status(500)
+        .json({ status: "Error", msg: "Validate image error: " + err })
     }
   })
 

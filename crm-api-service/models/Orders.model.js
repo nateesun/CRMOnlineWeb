@@ -81,11 +81,12 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET col1=?, col2=?, col3=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} 
+        SET order_no=?, cart_no=?, member_code=? WHERE uuid_index=? `
         const result = await pool.query(query, [
-          data.col1,
-          data.col2,
-          data.col3,
+          data.order_no,
+          data.cart_no,
+          data.member_code,
           data.uuid_index,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })

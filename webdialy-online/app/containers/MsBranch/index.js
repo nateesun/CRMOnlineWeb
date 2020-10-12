@@ -27,9 +27,7 @@ export function MsBranch(props) {
   }, []);
 
   return (
-    <div>
-      <ContentPage {...props} />
-    </div>
+    <ContentPage {...props} />
   );
 }
 

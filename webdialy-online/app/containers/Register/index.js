@@ -25,9 +25,7 @@ export function Register(props) {
   const { onRegisterMember } = props;
 
   return (
-    <div>
-      <RegisterForm {...props} onRegister={onRegisterMember} />
-    </div>
+    <RegisterForm {...props} onRegister={onRegisterMember} />
   );
 }
 
