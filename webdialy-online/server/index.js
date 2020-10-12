@@ -1,8 +1,9 @@
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
-const logger = require('./logger');
+// const cookieParser = require('cookie-parser');
 
+const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
@@ -13,8 +14,9 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
+// app.use(cookieParser())
 
-const httpRequest = require('./infra/httpRequest/usecases')();
+const httpRequest = require('./infra/httpRequest')();
 const envConfig = require('../config/envConfig');
 
 const appBasePath = process.env.REACT_APP_PUBLIC_PATH || envConfig('APP_BASE_PATH');
@@ -25,11 +27,28 @@ if (isDemo) {
   serviceApiHost = envConfig('SERVICE_API_HOST_DEMO');
 }
 
+const loggerApp = require('./infra/logger')({
+  appName,
+  logLevel: 'info',
+})
+
+const jwtUseCases = require('./infra/jwt')({
+  tokenAge: 3600,
+  secret: 'softpos2013'
+})
+const passport = require('./infra/passport')({
+  loggerApp,
+  jwtUseCases,
+})
+
 const options = {
   serviceApiHost,
   appBasePath,
   appName,
   httpRequest,
+  passport,
+  jwtUseCases,
+  loggerApp,
 };
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
@@ -37,9 +56,6 @@ const basePathForAPI = appBasePath.replace(/\/*$/, '');
 app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
 app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
 app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
-app.get(`${basePathForAPI}/company/:company_code`, (req, res)=>{
-  res.redirect(`${basePathForAPI}/login?code=${req.params.company_code}`);
-})
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

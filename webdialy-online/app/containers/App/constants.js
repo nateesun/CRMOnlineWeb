@@ -27,7 +27,6 @@ export const PATH_MASTER_UI = `${publicPath}/master-ui`;
 export const PATH_MS_COMPANY = `${publicPath}/ms/company`;
 export const PATH_MS_BRANCH = `${publicPath}/ms/branch`;
 export const PATH_MS_PRODUCT = `${publicPath}/ms/product`;
-export const PATH_MS_EMPLOYEE = `${publicPath}/ms/employee`;
 export const PATH_MS_STOCK = `${publicPath}/ms/stock`;
 export const PATH_MS_PROMOTION = `${publicPath}/ms/promotion`;
 export const PATH_MS_ROLE = `${publicPath}/ms/role`;

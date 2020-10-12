@@ -64,7 +64,6 @@ const menuList = [
       { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
       { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
       { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
-      { id: 'Employee', icon: <DnsRoundedIcon />, to: constants.PATH_MS_EMPLOYEE },
       { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
       { id: 'Redeem', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
     ],

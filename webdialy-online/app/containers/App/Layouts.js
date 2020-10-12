@@ -29,7 +29,6 @@ import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
 import MsBranch from 'containers/MsBranch/Loadable';
 import MsProduct from 'containers/MsProduct/Loadable';
-import MsEmployee from 'containers/MsEmployee/Loadable';
 import MsStock from 'containers/MsStock/Loadable';
 import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
@@ -259,7 +258,6 @@ function Layouts(props) {
               <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
               <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
               <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
-              <Route path={path.PATH_MS_EMPLOYEE} component={MsEmployee} />
               <Route path={path.PATH_MS_STOCK} component={MsStock} />
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
