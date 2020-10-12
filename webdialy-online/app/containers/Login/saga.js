@@ -20,6 +20,8 @@ export function* onValidLogin() {
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));
       yield put(push(`${constants.publicPath}/dashboard`));
+    } else if (response.status === 'Missing Role') {
+      yield put(actions.checkLoginError(response.msg));
     } else {
       yield put(actions.checkLoginError('Email or password invalid'));
     }

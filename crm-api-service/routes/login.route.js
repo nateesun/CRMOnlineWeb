@@ -13,9 +13,10 @@ router.post("/", async (req, res, next) => {
     if (response.status === "Success") {
       return res.status(200).json({ status: response.status, msg: "Success" })
     }
-    return res
-      .status(200)
-      .json({ status: response.status, msg: "Username/Password invalid" })
+    if (response.status === "Missing Role") {
+      return res.status(200).json({ status: response.status, msg: "Member not found role mapping" })
+    }
+    return res.status(200).json({ status: response.status, msg: "Username/Password invalid" })
   } catch (error) {
     return res
       .status(500)
