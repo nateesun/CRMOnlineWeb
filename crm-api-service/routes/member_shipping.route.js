@@ -45,12 +45,14 @@ router.get("/:member_code", async (req, res, next) => {
 })
 
 router.post("/", async (req, res, next) => {
+  console.log(req.body);
   try {
     const { member_code } = req.body
     const response = await Task(req.headers.database).deleteByMemberCode(
       member_code
     )
-    if (response === "Success") {
+    console.log(response);
+    if (response.status === "Success") {
       const response2 = await Task(req.headers.database).create(req.body)
       res
         .status(200)

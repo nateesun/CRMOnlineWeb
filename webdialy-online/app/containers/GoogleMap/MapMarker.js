@@ -37,10 +37,12 @@ const MapMarker = compose(
     props.onExit(latitude, longitude);
   }
 
+  const position = new google.maps.LatLng(props.lat, props.lng) || {lat: latitude, lng: longitude};
+
   return (
     <GoogleMap
       defaultZoom={18}
-      defaultCenter={new google.maps.LatLng(props.lat, props.lng)}
+      defaultCenter={position}
       onClick={e => {
         setLatitude(e.latLng.lat());
         setLongitude(e.latLng.lng());
