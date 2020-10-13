@@ -63,15 +63,27 @@ export default defineMessages({
   },
   col1: {
     id: `${scope}.col1`,
-    defaultMessage: 'Column1',
+    defaultMessage: 'Order No',
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Column2',
+    defaultMessage: 'Member Code',
   },
   col3: {
     id: `${scope}.col3`,
-    defaultMessage: 'Column3',
+    defaultMessage: 'Cart Create',
+  },
+  col4: {
+    id: `${scope}.col4`,
+    defaultMessage: 'Total Items',
+  },
+  col5: {
+    id: `${scope}.col5`,
+    defaultMessage: 'Total Amount',
+  },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Transfer Date',
   },
   btnSave: {
     id: `${scope}.btnSave`,
