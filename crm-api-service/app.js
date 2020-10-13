@@ -55,6 +55,9 @@ const memberShippingRouter = require("./routes/member_shipping.route")
 const slipImageRouter = require("./routes/slip_image.route")
 const ordersRouter = require("./routes/orders.route")
 
+// router for confirm order from member
+
+
 const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');

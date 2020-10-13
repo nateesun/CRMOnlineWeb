@@ -34,7 +34,7 @@ export default function FinishOrder(props) {
             #{props.currentCartNo}
           </span>{' '}
           <br />
-          <QRCode value={`${constants.publicPath}/orders/${props.currentCartNo}`} />
+          <QRCode value={`${constants.confirmOrderPath}/order_confirm/${props.currentCartNo}`} />
           <br />
           ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
           และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ

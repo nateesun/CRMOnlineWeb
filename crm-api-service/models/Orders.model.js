@@ -22,6 +22,19 @@ module.exports = (db) => {
     })
   }
 
+  module.findByCartNo = (cart_no) => {
+    console.log("findByCartNo method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=?;`
+        const result = await pool.query(sql, [cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.findAll = () => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {

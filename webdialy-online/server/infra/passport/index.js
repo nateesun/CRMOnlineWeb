@@ -6,7 +6,7 @@ module.exports = args => {
   passport.use(
     'validate-cookie',
     new CookieStrategy(async (token, done) => {
-      logger.log('info', `validate-cookie:${token}`);
+      // logger.log('info', `validate-cookie:${token}`);
       if (token) {
         const payload = await jwtUseCases
           .readWebToken(token)
