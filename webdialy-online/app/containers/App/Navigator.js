@@ -29,7 +29,7 @@ const menuList = [
   },
   {
     id: 'Orders',
-    role: 'admin|member|employee',
+    role: 'admin|member',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
       { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
