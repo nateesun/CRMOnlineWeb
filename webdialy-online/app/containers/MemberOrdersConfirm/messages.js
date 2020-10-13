@@ -85,9 +85,13 @@ export default defineMessages({
     id: `${scope}.col6`,
     defaultMessage: 'Transfer Date',
   },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Order Status',
+  },
   btnSave: {
     id: `${scope}.btnSave`,
-    defaultMessage: 'Save',
+    defaultMessage: 'Confirm to receive',
   },
   btnReset: {
     id: `${scope}.btnReset`,

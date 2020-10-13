@@ -53,6 +53,18 @@ router.post("/", async (req, res) => {
   }
 })
 
+router.patch("/", async (req, res) => {
+  try {
+    const response = await Task(req.headers.database).updateMemberApprove(req.body)
+    const data = JSON.parse(response.data)
+    res.status(200).json({ status: response.status, msg: "Success", data })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+  }
+})
+
 router.put("/", async (req, res) => {
   try {
     const response = await Task(req.headers.database).update(req.body)

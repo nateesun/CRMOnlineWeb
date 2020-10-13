@@ -7,8 +7,7 @@ import * as actions from './actions';
 export function* onValidLogin() {
   try {
     const requestURL = `${constants.publicPath}/api/login`;
-    const loginForm = yield select(selectors.makeSelectData());
-    const { email, database, password, cart_no } = loginForm;
+    const { email, database, password, cart_no } = yield select(selectors.makeSelectData());
     const encryptPassword = Buffer.from(password).toString('base64');
     const response = yield call(request, requestURL, {
       database,
@@ -27,6 +26,39 @@ export function* onValidLogin() {
   }
 }
 
+export function* onApproveConfirmOrder() {
+  try {
+    const requestURL = `${constants.publicPath}/api/orders`;
+    const { database } = yield select(selectors.makeSelectData());
+    const { 
+      order_no,
+      member_code_update, 
+      member_remark, 
+      signature,
+      order_status
+    } = yield select(selectors.makeSelectConfirmData());
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ 
+        order_no,
+        member_code_update, 
+        member_remark, 
+        signature,
+        order_status 
+      }),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.confirmOrderSuccess(response.data));
+    } else {
+      yield put(actions.confirmOrderError('Email or password invalid'));
+    }
+  } catch (err) {
+    yield put(actions.confirmOrderError(`${err}`));
+  }
+}
+
 export default function* memberOrdersConfirmSaga() {
   yield takeEvery(constants.LOGIN_TO_CONFIRM, onValidLogin);
+  yield takeEvery(constants.CONFIRM_ORDERS, onApproveConfirmOrder);
 }

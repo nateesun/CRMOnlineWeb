@@ -15,8 +15,10 @@ export const initialState = {
   },
   list: {},
   confirmData: {
-    status: '',
-    signature: ''
+    mobile: '',
+    order_no: '',
+    signature: '',
+    order_status: '',
   },
   response: {
     status: null,

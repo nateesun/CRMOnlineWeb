@@ -109,6 +109,31 @@ module.exports = (db) => {
     })
   }
 
+  module.updateMemberApprove = (data) => {
+    console.log("updateMemberApprove method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} 
+        SET member_code_update=?, 
+        member_remark=?, 
+        order_status=?,
+        order_update_date=now(),
+        signature=? 
+        WHERE order_no=? `
+        const result = await pool.query(query, [
+          data.member_code_update,
+          data.member_remark,
+          data.order_status,
+          data.signature,
+          data.order_no,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.delete = (id) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
