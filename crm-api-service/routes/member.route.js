@@ -69,6 +69,7 @@ router.post("/", async (req, res, next) => {
       expired_date,
       birthday,
       line_id,
+      member_role,
     } = req.body
     const memberModel = {
       code,
@@ -86,6 +87,7 @@ router.post("/", async (req, res, next) => {
       expired_date,
       birthday,
       line_id,
+      member_role,
     }
     const loginModel = {
       username,

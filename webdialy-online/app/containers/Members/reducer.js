@@ -90,7 +90,7 @@ const membersReducer = (state = initialState, action) =>
         draft.response.message = 'Update data error!';
         break;
       case constants.DELETE_ITEM:
-        draft.data.uuid_index = action.payload;
+        draft.data.email = action.payload;
         break;
       case constants.DELETE_ITEM_SUCCESS:
         draft.response.status = 'Success';

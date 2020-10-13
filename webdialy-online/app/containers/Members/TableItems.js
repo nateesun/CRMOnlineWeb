@@ -162,15 +162,15 @@ export default function TableItems(props) {
                             Edit
                           </Button>
                         </Grid>
-                        <Grid item>
+                        {item.member_role !== 'admin' && <Grid item>
                           <Button
                             variant="contained"
                             color="secondary"
-                            onClick={() => handleDelete(item.uuid_index)}
+                            onClick={() => handleDelete(item.email)}
                           >
                             Delete
                           </Button>
-                        </Grid>
+                        </Grid>}
                       </Grid>
                     </TableCell>
                   </TableRow>

@@ -7,7 +7,7 @@ const CartsTask = require("../models/Carts.model")
 
 router.get("/", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).findAll()
+    const response = await Task(req.headers.database).findAll()
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -20,7 +20,7 @@ router.get("/", async (req, res, next) => {
 router.post("/search", async (req, res, next) => {
   try {
     const { key, value } = req.body
-    const response = Task(req.headers.database).searchData(key, value)
+    const response = await Task(req.headers.database).searchData(key, value)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -32,7 +32,7 @@ router.post("/search", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).findById(req.params.id)
+    const response = await Task(req.headers.database).findById(req.params.id)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -44,7 +44,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).create(req.body)
+    const response = await Task(req.headers.database).create(req.body)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -56,7 +56,7 @@ router.post("/", async (req, res, next) => {
 
 router.put("/", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).update(req.body)
+    const response = await Task(req.headers.database).update(req.body)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -68,7 +68,7 @@ router.put("/", async (req, res, next) => {
 
 router.patch("/", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).updateQty(req.body)
+    const response = await Task(req.headers.database).updateQty(req.body)
     await CartsTask(req.headers.database).updateSummary({
       cart_no: req.body.cart_no,
     })
@@ -83,7 +83,7 @@ router.patch("/", async (req, res, next) => {
 
 router.delete("/", async (req, res, next) => {
   try {
-    const response = Task(req.headers.database).delete(req.body)
+    const response = await Task(req.headers.database).delete(req.body)
     await CartsTask(req.headers.database).updateSummary({
       cart_no: req.body.cart_no,
     })
