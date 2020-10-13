@@ -22,6 +22,19 @@ module.exports = (db) => {
     })
   }
 
+  module.findByCartNo = (cart_no) => {
+    console.log("findByCartNo method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=?;`
+        const result = await pool.query(sql, [cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.findAll = () => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {
@@ -88,6 +101,31 @@ module.exports = (db) => {
           data.cart_no,
           data.member_code,
           data.uuid_index,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.updateMemberApprove = (data) => {
+    console.log("updateMemberApprove method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} 
+        SET member_code_update=?, 
+        member_remark=?, 
+        order_status=?,
+        order_update_date=now(),
+        signature=? 
+        WHERE order_no=? `
+        const result = await pool.query(query, [
+          data.member_code_update,
+          data.member_remark,
+          data.order_status,
+          data.signature,
+          data.order_no,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {

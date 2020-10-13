@@ -29,7 +29,7 @@ const menuList = [
   },
   {
     id: 'Orders',
-    role: 'admin|member|employee',
+    role: 'admin|member',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
       { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
@@ -64,7 +64,6 @@ const menuList = [
       { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
       { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
       { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
-      { id: 'Employee', icon: <DnsRoundedIcon />, to: constants.PATH_MS_EMPLOYEE },
       { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
       { id: 'Redeem', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
     ],

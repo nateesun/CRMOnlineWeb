@@ -20,6 +20,19 @@ module.exports = (db) => {
     })
   }
 
+  module.findByOrderNo = (order_no) => {
+    console.log("findByOrderNo method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where order_no=?;`
+        const result = await pool.query(sql, [order_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.findAll = () => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {

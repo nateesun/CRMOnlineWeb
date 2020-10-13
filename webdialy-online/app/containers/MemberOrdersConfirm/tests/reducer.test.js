@@ -1,9 +1,9 @@
 // import produce from 'immer';
-import msEmployeeReducer from '../reducer';
+import memberOrdersConfirmReducer from '../reducer';
 // import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
-describe('msEmployeeReducer', () => {
+describe('memberOrdersConfirmReducer', () => {
   let state;
   beforeEach(() => {
     state = {
@@ -13,7 +13,7 @@ describe('msEmployeeReducer', () => {
 
   it('returns the initial state', () => {
     const expectedResult = state;
-    expect(msEmployeeReducer(undefined, {})).toEqual(expectedResult);
+    expect(memberOrdersConfirmReducer(undefined, {})).toEqual(expectedResult);
   });
 
   /**

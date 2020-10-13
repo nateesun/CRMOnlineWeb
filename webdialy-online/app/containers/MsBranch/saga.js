@@ -47,7 +47,7 @@ export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = yield select(loginSelectors.makeSelectDatabase());
-    const requestURL = `${constants.publicPath}/api/branch`;
+    const requestURL = `${constants.publicPath}/api/branch/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',

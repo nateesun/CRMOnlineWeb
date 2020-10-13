@@ -69,6 +69,7 @@ router.post("/", async (req, res, next) => {
       expired_date,
       birthday,
       line_id,
+      member_role,
     } = req.body
     const memberModel = {
       code,
@@ -86,6 +87,7 @@ router.post("/", async (req, res, next) => {
       expired_date,
       birthday,
       line_id,
+      member_role,
     }
     const loginModel = {
       username,
@@ -103,9 +105,10 @@ router.post("/", async (req, res, next) => {
   }
 })
 
-router.put("/", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    const response = await Task(req.headers.database).update(req.body)
+    const payload = {...req.body, uuid_index: req.params.id }
+    const response = await Task(req.headers.database).update(payload)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {
@@ -115,9 +118,10 @@ router.put("/", async (req, res, next) => {
   }
 })
 
-router.patch("/", async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   try {
-    const response = await Task(req.headers.database).updateRole(req.body)
+    const payload = {...req.body, uuid_index: req.params.id }
+    const response = await Task(req.headers.database).updateRole(payload)
     const data = JSON.parse(response.data)
     res.status(200).json({ status: response.status, msg: "Success", data })
   } catch (error) {

@@ -78,5 +78,6 @@
   "app.containers.Register.registerHeader": "ลงทะเบียนสมาชิกใหม่",
   "app.containers.App.headerLogin": "เข้าสู่ระบบ",
   "app.containers.App.headerLogout": "ลงชื่อออก",
-  "app.containers.Dashboard.btnRefresh": "โหลดข้อมูลคะแนน"
+  "app.containers.Dashboard.btnRefresh": "โหลดข้อมูลคะแนน",
+  "app.containers.MemberOrdersConfirm.btnSave": "ยืนยันรับสินค้า"
 }

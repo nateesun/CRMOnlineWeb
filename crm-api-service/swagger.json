@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "CRM-API-SERVICE",
+        "description": "Web Daily Online Project API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/branch": {
+            "post": {
+                "tags": [
+                    "Branch Post"
+                ],
+                "description": "Create new branch in system",
+                "parameters": [
+                    {
+                        "name": "Branch",
+                        "in": "body",
+                        "description": "Branch that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Branch"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "response": {
+                    "200": {
+                        "description": "New branch is created",
+                        "schema": {
+                            "$ref": "#/definitions/Branch"
+                        }
+                    },
+                    "401": {
+                        "description": "Not Authorization"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Branch Put"],
+                "description": "Update all data in branch"
+            },
+            "patch": {
+                "tags": ["Branch Patch"],
+                "description": "Update some data in branch"
+            },
+            "delete": {
+                "tags": ["Branch Delete"],
+                "description": "Delete branch in system"
+            },
+            "get": {
+                "tags": ["Branch Get"],
+                "description": "Show All branch in system"
+            }
+        }
+    },
+    "definitions": {
+        "Branch": {
+            "required": [
+                "code",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "map_latitude": {
+                    "type": "string"
+                },
+                "map_longitude": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

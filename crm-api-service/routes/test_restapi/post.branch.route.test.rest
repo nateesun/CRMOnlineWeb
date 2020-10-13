@@ -1,0 +1,38 @@
+post http://localhost:5000/api/branch
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx
+
+{
+    "code": "B001",
+    "name": "BBBBBBBBBB"
+}
+
+###
+post http://localhost:5000/api/branch
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx
+
+{
+    "code": "B001"
+}
+
+###
+post http://localhost:5000/api/branch
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx
+
+{
+    "name": "BBBBBBBBBBBB"
+}
+
+###
+post http://localhost:5000/api/branch
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx
+
+{
+}

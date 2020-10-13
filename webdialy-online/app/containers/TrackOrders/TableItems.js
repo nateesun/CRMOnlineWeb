@@ -122,7 +122,7 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} />
+        {props.profile.member_role !== 'member' && <SearchBar {...props} />}
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}

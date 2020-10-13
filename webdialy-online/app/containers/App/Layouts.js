@@ -29,7 +29,6 @@ import Members from 'containers/Members/Loadable';
 import MsCompany from 'containers/MsCompany/Loadable';
 import MsBranch from 'containers/MsBranch/Loadable';
 import MsProduct from 'containers/MsProduct/Loadable';
-import MsEmployee from 'containers/MsEmployee/Loadable';
 import MsStock from 'containers/MsStock/Loadable';
 import MsPromotion from 'containers/MsPromotion/Loadable';
 import MsRole from 'containers/MsRole/Loadable';
@@ -38,6 +37,7 @@ import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
 import GoogleMap from 'containers/GoogleMap/Loadable';
 import MemberTracking from 'containers/MemberTracking/Loadable';
 import CheckCarts from 'containers/CheckCarts/Loadable';
+import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -259,7 +259,6 @@ function Layouts(props) {
               <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
               <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
               <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
-              <Route path={path.PATH_MS_EMPLOYEE} component={MsEmployee} />
               <Route path={path.PATH_MS_STOCK} component={MsStock} />
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
@@ -267,6 +266,7 @@ function Layouts(props) {
               <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
               <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
               <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
+              <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>
