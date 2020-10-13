@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Grid } from '@material-ui/core';
@@ -17,9 +16,9 @@ import { useInjectReducer } from 'utils/injectReducer';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
 import * as selectors from './selectors';
+import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 
 export function MemberTracking(props) {
   useInjectReducer({ key: 'memberTracking', reducer });
@@ -43,6 +42,7 @@ MemberTracking.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),
+  profile: dashboardSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

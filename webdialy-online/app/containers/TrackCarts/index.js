@@ -23,7 +23,12 @@ export function TrackCarts(props) {
   useInjectSaga({ key: 'trackCarts', saga });
 
   useEffect(() => {
-    props.onInitLoad();
+    if(props.profile.member_role==='member'){
+      props.onSearch('member_code', props.profile.code)
+    }else{
+      props.onInitLoad();
+    }
+      
   }, []);
 
   return <ContentPage {...props} />;
