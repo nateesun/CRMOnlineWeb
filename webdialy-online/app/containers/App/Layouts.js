@@ -38,6 +38,7 @@ import GoogleMap from 'containers/GoogleMap/Loadable';
 import MemberTracking from 'containers/MemberTracking/Loadable';
 import CheckCarts from 'containers/CheckCarts/Loadable';
 import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
+import DatabaseConfig from 'containers/DatabaseConfig/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -262,11 +263,11 @@ function Layouts(props) {
               <Route path={path.PATH_MS_STOCK} component={MsStock} />
               <Route path={path.PATH_MS_ROLE} component={MsRole} />
               <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
-              <Route path={path.PATH_DATABASE} component={null} />
               <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
               <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
               <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
               <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
+              <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

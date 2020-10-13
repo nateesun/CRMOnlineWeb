@@ -55,8 +55,8 @@ const memberShippingRouter = require("./routes/member_shipping.route")
 const slipImageRouter = require("./routes/slip_image.route")
 const ordersRouter = require("./routes/orders.route")
 
-// router for confirm order from member
-
+// router for database config
+const dbConfigRouter = require('./routes/database_config.route');
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -118,6 +118,9 @@ app.use("/api/carts_detail", basicAuth({ users: { admin: fixPassword } }), carts
 app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
 app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter(options))
 app.use("/api/orders", basicAuth({ users: { admin: fixPassword } }), ordersRouter)
+
+// database config
+app.use("/api/database_config", basicAuth({ users: { admin: fixPassword } }), dbConfigRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
