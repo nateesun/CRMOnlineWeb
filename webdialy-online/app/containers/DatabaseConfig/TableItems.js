@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Swal from 'sweetalert2';
+import { publicPath } from './constants';
 
 const useStyles = makeStyles({
   root: {
@@ -46,27 +46,11 @@ const useStyles = makeStyles({
 
 export default function TableItems(props) {
   const { getList, showCommand = true } = props;
-  const handleDelete = id => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Confirm to delete this member!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(result => {
-      if (result.value) {
-        props.onDeleteItem(id);
-        props.onInitLoad();
-        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
-      }
-    });
-  };
-
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  console.log(window.location.origin);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -75,16 +59,6 @@ export default function TableItems(props) {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const onViewItem = item => {
-    props.onChangePage('VIEW');
-    props.onLoadView(item);
-  };
-
-  const onEditItem = item => {
-    props.onChangePage('EDIT');
-    props.onLoadEdit(item);
   };
 
   TableItems.propTypes = {
@@ -131,9 +105,8 @@ export default function TableItems(props) {
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
                 <TableCell align="left">Database</TableCell>
-                <TableCell align="left">Encrypt</TableCell>
                 <TableCell align="left">Path Query</TableCell>
-                {/* <TableCell align="center">Actions</TableCell> */}
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -145,45 +118,21 @@ export default function TableItems(props) {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={item.uuid_index}
+                      key={item.database}
                       className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="left">{item.database}</TableCell>
-                      <TableCell align="left">{item.encrypt}</TableCell>
                       <TableCell align="left">{item.query}</TableCell>
-                      {/* <TableCell align="center">
-                        {showCommand && (
-                          <Grid container spacing={1} justify="center">
+                      <TableCell align="center">
+                      <Grid container spacing={1} justify="center">
                             <Grid item>
-                              <Button
-                                variant="outlined"
-                                onClick={() => onViewItem(item)}
-                              >
-                                View
-                              </Button>
-                            </Grid>
-                            <Grid item>
-                              <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={() => handleDelete(item.uuid_index)}
-                              >
-                                Delete
-                              </Button>
-                            </Grid>
-                            <Grid item>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => hanbleExport(item.database)}
-                              >
-                                Export
-                              </Button>
+                              <a target="_blank" href={`${window.location.origin}${publicPath}${item.query}`} style={{textDecoration: 'none'}}>
+                                <Button>Link Test</Button>
+                              </a>
                             </Grid>
                           </Grid>
-                        )}
-                      </TableCell> */}
+                      </TableCell>
                     </TableRow>
                   ))}
             </TableBody>

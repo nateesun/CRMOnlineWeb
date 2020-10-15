@@ -138,7 +138,9 @@ CREATE TABLE `orders` (
   `member_code_update` varchar(30) DEFAULT NULL,
   `member_remark` varchar(100) DEFAULT NULL,
   `order_update_date` datetime DEFAULT NULL,
-  `order_create_date` datetime DEFAULT NULL
+  `order_create_date` datetime DEFAULT NULL,
+  `order_status` varchar(50) DEFAULT NULL,
+  `signature` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `orders_detail` (
