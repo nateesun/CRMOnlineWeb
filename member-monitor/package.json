@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "stop:app": "pm2 delete all",
+    "stop:app": "pm2 delete -s member-monitor || echo notfound member-monitor name",
     "start": "npm run stop:app && pm2 start ./monitor-ui/server/index.js --name member-monitor && electron .",
     "build": "electron-builder"
   },

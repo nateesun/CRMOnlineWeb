@@ -44,7 +44,7 @@ const App = () => {
   const callApi = async () => {
     console.log("Call api service updater")
     return new Promise(async (resolve, reject) => {
-      const response = await fetch("/ping")
+      const response = await fetch("/api/sync_data")
         .then((response) => response.json())
         .catch((err) => {
           reject(err)

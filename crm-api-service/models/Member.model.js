@@ -46,6 +46,19 @@ module.exports = (db) => {
     })
   }
 
+  module.getDataForClient = () => {
+    console.log("findAll method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where member_role='member' order by code;`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.searchData = (key, value) => {
     console.log("searchData method start:")
     return new Promise(async (resolve, reject) => {
