@@ -59,7 +59,7 @@ const ordersRouter = require("./routes/orders.route")
 const dbConfigRouter = require('./routes/database_config.route');
 
 const helmet = require("helmet")
-const cors = require("cors")
+// const cors = require("cors")
 const nocache = require('nocache');
 
 const fixPassword = 'softpos2013';
@@ -85,13 +85,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
-app.use(
-  cors({
-    origin: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+// app.use(
+//   cors({
+//     origin: true,
+//     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//   })
+// );
 
 // swagger api document
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
