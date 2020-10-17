@@ -105,7 +105,7 @@ export default function RedeemCard(props) {
         <Grid container justify="center">
           {props.free ? (
             <Button variant="contained" className={classes.buttonFooter} onClick={()=>showRedeemCode()}>
-              แลกเลย
+              กดรับสิทธิ์
             </Button>
           ) : (
             <Button
@@ -113,7 +113,7 @@ export default function RedeemCard(props) {
               className={classes.buttonFooter}
               disabled
             >
-              แลกเลย
+              กดรับสิทธิ์
             </Button>
           )}
         </Grid>

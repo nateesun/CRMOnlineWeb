@@ -199,6 +199,16 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="member_register_point"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col13} />}
+                required
+              />
+            </Grid>
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>

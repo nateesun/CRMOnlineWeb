@@ -118,8 +118,9 @@ export default function TableItems(props) {
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
                 <TableCell align="center">Code</TableCell>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Line Official</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Line Official</TableCell>
+                <TableCell align="right">Member Point</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -137,10 +138,9 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
-                      <TableCell align="center">{item.name}</TableCell>
-                      <TableCell align="center">
-                        {item.line_official_id}
-                      </TableCell>
+                      <TableCell align="left">{item.name}</TableCell>
+                      <TableCell align="left">{item.line_official_id}</TableCell>
+                      <TableCell align="right">{item.member_register_point}</TableCell>
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
