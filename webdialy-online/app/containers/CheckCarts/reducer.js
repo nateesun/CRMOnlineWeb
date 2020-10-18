@@ -10,12 +10,7 @@ const { v4 } = require('uuid');
 
 export const initialState = {
   list: [],
-  data: {
-    uuid_index: '',
-    col1: '',
-    col2: '',
-    col3: '',
-  },
+  data: {},
   page: 'LIST',
   status: null,
   message: null,
@@ -122,6 +117,15 @@ const checkCartsReducer = (state = initialState, action) =>
       case constants.LOAD_VIEW_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Load data to view error!';
+        break;
+      case constants.LOAD_VIEW_ORDER:
+        draft.data = action.payload;
+        break;
+      case constants.LOAD_VIEW_ORDER_SUCCESS:
+        break;
+      case constants.LOAD_VIEW_ORDER_ERROR:
+        draft.response.status = 'Error';
+        draft.response.message = 'Load data to view order error!';
         break;
       case constants.UPDATE_SHOPPING_STEP:
         draft.carts = action.payload;

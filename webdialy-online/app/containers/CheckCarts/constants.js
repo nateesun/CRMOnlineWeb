@@ -40,3 +40,7 @@ export const SEARCH_ERROR = 'app/CheckCarts/SEARCH_ERROR';
 export const UPDATE_SHOPPING_STEP = 'app/CheckCarts/UPDATE_SHOPPING_STEP';
 export const UPDATE_SHOPPING_STEP_SUCCESS = 'app/CheckCarts/UPDATE_SHOPPING_STEP_SUCCESS';
 export const UPDATE_SHOPPING_STEP_ERROR = 'app/CheckCarts/UPDATE_SHOPPING_STEP_ERROR';
+
+export const LOAD_VIEW_ORDER = 'app/CheckCarts/LOAD_VIEW_ORDER';
+export const LOAD_VIEW_ORDER_SUCCESS = 'app/CheckCarts/LOAD_VIEW_ORDER_SUCCESS';
+export const LOAD_VIEW_ORDER_ERROR = 'app/CheckCarts/LOAD_VIEW_ORDER_ERROR';

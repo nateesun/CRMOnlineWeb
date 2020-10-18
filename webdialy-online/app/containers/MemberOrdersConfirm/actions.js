@@ -6,21 +6,21 @@
 
 import * as constants from './constants';
 
-export function loginToConfirm(payload) {
+export function initLoad(payload) {
   return {
-    type: constants.LOGIN_TO_CONFIRM,
+    type: constants.INIT_LOAD,
     payload,
   };
 }
-export function loginToConfirmSuccess(payload) {
+export function initLoadSuccess(payload) {
   return {
-    type: constants.LOGIN_TO_CONFIRM_SUCCESS,
+    type: constants.INIT_LOAD_SUCCESS,
     payload,
   };
 }
-export function loginToConfirmError(payload) {
+export function initLoadError(payload) {
   return {
-    type: constants.LOGIN_TO_CONFIRM_ERROR,
+    type: constants.INIT_LOAD_ERROR,
     payload,
   };
 }

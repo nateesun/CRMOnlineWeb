@@ -50,8 +50,6 @@ export default function TableItems(props) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  console.log(window.location.origin);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

@@ -18,6 +18,7 @@ import SignatureForm from './SignatureForm';
 import messages from './messages';
 import * as selectors from './selectors';
 import { TextField } from '@material-ui/core';
+import { propTypes } from 'qrcode.react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,7 +59,7 @@ const ViewItem = props => {
   const [imgSigUrl, setImgSigUrl] = useState(null);
 
   useEffect(() => {
-    if (orders.signature) {
+    if (orders && orders.signature) {
       setImgSigUrl(orders.signature);
     }
   }, []);
@@ -76,6 +77,10 @@ const ViewItem = props => {
   const onShowImageSignature = img_base64 => {
     setImgSigUrl(img_base64);
   };
+
+  if(!orders){
+    return <h1>Notfound orders</h1>
+  }
 
   return (
     <Container component="main" maxWidth="lg">
