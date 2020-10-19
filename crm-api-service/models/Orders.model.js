@@ -118,13 +118,15 @@ module.exports = (db) => {
         member_remark=?, 
         order_status=?,
         order_update_date=now(),
-        signature=? 
+        signature=?, 
+        member_mobile=? 
         WHERE order_no=? `
         const result = await pool.query(query, [
           data.member_code_update,
           data.member_remark,
           data.order_status,
           data.signature,
+          data.member_mobile,
           data.order_no,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })

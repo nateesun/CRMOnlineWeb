@@ -26,13 +26,14 @@ export function* initLoad() {
 export function* onApproveConfirmOrder() {
   try {
     const requestURL = `${constants.publicPath}/api/orders`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const { database } = yield select(selectors.makeSelectData());
     const { 
       order_no,
       member_code_update, 
       member_remark, 
       signature,
-      order_status
+      order_status,
+      member_mobile
     } = yield select(selectors.makeSelectConfirmData());
     const response = yield call(request, requestURL, {
       database,
@@ -42,7 +43,8 @@ export function* onApproveConfirmOrder() {
         member_code_update, 
         member_remark, 
         signature,
-        order_status 
+        order_status,
+        member_mobile
       }),
     });
     if (response.status === 'Success') {

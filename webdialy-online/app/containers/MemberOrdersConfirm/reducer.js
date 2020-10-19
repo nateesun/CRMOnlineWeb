@@ -13,7 +13,7 @@ export const initialState = {
   },
   list: {},
   confirmData: {
-    mobile: '',
+    member_mobile: '',
     order_no: '',
     signature: '',
     order_status: '',
@@ -43,7 +43,7 @@ const memberOrdersConfirmReducer = (state = initialState, action) =>
         draft.confirmData = action.payload;
         break;
       case constants.CONFIRM_ORDERS_SUCCESS:
-        draft.list = action.payload;
+        draft.response.status = 'Success';
         break;
       case constants.CONFIRM_ORDERS_ERROR:
         draft.response.status = 'Error';

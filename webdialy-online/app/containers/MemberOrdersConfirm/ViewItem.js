@@ -18,7 +18,6 @@ import SignatureForm from './SignatureForm';
 import messages from './messages';
 import * as selectors from './selectors';
 import { TextField } from '@material-ui/core';
-import { propTypes } from 'qrcode.react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,11 +55,11 @@ const useStyles = makeStyles(theme => ({
 const ViewItem = props => {
   const classes = useStyles();
   const { orders, orders_detail } = props.getOrderList;
-  const [imgSigUrl, setImgSigUrl] = useState(null);
+  const [mobileNo, setMobileNo] = useState(null);
 
   useEffect(() => {
     if (orders && orders.signature) {
-      setImgSigUrl(orders.signature);
+      setMobileNo(orders.member_mobile);
     }
   }, []);
 
@@ -71,6 +70,7 @@ const ViewItem = props => {
       member_remark: '',
       signature: imgSigUrl,
       order_status: 'member_approve',
+      member_mobile: mobileNo,
     });
   };
 
@@ -193,10 +193,11 @@ const ViewItem = props => {
         </Grid>
         <Grid container>
           <Grid item xs={12}>
-            <TextField id="mobile" label="Contact Mobile" value={orders.member_mobile} />
+            {!orders.member_mobile && <TextField label="Contact Mobile" value={mobileNo} onChange={e=>setMobileNo(e.target.value)} />}
+            {orders.member_mobile && <span>Mobile: {orders.member_mobile}</span>}
           </Grid>
         </Grid>
-        {!imgSigUrl && (
+        {!orders.signature && (
           <Grid container>
             <Grid item xs={6}>
               <SignatureForm
@@ -206,15 +207,15 @@ const ViewItem = props => {
             </Grid>
           </Grid>
         )}
-        {imgSigUrl && (
+        {orders.signature && (
           <Grid container>
             <Grid item xs={6}>
             <h4>Signature:</h4>
-              <img src={imgSigUrl} alt="show signature" />
+              <img src={orders.signature} alt="show signature" />
             </Grid>
           </Grid>
         )}
-        <Grid container spacing={3} style={{marginTop: '10px'}}>
+        {orders.order_status!=='member_approve' && <Grid container spacing={3} style={{marginTop: '10px'}}>
           <Grid item xs={4}>
             <Button
               fullWidth
@@ -225,7 +226,7 @@ const ViewItem = props => {
               <FormattedMessage {...messages.btnSave} />
             </Button>
           </Grid>
-        </Grid>
+        </Grid>}
       </div>
     </Container>
   );
