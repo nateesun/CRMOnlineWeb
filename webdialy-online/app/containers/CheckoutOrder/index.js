@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import * as loginSelectors from 'containers/Login/selectors';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -44,6 +45,7 @@ const mapStateToProps = createStructuredSelector({
   paymentData: selectors.makeSelectPaymentData(),
   imgValid: selectors.makeSelectSlipValidateStatus(),
   currentCartNo: selectors.makeSelectCartsNo(),
+  database: loginSelectors.makeSelectDatabase(),
 });
 
 function mapDispatchToProps(dispatch) {

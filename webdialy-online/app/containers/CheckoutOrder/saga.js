@@ -188,7 +188,6 @@ export function* onUpdateShoppingStep() {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
     }
   } catch (err) {
-    console.log(err);
     yield put(actions.updateShoppingStepError(err));
   }
 }

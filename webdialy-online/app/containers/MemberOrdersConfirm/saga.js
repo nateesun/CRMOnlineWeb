@@ -1,28 +1,25 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
-export function* onValidLogin() {
+export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/login`;
-    const { email, database, password, cart_no } = yield select(selectors.makeSelectData());
-    const encryptPassword = Buffer.from(password).toString('base64');
+    const { cart_no, database } = yield select(selectors.makeSelectData());
+    const requestURL = `${constants.publicPath}/api/orders/confirm_order/${cart_no}`;
+    const dbFromLogin = yield select(loginSelectors.makeSelectDatabase());
+    const dbFromUrl = database || dbFromLogin;
     const response = yield call(request, requestURL, {
-      database,
-      method: 'POST',
-      body: JSON.stringify({ email, password: encryptPassword, cart_no, type: 'confirm_order' }),
+      database: dbFromUrl,
+      method: 'GET',
     });
     if (response.status === 'Success') {
-      yield put(actions.loginToConfirmSuccess(response.data));
-    } else if (response.status === 'Missing Role') {
-      yield put(actions.loginToConfirmError(response.msg));
-    } else {
-      yield put(actions.loginToConfirmError('Email or password invalid'));
+      yield put(actions.initLoadSuccess(response.data));
     }
   } catch (err) {
-    yield put(actions.loginToConfirmError(`${err}`));
+    yield put(actions.initLoadError(`${err}`));
   }
 }
 
@@ -35,7 +32,8 @@ export function* onApproveConfirmOrder() {
       member_code_update, 
       member_remark, 
       signature,
-      order_status
+      order_status,
+      member_mobile
     } = yield select(selectors.makeSelectConfirmData());
     const response = yield call(request, requestURL, {
       database,
@@ -45,7 +43,8 @@ export function* onApproveConfirmOrder() {
         member_code_update, 
         member_remark, 
         signature,
-        order_status 
+        order_status,
+        member_mobile
       }),
     });
     if (response.status === 'Success') {
@@ -59,6 +58,6 @@ export function* onApproveConfirmOrder() {
 }
 
 export default function* memberOrdersConfirmSaga() {
-  yield takeEvery(constants.LOGIN_TO_CONFIRM, onValidLogin);
+  yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CONFIRM_ORDERS, onApproveConfirmOrder);
 }

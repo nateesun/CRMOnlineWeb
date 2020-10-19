@@ -40,7 +40,6 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
-    width: '750px',
   },
 });
 
@@ -49,8 +48,6 @@ export default function TableItems(props) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  console.log(window.location.origin);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

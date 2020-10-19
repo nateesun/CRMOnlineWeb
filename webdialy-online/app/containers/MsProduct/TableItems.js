@@ -39,7 +39,6 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
-    width: '750px',
   },
 });
 
@@ -129,7 +128,7 @@ export default function TableItems(props) {
                 <TableCell align="right">Max Stock</TableCell>
                 <TableCell align="right">Min Stock</TableCell>
                 <TableCell align="center">Unit Stock</TableCell>
-                <TableCell align="center">Path</TableCell>
+                <TableCell align="left">Path</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -146,7 +145,7 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
-                      <TableCell align="center">{item.name}</TableCell>
+                      <TableCell align="left">{item.name}</TableCell>
                       <TableCell align="center">{item.unit_code_sale}</TableCell>
                       <TableCell align="center">{item.product_group_code}</TableCell>
                       <TableCell align="center">{item.point}</TableCell>
@@ -157,7 +156,7 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.max_stock}</TableCell>
                       <TableCell align="center">{item.min_stock}</TableCell>
                       <TableCell align="center">{item.unit_code_stock}</TableCell>
-                      <TableCell align="center">{item.img_path}</TableCell>
+                      <TableCell align="left">{item.img_path}</TableCell>
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>

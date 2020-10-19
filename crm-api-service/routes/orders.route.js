@@ -3,6 +3,7 @@
 const express = require("express")
 const router = express.Router()
 const Task = require("../models/Orders.model")
+const TaskOrderDetail = require("../models/OrdersDetail.model")
 
 router.get("/", async (req, res) => {
   try {
@@ -38,6 +39,30 @@ router.get("/:id", async (req, res) => {
     return res
       .status(500)
       .json({ status: "Internal Server Error", msg: error.sqlMessage })
+  }
+})
+
+router.get('/confirm_order/:cart_no', async (req, res)=>{
+  try {
+    const cart_no = req.params.cart_no
+    const orders_response = await Task(req.headers.database).findByCartNo(cart_no);
+    const orders = JSON.parse(orders_response.data);
+    if(orders.length===0){
+      return res.status(200).json({ status: response.status, msg: "Not found Order", data: [] })
+    }
+    const order_no = orders[0].order_no;
+    const orders_detail_response = await TaskOrderDetail(req.headers.database).findByOrderNo(order_no);
+    const orders_detail = JSON.parse(orders_detail_response.data);
+    return res.status(200).json({
+      status: "Success",
+      msg: "Success",
+      data: {
+        orders: orders[0],
+        orders_detail
+      },
+    })
+  } catch (error) {
+    return res.status(500).json({ status: "Internal Server Error", msg: error.sqlMessage })
   }
 })
 

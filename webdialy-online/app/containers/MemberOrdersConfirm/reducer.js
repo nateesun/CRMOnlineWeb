@@ -8,14 +8,12 @@ import * as constants from './constants';
 
 export const initialState = {
   data: {
-    database: '',
-    email: '',
-    password: '',
     cart_no: '',
+    database: '',
   },
   list: {},
   confirmData: {
-    mobile: '',
+    member_mobile: '',
     order_no: '',
     signature: '',
     order_status: '',
@@ -30,21 +28,22 @@ export const initialState = {
 const memberOrdersConfirmReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case constants.LOGIN_TO_CONFIRM:
-        draft.data = action.payload;
+      case constants.INIT_LOAD:
+        draft.data.cart_no = action.payload.cart_no;
+        draft.data.database = action.payload.database;
         break;
-      case constants.LOGIN_TO_CONFIRM_SUCCESS:
+      case constants.INIT_LOAD_SUCCESS:
         draft.list = action.payload;
         break;
-      case constants.LOGIN_TO_CONFIRM_ERROR:
+      case constants.INIT_LOAD_ERROR:
         draft.response.status = 'Error';
-        draft.response.message = 'Validate login data error!';
+        draft.response.message = 'Error load initial data';
         break;
       case constants.CONFIRM_ORDERS:
         draft.confirmData = action.payload;
         break;
       case constants.CONFIRM_ORDERS_SUCCESS:
-        draft.list = action.payload;
+        draft.response.status = 'Success';
         break;
       case constants.CONFIRM_ORDERS_ERROR:
         draft.response.status = 'Error';

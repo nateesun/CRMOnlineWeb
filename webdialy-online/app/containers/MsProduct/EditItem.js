@@ -214,6 +214,16 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={2}>
+              <Field
+                name="qty_over_stock"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col14} />}
+                required
+              />
+            </Grid>
             <Grid item xs={4}>
               <Field
                 name="img_path"
@@ -335,6 +345,9 @@ const validate = formValues => {
   }
   if (!formValues.img_path) {
     errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
+  }
+  if (!formValues.qty_over_stock) {
+    errors.qty_over_stock = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
   }
   return errors;
 };

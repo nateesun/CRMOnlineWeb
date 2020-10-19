@@ -24,6 +24,7 @@ export function Profile(props) {
 
   useEffect(() => {
     props.initLoad(props.login.email);
+    props.initLoadCompany();
   }, []);
 
   return <ProfileContent {...props} />;
@@ -37,10 +38,12 @@ Profile.propTypes = {
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
   profile: selectors.makeSelectProfile(),
+  company: selectors.makeSelectCompany(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
+    initLoadCompany: () => dispatch(actions.initLoadCompany()),
     initLoad: email => {
       dispatch(actions.initLoad(email));
     },

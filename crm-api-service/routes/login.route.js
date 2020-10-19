@@ -12,28 +12,8 @@ router.post("/", async (req, res, next) => {
       password
     )
     if (response.status === "Success") {
-      if(type && type==='confirm_order'){
-        const orders_response = await TaskOrder(req.headers.database).findByCartNo(cart_no);
-        const orders = JSON.parse(orders_response.data);
-        if(orders.length===0){
-          return res.status(200).json({ status: response.status, msg: "Not found Order", data: [] })
-        }
-        const order_no = orders[0].order_no;
-        const orders_detail_response = await TaskOrderDetail(req.headers.database).findByOrderNo(order_no);
-        const orders_detail = JSON.parse(orders_detail_response.data);
-        return res.status(200).json({ 
-          status: response.status, 
-          msg: "Success", 
-          data: {
-            orders: orders[0],
-            orders_detail
-          },
-        })
-      }else{
-        return res.status(200).json({ status: response.status, msg: "Success" })
-      }
-    }
-    if (response.status === "Missing Role") {
+      return res.status(200).json({ status: response.status, msg: "Success" })
+    }else if (response.status === "Missing Role") {
       return res.status(200).json({ status: response.status, msg: "Member not found role mapping" })
     }
     return res.status(200).json({ status: response.status, msg: "Username/Password invalid" })

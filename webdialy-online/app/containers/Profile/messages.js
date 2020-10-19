@@ -69,6 +69,10 @@ export default defineMessages({
     id: `${scope}.lineId`,
     defaultMessage: 'Line Id',
   },
+  lineOfficial: {
+    id: `${scope}.lineId`,
+    defaultMessage: 'Line Company Official',
+  },
   btnEditProfile: {
     id: `${scope}.btnEditProfile`,
     defaultMessage: 'Edit Profile',

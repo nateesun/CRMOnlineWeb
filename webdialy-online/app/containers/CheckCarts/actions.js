@@ -181,3 +181,23 @@ export function updateShoppingStepError(payload) {
     payload,
   };
 }
+export function loadViewOrder(payload) {
+  return {
+    type: constants.LOAD_VIEW_ORDER,
+    payload,
+  };
+}
+
+export function loadViewOrderSuccess(payload) {
+  return {
+    type: constants.LOAD_VIEW_ORDER_SUCCESS,
+    payload,
+  };
+}
+
+export function loadViewOrderError(payload) {
+  return {
+    type: constants.LOAD_VIEW_ORDER_ERROR,
+    payload,
+  };
+}

@@ -41,7 +41,6 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
-    width: '750px',
   },
 });
 
@@ -170,9 +169,9 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.cart_active}</TableCell>
                       <TableCell align="center">{item.shopping_step}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
-                      <TableCell align="center">{item.cust_approve}</TableCell>
+                      <TableCell align="center">{item.order_status}</TableCell>
                       <TableCell align="center">
-                        {item.cust_not_approve_reason}
+                        {item.member_remark}
                       </TableCell>
                       <TableCell align="center">
                         {showCommand && (

@@ -16,6 +16,18 @@ router.get("/", async (req, res, next) => {
   }
 })
 
+router.get("/client", async (req, res, next) => {
+  try {
+    const response = await Task(req.headers.database).getDataForClient()
+    const data = JSON.parse(response.data)
+    res.status(200).json({ status: response.status, msg: "Success", data })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+  }
+})
+
 router.post("/search", async (req, res, next) => {
   try {
     const { key, value } = req.body

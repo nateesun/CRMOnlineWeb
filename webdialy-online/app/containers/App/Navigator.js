@@ -21,7 +21,7 @@ import * as constants from './constants';
 const menuList = [
   {
     id: 'Account',
-    role: 'admin|member|employee',
+    role: 'super|admin|member|employee',
     children: [
       { id: 'Overview', icon: <CardGiftcardIcon />, to: constants.PATH_DASHBOARD, active: true },
       { id: 'Profile', icon: <RecentActorsIcon />, to: constants.PATH_PROFILE },
@@ -29,7 +29,7 @@ const menuList = [
   },
   {
     id: 'Orders',
-    role: 'admin|member',
+    role: 'super|admin|member',
     children: [
       { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
       { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
@@ -37,21 +37,21 @@ const menuList = [
   },
   {
     id: 'Request Order',
-    role: 'admin|employee',
+    role: 'super|admin|employee',
     children: [
       { id: 'Check cart list', icon: <LocalMallIcon />, to: constants.PATH_CHECK_CARTS },
     ],
   },
   {
     id: 'Members',
-    role: 'admin',
+    role: 'super|admin',
     children: [
       { id: 'Member List', icon: <PeopleIcon />, to: constants.PATH_MEMBER },
     ],
   },
   {
     id: 'Settings',
-    role: 'admin',
+    role: 'super',
     children: [
       { id: 'Roles', icon: <LockIcon />, to: constants.PATH_MS_ROLE },
       { id: 'Database', icon: <DnsRoundedIcon />, to: constants.PATH_DATABASE },
@@ -59,7 +59,7 @@ const menuList = [
   },
   {
     id: 'Master',
-    role: 'admin',
+    role: 'super|admin',
     children: [
       { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
       { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },

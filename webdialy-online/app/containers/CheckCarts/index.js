@@ -58,6 +58,7 @@ function mapDispatchToProps(dispatch) {
     onLoadView: item => dispatch(actions.loadView(item)),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
     onUpdateShoppingStep: data => dispatch(actions.updateShoppingStep(data)),
+    onLoadViewOrder: data => dispatch(actions.loadViewOrder(data)),
   };
 }
 

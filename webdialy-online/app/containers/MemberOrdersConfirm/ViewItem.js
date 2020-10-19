@@ -55,11 +55,11 @@ const useStyles = makeStyles(theme => ({
 const ViewItem = props => {
   const classes = useStyles();
   const { orders, orders_detail } = props.getOrderList;
-  const [imgSigUrl, setImgSigUrl] = useState(null);
+  const [mobileNo, setMobileNo] = useState(null);
 
   useEffect(() => {
-    if (orders.signature) {
-      setImgSigUrl(orders.signature);
+    if (orders && orders.signature) {
+      setMobileNo(orders.member_mobile);
     }
   }, []);
 
@@ -70,12 +70,17 @@ const ViewItem = props => {
       member_remark: '',
       signature: imgSigUrl,
       order_status: 'member_approve',
+      member_mobile: mobileNo,
     });
   };
 
   const onShowImageSignature = img_base64 => {
     setImgSigUrl(img_base64);
   };
+
+  if(!orders){
+    return <h1>Notfound orders</h1>
+  }
 
   return (
     <Container component="main" maxWidth="lg">
@@ -186,14 +191,13 @@ const ViewItem = props => {
             </div>
           </Grid>
         </Grid>
-        {!imgSigUrl && (
-          <Grid container>
-            <Grid item xs={12}>
-              <TextField id="mobile" label="Contact Mobile" />
-            </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            {!orders.member_mobile && <TextField label="Contact Mobile" value={mobileNo} onChange={e=>setMobileNo(e.target.value)} />}
+            {orders.member_mobile && <span>Mobile: {orders.member_mobile}</span>}
           </Grid>
-        )}
-        {!imgSigUrl && (
+        </Grid>
+        {!orders.signature && (
           <Grid container>
             <Grid item xs={6}>
               <SignatureForm
@@ -203,28 +207,26 @@ const ViewItem = props => {
             </Grid>
           </Grid>
         )}
-        {imgSigUrl && (
+        {orders.signature && (
           <Grid container>
             <Grid item xs={6}>
             <h4>Signature:</h4>
-              <img src={imgSigUrl} alt="show signature" />
+              <img src={orders.signature} alt="show signature" />
             </Grid>
           </Grid>
         )}
-        {!imgSigUrl && (
-          <Grid container spacing={3} style={{marginTop: '10px'}}>
-            <Grid item xs={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={() => onConfirmRecieveOrder()}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
+        {orders.order_status!=='member_approve' && <Grid container spacing={3} style={{marginTop: '10px'}}>
+          <Grid item xs={4}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => onConfirmRecieveOrder()}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
           </Grid>
-        )}
+        </Grid>}
       </div>
     </Container>
   );
