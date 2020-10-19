@@ -191,13 +191,11 @@ const ViewItem = props => {
             </div>
           </Grid>
         </Grid>
-        {!imgSigUrl && (
-          <Grid container>
-            <Grid item xs={12}>
-              <TextField id="mobile" label="Contact Mobile" />
-            </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            <TextField id="mobile" label="Contact Mobile" value={orders.member_mobile} />
           </Grid>
-        )}
+        </Grid>
         {!imgSigUrl && (
           <Grid container>
             <Grid item xs={6}>
@@ -216,20 +214,18 @@ const ViewItem = props => {
             </Grid>
           </Grid>
         )}
-        {!imgSigUrl && (
-          <Grid container spacing={3} style={{marginTop: '10px'}}>
-            <Grid item xs={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={() => onConfirmRecieveOrder()}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
+        <Grid container spacing={3} style={{marginTop: '10px'}}>
+          <Grid item xs={4}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => onConfirmRecieveOrder()}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
           </Grid>
-        )}
+        </Grid>
       </div>
     </Container>
   );
