@@ -147,6 +147,7 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.col5} />}
                   required
                 >
+                  <option value="super">Super Admin</option>
                   <option value="admin">Admin</option>
                   <option value="member">Member</option>
                   <option value="employee">Employee</option>

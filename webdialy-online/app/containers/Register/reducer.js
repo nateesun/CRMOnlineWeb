@@ -19,6 +19,7 @@ export const initialState = {
     birthday: '',
     lineId: '',
   },
+  company: {},
   status: '',
   error: '',
 };

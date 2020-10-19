@@ -19,6 +19,11 @@ const makeSelectProfile = () =>
     selectProfileDomain,
     substate => substate,
   );
+const makeSelectCompany = () =>
+  createSelector(
+    selectProfileDomain,
+    substate => substate.company,
+  );
 const makeSelectProfileData = () =>
   createSelector(
     selectProfileDomain,
@@ -42,5 +47,6 @@ export {
   makeUpdateStatus,
   makeErrorUpdate,
   makeSelectProfile,
+  makeSelectCompany,
   makeSelectProfileData,
 };
