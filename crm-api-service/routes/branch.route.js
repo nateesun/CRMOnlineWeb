@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { body, param, validationResult } = require('express-validator');
 const Task = require("../models/Branch.model")
+const Controller = require('../controllers/Branch.controller');
 /**
  * @swagger
  *
@@ -25,14 +26,22 @@ const Task = require("../models/Branch.model")
  */
 router.get("/", async (req, res) => {
   try {
-    const response = await Task(req.headers.database).findAll()
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const result = await Controller(req.headers.database).findAll();
+    return res.status(result.status).json({
+      status: result.status,
+      msg: result.message,
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status,
+      msg: error.message,
+      error: error.error,
+      data: error.data
+    })
   }
+  
 })
 
 /**
@@ -65,14 +74,23 @@ router.get("/:id", async (req, res) => {
     return res.status(400).json({ status: 'Error', errors: errors.array() });
   }
   try {
-    const response = await Task(req.headers.database).findById(req.params.id)
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const id = req.params.id;
+    const result = await Controller(req.headers.database).findById(id)
+    return res.status(result.status).json({
+      status: result.status, 
+      msg: result.message, 
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status, 
+      msg: error.message, 
+      error: error.error,
+      data: error.data
+    })
   }
+  
 })
 
 /**
@@ -95,9 +113,9 @@ router.get("/:id", async (req, res) => {
  *            name:
  *              type: string
  *            map_latitude:
- *              type: string
+ *              type: number
  *            map_longitude:
- *              type: string
+ *              type: number
  *      - name: database
  *        type: string
  *        in: header
@@ -113,27 +131,30 @@ router.get("/:id", async (req, res) => {
 router.post("/", [
   body('code').not().isEmpty().trim(),
   body('name').not().isEmpty().trim(),
-  body('code').custom((branch_code, { req }) => {
-    return Task(req.headers.database).findByCode(branch_code).then(branch => {
-      if (JSON.parse(branch.data).length === 1) {
-        return Promise.reject(`Branch code [${branch_code}] already in use`);
-      }
-    })
-  })
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ status: 'Error', errors: errors.array() });
+    return res.status(400).json({ 
+      status: 'Error', 
+      errors: errors.array() 
+    });
   }
 
   try {
-    const response = await Task(req.headers.database).create(req.body)
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const result = await Controller(req.headers.database).create(req.body)
+    return res.status(result.status).json({
+      status: result.status, 
+      msg: result.message, 
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status, 
+      msg: error.message, 
+      error: error.error,
+      data: error.data
+    })
   }
 })
 
@@ -157,9 +178,9 @@ router.post("/", [
  *            name:
  *              type: string
  *            map_latitude:
- *              type: string
+ *              type: number
  *            map_longitude:
- *              type: string
+ *              type: number
  *      - name: database
  *        type: string
  *        in: header
@@ -175,28 +196,27 @@ router.post("/", [
  *      '500':
  *        description: Internal Server Error
  */
-router.put("/:id", [
-  param('id').custom((id, { req }) => {
-    return Task(req.headers.database).findById(id).then(branch => {
-      if (JSON.parse(branch.data).length === 0) {
-        return Promise.reject(`Branch id not found in database`)
-      }
-    })
-  })
-], async (req, res) => {
+router.put("/:id", async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ status: 'Error', errors: errors.array() });
   }
   try {
     const payload = {...req.body, uuid_index: req.params.id}
-    const response = await Task(req.headers.database).update(payload)
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const result = await Controller(req.headers.database).update(payload)
+    return res.status(result.status).json({
+      status: result.status, 
+      msg: result.message, 
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status, 
+      msg: error.message, 
+      error: error.error,
+      data: error.data
+    })
   }
 })
 
@@ -216,9 +236,9 @@ router.put("/:id", [
  *          type: object
  *          properties:
  *            map_latitude:
- *              type: string
+ *              type: number
  *            map_longitude:
- *              type: string
+ *              type: number
  *      - name: database
  *        type: string
  *        in: header
@@ -234,28 +254,27 @@ router.put("/:id", [
  *      '500':
  *        description: Internal Server Error
  */
-router.patch("/:id", [
-  param('id').custom((id, { req }) => {
-    return Task(req.headers.database).findById(id).then(branch => {
-      if (JSON.parse(branch.data).length === 0) {
-        return Promise.reject(`Branch id not found in database`)
-      }
-    })
-  })
-], async (req, res) => {
+router.patch("/:id", async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ status: 'Error', errors: errors.array() });
   }
   try {
     const payload = {...req.body, uuid_index: req.params.id}
-    const response = await Task(req.headers.database).updatePatch(payload)
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const result = await Controller(req.headers.database).updatePatch(payload)
+    return res.status(result.status).json({
+      status: result.status, 
+      msg: result.message, 
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status, 
+      msg: error.message, 
+      error: error.error,
+      data: error.data
+    })
   }
 })
 
@@ -283,27 +302,26 @@ router.patch("/:id", [
  *      '500':
  *        description: Internal Server Error
  */
-router.delete("/:id", [
-  param('id').custom((id, { req }) => {
-    return Task(req.headers.database).findById(id).then(branch => {
-      if (JSON.parse(branch.data).length === 0) {
-        return Promise.reject(`Branch id not found in database`)
-      }
-    })
-  })
-], async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ status: 'Error', errors: errors.array() });
   }
   try {
-    const response = await Task(req.headers.database).delete(req.params.id)
-    const data = JSON.parse(response.data)
-    res.status(200).json({ status: response.status, msg: "Success", data })
+    const result = await Controller(req.headers.database).delete(req.params.id)
+    return res.status(result.status).json({
+      status: result.status, 
+      msg: result.message, 
+      error: result.error,
+      data: result.data
+    })
   } catch (error) {
-    return res
-      .status(500)
-      .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    return res.status(error.status).json({
+      status: error.status, 
+      msg: error.message, 
+      error: error.error,
+      data: error.data
+    })
   }
 })
 
