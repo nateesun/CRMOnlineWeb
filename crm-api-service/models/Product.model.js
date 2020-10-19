@@ -65,7 +65,7 @@ module.exports = (db) => {
         max_stock=?,
         min_stock=?,
         unit_code_stock=?,
-        qty_in_stock=? 
+        qty_over_stock=? 
         WHERE uuid_index=? `
         const result = await pool.query(query, [
           data.code,
@@ -81,7 +81,7 @@ module.exports = (db) => {
           data.max_stock,
           data.min_stock,
           data.unit_code_stock,
-          data.qty_in_stock,
+          data.qty_over_stock,
           data.uuid_index,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })

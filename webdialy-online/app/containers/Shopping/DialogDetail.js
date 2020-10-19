@@ -77,7 +77,7 @@ export default function DialogDetail(props) {
 
   const addQty = qtyAmt => {
     setQty(qtyAmt + 1);
-    if(item.qty_in_stock === 'Y'){
+    if(item.qty_over_stock === 'N'){
       if (item.in_stock && qtyAmt + 1 > item.in_stock) {
         setQty(item.in_stock);
       }
