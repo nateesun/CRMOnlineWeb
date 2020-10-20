@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 const { body, param, validationResult } = require('express-validator');
-const Task = require("../models/Branch.model")
 const Controller = require('../controllers/Branch.controller');
 /**
  * @swagger

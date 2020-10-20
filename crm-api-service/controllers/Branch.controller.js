@@ -1,5 +1,3 @@
-const { resolve, reject } = require("bluebird");
-
 module.exports = database => {
     const Task = require("../models/Branch.model")(database);
     const module = {}
