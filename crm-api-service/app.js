@@ -36,6 +36,22 @@ const swaggerOptions = {
 
 const indexRouter = require("./routes/index")
 
+if(!global.requireModel) {
+  global.requireModel = name=>{
+    return require(__dirname+'/models/'+name+'.model.js');
+  }
+}
+if(!global.requireControl) {
+  global.requireController = name=>{
+    return require(__dirname+'/controllers/'+name+'.controller.js');
+  }
+}
+if(!global.requireRoute) {
+  global.requireRoute = name=>{
+    return require(__dirname+'/routes/'+name+'.route.js');
+  }
+}
+
 const memberMasterRouter = require("./routes/login.route")
 const lineLoginRouter = require("./routes/line_login.route")
 const crudRouter = require("./routes/table_crud.route")

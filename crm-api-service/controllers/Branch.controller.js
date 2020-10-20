@@ -1,5 +1,5 @@
 module.exports = database => {
-    const Task = require("../models/Branch.model")(database);
+    const Task = requireModel("Branch")(database);
     const module = {}
 
     module.findAll = () => {
