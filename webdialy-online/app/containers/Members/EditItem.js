@@ -95,7 +95,7 @@ const renderSelectField = ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response } = props;
+  const { handleSubmit, pristine, reset, submitting, response, rolesList } = props;
 
   const onValidated = formValues => {
     props.onUpdateItem(formValues);
@@ -147,10 +147,7 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.col5} />}
                   required
                 >
-                  <option value="super">Super Admin</option>
-                  <option value="admin">Admin</option>
-                  <option value="member">Member</option>
-                  <option value="employee">Employee</option>
+                  {rolesList && rolesList.map((item, index) => <option key={item.code} value={item.code}>{item.name}</option>)}
                 </Field>
               </div>
             </Grid>

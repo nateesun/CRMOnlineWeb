@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Update Member',
   },
   headerViewItem: {
     id: `${scope}.headerViewItem`,
