@@ -74,7 +74,7 @@ const renderSelectField = ({
       error={touched && error}
       style={{ width: '100%' }}
     >
-      <InputLabel htmlFor={input.id}>Prefix</InputLabel>
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
         native
@@ -159,7 +159,7 @@ const EditItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col2} />}
-                required
+                disabled
               />
             </Grid>
             <Grid item xs={4}>

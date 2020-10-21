@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Company',
+    defaultMessage: 'Update Company',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
