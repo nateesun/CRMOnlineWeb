@@ -106,7 +106,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={6}>
               <Field
-                name="product_name"
+                name="redeem_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -161,6 +161,36 @@ const EditItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="redeem_or_free"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="discount_amt"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="discount_percent"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
                 required
               />
             </Grid>

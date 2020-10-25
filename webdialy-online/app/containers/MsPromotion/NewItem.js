@@ -118,7 +118,7 @@ const NewItem = props => {
             </Grid>
             <Grid item xs={4} md={6}>
               <Field
-                name="product_name"
+                name="redeem_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -163,6 +163,36 @@ const NewItem = props => {
                 type="number"
                 margin="normal"
                 label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Field
+                name="redeem_or_free"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Field
+                name="discount_amt"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Field
+                name="discount_percent"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
                 required
               />
             </Grid>
