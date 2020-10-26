@@ -67,7 +67,7 @@ export default function DialogRedeemCode(props) {
         <div align="center">
           <QRCode value={`${(redeemPoint && redeemPoint.redeem_code) ? redeemPoint.redeem_code:'00000000'}`} />
           <h3>Scan Qr code here</h3>
-          <span>{redeemPoint.redeem_code}</span>
+          <Input type="text" value={redeemPoint.redeem_code} readOnly />
         </div>
         <DivFooter>
           <Button variant="contained" onClick={handleClose} color="primary">
