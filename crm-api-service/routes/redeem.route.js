@@ -31,6 +31,7 @@ router.post("/", async (req, res, next) => {
       uuid_index,
       redeem_code: redeemCodeGen,
       product_code,
+      redeem_name: promotion.redeem_name,
       point_to_redeem: promotion.point_to_redeem,
       use_in_branch: "",
       emp_code_redeem: "",
@@ -38,9 +39,12 @@ router.post("/", async (req, res, next) => {
       qty_in_use: 1,
       stystem_create: moment().format("YYYY-MM-DD HH:mm:ss"),
       redeem_date: null, // update agian from active status
-      in_time: moment().add(5, "minutes").format("YYYY-MM-DD HH:mm:ss"),
+      in_time: moment().add(30, "minutes").format("YYYY-MM-DD HH:mm:ss"),
       status_use: "in_progress", // in_progress|success|expired
       active: "Y", // Y|N
+      redeem_or_free: promotion.redeem_or_free, // (R)edeem or (F)ree
+      discount_amt: promotion.discount_amt,
+      discount_percent: promotion.discount_percent,
     }
     const response1 = await TaskRedeem(req.headers.database).create(payload)
     res

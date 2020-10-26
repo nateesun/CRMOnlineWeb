@@ -27,15 +27,15 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Update Member',
   },
   headerViewItem: {
     id: `${scope}.headerViewItem`,
-    defaultMessage: 'View Item Detail',
+    defaultMessage: 'View Member',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
-    defaultMessage: 'New Item Form',
+    defaultMessage: 'Create Member',
   },
   headerTableItems: {
     id: `${scope}.headerTableItems`,

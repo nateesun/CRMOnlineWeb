@@ -36,6 +36,22 @@ const swaggerOptions = {
 
 const indexRouter = require("./routes/index")
 
+if(!global.requireModel) {
+  global.requireModel = name=>{
+    return require(__dirname+'/models/'+name+'.model.js');
+  }
+}
+if(!global.requireControl) {
+  global.requireController = name=>{
+    return require(__dirname+'/controllers/'+name+'.controller.js');
+  }
+}
+if(!global.requireRoute) {
+  global.requireRoute = name=>{
+    return require(__dirname+'/routes/'+name+'.route.js');
+  }
+}
+
 const memberMasterRouter = require("./routes/login.route")
 const lineLoginRouter = require("./routes/line_login.route")
 const crudRouter = require("./routes/table_crud.route")
@@ -84,14 +100,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
-
-// app.use(
-//   cors({
-//     origin: true,
-//     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//   })
-// );
 
 // swagger api document
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

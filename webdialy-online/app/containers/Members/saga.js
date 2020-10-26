@@ -102,10 +102,28 @@ export function* deleteData() {
   }
 }
 
+export function* onLoadRolesList() {
+  try {
+    const requestURL = `${constants.publicPath}/api/role`;
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'GET',
+    });
+    if (response.data) {
+      yield put(actions.loadRolesSuccess(response.data));
+    } else {
+      yield put(actions.loadRolesError('Not found data'));
+    }
+  } catch (err) {
+    yield put(actions.loadRolesError(err));
+  }
+}
 export default function* membersSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateMemberData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
+  yield takeEvery(constants.LOAD_ROLES, onLoadRolesList);
 }

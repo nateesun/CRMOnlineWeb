@@ -89,21 +89,27 @@ module.exports = (db) => {
       try {
         const query = `UPDATE ${table_name} SET 
         product_code=?,
-        product_name=?,
+        redeem_name=?,
         point_to_redeem=?,
         start_time=?,
         finish_time=?,
         qty_in_stock=?,
-        img_path=? 
+        img_path=?,
+        redeem_or_free=?,
+        discount_amt=?,
+        discount_percent=? 
         WHERE uuid_index=? `
         const result = await pool.query(query, [
           data.product_code,
-          data.product_name,
+          data.redeem_name,
           data.point_to_redeem,
           data.start_time,
           data.finish_time,
           data.qty_in_stock,
           data.img_path,
+          data.redeem_or_free,
+          data.discount_amt,
+          data.discount_percent,
           data.uuid_index,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })

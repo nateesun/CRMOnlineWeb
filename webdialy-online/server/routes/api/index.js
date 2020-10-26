@@ -18,14 +18,14 @@ module.exports = args => {
   router.use(cookieParser())
 
   const saveTokenToCookie = ({ res, token, path = '/' }) => {
-    logger.log('info', `Saving Cookie Token: ${JSON.stringify(token)}`);
-    const tokenExpire = 30 * 60;
-    res.cookie('token', token, {
-      httpOnly: true,
-      maxAge: tokenExpire * 1000,
-      secure: 0,
-      path,
-    });
+    // logger.log('info', `Saving Cookie Token: ${JSON.stringify(token)}`);
+    // const tokenExpire = 30 * 60;
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   maxAge: tokenExpire * 1000,
+    //   secure: 0,
+    //   path,
+    // });
   };
 
   const removeCookieFromToken = ({ res }) => {

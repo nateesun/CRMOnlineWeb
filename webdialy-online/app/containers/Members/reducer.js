@@ -10,6 +10,7 @@ const { v4 } = require('uuid');
 
 export const initialState = {
   list: [],
+  rolesList: [],
   data: {
     uuid_index: '',
     code: '',
@@ -118,6 +119,15 @@ const membersReducer = (state = initialState, action) =>
       case constants.LOAD_VIEW_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Load data to view error!';
+        break;
+      case constants.LOAD_ROLES:
+        break;
+      case constants.LOAD_ROLES_SUCCESS:
+        draft.rolesList = action.payload;
+        break;
+      case constants.LOAD_ROLES_ERROR:
+        draft.response.status = 'Error';
+        draft.response.message = 'Load role list!';
         break;
     }
   });

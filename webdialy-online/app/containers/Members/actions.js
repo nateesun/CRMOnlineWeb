@@ -160,3 +160,22 @@ export function searchError(payload) {
     payload,
   };
 }
+export function loadRoles() {
+  return {
+    type: constants.LOAD_ROLES,
+  };
+}
+
+export function loadRolesSuccess(payload) {
+  return {
+    type: constants.LOAD_ROLES_SUCCESS,
+    payload,
+  };
+}
+
+export function loadRolesError(payload) {
+  return {
+    type: constants.LOAD_ROLES_ERROR,
+    payload,
+  };
+}

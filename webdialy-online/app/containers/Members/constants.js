@@ -37,3 +37,7 @@ export const DELETE_ITEM_ERROR = 'app/Members/DELETE_ITEM_ERROR';
 export const SEARCH = 'app/Members/SEARCH';
 export const SEARCH_SUCCESS = 'app/Members/SEARCH_SUCCESS';
 export const SEARCH_ERROR = 'app/Members/SEARCH_ERROR';
+
+export const LOAD_ROLES = 'app/Members/LOAD_ROLES';
+export const LOAD_ROLES_SUCCESS = 'app/Members/LOAD_ROLES_SUCCESS';
+export const LOAD_ROLES_ERROR = 'app/Members/LOAD_ROLES_ERROR';

@@ -133,10 +133,17 @@ module.exports = (db) => {
     return new Promise(async (resolve, reject) => {
       try {
         const query = `UPDATE ${table_name} SET  
-        member_role = ?, 
+        member_role = ?,
+        first_name=?,
+        last_name=?,
         system_updated = now() 
         WHERE uuid_index=? `
-        const result = await pool.query(query, [ data.member_role, data.uuid_index ])
+        const result = await pool.query(query, [
+          data.member_role,
+          data.first_name,
+          data.last_name,
+          data.uuid_index
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)

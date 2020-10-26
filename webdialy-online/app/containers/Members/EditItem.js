@@ -74,7 +74,7 @@ const renderSelectField = ({
       error={touched && error}
       style={{ width: '100%' }}
     >
-      <InputLabel htmlFor={input.id}>Prefix</InputLabel>
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
         native
@@ -95,7 +95,7 @@ const renderSelectField = ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response } = props;
+  const { handleSubmit, pristine, reset, submitting, response, rolesList } = props;
 
   const onValidated = formValues => {
     props.onUpdateItem(formValues);
@@ -147,10 +147,7 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.col5} />}
                   required
                 >
-                  <option value="super">Super Admin</option>
-                  <option value="admin">Admin</option>
-                  <option value="member">Member</option>
-                  <option value="employee">Employee</option>
+                  {rolesList && rolesList.map((item, index) => <option key={item.code} value={item.code}>{item.name}</option>)}
                 </Field>
               </div>
             </Grid>
@@ -162,7 +159,7 @@ const EditItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col2} />}
-                required
+                disabled
               />
             </Grid>
             <Grid item xs={4}>
