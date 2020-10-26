@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -18,12 +19,12 @@ import saga from './saga';
 import LoginForm from './LoginForm';
 import * as actions from './actions';
 
-export function Login(props) {
+const Login = (props) => {
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
 
   useEffect(()=>{
-    const data = new URLSearchParams(props.location.search).get('data')||'';
+    const data = getCookie('database')||'';
     if(data){
       props.initDatabase(data);
     }
