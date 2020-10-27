@@ -1,4 +1,5 @@
 const pool = require("../mysql-connect")
+const moment = require('moment')
 
 module.exports = () => {
   const module = {}
@@ -30,11 +31,33 @@ module.exports = () => {
 
   module.saveMember = data => {
     return new Promise(async (resolve, reject) => {
+      const payload = {
+        Member_Code: data.code,
+        Member_NameThai: data.first_name,
+        Member_HomeTel: data.mobile,
+        Member_Email: data.email,
+        Member_Brithday: moment(data.birthday).format('YYYY-MM-DD'),
+        Member_ExpiredDate: moment(data.expired_date).format('YYYY-MM-DD'),
+        Member_AppliedDate: moment().format('YYYY-MM-DD'),
+        Member_LastDateService: moment().format('YYYY-MM-DD'),
+        Employee_CreateDate: moment().format('YYYY-MM-DD'),
+        Employee_ModifyDate: moment().format('YYYY-MM-DD'),
+        Member_TotalPurchase: data.total_purchase,
+        Member_Mobile: data.mobile,
+        Member_PointExpiredDate: moment(data.point_expired_date).format('YYYY-MM-DD'),
+        Member_TotalScore: data.total_score,
+        Member_TitleNameThai: data.prefix,
+        Member_SurnameThai: data.last_name,
+        Member_Active: 'Y',
+        System_Created: moment(data.system_created).format('YYYY-MM-DD HH:mm:ss'),
+        System_Updated: moment(data.system_updated).format('YYYY-MM-DD HH:mm:ss')
+      }
       try {
         const sql = `INSERT INTO ${table_name} SET ? `;
-        const result = await pool.query(sql, data);
+        const result = await pool.query(sql, payload);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        console.log(err);
         reject(err)
       }
     })

@@ -124,7 +124,7 @@ app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
 app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter(io))
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
-app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
+app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter(io))
 
 // order shopping
 app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)

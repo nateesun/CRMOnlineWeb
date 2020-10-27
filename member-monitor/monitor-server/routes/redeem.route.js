@@ -28,7 +28,6 @@ module.exports = args => {
 
   module.POST_REDEEM = async (req, res) => {
     try {
-      console.log('POST_REDEEM', req.body);
       const response = await Task().create(req.body);
       const data = JSON.parse(response.data);
       res.status(200).json({ status: response.status, msg: "Success", data })
