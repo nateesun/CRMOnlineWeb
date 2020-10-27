@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import socketIOClient from 'socket.io-client';
+import socketIOClient from "socket.io-client"
 
 import logo from "./logo.svg"
 import "./App.css"
-
-const timeToSync = 60 * 60
 
 const BoxContain = styled.span`
   font-weight: bold;
@@ -29,11 +27,11 @@ const WrapperTime = (props) => {
   )
 }
 
-const END_POINT = 'http://localhost:5000';
+const END_POINT = "http://localhost:5000"
 
 const App = () => {
   const [count, setCount] = useState(0)
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null)
 
   const showTimer = (count) => {
     let minutes, seconds
@@ -46,48 +44,57 @@ const App = () => {
     return <WrapperTime minute={minutes} second={seconds} />
   }
 
-  const saveRedeemLocal = async payload => {
+  const saveRedeemLocal = async (payload) => {
     return new Promise(async (resolve, reject) => {
       const response = await fetch("/api/redeem", {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(payload)
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(payload),
       }).catch((err) => {
-          reject(err)
-        })
-        resolve(response)
+        reject(err)
+      })
+      resolve(response)
     })
   }
 
-  const saveMemberLocal = async payload => {
+  const saveMemberLocal = async (payload) => {
     return new Promise(async (resolve, reject) => {
       const response = await fetch("/api/member", {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(payload)
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(payload),
       }).catch((err) => {
-          reject(err)
-        })
-        resolve(response)
+        reject(err)
+      })
+      resolve(response)
     })
   }
 
-  const handleApi = async () => {
-    const response = "Success"; // wait for dev
+  const runingCounter = async () => {
+    setCount((c) => c + 1)
+    const response = await fetch('/api/member')
+    .then(res => res.json())
+    .catch(err => console.log(err));
+    const data = response.data;
+    console.log(data);
+  }
+
+  const handleApi = () => {
+    const response = "Success" // wait for dev
 
     if (response === "Success") {
       setMessage("Call API Success")
@@ -100,17 +107,22 @@ const App = () => {
   }
 
   useEffect(() => {
-    const socket = socketIOClient(END_POINT);
-    socket.on('create_redeem', async data => {
-      const payload = JSON.parse(data);
-      await saveRedeemLocal(payload);
-      setMessage(`get redeem:${payload.redeem_code}`);
+    console.log("app ui init")
+    const socket = socketIOClient(END_POINT)
+    socket.on("create_redeem", async (data) => {
+      const payload = JSON.parse(data)
+      await saveRedeemLocal(payload)
+      setMessage(`get redeem:${payload.redeem_code}`)
     })
-    socket.on('create_member', async data => {
-      const payload = JSON.parse(data);
-      await saveMemberLocal(payload);
-      setMessage(`get member:${payload.code}`);
+    socket.on("create_member", async (data) => {
+      const payload = JSON.parse(data)
+      await saveMemberLocal(payload)
+      setMessage(`get member:${payload.code}`)
     })
+
+    setInterval(() => {
+      runingCounter()
+    }, 10000)
   }, [])
 
   return (
