@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "watch": "nodemon ./bin/www"
+    "start": "MYSQL_PASSWORD=myPassword node ./bin/www",
+    "watch": "MYSQL_PASSWORD=myPassword nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

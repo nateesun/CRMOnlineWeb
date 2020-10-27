@@ -1,6 +1,7 @@
 /* Redeem.model code generator by automatic script */
 
 const pool = require("../mysql-connect")
+const config = require('../mysql-connect/config')
 
 module.exports = () => {
   const module = {}
@@ -71,9 +72,13 @@ module.exports = () => {
         discount_percent: params.discount_percent
       };
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, payload)
-        resolve({ status: "Success", data: JSON.stringify(result) })
+        if(config.database === data.database){
+          const sql = `INSERT INTO ${table_name} SET ? `
+          const result = await pool.query(sql, payload);
+          resolve({ status: "Success", data: JSON.stringify(result) })
+        }else{
+          resolve({ status: "Success", data: JSON.stringify([])})
+        }
       } catch (err) {
         reject(err)
       }

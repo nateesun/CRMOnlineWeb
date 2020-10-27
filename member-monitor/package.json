@@ -4,8 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "stop:app": "pm2 delete -s member-monitor || echo notfound member-monitor name",
-    "start": "npm run stop:app && pm2 start ./monitor-ui/server/index.js --name member-monitor && electron .",
+    "stop:server": "pm2 delete -s server-monitor || echo notfound server-monitor name",
+    "stop:ui": "pm2 delete -s ui-monitor || echo notfound ui-monitor name",
+    "stop:app": "npm run stop:server && npm run stop:ui",
+    "start:server": "pm2 start ./monitor-server/bin/www --name server-monitor",
+    "start:ui": "pm2 start ./monitor-ui/server/index.js --name ui-monitor",
+    "start:app": "npm run start:server && npm run start:ui",
+    "start": "npm run stop:app && npm run start:app && electron .",
+    "start:prod": "npm run build && npm run start",
     "build": "electron-builder"
   },
   "keywords": [],

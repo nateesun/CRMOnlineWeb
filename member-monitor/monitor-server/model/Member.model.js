@@ -1,4 +1,5 @@
 const pool = require("../mysql-connect")
+const config = require('../mysql-connect/config')
 const moment = require('moment')
 
 module.exports = () => {
@@ -43,9 +44,13 @@ module.exports = () => {
         System_Updated: moment(data.system_updated).format('YYYY-MM-DD HH:mm:ss')
       }
       try {
-        const sql = `INSERT INTO ${table_name} SET ? `;
-        const result = await pool.query(sql, payload);
-        resolve({ status: "Success", data: JSON.stringify(result) })
+        if(config.database === data.database){
+          const sql = `INSERT INTO ${table_name} SET ? `;
+          const result = await pool.query(sql, payload);
+          resolve({ status: "Success", data: JSON.stringify(result) })
+        }else{
+          resolve({ status: "Success", data: JSON.stringify([])})
+        }
       } catch (err) {
         console.log(err);
         reject(err)

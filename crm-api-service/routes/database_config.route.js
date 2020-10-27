@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
       database.push({
         database: data[i].Database,
         encrypt: encryptDb,
-        query: `/login?data=${encryptDb}`
+        query: `/?data=${encryptDb}`
       });
     }
   }

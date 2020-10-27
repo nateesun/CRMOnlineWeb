@@ -47,7 +47,6 @@ const App = () => {
   }
 
   const saveRedeemLocal = async payload => {
-    console.log("Call api service create redeem")
     return new Promise(async (resolve, reject) => {
       const response = await fetch("/api/redeem", {
         method: 'POST',
@@ -68,7 +67,6 @@ const App = () => {
   }
 
   const saveMemberLocal = async payload => {
-    console.log("Call api service create member")
     return new Promise(async (resolve, reject) => {
       const response = await fetch("/api/member", {
         method: 'POST',
@@ -105,15 +103,13 @@ const App = () => {
     const socket = socketIOClient(END_POINT);
     socket.on('create_redeem', async data => {
       const payload = JSON.parse(data);
-      const database = payload.database;
       await saveRedeemLocal(payload);
-      setMessage("get redeem");
+      setMessage(`get redeem:${payload.redeem_code}`);
     })
     socket.on('create_member', async data => {
       const payload = JSON.parse(data);
-      const database = payload.database;
       await saveMemberLocal(payload);
-      setMessage("get member");
+      setMessage(`get member:${payload.code}`);
     })
   }, [])
 

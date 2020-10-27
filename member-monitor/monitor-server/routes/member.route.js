@@ -10,7 +10,7 @@ module.exports = args => {
 
   const module = {}
 
-  module.GET_ALL_MEMBERS = async (req, res) => {
+  module.GET_ALL_MEMBER = async (req, res) => {
     try {
       const response = await Task().findAll();
       const data = JSON.parse(response.data);
@@ -26,7 +26,7 @@ module.exports = args => {
     }
   }
 
-  module.POST_MEMBERS = async (req, res) => {
+  module.POST_MEMBER = async (req, res) => {
     try {
       const response = await Task().create(req.body);
       const data = JSON.parse(response.data);
@@ -40,8 +40,8 @@ module.exports = args => {
 
   // local database
   // member
-  router.get('/', module.GET_ALL_MEMBERS); // get old member
-  router.post('/', module.POST_MEMBERS); // create new member
+  router.get('/', module.GET_ALL_MEMBER); // get old member
+  router.post('/', module.POST_MEMBER); // create new member
 
   return router;
 }
