@@ -5,10 +5,12 @@ module.exports = () => {
   const module = {}
   const table_name = "memmaster"
 
-  module.getAllMember = () => {
+  module.findAll = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where Member_Active='Y' order by Member_Code;`
+        const sql = `select * from ${table_name} 
+        where Member_Active='Y' 
+        order by Member_Code;`
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -17,19 +19,7 @@ module.exports = () => {
     })
   }
 
-  module.getMemberById = member_code => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const sql = `select * from ${table_name} where Member_Code=?;`
-        const result = await pool.query(sql, [member_code])
-        resolve({ status: "Success", data: JSON.stringify(result) })
-      } catch (err) {
-        reject(err)
-      }
-    })
-  }
-
-  module.saveMember = data => {
+  module.create = data => {
     return new Promise(async (resolve, reject) => {
       const payload = {
         Member_Code: data.code,

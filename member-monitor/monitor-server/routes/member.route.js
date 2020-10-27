@@ -12,7 +12,7 @@ module.exports = args => {
 
   module.GET_ALL_MEMBERS = async (req, res) => {
     try {
-      const response = await Task().getAllMember();
+      const response = await Task().findAll();
       const data = JSON.parse(response.data);
       res.status(200).json({
         status: response.status,
@@ -28,7 +28,7 @@ module.exports = args => {
 
   module.POST_MEMBERS = async (req, res) => {
     try {
-      const response = await Task().saveMember(req.body);
+      const response = await Task().create(req.body);
       const data = JSON.parse(response.data);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
