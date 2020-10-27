@@ -4,6 +4,7 @@ const path = require("path")
 const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
+const socketIo = require('socket.io')
 
 // api document
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -84,6 +85,11 @@ const options = {
 }
 
 const app = express()
+
+// Socket.io
+const io = socketIo();
+app.io = io;
+
 app.use(helmet())
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard());
@@ -116,7 +122,7 @@ app.use("/api/branch", basicAuth({ users: { admin: fixPassword } }), branchRoute
 app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRouter)
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
-app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter)
+app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter(io))
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
 app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
 
@@ -147,5 +153,10 @@ app.use((err, req, res, next) => {
     status: 'Someting wrong with api request'
   })
 })
+
+// socket.io events
+io.on( "connection", function( socket ) {
+    console.log( "A user connected" );
+});
 
 module.exports = app

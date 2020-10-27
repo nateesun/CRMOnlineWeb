@@ -5,7 +5,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "myPassword",
-  database: 'webdaily_001',
+  database: 'mycrmbranch',
   port: 3306,
   connectionLimit: 5,
   connectTimeout: 10000,

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import socketIOClient from 'socket.io-client';
+
 import logo from "./logo.svg"
 import "./App.css"
 
 const timeToSync = 60 * 60
+
 const BoxContain = styled.span`
   font-weight: bold;
   padding: 10px;
@@ -26,6 +29,8 @@ const WrapperTime = (props) => {
   )
 }
 
+const END_POINT = 'http://localhost:5000';
+
 const App = () => {
   const [count, setCount] = useState(0)
   const [message, setMessage] = useState(null);
@@ -41,23 +46,51 @@ const App = () => {
     return <WrapperTime minute={minutes} second={seconds} />
   }
 
-  const callApi = async () => {
-    console.log("Call api service updater")
+  const saveRedeemLocal = async payload => {
+    console.log("Call api service create redeem")
     return new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/sync_data")
-        .then((response) => response.json())
-        .catch((err) => {
+      const response = await fetch("/api/redeem", {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(payload)
+      }).catch((err) => {
           reject(err)
         })
+        resolve(response)
+    })
+  }
 
+  const saveMemberLocal = async payload => {
+    console.log("Call api service create member")
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/member", {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(payload)
+      }).catch((err) => {
+          reject(err)
+        })
         resolve(response)
     })
   }
 
   const handleApi = async () => {
-    const response = await callApi().catch(err=>{
-      setMessage("Failure to call API!: " + err)
-    })
+    const response = "Success"; // wait for dev
+
     if (response === "Success") {
       setMessage("Call API Success")
     } else {
@@ -69,14 +102,20 @@ const App = () => {
   }
 
   useEffect(() => {
-    const timerMonitor = setTimeout(async () => {
-      setCount(count + 1)
-      if (count === timeToSync) {
-        await handleApi();
-      }
-    }, 1000)
-    return () => clearTimeout(timerMonitor)
-  })
+    const socket = socketIOClient(END_POINT);
+    socket.on('create_redeem', async data => {
+      const payload = JSON.parse(data);
+      const database = payload.database;
+      await saveRedeemLocal(payload);
+      setMessage("get redeem");
+    })
+    socket.on('create_member', async data => {
+      const payload = JSON.parse(data);
+      const database = payload.database;
+      await saveMemberLocal(payload);
+      setMessage("get member");
+    })
+  }, [])
 
   return (
     <div className="App">
@@ -91,7 +130,7 @@ const App = () => {
             Refresh Sync API Service
           </button>
         </div>
-        {message && <div>Status: {message}</div>}
+        {message && <div>{message}</div>}
       </header>
     </div>
   )
