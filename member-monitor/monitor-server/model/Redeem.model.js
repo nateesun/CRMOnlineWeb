@@ -2,6 +2,7 @@
 
 const pool = require("../mysql-connect")
 const config = require('../mysql-connect/config')
+const util = require('../utils/TextUtil');
 
 module.exports = () => {
   const module = {}
@@ -56,7 +57,7 @@ module.exports = () => {
         uuid_index: params.uuid_index,
         redeem_code: params.redeem_code,
         product_code: params.product_code,
-        redeem_name: params.redeem_name,
+        redeem_name: util.convUnicode2Ascii(params.redeem_name),
         point_to_redeem: params.point_to_redeem,
         use_in_branch: params.use_in_branch,
         emp_code_redeem: params.emp_code_redeem,
@@ -72,7 +73,7 @@ module.exports = () => {
         discount_percent: params.discount_percent
       };
       try {
-        if(config.databaseServer === data.database){
+        if(config.databaseServer === params.database){
           const sql = `INSERT INTO ${table_name} SET ? `
           const result = await pool.query(sql, payload);
           resolve({ status: "Success", data: JSON.stringify(result) })

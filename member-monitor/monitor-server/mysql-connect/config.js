@@ -1,7 +1,7 @@
 const config = {
   host: "localhost",
   user: "root",
-  password: process.env.MYSQL_PASSWORD || '',
+  password: 'myPassword',
   database: "mycrmbranch",
   databaseServer: Buffer.from("webdaily_001").toString("base64"),
   port: 3306,

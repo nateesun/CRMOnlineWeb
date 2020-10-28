@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import socketIOClient from "socket.io-client"
+import config from './config';
 
 import logo from "./logo.svg"
 import "./App.css"
@@ -27,8 +28,6 @@ const WrapperTime = (props) => {
   )
 }
 
-const END_POINT =  "http://softcrmpkh.dyndns.org:5000";
-
 const App = () => {
   const [count, setCount] = useState(0)
   const [message, setMessage] = useState(null)
@@ -46,7 +45,7 @@ const App = () => {
 
   const saveRedeemLocal = async (payload) => {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/redeem", {
+      const response = await fetch("http://localhost:5050/api/redeem", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -66,7 +65,7 @@ const App = () => {
 
   const saveMemberLocal = async (payload) => {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/member", {
+      const response = await fetch("http://localhost:5050/api/member", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -86,11 +85,13 @@ const App = () => {
 
   const runingCounter = async () => {
     setCount((c) => c + 10)
-    const response = await fetch('/api/member')
+    const response = await fetch('http://localhost:5050/api/member')
     .then(res => res.json())
-    .catch(err => console.log(err));
-    const data = response.data;
-    console.log(data);
+    .catch(err => console.log('Cannot get data from /api/member'));
+    if (response) {
+      const data = response.data;
+      console.log(data);
+    }
   }
 
   const handleApi = () => {
@@ -108,15 +109,17 @@ const App = () => {
 
   useEffect(() => {
     console.log("app ui init")
-    const socket = socketIOClient(END_POINT)
+    const socket = socketIOClient(config.END_POINT)
     socket.on("create_redeem", async (data) => {
       const payload = JSON.parse(data)
-      await saveRedeemLocal(payload)
+      const response = await saveRedeemLocal(payload)
+      console.log(response);
       setMessage(`get redeem:${payload.redeem_code}`)
     })
     socket.on("create_member", async (data) => {
       const payload = JSON.parse(data)
-      await saveMemberLocal(payload)
+      const response = await saveMemberLocal(payload)
+      console.log(response);
       setMessage(`get member:${payload.code}`)
     })
 
@@ -135,7 +138,8 @@ const App = () => {
         <div>{showTimer(count)}</div>
         <div className="DivButton">
           <button onClick={() => handleApi()} className="Button">
-            Refresh Sync API Service
+            Refresh Sync API Service<br />
+            {config.END_POINT}
           </button>
         </div>
         {message && <div>{message}</div>}

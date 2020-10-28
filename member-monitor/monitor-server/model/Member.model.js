@@ -1,6 +1,7 @@
 const pool = require("../mysql-connect")
 const config = require('../mysql-connect/config')
 const moment = require('moment')
+const util = require('../utils/TextUtil');
 
 module.exports = () => {
   const module = {}
@@ -24,7 +25,7 @@ module.exports = () => {
     return new Promise(async (resolve, reject) => {
       const payload = {
         Member_Code: data.code,
-        Member_NameThai: data.first_name,
+        Member_NameThai: util.convUnicode2Ascii(data.first_name),
         Member_HomeTel: data.mobile,
         Member_Email: data.email,
         Member_Brithday: moment(data.birthday).format('YYYY-MM-DD'),
@@ -37,8 +38,8 @@ module.exports = () => {
         Member_Mobile: data.mobile,
         Member_PointExpiredDate: moment(data.point_expired_date).format('YYYY-MM-DD'),
         Member_TotalScore: data.total_score,
-        Member_TitleNameThai: data.prefix,
-        Member_SurnameThai: data.last_name,
+        Member_TitleNameThai: util.convUnicode2Ascii(data.prefix),
+        Member_SurnameThai: util.convUnicode2Ascii(data.last_name),
         Member_Active: 'Y',
         System_Created: moment(data.system_created).format('YYYY-MM-DD HH:mm:ss'),
         System_Updated: moment(data.system_updated).format('YYYY-MM-DD HH:mm:ss')
