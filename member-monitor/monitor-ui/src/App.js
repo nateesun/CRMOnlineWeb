@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import socketIOClient from "socket.io-client"
+import config from './config';
+
 import logo from "./logo.svg"
 import "./App.css"
 
-const timeToSync = 60 * 60
 const BoxContain = styled.span`
   font-weight: bold;
   padding: 10px;
@@ -28,7 +30,7 @@ const WrapperTime = (props) => {
 
 const App = () => {
   const [count, setCount] = useState(0)
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null)
 
   const showTimer = (count) => {
     let minutes, seconds
@@ -41,23 +43,60 @@ const App = () => {
     return <WrapperTime minute={minutes} second={seconds} />
   }
 
-  const callApi = async () => {
-    console.log("Call api service updater")
+  const saveRedeemLocal = async (payload) => {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/sync_data")
-        .then((response) => response.json())
-        .catch((err) => {
-          reject(err)
-        })
-
-        resolve(response)
+      const response = await fetch("http://localhost:5050/api/redeem", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(payload),
+      }).catch((err) => {
+        reject(err)
+      })
+      resolve(response)
     })
   }
 
-  const handleApi = async () => {
-    const response = await callApi().catch(err=>{
-      setMessage("Failure to call API!: " + err)
+  const saveMemberLocal = async (payload) => {
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch("http://localhost:5050/api/member", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(payload),
+      }).catch((err) => {
+        reject(err)
+      })
+      resolve(response)
     })
+  }
+
+  const runingCounter = async () => {
+    setCount((c) => c + 10)
+    const response = await fetch('http://localhost:5050/api/member')
+    .then(res => res.json())
+    .catch(err => console.log('Cannot get data from /api/member'));
+    if (response) {
+      const data = response.data;
+      console.log(data);
+    }
+  }
+
+  const handleApi = () => {
+    const response = "Success" // wait for dev
+
     if (response === "Success") {
       setMessage("Call API Success")
     } else {
@@ -69,14 +108,25 @@ const App = () => {
   }
 
   useEffect(() => {
-    const timerMonitor = setTimeout(async () => {
-      setCount(count + 1)
-      if (count === timeToSync) {
-        await handleApi();
-      }
-    }, 1000)
-    return () => clearTimeout(timerMonitor)
-  })
+    console.log("app ui init")
+    const socket = socketIOClient(config.END_POINT)
+    socket.on("create_redeem", async (data) => {
+      const payload = JSON.parse(data)
+      const response = await saveRedeemLocal(payload)
+      console.log(response);
+      setMessage(`get redeem:${payload.redeem_code}`)
+    })
+    socket.on("create_member", async (data) => {
+      const payload = JSON.parse(data)
+      const response = await saveMemberLocal(payload)
+      console.log(response);
+      setMessage(`get member:${payload.code}`)
+    })
+
+    setInterval(() => {
+      runingCounter()
+    }, 10000)
+  }, [])
 
   return (
     <div className="App">
@@ -88,10 +138,11 @@ const App = () => {
         <div>{showTimer(count)}</div>
         <div className="DivButton">
           <button onClick={() => handleApi()} className="Button">
-            Refresh Sync API Service
+            Refresh Sync API Service<br />
+            {config.END_POINT}
           </button>
         </div>
-        {message && <div>Status: {message}</div>}
+        {message && <div>{message}</div>}
       </header>
     </div>
   )

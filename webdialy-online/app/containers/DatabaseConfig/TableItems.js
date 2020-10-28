@@ -73,25 +73,6 @@ export default function TableItems(props) {
         <Typography color="textSecondary" variant="h6">
           Show all database
         </Typography>
-        {/* <div className={classes.wrapButtonAction}>
-          {showCommand && (
-            <Button
-              variant="contained"
-              className={classes.buttonNew}
-              onClick={() => props.onChangePage('NEW')}
-            >
-              CREATE
-            </Button>
-          )}
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.buttonRefresh}
-            onClick={() => props.onInitLoad()}
-          >
-            REFRESH
-          </Button>
-        </div> */}
         <div>
           <Table
             className={classes.table}
