@@ -10,11 +10,13 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({ 
-    width: 200,
-    height: 350,
+    width: 350,
+    height: 400,
   })
 
   mainWindow.loadURL('http://localhost:3333');
+  mainWindow.setMenu(null);
+  mainWindow.setResizable(false);
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
