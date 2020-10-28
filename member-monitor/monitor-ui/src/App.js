@@ -27,7 +27,7 @@ const WrapperTime = (props) => {
   )
 }
 
-const END_POINT = "http://localhost:5000"
+const END_POINT =  "http://softcrmpkh.dyndns.org:5000";
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -85,7 +85,7 @@ const App = () => {
   }
 
   const runingCounter = async () => {
-    setCount((c) => c + 1)
+    setCount((c) => c + 10)
     const response = await fetch('/api/member')
     .then(res => res.json())
     .catch(err => console.log(err));

@@ -44,7 +44,7 @@ module.exports = () => {
         System_Updated: moment(data.system_updated).format('YYYY-MM-DD HH:mm:ss')
       }
       try {
-        if(config.database === data.database){
+        if(config.databaseServer === data.database){
           const sql = `INSERT INTO ${table_name} SET ? `;
           const result = await pool.query(sql, payload);
           resolve({ status: "Success", data: JSON.stringify(result) })
