@@ -67,7 +67,7 @@ export default defineMessages({
   },
   col2: {
     id: `${scope}.col2`,
-    defaultMessage: 'Product Name',
+    defaultMessage: 'Redeem Name',
   },
   col3: {
     id: `${scope}.col3`,
@@ -88,6 +88,18 @@ export default defineMessages({
   col7: {
     id: `${scope}.col7`,
     defaultMessage: 'Image Path',
+  },
+  col8: {
+    id: `${scope}.col8`,
+    defaultMessage: 'Redeem or Free',
+  },
+  col9: {
+    id: `${scope}.col9`,
+    defaultMessage: 'Discount Amount',
+  },
+  col10: {
+    id: `${scope}.col10`,
+    defaultMessage: 'Discount Percent',
   },
   btnSave: {
     id: `${scope}.btnSave`,

@@ -37,7 +37,20 @@ module.exports = (db) => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where email !='softpos@gmail.com' order by code;`
+        const sql = `select * from ${table_name} order by code;`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.getDataForClient = () => {
+    console.log("findAll method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where member_role='member' order by code;`
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -50,7 +63,7 @@ module.exports = (db) => {
     console.log("searchData method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select * from ${table_name} where email !='softpos@gmail.com'`
+        let sql = `select * from ${table_name} where 1=1 `
         if (key !== "") {
           sql = `${sql} and ${key} like '%${value}%'`
         }
@@ -98,7 +111,7 @@ module.exports = (db) => {
         mobile = ?, 
         line_id = ?, 
         system_updated = now() 
-        WHERE email=? `
+        WHERE uuid_index=? `
         const result = await pool.query(query, [
           data.prefix,
           data.first_name,
@@ -106,7 +119,30 @@ module.exports = (db) => {
           data.birthday,
           data.mobile,
           data.line_id,
-          data.email,
+          data.uuid_index,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.updateRole = (data) => {
+    console.log("update method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `UPDATE ${table_name} SET  
+        member_role = ?,
+        first_name=?,
+        last_name=?,
+        system_updated = now() 
+        WHERE uuid_index=? `
+        const result = await pool.query(query, [
+          data.member_role,
+          data.first_name,
+          data.last_name,
+          data.uuid_index
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {

@@ -1,11 +1,11 @@
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
+const { getDB } = require("./FuncUtil")()
 
-module.exports = db => {
+module.exports = (db) => {
   const module = {}
-  const table_name = getDB(db, 'table_crud');
+  const table_name = getDB(db, "table_crud")
 
-  module.findById = id => {
+  module.findById = (id) => {
     console.log("findById method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -35,9 +35,9 @@ module.exports = db => {
     console.log("searchData method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select * from ${table_name}`;
-        if(key!==''){
-          sql = `${sql} where ${key} like '%${value}%'`;
+        let sql = `select * from ${table_name}`
+        if (key !== "") {
+          sql = `${sql} where ${key} like '%${value}%'`
         }
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
@@ -47,7 +47,7 @@ module.exports = db => {
     })
   }
 
-  module.create = params => {
+  module.create = (params) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -60,7 +60,7 @@ module.exports = db => {
     })
   }
 
-  module.update = data => {
+  module.update = (data) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
@@ -69,7 +69,7 @@ module.exports = db => {
           data.col1,
           data.col2,
           data.col3,
-          data.uuid_index
+          data.uuid_index,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -78,7 +78,7 @@ module.exports = db => {
     })
   }
 
-  module.delete = id => {
+  module.delete = (id) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {

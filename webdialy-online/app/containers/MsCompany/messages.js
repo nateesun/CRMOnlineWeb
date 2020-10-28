@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
+    defaultMessage: 'New Company',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
+    defaultMessage: 'Update Company',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
@@ -108,6 +108,10 @@ export default defineMessages({
   col12: {
     id: `${scope}.col12`,
     defaultMessage: 'Cart Size Running',
+  },
+  col13: {
+    id: `${scope}.col13`,
+    defaultMessage: 'Member Register Point',
   },
   btnSave: {
     id: `${scope}.btnSave`,

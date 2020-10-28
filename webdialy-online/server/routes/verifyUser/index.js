@@ -1,4 +1,4 @@
-const { Router, response } = require('express');
+const { Router } = require('express');
 const { json, urlencoded } = require('body-parser');
 
 module.exports = args => {
@@ -22,13 +22,12 @@ module.exports = args => {
     options.json = true;
 
     try {
-      return httpRequest(options, (error, resposne, body) => {
-        if (response) {
-          if (response.statusCode === 200) {
-            return res.status(200).json(body);
-          }
+      return httpRequest(options, (error, response, body) => {
+        if (response.statusCode === 200) {
+          return res.status(200).json(body);
+        } else {
+          return res.status(response.statusCode).json({ Error: response.statusMessage });
         }
-        return res.status(500).json({ Error: 'error' });
       });
     } catch (e) {
       return res.status(500).json({ Error: e });

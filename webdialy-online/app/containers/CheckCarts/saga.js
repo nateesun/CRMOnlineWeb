@@ -1,4 +1,5 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import request from 'utils/request';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
@@ -129,6 +130,16 @@ export function* onUpdateShoppingStep() {
     yield put(actions.updateShoppingStepError(err));
   }
 }
+export function* onLoadViewOrder() {
+  try {
+    const data = yield select(selectors.makeSelectForm());
+    const database = yield select(loginSelectors.makeSelectDatabase());
+    yield put(push(`${constants.publicPath}/order_confirm/${data.cart_no}/${database}`));
+    yield put(actions.loadViewOrderSuccess('Success'))
+  } catch (err) {
+    yield put(actions.loadViewOrderError(err));
+  }
+}
 
 export default function* checkCartsSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
@@ -137,4 +148,5 @@ export default function* checkCartsSaga() {
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
+  yield takeEvery(constants.LOAD_VIEW_ORDER, onLoadViewOrder);
 }

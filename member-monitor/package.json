@@ -1,20 +1,30 @@
 {
   "name": "member-monitor",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "",
-  "main": "server.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "stop:server": "pm2 delete -s server-monitor || echo notfound server-monitor name",
+    "stop:ui": "pm2 delete -s ui-monitor || echo notfound ui-monitor name",
+    "stop:app": "npm run stop:server && npm run stop:ui",
+    "start:server": "pm2 start ./monitor-server/bin/www --name server-monitor",
+    "start:ui": "pm2 start ./monitor-ui/server/index.js --name ui-monitor",
+    "start:app": "npm run start:server && npm run start:ui",
+    "start": "npm run stop:app && npm run start:app && electron .",
+    "start:prod": "npm run build && npm run start",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "googleapis": "^55.0.0",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "electron": "^10.1.3",
+    "electron-builder": "^22.9.1"
   }
 }

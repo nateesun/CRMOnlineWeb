@@ -24,6 +24,7 @@ export function Members(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadRoles();
   }, []);
 
   return <ContentPage {...props} />;
@@ -38,6 +39,8 @@ Members.propTypes = {
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
   onSearch: PropTypes.func,
+  onLoadRoles: PropTypes.func,
+  rolesList: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -45,6 +48,7 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
+  rolesList: selectors.makeSelectRolesList(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -56,6 +60,7 @@ function mapDispatchToProps(dispatch) {
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onLoadView: item => dispatch(actions.loadView(item)),
+    onLoadRoles: () => dispatch(actions.loadRoles()),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
   };
 }

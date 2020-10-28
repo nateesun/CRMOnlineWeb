@@ -24,9 +24,9 @@ export function addRegisterMemberSuccess() {
   };
 }
 
-export function addRegisterMemberError(error) {
+export function addRegisterMemberError(payload) {
   return {
     type: constants.ADD_REGISTER_MEMBER_ERROR,
-    payload: error,
+    payload,
   };
 }

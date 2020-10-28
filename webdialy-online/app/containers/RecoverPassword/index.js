@@ -23,9 +23,9 @@ export function RecoverPassword() {
   useInjectSaga({ key: 'recoverPassword', saga });
 
   return (
-    <div>
+    <React.Fragment>
       <FormattedMessage {...messages.header} />
-    </div>
+    </React.Fragment>
   );
 }
 

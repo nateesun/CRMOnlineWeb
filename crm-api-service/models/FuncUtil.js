@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require("uuid")
+
 module.exports = () => {
   const module = {}
 
@@ -17,6 +19,10 @@ module.exports = () => {
   }
 
   module.zeroPad = (num, places) => String(num).padStart(places, "0")
+
+  module.getUUID = () => {
+    return uuidv4();
+  }
 
   return module
 }

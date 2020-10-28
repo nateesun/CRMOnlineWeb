@@ -8,6 +8,8 @@ import Thanks from './images/thanks.jpg';
 import * as constants from './constants';
 
 export default function FinishOrder(props) {
+  const loc = window.location.href.split('/');
+  const hostUrl = `${loc[0]}//${loc[2]}${constants.publicPath}`;
   return (
     <React.Fragment>
       <div align="center">
@@ -34,7 +36,7 @@ export default function FinishOrder(props) {
             #{props.currentCartNo}
           </span>{' '}
           <br />
-          <QRCode value={`${constants.publicPath}/orders/${props.currentCartNo}`} />
+          <QRCode value={`${hostUrl}/order_confirm/${props.currentCartNo}/${props.database}`} />
           <br />
           ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
           และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ

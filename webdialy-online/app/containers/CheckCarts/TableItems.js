@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +15,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import SearchBar from './SearchBar';
+
+const ALink = styled.a`
+  text-decoration: none;
+`;
 
 const useStyles = makeStyles({
   root: {
@@ -82,6 +87,10 @@ export default function TableItems(props) {
     props.onLoadView(item);
   };
 
+  const loadViewOrder = item => {
+    props.onLoadViewOrder(item);
+  };
+
   const onEditItem = item => {
     props.onChangePage('EDIT');
     props.onLoadEdit(item);
@@ -91,6 +100,7 @@ export default function TableItems(props) {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,
     onLoadView: PropTypes.func,
+    onLoadViewOrder: PropTypes.func,
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
@@ -163,9 +173,14 @@ export default function TableItems(props) {
                               variant="outlined"
                               onClick={() => onViewItem(item)}
                             >
-                              View
+                              Detail
                             </Button>
                           </Grid>
+                          {item.shopping_step === 'approve' && <Grid item>
+                            <Button variant="outlined" onClick={()=>loadViewOrder(item)}>
+                                View Signature
+                              </Button>
+                          </Grid>}
                         </Grid>
                       </TableCell>
                     </TableRow>

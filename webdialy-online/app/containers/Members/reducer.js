@@ -10,12 +10,14 @@ const { v4 } = require('uuid');
 
 export const initialState = {
   list: [],
+  rolesList: [],
   data: {
     uuid_index: '',
     code: '',
     email: '',
-    total_score: 0,
-    total_purchase: 0,
+    first_name: '',
+    last_name: '',
+    member_role: '',
   },
   page: 'LIST',
   status: null,
@@ -89,7 +91,7 @@ const membersReducer = (state = initialState, action) =>
         draft.response.message = 'Update data error!';
         break;
       case constants.DELETE_ITEM:
-        draft.data.uuid_index = action.payload;
+        draft.data.email = action.payload;
         break;
       case constants.DELETE_ITEM_SUCCESS:
         draft.response.status = 'Success';
@@ -117,6 +119,15 @@ const membersReducer = (state = initialState, action) =>
       case constants.LOAD_VIEW_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Load data to view error!';
+        break;
+      case constants.LOAD_ROLES:
+        break;
+      case constants.LOAD_ROLES_SUCCESS:
+        draft.rolesList = action.payload;
+        break;
+      case constants.LOAD_ROLES_ERROR:
+        draft.response.status = 'Error';
+        draft.response.message = 'Load role list!';
         break;
     }
   });

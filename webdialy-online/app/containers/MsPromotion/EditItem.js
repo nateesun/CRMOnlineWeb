@@ -11,6 +11,11 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+
 import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
@@ -45,6 +50,54 @@ const useStyles = makeStyles(theme => ({
     background: '#aaa',
   },
 }));
+
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+  return (
+    <FormControl
+      variant="outlined"
+      error={touched && error}
+      style={{ width: '100%' }}
+    >
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: input.id,
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const EditItem = props => {
   const classes = useStyles();
@@ -106,7 +159,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={6}>
               <Field
-                name="product_name"
+                name="redeem_name"
                 component={RenderField}
                 type="text"
                 margin="normal"
@@ -161,6 +214,39 @@ const EditItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <div style={{ width: '100%', paddingTop: '16px' }}>
+                <Field
+                  name="redeem_or_free"
+                  component={renderSelectField}
+                  label={<FormattedMessage {...messages.col8} />}
+                  required
+                >
+                  <option key="F" value="F">Free</option>
+                  <option key="R" value="R">Redeem</option>
+                </Field>
+              </div>
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="discount_amt"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col9} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="discount_percent"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.col10} />}
                 required
               />
             </Grid>

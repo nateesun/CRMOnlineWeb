@@ -11,90 +11,61 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import TimeLineIcon from '@material-ui/icons/Timeline';
-import HistoryIcon from '@material-ui/icons/History';
-import StorefrontIcon from '@material-ui/icons/Storefront';
 import PeopleIcon from '@material-ui/icons/People';
 import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import StoreMallDirectory from '@material-ui/icons/StoreMallDirectory';
 import ButtonLink from 'components/ButtonLink';
-import { publicPath } from './constants';
+import * as constants from './constants';
 
-const categories = [
+const menuList = [
   {
     id: 'Account',
+    role: 'super|admin|member|employee',
     children: [
-      {
-        id: 'Overview',
-        icon: <CardGiftcardIcon />,
-        to: `${publicPath}/dashboard`,
-        active: true,
-      },
-      {
-        id: 'Profile',
-        icon: <RecentActorsIcon />,
-        to: `${publicPath}/profile`,
-      },
+      { id: 'Overview', icon: <CardGiftcardIcon />, to: constants.PATH_DASHBOARD, active: true },
+      { id: 'Profile', icon: <RecentActorsIcon />, to: constants.PATH_PROFILE },
     ],
   },
   {
     id: 'Orders',
+    role: 'super|admin|member',
     children: [
-      { id: 'Shopping', icon: <LocalMallIcon />, to: `${publicPath}/shopping` },
-      { id: 'Track Order', icon: <LocalMallIcon />, to: `${publicPath}/tracking` },
+      { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
+      { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
     ],
   },
   {
     id: 'Request Order',
+    role: 'super|admin|employee',
     children: [
-      { id: 'Check cart list', icon: <LocalMallIcon />, to: `${publicPath}/check_carts` },
+      { id: 'Check cart list', icon: <LocalMallIcon />, to: constants.PATH_CHECK_CARTS },
     ],
   },
   {
     id: 'Members',
+    role: 'super|admin',
     children: [
-      { id: 'Member List', icon: <PeopleIcon />, to: `${publicPath}/members` },
+      { id: 'Member List', icon: <PeopleIcon />, to: constants.PATH_MEMBER },
     ],
   },
   {
     id: 'Settings',
+    role: 'super',
     children: [
-      { id: 'Roles', icon: <LockIcon />, to: `${publicPath}/ms/role` },
-      {
-        id: 'Database',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/database`,
-      },
+      { id: 'Roles', icon: <LockIcon />, to: constants.PATH_MS_ROLE },
+      { id: 'Database', icon: <DnsRoundedIcon />, to: constants.PATH_DATABASE },
     ],
   },
   {
     id: 'Master',
+    role: 'super|admin',
     children: [
-      {
-        id: 'Company',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/company`,
-      },
-      { id: 'Branch', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/branch` },
-      {
-        id: 'Product',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/product`,
-      },
-      {
-        id: 'Employee',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/employee`,
-      },
-      { id: 'Stock', icon: <DnsRoundedIcon />, to: `${publicPath}/ms/stock` },
-      {
-        id: 'Redeem',
-        icon: <DnsRoundedIcon />,
-        to: `${publicPath}/ms/promotion`,
-      },
+      { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
+      { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
+      { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
+      { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
+      { id: 'Redeem', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
     ],
   },
 ];
@@ -143,23 +114,16 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-  const { classes, email, ...other } = props;
+  const { classes, email, profile, ...other } = props;
+  const { member_role } = profile;
   leftMenus.length = 0;
-  categories.forEach(item => {
-    if (
-      item.id === 'Members' ||
-      item.id === 'Settings' ||
-      item.id === 'Master'
-    ) {
-      if (email === 'softpos@gmail.com') {
+  if (profile) {
+    menuList.forEach(item => {
+      if(item.role.includes(member_role)){
         leftMenus.push(item);
       }
-    } else if (item.id === 'Orders' && email !== 'softpos@gmail.com') {
-      leftMenus.push(item);
-    } else {
-      leftMenus.push(item);
-    }
-  });
+    });
+  }
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -167,7 +131,7 @@ function Navigator(props) {
         <ListItem
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
-          <ButtonLink to={`${publicPath}/`} color="white">
+          <ButtonLink to={`${constants.publicPath}/`} color="white">
             Main Menu
           </ButtonLink>
         </ListItem>
@@ -180,7 +144,7 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            <ButtonLink to={`${publicPath}/`} color="white">
+            <ButtonLink to={`${constants.publicPath}/`} color="white">
               Home
             </ButtonLink>
           </ListItemText>
@@ -231,6 +195,7 @@ function Navigator(props) {
 Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
   email: PropTypes.string,
+  profile: PropTypes.object,
 };
 
 export default withStyles(styles)(Navigator);

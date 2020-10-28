@@ -48,11 +48,17 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET code=?, name=?, line_official_id=? WHERE uuid_index=? `
+        const query = `UPDATE ${table_name} 
+        SET code=?, 
+        name=?, 
+        line_official_id=?,
+        member_register_point=? 
+        WHERE uuid_index=? `
         const result = await pool.query(query, [
           data.code,
           data.name,
           data.line_official_id,
+          data.member_register_point,
           data.uuid_index,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
@@ -62,7 +68,7 @@ module.exports = (db) => {
     })
   }
 
-  module.deleten = (id) => {
+  module.delete = (id) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {

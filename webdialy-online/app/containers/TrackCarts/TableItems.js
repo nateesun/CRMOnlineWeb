@@ -41,7 +41,6 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
-    width: '750px',
   },
 });
 
@@ -122,7 +121,7 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} />
+        {props.profile.member_role !== 'member' && <SearchBar {...props} />}
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
@@ -165,8 +164,8 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">{item.shopping_step}</TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                      <TableCell align="center">
                         {showCommand && (
+                      <TableCell align="center">
                           <Grid container spacing={1} justify="center">
                             <Grid item>
                               <Button
@@ -194,8 +193,8 @@ export default function TableItems(props) {
                               </Button>
                             </Grid>
                           </Grid>
-                        )}
                       </TableCell>
+                        )}
                     </TableRow>
                   ))}
             </TableBody>

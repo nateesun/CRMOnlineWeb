@@ -55,13 +55,11 @@ const MapDirectionAB = compose(
   if (props.distance) {
     props.onExit(props.distance, props.duration);
   }
+  const position = new google.maps.LatLng(props.lat || 13.828941, props.lng) || {
+    lat: props.lat || 13.828941, lng: props.lng || 100.525943
+  };
   return (
-    <GoogleMap
-      defaultZoom={7}
-      defaultCenter={
-        new google.maps.LatLng(props.lat | 13.828941, props.lng | 100.525943)
-      }
-    >
+    <GoogleMap defaultZoom={7} defaultCenter={position}>
       {props.directions && <DirectionsRenderer directions={props.directions} />}
     </GoogleMap>
   );

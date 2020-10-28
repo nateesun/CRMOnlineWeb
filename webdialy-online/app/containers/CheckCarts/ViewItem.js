@@ -122,7 +122,7 @@ const ViewItem = props => {
           <Grid item xs={12}>
             <img src={SlipImage} width={250} alt="sample slip upload" />
           </Grid>
-          <Grid item xs={12}>
+          {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Approve Slip</FormLabel>
               <RadioGroup
@@ -143,8 +143,8 @@ const ViewItem = props => {
                 />
               </RadioGroup>
             </FormControl>
-          </Grid>
-          <Grid item xs={10}>
+          </Grid>}
+          {shopping_step && shopping_step !== 'approve' && <Grid item xs={10}>
             <TextField
               fullWidth
               id="standard-basic"
@@ -153,7 +153,7 @@ const ViewItem = props => {
               value={reason}
               onChange={e=>setReason(e.target.value)}
             />
-          </Grid>
+          </Grid>}
           <Grid item xs={3}>
             <Button
               fullWidth
@@ -163,7 +163,7 @@ const ViewItem = props => {
               <FormattedMessage {...messages.btnBack} />
             </Button>
           </Grid>
-          <Grid item xs={5}>
+          {shopping_step && shopping_step !== 'approve' && <Grid item xs={5}>
             <Button
               color="primary"
               fullWidth
@@ -172,7 +172,7 @@ const ViewItem = props => {
             >
               <FormattedMessage {...messages.btnApprove} />
             </Button>
-          </Grid>
+          </Grid>}
         </Grid>
       </div>
     </Container>

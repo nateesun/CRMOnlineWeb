@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -51,6 +51,7 @@ const useStyles = makeStyles({
 });
 
 export default function ProfileContent(props) {
+  const { company } = props;
   const { data } = props.profile;
   const classes = useStyles();
 
@@ -160,6 +161,18 @@ export default function ProfileContent(props) {
               <LabelContent>{data.line_id}</LabelContent>
             </Typography>
           </Grid>
+          {company && <Grid item xs={12}>
+            <Typography>
+              <Label>
+                <FormattedMessage {...messages.lineOfficial} />
+              </Label>{' '}
+              <LabelContent>
+                <a href={`http://line.me/ti/p/${company.line_official_id}`} target="_blank">
+                  <button style={{background: 'green', color: 'white', border: '0'}}>Add Line</button>
+                </a>
+              </LabelContent>
+            </Typography>
+          </Grid>}
         </Grid>
       </CardContent>
       <CardActions>

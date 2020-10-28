@@ -39,8 +39,9 @@ const ViewItem = props => {
   const {
     code,
     email,
-    total_score: totalScore,
-    total_purchase: totalPurchase,
+    member_role,
+    first_name,
+    last_name,
   } = props.initialValues;
 
   return (
@@ -63,16 +64,22 @@ const ViewItem = props => {
             {email}
           </Grid>
           <Grid item xs={4}>
+            <FormattedMessage {...messages.col5} />
+          </Grid>
+          <Grid item xs={6}>
+            {member_role}
+          </Grid>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col3} />
           </Grid>
           <Grid item xs={6}>
-            {totalScore}
+            {first_name}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col4} />
           </Grid>
           <Grid item xs={6}>
-            {totalPurchase}
+            {last_name}
           </Grid>
         </Grid>
         <Grid container spacing={3}>

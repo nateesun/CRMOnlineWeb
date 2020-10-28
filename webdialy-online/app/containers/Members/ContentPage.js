@@ -11,11 +11,11 @@ export default function ContentPage(props) {
   };
 
   return (
-    <div>
+    <React.Fragment>
       {props.getPage === 'LIST' && <TableItems {...props} />}
       {props.getPage === 'NEW' && <NewItem {...props} />}
       {props.getPage === 'EDIT' && <EditItem {...props} />}
       {props.getPage === 'VIEW' && <ViewItem {...props} />}
-    </div>
+    </React.Fragment>
   );
 }

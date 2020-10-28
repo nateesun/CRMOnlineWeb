@@ -5,11 +5,15 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
+import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import * as selectors from './selectors';
@@ -40,16 +44,61 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+  return (
+    <FormControl
+      variant="outlined"
+      error={touched && error}
+      style={{ width: '100%' }}
+    >
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: input.id,
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
+
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response } = props;
+  const { handleSubmit, pristine, reset, submitting, response, rolesList } = props;
 
   const onValidated = formValues => {
-    updateData(formValues);
-  };
-
-  const updateData = data => {
-    props.onUpdateItem(data);
+    props.onUpdateItem(formValues);
   };
 
   const clearData = () => {
@@ -78,7 +127,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={4}>
               <Field
                 name="code"
                 component={RenderField}
@@ -89,31 +138,45 @@ const EditItem = props => {
                 disabled
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={4}>
+              <div style={{ width: '100%', paddingTop: '14px' }}>
+                <Field
+                  id="member_role"
+                  name="member_role"
+                  component={renderSelectField}
+                  label={<FormattedMessage {...messages.col5} />}
+                  required
+                >
+                  {rolesList && rolesList.map((item, index) => <option key={item.code} value={item.code}>{item.name}</option>)}
+                </Field>
+              </div>
+            </Grid>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={4}>
               <Field
                 name="email"
                 component={RenderField}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col2} />}
-                required
+                disabled
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={4}>
               <Field
-                name="total_score"
+                name="first_name"
                 component={RenderField}
-                type="number"
+                type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={4}>
               <Field
-                name="total_purchase"
+                name="last_name"
                 component={RenderField}
-                type="number"
+                type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
                 required
@@ -173,19 +236,17 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.code) {
-    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
-  }
   if (!formValues.email) {
     errors.email = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (formValues.total_score < 0) {
-    errors.total_score = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+  if (!formValues.first_name) {
+    errors.first_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
-  if (!formValues.total_purchase < 0) {
-    errors.total_purchase = (
-      <FormattedMessage {...messages.col3ShouldNotEmpty} />
-    );
+  if (!formValues.last_name) {
+    errors.last_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+  }
+  if (!formValues.member_role) {
+    errors.member_role = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   return errors;
 };

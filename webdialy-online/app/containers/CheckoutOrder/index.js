@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import * as loginSelectors from 'containers/Login/selectors';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -18,7 +19,6 @@ import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
 import * as actions from './actions';
-import * as constants from './constants';
 
 export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
@@ -45,6 +45,7 @@ const mapStateToProps = createStructuredSelector({
   paymentData: selectors.makeSelectPaymentData(),
   imgValid: selectors.makeSelectSlipValidateStatus(),
   currentCartNo: selectors.makeSelectCartsNo(),
+  database: loginSelectors.makeSelectDatabase(),
 });
 
 function mapDispatchToProps(dispatch) {

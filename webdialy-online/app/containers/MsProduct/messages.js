@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new product',
+    defaultMessage: 'New Product',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit product',
+    defaultMessage: 'Update product',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
@@ -89,6 +89,10 @@ export default defineMessages({
     id: `${scope}.col13ShouldNotEmpty`,
     defaultMessage: 'Image path not empty',
   },
+  col14ShouldNotEmpty: {
+    id: `${scope}.col14ShouldNotEmpty`,
+    defaultMessage: 'Flag to check qty',
+  },
   col1: {
     id: `${scope}.col1`,
     defaultMessage: 'Product Code',
@@ -140,6 +144,10 @@ export default defineMessages({
   col13: {
     id: `${scope}.col13`,
     defaultMessage: 'Unit Code Stock',
+  },
+  col14: {
+    id: `${scope}.col14`,
+    defaultMessage: 'Qty No limit',
   },
   btnSave: {
     id: `${scope}.btnSave`,

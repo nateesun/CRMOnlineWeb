@@ -18,7 +18,7 @@ function RenderField({
   meta: { touched, error },
 }) {
   return (
-    <div>
+    <React.Fragment>
       <TextField
         {...input}
         variant="outlined"
@@ -31,7 +31,7 @@ function RenderField({
         disabled={disabled}
       />
       {touched && error && <span style={{ color: 'red' }}>{error}</span>}
-    </div>
+    </React.Fragment>
   );
 }
 

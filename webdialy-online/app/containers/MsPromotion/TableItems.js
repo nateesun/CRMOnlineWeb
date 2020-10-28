@@ -40,7 +40,6 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
-    width: '750px',
   },
 });
 
@@ -119,11 +118,11 @@ export default function TableItems(props) {
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
                 <TableCell align="center">Product Code</TableCell>
-                <TableCell align="center">Product Name</TableCell>
-                <TableCell align="center">Point Redeem</TableCell>
+                <TableCell align="left">Product Name</TableCell>
+                <TableCell align="right">Point Redeem</TableCell>
                 <TableCell align="center">Start Time</TableCell>
                 <TableCell align="center">Finish Time</TableCell>
-                <TableCell align="center">Qty Stock</TableCell>
+                <TableCell align="right">Qty Stock</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -141,11 +140,11 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
-                      <TableCell align="center">{item.product_name}</TableCell>
-                      <TableCell align="center">{item.point_to_redeem}</TableCell>
+                      <TableCell align="left">{item.redeem_name}</TableCell>
+                      <TableCell align="right">{item.point_to_redeem}</TableCell>
                       <TableCell align="center">{moment(item.start_time).format('DD/MM/YYYY')}</TableCell>
                       <TableCell align="center">{moment(item.finish_time).format('DD/MM/YYYY')}</TableCell>
-                      <TableCell align="center">{item.qty_in_stock}</TableCell>
+                      <TableCell align="right">{item.qty_in_stock}</TableCell>
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
