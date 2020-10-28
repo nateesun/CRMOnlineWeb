@@ -11,6 +11,7 @@
     "start:ui": "pm2 start ./monitor-ui/server/index.js --name ui-monitor",
     "start:app": "npm run start:server && npm run start:ui",
     "start": "npm run stop:app && npm run start:app && electron .",
+    "test": "electron .",
     "start:prod": "npm run build && npm run start",
     "build": "electron-builder"
   },
