@@ -30,31 +30,26 @@ const App = () => {
 
   const handleApi = () => {
     const response = "Success" // wait for dev
-
     if (response === "Success") {
       setMessage("Call API Success")
     } else {
       setMessage("Failure to call API!")
     }
-
     // reset count
     setCount(0)
   }
 
   useEffect(() => {
-    console.log("app ui init")
     Func.initLoadData();
     const socket = socketIOClient(config.apiServiceEndpoint)
     socket.on("create_redeem", async (data) => {
       const payload = JSON.parse(data)
-      const response = await Func.saveRedeemLocal(payload)
-      console.log(response);
+      await Func.saveRedeemLocal(payload)
       setMessage(`get redeem:${payload.redeem_code}`)
     })
     socket.on("create_member", async (data) => {
       const payload = JSON.parse(data)
-      const response = await Func.saveMemberLocal(payload)
-      console.log(response);
+      await Func.saveMemberLocal(payload)
       setMessage(`get member:${payload.code}`)
     })
 

@@ -5,6 +5,7 @@ const fs = require('fs');
 const Task = require('../model/Redeem.model')
 
 module.exports = args => {
+  const { apiServiceRedeem, apiServiceDB, apiServiceAuth } = args;
   const router = Router()
 
   router.use(json())
@@ -14,13 +15,13 @@ module.exports = args => {
 
   module.GET_SERVER = (req, res) => {
     console.log('GET_SERVER');
-    const file_path = __dirname + '/redeem.json';
+    const file_path = __dirname + '/file_stores/redeem.json';
     const options = {
       'method': 'GET',
-      'url': 'http://softcrmpkh.dyndns.org:5000/api/redeem',
+      'url': apiServiceRedeem,
       'headers': {
-        'database': 'd2ViZGFpbHlfMDAx',
-        'Authorization': 'Basic YWRtaW46c29mdHBvczIwMTM='
+        'database': apiServiceDB,
+        'Authorization': apiServiceAuth
       }
     };
     request(options, function (error, response) {

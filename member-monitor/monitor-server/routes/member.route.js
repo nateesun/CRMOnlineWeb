@@ -5,6 +5,7 @@ const fs = require('fs');
 const Task = require('../model/Member.model')
 
 module.exports = args => {
+  const { apiServiceMember, apiServiceDB, apiServiceAuth } = args;
   const router = Router()
 
   router.use(json())
@@ -14,13 +15,13 @@ module.exports = args => {
 
   module.GET_SERVER = (req, res) => {
     console.log('GET_SERVER');
-    const file_path = __dirname + '/member.json';
+    const file_path = __dirname + '/file_stores/member.json';
     const options = {
       'method': 'GET',
-      'url': 'http://softcrmpkh.dyndns.org:5000/api/member',
+      'url': apiServiceMember,
       'headers': {
-        'database': 'd2ViZGFpbHlfMDAx',
-        'Authorization': 'Basic YWRtaW46c29mdHBvczIwMTM='
+        'database': apiServiceDB,
+        'Authorization': apiServiceAuth
       }
     };
     request(options, function (error, response) {
