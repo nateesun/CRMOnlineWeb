@@ -1,5 +1,7 @@
 const { Router } = require("express")
 const { json, urlencoded } = require("body-parser")
+const request = require('request');
+const fs = require('fs');
 const Task = require('../model/Redeem.model')
 
 module.exports = args => {
@@ -10,7 +12,26 @@ module.exports = args => {
 
   const module = {}
 
-  module.GET_ALL_REDEEM = async (req, res) => {
+  module.GET_SERVER = (req, res) => {
+    console.log('GET_SERVER');
+    const file_path = __dirname + '/redeem.json';
+    const options = {
+      'method': 'GET',
+      'url': 'http://softcrmpkh.dyndns.org:5000/api/redeem',
+      'headers': {
+        'database': 'd2ViZGFpbHlfMDAx',
+        'Authorization': 'Basic YWRtaW46c29mdHBvczIwMTM='
+      }
+    };
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+      const payload = JSON.parse(response.body);
+      fs.writeFileSync(file_path, JSON.stringify(payload.data));
+      res.json(JSON.parse(response.body));
+    });
+  }
+
+  module.GET_ALL = async (req, res) => {
     try {
       const response = await Task().findAll();
       const data = JSON.parse(response.data);
@@ -26,7 +47,7 @@ module.exports = args => {
     }
   }
 
-  module.POST_REDEEM = async (req, res) => {
+  module.POST = async (req, res) => {
     try {
       const response = await Task().create(req.body);
       const data = JSON.parse(response.data);
@@ -40,8 +61,9 @@ module.exports = args => {
 
   // local database
   // redeem
-  router.get('/', module.GET_ALL_REDEEM); // get old redeem
-  router.post('/', module.POST_REDEEM); // create new redeem
+  router.get('/server', module.GET_SERVER); // all redeem from server
+  router.get('/', module.GET_ALL); // get old redeem
+  router.post('/', module.POST); // create new redeem
 
   return router;
 }
