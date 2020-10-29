@@ -21,6 +21,18 @@ module.exports = io => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
+
+  router.get("/all", async (req, res, next) => {
+    try {
+      const response = await TaskRedeem(req.headers.database).findAll();
+      const data = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
   
   router.post("/", async (req, res, next) => {
     try {
@@ -38,7 +50,7 @@ module.exports = io => {
         emp_code_redeem: "",
         member_code_use,
         qty_in_use: 1,
-        stystem_create: moment().format("YYYY-MM-DD HH:mm:ss"),
+        system_create: moment().format("YYYY-MM-DD HH:mm:ss"),
         redeem_date: null, // update agian from active status
         in_time: moment().add(30, "minutes").format("YYYY-MM-DD HH:mm:ss"),
         status_use: "in_progress", // in_progress|success|expired

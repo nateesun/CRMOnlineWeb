@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `redeem` (
   `emp_code_redeem` varchar(30) DEFAULT NULL COMMENT 'รหัสพนักงาน',
   `member_code_use` varchar(30) DEFAULT NULL COMMENT 'รหัสสมาชิก',
   `qty_in_use` int(3) DEFAULT NULL COMMENT 'จำนวนที่ใช้',
-  `stystem_create` datetime DEFAULT NULL COMMENT 'วันที่สร้าง',
+  `system_create` datetime DEFAULT NULL COMMENT 'วันที่สร้าง',
   `redeem_date` datetime DEFAULT NULL COMMENT 'วันที่นำไปใช้',
   `in_time` datetime DEFAULT NULL COMMENT 'ใช้ภายในระยะเวลา',
   `status_use` varchar(20) DEFAULT NULL COMMENT 'คำอธิบาย สถานะ',

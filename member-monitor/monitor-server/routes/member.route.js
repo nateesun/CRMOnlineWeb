@@ -3,6 +3,7 @@ const { json, urlencoded } = require("body-parser")
 const request = require('request');
 const fs = require('fs');
 const Task = require('../model/Member.model')
+const Controller = require('../controller/Member.controller')
 
 module.exports = args => {
   const { apiServiceMember, apiServiceDB, apiServiceAuth } = args;
@@ -26,9 +27,14 @@ module.exports = args => {
     };
     request(options, function (error, response) {
       if (error) throw new Error(error);
-      const payload = JSON.parse(response.body);
-      fs.writeFileSync(file_path, JSON.stringify(payload.data));
-      res.json(JSON.parse(response.body));
+      (async ()=>{
+        const payload = JSON.parse(response.body);
+        fs.writeFileSync(file_path, JSON.stringify(payload.data), async ()=>{
+          const data = fs.readFileSync(file_path)
+          const result = await Controller().createOrUpdateFromFile(data);
+          res.json(result);
+        });
+      })()
     });
   }
 
