@@ -1,6 +1,6 @@
 const config = {
-    apiServiceMember: 'http://localhost:5000/api/member',
-    apiServiceRedeem: 'http://localhost:5000/api/redeem/all',
+    apiServiceMember: 'http://localhost:5000/api/member/client',
+    apiServiceRedeem: 'http://localhost:5000/api/redeem/client',
     apiServiceDB: 'd2ViZGFpbHlfMDAx',
     apiServiceAuth: 'Basic YWRtaW46c29mdHBvczIwMTM=',
     database: {

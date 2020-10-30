@@ -22,9 +22,9 @@ module.exports = io => {
     }
   })
 
-  router.get("/all", async (req, res, next) => {
+  router.get("/client", async (req, res, next) => {
     try {
-      const response = await TaskRedeem(req.headers.database).findAll();
+      const response = await TaskRedeem(req.headers.database).getDataForClient();
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
