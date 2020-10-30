@@ -59,9 +59,9 @@ export const saveMemberLocal = async (payload) => {
   })
 }
 
-export const initLoadData = () => {
+export const initLoadData = async () => {
   console.log('init load data function');
-  fetch(config.apiServiceMember)
+  await fetch(config.apiServiceMember)
   .then(res => res.json())
   .then(result => {
     console.log('member sync');
@@ -69,7 +69,7 @@ export const initLoadData = () => {
   })
   .catch(err => console.log('Cannot get data from '+config.apiLocalMember));
 
-  fetch(config.apiServiceRedeem)
+  await fetch(config.apiServiceRedeem)
   .then(res => res.json())
   .then(result => {
     console.log('redeem sync');
