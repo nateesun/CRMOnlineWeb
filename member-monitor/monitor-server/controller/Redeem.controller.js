@@ -3,7 +3,7 @@ module.exports = () => {
     const config = require('../config')
     const module = {}
 
-    module.createOrUpdateFromFile = (data_in_file) => {
+    module.createOrUpdate = (data_in_file) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const data = JSON.parse(data_in_file)
@@ -13,6 +13,9 @@ module.exports = () => {
                 }
                 if(query.length>0){
                     const response = await Task.bulkInsert(query);
+                    if (response) {
+                        await Task.bulkInsertTemp(query);
+                    }
                     resolve(response);
                 }else{
                     resolve('not found data to create')

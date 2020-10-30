@@ -12,20 +12,10 @@ const App = () => {
 
   const runingCounter = async () => {
     setCount((c) => c + 10)
-    const resMember = await fetch(config.apiLocalMember)
-    .then(res => res.json())
-    .catch(err => console.log('Cannot get data from '+config.apiLocalMember));
-    if (resMember) {
-      // const data = resMember.data;
-      console.log('member sync');
-    }
-    const resRedeem = await fetch(config.apiLocalRedeem)
-    .then(res => res.json())
-    .catch(err => console.log('Cannot get data from '+config.apiLocalRedeem));
-    if (resRedeem) {
-      // const data = resRedeem.data;
-      console.log('redeem sync');
-    }
+    const uploadMemberResponse = await Func.uploadMember().catch(err=>console.log('Error:', err));
+    console.log(uploadMemberResponse);
+    const uploadRedeemResponse = await Func.uploadRedeem().catch(err=>console.log('Error:', err));
+    console.log(uploadRedeemResponse);
   }
 
   const handleApi = () => {
@@ -51,6 +41,9 @@ const App = () => {
       const payload = JSON.parse(data)
       await Func.saveMemberLocal(payload)
       setMessage(`get member:${payload.code}`)
+    })
+    socket.on('error', ()=>{
+      console.log('socket connection error')
     })
 
     setInterval(() => {

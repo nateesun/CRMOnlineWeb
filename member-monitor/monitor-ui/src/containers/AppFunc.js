@@ -11,6 +11,34 @@ export const showTimer = (count) => {
   return <WrapperTime minute={minutes} second={seconds} />
 }
 
+export const uploadMember = () => {
+  return new Promise(async (resolve, reject) => {
+    const resMember = await fetch(config.apiLocalMember)
+    .then(res => res.json())
+    .catch(err => console.log('Cannot get data from '+config.apiLocalMember));
+    if (resMember) {
+      // const data = resMember.data;
+      resolve('member sync up success');
+    } else {
+      reject('member sync up failure')
+    }
+  })
+}
+
+export const uploadRedeem = () => {
+  return new Promise(async (resolve, reject) => {
+    const resRedeem = await fetch(config.apiLocalRedeem)
+    .then(res => res.json())
+    .catch(err => console.log('Cannot get data from '+config.apiLocalRedeem));
+    if (resRedeem) {
+      // const data = resRedeem.data;
+      resolve('redeem sync up success');
+    } else {
+      reject('redeem sync up failure')
+    }
+  })
+}
+
 export const saveRedeemLocal = async (payload) => {
   return new Promise(async (resolve, reject) => {
     const response = await fetch(config.apiLocalRedeem, {

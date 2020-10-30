@@ -1,7 +1,6 @@
 const { Router } = require("express")
 const { json, urlencoded } = require("body-parser")
 const request = require('request');
-const fs = require('fs');
 const Task = require('../model/Member.model')
 const Controller = require('../controller/Member.controller')
 
@@ -16,7 +15,6 @@ module.exports = args => {
 
   module.GET_SERVER = (req, res) => {
     console.log('GET_SERVER');
-    const file_path = __dirname + '/file_stores/member.json';
     const options = {
       'method': 'GET',
       'url': apiServiceMember,
@@ -25,22 +23,19 @@ module.exports = args => {
         'Authorization': apiServiceAuth
       }
     };
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      (async ()=>{
-        const payload = JSON.parse(response.body);
-        fs.writeFileSync(file_path, JSON.stringify(payload.data), async ()=>{
-          const data = fs.readFileSync(file_path)
-          const result = await Controller().createOrUpdateFromFile(data);
-          res.json(result);
-        });
-      })()
+    request(options, async (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const result = await Controller().createOrUpdate(response.body);
+        res.json(result);
+      }
     });
   }
 
-  module.GET_ALL = async (req, res) => {
+  module.SYNC_UPLOAD = async (req, res) => {
     try {
-      const response = await Task().findAll();
+      const response = await Task().syncData();
       const data = JSON.parse(response.data);
       res.status(200).json({
         status: response.status,
@@ -57,6 +52,9 @@ module.exports = args => {
   module.POST = async (req, res) => {
     try {
       const response = await Task().create(req.body);
+      if (response) {
+        await Task().createTemp(req.body);
+      }
       const data = JSON.parse(response.data);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
@@ -68,8 +66,8 @@ module.exports = args => {
 
   // local database
   // member
-  router.get('/server', module.GET_SERVER); // all member from server
-  router.get('/', module.GET_ALL); // get old member
+  router.get('/server', module.GET_SERVER); // get member from server
+  router.get('/', module.SYNC_UPLOAD); // sync member to server
   router.post('/', module.POST); // create new member
 
   return router;

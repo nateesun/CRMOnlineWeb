@@ -16,7 +16,6 @@ module.exports = args => {
 
   module.GET_SERVER = (req, res) => {
     console.log('GET_SERVER');
-    const file_path = __dirname + '/file_stores/redeem.json';
     const options = {
       'method': 'GET',
       'url': apiServiceRedeem,
@@ -25,22 +24,19 @@ module.exports = args => {
         'Authorization': apiServiceAuth
       }
     };
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      (async ()=>{
-        const payload = JSON.parse(response.body);
-        fs.writeFile(file_path, JSON.stringify(payload.data), async ()=>{
-          const data = fs.readFileSync(file_path)
-          const result = await Controller().createOrUpdateFromFile(data);
-          res.json(result);
-        });
-      })()
+    request(options, async (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const result = await Controller().createOrUpdate(response.body);
+        res.json(result);
+      }
     });
   }
 
-  module.GET_ALL = async (req, res) => {
+  module.SYNC_UPLOAD = async (req, res) => {
     try {
-      const response = await Task().findAll();
+      const response = await Task().syncData();
       const data = JSON.parse(response.data);
       res.status(200).json({
         status: response.status,
@@ -57,6 +53,9 @@ module.exports = args => {
   module.POST = async (req, res) => {
     try {
       const response = await Task().create(req.body);
+      if (response) {
+        await Task().createTemp(req.body);
+      }
       const data = JSON.parse(response.data);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
@@ -69,7 +68,7 @@ module.exports = args => {
   // local database
   // redeem
   router.get('/server', module.GET_SERVER); // all redeem from server
-  router.get('/', module.GET_ALL); // get old redeem
+  router.get('/', module.SYNC_UPLOAD); // get old redeem
   router.post('/', module.POST); // create new redeem
 
   return router;

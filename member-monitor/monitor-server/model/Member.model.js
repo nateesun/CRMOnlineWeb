@@ -10,9 +10,24 @@ module.exports = () => {
   module.findAll = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} 
-        where Member_Active='Y' 
-        order by Member_Code;`
+        const sql = `select * from ${table_name} order by Member_Code;`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.syncData = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const fieldCheck = 'Member_Code, Member_TotalPurchase, Member_TotalScore';
+        const sql = `SELECT ${fieldCheck} FROM 
+        (SELECT ${fieldCheck} FROM ${table_name} t1 
+        UNION ALL SELECT ${fieldCheck} FROM ${table_name}_temp) tbl
+        GROUP BY ${fieldCheck} HAVING count(*) = 1 
+        ORDER BY Member_Code;`
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -38,6 +53,17 @@ module.exports = () => {
       let keys = Object.keys(objectArray[0]);
       let values = objectArray.map( obj => keys.map( key => obj[key]));
       let sql = `INSERT INTO ${table_name} (${keys.join(',')}) VALUES ? 
+      ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
+      const response = await pool.query(sql, [values]);
+      resolve(response);
+    });
+  }
+
+  module.bulkInsertTemp = (objectArray) => {
+    return new Promise(async (resolve, reject) => {
+      let keys = Object.keys(objectArray[0]);
+      let values = objectArray.map( obj => keys.map( key => obj[key]));
+      let sql = `INSERT INTO ${table_name}_temp (${keys.join(',')}) VALUES ? 
       ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
       const response = await pool.query(sql, [values]);
       resolve(response);
@@ -77,6 +103,24 @@ module.exports = () => {
       try {
         if(config.database.databaseServer === data.database){
           const sql = `INSERT INTO ${table_name} SET ? `;
+          const result = await pool.query(sql, payload);
+          resolve({ status: "Success", data: JSON.stringify(result) })
+        }else{
+          resolve({ status: "Success", data: JSON.stringify([])})
+        }
+      } catch (err) {
+        console.log(err);
+        reject(err)
+      }
+    })
+  }
+
+  module.createTemp = data => {
+    return new Promise(async (resolve, reject) => {
+      const payload = await module.getQuery(data);
+      try {
+        if(config.database.databaseServer === data.database){
+          const sql = `INSERT INTO ${table_name}_temp SET ? `;
           const result = await pool.query(sql, payload);
           resolve({ status: "Success", data: JSON.stringify(result) })
         }else{
