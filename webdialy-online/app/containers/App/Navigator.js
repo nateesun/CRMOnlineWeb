@@ -47,6 +47,7 @@ const menuList = [
     role: 'super|admin',
     children: [
       { id: 'Member List', icon: <PeopleIcon />, to: constants.PATH_MEMBER },
+      { id: 'Use Promotion', icon: <PeopleIcon />, to: constants.PATH_USE_PROMOTION },
     ],
   },
   {
@@ -65,7 +66,7 @@ const menuList = [
       { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
       { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
       { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
-      { id: 'Redeem', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
+      { id: 'Promotion', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
     ],
   },
 ];
