@@ -54,7 +54,7 @@ module.exports = (db) => {
   }
 
   module.findShowUser = () => {
-    console.log("findAll method start:")
+    console.log("findShowUser method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select *,

@@ -39,6 +39,7 @@ import MemberTracking from 'containers/MemberTracking/Loadable';
 import CheckCarts from 'containers/CheckCarts/Loadable';
 import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
 import DatabaseConfig from 'containers/DatabaseConfig/Loadable';
+import UsePromotion from 'containers/UsePromotion/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -268,6 +269,7 @@ function Layouts(props) {
               <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
               <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
               <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
+              <Route path={path.PATH_USE_PROMOTION} component={UsePromotion} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

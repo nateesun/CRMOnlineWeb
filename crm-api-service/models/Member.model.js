@@ -47,11 +47,30 @@ module.exports = (db) => {
   }
 
   module.getDataForClient = () => {
-    console.log("findAll method start:")
+    console.log("getDataForClient method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_role='member' order by code;`
         const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.updateMemberFromClient = (member) => {
+    console.log("updateMemberFromClient method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `update ${table_name} 
+        set total_purchase=?,
+        total_score=? where code=?;`
+        const result = await pool.query(sql, [
+          member.Member_TotalPurchase,
+          member.Member_TotalScore,
+          member.Member_Code
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)
