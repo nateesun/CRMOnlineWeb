@@ -34,11 +34,36 @@ module.exports = (db) => {
   }
 
   module.getDataForClient = () => {
-    console.log("findAll method start:")
+    console.log("getDataForClient method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where in_time > curdate()`
         const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.updateRedeemFromClient = (redeem) => {
+    console.log("updateRedeemFromClient method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `update ${table_name} 
+        set bill_no=?,
+        use_in_branch=?,
+        emp_code_redeem=?,
+        redeem_date=curdate(),
+        active=? 
+        where code=?;`
+        const result = await pool.query(sql, [
+          redeem.bill_no,
+          redeem.use_in_branch,
+          redeem.emp_code_redeem,
+          redeem.active,
+          redeem.Member_Code
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)

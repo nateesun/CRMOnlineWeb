@@ -38,6 +38,34 @@ module.exports = args => {
     try {
       const response = await Task().syncData();
       const data = JSON.parse(response.data);
+      if(data.length>0){
+        // 1. find data[0] from db
+        const getData = await Task().findByRedeemCode(data[0].redeem_code)
+        // 2. send data[0] to server
+        const options = {
+          'method': 'PUT',
+          'url': apiServiceRedeem,
+          'headers': {
+            'database': apiServiceDB,
+            'Authorization': apiServiceAuth,
+            'Content-Type': 'application/json',
+          },
+          'body': getData.data,
+        }
+        request(options, async (error, response) => {
+          if (error) {
+            console.log(error);
+          } else {
+            const newData = JSON.parse(getData.data);
+            //    3.1 delete data[0] from db_temp
+            const res1 = await Task().deleteTemp(newData[0].redeem_code);
+            console.log(res1);
+            //    3.2 insert data[0] into db_temp
+            const res2 = await Task().createTemp(newData[0]);
+            console.log(res2);
+          }
+        });
+      }
       res.status(200).json({
         status: response.status,
         msg: 'Success',

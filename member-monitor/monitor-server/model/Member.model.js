@@ -115,17 +115,13 @@ module.exports = () => {
     })
   }
 
-  module.createTemp = data => {
+  module.createTemp = payload => {
     return new Promise(async (resolve, reject) => {
-      const payload = await module.getQuery(data);
       try {
-        if(config.database.databaseServer === data.database){
-          const sql = `INSERT INTO ${table_name}_temp SET ? `;
-          const result = await pool.query(sql, payload);
-          resolve({ status: "Success", data: JSON.stringify(result) })
-        }else{
-          resolve({ status: "Success", data: JSON.stringify([])})
-        }
+        const sql = `INSERT INTO ${table_name}_temp 
+        select * from ${table_name} where Member_Code = ? `;
+        const result = await pool.query(sql, payload.Member_Code);
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         console.log(err);
         reject(err)
@@ -202,6 +198,18 @@ module.exports = () => {
           data.Member_TotalPurchase,
           data.Member_Code
         ]);
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.deleteTemp = memberCode => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `DELETE FROM ${table_name}_temp WHERE Member_Code=?`;
+        const result = await pool.query(sql, [ memberCode ]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)

@@ -33,6 +33,18 @@ module.exports = io => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
+  router.put("/client", async (req, res, next) => {
+    try {
+      const payload = JSON.parse(req.body);
+      const response = await TaskRedeem(req.headers.database).updateRedeemFromClient(payload[0]);
+      const data = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
   
   router.post("/", async (req, res, next) => {
     try {

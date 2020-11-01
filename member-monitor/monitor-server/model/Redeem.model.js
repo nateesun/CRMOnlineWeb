@@ -22,6 +22,23 @@ module.exports = () => {
     })
   }
 
+  module.syncData = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const fieldCheck = 'redeem_code,bill_no';
+        const sql = `SELECT ${fieldCheck} FROM 
+        (SELECT ${fieldCheck} FROM ${table_name} t1 
+        UNION ALL SELECT ${fieldCheck} FROM ${table_name}_temp) tbl
+        GROUP BY ${fieldCheck} HAVING count(*) = 1 
+        ORDER BY redeem_code;`
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.findByRedeemCode = (redeemCode) => {
     console.log("findById method start:")
     return new Promise(async (resolve, reject) => {
@@ -145,18 +162,14 @@ module.exports = () => {
       }
     })
   }
-  module.createTemp = data => {
+  module.createTemp = payload => {
     console.log("create temp method start:")
     return new Promise(async (resolve, reject) => {
-      const payload = await module.getQuery(data);
       try {
-        if(config.database.databaseServer === data.database){
-          const sql = `INSERT INTO ${table_name}_temp SET ? `
-          const result = await pool.query(sql, payload);
+          const sql = `INSERT INTO ${table_name}_temp 
+          select * from ${table_name} where Member_Code = ? `;
+          const result = await pool.query(sql, payload.Member_Code);
           resolve({ status: "Success", data: JSON.stringify(result) })
-        }else{
-          resolve({ status: "Success", data: JSON.stringify([])})
-        }
       } catch (err) {
         console.log(err);
         reject(err)
@@ -218,6 +231,20 @@ module.exports = () => {
       try {
         const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
         const result = await pool.query(query, [id])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.deleteTemp = (redeemCode) => {
+    console.log("deleteTemp method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const query = `DELETE FROM ${table_name} 
+        WHERE redeem_code = ? `
+        const result = await pool.query(query, [redeemCode])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)
