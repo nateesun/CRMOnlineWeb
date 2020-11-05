@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import useCookie from 'react-use-cookie';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -32,9 +33,11 @@ const Wrapper = styled.div`
 export function Logout(props) {
   useInjectReducer({ key: 'logout', reducer });
   useInjectSaga({ key: 'logout', saga });
+  const [token, setToken] = useCookie('token', '');
 
   useEffect(() => {
     props.onCheckLogout();
+    setToken('');
   }, []);
 
   return (

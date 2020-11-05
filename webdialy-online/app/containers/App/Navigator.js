@@ -115,7 +115,7 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-  const { classes, email, profile, ...other } = props;
+  const { classes, profile, ...other } = props;
   const { member_role } = profile;
   leftMenus.length = 0;
   if (profile) {
@@ -195,7 +195,6 @@ function Navigator(props) {
 
 Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
-  email: PropTypes.string,
   profile: PropTypes.object,
 };
 

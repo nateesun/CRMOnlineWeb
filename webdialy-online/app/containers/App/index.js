@@ -3,6 +3,7 @@ import 'fontsource-roboto';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
 import * as selectors from 'containers/Login/selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import * as dashboardActions from 'containers/Dashboard/actions';
@@ -11,7 +12,10 @@ import Layout from './Layouts';
 
 export function App(props) {
   useEffect(() => {
-    props.loadAuthMenu(props.login.email);
+    const getToken = getCookie('token')||'';
+    if (getToken !== '') {
+      props.loadAuthMenu(JSON.parse(getToken));
+    }
   }, []);
 
   return (

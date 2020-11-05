@@ -197,7 +197,7 @@ const styles = {
 };
 
 function Layouts(props) {
-  const { classes, login, loggedIn } = props;
+  const { classes, login } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -208,33 +208,27 @@ function Layouts(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {loggedIn && (
-          <nav className={classes.drawer}>
-            <Hidden smUp implementation="js">
-              <Navigator
-                profile ={props.profile}
-                email={login.email}
-                PaperProps={{ style: { width: drawerWidth } }}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-              />
-            </Hidden>
-            <Hidden xsDown implementation="css">
-              <Navigator
-                profile={props.profile}
-                email={login.email}
-                PaperProps={{ style: { width: drawerWidth } }}
-              />
-            </Hidden>
-          </nav>
-        )}
+        <nav className={classes.drawer}>
+          <Hidden smUp implementation="js">
+            <Navigator
+              profile ={props.profile}
+              email={login.email}
+              PaperProps={{ style: { width: drawerWidth } }}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+            />
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Navigator
+              profile={props.profile}
+              email={login.email}
+              PaperProps={{ style: { width: drawerWidth } }}
+            />
+          </Hidden>
+        </nav>
         <div className={classes.app}>
-          <Header
-            login={login}
-            loggedIn={loggedIn}
-            onDrawerToggle={handleDrawerToggle}
-          />
+          <Header onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />
