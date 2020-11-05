@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
-import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -8,7 +8,7 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/company`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -26,7 +26,7 @@ export function* initLoad() {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/company`;
     const response = yield call(request, requestURL, {
       database,
@@ -46,7 +46,7 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/company`;
     const response = yield call(request, requestURL, {
       database,
@@ -66,7 +66,7 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/company/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,

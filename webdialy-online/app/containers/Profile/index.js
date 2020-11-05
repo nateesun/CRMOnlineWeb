@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -23,8 +24,11 @@ export function Profile(props) {
   useInjectSaga({ key: 'profile', saga });
 
   useEffect(() => {
-    props.initLoad(props.login.email);
-    props.initLoadCompany();
+    const getToken = getCookie('token') || '';
+    if (getToken !== '') {
+      props.initLoad(JSON.parse(getToken));
+      props.initLoadCompany();
+    }
   }, []);
 
   return <ProfileContent {...props} />;

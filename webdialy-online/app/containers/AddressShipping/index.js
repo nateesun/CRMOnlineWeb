@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
@@ -18,6 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import EditForm from './EditForm';
 import * as selectors from './selectors';
+import * as constants from './constants';
 
 export function AddressShipping(props) {
   useInjectReducer({ key: 'addressShipping', reducer });
@@ -26,6 +28,10 @@ export function AddressShipping(props) {
   useEffect(() => {
     props.initLoad(props.profile.code);
   }, []);
+
+  if(!props.profile.code){
+    return <Redirect to={`${constants.publicPath}/profile`} />
+  }
 
   return <EditForm {...props} />;
 }

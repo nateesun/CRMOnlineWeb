@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
@@ -23,7 +24,10 @@ export function ProfileEdit(props) {
   useInjectSaga({ key: 'profileEdit', saga });
 
   useEffect(() => {
-    props.initLoad(props.login.email);
+    const getToken = getCookie('token') || '';
+    if (getToken !== '') {
+      props.initLoad(JSON.parse(getToken));
+    }
   }, []);
 
   return <EditForm {...props} />;
