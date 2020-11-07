@@ -211,6 +211,7 @@ function Layouts(props) {
         <nav className={classes.drawer}>
           <Hidden smUp implementation="js">
             <Navigator
+              leftmenu={props.leftMenu}
               profile ={props.profile}
               email={login.email}
               PaperProps={{ style: { width: drawerWidth } }}
@@ -221,6 +222,7 @@ function Layouts(props) {
           </Hidden>
           <Hidden xsDown implementation="css">
             <Navigator
+              leftmenu={props.leftMenu}
               profile={props.profile}
               email={login.email}
               PaperProps={{ style: { width: drawerWidth } }}
