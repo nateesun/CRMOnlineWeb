@@ -16,6 +16,7 @@ import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
+import * as appActions from 'containers/App/actions';
 import DashboardContent from './DashboardContent';
 
 export function Dashboard(props) {
@@ -31,6 +32,7 @@ export function Dashboard(props) {
     if (getToken !== '') {
       props.onRefresh(JSON.parse(getToken));
       props.onLoadRedeem();
+      props.onLoadMenu();
     }
   }, []);
 
@@ -56,6 +58,9 @@ function mapDispatchToProps(dispatch) {
     },
     onCreateRedeem: code => {
       dispatch(actions.createRedeem(code));
+    },
+    onLoadMenu: () => {
+      dispatch(appActions.initLoad());
     },
   };
 }
