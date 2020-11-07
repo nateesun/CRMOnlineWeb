@@ -18,59 +18,6 @@ import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import ButtonLink from 'components/ButtonLink';
 import * as constants from './constants';
 
-// const menuList = [
-//   {
-//     id: 'Account',
-//     role: 'super|admin|member|employee',
-//     children: [
-//       { id: 'Overview', icon: <CardGiftcardIcon />, to: constants.PATH_DASHBOARD, active: true },
-//       { id: 'Profile', icon: <RecentActorsIcon />, to: constants.PATH_PROFILE },
-//     ],
-//   },
-//   {
-//     id: 'Orders',
-//     role: 'super|admin|member',
-//     children: [
-//       { id: 'Shopping', icon: <LocalMallIcon />, to: constants.PATH_SHOPPING },
-//       { id: 'Track Order', icon: <LocalMallIcon />, to: constants.PATH_ORDERS_TRACKING },
-//     ],
-//   },
-//   {
-//     id: 'Request Order',
-//     role: 'super|admin|employee',
-//     children: [
-//       { id: 'Check cart list', icon: <LocalMallIcon />, to: constants.PATH_CHECK_CARTS },
-//     ],
-//   },
-//   {
-//     id: 'Members',
-//     role: 'super|admin',
-//     children: [
-//       { id: 'Member List', icon: <PeopleIcon />, to: constants.PATH_MEMBER },
-//       { id: 'Use Promotion', icon: <PeopleIcon />, to: constants.PATH_USE_PROMOTION },
-//     ],
-//   },
-//   {
-//     id: 'Settings',
-//     role: 'super',
-//     children: [
-//       { id: 'Roles', icon: <LockIcon />, to: constants.PATH_MS_ROLE },
-//       { id: 'Database', icon: <DnsRoundedIcon />, to: constants.PATH_DATABASE },
-//     ],
-//   },
-//   {
-//     id: 'Master',
-//     role: 'super|admin',
-//     children: [
-//       { id: 'Company', icon: <DnsRoundedIcon />, to: constants.PATH_MS_COMPANY },
-//       { id: 'Branch', icon: <DnsRoundedIcon />, to: constants.PATH_MS_BRANCH },
-//       { id: 'Product', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PRODUCT },
-//       { id: 'Stock', icon: <DnsRoundedIcon />, to: constants.PATH_MS_STOCK },
-//       { id: 'Promotion', icon: <DnsRoundedIcon />, to: constants.PATH_MS_PROMOTION },
-//     ],
-//   },
-// ];
-
 const leftMenus = [];
 
 const styles = theme => ({
@@ -178,7 +125,7 @@ function Navigator(props) {
               </ListItemText>
             </ListItem>
             {children.map(({ id, icon, active, to_path: to }) => (
-              <ButtonLink to={to} key={`menu${id}`}>
+              <ButtonLink to={constants.publicPath+to} key={`menu${id}`}>
                 <ListItem
                   key={id}
                   button

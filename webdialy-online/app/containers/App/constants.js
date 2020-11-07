@@ -40,3 +40,4 @@ export const PATH_USE_PROMOTION = `${publicPath}/use_promotion`;
 export const INIT_LOAD = 'app/App/INIT_LOAD';
 export const INIT_LOAD_SUCCESS = 'app/App/INIT_LOAD_SUCCESS';
 export const INIT_LOAD_ERROR = 'app/App/INIT_LOAD_ERROR';
+export const CLEAR_MENU = 'app/App/CLEAR_MENU';

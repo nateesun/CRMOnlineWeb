@@ -23,6 +23,9 @@ const appReducer = (state = initialState, action) =>
         draft.leftMenu = [];
         draft.error = action.payload;
         break;
+      case constants.CLEAR_MENU:
+        draft.leftMenu = [];
+        break;
     }
   });
 

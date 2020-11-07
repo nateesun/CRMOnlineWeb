@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
+import * as appActions from 'containers/App/actions';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -61,9 +62,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
     onCheckLogout: email => {
       dispatch(checkLogout(email));
+      dispatch(appActions.clearMenu());
     },
   };
 }
