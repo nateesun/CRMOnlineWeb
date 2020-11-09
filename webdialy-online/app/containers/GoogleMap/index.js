@@ -52,9 +52,7 @@ export function GoogleMap() {
   );
 }
 
-GoogleMap.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+GoogleMap.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   googleMap: selectors.makeSelectGoogleMap(),
@@ -62,7 +60,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
   };
 }
 

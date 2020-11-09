@@ -36,7 +36,6 @@ const Login = (props) => {
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
 };
 
@@ -48,7 +47,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
     onSubmit: ({ email, password }) => {
       dispatch(actions.checkLogin(email, password));
     },

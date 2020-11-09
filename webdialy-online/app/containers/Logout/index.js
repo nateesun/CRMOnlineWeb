@@ -52,7 +52,6 @@ export function Logout(props) {
 }
 
 Logout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   onCheckLogout: PropTypes.func,
 };
 

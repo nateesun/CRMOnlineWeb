@@ -36,9 +36,7 @@ export function MemberTracking(props) {
   );
 }
 
-MemberTracking.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+MemberTracking.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),

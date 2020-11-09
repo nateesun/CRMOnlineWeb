@@ -22,4 +22,14 @@ const makeSelectForgotPassword = () =>
     substate => substate,
   );
 
-export { selectForgotPasswordDomain, makeSelectForgotPassword };
+const makeSelectRequest = () =>
+  createSelector(
+    selectForgotPasswordDomain,
+    substate => substate.request,
+  );
+
+export { 
+  selectForgotPasswordDomain, 
+  makeSelectForgotPassword,
+  makeSelectRequest,
+};
