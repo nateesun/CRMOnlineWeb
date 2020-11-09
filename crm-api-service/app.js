@@ -75,6 +75,9 @@ const ordersRouter = require("./routes/orders.route")
 // router for database config
 const dbConfigRouter = require('./routes/database_config.route');
 
+// router for leftmenu
+const leftMenuRouter = require('./routes/left_menu.route');
+
 const helmet = require("helmet")
 // const cors = require("cors")
 const nocache = require('nocache');
@@ -135,6 +138,9 @@ app.use("/api/orders", basicAuth({ users: { admin: fixPassword } }), ordersRoute
 
 // database config
 app.use("/api/database_config", basicAuth({ users: { admin: fixPassword } }), dbConfigRouter)
+
+// left menu
+app.use("/api/leftmenu", basicAuth({ users: { admin: fixPassword } }), leftMenuRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

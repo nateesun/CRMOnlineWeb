@@ -29,9 +29,7 @@ export function RecoverPassword() {
   );
 }
 
-RecoverPassword.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+RecoverPassword.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   recoverPassword: selectors.makeSelectRecoverPassword(),
@@ -39,7 +37,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
   };
 }
 

@@ -1,13 +1,13 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
-import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
 export function* loadProduct() {
   try {
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       database,
@@ -26,7 +26,7 @@ export function* loadProduct() {
 export function* saveCartItem() {
   try {
     const data = yield select(selectors.makeSelectItemCart());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
@@ -46,7 +46,7 @@ export function* saveCartItem() {
 export function* updateCartItem() {
   try {
     const data = yield select(selectors.makeSelectItemCart());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,

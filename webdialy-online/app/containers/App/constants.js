@@ -35,3 +35,9 @@ export const PATH_TEST_GOOGLE_MAP = `${publicPath}/googlemap`;
 export const PATH_ORDERS_TRACKING = `${publicPath}/tracking`;
 export const PATH_CHECK_CARTS = `${publicPath}/check_carts`;
 export const PATH_MEMBER_ORDERS_CONFIRM = `${publicPath}/order_confirm/:cart_no/:database`;
+export const PATH_USE_PROMOTION = `${publicPath}/use_promotion`;
+
+export const INIT_LOAD = 'app/App/INIT_LOAD';
+export const INIT_LOAD_SUCCESS = 'app/App/INIT_LOAD_SUCCESS';
+export const INIT_LOAD_ERROR = 'app/App/INIT_LOAD_ERROR';
+export const CLEAR_MENU = 'app/App/CLEAR_MENU';

@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-const { v4 } = require('uuid');
+import { v4 } from 'uuid';
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 

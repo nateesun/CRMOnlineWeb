@@ -7,7 +7,15 @@ import produce from 'immer';
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
-export const initialState = {};
+export const initialState = {
+  request: {
+    email: '',
+    mobile: '',
+    secret: '',
+  },
+  status: '',
+  msg: '',
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const forgotPasswordReducer = (state = initialState, action) =>
@@ -15,6 +23,17 @@ const forgotPasswordReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
+        break;
+      case constants.REQUEST_PASSWORD:
+        draft.request = action.payload;
+        break;
+      case constants.REQUEST_PASSWORD_SUCCESS:
+        draft.status = 'Success';
+        draft.msg = 'Change password to default success';
+        break;
+      case constants.REQUEST_PASSWORD_ERROR:
+        draft.status = 'Error';
+        draft.msg = 'Error to Change password !!!';
         break;
     }
   });

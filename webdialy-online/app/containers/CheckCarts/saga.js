@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
-import * as loginSelectors from 'containers/Login/selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
@@ -10,7 +10,7 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/carts`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -28,7 +28,7 @@ export function* searchItem({ payload }) {
   const { key, value } = payload;
   try {
     const requestURL = `${constants.publicPath}/api/carts/search`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -47,7 +47,7 @@ export function* searchItem({ payload }) {
 export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
@@ -67,7 +67,7 @@ export function* saveData() {
 export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
@@ -87,7 +87,7 @@ export function* updateData() {
 export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
@@ -108,7 +108,7 @@ export function* onUpdateShoppingStep() {
   try {
     const { cart_no, approve, reason } = yield select(selectors.makeSelectCartStatus());
     const requestURL = `${constants.publicPath}/api/carts/shopping_approve`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const { code } = yield select(dashboardSelectors.makeSelectProfile());
     let response = yield call(request, requestURL, {
       database,
@@ -133,7 +133,7 @@ export function* onUpdateShoppingStep() {
 export function* onLoadViewOrder() {
   try {
     const data = yield select(selectors.makeSelectForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     yield put(push(`${constants.publicPath}/order_confirm/${data.cart_no}/${database}`));
     yield put(actions.loadViewOrderSuccess('Success'))
   } catch (err) {

@@ -39,6 +39,7 @@ import MemberTracking from 'containers/MemberTracking/Loadable';
 import CheckCarts from 'containers/CheckCarts/Loadable';
 import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
 import DatabaseConfig from 'containers/DatabaseConfig/Loadable';
+import UsePromotion from 'containers/UsePromotion/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
@@ -196,7 +197,7 @@ const styles = {
 };
 
 function Layouts(props) {
-  const { classes, login, loggedIn } = props;
+  const { classes, login } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -207,33 +208,29 @@ function Layouts(props) {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        {loggedIn && (
-          <nav className={classes.drawer}>
-            <Hidden smUp implementation="js">
-              <Navigator
-                profile ={props.profile}
-                email={login.email}
-                PaperProps={{ style: { width: drawerWidth } }}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-              />
-            </Hidden>
-            <Hidden xsDown implementation="css">
-              <Navigator
-                profile={props.profile}
-                email={login.email}
-                PaperProps={{ style: { width: drawerWidth } }}
-              />
-            </Hidden>
-          </nav>
-        )}
+        <nav className={classes.drawer}>
+          <Hidden smUp implementation="js">
+            <Navigator
+              leftmenu={props.leftMenu}
+              profile ={props.profile}
+              email={login.email}
+              PaperProps={{ style: { width: drawerWidth } }}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+            />
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Navigator
+              leftmenu={props.leftMenu}
+              profile={props.profile}
+              email={login.email}
+              PaperProps={{ style: { width: drawerWidth } }}
+            />
+          </Hidden>
+        </nav>
         <div className={classes.app}>
-          <Header
-            login={login}
-            loggedIn={loggedIn}
-            onDrawerToggle={handleDrawerToggle}
-          />
+          <Header onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />
@@ -268,6 +265,7 @@ function Layouts(props) {
               <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
               <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
               <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
+              <Route path={path.PATH_USE_PROMOTION} component={UsePromotion} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>

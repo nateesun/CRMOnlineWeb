@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import useCookie from 'react-use-cookie';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -15,6 +16,7 @@ import styled from 'styled-components';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
+import * as appActions from 'containers/App/actions';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -32,9 +34,11 @@ const Wrapper = styled.div`
 export function Logout(props) {
   useInjectReducer({ key: 'logout', reducer });
   useInjectSaga({ key: 'logout', saga });
+  const [token, setToken] = useCookie('token', '');
 
   useEffect(() => {
     props.onCheckLogout();
+    setToken('');
   }, []);
 
   return (
@@ -48,7 +52,6 @@ export function Logout(props) {
 }
 
 Logout.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   onCheckLogout: PropTypes.func,
 };
 
@@ -58,9 +61,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
     onCheckLogout: email => {
       dispatch(checkLogout(email));
+      dispatch(appActions.clearMenu());
     },
   };
 }

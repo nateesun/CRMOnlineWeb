@@ -33,6 +33,20 @@ module.exports = (db) => {
     })
   }
 
+  module.findByMobileAndEmail = (email, mobile) => {
+    console.log("findByEmail method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} 
+        where email=? and mobile=?;`
+        const result = await pool.query(sql, [email, mobile])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   module.findAll = () => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {
@@ -47,11 +61,30 @@ module.exports = (db) => {
   }
 
   module.getDataForClient = () => {
-    console.log("findAll method start:")
+    console.log("getDataForClient method start:")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_role='member' order by code;`
         const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.updateMemberFromClient = (member) => {
+    console.log("updateMemberFromClient method start:")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `update ${table_name} 
+        set total_purchase=?,
+        total_score=? where code=?;`
+        const result = await pool.query(sql, [
+          member.Member_TotalPurchase,
+          member.Member_TotalScore,
+          member.Member_Code
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)
@@ -144,6 +177,21 @@ module.exports = (db) => {
           data.last_name,
           data.uuid_index
         ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  module.changePassword = (data) => {
+    console.log("changePassword method start:")
+    return new Promise(async (resolve, reject) => {
+      const { email, mobile, secret } = data;
+      const password = Buffer.from('123456').toString('base64');
+      try {
+        const query = `UPDATE ${tb_login} SET password = ? WHERE username=? `
+        const result = await pool.query(query, [password, email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)

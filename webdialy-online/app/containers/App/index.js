@@ -3,15 +3,23 @@ import 'fontsource-roboto';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import * as selectors from 'containers/Login/selectors';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import * as loginSelectors from 'containers/Login/selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
-import * as dashboardActions from 'containers/Dashboard/actions';
 import GlobalStyle from '../../global-styles';
 import Layout from './Layouts';
+import * as actions from './actions';
+import reducer from './reducer';
+import saga from './saga';
+import * as selectors from './selectors';
 
 export function App(props) {
+  useInjectReducer({ key: 'app', reducer });
+  useInjectSaga({ key: 'app', saga });
+
   useEffect(() => {
-    props.loadAuthMenu(props.login.email);
+    console.log('App:init');
   }, []);
 
   return (
@@ -23,15 +31,16 @@ export function App(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  login: selectors.makeSelectLogin(),
-  loggedIn: selectors.makeSelectLoggedIn(),
+  login: loginSelectors.makeSelectLogin(),
+  loggedIn: loginSelectors.makeSelectLoggedIn(),
   profile: dashboardSelectors.makeSelectProfile(),
+  leftMenu: selectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadAuthMenu: (email) => {
-      dispatch(dashboardActions.initLoad(email));
+    loadAuthMenu: () => {
+      dispatch(actions.initLoad());
     }
   };
 }

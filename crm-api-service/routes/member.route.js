@@ -28,6 +28,18 @@ module.exports = io => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
+  router.put("/client", async (req, res, next) => {
+    try {
+      const payload = JSON.parse(req.body);
+      const response = await Task(req.headers.database).updateMemberFromClient(payload[0])
+      const data = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
   
   router.post("/search", async (req, res, next) => {
     try {
@@ -121,7 +133,18 @@ module.exports = io => {
   router.patch("/:id", async (req, res, next) => {
     try {
       const payload = {...req.body, uuid_index: req.params.id }
-      const response = await Task(req.headers.database).updateRole(payload)
+      let response
+      if (req.params.id === 'change_password') {
+        const { email, mobile } = req.body;
+        const memberResult = await Task(req.headers.database).findByMobileAndEmail(email, mobile);
+        const memberData = JSON.parse(memberResult.data);
+        if (memberData.length === 0) {
+          return res.status(500).json({ status: "Error", msg: "Email or Mobile mismatch in system!" })
+        }
+        response = await Task(req.headers.database).changePassword(req.body)
+      } else {
+        response = await Task(req.headers.database).updateRole(payload)
+      }
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {

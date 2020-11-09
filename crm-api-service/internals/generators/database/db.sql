@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `redeem` (
   `emp_code_redeem` varchar(30) DEFAULT NULL COMMENT 'รหัสพนักงาน',
   `member_code_use` varchar(30) DEFAULT NULL COMMENT 'รหัสสมาชิก',
   `qty_in_use` int(3) DEFAULT NULL COMMENT 'จำนวนที่ใช้',
-  `stystem_create` datetime DEFAULT NULL COMMENT 'วันที่สร้าง',
+  `system_create` datetime DEFAULT NULL COMMENT 'วันที่สร้าง',
   `redeem_date` datetime DEFAULT NULL COMMENT 'วันที่นำไปใช้',
   `in_time` datetime DEFAULT NULL COMMENT 'ใช้ภายในระยะเวลา',
   `status_use` varchar(20) DEFAULT NULL COMMENT 'คำอธิบาย สถานะ',
@@ -266,3 +266,65 @@ CREATE TABLE IF NOT EXISTS `table_crud` (
   `col2` varchar(100) DEFAULT NULL,
   `col3` varchar(100) DEFAULT NULL
 );
+
+CREATE TABLE IF NOT EXISTS `ui_menu` (
+  `id` varchar(50) NOT NULL,
+  `role` varchar(100) NOT NULL DEFAULT '',
+  `priority` int(2) DEFAULT NULL
+);
+INSERT INTO ui_menu(id, `role`) VALUES('Account', 'super|admin|member|employee', 1);
+INSERT INTO ui_menu(id, `role`) VALUES('Orders', 'super|admin|member', 2);
+INSERT INTO ui_menu(id, `role`) VALUES('Request Order', 'super|admin|employee', 3);
+INSERT INTO ui_menu(id, `role`) VALUES('Members', 'super|admin', 4);
+INSERT INTO ui_menu(id, `role`) VALUES('Settings', 'super', 5);
+INSERT INTO ui_menu(id, `role`) VALUES('Master', 'super|admin', 6);
+
+CREATE TABLE IF NOT EXISTS `ui_menu_list` (
+  `id` varchar(30) DEFAULT NULL,
+  `menu_id` varchar(30) DEFAULT NULL,
+  `icon` varchar(50) DEFAULT NULL,
+  `to_path` varchar(100) DEFAULT NULL,
+  `active` char(1) NOT NULL DEFAULT 'N'
+);
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Overview', 'Account', 'CardGiftcardIcon', '/dashboard', 'Y');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Profile', 'Account', 'RecentActorsIcon', '/profile', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Shopping', 'Orders', 'LocalMallIcon', '/shopping', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Track Order', 'Orders', 'LocalMallIcon', '/tracking', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Check cart list', 'Request Order', 'LocalMallIcon', '/check_carts', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Member List', 'Members', 'PeopleIcon', '/members', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Use Promotion', 'Members', 'PeopleIcon', '/use_promotion', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Roles', 'Settings', 'LockIcon', '/ms/role', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Database', 'Settings', 'DnsRoundedIcon', '/database_config', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Company', 'Master', 'DnsRoundedIcon', '/ms/company', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Branch', 'Master', 'DnsRoundedIcon', '/ms/branch', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Product', 'Master', 'DnsRoundedIcon', '/ms/product', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Stock', 'Master', 'DnsRoundedIcon', '/ms/stock', 'N');
+INSERT INTO ui_menu_list
+(id, menu_id, icon, to_path, active)
+VALUES('Promotion', 'Master', 'DnsRoundedIcon', '/ms/promotion', 'N');

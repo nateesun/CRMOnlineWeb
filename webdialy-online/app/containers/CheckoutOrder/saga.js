@@ -1,6 +1,6 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
-import * as loginSelectors from 'containers/Login/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 export function* loadCartList() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts/${cart_no}`;
     const response = yield call(request, requestURL, {
       database,
@@ -29,7 +29,7 @@ export function* loadCartList() {
 export function* loadMemberShipping() {
   try {
     const member_code = yield select(selectors.makeSelectMemberCode());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/shipping/${member_code}`;
     const response = yield call(request, requestURL, {
       database,
@@ -90,7 +90,7 @@ export function* onDeleteItemCart() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
     const { product_code } = yield select(selectors.makeSelectProduct());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
       database,
@@ -110,7 +110,7 @@ export function* onDeleteItemCart() {
 export function* onUpdateItemCart() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const { product_code, qty } = yield select(selectors.makeSelectProduct());
     const requestURL = `${constants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
@@ -132,7 +132,7 @@ export function* onUpdateAddressForm() {
   try {
     const member_code = yield select(selectors.makeSelectMemberCode());
     const addressFormData = yield select(selectors.makeSelectAddressForm());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/shipping`;
     let response = yield call(request, requestURL, {
       database,
@@ -154,7 +154,7 @@ export function* onUpdatePaymentForm() {
     const cart_no = yield select(selectors.makeSelectCartsNo());
     const member_code = yield select(selectors.makeSelectMemberCode());
     const paymentData = yield select(selectors.makeSelectPaymentData());
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     const requestURL = `${constants.publicPath}/api/carts/payment`;
     let response = yield call(request, requestURL, {
       database,
@@ -175,7 +175,7 @@ export function* onUpdateShoppingStep() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
     const requestURL = `${constants.publicPath}/api/carts/shopping_step`;
-    const database = yield select(loginSelectors.makeSelectDatabase());
+    const database = getCookie('database');
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',

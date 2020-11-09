@@ -13,34 +13,33 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Forgot Password',
   },
-
-  enterEmail: {
-    id: `${scope}.enterEmail`,
-    defaultMessage: 'Email',
-  },
   emailShouldNotEmpty: {
     id: `${scope}.emailShouldNotEmpty`,
     defaultMessage: 'Email should not be blank.',
+  },
+  mobileShouldNotEmpty: {
+    id: `${scope}.mobileShouldNotEmpty`,
+    defaultMessage: 'Mobile should not be blank.',
+  },
+  secretShouldNotEmpty: {
+    id: `${scope}.secretShouldNotEmpty`,
+    defaultMessage: 'Confirm secret should not be blank.',
   },
   emailIncorrectPattern: {
     id: `${scope}.emailIncorrectPattern`,
     defaultMessage: 'Incorrect format email.',
   },
-  submit: {
-    id: `${scope}.submit`,
-    defaultMessage: 'Confrim Send',
-  },
-  forgotPassword: {
-    id: `${scope}.forgotPassword`,
-    defaultMessage: 'Forgot password',
-  },
-  loginErrorMessage: {
-    id: `${scope}.loginErrorMessage`,
-    defaultMessage: 'Incorrect email or password.',
-  },
   emailAddress: {
     id: `${scope}.emailAddress`,
     defaultMessage: 'Email Address',
+  },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile',
+  },
+  confirmSecret: {
+    id: `${scope}.confirmSecret`,
+    defaultMessage: 'Confirm Secret',
   },
   sendEmail: {
     id: `${scope}.sendEmail`,
