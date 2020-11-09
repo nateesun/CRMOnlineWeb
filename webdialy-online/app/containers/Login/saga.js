@@ -1,5 +1,6 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -9,7 +10,7 @@ export function* onValidLogin() {
   try {
     const requestURL = `${constants.publicPath}/api/login`;
     const loginForm = yield select(selectors.makeSelectLogin());
-    const database = yield select(selectors.makeSelectDatabase());
+    const database = getCookie('database');
     const { email, password } = loginForm;
     const encryptPassword = Buffer.from(password).toString('base64');
     const response = yield call(request, requestURL, {

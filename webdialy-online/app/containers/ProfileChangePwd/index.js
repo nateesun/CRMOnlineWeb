@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -23,7 +24,10 @@ export function ProfileChangePwd(props) {
   useInjectSaga({ key: 'profileChangePwd', saga });
 
   useEffect(() => {
-    props.initLoad(props.login.email);
+    const getToken = getCookie('token') || '';
+    if (getToken !== '') {
+      props.initLoad(JSON.parse(getToken));
+    }
   }, []);
 
   return <EditForm {...props} />;

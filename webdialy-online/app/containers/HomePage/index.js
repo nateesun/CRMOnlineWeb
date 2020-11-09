@@ -25,7 +25,6 @@ const HomePage = (props) => {
     const data = new URLSearchParams(props.location.search).get('data')||'';
     if(data){
       setDatabase(data);
-      console.log('database:', database);
     }
   }, [])
 

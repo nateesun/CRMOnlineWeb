@@ -1,4 +1,5 @@
 import React from 'react';
+import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -42,7 +43,12 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle, login, loggedIn } = props;
+  const { classes, onDrawerToggle } = props;
+  const loggedIn = getCookie('token') || '';
+  const email = loggedIn ? JSON.parse(getCookie('token')): '';
+  const login = {
+    email
+  }
 
   return (
     <React.Fragment>
@@ -74,7 +80,7 @@ function Header(props) {
               <LocaleToggle />
             </Grid>
             <Grid item>
-              {loggedIn === true ? (
+              {loggedIn ? (
                 <ButtonLink to={`${publicPath}/logout`}>
                   <Button size="large" startIcon={<ExitToApp />}>
                     <FormattedMessage {...messages.headerLogout} />
@@ -90,7 +96,7 @@ function Header(props) {
             </Grid>
           </Grid>
         </Toolbar>
-        {loggedIn === true && (
+        {loggedIn && (
           <Typography
             component="span"
             style={{
@@ -113,8 +119,6 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool,
-  login: PropTypes.object,
 };
 
 export default withStyles(styles)(Header);

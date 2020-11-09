@@ -15,9 +15,10 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import * as actions from './actions';
 import ForgotForm from './ForgotForm';
 
-export function ForgotPassword(props) {
+const ForgotPassword = (props) => {
   useInjectReducer({ key: 'forgotPassword', reducer });
   useInjectSaga({ key: 'forgotPassword', saga });
 
@@ -26,9 +27,7 @@ export function ForgotPassword(props) {
   );
 }
 
-ForgotPassword.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+ForgotPassword.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   forgotPassword: selectors.makeSelectForgotPassword(),
@@ -36,7 +35,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onSendRequest: payload => {
+      dispatch(actions.requestPassword(payload));
+    }
   };
 }
 
