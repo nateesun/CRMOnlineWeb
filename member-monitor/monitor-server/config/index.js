@@ -1,13 +1,13 @@
 const config = {
-    apiServiceMember: 'http://softcrmpkh.dyndns.org:5000/api/member/client',
-    apiServiceRedeem: 'http://softcrmpkh.dyndns.org:5000/api/redeem/client',
+    apiServiceMember: 'http://localhost:5000/api/member/client',
+    apiServiceRedeem: 'http://localhost:5000/api/redeem/client',
     apiServiceDB: 'd2ViZGFpbHlfMDAx',
     apiServiceAuth: 'Basic YWRtaW46c29mdHBvczIwMTM=',
     database: {
         host: "localhost",
         user: "root",
         password: 'myPassword',
-        database: "pos_softpos",
+        database: "webdaily_001",
         port: 3306,
         connectionLimit: 5,
         connectTimeout: 10000,
