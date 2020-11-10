@@ -1,7 +1,7 @@
 /* Redeem.model code generator by automatic script */
 
-const pool = require("../mysql-connect")
 const config = require('../config')
+const pool = require("../mysql-connect")(config.database)
 const moment = require('moment')
 const util = require('../utils/TextUtil');
 
@@ -149,7 +149,7 @@ module.exports = () => {
     return new Promise(async (resolve, reject) => {
       const payload = await module.getQuery(data);
       try {
-        if(config.database.databaseServer === data.database){
+        if(config.apiServiceDB === data.database){
           const sql = `INSERT INTO ${table_name} SET ? `
           const result = await pool.query(sql, payload);
           resolve({ status: "Success", data: JSON.stringify(result) })
