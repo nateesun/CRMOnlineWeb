@@ -6,9 +6,9 @@ module.exports = () => {
     module.createOrUpdate = (data_in_file) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const data = JSON.parse(data_in_file)
+                const get = JSON.parse(data_in_file)
                 const query = [];
-                for(let payload of data){
+                for(let payload of get.data){
                     query.push(await Task.getQuery({ ...payload, database: config.apiServiceDB })); 
                 }
                 if(query.length>0){
