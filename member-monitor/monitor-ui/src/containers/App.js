@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import socketIOClient from "socket.io-client"
-import config from '../config';
 import * as Func from './AppFunc';
 
 import logo from "./logo.svg"
 import "./App.css"
+
+const apiServiceEndpoint = 'http://softcrmpkh.dyndns.org:5000';
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -31,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     Func.initLoadData();
-    const socket = socketIOClient(config.apiServiceEndpoint)
+    const socket = socketIOClient(apiServiceEndpoint)
     socket.on("create_redeem", async (data) => {
       const payload = JSON.parse(data)
       await Func.saveRedeemLocal(payload)
@@ -62,7 +63,7 @@ const App = () => {
         <div className="DivButton">
           <button onClick={() => handleApi()} className="Button">
             Refresh Sync API Service<br />
-            {config.END_POINT}
+            {apiServiceEndpoint}
           </button>
         </div>
         {message && <div>{message}</div>}

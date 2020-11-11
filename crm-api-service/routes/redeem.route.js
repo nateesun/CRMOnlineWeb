@@ -46,7 +46,7 @@ module.exports = io => {
   })
   router.put("/client", async (req, res, next) => {
     try {
-      const payload = JSON.parse(req.body);
+      const payload = req.body
       const response = await TaskRedeem(req.headers.database).updateRedeemFromClient(payload[0]);
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
