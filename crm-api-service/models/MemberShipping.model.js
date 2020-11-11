@@ -1,5 +1,5 @@
 /* MemberShipping.model code generator by automatic script */
-
+const logger = require('../logger');
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -16,6 +16,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [member_code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -30,6 +31,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -47,6 +49,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -61,6 +64,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -102,6 +106,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -116,6 +121,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -130,6 +136,7 @@ module.exports = (db) => {
         await pool.query(sql, [member_code])
         resolve({ status: "Success", data: JSON.stringify(member_code) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })

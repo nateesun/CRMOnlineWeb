@@ -17,6 +17,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -31,6 +32,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [order_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -45,6 +47,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -62,6 +65,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -76,6 +80,7 @@ module.exports = (db) => {
         await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(params.order_no) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -97,6 +102,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -111,6 +117,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })

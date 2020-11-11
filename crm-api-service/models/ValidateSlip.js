@@ -15,6 +15,7 @@ module.exports = {
         const qr = new QrCode()
         qr.callback = (err, value) => {
           if (err) {
+            logger.error(err);
             return reject({ status: "Error", msg: err.message })
           }
           resolve(value.result)
