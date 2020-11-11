@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
 const socketIo = require('socket.io')
+const logger = require('./logger');
 
 // api document
 const swaggerJsDoc = require('swagger-jsdoc');
