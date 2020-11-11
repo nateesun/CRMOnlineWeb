@@ -6,6 +6,7 @@ const { getDB } = require("./FuncUtil")()
 module.exports = (db) => {
   const module = {}
   const table_name = getDB(db, "redeem")
+  const promotion = getDB(db, "promotion")
 
   module.findById = (id) => {
     console.log("findById method start:")
@@ -56,7 +57,7 @@ module.exports = (db) => {
         emp_code_redeem=?,
         redeem_date=curdate(),
         active=? 
-        where code=?;`
+        where redeem_code=?;`
         const result = await pool.query(sql, [
           redeem.bill_no,
           redeem.use_in_branch,
@@ -64,6 +65,10 @@ module.exports = (db) => {
           redeem.active,
           redeem.Member_Code
         ])
+        const sql2 = `update ${promotion} 
+        set qty_in_stock = qty_in_stock-1 
+        where product_code=?`;
+        const result2 = await pool.query(sql2, [redeem.product_code]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject(err)
