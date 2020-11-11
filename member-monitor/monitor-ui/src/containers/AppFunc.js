@@ -1,6 +1,10 @@
 import React from 'react'
 import WrapperTime from '../components/WrapperTime'
-import config from '../config';
+
+const apiLocalRedeem = 'http://localhost:5050/api/redeem';
+const apiLocalMember = 'http://localhost:5050/api/member';
+const apiServiceRedeem = 'http://localhost:5050/api/redeem/server';
+const apiServiceMember = 'http://localhost:5050/api/member/server';
 
 export const showTimer = (count) => {
   let minutes, seconds
@@ -13,9 +17,9 @@ export const showTimer = (count) => {
 
 export const uploadMember = () => {
   return new Promise(async (resolve, reject) => {
-    const resMember = await fetch(config.apiLocalMember)
+    const resMember = await fetch(apiLocalMember)
     .then(res => res.json())
-    .catch(err => console.log('Cannot get data from '+config.apiLocalMember));
+    .catch(err => console.log('Cannot get data from '+apiLocalMember));
     if (resMember) {
       // const data = resMember.data;
       resolve('member sync up success');
@@ -27,9 +31,9 @@ export const uploadMember = () => {
 
 export const uploadRedeem = () => {
   return new Promise(async (resolve, reject) => {
-    const resRedeem = await fetch(config.apiLocalRedeem)
+    const resRedeem = await fetch(apiLocalRedeem)
     .then(res => res.json())
-    .catch(err => console.log('Cannot get data from '+config.apiLocalRedeem));
+    .catch(err => console.log('Cannot get data from '+apiLocalRedeem));
     if (resRedeem) {
       // const data = resRedeem.data;
       resolve('redeem sync up success');
@@ -41,7 +45,7 @@ export const uploadRedeem = () => {
 
 export const saveRedeemLocal = async (payload) => {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(config.apiLocalRedeem, {
+    const response = await fetch(apiLocalRedeem, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -65,7 +69,7 @@ export const saveRedeemLocal = async (payload) => {
 
 export const saveMemberLocal = async (payload) => {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(config.apiLocalMember, {
+    const response = await fetch(apiLocalMember, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -89,19 +93,19 @@ export const saveMemberLocal = async (payload) => {
 
 export const initLoadData = async () => {
   console.log('init load data function');
-  await fetch(config.apiServiceMember)
+  await fetch(apiServiceMember)
   .then(res => res.json())
   .then(result => {
     console.log('member sync');
     console.log(result);
   })
-  .catch(err => console.log('Cannot get data from '+config.apiLocalMember));
+  .catch(err => console.log('Cannot get data from '+apiLocalMember));
 
-  await fetch(config.apiServiceRedeem)
+  await fetch(apiServiceRedeem)
   .then(res => res.json())
   .then(result => {
     console.log('redeem sync');
     console.log(result);
   })
-  .catch(err => console.log('Cannot get data from '+config.apiServiceRedeem));
+  .catch(err => console.log('Cannot get data from '+apiServiceRedeem));
 }

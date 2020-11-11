@@ -41,6 +41,7 @@ module.exports = args => {
       if(data.length>0){
         // 1. find data[0] from db
         const getData = await Task().findByRedeemCode(data[0].redeem_code)
+        const parseData = JSON.parse(getData.data);
         // 2. send data[0] to server
         const options = {
           'method': 'PUT',
@@ -50,7 +51,7 @@ module.exports = args => {
             'Authorization': apiServiceAuth,
             'Content-Type': 'application/json',
           },
-          'body': getData.data,
+          'body': JSON.stringify(parseData[0]),
         }
         request(options, async (error, response) => {
           if (error) {

@@ -41,6 +41,7 @@ module.exports = args => {
         // 1. find data[0] from db
         const getData = await Task().findByMemberCode(data[0].Member_Code);
         // 2. send data[0] to server
+        const parseData = JSON.parse(getData.data);
         const options = {
           'method': 'PUT',
           'url': apiServiceMember,
@@ -49,7 +50,7 @@ module.exports = args => {
             'Authorization': apiServiceAuth,
             'Content-Type': 'application/json',
           },
-          'body': getData.data,
+          'body': JSON.stringify(parseData[0]),
         };
         request(options, async (error, response) => {
           if (error) {
