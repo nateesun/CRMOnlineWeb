@@ -1,3 +1,4 @@
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { zeroPad, getDB } = require("./FuncUtil")()
 
@@ -11,7 +12,8 @@ module.exports = (db) => {
     console.log("findById method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where uuid_index=?;`
+        const sql = `select * from ${table_name} where uuid_index=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -24,7 +26,8 @@ module.exports = (db) => {
     console.log("findByEmail method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where email=?;`
+        const sql = `select * from ${table_name} where email=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -38,7 +41,8 @@ module.exports = (db) => {
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} 
-        where email=? and mobile=?;`
+        where email=? and mobile=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [email, mobile])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -51,7 +55,8 @@ module.exports = (db) => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} order by code;`
+        const sql = `select * from ${table_name} order by code;`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -64,7 +69,8 @@ module.exports = (db) => {
     console.log("getDataForClient method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where member_role='member' order by code;`
+        const sql = `select * from ${table_name} where member_role='member' order by code;`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -79,7 +85,8 @@ module.exports = (db) => {
       try {
         const sql = `update ${table_name} 
         set total_purchase=?,
-        total_score=? where code=?;`
+        total_score=? where code=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [
           member.Member_TotalPurchase,
           member.Member_TotalScore,
@@ -98,8 +105,9 @@ module.exports = (db) => {
       try {
         let sql = `select * from ${table_name} where 1=1 `
         if (key !== "") {
-          sql = `${sql} and ${key} like '%${value}%'`
+          sql = `${sql} and ${key} like '%${value}%'`;
         }
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -112,19 +120,19 @@ module.exports = (db) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const config = await pool.query(
-          `select member_running, prefix_running, size_running from ${tb_company} c limit 0,1;`
-        )
+        let sql = `select member_running, prefix_running, size_running from ${tb_company} c limit 0,1;`;
+        const config = await pool.query(sql)
         const { prefix_running, member_running, size_running } = config[0]
         data.code = prefix_running + zeroPad(member_running, size_running) // generate prefix running
 
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, data)
+        sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, data)
 
         // update running +1
-        await pool.query(
-          `update ${tb_company} set member_running=member_running+1`
-        )
+        sql = `update ${tb_company} set member_running=member_running+1;`;
+        logger.debug(sql);
+        await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })
@@ -136,7 +144,7 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET  
+        const sql = `UPDATE ${table_name} SET  
         prefix = ?, 
         first_name = ?, 
         last_name = ?, 
@@ -144,8 +152,9 @@ module.exports = (db) => {
         mobile = ?, 
         line_id = ?, 
         system_updated = now() 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.prefix,
           data.first_name,
           data.last_name,
@@ -165,13 +174,14 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET  
+        const sql = `UPDATE ${table_name} SET  
         member_role = ?,
         first_name=?,
         last_name=?,
         system_updated = now() 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.member_role,
           data.first_name,
           data.last_name,
@@ -190,8 +200,9 @@ module.exports = (db) => {
       const { email, mobile, secret } = data;
       const password = Buffer.from('123456').toString('base64');
       try {
-        const query = `UPDATE ${tb_login} SET password = ? WHERE username=? `
-        const result = await pool.query(query, [password, email])
+        const sql = `UPDATE ${tb_login} SET password = ? WHERE username=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [password, email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })
@@ -203,10 +214,12 @@ module.exports = (db) => {
     console.log("delete method start")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE email = ? `
-        const qDelLogin = `DELETE FROM ${tb_login} WHERE username = ? `
-        const result = await pool.query(query, [email])
-        const result2 = await pool.query(qDelLogin, [email])
+        const sql = `DELETE FROM ${table_name} WHERE email = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [email])
+        sql = `DELETE FROM ${tb_login} WHERE username = ?;`;
+        logger.debug(sql);
+        const result2 = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })
@@ -221,7 +234,8 @@ module.exports = (db) => {
         const verifyPass = jwt.verify(token, "softpos2013")
         if (verifyPass) {
           const { lineId } = jwt.decode(token)
-          const sql = `select * from ${table_name} where line_id=?`
+          const sql = `select * from ${table_name} where line_id=?;`;
+          logger.debug(sql);
           const member = await pool.query(sql, [lineId])
           resolve({ status: "Success", data: JSON.stringify(member) })
         } else {

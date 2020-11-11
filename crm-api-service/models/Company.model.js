@@ -1,3 +1,4 @@
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -9,7 +10,8 @@ module.exports = (db) => {
     console.log("findById method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where uuid_index=?;`
+        const sql = `select * from ${table_name} where uuid_index=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -22,7 +24,8 @@ module.exports = (db) => {
     console.log("findAll method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name}`
+        const sql = `select * from ${table_name};`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -35,8 +38,9 @@ module.exports = (db) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        const sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })
@@ -48,13 +52,14 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
+        const sql = `UPDATE ${table_name} 
         SET code=?, 
         name=?, 
         line_official_id=?,
         member_register_point=? 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.code,
           data.name,
           data.line_official_id,
@@ -72,8 +77,9 @@ module.exports = (db) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
-        const result = await pool.query(query, [id])
+        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })

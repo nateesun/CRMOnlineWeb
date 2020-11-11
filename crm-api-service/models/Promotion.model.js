@@ -1,3 +1,4 @@
+const logger = require('../logger');
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -12,7 +13,8 @@ module.exports = (db) => {
         const sql = `select *,
         DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
         DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-        from ${table_name} where product_code=?;`
+        from ${table_name} where product_code=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -28,7 +30,8 @@ module.exports = (db) => {
         const sql = `select *,
         DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
         DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-        from ${table_name} where uuid_index=?;`
+        from ${table_name} where uuid_index=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -44,7 +47,8 @@ module.exports = (db) => {
         const sql = `select *,
         DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
         DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
-        from ${table_name};`
+        from ${table_name};`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -61,7 +65,8 @@ module.exports = (db) => {
         DATE_FORMAT(start_time, '%Y-%m-%d') start_time,
         DATE_FORMAT(finish_time, '%Y-%m-%d') finish_time 
         from ${table_name} 
-        where (curdate() between start_time  and finish_time) and qty_in_stock > 0;`
+        where (curdate() between start_time  and finish_time) and qty_in_stock > 0;`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -74,8 +79,9 @@ module.exports = (db) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        const sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })
@@ -87,7 +93,7 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET 
+        const sql = `UPDATE ${table_name} SET 
         product_code=?,
         redeem_name=?,
         point_to_redeem=?,
@@ -98,8 +104,8 @@ module.exports = (db) => {
         redeem_or_free=?,
         discount_amt=?,
         discount_percent=? 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`;
+        const result = await pool.query(sql, [
           data.product_code,
           data.redeem_name,
           data.point_to_redeem,
@@ -123,8 +129,9 @@ module.exports = (db) => {
     console.log("delete method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
-        const result = await pool.query(query, [id])
+        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         reject({ status: "Error", msg: err.message })

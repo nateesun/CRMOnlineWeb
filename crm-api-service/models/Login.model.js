@@ -1,3 +1,4 @@
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -10,7 +11,8 @@ module.exports = (db) => {
     console.log("create method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
+        const sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
         const result = await pool.query(query, data)
         if (result.affectedRows > 0) {
           resolve({ status: "Success", data: JSON.stringify(result) })
@@ -27,8 +29,9 @@ module.exports = (db) => {
     console.log("update method start:")
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} SET password = ? WHERE username=? `
-        const result = await pool.query(query, [
+        const sql = `UPDATE ${table_name} SET password = ? WHERE username=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           Buffer.from(data.password).toString("base64"),
           data.username,
         ])
@@ -51,7 +54,8 @@ module.exports = (db) => {
         inner join ${tb_member} m on l.username=m.email 
         where l.username=? 
         and l.password=? 
-        and member_active = 'Y'`;
+        and member_active = 'Y';`;
+        logger.debug(sql);
         const user = await pool.query(sql, [username, password])
         if (user.length === 0) {
           return resolve({ status: "Invalid", data: JSON.stringify("Invalid user") })
@@ -69,7 +73,8 @@ module.exports = (db) => {
   module.getLineId = (lineId) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where Line_Id=?`
+        const sql = `select * from ${table_name} where Line_Id=?;`;
+        logger.debug(sql);
         const member = await pool.query(sql, [lineId])
         if (member.length == 0) {
           reject("Not Found")
