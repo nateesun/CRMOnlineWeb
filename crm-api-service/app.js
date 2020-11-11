@@ -36,8 +36,6 @@ const swaggerOptions = {
   apis: ['./routes/*.js']
 }
 
-const indexRouter = require("./routes/index")
-
 if(!global.requireModel) {
   global.requireModel = name=>{
     return require(__dirname+'/models/'+name+'.model.js');
@@ -54,52 +52,60 @@ if(!global.requireRoute) {
   }
 }
 
-const memberMasterRouter = require("./routes/login.route")
-const lineLoginRouter = require("./routes/line_login.route")
-const crudRouter = require("./routes/table_crud.route")
-const companyRouter = require("./routes/company.route")
-const branchRouter = require("./routes/branch.route")
-const productRouter = require("./routes/product.route")
-const stockRouter = require("./routes/stock.route")
-const promotionRouter = require("./routes/promotion.route")
-const roleRouter = require("./routes/role.route")
-const memberRouter = require("./routes/member.route")
-const redeemRouter = require("./routes/redeem.route")
-
-// router for shopping
-const cartsRouter = require("./routes/carts.route")
-const cartsDetailRouter = require("./routes/carts_detail.route")
-const memberShippingRouter = require("./routes/member_shipping.route")
-const slipImageRouter = require("./routes/slip_image.route")
-const ordersRouter = require("./routes/orders.route")
-
-// router for database config
-const dbConfigRouter = require('./routes/database_config.route');
-
-// router for leftmenu
-const leftMenuRouter = require('./routes/left_menu.route');
-
 const helmet = require("helmet")
 // const cors = require("cors")
 const nocache = require('nocache');
 
 const fixPassword = 'softpos2013';
-const options = {
-  imagePath: __dirname + '/public/images',
+
+const setupLogger = (req, res, next) => {
+  logger.info(`${req.method} ${req.path} ${res.statusCode}`);
+  next();
 }
 
 const app = express()
-
-// Socket.io
-const io = socketIo();
-app.io = io;
-
+app.use(setupLogger);
 app.use(helmet())
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard());
 app.use(nocache());
 app.use(helmet.hidePoweredBy({ setTo: 'SOFTPOS' }));
 app.disable('etag');
+
+// Socket.io
+const io = socketIo();
+app.io = io;
+
+const options = {
+  imagePath: __dirname + '/public/images',
+}
+
+const indexRouter = require("./routes/index")(options)
+
+const branchRouter = require("./routes/branch.route")(options)
+const memberMasterRouter = require("./routes/login.route")(options)
+const lineLoginRouter = require("./routes/line_login.route")(options)
+const crudRouter = require("./routes/table_crud.route")(options)
+const companyRouter = require("./routes/company.route")(options)
+const productRouter = require("./routes/product.route")(options)
+const stockRouter = require("./routes/stock.route")(options)
+const promotionRouter = require("./routes/promotion.route")(options)
+const roleRouter = require("./routes/role.route")(options)
+const memberRouter = require("./routes/member.route")(io)
+const redeemRouter = require("./routes/redeem.route")(io)
+
+// router for shopping
+const cartsDetailRouter = require("./routes/carts_detail.route")(options)
+const cartsRouter = require("./routes/carts.route")(options)
+const memberShippingRouter = require("./routes/member_shipping.route")(options)
+const slipImageRouter = require("./routes/slip_image.route")(options)
+const ordersRouter = require("./routes/orders.route")(options)
+
+// router for database config
+const dbConfigRouter = require('./routes/database_config.route')(options)
+
+// router for leftmenu
+const leftMenuRouter = require('./routes/left_menu.route')(options)
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
@@ -126,15 +132,15 @@ app.use("/api/branch", basicAuth({ users: { admin: fixPassword } }), branchRoute
 app.use("/api/product", basicAuth({ users: { admin: fixPassword } }), productRouter)
 app.use("/api/stock", basicAuth({ users: { admin: fixPassword } }), stockRouter)
 app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotionRouter)
-app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter(io))
+app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter)
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
-app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter(io))
+app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
 
 // order shopping
 app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)
 app.use("/api/carts_detail", basicAuth({ users: { admin: fixPassword } }), cartsDetailRouter)
 app.use("/api/shipping", basicAuth({ users: { admin: fixPassword } }), memberShippingRouter)
-app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter(options))
+app.use("/api/validate_slip", basicAuth({ users: { admin: fixPassword } }), slipImageRouter)
 app.use("/api/orders", basicAuth({ users: { admin: fixPassword } }), ordersRouter)
 
 // database config
