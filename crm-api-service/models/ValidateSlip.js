@@ -4,7 +4,7 @@ const fs = require("fs")
 
 module.exports = {
   validateImage: (imageFile) => {
-    console.log("validateImage method start:")
+    logger.info("validateImage")
     return new Promise((resolve, reject) => {
       const qr = new QrCode()
       const buffer = fs.readFileSync(imageFile)

@@ -9,7 +9,7 @@ module.exports = (db) => {
   const table_name = getDB(db, "orders_detail")
 
   module.findById = (id) => {
-    console.log("findById method start:")
+    logger.info(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`;
@@ -24,7 +24,7 @@ module.exports = (db) => {
   }
 
   module.findByOrderNo = (order_no) => {
-    console.log("findByOrderNo method start:")
+    logger.info(`findByOrderNo: ${order_no}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where order_no=?;`;
@@ -39,7 +39,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name};`;
@@ -54,7 +54,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    console.log("searchData method start:")
+    logger.info(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name}`;
@@ -72,7 +72,7 @@ module.exports = (db) => {
   }
 
   module.create = async (params) => {
-    console.log("create method start:")
+    logger.info(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `INSERT INTO ${table_name} SET ?;`;
@@ -87,7 +87,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
@@ -109,7 +109,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    console.log("delete method start:")
+    logger.info(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;

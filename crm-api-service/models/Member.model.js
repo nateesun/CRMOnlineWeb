@@ -9,7 +9,7 @@ module.exports = (db) => {
   const tb_login = getDB(db, "login")
 
   module.findById = (id) => {
-    console.log("findById method start:")
+    logger.info(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`;
@@ -24,7 +24,7 @@ module.exports = (db) => {
   }
 
   module.findByEmail = (email) => {
-    console.log("findByEmail method start:")
+    logger.info(`findByEmail: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where email=?;`;
@@ -39,11 +39,10 @@ module.exports = (db) => {
   }
 
   module.findByMobileAndEmail = (email, mobile) => {
-    console.log("findByEmail method start:")
+    logger.info(`findByMobileAndEmail: ${email} ${mobile}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} 
-        where email=? and mobile=?;`;
+        const sql = `select * from ${table_name} where email=? and mobile=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [email, mobile])
         resolve({ status: "Success", data: JSON.stringify(result) })
@@ -55,7 +54,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} order by code;`;
@@ -70,7 +69,7 @@ module.exports = (db) => {
   }
 
   module.getDataForClient = () => {
-    console.log("getDataForClient method start:")
+    logger.info("getDataForClient")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_role='member' order by code;`;
@@ -85,7 +84,7 @@ module.exports = (db) => {
   }
 
   module.updateMemberFromClient = (member) => {
-    console.log("updateMemberFromClient method start:")
+    logger.info(`updateMemberFromClient: ${member}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `update ${table_name} 
@@ -106,7 +105,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    console.log("searchData method start:")
+    logger.info(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name} where 1=1 `
@@ -124,7 +123,7 @@ module.exports = (db) => {
   }
 
   module.create = (data) => {
-    console.log("create method start:")
+    logger.info(`create: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select member_running, prefix_running, size_running from ${tb_company} c limit 0,1;`;
@@ -149,7 +148,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET  
@@ -180,7 +179,7 @@ module.exports = (db) => {
   }
 
   module.updateRole = (data) => {
-    console.log("update method start:")
+    logger.info(`updateRole: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET  
@@ -205,7 +204,7 @@ module.exports = (db) => {
   }
 
   module.changePassword = (data) => {
-    console.log("changePassword method start:")
+    logger.info(`changePassword: ${data}`)
     return new Promise(async (resolve, reject) => {
       const { email, mobile, secret } = data;
       const password = Buffer.from('123456').toString('base64');
@@ -222,7 +221,7 @@ module.exports = (db) => {
   }
 
   module.delete = (email) => {
-    console.log("delete method start")
+    logger.info(`delete: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE email = ?;`;
@@ -240,7 +239,7 @@ module.exports = (db) => {
   }
 
   module.verifyTokenLine = (token) => {
-    console.log("verifyTokenLine method start")
+    logger.info(`verifyTokenLine: ${token}`)
     return new Promise(async (resolve, reject) => {
       try {
         const verifyPass = jwt.verify(token, "softpos2013")
@@ -251,7 +250,7 @@ module.exports = (db) => {
           const member = await pool.query(sql, [lineId])
           resolve({ status: "Success", data: JSON.stringify(member) })
         } else {
-          reject("Verify Token Error")
+          reject({ status: 'Warning', msg: "Verify Token Error" })
         }
       } catch (err) {
         logger.error(err);

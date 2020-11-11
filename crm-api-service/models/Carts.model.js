@@ -11,7 +11,7 @@ module.exports = (db) => {
   const tb_carts_detail = getDB(db, "carts_detail")
 
   module.findByCartNo = (cart_no) => {
-    console.log("findByCartNo method start:")
+    logger.info(`findByCartNo: ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where cart_no=?;`;
@@ -26,7 +26,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} order by cart_no;`;
@@ -41,7 +41,7 @@ module.exports = (db) => {
   }
 
   module.findAllByMember = (member_code) => {
-    console.log("findAll method start:")
+    logger.info(`findAllByMember: ${member_code}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_code = ? order by cart_no;`;
@@ -56,7 +56,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    console.log("searchData method start:")
+    logger.info(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name}`;
@@ -74,7 +74,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    console.log("create method start:")
+    logger.info(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select cart_running, cart_prefix, cart_size_running from ${tb_company} c limit 0,1;`;
@@ -100,7 +100,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET cart_no=?, member_code=? WHERE uuid_index=?;`;
@@ -119,7 +119,7 @@ module.exports = (db) => {
   }
 
   module.updatePayment = (data) => {
-    console.log("updatePayment method start:")
+    logger.info(`updatePayment: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET 
@@ -152,7 +152,7 @@ module.exports = (db) => {
   }
 
   module.updateShoppingStep = (data) => {
-    console.log("updateShoppingStep method start:")
+    logger.info(`updateShoppingStep: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?;`;
@@ -170,7 +170,7 @@ module.exports = (db) => {
   }
 
   module.updateShoppingApprove = (data) => {
-    console.log("updateShoppingApprove method start:")
+    logger.info(`updateShoppingApprove: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `UPDATE ${table_name} 
@@ -195,7 +195,7 @@ module.exports = (db) => {
   }
 
   module.updateSummary = (data) => {
-    console.log("updateSummary method start:")
+    logger.info(`updateSummary: ${data}`)
     return new Promise(async (resolve, reject) => {
       // summary to carts
       try {
@@ -215,7 +215,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    console.log("delete method start:")
+    logger.info(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
