@@ -15,7 +15,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -28,7 +28,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -42,7 +42,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [email, mobile])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -55,7 +55,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -68,7 +68,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -87,7 +87,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -103,7 +103,7 @@ module.exports = (db) => {
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -127,7 +127,7 @@ module.exports = (db) => {
         )
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -156,7 +156,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -179,7 +179,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -194,7 +194,7 @@ module.exports = (db) => {
         const result = await pool.query(query, [password, email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -209,7 +209,7 @@ module.exports = (db) => {
         const result2 = await pool.query(qDelLogin, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -228,7 +228,7 @@ module.exports = (db) => {
           reject("Verify Token Error")
         }
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }

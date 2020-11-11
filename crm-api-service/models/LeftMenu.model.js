@@ -21,7 +21,7 @@ module.exports = (db) => {
         const result = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }

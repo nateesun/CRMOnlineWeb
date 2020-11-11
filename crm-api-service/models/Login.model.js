@@ -18,7 +18,7 @@ module.exports = (db) => {
           reject("Cannot update password")
         }
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -38,7 +38,7 @@ module.exports = (db) => {
           reject("Cannot update password")
         }
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -61,7 +61,7 @@ module.exports = (db) => {
           return resolve({ status: "Success", data: JSON.stringify(user) })
         }
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
@@ -77,7 +77,7 @@ module.exports = (db) => {
           resolve({ status: "Success", data: JSON.stringify(member) })
         }
       } catch (err) {
-        reject(err)
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
