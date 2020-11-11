@@ -1,3 +1,4 @@
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB, getUUID } = require("./FuncUtil")()
 
@@ -6,84 +7,93 @@ module.exports = (db) => {
   const table_name = getDB(db, "branch")
 
   module.findById = (uuid_index) => {
-    console.log("findById method start:")
+    logger.info(`findById: ${uuid_index}`);
     if(!uuid_index) {
-      return reject('uuid_index to find is empty!')
+      logger.warn(`uuid_index to find is empty!`);
+      return reject({ status: "Warning", msg: 'uuid_index to find is empty!' })
     }
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`
+        logger.debug(sql);
         const result = await pool.query(sql, [uuid_index])
         if(result.length === 1){
           return resolve({ status: "Success", data: JSON.stringify(result[0]) })
-        } else {
-          return resolve({ status: "Success", data: JSON.stringify(result) })
         }
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findByCode = (code) => {
-    console.log("findByCode method start:")
+    logger.info(`findByCode: ${code}`);
     if(!code) {
-      return reject('code to find is empty!')
+      logger.warn(`code to find is empty!`)
+      return reject({ status: 'Warning', msg: 'code to find is empty!' })
     }
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where code=?;`
+        logger.debug(sql);
         const result = await pool.query(sql, [code])
         if(result.length === 1){
           return resolve({ status: "Success", data: JSON.stringify(result[0]) })
-        } else {
-          return resolve({ status: "Success", data: JSON.stringify(result) })
         }
+        resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info(`findAll`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name}`
+        const sql = `select * from ${table_name};`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
+        logger.error(err);
         reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.create = (params) => {
-    console.log("create method start:")
+    logger.info(`create ${params}`)
     return new Promise(async (resolve, reject) => {
       params.uuid_index = getUUID();
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        const sql = `INSERT INTO ${table_name} SET ?;`
+        logger.debug(sql);
+        const result = await pool.query(sql, params)
         if (result.affectedRows > 0) {
-          resolve({ status: "Success", data: JSON.stringify(params.uuid_index) })
-        } else {
-          reject('Cannot create branch data');
+          return resolve({ status: "Success", data: JSON.stringify(params.uuid_index) })
         }
+        logger.warn('Cannot create branch data');
+        reject({ status: 'Warning', msg: 'Cannot create branch data' });
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`Branch:update ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
+        const sql = `UPDATE ${table_name} 
         SET code=?, name=?, map_latitude=?, map_longitude=? 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.code,
           data.name,
           data.map_latitude,
@@ -93,21 +103,24 @@ module.exports = (db) => {
         if (result.affectedRows > 0) {
           return resolve({ status: "Success", data: JSON.stringify(data) })
         }
-        reject('Cannot update branch data');
+        logger.warn('Cannot update branch data')
+        reject({ status: 'Warning', msg: 'Cannot update branch data' });
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.updatePatch = (data) => {
-    console.log("updatePatch method start:")
+    logger.info(`updatePatch ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
+        const sql = `UPDATE ${table_name} 
         SET map_latitude=?, map_longitude=? 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.map_latitude,
           data.map_longitude,
           data.uuid_index,
@@ -115,29 +128,34 @@ module.exports = (db) => {
         if (result.affectedRows > 0) {
           return resolve({ status: "Success", data: JSON.stringify(data) })
         }
-        reject('Cannot update branch data');
+        logger.warn('Cannot update branch data');
+        reject({ status: 'Warning', msg: 'Cannot update branch data' });
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.delete = (uuid_index) => {
-    console.log("delete method start:")
+    logger.info(`delete ${uuid_index}`)
     if(!uuid_index) {
-      return reject('id to delete is empty!')
+      logger.warn('id to delete is empty!');
+      return reject({ status: 'Warning', msg: 'id to delete is empty!' })
     }
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} 
-        WHERE uuid_index = ? `
-        const result = await pool.query(query, [uuid_index])
+        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [uuid_index])
         if (result.affectedRows > 0) {
           return resolve({ status: "Success", data: JSON.stringify(uuid_index) })
         }
-        reject('Cannot delete branch data');
+        logger.warn('Cannot delete branch data');
+        reject({ status: 'Warning', msg: 'Cannot delete branch data' });
       } catch (err) {
-        reject(err, { status: "Error", msg: err.message })
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
