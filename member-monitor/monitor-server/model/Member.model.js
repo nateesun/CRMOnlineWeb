@@ -115,12 +115,11 @@ module.exports = () => {
     })
   }
 
-  module.createTemp = payload => {
+  module.createTemp = memberCode => {
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `INSERT INTO ${table_name}_temp 
-        select * from ${table_name} where Member_Code = ? `;
-        const result = await pool.query(sql, payload.Member_Code);
+        const sql = `INSERT INTO ${table_name}_temp select * from ${table_name} where Member_Code = ? `;
+        const result = await pool.query(sql, memberCode);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         console.log(err);
