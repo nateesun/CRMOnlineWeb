@@ -16,7 +16,7 @@ module.exports = (db) => {
           select ml.*,m.role 
           from ${table_name} m 
           inner join ${ui_menu_list} ml on m.id=ml.menu_id 
-          where m.role like concat('%', (select member_role from ${member} m1 where m1.email = ?),'%') 
+          where m.role like concat('%', (select member_role from ${member} m1 where m1.email = ? limit 0,1),'%') 
           order by m.priority, ml.id;`;
           logger.debug(sql);
         const result = await pool.query(sql, [email])
