@@ -1,17 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const cors = require('cors');
 
+const logger = require('./logger');
 const config = require('./config');
 
-var indexRouter = require('./routes/index');
-var memberRouter = require('./routes/member.route');
-var redeemRouter = require('./routes/redeem.route');
+const indexRouter = require('./routes/index');
+const memberRouter = require('./routes/member.route');
+const redeemRouter = require('./routes/redeem.route');
 
-var app = express();
+const app = express();
 
 const options = {
   apiServiceMember: config.apiServiceMember,
@@ -20,13 +21,19 @@ const options = {
   apiServiceAuth: config.apiServiceAuth,
 }
 
+const setupLogger = (req, res, next) => {
+  logger.info(`${req.method} ${req.path} ${res.statusCode}`);
+  next();
+}
+
 app.use(cors());
+app.use(setupLogger);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
