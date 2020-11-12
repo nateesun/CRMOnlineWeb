@@ -1,3 +1,4 @@
+const logger = require('../logger');
 const QrCode = require("qrcode-reader")
 const Jimp = require("jimp")
 const fs = require("fs")
