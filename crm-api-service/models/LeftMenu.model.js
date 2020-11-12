@@ -1,3 +1,4 @@
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -8,7 +9,7 @@ module.exports = (db) => {
   const member = getDB(db, "member")
 
   module.findRole = (email) => {
-    console.log("findRole method start:")
+    logger.info(`findRole: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `
@@ -16,12 +17,13 @@ module.exports = (db) => {
           from ${table_name} m 
           inner join ${ui_menu_list} ml on m.id=ml.menu_id 
           where m.role like concat('%', (select member_role from ${member} m1 where m1.email = ?),'%') 
-          order by m.priority, ml.id ;
-        `
+          order by m.priority, ml.id;`;
+          logger.debug(sql);
         const result = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }

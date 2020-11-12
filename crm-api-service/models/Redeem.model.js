@@ -1,62 +1,71 @@
 /* Redeem.model code generator by automatic script */
 
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
 module.exports = (db) => {
   const module = {}
   const table_name = getDB(db, "redeem")
+  const promotion = getDB(db, "promotion")
 
   module.findById = (id) => {
-    console.log("findById method start:")
+    logger.info(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where uuid_index=?;`
+        const sql = `select * from ${table_name} where uuid_index=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info("findAll")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name}`
+        const sql = `select * from ${table_name};`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.getDataForClient = () => {
-    console.log("getDataForClient method start:")
+    logger.info("getDataForClient")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where in_time > curdate()`
+        const sql = `select * from ${table_name} where in_time > curdate();`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.updateRedeemFromClient = (redeem) => {
-    console.log("updateRedeemFromClient method start:")
+    logger.info(`updateRedeemFromClient: ${redeem}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `update ${table_name} 
+        let sql = `update ${table_name} 
         set bill_no=?,
         use_in_branch=?,
         emp_code_redeem=?,
         redeem_date=curdate(),
         active=? 
-        where code=?;`
+        where redeem_code=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [
           redeem.bill_no,
           redeem.use_in_branch,
@@ -64,49 +73,60 @@ module.exports = (db) => {
           redeem.active,
           redeem.Member_Code
         ])
+        sql = `update ${promotion} 
+        set qty_in_stock = qty_in_stock-1 
+        where product_code=?;`;
+        logger.debug(sql);
+        const result2 = await pool.query(sql2, [redeem.product_code]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.searchData = (key, value) => {
-    console.log("searchData method start:")
+    logger.info(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select * from ${table_name}`
+        let sql = `select * from ${table_name}`;
         if (key !== "") {
-          sql = `${sql} where ${key} like '%${value}%'`
+          sql = `${sql} where ${key} like '%${value}%'`;
         }
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.create = (params) => {
-    console.log("create method start:")
+    logger.info(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        const sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
-        SET redeem_code=?, product_code=?, point_to_redeem=? WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        const sql = `UPDATE ${table_name} 
+        SET redeem_code=?, product_code=?, point_to_redeem=? WHERE uuid_index=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.redeem_code,
           data.product_code,
           data.point_to_redeem,
@@ -114,20 +134,23 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.delete = (id) => {
-    console.log("delete method start:")
+    logger.info(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE uuid_index = ? `
-        const result = await pool.query(query, [id])
+        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
