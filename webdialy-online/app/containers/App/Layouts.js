@@ -43,6 +43,7 @@ import UsePromotion from 'containers/UsePromotion/Loadable';
 import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
+import SubMenu from './SubMenu';
 
 function Copyright() {
   return (
@@ -231,6 +232,7 @@ function Layouts(props) {
         </nav>
         <div className={classes.app}>
           <Header onDrawerToggle={handleDrawerToggle} />
+          <SubMenu leftMenu={props.leftMenu} profile={props.profile} />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />

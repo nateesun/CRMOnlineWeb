@@ -331,6 +331,10 @@ const validate = formValues => {
   if (!formValues.qty_in_stock && formValues.qty_in_stock < 0) {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
+  if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
+    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+  }
   return errors;
 };
 
