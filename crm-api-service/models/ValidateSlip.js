@@ -4,20 +4,21 @@ const fs = require("fs")
 
 module.exports = {
   validateImage: (imageFile) => {
-    console.log("validateImage method start:")
+    logger.info("validateImage")
     return new Promise((resolve, reject) => {
       const qr = new QrCode()
       const buffer = fs.readFileSync(imageFile)
       Jimp.read(buffer, (err, image) => {
         if (err) {
-          return reject(err)
+          return reject({ status: "Error", msg: err.message })
         }
         const qr = new QrCode()
         qr.callback = (err, value) => {
           if (err) {
-            return reject(err)
+            logger.error(err);
+            return reject({ status: "Error", msg: err.message })
           }
-          return resolve(value.result)
+          resolve(value.result)
         }
         qr.decode(image.bitmap)
       })

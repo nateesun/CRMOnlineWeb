@@ -167,8 +167,8 @@ module.exports = () => {
     return new Promise(async (resolve, reject) => {
       try {
           const sql = `INSERT INTO ${table_name}_temp 
-          select * from ${table_name} where Member_Code = ? `;
-          const result = await pool.query(sql, payload.Member_Code);
+          select * from ${table_name} where redeem_code = ? `;
+          const result = await pool.query(sql, payload.redeem_code);
           resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         console.log(err);

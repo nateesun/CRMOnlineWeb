@@ -1,5 +1,6 @@
 /* CartsDetail.model code generator by automatic script */
 
+const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { getDB } = require("./FuncUtil")()
 
@@ -8,91 +9,103 @@ module.exports = (db) => {
   const table_name = getDB(db, "carts_detail")
 
   module.findByCartNo = (cart_no) => {
-    console.log("findByProduct method start:")
+    logger.info(`findByProduct: ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where cart_no=?;`
+        const sql = `select * from ${table_name} where cart_no=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findByProduct = (product_code, cart_no) => {
-    console.log("findByProduct method start:")
+    logger.info(`findByProduct: ${product_code} ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where product_code=? and cart_no=?;`
+        const sql = `select * from ${table_name} where product_code=? and cart_no=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [product_code, cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findById = (id) => {
-    console.log("findById method start:")
+    logger.info(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where uuid_index=?;`
+        const sql = `select * from ${table_name} where uuid_index=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.findAll = () => {
-    console.log("findAll method start:")
+    logger.info("findAll")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name}`
+        const sql = `select * from ${table_name};`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.searchData = (key, value) => {
-    console.log("searchData method start:")
+    logger.info(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select * from ${table_name}`
+        let sql = `select * from ${table_name}`;
         if (key !== "") {
-          sql = `${sql} where ${key} like '%${value}%'`
+          sql = `${sql} where ${key} like '%${value}%'`;
         }
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.create = (params) => {
-    console.log("create method start:")
+    logger.info(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ? `
-        const result = await pool.query(query, params)
+        const sql = `INSERT INTO ${table_name} SET ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.update = (data) => {
-    console.log("update method start:")
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
+        const sql = `UPDATE ${table_name} 
         SET 
         cart_no=?,
         product_code=?,
@@ -104,8 +117,9 @@ module.exports = (db) => {
         options=?,
         special_text=?,
         point =? 
-        WHERE uuid_index=? `
-        const result = await pool.query(query, [
+        WHERE uuid_index=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.cart_no,
           data.product_code,
           data.product_name,
@@ -120,39 +134,44 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.updateQty = (data) => {
-    console.log("update method start:")
+    logger.info(`updateQty: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `UPDATE ${table_name} 
+        const sql = `UPDATE ${table_name} 
         SET qty=?,total_amount=qty*product_price 
-        WHERE cart_no=? and product_code=? `
-        const result = await pool.query(query, [
+        WHERE cart_no=? and product_code=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
           data.qty,
           data.cart_no,
           data.product_code,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
 
   module.delete = ({ cart_no, product_code }) => {
-    console.log("delete method start:")
+    logger.info(`delete: ${cart_no} ${product_code}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `DELETE FROM ${table_name} WHERE cart_no=? and product_code=?`
-        const result = await pool.query(query, [cart_no, product_code])
+        const sql = `DELETE FROM ${table_name} WHERE cart_no=? and product_code=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [cart_no, product_code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
       }
     })
   }
