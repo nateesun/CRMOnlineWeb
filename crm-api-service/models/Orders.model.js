@@ -85,7 +85,7 @@ module.exports = (db) => {
 
         sql = `INSERT INTO ${table_name} SET ?;`;
         logger.debug(sql);
-        await pool.query(query, params)
+        await pool.query(sql, params)
 
         // update running +1
         sql = `update ${tb_company} set order_running=order_running+1`;
