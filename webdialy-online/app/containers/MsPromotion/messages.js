@@ -61,6 +61,10 @@ export default defineMessages({
     id: `${scope}.col6ShouldNotEmpty`,
     defaultMessage: 'Qty in stock should not empty',
   },
+  discountAmtOrPercentOnly: {
+    id: `${scope}.discountAmtOrPercentOnly`,
+    defaultMessage: 'Should one value in discount amount or discount percent',
+  },
   col1: {
     id: `${scope}.col1`,
     defaultMessage: 'Product Code',

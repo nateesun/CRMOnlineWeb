@@ -47,10 +47,11 @@ export default function RedeemPage(props) {
                 <RedeemCard
                   options={{
                     code: item.product_code,
+                    name: item.redeem_name,
                     label: item.product_name,
                     expiredPro: 'หมดเขต: '+moment(item.finish_time).format('DD/MM/YYYY'),
                     pointUse: 'ใช้คะแนน: ' + item.point_to_redeem + ' คะแนน',
-                    inStock: 'คงเหลือ: ' + item.qty_in_stock,
+                    // inStock: 'คงเหลือ: ' + item.qty_in_stock,
                     status:
                       profile.total_score >= item.point_to_redeem
                         ? 'สถานะ: สามารถแลกได้'
