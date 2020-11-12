@@ -61,7 +61,7 @@ module.exports = args => {
             const res1 = await Task().deleteTemp(newData[0].Member_Code);
             console.log(res1);
             //    3.2 insert data[0] into db_temp
-            const res2 = await Task().createTemp(newData[0]);
+            const res2 = await Task().createTemp(newData[0].Member_Code);
             console.log(res2);
           }
         });
@@ -82,7 +82,8 @@ module.exports = args => {
     try {
       const response = await Task().create(req.body);
       if (response) {
-        await Task().createTemp(req.body);
+        const memberCode = req.body.code || req.body.Member_Code;
+        await Task().createTemp(memberCode);
       }
       const data = JSON.parse(response.data);
       res.status(200).json({ status: response.status, msg: "Success", data })
