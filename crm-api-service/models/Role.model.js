@@ -40,9 +40,9 @@ module.exports = (db) => {
     logger.info(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const query = `INSERT INTO ${table_name} SET ?;`;
+        const sql = `INSERT INTO ${table_name} SET ?;`;
         logger.debug(sql);
-        const result = await pool.query(query, params)
+        const result = await pool.query(sql, params)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);
