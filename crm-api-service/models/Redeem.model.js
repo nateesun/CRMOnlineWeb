@@ -77,7 +77,7 @@ module.exports = (db) => {
         set qty_in_stock = qty_in_stock-1 
         where product_code=?;`;
         logger.debug(sql);
-        const result2 = await pool.query(sql2, [redeem.product_code]);
+        const result2 = await pool.query(sql, [redeem.product_code]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);
