@@ -128,8 +128,9 @@ module.exports = (db) => {
       try {
         let sql = `select member_running, prefix_running, size_running from ${tb_company} c limit 0,1;`;
         const config = await pool.query(sql)
-        const { prefix_running, member_running, size_running } = config[0]
+        const { prefix_running, member_running, size_running, member_register_point } = config[0]
         data.code = prefix_running + zeroPad(member_running, size_running) // generate prefix running
+        data.total_score = member_register_point;
 
         sql = `INSERT INTO ${table_name} SET ?;`;
         logger.debug(sql);
