@@ -32,22 +32,21 @@ const App = () => {
 
   useEffect(() => {
     Func.initLoadData();
-    const socket = socketIOClient(apiServiceEndpoint)
-    socket.on("create_redeem", async (data) => {
-      const payload = JSON.parse(data)
-      await Func.saveRedeemLocal(payload)
-      setMessage(`get redeem:${payload.redeem_code}`)
-    })
-    socket.on("create_member", async (data) => {
-      const payload = JSON.parse(data)
-      await Func.saveMemberLocal(payload)
-      setMessage(`get member:${payload.code}`)
-    })
-    socket.on('error', ()=>{
-      console.log('socket connection error')
-    })
-
     setInterval(() => {
+      const socket = socketIOClient(apiServiceEndpoint)
+      socket.on("create_redeem", async (data) => {
+        const payload = JSON.parse(data)
+        await Func.saveRedeemLocal(payload)
+        setMessage(`get redeem:${payload.redeem_code}`)
+      })
+      socket.on("create_member", async (data) => {
+        const payload = JSON.parse(data)
+        await Func.saveMemberLocal(payload)
+        setMessage(`get member:${payload.code}`)
+      })
+      socket.on('error', ()=>{
+        console.log('socket connection error')
+      })
       runingCounter()
     }, 10000)
   }, [])
