@@ -13,7 +13,7 @@ module.exports = (db) => {
       try {
         const sql = `INSERT INTO ${table_name} SET ?;`;
         logger.debug(sql);
-        const result = await pool.query(query, data)
+        const result = await pool.query(sql, data)
         if (result.affectedRows > 0) {
           resolve({ status: "Success", data: JSON.stringify(result) })
         } else {
