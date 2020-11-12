@@ -2,24 +2,29 @@ const config = require('../config')
 const pool = require("../mysql-connect")(config.databaseMember)
 const moment = require('moment')
 const util = require('../utils/TextUtil');
+const logger = require('../logger');
 
 module.exports = () => {
   const module = {}
   const table_name = "memmaster"
 
   module.findAll = () => {
+    logger.info('findAll');
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} order by Member_Code;`
+        const sql = `select * from ${table_name} order by Member_Code;`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.syncData = () => {
+    logger.info('syncData');
     return new Promise(async (resolve, reject) => {
       try {
         const fieldCheck = 'Member_Code, Member_TotalPurchase, Member_TotalScore';
@@ -27,51 +32,70 @@ module.exports = () => {
         (SELECT ${fieldCheck} FROM ${table_name} t1 
         UNION ALL SELECT ${fieldCheck} FROM ${table_name}_temp) tbl
         GROUP BY ${fieldCheck} HAVING count(*) = 1 
-        ORDER BY Member_Code;`
+        ORDER BY Member_Code;`;
+        logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.findByMemberCode = memberCode => {
+    logger.info(`findByMemberCode: ${memberCode}`);
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where Member_Code = ?;`
+        const sql = `select * from ${table_name} where Member_Code = ?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, memberCode)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.bulkInsert = (objectArray) => {
+    logger.info(`bulkInsert: ${objectArray}`)
     return new Promise(async (resolve, reject) => {
-      let keys = Object.keys(objectArray[0]);
-      let values = objectArray.map( obj => keys.map( key => obj[key]));
-      let sql = `INSERT INTO ${table_name} (${keys.join(',')}) VALUES ? 
-      ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
-      const response = await pool.query(sql, [values]);
-      resolve(response);
+      try {
+        let keys = Object.keys(objectArray[0]);
+        let values = objectArray.map( obj => keys.map( key => obj[key]));
+        let sql = `INSERT INTO ${table_name} (${keys.join(',')}) VALUES ? 
+        ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
+        logger.debug(sql);
+        const response = await pool.query(sql, [values]);
+        resolve(response);
+      } catch (err) {
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
+      }
     });
   }
 
   module.bulkInsertTemp = (objectArray) => {
+    logger.info(`bulkInsertTemp: ${objectArray}`)
     return new Promise(async (resolve, reject) => {
-      let keys = Object.keys(objectArray[0]);
-      let values = objectArray.map( obj => keys.map( key => obj[key]));
-      let sql = `INSERT INTO ${table_name}_temp (${keys.join(',')}) VALUES ? 
-      ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
-      const response = await pool.query(sql, [values]);
-      resolve(response);
+      try {
+        let keys = Object.keys(objectArray[0]);
+        let values = objectArray.map( obj => keys.map( key => obj[key]));
+        let sql = `INSERT INTO ${table_name}_temp (${keys.join(',')}) VALUES ? 
+        ON DUPLICATE KEY UPDATE Member_Code=Member_Code`;
+        logger.debug(sql);
+        const response = await pool.query(sql, [values]);
+        resolve(response);
+      } catch (err) {
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
+      }
     });
   }
 
   module.getQuery = (data) => {
-    console.log("create method start:")
+    logger.info(`getQuery: ${data}`)
     return new Promise(async (resolve, reject) => {
       return resolve({
         Member_Code: data.code,
@@ -98,37 +122,42 @@ module.exports = () => {
   }
 
   module.create = data => {
+    logger.info(`create: ${data}`)
     return new Promise(async (resolve, reject) => {
       const payload = await module.getQuery(data);
       try {
         if(config.apiServiceDB === data.database){
           const sql = `INSERT INTO ${table_name} SET ? `;
+          logger.debug(sql);
           const result = await pool.query(sql, payload);
           resolve({ status: "Success", data: JSON.stringify(result) })
         }else{
           resolve({ status: "Success", data: JSON.stringify([])})
         }
       } catch (err) {
-        console.log(err);
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.createTemp = memberCode => {
+    logger.info(`createTemp: ${memberCode}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `INSERT INTO ${table_name}_temp select * from ${table_name} where Member_Code = ? `;
+        const sql = `INSERT INTO ${table_name}_temp select * from ${table_name} where Member_Code = ?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, memberCode);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        console.log(err);
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.update = data => {
+    logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       const payload = await module.getQuery(data);
       try {
@@ -151,8 +180,8 @@ module.exports = () => {
           Member_Active=?, 
           System_Created=?, 
           System_Updated=? 
-          WHERE Member_Code=? 
-          `;
+          WHERE Member_Code=?;`;
+          logger.debug(sql);
           const result = await pool.query(sql, [
             payload.Member_NameThai,
             payload.Member_HomeTel, 
@@ -178,20 +207,22 @@ module.exports = () => {
           resolve({ status: "Success", data: JSON.stringify([])})
         }
       } catch (err) {
-        console.log(err);
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.updateMemberPoint = data => {
+    logger.info(`updateMemberPoint: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
         SET Member_TotalScore=?, 
         Member_TotalPurchase=?, 
         System_Updated=now() 
-        WHERE Member_Code=?`;
+        WHERE Member_Code=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [
           data.Member_TotalScore,
           data.Member_TotalPurchase,
@@ -199,19 +230,23 @@ module.exports = () => {
         ]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
 
   module.deleteTemp = memberCode => {
+    logger.info(`deleteTemp: ${memberCode}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `DELETE FROM ${table_name}_temp WHERE Member_Code=?`;
+        const sql = `DELETE FROM ${table_name}_temp WHERE Member_Code=?;`;
+        logger.debug(sql);
         const result = await pool.query(sql, [ memberCode ]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        reject(err)
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
       }
     })
   }
