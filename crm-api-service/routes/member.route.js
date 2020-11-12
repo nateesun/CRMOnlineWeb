@@ -77,8 +77,6 @@ module.exports = io => {
   
   router.post("/", async (req, res, next) => {
     try {
-      const respComp = await TaskCompany(req.headers.database).findAll();
-      const company = JSON.parse(respComp.data);
       const memberModel = {
         code: req.body.code,
         uuid_index: req.body.uuid_index,
@@ -89,7 +87,7 @@ module.exports = io => {
         email: req.body.email,
         system_created: req.body.system_created,
         system_updated: req.body.system_updated,
-        total_score: company.member_register_point || 0,
+        total_score: 0,
         total_purchase: req.body.total_purchase,
         point_expired_date: req.body.point_expired_date,
         expired_date: req.body.expired_date,
