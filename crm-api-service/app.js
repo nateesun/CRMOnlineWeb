@@ -53,7 +53,7 @@ if(!global.requireRoute) {
 }
 
 const helmet = require("helmet")
-// const cors = require("cors")
+const cors = require("cors")
 const nocache = require('nocache');
 
 const fixPassword = 'softpos2013';
@@ -64,6 +64,7 @@ const setupLogger = (req, res, next) => {
 }
 
 const app = express()
+app.use(cors());
 app.use(setupLogger);
 app.use(helmet())
 app.use(helmet.xssFilter());

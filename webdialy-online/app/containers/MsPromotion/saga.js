@@ -34,7 +34,7 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
+      body: JSON.stringify({...data, img_path: `${constants.apiServiceHost}/images/${file.name}`}),
     });
     if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
@@ -57,7 +57,7 @@ export function* updateData() {
       response = yield call(request, requestURL, {
         database,
         method: 'PUT',
-        body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
+        body: JSON.stringify({...data, img_path: `${constants.apiServiceHost}/images/${file.name}`}),
       });
     } else {
       response = yield call(request, requestURL, {
