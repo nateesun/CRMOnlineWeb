@@ -99,6 +99,7 @@ const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
@@ -130,6 +131,7 @@ const NewItem = props => {
   const onChangeHandler = event => {
     setShowImg(false);
     setFile(event.target.files[0]);
+    setPreview(URL.createObjectURL(event.target.files[0]));
   };
 
   const onUploadImageFile = () => {
@@ -252,11 +254,14 @@ const NewItem = props => {
               />
             </Grid>
             <Grid item xs={6}>
-              <input type="file" name="file" onChange={onChangeHandler} />
+              <input type="file" name="file" onChange={onChangeHandler} /><br />
+            </Grid>
+            <Grid item xs={12}>
+              {preview && <img src={preview} width={200} height={200} />}
             </Grid>
             <Grid item xs={6}>
               {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                Upload
+                Please press upload button
               </Button>}
             </Grid>
             <Grid item xs={12}>
