@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { body, param, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const Controller = require('../controllers/Branch.controller');
 
 module.exports = args => {

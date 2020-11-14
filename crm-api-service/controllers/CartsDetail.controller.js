@@ -1,5 +1,7 @@
+/* CartsDetail.controller code generator by automatic script */
+
 module.exports = database => {
-    const Task = requireModel("Branch")(database);
+    const Task = requireModel(CartsDetail)(database);
     const module = {}
 
     module.findAll = () => {
@@ -85,7 +87,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch code [${code}] already in use`,
+                        message: `CartsDetail code [${code}] already in use`,
                         error: '',
                         data: [],
                     });
@@ -95,7 +97,7 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Create branch success`,
+                    message: `Create CartsDetail success`,
                     error: '',
                     data: {
                         uuid: resultJson
@@ -105,7 +107,7 @@ module.exports = database => {
                 return reject({
                     status: 500,
                     bizStatus: 500,
-                    message: `Error to create branch`,
+                    message: `Error to create CartsDetail`,
                     error,
                     data: [],
                 });
@@ -124,7 +126,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `CartsDetail id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -134,7 +136,7 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Update branch success`,
+                    message: `Update CartsDetail success`,
                     error: '',
                     data: resultJson,
                 });
@@ -142,7 +144,7 @@ module.exports = database => {
                 return reject({
                     status: 500,
                     bizStatus: 500,
-                    message: `Error to update branch`,
+                    message: `Error to update CartsDetail`,
                     error,
                     data: [],
                 });
@@ -161,7 +163,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `CartsDetail id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -171,7 +173,7 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Update patch branch success`,
+                    message: `Update patch CartsDetail success`,
                     error: '',
                     data: resultJson,
                 });
@@ -179,7 +181,7 @@ module.exports = database => {
                 return reject({
                     status: 500,
                     bizStatus: 500,
-                    message: `Error to update patch branch`,
+                    message: `Error to update patch CartsDetail`,
                     error,
                     data: [],
                 });
@@ -198,7 +200,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `CartsDetail id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -208,7 +210,7 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Delete branch success`,
+                    message: `Delete CartsDetail success`,
                     error: '',
                     data: {
                         uuid_index: resultJson
@@ -218,7 +220,7 @@ module.exports = database => {
                 return reject({
                     status: 500,
                     bizStatus: 500,
-                    message: `Error to delete branch`,
+                    message: `Error to delete CartsDetail`,
                     error,
                     data: [],
                 });

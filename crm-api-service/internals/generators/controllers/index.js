@@ -1,25 +1,25 @@
 /**
- * Model Generator
+ * Controller Generator
  */
 
 /* eslint strict: ["off"] */
 
 'use strict';
 
-const modelExists = require('../../utils/modelExists');
+const controllerExists = require('../../utils/controllerExists');
 
 module.exports = {
-  description: 'Add an unconnected model',
+  description: 'Add an unconnected route',
   prompts: [
     {
       type: 'input',
       name: 'name',
       message: 'What should it be called?',
-      default: 'Index',
+      default: 'index',
       validate: value => {
         if (/.+/.test(value)) {
-          return modelExists(value)
-            ? 'A model with this name already exists'
+          return controllerExists(value)
+            ? 'A controller with this name already exists'
             : true;
         }
 
@@ -31,8 +31,8 @@ module.exports = {
     const actions = [
       {
         type: 'add',
-        path: '../../models/{{properCase name}}.model.js',
-        templateFile: './models/index.js.hbs',
+        path: '../../controllers/{{properCase name}}.controller.js',
+        templateFile: './controllers/index.js.hbs',
         abortOnFail: true,
       }
     ];
