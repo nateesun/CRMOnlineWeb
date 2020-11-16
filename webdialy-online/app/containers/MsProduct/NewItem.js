@@ -105,7 +105,7 @@ const NewItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="code"
                 component={RenderField}
@@ -116,7 +116,7 @@ const NewItem = props => {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={6} md={5}>
               <Field
                 name="name"
                 component={RenderField}
@@ -126,7 +126,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="unit_code_sale"
                 component={RenderField}
@@ -136,7 +136,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="product_group_code"
                 component={RenderField}
@@ -146,7 +146,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="point"
                 component={RenderField}
@@ -156,7 +156,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="stock_code"
                 component={RenderField}
@@ -166,7 +166,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="price_e"
                 component={RenderField}
@@ -176,7 +176,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="price_t"
                 component={RenderField}
@@ -186,7 +186,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="price_d"
                 component={RenderField}
@@ -196,7 +196,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="max_stock"
                 component={RenderField}
@@ -206,7 +206,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="min_stock"
                 component={RenderField}
@@ -216,7 +216,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="unit_code_stock"
                 component={RenderField}
@@ -226,7 +226,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6} md={2}>
               <Field
                 name="qty_over_stock"
                 component={RenderField}
@@ -236,10 +236,10 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <input type="file" name="file" onChange={onChangeHandler} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
                 Upload
               </Button>}
