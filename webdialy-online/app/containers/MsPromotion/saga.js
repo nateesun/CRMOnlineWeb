@@ -6,6 +6,8 @@ import * as constants from './constants';
 import * as actions from './actions';
 
 const fetch = require('node-fetch');
+const loc = window.location.href.split('/');
+const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
 export function* initLoad() {
   try {
@@ -34,7 +36,7 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: `${constants.apiServiceHost}/images/${file.name}`}),
+      body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
     });
     if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
@@ -57,7 +59,7 @@ export function* updateData() {
       response = yield call(request, requestURL, {
         database,
         method: 'PUT',
-        body: JSON.stringify({...data, img_path: `${constants.apiServiceHost}/images/${file.name}`}),
+        body: JSON.stringify(data),
       });
     } else {
       response = yield call(request, requestURL, {
@@ -109,7 +111,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     }
-    const response = yield fetch(`${constants.apiServiceHost}/api/upload`, options)
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));
     if (response.status === 'Success') {

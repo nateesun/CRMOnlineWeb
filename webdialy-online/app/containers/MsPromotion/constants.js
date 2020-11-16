@@ -5,7 +5,6 @@
  */
 
 export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-export const apiServiceHost = process.env.API_SERVICE_HOST || 'http://localhost:5000';
 
 export const INIT_STATE = 'app/MsPromotion/INIT_STATE';
 

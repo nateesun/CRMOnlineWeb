@@ -1,0 +1,10 @@
+get http://localhost:5000/api/branch
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx
+
+###
+get http://localhost:5000/api/branch/1
+Content-Type: application/json
+Authorization: Basic YWRtaW46c29mdHBvczIwMTM=
+database: d2ViZGFpbHlfMDAx

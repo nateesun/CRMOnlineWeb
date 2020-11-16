@@ -1,25 +1,8 @@
-module.exports = database => {
-    const Task = requireModel("Branch")(database);
-    const module = {}
+/* {{properCase name}}.controller code generator by automatic script */
 
-    const NotFoundResponse = (msg) => {
-        return {
-            status: 404,
-            bizStatus: 404,
-            message: 'NOT_FOUND',
-            error: msg,
-            data: []
-        }
-    }
-    const ErrorResponse = (msg) => {
-        return {
-            status: 500,
-            bizStatus: 500,
-            message: 'ERROR',
-            error: msg,
-            data: []
-        }
-    }
+module.exports = database => {
+    const Task = requireModel({{properCase name}})(database);
+    const module = {}
 
     module.findAll = () => {
         return new Promise(async (resolve, reject) => {
@@ -34,7 +17,13 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject(ErrorResponse('Error to find all data'))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: 'Error to find all data',
+                    error,
+                    data: [],
+                });
             }
         })
     }
@@ -44,9 +33,6 @@ module.exports = database => {
             try {
                 const result = await Task.findById(id);
                 const resultJson = JSON.parse(result.data);
-                if (resultJson.length === 0) {
-                    return resolve(NotFoundResponse(`Not found id ${id}`))
-                }
                 return resolve({
                     status: 200,
                     bizStatus: 200,
@@ -55,7 +41,13 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to find id ${id}`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to find id ${id}`,
+                    error,
+                    data: [],
+                });
             }
         })
     }
@@ -73,7 +65,13 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to find code ${code}`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to find code ${code}`,
+                    error,
+                    data: [],
+                });
             }
         })
     }
@@ -89,7 +87,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch code [${code}] already in use`,
+                        message: `{{properCase name}} code [${code}] already in use`,
                         error: '',
                         data: [],
                     });
@@ -99,14 +97,20 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Create branch success`,
+                    message: `Create {{properCase name}} success`,
                     error: '',
                     data: {
                         uuid: resultJson
                     },
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to create branch`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to create {{properCase name}}`,
+                    error,
+                    data: [],
+                });
             }
         })
     }
@@ -122,7 +126,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `{{properCase name}} id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -132,12 +136,18 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Update branch success`,
+                    message: `Update {{properCase name}} success`,
                     error: '',
                     data: resultJson,
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to update branch`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to update {{properCase name}}`,
+                    error,
+                    data: [],
+                });
             }
         })
     }
@@ -153,7 +163,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `{{properCase name}} id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -163,12 +173,18 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Update patch branch success`,
+                    message: `Update patch {{properCase name}} success`,
                     error: '',
                     data: resultJson,
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to update patch branch`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to update patch {{properCase name}}`,
+                    error,
+                    data: [],
+                });
             }
             
         })
@@ -184,7 +200,7 @@ module.exports = database => {
                     return reject({
                         status: 400,
                         bizStatus: 400,
-                        message: `Branch id not found in database`,
+                        message: `{{properCase name}} id not found in database`,
                         error: '',
                         data: [],
                     });
@@ -194,14 +210,20 @@ module.exports = database => {
                 return resolve({
                     status: 200,
                     bizStatus: 200,
-                    message: `Delete branch success`,
+                    message: `Delete {{properCase name}} success`,
                     error: '',
                     data: {
                         uuid_index: resultJson
                     },
                 });
             } catch (error) {
-                return reject(ErrorResponse(`Error to delete branch`))
+                return reject({
+                    status: 500,
+                    bizStatus: 500,
+                    message: `Error to delete {{properCase name}}`,
+                    error,
+                    data: [],
+                });
             }
         })
     }

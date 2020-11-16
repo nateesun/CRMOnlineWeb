@@ -6,7 +6,7 @@
 
 'use strict';
 
-const modelExists = require('../../utils/modelExists');
+const routeExists = require('../../utils/routeExists');
 
 module.exports = {
   description: 'Add an unconnected route',
@@ -15,11 +15,11 @@ module.exports = {
       type: 'input',
       name: 'name',
       message: 'What should it be called?',
-      default: 'product',
+      default: 'index',
       validate: value => {
         if (/.+/.test(value)) {
-          return modelExists(value)
-            ? 'A model or route with this name already exists'
+          return routeExists(value)
+            ? 'A route with this name already exists'
             : true;
         }
 
@@ -28,7 +28,6 @@ module.exports = {
     },
   ],
   actions: data => {
-    // Generate product.js
     const actions = [
       {
         type: 'add',

@@ -20,6 +20,7 @@ import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
 import * as selectors from './selectors';
+import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -103,7 +104,12 @@ const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
+  const [preview, setPreview] = useState(null);
   const { img_path } = props.initialValues;
+
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -120,6 +126,8 @@ const EditItem = props => {
 
   const onChangeHandler = event => {
     setFile(event.target.files[0]);
+    setPreview(URL.createObjectURL(event.target.files[0]));
+    setFileName(event.target.files[0].name);
   };
 
   const onUploadImageFile = () => {
@@ -252,6 +260,10 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={6}>
               <input type="file" name="file" onChange={onChangeHandler} />
+              <input type="text" value={fileName} />
+            </Grid>
+            <Grid item xs={12}>
+              {preview && <img src={preview} width={200} height={200} />}
             </Grid>
             <Grid item xs={6}>
               <Button
@@ -259,13 +271,13 @@ const EditItem = props => {
                 color="primary"
                 onClick={() => onUploadImageFile()}
               >
-                Upload
+                Please press upload button
               </Button>
             </Grid>
             {img_path && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={img_path} width="250" alt="" />
+                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
                 </Paper>
               </Grid>
             )}
