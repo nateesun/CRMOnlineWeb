@@ -17,6 +17,7 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -116,7 +117,7 @@ export default function DialogDetail(props) {
         </IconButton>
       </Toolbar>
       <Typography align="center">
-        <img src={item.img_path} width="250" alt="" />
+        <img src={`${constants.apiServiceHost}${item.img_path}`} width="250" alt="" />
         <br />
         options: {options}
         <br />

@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import ProductTopic from './ProductTopic';
+import * as constants from './constants';
 
 export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
@@ -30,7 +31,7 @@ export default function ProductList(props) {
                   <img
                     style={{ height: 118, width: '150px', marginBottom: '8px' }}
                     alt={item.name}
-                    src={item.img_path}
+                    src={`${constants.apiServiceHost}${item.img_path}`}
                   />
                   <Box pr={2}>
                     <Typography

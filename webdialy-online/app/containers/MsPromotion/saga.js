@@ -57,7 +57,7 @@ export function* updateData() {
       response = yield call(request, requestURL, {
         database,
         method: 'PUT',
-        body: JSON.stringify({...data, img_path: `/images/${file.name}`}),
+        body: JSON.stringify(data),
       });
     } else {
       response = yield call(request, requestURL, {
