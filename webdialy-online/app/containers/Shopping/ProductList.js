@@ -9,6 +9,8 @@ import * as constants from './constants';
 
 export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   ProductList.propTypes = {
     data: PropTypes.array,
@@ -31,7 +33,7 @@ export default function ProductList(props) {
                   <img
                     style={{ height: 118, width: '150px', marginBottom: '8px' }}
                     alt={item.name}
-                    src={`${constants.apiServiceHost}${item.img_path}`}
+                    src={`${apiServiceHost}${item.img_path}`}
                   />
                   <Box pr={2}>
                     <Typography

@@ -108,6 +108,9 @@ const EditItem = props => {
   const [preview, setPreview] = useState(null);
   const { img_path } = props.initialValues;
 
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+
   const onValidated = formValues => {
     updateData(formValues);
   };
@@ -274,7 +277,7 @@ const EditItem = props => {
             {img_path && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${constants.apiServiceHost}/${img_path}`} width="250" alt="" />
+                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
                 </Paper>
               </Grid>
             )}

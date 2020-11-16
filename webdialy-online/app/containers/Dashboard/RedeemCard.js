@@ -13,7 +13,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import DialogRedeemCode from './DialogRedeemCode';
-import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -59,6 +58,8 @@ export default function RedeemCard(props) {
   const classes = useStyles();
   const { options } = props;
   const [showDialog, setShowDialog] = useState(false);
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   const showRedeemCode = () => {
     setShowDialog(true);
@@ -82,7 +83,7 @@ export default function RedeemCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image={`${constants.apiServiceHost}/${props.img}`}
+        image={`${apiServiceHost}${props.img}`}
         title="Paella dish"
         style={{ borderRadius: '150px' }}
       />
