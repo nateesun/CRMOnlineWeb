@@ -155,7 +155,7 @@ const EditItem = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
-            <Grid item xs={3}>
+            <Grid item xs={4} md={3}>
               <Field
                 name="product_code"
                 component={RenderField}
@@ -165,7 +165,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8} md={6}>
               <Field
                 name="redeem_name"
                 component={RenderField}
@@ -175,7 +175,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} md={3}>
               <Field
                 name="point_to_redeem"
                 component={RenderField}
@@ -185,7 +185,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="start_time"
                 component={DateTimeInput}
@@ -195,7 +195,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <Field
                 name="finish_time"
                 component={DateTimeInput}
@@ -205,7 +205,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4} md={2}>
               <Field
                 name="qty_in_stock"
                 component={RenderField}
@@ -215,7 +215,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Field
                 name="img_path"
                 component={RenderField}
@@ -225,7 +225,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <div style={{ width: '100%', paddingTop: '16px' }}>
                 <Field
                   name="redeem_or_free"
@@ -238,7 +238,7 @@ const EditItem = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} md={4}>
               <Field
                 name="discount_amt"
                 component={RenderField}
@@ -248,7 +248,7 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} md={4}>
               <Field
                 name="discount_percent"
                 component={RenderField}
@@ -258,14 +258,14 @@ const EditItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <input type="file" name="file" onChange={onChangeHandler} />
               <input type="text" value={fileName} />
             </Grid>
             <Grid item xs={12}>
               {preview && <img src={preview} width={200} height={200} />}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Button
                 variant="contained"
                 color="primary"

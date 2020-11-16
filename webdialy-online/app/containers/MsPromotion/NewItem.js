@@ -174,7 +174,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4} md={6}>
+            <Grid item xs={8} md={6}>
               <Field
                 name="redeem_name"
                 component={RenderField}
@@ -184,7 +184,7 @@ const NewItem = props => {
                 required
               />
             </Grid>
-            <Grid item xs={4} md={3}>
+            <Grid item xs={12} md={3}>
               <Field
                 name="point_to_redeem"
                 component={RenderField}
