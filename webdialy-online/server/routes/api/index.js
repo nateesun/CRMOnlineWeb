@@ -35,10 +35,7 @@ module.exports = args => {
 
   const serviceProvider = (req, res) => {
     const { method, baseUrl, path } = req;
-    const completeUrl = `${serviceApiHost}${baseUrl.replace(
-      new RegExp(`/${appName}`),
-      '',
-    )}${path}`;
+    const completeUrl = `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`;
     const options = {
       url: completeUrl,
       method,

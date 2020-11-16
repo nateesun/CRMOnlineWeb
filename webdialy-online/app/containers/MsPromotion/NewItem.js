@@ -100,7 +100,6 @@ const NewItem = props => {
   const { handleSubmit, pristine, reset, submitting, response } = props;
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [showImg, setShowImg] = useState(false);
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -129,18 +128,23 @@ const NewItem = props => {
   };
 
   const onChangeHandler = event => {
-    setShowImg(false);
     setFile(event.target.files[0]);
     setPreview(URL.createObjectURL(event.target.files[0]));
   };
 
   const onUploadImageFile = () => {
     props.onUploadImage(file);
-    setShowImg(true);
   };
 
   return (
     <Container component="main" maxWidth="lg">
+      <SweetAlert
+        show={response.status === 'Upload_Success'}
+        title="Success"
+        type="success"
+        text={response.message}
+        onConfirm={()=>console.log('Upload success')}
+      />
       <SweetAlert
         show={response.status === 'Success'}
         title="Success"
@@ -263,17 +267,6 @@ const NewItem = props => {
               {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
                 Please press upload button
               </Button>}
-            </Grid>
-            <Grid item xs={12}>
-            {showImg && (
-                <Paper elevation={3} className={classes.paddingImg}>
-                  <img
-                    src={`/images/${file.name}`}
-                    width="250"
-                    alt=""
-                  />
-                </Paper>
-              )}
             </Grid>
           </Grid>
           <Grid container spacing={1}>

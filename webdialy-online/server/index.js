@@ -1,8 +1,4 @@
-/* eslint consistent-return:0 import/order:0 */
-
 const express = require('express');
-// const cookieParser = require('cookie-parser');
-
 const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
@@ -14,7 +10,6 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
-// app.use(cookieParser())
 
 const httpRequest = require('./infra/httpRequest')();
 const envConfig = require('../config/envConfig');
@@ -51,21 +46,19 @@ const options = {
   loggerApp,
 };
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
 const basePathForAPI = appBasePath.replace(/\/*$/, '');
 app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
 app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
+app.use(`${basePathForAPI}/api/upload`, require('./routes/upload')(options));
 app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
 
-// In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: `${basePathForAPI}/`,
 });
 
-// get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
-const host = customHost || null; // Let http.Server use its default IPv6/4 host
+const host = customHost || null;
 const prettyHost = customHost || 'localhost';
 const customPort = envConfig('PORT') || port;
 

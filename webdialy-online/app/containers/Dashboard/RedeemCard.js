@@ -58,6 +58,8 @@ export default function RedeemCard(props) {
   const classes = useStyles();
   const { options } = props;
   const [showDialog, setShowDialog] = useState(false);
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   const showRedeemCode = () => {
     setShowDialog(true);
@@ -81,7 +83,7 @@ export default function RedeemCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image={props.img}
+        image={`${apiServiceHost}${props.img}`}
         title="Paella dish"
         style={{ borderRadius: '150px' }}
       />
