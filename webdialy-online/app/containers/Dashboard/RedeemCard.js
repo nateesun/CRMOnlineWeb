@@ -13,6 +13,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import DialogRedeemCode from './DialogRedeemCode';
+import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -81,7 +82,7 @@ export default function RedeemCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image={props.img}
+        image={`${constants.apiServiceHost}/${props.img}`}
         title="Paella dish"
         style={{ borderRadius: '150px' }}
       />

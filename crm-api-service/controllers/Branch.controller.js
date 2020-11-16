@@ -2,6 +2,25 @@ module.exports = database => {
     const Task = requireModel("Branch")(database);
     const module = {}
 
+    const NotFoundResponse = (msg) => {
+        return {
+            status: 404,
+            bizStatus: 404,
+            message: 'NOT_FOUND',
+            error: msg,
+            data: []
+        }
+    }
+    const ErrorResponse = (msg) => {
+        return {
+            status: 500,
+            bizStatus: 500,
+            message: 'ERROR',
+            error: msg,
+            data: []
+        }
+    }
+
     module.findAll = () => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -15,13 +34,7 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: 'Error to find all data',
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse('Error to find all data'))
             }
         })
     }
@@ -31,6 +44,9 @@ module.exports = database => {
             try {
                 const result = await Task.findById(id);
                 const resultJson = JSON.parse(result.data);
+                if (resultJson.length === 0) {
+                    return resolve(NotFoundResponse(`Not found id ${id}`))
+                }
                 return resolve({
                     status: 200,
                     bizStatus: 200,
@@ -39,13 +55,7 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to find id ${id}`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to find id ${id}`))
             }
         })
     }
@@ -63,13 +73,7 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to find code ${code}`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to find code ${code}`))
             }
         })
     }
@@ -102,13 +106,7 @@ module.exports = database => {
                     },
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to create branch`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to create branch`))
             }
         })
     }
@@ -139,13 +137,7 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to update branch`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to update branch`))
             }
         })
     }
@@ -176,13 +168,7 @@ module.exports = database => {
                     data: resultJson,
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to update patch branch`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to update patch branch`))
             }
             
         })
@@ -215,13 +201,7 @@ module.exports = database => {
                     },
                 });
             } catch (error) {
-                return reject({
-                    status: 500,
-                    bizStatus: 500,
-                    message: `Error to delete branch`,
-                    error,
-                    data: [],
-                });
+                return reject(ErrorResponse(`Error to delete branch`))
             }
         })
     }
