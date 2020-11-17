@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import socketIOClient from "socket.io-client"
 import * as Func from './AppFunc';
+import { config } from '../config';
 
 import logo from "./logo.svg"
 import "./App.css"
 
-const apiServiceEndpoint = 'http://softcrmpkh.dyndns.org:5000';
+const apiServiceEndpoint = config.apiServiceEndpoint;
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -31,22 +32,24 @@ const App = () => {
   }
 
   useEffect(() => {
-    Func.initLoadData();
+    const socket = socketIOClient(apiServiceEndpoint, { transports: ['websocket'] })
+    socket.on("create_redeem", async (data) => {
+      console.log('create_redeem detect socket');
+      const payload = JSON.parse(data)
+      await Func.saveRedeemLocal(payload)
+      setMessage(`get redeem:${payload.redeem_code}`)
+    })
+    socket.on("create_member", async (data) => {
+      console.log('create_member detect socket');
+      const payload = JSON.parse(data)
+      await Func.saveMemberLocal(payload)
+      setMessage(`get member:${payload.code}`)
+    })
+    socket.on('error', ()=>{
+      console.log('socket connection error')
+    })
     setInterval(() => {
-      const socket = socketIOClient(apiServiceEndpoint)
-      socket.on("create_redeem", async (data) => {
-        const payload = JSON.parse(data)
-        await Func.saveRedeemLocal(payload)
-        setMessage(`get redeem:${payload.redeem_code}`)
-      })
-      socket.on("create_member", async (data) => {
-        const payload = JSON.parse(data)
-        await Func.saveMemberLocal(payload)
-        setMessage(`get member:${payload.code}`)
-      })
-      socket.on('error', ()=>{
-        console.log('socket connection error')
-      })
+      Func.initLoadData();
       runingCounter()
     }, 10000)
   }, [])
