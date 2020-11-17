@@ -226,7 +226,7 @@ module.exports = (db) => {
     logger.info(`delete: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `DELETE FROM ${table_name} WHERE email = ?;`;
+        let sql = `DELETE FROM ${table_name} WHERE email = ?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [email])
         sql = `DELETE FROM ${tb_login} WHERE username = ?;`;
