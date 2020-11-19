@@ -2,7 +2,6 @@ const express = require("express")
 const router = express.Router()
 const Task = require("../models/Member.model")
 const TaskLogin = require("../models/Login.model")
-const TaskCompany = require("../models/Company.model")
 const moment = require("moment")
 
 module.exports = io => {
@@ -34,6 +33,7 @@ module.exports = io => {
       const payload = req.body;
       const response = await Task(req.headers.database).updateMemberFromClient(payload)
       const data = JSON.parse(response.data)
+      io.emit('update_member', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
@@ -123,6 +123,7 @@ module.exports = io => {
       const payload = {...req.body, uuid_index: req.params.id }
       const response = await Task(req.headers.database).update(payload)
       const data = JSON.parse(response.data)
+      io.emit('update_member', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
@@ -147,6 +148,7 @@ module.exports = io => {
         response = await Task(req.headers.database).updateRole(payload)
       }
       const data = JSON.parse(response.data)
+      io.emit('update_member', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
@@ -159,6 +161,7 @@ module.exports = io => {
     try {
       const response = await Task(req.headers.database).delete(req.params.id)
       const data = JSON.parse(response.data)
+      io.emit('update_member', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
