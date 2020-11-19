@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import socketIOClient from "socket.io-client"
+import styled from 'styled-components';
 import * as Func from './AppFunc';
 import { config } from '../config';
 
@@ -8,50 +9,70 @@ import "./App.css"
 
 const apiServiceEndpoint = config.apiServiceEndpoint;
 
+const ConnectStyle = styled.span`
+  background: green;
+  padding: 5px;
+  color: white;
+`;
+
+const DisConnectStyle = styled.span`
+  background: red;
+  padding: 5px;
+`;
+
+const init = async () => {
+  await Func.initLoadData();
+}
+const handleApi = async (action) => {
+  console.log(action);
+  await Func.uploadMember();
+  await Func.uploadRedeem();
+}
+
 const App = () => {
-  const [count, setCount] = useState(0)
-  const [message, setMessage] = useState(null)
-
-  const runingCounter = async () => {
-    setCount((c) => c + 10)
-    const uploadMemberResponse = await Func.uploadMember().catch(err=>console.log('Error:', err));
-    console.log(uploadMemberResponse);
-    const uploadRedeemResponse = await Func.uploadRedeem().catch(err=>console.log('Error:', err));
-    console.log(uploadRedeemResponse);
-  }
-
-  const handleApi = () => {
-    const response = "Success" // wait for dev
-    if (response === "Success") {
-      setMessage("Call API Success")
-    } else {
-      setMessage("Failure to call API!")
-    }
-    // reset count
-    setCount(0)
-  }
+  const [client, setClient] = useState('');
+  const [connect, setConnect] = useState(false);
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     const socket = socketIOClient(apiServiceEndpoint, { transports: ['websocket'] })
-    socket.on("create_redeem", async (data) => {
-      console.log('create_redeem detect socket');
-      const payload = JSON.parse(data)
-      await Func.saveRedeemLocal(payload)
-      setMessage(`get redeem:${payload.redeem_code}`)
+    socket.on("create_redeem", async data => {
+      await Func.saveRedeemLocal(JSON.parse(data))
     })
-    socket.on("create_member", async (data) => {
-      console.log('create_member detect socket');
-      const payload = JSON.parse(data)
-      await Func.saveMemberLocal(payload)
-      setMessage(`get member:${payload.code}`)
+
+    socket.on("create_member", async data => {
+      await Func.saveMemberLocal(JSON.parse(data))
     })
+
+    socket.on("client_id", (id)=>{
+      setClient('Your id: ' + id);
+      setTime(new Date());
+      setConnect(true)
+
+      // call init first time only
+      init();
+    })
+    socket.on("client_close", (status)=>{
+      setConnect(status);
+    })
+
+    socket.on("timeSync", action => {
+      handleApi(action);
+    })
+    
     socket.on('error', ()=>{
-      console.log('socket connection error')
+      setConnect(false);
     })
-    setInterval(() => {
-      Func.initLoadData();
-      runingCounter()
-    }, 10000)
+
+    socket.on('connect_error', err => {
+      setConnect(false)
+    });
+    socket.on('connect_failed', err => {
+      setConnect(false)
+    });
+    socket.on('disconnect', err => {
+      setConnect(false)
+    });
   }, [])
 
   return (
@@ -59,16 +80,18 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div style={{ marginBottom: "20px", color: "chocolate" }}>
-          Time To Refresh
+          {client}
         </div>
-        <div>{Func.showTimer(count)}</div>
+        <div>
+            {connect ? <ConnectStyle>Connected.</ConnectStyle>:<DisConnectStyle>Disconnect</DisConnectStyle>}
+        </div>
         <div className="DivButton">
           <button onClick={() => handleApi()} className="Button">
             Refresh Sync API Service<br />
             {apiServiceEndpoint}
           </button>
         </div>
-        {message && <div>{message}</div>}
+        <div>Time at: {time && time.toLocaleString()}</div>
       </header>
     </div>
   )

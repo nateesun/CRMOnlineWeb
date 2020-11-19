@@ -6,11 +6,11 @@ const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
 const socketIo = require('socket.io')
 const logger = require('./logger');
+const config = require('./config')
 
 // api document
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-// const swaggerDocument = require('./swagger.json');
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
@@ -19,7 +19,6 @@ const swaggerOptions = {
       contact: {
         name: 'Nathee Sungthong-ngam'
       },
-      servers: ['http://localhost:5000']
     },
     basePath: '/api',
     securityDefinitions: {
@@ -56,7 +55,7 @@ const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
 
-const fixPassword = 'softpos2013';
+const fixPassword = config.fixPassword;
 
 const setupLogger = (req, res, next) => {
   logger.info(`${req.method} ${req.path} ${res.statusCode}`);
@@ -164,13 +163,23 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500)
   res.json({
-    status: 'Someting wrong with api request'
+    status: 'Someting wrong with api request:'+err
   })
 })
 
 // socket.io events
-io.on( "connection", function( socket ) {
-    console.log( "A user connected" );
+io.on( "connection", function( client ) {
+  console.log(`client ${client.id} connected.`);
+  io.to(client.id).emit('client_id', client.id);
+
+  client.on('disconnect', ()=>{
+    console.log(`client ${client.id} disconnected.`);
+    io.to(client.id).emit('client_close', false);
+  })
 });
+
+setInterval(()=>{
+  io.emit("timeSync", "fetch data from client");
+}, config.timeToSync);
 
 module.exports = app
