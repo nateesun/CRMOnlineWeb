@@ -71,13 +71,13 @@ module.exports = (db) => {
           redeem.use_in_branch,
           redeem.emp_code_redeem,
           redeem.active,
-          redeem.Member_Code
+          redeem.redeem_code
         ])
         sql = `update ${promotion} 
         set qty_in_stock = qty_in_stock-1 
         where product_code=?;`;
         logger.debug(sql);
-        const result2 = await pool.query(sql, [redeem.product_code]);
+        await pool.query(sql, [redeem.product_code]);
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);
