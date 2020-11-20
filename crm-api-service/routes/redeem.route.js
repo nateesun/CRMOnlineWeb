@@ -50,6 +50,7 @@ module.exports = io => {
       const response = await TaskRedeem(req.headers.database).updateRedeemFromClient(payload);
       const data = JSON.parse(response.data)
       io.emit('update_member', true);
+      io.emit('update_redeem', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res

@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import useCookie, { getCookie } from 'react-use-cookie';
+import socketIOClient from "socket.io-client"
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
@@ -34,6 +35,13 @@ export function Dashboard(props) {
       props.onLoadRedeem();
       props.onLoadMenu();
     }
+
+    const loc = window.location.href.split('/');
+    const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+    const socket = socketIOClient(apiServiceEndpoint, { transports: ['websocket'] })
+    socket.on("update_redeem", (data) => {
+      props.onLoadRedeem();
+    })
   }, []);
 
   return props.login && <DashboardContent {...props} />;
