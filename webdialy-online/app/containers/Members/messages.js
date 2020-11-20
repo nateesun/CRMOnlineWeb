@@ -73,6 +73,14 @@ export default defineMessages({
     id: `${scope}.col5`,
     defaultMessage: 'Role',
   },
+  col6: {
+    id: `${scope}.col6`,
+    defaultMessage: 'Total Score',
+  },
+  col7: {
+    id: `${scope}.col7`,
+    defaultMessage: 'Total Purchase',
+  },
   btnSave: {
     id: `${scope}.btnSave`,
     defaultMessage: 'Save',

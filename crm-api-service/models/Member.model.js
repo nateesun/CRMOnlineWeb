@@ -188,13 +188,17 @@ module.exports = (db) => {
         member_role = ?,
         first_name=?,
         last_name=?,
-        system_updated = now() 
+        system_updated = now(),
+        total_score=?,
+        total_purchase=? 
         WHERE uuid_index=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [
           data.member_role,
           data.first_name,
           data.last_name,
+          data.total_score,
+          data.total_purchase,
           data.uuid_index
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
