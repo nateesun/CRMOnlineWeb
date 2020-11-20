@@ -85,7 +85,6 @@ export default function RedeemCard(props) {
         className={classes.media}
         image={`${apiServiceHost}${props.img}`}
         title="Paella dish"
-        style={{ borderRadius: '150px' }}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="span">
