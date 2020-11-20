@@ -182,6 +182,26 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="total_score"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col6} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="total_purchase"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col7} />}
+                required
+              />
+            </Grid>
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>

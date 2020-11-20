@@ -161,7 +161,7 @@ module.exports = (db) => {
         mobile = ?, 
         line_id = ?, 
         system_updated = now() 
-        WHERE uuid_index=?;`;
+        WHERE code=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [
           data.prefix,
@@ -170,7 +170,7 @@ module.exports = (db) => {
           data.birthday,
           data.mobile,
           data.line_id,
-          data.uuid_index,
+          data.code,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
@@ -188,13 +188,17 @@ module.exports = (db) => {
         member_role = ?,
         first_name=?,
         last_name=?,
-        system_updated = now() 
+        system_updated = now(),
+        total_score=?,
+        total_purchase=? 
         WHERE uuid_index=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [
           data.member_role,
           data.first_name,
           data.last_name,
+          data.total_score,
+          data.total_purchase,
           data.uuid_index
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
