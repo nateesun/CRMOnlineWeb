@@ -231,7 +231,7 @@ function Layouts(props) {
           </Hidden>
         </nav>
         <div className={classes.app}>
-          <Header onDrawerToggle={handleDrawerToggle} />
+          <Header profile={props.profile} onDrawerToggle={handleDrawerToggle} />
           <SubMenu leftMenu={props.leftMenu} profile={props.profile} />
           <main className={classes.main}>
             <Switch>

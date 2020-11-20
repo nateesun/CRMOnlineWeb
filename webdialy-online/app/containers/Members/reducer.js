@@ -18,6 +18,8 @@ export const initialState = {
     first_name: '',
     last_name: '',
     member_role: '',
+    total_score: 0,
+    total_purchase: 0,
   },
   page: 'LIST',
   status: null,

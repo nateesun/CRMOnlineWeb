@@ -43,7 +43,7 @@ const styles = theme => ({
 });
 
 function Header(props) {
-  const { classes, onDrawerToggle } = props;
+  const { classes, onDrawerToggle, profile } = props;
   const loggedIn = getCookie('token') || '';
   const email = loggedIn ? JSON.parse(getCookie('token')): '';
   const login = {
@@ -107,7 +107,7 @@ function Header(props) {
             }}
           >
             <ButtonLink to={`${publicPath}/profile`} color="white">
-              สมาชิก: {login.email}
+              สวัสดี {profile.prefix} {profile.first_name} {profile.last_name}
             </ButtonLink>
           </Typography>
         )}
