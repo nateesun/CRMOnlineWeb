@@ -19,7 +19,7 @@ export function App(props) {
   useInjectSaga({ key: 'app', saga });
 
   useEffect(() => {
-    console.log('App:init');
+    props.loadAuthMenu();
   }, []);
 
   return (

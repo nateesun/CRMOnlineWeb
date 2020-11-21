@@ -40,6 +40,7 @@ export function Dashboard(props) {
     const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
     const socket = socketIOClient(apiServiceEndpoint, { transports: ['websocket'] })
     socket.on("update_redeem", (data) => {
+      props.onRefresh(JSON.parse(getToken));
       props.onLoadRedeem();
     })
   }, []);
