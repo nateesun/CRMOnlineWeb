@@ -76,7 +76,7 @@ const groupBy = (list, keyGetter) => {
 }
 
 function Navigator(props) {
-  const { classes, profile, leftMenu, ...other } = props;
+  const { classes, profile, ...other } = props;
   leftMenus.length = 0;
   if (profile) {
     const grouped = groupBy(props.leftmenu, item => item.menu_id);
@@ -113,7 +113,7 @@ function Navigator(props) {
             </ButtonLink>
           </ListItemText>
         </ListItem>
-        {leftMenus.map(({ id, children }) => (
+        {leftMenus && leftMenus.map(({ id, children }) => (
           <React.Fragment key={id}>
             <ListItem className={classes.categoryHeader}>
               <ListItemText
