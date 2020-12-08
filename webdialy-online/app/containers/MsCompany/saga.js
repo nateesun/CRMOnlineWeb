@@ -5,6 +5,10 @@ import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
+const fetch = require('node-fetch');
+const loc = window.location.href.split('/');
+const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+
 export function* initLoad() {
   try {
     const requestURL = `${constants.publicPath}/api/company`;
@@ -83,9 +87,33 @@ export function* deleteData() {
   }
 }
 
+export function* uploadFile() {
+  try {
+    const file = yield select(selectors.makeSelectFileUpload());
+    const formdata = new FormData();
+    formdata.append('file', file, file.name);
+    const options = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+    }
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options)
+      .then(response => response.json())
+      .catch(error => console.log('error', error));
+    if (response.status === 'Success') {
+      yield put(actions.uploadImageSuccess(response));
+    } else {
+      yield put(actions.uploadImageError('Cannot update data'));
+    }
+  } catch (err) {
+    yield put(actions.uploadImageError(err));
+  }
+}
+
 export default function* msCompanySaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.CREATE_ITEM, saveData);
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
+  yield takeEvery(constants.UPLOAD_IMG, uploadFile);
 }

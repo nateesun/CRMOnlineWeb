@@ -113,6 +113,10 @@ export default defineMessages({
     id: `${scope}.col13`,
     defaultMessage: 'Member Register Point',
   },
+  col14: {
+    id: `${scope}.col14`,
+    defaultMessage: 'Images Path',
+  },
   btnSave: {
     id: `${scope}.btnSave`,
     defaultMessage: 'Save',
