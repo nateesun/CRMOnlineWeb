@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { Paper } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Typography from '@material-ui/core/Typography';
@@ -38,11 +39,21 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  paddingImg: {
+    margin: '10px',
+    background: '#aaa',
+  },
 }));
 
 const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const { img_path } = props.initialValues;
+
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -55,6 +66,15 @@ const EditItem = props => {
   const clearData = () => {
     props.onInitLoad();
     props.onChangePage('LIST');
+  };
+
+  const onChangeHandler = event => {
+    setFile(event.target.files[0]);
+    setPreview(URL.createObjectURL(event.target.files[0]));
+  };
+
+  const onUploadImageFile = () => {
+    props.onUploadImage(file);
   };
 
   return (
@@ -209,6 +229,34 @@ const EditItem = props => {
                 required
               />
             </Grid>
+            <Grid item xs={12} md={4}>
+              <Field
+                name="img_path"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.col14} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <input type="file" name="file" onChange={onChangeHandler} /><br />
+            </Grid>
+            <Grid item xs={12}>
+              {preview && <img src={preview} width={200} height={200} />}
+            </Grid>
+            <Grid item xs={6}>
+              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Please press upload button
+              </Button>}
+            </Grid>
+            {img_path && (
+            <Grid item xs={12}>
+                <Paper elevation={3} className={classes.paddingImg}>
+                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
+                </Paper>
+              </Grid>
+            )}
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={4} lg={3}>

@@ -65,7 +65,8 @@ CREATE TABLE IF NOT EXISTS `company` (
   `cart_running` int(5) DEFAULT NULL,
   `cart_prefix` varchar(3) DEFAULT NULL,
   `cart_size_running` int(10) DEFAULT NULL,
-  `member_register_point` int(3) DEFAULT NULL
+  `member_register_point` int(3) DEFAULT NULL,
+  `img_path` varchar(250) DEFAULT NULL
 );
 INSERT INTO `company`
 (uuid_index, code, name, line_official_id, member_running, prefix_running, size_running, order_running, order_prefix, order_size_running, cart_running, cart_prefix, cart_size_running, member_register_point)
@@ -272,12 +273,12 @@ CREATE TABLE IF NOT EXISTS `ui_menu` (
   `role` varchar(100) NOT NULL DEFAULT '',
   `priority` int(2) DEFAULT NULL
 );
-INSERT INTO ui_menu(id, `role`) VALUES('Account', 'super|admin|member|employee', 1);
-INSERT INTO ui_menu(id, `role`) VALUES('Orders', 'super|admin|member', 2);
-INSERT INTO ui_menu(id, `role`) VALUES('Request Order', 'super|admin|employee', 3);
-INSERT INTO ui_menu(id, `role`) VALUES('Members', 'super|admin', 4);
-INSERT INTO ui_menu(id, `role`) VALUES('Settings', 'super', 5);
-INSERT INTO ui_menu(id, `role`) VALUES('Master', 'super|admin', 6);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Account', 'super|admin|member|employee', 1);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Orders', 'super|admin|member', 2);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Request Order', 'super|admin|employee', 3);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Members', 'super|admin', 4);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Settings', 'super', 5);
+INSERT INTO ui_menu(id, `role`, priority) VALUES('Master', 'super|admin', 6);
 
 CREATE TABLE IF NOT EXISTS `ui_menu_list` (
   `id` varchar(30) DEFAULT NULL,

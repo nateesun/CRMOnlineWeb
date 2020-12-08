@@ -20,7 +20,6 @@ import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   root: {

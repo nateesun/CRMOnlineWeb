@@ -55,6 +55,7 @@ function mapDispatchToProps(dispatch) {
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
+    onUploadImage: (file) => dispatch(actions.uploadImage(file)),
   };
 }
 

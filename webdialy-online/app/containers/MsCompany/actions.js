@@ -120,3 +120,24 @@ export function deleteItemError(payload) {
     payload,
   };
 }
+
+export function uploadImage(payload) {
+  return {
+    type: constants.UPLOAD_IMG,
+    payload,
+  };
+}
+
+export function uploadImageSuccess(payload) {
+  return {
+    type: constants.UPLOAD_IMG_SUCCESS,
+    payload,
+  };
+}
+
+export function uploadImageError(payload) {
+  return {
+    type: constants.UPLOAD_IMG_ERROR,
+    payload,
+  };
+}
