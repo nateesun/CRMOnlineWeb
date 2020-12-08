@@ -65,7 +65,8 @@ CREATE TABLE IF NOT EXISTS `company` (
   `cart_running` int(5) DEFAULT NULL,
   `cart_prefix` varchar(3) DEFAULT NULL,
   `cart_size_running` int(10) DEFAULT NULL,
-  `member_register_point` int(3) DEFAULT NULL
+  `member_register_point` int(3) DEFAULT NULL,
+  `img_path` varchar(250) DEFAULT NULL
 );
 INSERT INTO `company`
 (uuid_index, code, name, line_official_id, member_running, prefix_running, size_running, order_running, order_prefix, order_size_running, cart_running, cart_prefix, cart_size_running, member_register_point)

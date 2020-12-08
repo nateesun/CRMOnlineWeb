@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -9,11 +8,10 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import RenderField from 'components/RenderField';
-import ButtonLink from 'components/ButtonLink';
 import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
-import { publicPath } from './constants';
+import LoginFooter from './LoginFooter';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -110,19 +108,8 @@ const LoginForm = props => {
           >
             {<FormattedMessage {...messages.clear} />}
           </Button>
-          <Grid container className={classes.loginFooter}>
-            <Grid item xs={12} lg={4}>
-              <ButtonLink color="purple" to={`${publicPath}/forgot-password`}>
-                {<FormattedMessage {...messages.forgotPassword} />}
-              </ButtonLink>
-            </Grid>
-            <Grid item xs={12} lg={8}>
-              <ButtonLink color="purple" to={`${publicPath}/register`}>
-                {<FormattedMessage {...messages.register} />}
-              </ButtonLink>
-            </Grid>
-          </Grid>
         </form>
+        <LoginFooter />
       </div>
     </Container>
   );

@@ -73,7 +73,7 @@ function Header(props) {
             </Hidden>
             <Grid item xs>
               <ButtonLink to={`${publicPath}/`} color="white">
-                WEB DAILY ONLINE
+                PANKHAMHOM
               </ButtonLink>
             </Grid>
             <Grid item>

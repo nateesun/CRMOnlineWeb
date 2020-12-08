@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import useCookie from 'react-use-cookie';
 
 import messages from './messages';
-import intro from '../../images/welcome.png';
+import intro from '../../images/pankhumhom.jpg';
 
 const Img = styled.img`
   border-radius: 2px 10px 2px 10px;
@@ -29,12 +29,10 @@ const HomePage = (props) => {
   }, [])
 
   return (
-    <div
-      style={{ textAlign: 'center', verticalAlign: 'middle', adding: '20px' }}
-    >
+    <div style={{ textAlign: 'center', verticalAlign: 'middle' }}>
       <h2><FormattedMessage {...messages.header} /></h2>
-      {/* <h5>{database}</h5> */}
-      <Img src={intro} width={300} />
+      <Img src={intro} style={{ backgroundSize: 'contain', width: '100%' }} />
+      <h5>{database}</h5>
     </div>
   );
 }
