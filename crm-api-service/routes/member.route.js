@@ -170,24 +170,5 @@ module.exports = io => {
     }
   })
   
-  router.post("/login", async (req, res, next) => {
-    try {
-      const { token } = req.body
-      const response = await Task(req.headers.database).verifyTokenLine(token)
-      const { Username, Password } = JSON.parse(response.data)[0]
-      res.status(200).json({
-        status: "Success",
-        data: {
-          Username,
-          Password,
-        },
-      })
-    } catch (error) {
-      return res
-        .status(500)
-        .json({ status: "Internal Server Error", msg: error.sqlMessage })
-    }
-  })
-  
   return router  
 }

@@ -74,24 +74,5 @@ module.exports = (db) => {
     })
   }
 
-  module.getLineId = (lineId) => {
-    logger.info(`getLineId: ${lineId}`)
-    return new Promise(async (resolve, reject) => {
-      try {
-        const sql = `select * from ${table_name} where Line_Id=?;`;
-        logger.debug(sql);
-        const member = await pool.query(sql, [lineId])
-        if (member.length == 0) {
-          reject({ status: 'Warning', msg: "Not Found" })
-        } else {
-          resolve({ status: "Success", data: JSON.stringify(member) })
-        }
-      } catch (err) {
-        logger.error(err);
-        reject({ status: "Error", msg: err.message })
-      }
-    })
-  }
-
   return module
 }
