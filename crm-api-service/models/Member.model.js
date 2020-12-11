@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken")
+
 const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { zeroPad, getDB } = require("./FuncUtil")()
@@ -244,19 +246,34 @@ module.exports = (db) => {
     })
   }
 
-  module.verifyTokenLine = (token) => {
-    logger.info(`verifyTokenLine: ${token}`)
+  module.verifyTokenLine = (lineId) => {
+    logger.info(`verifyTokenLine: ${lineId}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const verifyPass = jwt.verify(token, "softpos2013")
-        if (verifyPass) {
-          const { lineId } = jwt.decode(token)
-          const sql = `select * from ${table_name} where line_id=?;`;
+        const sql = `select l.* from ${table_name} m 
+          inner join ${tb_login} l on m.email = l.username 
+          where line_id ='nathee' and member_active ='Y';`;
           logger.debug(sql);
           const member = await pool.query(sql, [lineId])
-          resolve({ status: "Success", data: JSON.stringify(member) })
+          resolve({ status: "Success", data: JSON.stringify(member[0]) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.getLineId = (lineId) => {
+    logger.info(`getLineId: ${lineId}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where Line_Id=?;`;
+        logger.debug(sql);
+        const member = await pool.query(sql, [lineId])
+        if (member.length == 0) {
+          reject({ status: 'Warning', msg: "Not Found" })
         } else {
-          reject({ status: 'Warning', msg: "Verify Token Error" })
+          resolve({ status: "Success", data: JSON.stringify(member) })
         }
       } catch (err) {
         logger.error(err);

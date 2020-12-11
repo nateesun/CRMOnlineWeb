@@ -123,7 +123,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/", indexRouter)
 app.use("/api/login", basicAuth({ users: { admin: fixPassword } }), memberMasterRouter)
-app.use("/api/line", basicAuth({ users: { admin: fixPassword } }), lineLoginRouter)
+app.use("/api/line", lineLoginRouter)
 app.use("/api/crud", crudRouter)
 
 // master
