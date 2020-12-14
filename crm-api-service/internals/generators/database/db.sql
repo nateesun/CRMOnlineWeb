@@ -329,3 +329,5 @@ VALUES('Stock', 'Master', 'DnsRoundedIcon', '/ms/stock', 'N');
 INSERT INTO ui_menu_list
 (id, menu_id, icon, to_path, active)
 VALUES('Promotion', 'Master', 'DnsRoundedIcon', '/ms/promotion', 'N');
+
+ALTER TABLE `member` ADD line_user_id varchar(100) NULL;
