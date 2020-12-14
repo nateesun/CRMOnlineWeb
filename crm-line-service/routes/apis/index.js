@@ -127,6 +127,7 @@ const handleText = (message, replyToken, source, client) => {
                         "size": "xl",
                         "color": "#F3F9F3FF",
                         "flex": 0,
+                        "align": "start",
                         "wrap": true,
                         "contents": []
                       }
@@ -138,6 +139,7 @@ const handleText = (message, replyToken, source, client) => {
                     "weight": "bold",
                     "size": "xl",
                     "color": "#F9E532FF",
+                    "align": "start",
                     "wrap": true,
                     "contents": []
                   },
@@ -154,6 +156,7 @@ const handleText = (message, replyToken, source, client) => {
                         "text": "ยอดซื้อสินค้า (Purchase)",
                         "weight": "bold",
                         "color": "#FAFAFCFF",
+                        "align": "start",
                         "contents": []
                       },
                       {
