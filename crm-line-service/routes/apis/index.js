@@ -1,3 +1,58 @@
+const fetch = require('node-fetch');
+const config = requireSrc('config');
+
+const apiUpdateLineUserId = `${config.crmApiHost}/api/member/update_line_user_id`;
+const apiGetPoint = `${config.crmApiHost}/api/member/line/:lineUserId`;
+
+const handleRequest = async (url, method, data) => {
+  const newHeaders = {
+    "Content-Type": "application/json",
+    "database": config.database,
+    "Authorization": config.basicAuth,
+  };
+  const newBody = data || {};
+  const newMethod = method || 'GET';
+  try {
+    let response;
+    if(method!=='GET'){
+      response = await fetch(url, {
+        method: newMethod,
+        headers: newHeaders,
+        body: JSON.stringify(newBody),
+        redirect: 'follow',
+      });
+    }else{
+      response = await fetch(url, {
+        method: newMethod,
+        headers: newHeaders,
+        redirect: 'follow',
+      });
+    }
+    const json = response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
+const fetchRequest = async (url) => {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "database": config.database,
+        "Authorization": config.basicAuth,
+      }
+    })
+    const json = response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
+const buttonsImageURL = 'https://picsum.photos/id/237/200/300';
 const handleText = (message, replyToken, source, client) => {
   switch (message.text) {
     case "profile":
@@ -25,26 +80,291 @@ const handleText = (message, replyToken, source, client) => {
       if (source.userId) {
         return client
           .getProfile(source.userId)
-          .then((profile) =>
-            replyText(
-              replyToken,
-              [`${profile.displayName} ลงทะเบียนเรียบร้อยแล้ว`],
-              client
-            )
+          .then(async (profile) => {
+              const response = await handleRequest(apiUpdateLineUserId, 'PATCH', {
+                email: 'nathee@gmail.com',
+                lineUserId: source.userId,
+              });
+              if(response.status==='Success'){
+                replyText(replyToken, [`${profile.displayName} ลงทะเบียนเรียบร้อยแล้ว`], client)
+              }else{
+                replyText(replyToken, [`${profile.displayName} ลงทะเบียนไม่สำเร็จ`], client)
+              }
+            }
           )
       }
     case "เรียกดูคะแนน":
-      if (source.userId) {
-        return client
-          .getProfile(source.userId)
-          .then((profile) =>
-            replyText(
-              replyToken,
-              [`${profile.displayName} เรียกดูคะแนน`],
-              client
-            )
-          )
+      let data = {
+        total_score: '0.00',
+        total_purchase: '0.00'
       }
+      if (source.userId) {
+        (async ()=>{
+          const response = await fetchRequest(apiGetPoint.replace(':lineUserId', source.userId));
+          if(response.status==='Success'){
+            data = response.data;
+          }
+          return client.replyMessage(replyToken, {
+            type: "flex",
+            altText: "Show Total Point",
+            contents: {
+              "type": "bubble",
+              "direction": "rtl",
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "backgroundColor": "#276DDEFF",
+                "contents": [
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "คะแนนสะสม (Point)",
+                        "weight": "bold",
+                        "size": "xl",
+                        "color": "#F3F9F3FF",
+                        "flex": 0,
+                        "wrap": true,
+                        "contents": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": ""+data.total_score,
+                    "weight": "bold",
+                    "size": "xl",
+                    "color": "#F9E532FF",
+                    "wrap": true,
+                    "contents": []
+                  },
+                  {
+                    "type": "separator"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "ยอดซื้อสินค้า (Purchase)",
+                        "weight": "bold",
+                        "color": "#FAFAFCFF",
+                        "contents": []
+                      },
+                      {
+                        "type": "text",
+                        "text": ""+data.total_purchase,
+                        "weight": "bold",
+                        "color": "#FFF533FF",
+                        "align": "start",
+                        "margin": "xs",
+                        "wrap": true,
+                        "style": "normal",
+                        "contents": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          })
+        })()
+      }
+      break;
+    case "โปรโมชั่น":
+      return client.replyMessage(replyToken, {
+        type: "flex",
+        altText: "Test Template",
+        contents: {
+          "type": "carousel",
+          "contents": [
+            {
+              "type": "bubble",
+              "hero": {
+                "type": "image",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png",
+                "size": "full",
+                "aspectRatio": "20:13",
+                "aspectMode": "cover"
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "Arm Chair, White",
+                    "weight": "bold",
+                    "size": "xl",
+                    "wrap": true,
+                    "contents": []
+                  },
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "$49",
+                        "weight": "bold",
+                        "size": "xl",
+                        "flex": 0,
+                        "wrap": true,
+                        "contents": []
+                      },
+                      {
+                        "type": "text",
+                        "text": ".99",
+                        "weight": "bold",
+                        "size": "sm",
+                        "flex": 0,
+                        "wrap": true,
+                        "contents": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "uri",
+                      "label": "Add to Cart",
+                      "uri": "https://linecorp.com"
+                    },
+                    "style": "primary"
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "uri",
+                      "label": "Add to wishlist",
+                      "uri": "https://linecorp.com"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "bubble",
+              "hero": {
+                "type": "image",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png",
+                "size": "full",
+                "aspectRatio": "20:13",
+                "aspectMode": "cover"
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "Metal Desk Lamp",
+                    "weight": "bold",
+                    "size": "xl",
+                    "wrap": true,
+                    "contents": []
+                  },
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "flex": 1,
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "$11",
+                        "weight": "bold",
+                        "size": "xl",
+                        "flex": 0,
+                        "wrap": true,
+                        "contents": []
+                      },
+                      {
+                        "type": "text",
+                        "text": ".99",
+                        "weight": "bold",
+                        "size": "sm",
+                        "flex": 0,
+                        "wrap": true,
+                        "contents": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": "Temporarily out of stock",
+                    "size": "xxs",
+                    "color": "#FF5551",
+                    "flex": 0,
+                    "margin": "md",
+                    "wrap": true,
+                    "contents": []
+                  }
+                ]
+              },
+              "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "uri",
+                      "label": "Add to Cart",
+                      "uri": "https://linecorp.com"
+                    },
+                    "flex": 2,
+                    "color": "#AAAAAA",
+                    "style": "primary"
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "uri",
+                      "label": "Add to wish list",
+                      "uri": "https://linecorp.com"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "bubble",
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "uri",
+                      "label": "See more",
+                      "uri": "https://linecorp.com"
+                    },
+                    "flex": 1,
+                    "gravity": "center"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      })
     case "buttons":
       return client.replyMessage(replyToken, {
         type: "template",

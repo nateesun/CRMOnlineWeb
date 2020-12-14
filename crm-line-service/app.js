@@ -7,6 +7,12 @@ const config = require('./config')
 
 var app = express();
 
+if(!global.requireSrc){
+  global.requireSrc = name => {
+    return require(__dirname + '/' + name);
+  }
+}
+
 const line = require("@line/bot-sdk")
 const middleware = require("@line/bot-sdk").middleware
 
