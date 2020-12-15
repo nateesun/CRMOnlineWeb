@@ -10,6 +10,21 @@ module.exports = (db) => {
   const tb_company = getDB(db, "company")
   const tb_login = getDB(db, "login")
 
+  module.findByLineUserId = (lineUserId) => {
+    logger.info(`findByLineUserId: ${lineUserId}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where line_user_id=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [lineUserId])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.findById = (id) => {
     logger.info(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
@@ -47,6 +62,21 @@ module.exports = (db) => {
         const sql = `select * from ${table_name} where email=? and mobile=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [email, mobile])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.findByEmail = (email) => {
+    logger.info(`findByEmail: ${email}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where email=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);
@@ -220,6 +250,22 @@ module.exports = (db) => {
         const sql = `UPDATE ${tb_login} SET password = ? WHERE username=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [password, email])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.updateLineUserId = (data) => {
+    logger.info(`updateLineUserId: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      const { email, lineUserId } = data;
+      try {
+        const sql = `UPDATE ${table_name} SET line_user_id = ? WHERE email = ?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [lineUserId, email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);

@@ -5,6 +5,23 @@ const TaskLogin = require("../models/Login.model")
 const moment = require("moment")
 
 module.exports = io => {
+  router.get("/line/:lineUserId", async (req, res, next) => {
+    try {
+      const lineUserId = req.params.lineUserId
+      const response = await Task(req.headers.database).findByLineUserId(lineUserId);
+      const data = JSON.parse(response.data)
+      if(data.length > 0){
+        res.status(200).json({ status: response.status, msg: "Success", data: data[0] })
+      }else{
+        res.status(200).json({ status: response.status, msg: "Success", data: [] })
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
+
   router.get("/", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).findAll()
@@ -144,7 +161,15 @@ module.exports = io => {
           return res.status(500).json({ status: "Error", msg: "Email or Mobile mismatch in system!" })
         }
         response = await Task(req.headers.database).changePassword(req.body)
-      } else {
+      } else if (req.params.id === 'update_line_user_id') {
+        const { email } = req.body;
+        const memberResult = await Task(req.headers.database).findByEmail(email);
+        const memberData = JSON.parse(memberResult.data);
+        if (memberData.length === 0) {
+          return res.status(500).json({ status: "Error", msg: "Email mismatch in system!" })
+        }
+        response = await Task(req.headers.database).updateLineUserId(req.body)
+      }else {
         response = await Task(req.headers.database).updateRole(payload)
       }
       const data = JSON.parse(response.data)
