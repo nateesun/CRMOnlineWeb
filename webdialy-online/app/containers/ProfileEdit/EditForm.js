@@ -326,11 +326,6 @@ const validate = formValues => {
       <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
     );
   }
-  if (typeof formValues.email === 'undefined') {
-    errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
-  } else if (!formValues.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
-    errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
-  }
 
   return errors;
 };

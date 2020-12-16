@@ -1,16 +1,15 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
-import * as loginSelectors from 'containers/Login/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const email = JSON.parse(getCookie('token')||'');
+    const { username } = yield select(selectors.makeSelectProfile());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member/${email}`;
+    const requestURL = `${constants.publicPath}/api/member/${username}`;
     try {
       const response = yield call(request, requestURL, {
         database,
@@ -28,14 +27,15 @@ export function* initLoad() {
 export function* onUpdatePassword() {
   try {
     const requestURL = `${constants.publicPath}/api/login`;
-    const profile = yield select(selectors.makeSelectProfile());
+    const { mobile, email, new_password } = yield select(selectors.makeSelectEditForm());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
       body: JSON.stringify({
-        username: profile.data.email,
-        password: profile.data.new_password,
+        mobile,
+        email,
+        new_password
       }),
     });
     if (response.status === 'Success') {

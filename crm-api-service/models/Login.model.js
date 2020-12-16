@@ -30,11 +30,12 @@ module.exports = (db) => {
     logger.info(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `UPDATE ${table_name} SET password = ? WHERE username=?;`;
+        const { email, mobile, new_password } = data;
+        const sql = `UPDATE ${table_name} SET password = ? WHERE username=? or username=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [
-          Buffer.from(data.password).toString("base64"),
-          data.username,
+          Buffer.from(new_password).toString("base64"),
+          email, mobile
         ])
         if (result.affectedRows > 0) {
           resolve({ status: "Success", data: JSON.stringify(result) })
