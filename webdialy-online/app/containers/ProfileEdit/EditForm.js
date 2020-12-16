@@ -147,7 +147,7 @@ const EditForm = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={3} lg={3}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
                 <Field
                   name="prefix"
@@ -163,7 +163,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={3} lg={3}>
               <Field
                 name="first_name"
                 component={RenderField}
@@ -173,7 +173,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="last_name"
                 component={RenderField}
@@ -183,7 +183,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="birthday"
                 component={DateInput}
@@ -192,7 +192,7 @@ const EditForm = props => {
                 label={<FormattedMessage {...messages.dateOfBirth} />}
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="mobile"
                 component={RenderField}
@@ -224,7 +224,7 @@ const EditForm = props => {
               />
             </Grid>
 
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={6} lg={6}>
               <span style={{ color: 'green' }}>
                 * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
                 โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
@@ -235,6 +235,19 @@ const EditForm = props => {
                 component={RenderField}
                 type="text"
                 label={<FormattedMessage {...messages.lineId} />}
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={6} lg={6}>
+              <span style={{ color: 'blue' }}>
+                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
+                เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
+              </span>
+              <Field
+                name="line_user_id"
+                component={RenderField}
+                type="text"
+                label={<FormattedMessage {...messages.lineUserId} />}
                 margin="normal"
               />
             </Grid>

@@ -19,6 +19,7 @@
   "app.containers.Login.loginErrorMessage": "Incorrect email or password.",
   "app.containers.Login.passwordShouldNotEmpty": "Password should not be blank.",
   "app.containers.Login.submit": "Sign in",
+  "app.containers.Login.signIn": "Login by Email",
   "app.containers.Logout.header": "You have successfully logged out.",
   "app.containers.NotFoundPage.header": "404 - Page Not Found !",
   "app.containers.Profile.header": "Profile container!",

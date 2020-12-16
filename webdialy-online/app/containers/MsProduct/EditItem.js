@@ -361,5 +361,5 @@ export default connect(mapStateToProps)(
     form: 'editItem',
     validate,
     enableReinitialize: true,
-  })(EditItem),
+  })(EditItem)
 );

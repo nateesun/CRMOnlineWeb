@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import RenderField from 'components/RenderField';
+import InputCheckBox from 'components/RenderField/CheckboxInput';
 import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
@@ -47,6 +48,7 @@ const ImgLogo = styled.img`
 
 const LoginForm = props => {
   const classes = useStyles();
+  const [type, setType] = useState('mobile');
   const {
     handleSubmit,
     pristine,
@@ -55,6 +57,10 @@ const LoginForm = props => {
     errorLogin,
     clearData,
   } = props;
+
+  useEffect(()=>{
+    setType('mobile');
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -67,11 +73,13 @@ const LoginForm = props => {
       />
       <div className={classes.paper}>
         <ImgLogo src={LoginLogo} width="128" height="128" />
-        <Typography variant="h5" className={classes.loginTopic}>
-          <FormattedMessage {...messages.signIn} />
-        </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Field
+          <Field name="type" 
+            component={InputCheckBox}
+            label={`Login by ${type}`}
+            onChange={()=>setType(type === 'mobile' ? 'email':'mobile')} 
+          />
+          {type==='email' && <Field
             name="email"
             component={RenderField}
             type="email"
@@ -79,8 +87,16 @@ const LoginForm = props => {
             label={<FormattedMessage {...messages.email} />}
             required
             fullWidth
-            autoFocus
-          />
+          />}
+          {type==='mobile' && <Field
+            name="mobile"
+            component={RenderField}
+            type="number"
+            margin="normal"
+            label={<FormattedMessage {...messages.mobile} />}
+            required
+            fullWidth
+          />}
           <Field
             name="password"
             component={RenderField}
@@ -126,21 +142,30 @@ LoginForm.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-
   if (typeof formValues.email === 'undefined') {
     errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
   } else if (!formValues.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
-
+  if (typeof formValues.mobile === 'undefined') {
+    errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
+  }
   if (!formValues.password) {
     errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
   }
-
   return errors;
 };
 
-export default reduxForm({
+const mapStateToProps = (state, props) => ({
+  initialValues: {
+    type: true,
+  }
+})
+
+export default connect(
+  mapStateToProps
+)(reduxForm({
   form: 'loginForm',
   validate,
-})(LoginForm);
+  enableReinitialize: true,
+})(LoginForm))

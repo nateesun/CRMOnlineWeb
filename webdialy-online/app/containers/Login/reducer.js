@@ -10,7 +10,9 @@ import * as constants from './constants';
 export const initialState = {
   loginForm: {
     email: '',
+    mobile: '',
     password: '',
+    type: '',
   },
   response: {
     status: null,
@@ -37,7 +39,9 @@ const loginReducer = (state = initialState, action) =>
         break;
       case constants.CHECK_LOGIN:
         draft.loginForm.email = action.payload.email;
+        draft.loginForm.mobile = action.payload.mobile;
         draft.loginForm.password = action.payload.password;
+        draft.loginForm.type = action.payload.type;
         break;
       case constants.CHECK_LOGIN_SUCCESS:
         draft.loggedIn = true;
@@ -50,7 +54,9 @@ const loginReducer = (state = initialState, action) =>
         break;
       case constants.CHECK_LOGOUT_SUCCESS:
         draft.loginForm.email = '';
+        draft.loginForm.mobile = '';
         draft.loginForm.password = '';
+        draft.loginForm.type = 'mobile';
         draft.loggedIn = false;
         break;
       case constants.CHECK_LOGOUT_ERROR:
@@ -60,7 +66,9 @@ const loginReducer = (state = initialState, action) =>
         draft.error = '';
         draft.loginForm = {
           email: '',
+          mobile: '',
           password: '',
+          type: 'mobile',
         };
         break;
       case constants.LOAD_PROFILE_TOKEN:

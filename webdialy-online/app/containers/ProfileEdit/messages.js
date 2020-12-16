@@ -113,6 +113,10 @@ export default defineMessages({
     id: `${scope}.lineId`,
     defaultMessage: 'Line ID',
   },
+  lineUserId: {
+    id: `${scope}.lineUserId`,
+    defaultMessage: 'Line User ID',
+  },
   headerEditForm: {
     id: `${scope}.headerEditForm`,
     defaultMessage: 'Edit Member',

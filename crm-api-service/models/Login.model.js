@@ -74,5 +74,31 @@ module.exports = (db) => {
     })
   }
 
+  module.validLoginMobile = (username, password) => {
+    logger.info(`validLoginMobile: ${username}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select l.*, m.member_role 
+        from ${table_name} l 
+        inner join ${tb_member} m on l.username=m.mobile 
+        where l.username=? 
+        and l.password=? 
+        and member_active = 'Y';`;
+        logger.debug(sql);
+        const user = await pool.query(sql, [username, password])
+        if (user.length === 0) {
+          return resolve({ status: "Invalid", data: JSON.stringify("Invalid user") })
+        }
+        if (user[0].member_role === '' || user[0].member_role === null){
+          return resolve({ status: "Missing Role", data: JSON.stringify("Invalid user") })
+        }
+        resolve({ status: "Success", data: JSON.stringify(user) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   return module
 }

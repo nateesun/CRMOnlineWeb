@@ -110,6 +110,7 @@ module.exports = io => {
         expired_date: req.body.expired_date,
         birthday: req.body.birthday,
         line_id: req.body.line_id,
+        line_user_id: req.body.line_user_id,
         member_role: req.body.member_role,
       }
       const loginModel = {
