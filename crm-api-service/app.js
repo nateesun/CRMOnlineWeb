@@ -169,11 +169,11 @@ app.use((err, req, res, next) => {
 
 // socket.io events
 io.on( "connection", function( client ) {
-  console.log(`client ${client.id} connected.`);
+  // console.log(`client ${client.id} connected.`);
   io.to(client.id).emit('client_id', client.id);
 
   client.on('disconnect', ()=>{
-    console.log(`client ${client.id} disconnected.`);
+    // console.log(`client ${client.id} disconnected.`);
     io.to(client.id).emit('client_close', false);
   })
 });
