@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.emailShouldNotEmpty`,
     defaultMessage: 'Email should not be blank.',
   },
+  mobileShouldNotEmpty: {
+    id: `${scope}.mobileShouldNotEmpty`,
+    defaultMessage: 'Mobile should not be blank.',
+  },
   emailIncorrectPattern: {
     id: `${scope}.emailIncorrectPattern`,
     defaultMessage: 'Incorrect format email.',
@@ -47,11 +51,19 @@ export default defineMessages({
   },
   signIn: {
     id: `${scope}.signIn`,
-    defaultMessage: 'Sign In',
+    defaultMessage: 'Login by Email',
+  },
+  signInMobile: {
+    id: `${scope}.signInMobile`,
+    defaultMessage: 'Login by Mobile',
   },
   email: {
     id: `${scope}.email`,
     defaultMessage: 'Email',
+  },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile',
   },
   password: {
     id: `${scope}.password`,

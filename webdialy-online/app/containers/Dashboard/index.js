@@ -26,8 +26,8 @@ export function Dashboard(props) {
   const [token, setToken] = useCookie('token', '');
 
   useEffect(() => {
-    if (props.login.email) {
-      setToken(JSON.stringify(props.login.email));
+    if (props.login.email||props.login.mobile) {
+      setToken(JSON.stringify(props.login.email||props.login.mobile));
     }
     const getToken = getCookie('token') || '';
     if (getToken !== '') {

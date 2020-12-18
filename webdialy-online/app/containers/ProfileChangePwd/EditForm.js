@@ -63,7 +63,8 @@ const EditForm = props => {
   } = props;
 
   const onValidated = formValues => {
-    onEditMember(formValues);
+    const { mobile, email, new_password } = formValues
+    onEditMember({mobile, email, new_password});
   };
 
   return (
@@ -88,13 +89,23 @@ const EditForm = props => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Field
                 name="email"
                 component={RenderField}
                 type="email"
                 margin="normal"
                 label={<FormattedMessage {...messages.email} />}
+                disabled
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Field
+                name="mobile"
+                component={RenderField}
+                type="number"
+                margin="normal"
+                label={<FormattedMessage {...messages.mobile} />}
                 disabled
               />
             </Grid>

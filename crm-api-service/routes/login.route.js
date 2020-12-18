@@ -1,18 +1,18 @@
 const express = require("express")
 const router = express.Router()
 const Task = require("../models/Login.model")
-const TaskOrder = require('../models/Orders.model')
-const TaskOrderDetail = require('../models/OrdersDetail.model')
 
 module.exports = args => {
 
   router.post("/", async (req, res, next) => {
     try {
-      const { email: username, password, type, cart_no } = req.body;
-      const response = await Task(req.headers.database).validLogin(
-        username,
-        password
-      )
+      const { email: username, mobile, password, type } = req.body;
+      let response = {};
+      if(type){
+        response = await Task(req.headers.database).validLoginMobile(mobile, password);
+      }else{
+        response = await Task(req.headers.database).validLogin(username, password);
+      }
       if (response.status === "Success") {
         return res.status(200).json({ status: response.status, msg: "Success" })
       }else if (response.status === "Missing Role") {

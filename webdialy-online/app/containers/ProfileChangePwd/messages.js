@@ -33,6 +33,10 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email Address',
   },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile',
+  },
   oldPassword: {
     id: `${scope}.oldPassword`,
     defaultMessage: 'Current Password',
