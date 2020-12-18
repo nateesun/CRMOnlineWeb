@@ -3,7 +3,7 @@ const { getFlexPoint, getFlexItemPromotion, gertFlexRedeemQrCode } = require('./
 const { getRequestApi } = require('./handleRequest');
 
 const apiGetPoint = `${config.crmApiHost}/api/member/line/:lineUserId`
-const apiGetPromotions = `${config.crmApiHost}/api/promotion`
+const apiGetPromotions = `${config.crmApiHost}/api/redeem`
 
 const handleText = (message, replyToken, source, client) => {
   switch (message.text) {
@@ -58,8 +58,8 @@ const handleText = (message, replyToken, source, client) => {
       }
       break
     case "โปรโมชั่น":
-      const promotions = [];
       (async () => {
+        const promotions = [];
         const response = await getRequestApi(apiGetPromotions);
         if (response.status === "Success") {
           const data = response.data
