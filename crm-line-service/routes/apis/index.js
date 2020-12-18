@@ -1,8 +1,7 @@
 const config = requireSrc("config")
 const { getFlexPoint, getFlexItemPromotion, gertFlexRedeemQrCode } = require('./flex_ui');
-const { handleRequest, getRequestApi } = require('./handleRequest');
+const { getRequestApi } = require('./handleRequest');
 
-const apiUpdateLineUserId = `${config.crmApiHost}/api/member/update_line_user_id`
 const apiGetPoint = `${config.crmApiHost}/api/member/line/:lineUserId`
 const apiGetPromotions = `${config.crmApiHost}/api/promotion`
 
@@ -32,23 +31,12 @@ const handleText = (message, replyToken, source, client) => {
     case "ลงทะเบียนรับข้อมูล":
       if (source.userId) {
         return client.getProfile(source.userId).then(async (profile) => {
-          const response = await handleRequest(apiUpdateLineUserId, "PATCH", {
-            email: "nathee@gmail.com",
-            lineUserId: source.userId,
-          })
-          if (response.status === "Success") {
-            replyText(
-              replyToken,
-              [`${profile.displayName} ลงทะเบียนเรียบร้อยแล้ว`],
-              client
-            )
-          } else {
-            replyText(
-              replyToken,
-              [`${profile.displayName} ลงทะเบียนไม่สำเร็จ`],
-              client
-            )
-          }
+          const convUserId = Buffer.from(source.userId).toString('base64');
+          replyText(
+            replyToken,
+            [`"ใช้ ข้อมูลด้านล่างนี้อัพเดตในระบบ web daily online"\n------------------------------\n${convUserId}\n------------------------------`],
+            client
+          )
         })
       }
     case "เรียกดูคะแนน":
@@ -58,8 +46,9 @@ const handleText = (message, replyToken, source, client) => {
       }
       if (source.userId) {
         (async () => {
+          const convUserId = Buffer.from(source.userId).toString('base64');
           const response = await getRequestApi(
-            apiGetPoint.replace(":lineUserId", source.userId)
+            apiGetPoint.replace(":lineUserId", convUserId)
           )
           if (response.status === "Success") {
             data = response.data
@@ -96,7 +85,6 @@ const handleText = (message, replyToken, source, client) => {
         contents: gertFlexRedeemQrCode(''),
       })
     default:
-      console.log(`Echo message to ${replyToken}: ${message.text}`)
       return replyText(replyToken, message.text, client)
   }
 }
@@ -113,10 +101,6 @@ module.exports = (client) => {
   const module = {}
 
   module.handleEvent = (event) => {
-    if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
-      return console.log("Test hook recieved: " + JSON.stringify(event.message))
-    }
-
     switch (event.type) {
       case "message":
         const message = event.message

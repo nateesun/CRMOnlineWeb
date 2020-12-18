@@ -74,9 +74,9 @@ module.exports = (db) => {
     logger.info(`findByEmail: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where email=?;`;
+        const sql = `select * from ${table_name} where email=? or mobile=?;`;
         logger.debug(sql);
-        const result = await pool.query(sql, [email])
+        const result = await pool.query(sql, [email, email])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);
@@ -192,6 +192,7 @@ module.exports = (db) => {
         birthday = ?, 
         mobile = ?, 
         line_id = ?, 
+        line_user_id = ?, 
         system_updated = now() 
         WHERE code=?;`;
         logger.debug(sql);
@@ -202,6 +203,7 @@ module.exports = (db) => {
           data.birthday,
           data.mobile,
           data.line_id,
+          data.line_user_id,
           data.code,
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
@@ -244,7 +246,7 @@ module.exports = (db) => {
   module.changePassword = (data) => {
     logger.info(`changePassword: ${data}`)
     return new Promise(async (resolve, reject) => {
-      const { email, mobile, secret } = data;
+      const { email } = data;
       const password = Buffer.from('123456').toString('base64');
       try {
         const sql = `UPDATE ${tb_login} SET password = ? WHERE username=?;`;
@@ -298,7 +300,7 @@ module.exports = (db) => {
       try {
         const sql = `select l.* from ${table_name} m 
           inner join ${tb_login} l on m.email = l.username 
-          where line_id ='nathee' and member_active ='Y';`;
+          where line_id =? and member_active ='Y';`;
           logger.debug(sql);
           const member = await pool.query(sql, [lineId])
           resolve({ status: "Success", data: JSON.stringify(member[0]) })

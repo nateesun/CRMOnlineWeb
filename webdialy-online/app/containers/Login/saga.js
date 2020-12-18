@@ -11,12 +11,12 @@ export function* onValidLogin() {
     const requestURL = `${constants.publicPath}/api/login`;
     const loginForm = yield select(selectors.makeSelectLogin());
     const database = getCookie('database');
-    const { email, password } = loginForm;
+    const { email, mobile, password, type } = loginForm;
     const encryptPassword = Buffer.from(password).toString('base64');
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ email, password: encryptPassword }),
+      body: JSON.stringify({ email, mobile, password: encryptPassword, type }),
     });
     if (response.status === 'Success') {
       yield put(actions.checkLoginSuccess(response));
@@ -24,7 +24,7 @@ export function* onValidLogin() {
     } else if (response.status === 'Missing Role') {
       yield put(actions.checkLoginError(response.msg));
     } else {
-      yield put(actions.checkLoginError('Email or password invalid'));
+      yield put(actions.checkLoginError('Mobile or Email or password invalid'));
     }
   } catch (err) {
     yield put(actions.checkLoginError(`${err}`));

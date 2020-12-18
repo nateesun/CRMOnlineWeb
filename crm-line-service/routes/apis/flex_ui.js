@@ -11,7 +11,7 @@ const gertFlexRedeemQrCode = (data) => {
       contents: [
         {
           type: "text",
-          text: "BROWN'S ADVENTURE",
+          text: "ตัวอย่างโปรโมชั่น",
           weight: "bold",
           size: "xl",
           align: "center",
@@ -40,7 +40,7 @@ const gertFlexRedeemQrCode = (data) => {
                 },
                 {
                   type: "text",
-                  text: "Monday 25, 9:00PM",
+                  text: "20/12/2020 12.00PM",
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -64,7 +64,7 @@ const gertFlexRedeemQrCode = (data) => {
                 },
                 {
                   type: "text",
-                  text: "C Row, 18 Seat",
+                  text: "20/02/2021 12.00PM",
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -199,7 +199,7 @@ const getFlexPoint = (data) => {
           },
           {
             type: "text",
-            text: "" + data.total_score,
+            text: "" + (data.total_score||'0.00'),
             weight: "bold",
             size: "xl",
             color: "#F9E532FF",
@@ -225,7 +225,7 @@ const getFlexPoint = (data) => {
               },
               {
                 type: "text",
-                text: "" + data.total_purchase,
+                text: "" + (data.total_purchase||'0.00'),
                 weight: "bold",
                 color: "#FFF533FF",
                 align: "start",

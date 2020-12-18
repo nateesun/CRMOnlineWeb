@@ -24,12 +24,14 @@ export function clearLogin() {
   };
 }
 
-export function checkLogin(email, password) {
+export function checkLogin(email, mobile, password, type) {
   return {
     type: constants.CHECK_LOGIN,
     payload: {
       email,
+      mobile,
       password,
+      type,
     },
   };
 }

@@ -46,9 +46,6 @@ function Header(props) {
   const { classes, onDrawerToggle, profile } = props;
   const loggedIn = getCookie('token') || '';
   const email = loggedIn ? JSON.parse(getCookie('token')): '';
-  const login = {
-    email
-  }
 
   return (
     <React.Fragment>
@@ -71,11 +68,7 @@ function Header(props) {
                 </IconButton>
               </Grid>
             </Hidden>
-            <Grid item xs>
-              <ButtonLink to={`${publicPath}/`} color="white">
-                PANKHAMHOM
-              </ButtonLink>
-            </Grid>
+            <Grid item xs></Grid>
             <Grid item>
               <LocaleToggle />
             </Grid>

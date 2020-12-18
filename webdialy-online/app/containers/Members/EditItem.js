@@ -256,9 +256,6 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
-  if (!formValues.email) {
-    errors.email = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
-  }
   if (!formValues.first_name) {
     errors.first_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
