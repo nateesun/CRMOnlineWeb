@@ -111,7 +111,7 @@ const getFlexItemPromotion = (promotion) => {
     type: "bubble",
     hero: {
       type: "image",
-      url: `${config.crmApiHost}${promotion.img_path}`,
+      url: `${config.crmApiHost}${promotion.img_path||'images/noImage.jpg'}`,
       size: "full",
       aspectRatio: "20:13",
       aspectMode: "cover",
