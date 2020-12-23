@@ -331,3 +331,11 @@ INSERT INTO ui_menu_list
 VALUES('Promotion', 'Master', 'DnsRoundedIcon', '/ms/promotion', 'N');
 
 ALTER TABLE `member` ADD line_user_id varchar(100) NULL;
+
+CREATE TABLE `monitor_app` (
+  `branch_code` varchar(100) NOT NULL,
+  `branch_name` varchar(100) NOT NULL,
+  `system_create` datetime DEFAULT NULL,
+  `system_update` datetime DEFAULT NULL,
+  `staus_open` char(1) DEFAULT NULL
+);
