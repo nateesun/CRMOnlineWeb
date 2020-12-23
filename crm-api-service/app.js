@@ -178,8 +178,4 @@ io.on( "connection", function( client ) {
   })
 });
 
-setInterval(()=>{
-  io.emit("timeSync", "fetch data from client");
-}, config.timeToSync);
-
 module.exports = app

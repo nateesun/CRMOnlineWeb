@@ -55,7 +55,7 @@ module.exports = (db) => {
   }
 
   module.updateRedeemFromClient = (redeem) => {
-    logger.info(`updateRedeemFromClient: ${redeem}`)
+    logger.info(`updateRedeemFromClient: ${redeem.length}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `update ${table_name} 
@@ -66,19 +66,23 @@ module.exports = (db) => {
         active=? 
         where redeem_code=?;`;
         logger.debug(sql);
-        const result = await pool.query(sql, [
-          redeem.bill_no,
-          redeem.use_in_branch,
-          redeem.emp_code_redeem,
-          redeem.active,
-          redeem.redeem_code
-        ])
-        sql = `update ${promotion} 
-        set qty_in_stock = qty_in_stock-1 
-        where product_code=?;`;
-        logger.debug(sql);
-        await pool.query(sql, [redeem.product_code]);
-        resolve({ status: "Success", data: JSON.stringify(result) })
+        let countToUpdate = 0;
+        for (let i = 0; i < redeem.length; i++) {
+          const redeemData = JSON.parse(redeem[i]);
+          const result = await pool.query(sql, [
+            redeemData.bill_no,
+            redeemData.use_in_branch,
+            redeemData.emp_code_redeem,
+            redeemData.active,
+            redeemData.redeem_code
+          ])
+          sql = `update ${promotion} set qty_in_stock = qty_in_stock-1 where product_code=?;`;
+          logger.debug(sql);
+          await pool.query(sql, [redeemData.product_code]);
+
+          countToUpdate = countToUpdate + result.affectedRows;
+        }
+        resolve({ status: "Success", data: JSON.stringify({ result: countToUpdate }) })
       } catch (err) {
         logger.error(err);
         reject({ status: "Error", msg: err.message })
