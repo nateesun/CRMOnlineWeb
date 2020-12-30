@@ -52,6 +52,10 @@ module.exports = args => {
 
     try {
       return httpRequest(options, (error, response, body) => {
+        const { status, msg } = body;
+        if(status === 'Register_Error'){
+          return res.status(400).json({ Error: msg });
+        }
         if(error){
           return res.status(500).json({ Error: error });
         }
