@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Task = require("../models/Promotion.model")
 
-module.exports = args => {
+module.exports = io => {
 
   router.get("/", async (req, res, next) => {
     try {
@@ -32,6 +32,7 @@ module.exports = args => {
     try {
       const response = await Task(req.headers.database).create(req.body)
       const data = JSON.parse(response.data)
+      io.emit('update_redeem', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
@@ -44,6 +45,7 @@ module.exports = args => {
     try {
       const response = await Task(req.headers.database).update(req.body)
       const data = JSON.parse(response.data)
+      io.emit('update_redeem', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res
@@ -56,6 +58,7 @@ module.exports = args => {
     try {
       const response = await Task(req.headers.database).delete(req.params.id)
       const data = JSON.parse(response.data)
+      io.emit('update_redeem', true);
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
       return res

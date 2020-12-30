@@ -7,7 +7,7 @@ module.exports = (db) => {
   const table_name = getDB(db, "branch")
 
   module.findById = (uuid_index) => {
-    logger.info(`findById: ${uuid_index}`);
+    logger.debug(`findById: ${uuid_index}`);
     if(!uuid_index) {
       logger.warn(`uuid_index to find is empty!`);
       return reject({ status: "Warning", msg: 'uuid_index to find is empty!' })
@@ -29,7 +29,7 @@ module.exports = (db) => {
   }
 
   module.findByCode = (code) => {
-    logger.info(`findByCode: ${code}`);
+    logger.debug(`findByCode: ${code}`);
     if(!code) {
       logger.warn(`code to find is empty!`)
       return reject({ status: 'Warning', msg: 'code to find is empty!' })
@@ -51,7 +51,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info(`findAll`)
+    logger.debug(`findAll`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name};`;
@@ -66,7 +66,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    logger.info(`create ${params}`)
+    logger.debug(`create ${params}`)
     return new Promise(async (resolve, reject) => {
       params.uuid_index = getUUID();
       try {
@@ -86,7 +86,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`Branch:update ${data}`)
+    logger.debug(`Branch:update ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
@@ -113,7 +113,7 @@ module.exports = (db) => {
   }
 
   module.updatePatch = (data) => {
-    logger.info(`updatePatch ${data}`)
+    logger.debug(`updatePatch ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
@@ -138,7 +138,7 @@ module.exports = (db) => {
   }
 
   module.delete = (uuid_index) => {
-    logger.info(`delete ${uuid_index}`)
+    logger.debug(`delete ${uuid_index}`)
     if(!uuid_index) {
       logger.warn('id to delete is empty!');
       return reject({ status: 'Warning', msg: 'id to delete is empty!' })

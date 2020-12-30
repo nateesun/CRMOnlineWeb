@@ -9,7 +9,7 @@ module.exports = (db) => {
   const member = getDB(db, "member")
 
   module.findRole = (email) => {
-    logger.info(`findRole: ${email}`)
+    logger.debug(`findRole: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `

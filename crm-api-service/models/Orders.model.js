@@ -10,7 +10,7 @@ module.exports = (db) => {
   const tb_company = getDB(db, "company")
 
   module.findById = (id) => {
-    logger.info(`findById: ${id}`)
+    logger.debug(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`;
@@ -25,7 +25,7 @@ module.exports = (db) => {
   }
 
   module.findByCartNo = (cart_no) => {
-    logger.info(`findByCartNo: ${cart_no}`)
+    logger.debug(`findByCartNo: ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where cart_no=?;`;
@@ -40,7 +40,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name};`;
@@ -55,7 +55,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    logger.info(`searchData: ${key} ${value}`)
+    logger.debug(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name}`;
@@ -73,7 +73,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    logger.info(`create: ${params}`)
+    logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select order_running, order_prefix, order_size_running from ${tb_company} c limit 0,1;`;
@@ -100,7 +100,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
@@ -121,7 +121,7 @@ module.exports = (db) => {
   }
 
   module.updateMemberApprove = (data) => {
-    logger.info(`updateMemberApprove: ${data}`)
+    logger.debug(`updateMemberApprove: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} 
@@ -150,7 +150,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    logger.info(`delete: ${id}`)
+    logger.debug(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
