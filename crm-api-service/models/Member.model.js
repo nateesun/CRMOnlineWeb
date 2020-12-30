@@ -10,8 +10,28 @@ module.exports = (db) => {
   const tb_company = getDB(db, "company")
   const tb_login = getDB(db, "login")
 
+  module.checkDuplicateCreateMember = (data) => {
+    logger.debug(`checkDuplicateCreateMember: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      const { email, mobile, line_id } = data
+      try {
+        const sql = `select email, mobile, line_id from ${table_name} 
+        where email=? or mobile=? or line_id=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [email, mobile, line_id])
+        if(result.length>0){
+          return resolve({ status: "Success", data: JSON.stringify(result[0]) })
+        }
+        return resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.findByLineUserId = (lineUserId) => {
-    logger.info(`findByLineUserId: ${lineUserId}`)
+    logger.debug(`findByLineUserId: ${lineUserId}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where line_user_id=?;`
@@ -26,7 +46,7 @@ module.exports = (db) => {
   }
 
   module.findById = (id) => {
-    logger.info(`findById: ${id}`)
+    logger.debug(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`
@@ -41,7 +61,7 @@ module.exports = (db) => {
   }
 
   module.findByEmail = (email) => {
-    logger.info(`findByEmail: ${email}`)
+    logger.debug(`findByEmail: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where email=?;`
@@ -56,7 +76,7 @@ module.exports = (db) => {
   }
 
   module.findByMobileAndEmail = (email, mobile) => {
-    logger.info(`findByMobileAndEmail: ${email} ${mobile}`)
+    logger.debug(`findByMobileAndEmail: ${email} ${mobile}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where email=? and mobile=?;`
@@ -71,7 +91,7 @@ module.exports = (db) => {
   }
 
   module.findByEmail = (email) => {
-    logger.info(`findByEmail: ${email}`)
+    logger.debug(`findByEmail: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where email=? or mobile=?;`
@@ -86,7 +106,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} order by code;`
@@ -101,7 +121,7 @@ module.exports = (db) => {
   }
 
   module.getDataForClient = () => {
-    logger.info("getDataForClient")
+    logger.debug("getDataForClient")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_role='member' order by code;`
@@ -116,7 +136,7 @@ module.exports = (db) => {
   }
 
   module.updateMemberFromClient = (member) => {
-    logger.info(`updateMemberFromClient: ${member.length}`)
+    logger.debug(`updateMemberFromClient: ${member.length}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `update ${table_name} 
@@ -142,7 +162,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    logger.info(`searchData: ${key} ${value}`)
+    logger.debug(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name} where 1=1 `
@@ -160,7 +180,7 @@ module.exports = (db) => {
   }
 
   module.create = (data) => {
-    logger.info(`create: ${data}`)
+    logger.debug(`create: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select member_running, prefix_running, size_running, member_register_point 
@@ -192,7 +212,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET  
@@ -225,7 +245,7 @@ module.exports = (db) => {
   }
 
   module.updateRole = (data) => {
-    logger.info(`updateRole: ${data}`)
+    logger.debug(`updateRole: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET  
@@ -254,7 +274,7 @@ module.exports = (db) => {
   }
 
   module.changePassword = (data) => {
-    logger.info(`changePassword: ${data}`)
+    logger.debug(`changePassword: ${data}`)
     return new Promise(async (resolve, reject) => {
       const { email } = data
       const password = Buffer.from("123456").toString("base64")
@@ -271,7 +291,7 @@ module.exports = (db) => {
   }
 
   module.updateLineUserId = (data) => {
-    logger.info(`updateLineUserId: ${data}`)
+    logger.debug(`updateLineUserId: ${data}`)
     return new Promise(async (resolve, reject) => {
       const { email, lineUserId } = data
       try {
@@ -287,7 +307,7 @@ module.exports = (db) => {
   }
 
   module.delete = (email) => {
-    logger.info(`delete: ${email}`)
+    logger.debug(`delete: ${email}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `DELETE FROM ${table_name} WHERE email = ?;`
@@ -305,7 +325,7 @@ module.exports = (db) => {
   }
 
   module.verifyTokenLine = (lineId) => {
-    logger.info(`verifyTokenLine: ${lineId}`)
+    logger.debug(`verifyTokenLine: ${lineId}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select l.* from ${table_name} m 
@@ -322,7 +342,7 @@ module.exports = (db) => {
   }
 
   module.getLineId = (lineId) => {
-    logger.info(`getLineId: ${lineId}`)
+    logger.debug(`getLineId: ${lineId}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where Line_Id=?;`

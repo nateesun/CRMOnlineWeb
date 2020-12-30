@@ -8,7 +8,7 @@ module.exports = (db) => {
   const tb_member = getDB(db, "member")
 
   module.create = (data) => {
-    logger.info(`create: ${data}`)
+    logger.debug(`create: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `INSERT INTO ${table_name} SET ?;`;
@@ -27,7 +27,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const { email, mobile, new_password } = data;
@@ -50,7 +50,7 @@ module.exports = (db) => {
   }
 
   module.validLogin = (username, password) => {
-    logger.info(`validLogin: ${username}`)
+    logger.debug(`validLogin: ${username}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select l.*, m.member_role 
@@ -76,7 +76,7 @@ module.exports = (db) => {
   }
 
   module.validLoginMobile = (username, password) => {
-    logger.info(`validLoginMobile: ${username}`)
+    logger.debug(`validLoginMobile: ${username}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select l.*, m.member_role 

@@ -44,7 +44,7 @@ export function* onAddRegisterMember() {
       yield put(actions.addRegisterMemberSuccess());
       yield put(push(`${constants.publicPath}/login`));
     } else {
-      yield put(actions.addRegisterMemberError('ไม่สามารถบันทึกข้อมูลได้'));
+      yield put(actions.addRegisterMemberError(response.Error));
     }
   } catch (err) {
     yield put(actions.addRegisterMemberError(err));

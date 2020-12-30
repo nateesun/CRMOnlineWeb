@@ -58,7 +58,7 @@ const nocache = require('nocache');
 const fixPassword = config.fixPassword;
 
 const setupLogger = (req, res, next) => {
-  logger.info(`${req.method} ${req.path} ${res.statusCode}`);
+  logger.debug(`${req.method} ${req.path} ${res.statusCode}`);
   next();
 }
 
@@ -89,7 +89,7 @@ const crudRouter = require("./routes/table_crud.route")(options)
 const companyRouter = require("./routes/company.route")(options)
 const productRouter = require("./routes/product.route")(options)
 const stockRouter = require("./routes/stock.route")(options)
-const promotionRouter = require("./routes/promotion.route")(options)
+const promotionRouter = require("./routes/promotion.route")(io)
 const roleRouter = require("./routes/role.route")(options)
 const memberRouter = require("./routes/member.route")(io)
 const redeemRouter = require("./routes/redeem.route")(io)
@@ -169,11 +169,8 @@ app.use((err, req, res, next) => {
 
 // socket.io events
 io.on( "connection", function( client ) {
-  // console.log(`client ${client.id} connected.`);
   io.to(client.id).emit('client_id', client.id);
-
   client.on('disconnect', ()=>{
-    // console.log(`client ${client.id} disconnected.`);
     io.to(client.id).emit('client_close', false);
   })
 });

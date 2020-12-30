@@ -8,7 +8,7 @@ module.exports = (db) => {
   const table_name = getDB(db, "member_shipping")
 
   module.findByMemberCode = (member_code) => {
-    logger.info(`findByMemberCode: ${member_code}`)
+    logger.debug(`findByMemberCode: ${member_code}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_code=?;`;
@@ -23,7 +23,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name};`;
@@ -38,7 +38,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    logger.info(`searchData: ${key} ${value}`)
+    logger.debug(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name}`
@@ -56,7 +56,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    logger.info(`create: ${params}`)
+    logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `INSERT INTO ${table_name} SET ?;`;
@@ -71,7 +71,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET 
@@ -113,7 +113,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    logger.info(`delete: ${id}`)
+    logger.debug(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
@@ -128,7 +128,7 @@ module.exports = (db) => {
   }
 
   module.deleteByMemberCode = (member_code) => {
-    logger.info(`deleteByMemberCode: ${member_code}`)
+    logger.debug(`deleteByMemberCode: ${member_code}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE member_code = ?;`;

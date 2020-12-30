@@ -8,7 +8,7 @@ module.exports = (db) => {
   const tb_stock_product = getDB(db, "stock_product")
 
   module.findById = (id) => {
-    logger.info(`findById: ${id}`)
+    logger.debug(`findById: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where uuid_index=?;`;
@@ -23,7 +23,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select *,
@@ -40,7 +40,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    logger.info(`create: ${params}`)
+    logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `INSERT INTO ${table_name} SET ?;`;
@@ -55,7 +55,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET 
@@ -101,7 +101,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    logger.info(`delete: ${id}`)
+    logger.debug(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;

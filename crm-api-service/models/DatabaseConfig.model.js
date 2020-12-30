@@ -8,7 +8,7 @@ module.exports = db => {
   const module = {}
 
   module.findAll = async () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `show databases;`;
