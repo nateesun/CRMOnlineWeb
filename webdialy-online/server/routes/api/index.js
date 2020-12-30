@@ -52,7 +52,10 @@ module.exports = args => {
 
     try {
       return httpRequest(options, (error, response, body) => {
-        if (response.statusCode === 200) {
+        if(error){
+          return res.status(500).json({ Error: error });
+        }
+        if (response && response.statusCode === 200) {
           if (options.path === '/login') {
             const { email } = options.body;
             const token = jwtUseCases.sign({ email });
