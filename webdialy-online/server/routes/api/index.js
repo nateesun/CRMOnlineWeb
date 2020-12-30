@@ -52,12 +52,12 @@ module.exports = args => {
 
     try {
       return httpRequest(options, (error, response, body) => {
+        if(error){
+          return res.status(500).json({ Error: error });
+        }
         const { status, msg } = body;
         if(status === 'Register_Error'){
           return res.status(400).json({ Error: msg });
-        }
-        if(error){
-          return res.status(500).json({ Error: error });
         }
         if (response && response.statusCode === 200) {
           if (options.path === '/login') {

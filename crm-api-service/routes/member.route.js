@@ -97,29 +97,30 @@ module.exports = io => {
     const response = await Task(
       req.headers.database
     ).checkDuplicateCreateMember(req.body)
+    const { email: input_email, mobile: input_mobile, line_id: input_line_id } = req.body
     const { email, mobile, line_id } = JSON.parse(response.data)
-    if (email) {
+    if (email && email === input_email) {
       return res
         .status(400)
         .json({
           status: "Register_Error",
-          msg: `ข้อมูลอีเมล์(${email} ถูกนำไปใช้แล้ว`,
+          msg: `ข้อมูลอีเมล์(${input_email}) ถูกนำไปใช้แล้ว`,
         })
     }
-    if (mobile) {
+    if (mobile && mobile === input_mobile) {
       return res
         .status(400)
         .json({
           status: "Register_Error",
-          msg: `ข้อมูลเบอร์โทรศัพท์(${mobile}) ถูกนำไปใช้แล้ว`,
+          msg: `ข้อมูลเบอร์โทรศัพท์(${input_mobile}) ถูกนำไปใช้แล้ว`,
         })
     }
-    if (line_id) {
+    if (line_id && line_id === input_line_id) {
       return res
         .status(400)
         .json({
           status: "Register_Error",
-          msg: `ข้อมูลไลน์ id${line_id} ถูกนำไปใช้แล้ว`,
+          msg: `ข้อมูลไลน์ id(${input_line_id}) ถูกนำไปใช้แล้ว`,
         })
     }
     
@@ -151,8 +152,16 @@ module.exports = io => {
       }
       const response = await Task(req.headers.database).create(memberModel)
       const response1 = await TaskLogin(req.headers.database).create(loginModel)
+      // add mobile
+      const loginMobileForm = {
+        username: req.body.mobile,
+        password: Buffer.from(req.body.password).toString("base64"),
+        member_active: "Y",
+      }
+      const response2 = await TaskLogin(req.headers.database).create(loginMobileForm)
+
       const data = JSON.parse(response.data)
-      res.status(200).json({ status: response1.status, msg: "Success", data })
+      res.status(200).json({ status: response2.status, msg: "Success", data })
 
       // emit socket io
       const sendPayload = {
