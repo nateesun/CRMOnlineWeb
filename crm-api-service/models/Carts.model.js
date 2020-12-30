@@ -11,7 +11,7 @@ module.exports = (db) => {
   const tb_carts_detail = getDB(db, "carts_detail")
 
   module.findByCartNo = (cart_no) => {
-    logger.info(`findByCartNo: ${cart_no}`)
+    logger.debug(`findByCartNo: ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where cart_no=?;`;
@@ -26,7 +26,7 @@ module.exports = (db) => {
   }
 
   module.findAll = () => {
-    logger.info("findAll")
+    logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} order by cart_no;`;
@@ -41,7 +41,7 @@ module.exports = (db) => {
   }
 
   module.findAllByMember = (member_code) => {
-    logger.info(`findAllByMember: ${member_code}`)
+    logger.debug(`findAllByMember: ${member_code}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where member_code = ? order by cart_no;`;
@@ -56,7 +56,7 @@ module.exports = (db) => {
   }
 
   module.searchData = (key, value) => {
-    logger.info(`searchData: ${key} ${value}`)
+    logger.debug(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select * from ${table_name}`;
@@ -74,7 +74,7 @@ module.exports = (db) => {
   }
 
   module.create = (params) => {
-    logger.info(`create: ${params}`)
+    logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `select cart_running, cart_prefix, cart_size_running from ${tb_company} c limit 0,1;`;
@@ -100,7 +100,7 @@ module.exports = (db) => {
   }
 
   module.update = (data) => {
-    logger.info(`update: ${data}`)
+    logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET cart_no=?, member_code=? WHERE uuid_index=?;`;
@@ -119,7 +119,7 @@ module.exports = (db) => {
   }
 
   module.updatePayment = (data) => {
-    logger.info(`updatePayment: ${data}`)
+    logger.debug(`updatePayment: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `UPDATE ${table_name} SET 
@@ -152,7 +152,7 @@ module.exports = (db) => {
   }
 
   module.updateShoppingStep = (data) => {
-    logger.info(`updateShoppingStep: ${data}`)
+    logger.debug(`updateShoppingStep: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?;`;
@@ -170,7 +170,7 @@ module.exports = (db) => {
   }
 
   module.updateShoppingApprove = (data) => {
-    logger.info(`updateShoppingApprove: ${data}`)
+    logger.debug(`updateShoppingApprove: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
         let sql = `UPDATE ${table_name} 
@@ -195,7 +195,7 @@ module.exports = (db) => {
   }
 
   module.updateSummary = (data) => {
-    logger.info(`updateSummary: ${data}`)
+    logger.debug(`updateSummary: ${data}`)
     return new Promise(async (resolve, reject) => {
       // summary to carts
       try {
@@ -215,7 +215,7 @@ module.exports = (db) => {
   }
 
   module.delete = (id) => {
-    logger.info(`delete: ${id}`)
+    logger.debug(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;

@@ -58,7 +58,7 @@ const nocache = require('nocache');
 const fixPassword = config.fixPassword;
 
 const setupLogger = (req, res, next) => {
-  logger.info(`${req.method} ${req.path} ${res.statusCode}`);
+  logger.debug(`${req.method} ${req.path} ${res.statusCode}`);
   next();
 }
 
