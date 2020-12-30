@@ -10,6 +10,26 @@ module.exports = (db) => {
   const tb_company = getDB(db, "company")
   const tb_login = getDB(db, "login")
 
+  module.checkDuplicateCreateMember = (data) => {
+    logger.debug(`checkDuplicateCreateMember: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      const { email, mobile, line_id } = data
+      try {
+        const sql = `select email, mobile, line_id from ${table_name} 
+        where email=? or mobile=? or line_id=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [email, mobile, line_id])
+        if(result.length>0){
+          return resolve({ status: "Success", data: JSON.stringify(result[0]) })
+        }
+        return resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.findByLineUserId = (lineUserId) => {
     logger.debug(`findByLineUserId: ${lineUserId}`)
     return new Promise(async (resolve, reject) => {

@@ -93,6 +93,37 @@ module.exports = io => {
   })
   
   router.post("/", async (req, res, next) => {
+    // check duplicate email, mobile, line_id
+    const response = await Task(
+      req.headers.database
+    ).checkDuplicateCreateMember(req.body)
+    const { email, mobile, line_id } = JSON.parse(response.data)
+    if (email) {
+      return res
+        .status(400)
+        .json({
+          status: "Register_Error",
+          msg: `ข้อมูลอีเมล์(${email} ถูกนำไปใช้แล้ว`,
+        })
+    }
+    if (mobile) {
+      return res
+        .status(400)
+        .json({
+          status: "Register_Error",
+          msg: `ข้อมูลเบอร์โทรศัพท์(${mobile}) ถูกนำไปใช้แล้ว`,
+        })
+    }
+    if (line_id) {
+      return res
+        .status(400)
+        .json({
+          status: "Register_Error",
+          msg: `ข้อมูลไลน์ id${line_id} ถูกนำไปใช้แล้ว`,
+        })
+    }
+    
+    // process to create new member
     try {
       const memberModel = {
         code: req.body.code,
