@@ -339,3 +339,7 @@ CREATE TABLE `monitor_app` (
   `system_update` datetime DEFAULT NULL,
   `staus_open` char(1) DEFAULT NULL
 );
+
+ALTER TABLE `member` ADD UNIQUE (email);
+ALTER TABLE `member` ADD UNIQUE (mobile);
+ALTER TABLE `member` ADD UNIQUE (line_id);
