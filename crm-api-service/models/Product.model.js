@@ -24,6 +24,10 @@ module.exports = (db) => {
 
   module.findByCode = (code) => {
     logger.debug(`findByCode: ${code}`)
+    if(!code) {
+      logger.warn(`code to find is empty!`)
+      return reject({ status: 'Warning', msg: 'code to find is empty!' })
+    }
     return new Promise(async (resolve, reject) => {
       try {
         const sql = `select * from ${table_name} where code=?;`;

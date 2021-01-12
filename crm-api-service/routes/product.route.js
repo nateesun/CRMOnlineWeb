@@ -37,7 +37,7 @@ module.exports = args => {
       if(result.length>0){
         return res
         .status(400)
-        .json({ status: "Information Incorrect", msg: 'Product code is already exists' })
+        .json({ status: "Information Incorrect", msg: 'Code is already exists' })
       }
       const response = await Task(req.headers.database).create(req.body)
       const data = JSON.parse(response.data)

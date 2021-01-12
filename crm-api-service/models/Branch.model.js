@@ -39,9 +39,6 @@ module.exports = (db) => {
         const sql = `select * from ${table_name} where code=?;`
         logger.debug(sql);
         const result = await pool.query(sql, [code])
-        if(result.length === 1){
-          return resolve({ status: "Success", data: JSON.stringify(result[0]) })
-        }
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);

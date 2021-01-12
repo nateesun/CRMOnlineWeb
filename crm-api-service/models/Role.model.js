@@ -21,6 +21,21 @@ module.exports = (db) => {
     })
   }
 
+  module.findByCode = (code) => {
+    logger.debug(`findByCode: ${code}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where code=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [code])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.findAll = () => {
     logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
