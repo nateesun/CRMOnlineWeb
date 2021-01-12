@@ -1,5 +1,4 @@
 #!/bin/bash
-git pull origin master
 pm2 delete -s crm-api-service webdaily-online
 cd ./webdialy-online/
 pm2 start ecosystem.config.js
