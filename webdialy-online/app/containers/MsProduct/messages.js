@@ -91,7 +91,7 @@ export default defineMessages({
   },
   col14ShouldNotEmpty: {
     id: `${scope}.col14ShouldNotEmpty`,
-    defaultMessage: 'Flag to check qty',
+    defaultMessage: 'Flag to check qty or not',
   },
   col1: {
     id: `${scope}.col1`,

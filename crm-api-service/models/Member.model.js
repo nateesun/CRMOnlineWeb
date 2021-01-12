@@ -1,5 +1,3 @@
-const jwt = require("jsonwebtoken")
-
 const logger = require("../logger")
 const pool = require("../mysql-connect")
 const { zeroPad, getDB } = require("./FuncUtil")()

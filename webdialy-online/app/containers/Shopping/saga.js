@@ -33,7 +33,7 @@ export function* saveCartItem() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status==='Success') {
       yield put(actions.createItemCartSuccess(response.data[0]));
     } else {
       yield put(actions.createItemCartError('Cannot create data'));
@@ -53,7 +53,7 @@ export function* updateCartItem() {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    if (response) {
+    if (response.status==='Success') {
       yield put(actions.updateItemCartSuccess(response.data));
     } else {
       yield put(actions.updateItemCartError('Cannot create data'));
