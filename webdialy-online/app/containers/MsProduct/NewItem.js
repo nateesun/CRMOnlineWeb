@@ -336,7 +336,7 @@ const validate = formValues => {
     errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
   }
   if (!formValues.qty_over_stock) {
-    errors.qty_over_stock = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
+    errors.qty_over_stock = <FormattedMessage {...messages.col14ShouldNotEmpty} />;
   }
   return errors;
 };
