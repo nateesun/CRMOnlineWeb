@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -122,6 +123,8 @@ export default function TableItems(props) {
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Surname</TableCell>
               <TableCell align="right">Role</TableCell>
+              <TableCell align="left">Created Date</TableCell>
+              <TableCell align="left">Updated Date</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -143,7 +146,9 @@ export default function TableItems(props) {
                     <TableCell align="left">{item.first_name}</TableCell>
                     <TableCell align="left">{item.last_name}</TableCell>
                     <TableCell align="center">{item.member_role}</TableCell>
-                    <TableCell align="center">
+                    <TableCell align="left">{dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}</TableCell>
+                    <TableCell align="left">{dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}</TableCell>
+                    <TableCell align="left">
                       <Grid container spacing={1} justify="center">
                         <Grid item>
                           <Button
