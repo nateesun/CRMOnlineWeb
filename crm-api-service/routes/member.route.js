@@ -201,7 +201,8 @@ module.exports = io => {
         if (memberData.length === 0) {
           return res.status(500).json({ status: "Error", msg: "Email or Mobile mismatch in system!" })
         }
-        response = await Task(req.headers.database).changePassword(req.body)
+        response = await Task(req.headers.database).changePassword({ username: email }) // update new email password
+        response = await Task(req.headers.database).changePassword({ username: mobile }) // update new mobile password
       } else if (req.params.id === 'update_line_user_id') {
         const { email } = req.body;
         const memberResult = await Task(req.headers.database).findByEmail(email);

@@ -274,12 +274,12 @@ module.exports = (db) => {
   module.changePassword = (data) => {
     logger.debug(`changePassword: ${data}`)
     return new Promise(async (resolve, reject) => {
-      const { email } = data
+      const { username } = data
       const password = Buffer.from("123456").toString("base64")
       try {
         const sql = `UPDATE ${tb_login} SET password = ? WHERE username=?;`
         logger.debug(sql)
-        const result = await pool.query(sql, [password, email])
+        const result = await pool.query(sql, [password, username])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err)
