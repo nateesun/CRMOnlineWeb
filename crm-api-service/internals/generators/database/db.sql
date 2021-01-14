@@ -343,3 +343,20 @@ CREATE TABLE `monitor_app` (
 ALTER TABLE `member` ADD UNIQUE (email);
 ALTER TABLE `member` ADD UNIQUE (mobile);
 ALTER TABLE `member` ADD UNIQUE (line_id);
+
+ALTER TABLE `member` ADD member_code_ref varchar(100) NULL;
+
+insert into login 
+select 'Y', Member_Mobile, to_base64(Member_Mobile) 
+from test_backup.memmaster m  
+where Member_Mobile <> '' and length(Member_Mobile)=10;
+
+SET @row_number = 603; 
+insert into `member` 
+SELECT concat('MB', right(concat('00000', (@row_number:=@row_number + 1)), 5)) AS code, 
+'000',m2.Member_Gender, m2.Member_Status,'', curdate(), '2030-01-01', m2.Member_TotalPurchase,
+m2.Member_Mobile, '2030-01-01', m2.Member_TotalScore,'Y', m2.Member_NameThai, m2.Member_SurnameThai,
+now(), now(), '', m2.Member_TitleNameThai, uuid(), 'member', 'N', '', m2.Member_Code 
+FROM test_backup.memmaster m2 
+where m2.Member_Mobile <> '' and length(m2.Member_Mobile)=10
+ORDER BY m2.Member_Mobile;
