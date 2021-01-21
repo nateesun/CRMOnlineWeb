@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchProduct() {
+export default function SearchProduct(props) {
   const classes = useStyles();
 
   return (
@@ -56,7 +56,8 @@ export default function SearchProduct() {
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search' }}
+        inputProps={{ 'aria-label': 'search' }} 
+        onChange={(e)=>props.onSearch(e.target.value)}
       />
     </div>
   );

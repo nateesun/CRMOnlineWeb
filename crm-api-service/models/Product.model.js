@@ -58,6 +58,24 @@ module.exports = (db) => {
     })
   }
 
+  module.search = (data) => {
+    logger.debug(`search:${data}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select *,
+        (select in_stock from ${tb_stock_product} sp where sp.product_code=p.code) in_stock 
+        from ${table_name} p 
+        where 1=1 and name like '%${data}%';`;
+        logger.debug(sql);
+        const result = await pool.query(sql)
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.create = (params) => {
     logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
