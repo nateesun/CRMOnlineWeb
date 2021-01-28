@@ -16,9 +16,19 @@ module.exports = args => {
     }
   })
   
-  router.get("/:id", async (req, res, next) => {
+  router.get("/:id/:data", async (req, res, next) => {
     try {
-      const response = await Task(req.headers.database).findById(req.params.id)
+      const { id, data: dataSearch } = req.params;
+      let response = {};
+      if(id==='search'){
+        if(dataSearch==='no_data'){
+          response = await Task(req.headers.database).findAll()
+        }else{
+          response = await Task(req.headers.database).search(dataSearch);
+        }
+      }else{
+        response = await Task(req.headers.database).findById(id)
+      }
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {

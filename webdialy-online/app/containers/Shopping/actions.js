@@ -67,3 +67,21 @@ export function updateItemCartError(payload) {
     payload,
   };
 }
+export function searchProduct(payload) {
+  return {
+    type: constants.SEARCH_PRODUCT,
+    payload,
+  };
+}
+export function searchProductSuccess(payload) {
+  return {
+    type: constants.SEARCH_PRODUCT_SUCCESS,
+    payload,
+  };
+}
+export function searchProductError(payload) {
+  return {
+    type: constants.SEARCH_PRODUCT_ERROR,
+    payload,
+  };
+}

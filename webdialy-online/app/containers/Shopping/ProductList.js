@@ -23,6 +23,7 @@ export default function ProductList(props) {
       <Grid item xs={12}>
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>
+      <Grid item xs={12}>
       {data && data.length===0 && <h1>ไม่พบข้อมูลสินค้า</h1>}
       {data &&
         data.map(item => (
@@ -103,6 +104,7 @@ export default function ProductList(props) {
             </div>
           </Grid>
         ))}
+      </Grid>
     </Grid>
   );
 }
