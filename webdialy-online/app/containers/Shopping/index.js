@@ -46,6 +46,7 @@ function mapDispatchToProps(dispatch) {
     onLoadProduct: ()=> dispatch(actions.loadProduct()),
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
+    onSearch: data => dispatch(actions.searchProduct(data)),
   };
 }
 

@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import SlipImage from '../../images/example/slip.jpg';
+import SlipImage from '../../images/example/slip.png';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
 

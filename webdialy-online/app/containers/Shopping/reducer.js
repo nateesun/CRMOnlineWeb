@@ -39,6 +39,9 @@ export const initialState = {
       point: 0,
     }
   },
+  search: {
+    data: '',
+  },
   response: {
     status: '',
     message: '',
@@ -129,6 +132,18 @@ const shoppingReducer = (state = initialState, action) =>
       case constants.UPDATE_ITEM_CART_ERROR:
         draft.response.status = 'Update_Cart_Error';
         draft.response.message = 'Update cart error!';
+        break;
+      case constants.SEARCH_PRODUCT:
+        draft.search.data = action.payload;
+        break;
+      case constants.SEARCH_PRODUCT_SUCCESS:
+        draft.productList = action.payload;
+        draft.response.status = 'Search_Product_Success';
+        draft.response.message = 'Search product success';
+        break;
+      case constants.SEARCH_PRODUCT_ERROR:
+        draft.response.status = 'Search_Product_Error';
+        draft.response.message = 'Search product error!';
         break;
     }
   });
