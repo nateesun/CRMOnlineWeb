@@ -29,7 +29,7 @@ module.exports = (db) => {
     logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} order by cart_no;`;
+        const sql = `select * from ${table_name} order by cart_no desc;`;
         logger.debug(sql);
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
