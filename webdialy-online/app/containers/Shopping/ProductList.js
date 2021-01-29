@@ -24,7 +24,8 @@ export default function ProductList(props) {
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>
       <Grid item xs={12}>
-      {data && data.length===0 && <h1>ไม่พบข้อมูลสินค้า</h1>}
+        {data && data.length===0 && <h1>ไม่พบข้อมูลสินค้า</h1>}
+      </Grid>
       {data &&
         data.map(item => (
           <Grid item xs={6} sm={4} md={3} lg={2} key={item.code}>
@@ -104,7 +105,6 @@ export default function ProductList(props) {
             </div>
           </Grid>
         ))}
-      </Grid>
     </Grid>
   );
 }
