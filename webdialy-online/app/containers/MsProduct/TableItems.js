@@ -31,6 +31,14 @@ const useStyles = makeStyles({
   buttonRefresh: {
     marginRight: '5px',
   },
+  buttonUpload: {
+    marginRight: '5px',
+    backgroundColor: 'green',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'darkgreen'
+    },
+  },
   wrapButtonAction: {
     marginTop: '15px',
   },
@@ -101,6 +109,13 @@ export default function TableItems(props) {
             onClick={() => props.onChangePage('NEW')}
           >
             CREATE
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.buttonUpload}
+            onClick={() => props.onChangePage('LOAD_PRODUCT')}
+          >
+            UPLOAD FILE
           </Button>
           <Button
             variant="contained"
