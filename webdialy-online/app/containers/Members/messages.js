@@ -9,22 +9,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.Members';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the Members container!',
-  },
-  newItemHeader: {
-    id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
-  },
-  updateItemHeader: {
-    id: `${scope}.updateItemHeader`,
-    defaultMessage: 'Update old item',
-  },
-  headerContentPage: {
-    id: `${scope}.headerContentPage`,
-    defaultMessage: 'Content Page',
-  },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
     defaultMessage: 'Update Member',
@@ -33,53 +17,37 @@ export default defineMessages({
     id: `${scope}.headerViewItem`,
     defaultMessage: 'View Member',
   },
-  headerNewItem: {
-    id: `${scope}.headerNewItem`,
-    defaultMessage: 'Create Member',
-  },
-  headerTableItems: {
-    id: `${scope}.headerTableItems`,
-    defaultMessage: 'Table List Items',
-  },
-  col1ShouldNotEmpty: {
-    id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Column1 should not empty',
-  },
-  col2ShouldNotEmpty: {
-    id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Column2 should not empty',
-  },
-  col3ShouldNotEmpty: {
-    id: `${scope}.col3ShouldNotEmpty`,
-    defaultMessage: 'Column3 should not empty',
-  },
-  col1: {
-    id: `${scope}.col1`,
+  memberCode: {
+    id: `${scope}.memberCode`,
     defaultMessage: 'Member Code',
   },
-  col2: {
-    id: `${scope}.col2`,
+  email: {
+    id: `${scope}.email`,
     defaultMessage: 'Email',
   },
-  col3: {
-    id: `${scope}.col3`,
+  name: {
+    id: `${scope}.name`,
     defaultMessage: 'Name',
   },
-  col4: {
-    id: `${scope}.col4`,
+  lastName: {
+    id: `${scope}.lastName`,
     defaultMessage: 'Last Name',
   },
-  col5: {
-    id: `${scope}.col5`,
+  role: {
+    id: `${scope}.role`,
     defaultMessage: 'Role',
   },
-  col6: {
-    id: `${scope}.col6`,
+  totalScore: {
+    id: `${scope}.totalScore`,
     defaultMessage: 'Total Score',
   },
-  col7: {
-    id: `${scope}.col7`,
+  totalPurchase: {
+    id: `${scope}.totalPurchase`,
     defaultMessage: 'Total Purchase',
+  },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile',
   },
   btnSave: {
     id: `${scope}.btnSave`,
@@ -92,5 +60,29 @@ export default defineMessages({
   btnBack: {
     id: `${scope}.btnBack`,
     defaultMessage: 'Back',
+  },
+  firstNameSouldNotEmpty: {
+    id: `${scope}.firstNameSouldNotEmpty`,
+    defaultMessage: 'First name should not be empty!',
+  },
+  lastNameShouldNotEmpty: {
+    id: `${scope}.lastNameShouldNotEmpty`,
+    defaultMessage: 'Last name should not be empty!',
+  },
+  roleShouldNotEmpty: {
+    id: `${scope}.roleShouldNotEmpty`,
+    defaultMessage: 'Role should not be empty!',
+  },
+  mobileShouldNotEmpty: {
+    id: `${scope}.mobileShouldNotEmpty`,
+    defaultMessage: 'Mobile should not be empty!',
+  },
+  totalScoreShouldNotEmpty: {
+    id: `${scope}.totalScoreShouldNotEmpty`,
+    defaultMessage: 'Total score should greater than or equal to zero!',
+  },
+  totalPurchaseShouldNotEmpty: {
+    id: `${scope}.totalPurchaseShouldNotEmpty`,
+    defaultMessage: 'Total purchase should greater than or equal to zero!',
   },
 });

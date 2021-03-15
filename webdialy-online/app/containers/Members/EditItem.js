@@ -133,7 +133,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
+                label={<FormattedMessage {...messages.memberCode} />}
                 required
                 disabled
               />
@@ -144,7 +144,7 @@ const EditItem = props => {
                   id="member_role"
                   name="member_role"
                   component={renderSelectField}
-                  label={<FormattedMessage {...messages.col5} />}
+                  label={<FormattedMessage {...messages.role} />}
                   required
                 >
                   {rolesList && rolesList.map((item, index) => <option key={item.code} value={item.code}>{item.name}</option>)}
@@ -158,7 +158,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
+                label={<FormattedMessage {...messages.email} />}
                 disabled
               />
             </Grid>
@@ -168,7 +168,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
+                label={<FormattedMessage {...messages.name} />}
                 required
               />
             </Grid>
@@ -178,7 +178,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
+                label={<FormattedMessage {...messages.lastName} />}
                 required
               />
             </Grid>
@@ -188,7 +188,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
+                label={<FormattedMessage {...messages.totalScore} />}
                 required
               />
             </Grid>
@@ -198,7 +198,17 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col7} />}
+                label={<FormattedMessage {...messages.totalPurchase} />}
+                required
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Field
+                name="mobile"
+                component={RenderField}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mobile} />}
                 required
               />
             </Grid>
@@ -256,15 +266,26 @@ EditItem.propTypes = {
 
 const validate = formValues => {
   const errors = {};
+
   if (!formValues.first_name) {
-    errors.first_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+    errors.first_name = <FormattedMessage {...messages.firstNameSouldNotEmpty} />;
   }
   if (!formValues.last_name) {
-    errors.last_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.member_role) {
-    errors.member_role = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+    errors.member_role = <FormattedMessage {...messages.roleShouldNotEmpty} />;
   }
+  if (!formValues.mobile) {
+    errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
+  }
+  if (!formValues.total_score||formValues.total_score < 0) {
+    errors.total_score = <FormattedMessage {...messages.totalScoreShouldNotEmpty} />;
+  }
+  if (!formValues.total_purchase||formValues.total_purchase < 0) {
+    errors.total_purchase = <FormattedMessage {...messages.totalPurchaseShouldNotEmpty} />;
+  }
+
   return errors;
 };
 

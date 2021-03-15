@@ -43,7 +43,8 @@ const ViewItem = props => {
     first_name,
     last_name,
     total_score,
-    total_purchase
+    total_purchase,
+    mobile,
   } = props.initialValues;
 
   return (
@@ -54,46 +55,52 @@ const ViewItem = props => {
         </Typography>
         <Grid container spacing={2} className={classes.divContent}>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col1} />
+            <FormattedMessage {...messages.memberCode} />
           </Grid>
           <Grid item xs={6}>
             {code}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col2} />
+            <FormattedMessage {...messages.email} />
           </Grid>
           <Grid item xs={6}>
             {email}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col5} />
+            <FormattedMessage {...messages.role} />
           </Grid>
           <Grid item xs={6}>
             {member_role}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col3} />
+            <FormattedMessage {...messages.name} />
           </Grid>
           <Grid item xs={6}>
             {first_name}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col4} />
+            <FormattedMessage {...messages.lastName} />
           </Grid>
           <Grid item xs={6}>
             {last_name}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col6} />
+            <FormattedMessage {...messages.totalScore} />
           </Grid>
           <Grid item xs={6}>
             {total_score}
           </Grid>
           <Grid item xs={4}>
-            <FormattedMessage {...messages.col7} />
+            <FormattedMessage {...messages.totalPurchase} />
           </Grid>
           <Grid item xs={6}>
             {total_purchase}
+          </Grid>
+          <Grid item xs={4}>
+            <FormattedMessage {...messages.mobile} />
+          </Grid>
+          <Grid item xs={6}>
+            {mobile}
           </Grid>
         </Grid>
         <Grid container spacing={3}>
