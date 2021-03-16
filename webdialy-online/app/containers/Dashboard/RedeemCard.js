@@ -93,7 +93,6 @@ export default function RedeemCard(props) {
             <u className={classes.options}>
               <li>{options.name}</li>
               <li>{options.pointUse}</li>
-              {/* <li>{options.inStock}</li> */}
               {props.free ? (
                 <li className={classes.freeTemplate}>{options.status}</li>
               ) : (

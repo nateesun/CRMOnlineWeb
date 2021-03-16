@@ -58,7 +58,7 @@ const renderSelectField = ({
       error={touched && error}
       style={{ width: '100%' }}
     >
-      <InputLabel htmlFor={input.id}>Prefix</InputLabel>
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
         native

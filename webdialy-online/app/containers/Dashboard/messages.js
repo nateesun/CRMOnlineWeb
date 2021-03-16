@@ -33,4 +33,8 @@ export default defineMessages({
     id: `${scope}.topicRedeem`,
     defaultMessage: 'Redeem Promotion List Item',
   },
+  notFoundPromotion: {
+    id: `${scope}.notFoundPromotion`,
+    defaultMessage: 'Not found Promotion',
+  },
 });
