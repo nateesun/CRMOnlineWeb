@@ -13,7 +13,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import { FormattedMessage } from 'react-intl';
 import SearchBar from './SearchBar';
+import messages from './messages';
 
 const useStyles = makeStyles({
   root: {
@@ -100,25 +102,16 @@ export default function TableItems(props) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Typography color="textSecondary" variant="h6">
-          TrackOrders Table List
+          <FormattedMessage {...messages.headerTableItems} />
         </Typography>
         <div className={classes.wrapButtonAction}>
-          {showCommand && (
-            <Button
-              variant="contained"
-              className={classes.buttonNew}
-              onClick={() => props.onChangePage('NEW')}
-            >
-              CREATE
-            </Button>
-          )}
           <Button
             variant="contained"
             color="primary"
             className={classes.buttonRefresh}
             onClick={() => props.onInitLoad()}
           >
-            REFRESH
+            <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
         {props.profile.member_role !== 'member' && <SearchBar {...props} />}
@@ -130,19 +123,19 @@ export default function TableItems(props) {
           >
             <TableHead>
               <TableRow className={classes.colRow}>
-                <TableCell align="center">No</TableCell>
-                <TableCell align="center">Order</TableCell>
-                <TableCell align="center">Cart</TableCell>
-                <TableCell align="center">Create Date</TableCell>
-                <TableCell align="center">Member</TableCell>
-                <TableCell align="center">Item</TableCell>
-                <TableCell align="center">Amount</TableCell>
-                <TableCell align="center">Status Act.</TableCell>
-                <TableCell align="center">Step</TableCell>
-                <TableCell align="center">Point</TableCell>
-                <TableCell align="center">Appr Sts.</TableCell>
-                <TableCell align="center">Not Appr Comm.</TableCell>
-                <TableCell align="center">Actions</TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.no} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.orderNo} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.cart} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.createDate} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.member} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.item} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.amount} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.statusAction} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.step} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.point} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.approveStatus} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.notApproveComment} /></TableCell>
+                <TableCell align="center"><FormattedMessage {...messages.actions} /></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -182,14 +175,6 @@ export default function TableItems(props) {
                                 onClick={() => onViewItem(item)}
                               >
                                 View
-                              </Button>
-                            </Grid>
-                            <Grid item>
-                              <Button
-                                variant="outlined"
-                                onClick={() => onEditItem(item)}
-                              >
-                                Edit
                               </Button>
                             </Grid>
                             <Grid item>
