@@ -46,5 +46,6 @@
   "app.containers.Register.passwordShouldNotEmpty": "Password should not be blank.",
   "app.containers.Register.submit": "Confrim Send",
   "app.containers.LocaleToggle.th": "Thai",
-  "app.containers.LocaleToggle.en": "English"
+  "app.containers.LocaleToggle.en": "English",
+  "app.containers.Shopping.search": "Search"
 }

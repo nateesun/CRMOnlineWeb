@@ -13,4 +13,16 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the Shopping container!',
   },
+  productListTopic: {
+    id: `${scope}.productListTopic`,
+    defaultMessage: 'Product all items 2020',
+  },
+  search: {
+    id: `${scope}.search`,
+    defaultMessage: 'Search',
+  },
+  notfoundProduct: {
+    id: `${scope}.notfoundProduct`,
+    defaultMessage: 'Not found product',
+  },
 });

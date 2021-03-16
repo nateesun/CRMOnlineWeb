@@ -1,13 +1,12 @@
 import React, { useState, forwardRef } from 'react';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
-import TopPromotion from './TopPromotion';
+import { FormattedMessage } from 'react-intl';
 import SearchProduct from './SearchProduct';
 import DialogDetail from './DialogDetail';
-import GroupProduct from './GroupProduct';
 import OrderFooter from './OrderFooter';
 import ProductList from './ProductList';
-import GridCategory from './GridCategory';
+import messages from './messages';
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -28,15 +27,12 @@ const Media = (props) => {
 
   return (
     <div style={{ width: '100%' }}>
-      {/* <TopPromotion type="fade" /> */}
-      {/* <GridCategory /> */}
-      {/* <GroupProduct /> */}
       <SearchProduct {...props} />
       <ProductList 
         {...props}
         handleClickOpen={item => handleClickOpen(item)}
         data={props.productList}
-        topic="Product all items 2020"
+        topic={<FormattedMessage {...messages.productListTopic} />}
       />
       {props.cart && props.cart.cart_no !== '' && <OrderFooter {...props} />}
       {item && <DialogDetail

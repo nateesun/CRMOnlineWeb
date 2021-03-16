@@ -2,6 +2,8 @@ import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchProduct(props) {
+const SearchProduct = (props) => {
   const classes = useStyles();
 
   return (
@@ -51,7 +53,7 @@ export default function SearchProduct(props) {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Search…"
+        placeholder={props.intl.formatMessage({id: 'app.containers.Shopping.search'})}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
@@ -62,3 +64,5 @@ export default function SearchProduct(props) {
     </div>
   );
 }
+
+export default injectIntl(SearchProduct);
