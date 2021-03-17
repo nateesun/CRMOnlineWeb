@@ -161,8 +161,8 @@ const EditForm = props => {
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={4} lg={4}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} lg={4}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
                 <Field
                   id="address_type"
@@ -177,7 +177,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={4} lg={4} />
             <Grid item xs={4} lg={4} />
-            <Grid item xs={6} lg={3}>
+            <Grid item xs={5} lg={3}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
                 <Field
                   id="member_prefix"
@@ -194,7 +194,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={6} lg={3}>
+            <Grid item xs={7} lg={3}>
               <Field
                 name="member_code"
                 component={RenderField}
@@ -244,7 +244,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="province"
                 component={RenderField}
@@ -254,7 +254,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="district"
                 component={RenderField}
@@ -264,7 +264,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="sub_district"
                 component={RenderField}
@@ -274,7 +274,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="postcode"
                 component={RenderField}
@@ -284,7 +284,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="map_latitude"
                 component={RenderField}
@@ -294,7 +294,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Field
                 name="map_longitude"
                 component={RenderField}
@@ -304,7 +304,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={3} lg={6}>
+            <Grid item xs={6} lg={6}>
               <Button
                 variant="contained"
                 color="primary"
@@ -330,8 +330,8 @@ const EditForm = props => {
               )}
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={2} md={3}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={3}>
               <Button
                 type="submit"
                 fullWidth
@@ -342,7 +342,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={2} md={3}>
+            <Grid item xs={12} md={3}>
               <Button
                 fullWidth
                 variant="contained"
@@ -352,7 +352,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
             </Grid>
-            <Grid item xs={2} md={3}>
+            <Grid item xs={12} md={3}>
               <ButtonLink to={`${constants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />

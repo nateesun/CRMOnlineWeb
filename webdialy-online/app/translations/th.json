@@ -74,6 +74,8 @@
   "app.containers.Profile.loginTopic": "ข้อมูลเข้าใช้งานระบบ",
   "app.containers.Profile.btnEditProfile": "แก้ไขข้อมูล",
   "app.containers.Profile.headerEditShipping": "แก้ไขที่อยู่จัดส่ง",
+  "app.containers.Profile.lineId": "รหัสไลน์ไอดี",
+  "app.containers.Profile.lineOfficial": "ไลน์เป็นทางการ",
   "app.containers.Register.prefix": "คำนำหน้า",
   "app.containers.Register.firstName": "ชื่อ",
   "app.containers.Register.lastName": "นามสกุล",

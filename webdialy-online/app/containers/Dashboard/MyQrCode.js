@@ -4,6 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import { Cake, Phone, MoneyOff, Star } from '@material-ui/icons';
 const QRCode = require('qrcode.react');
 import messages from './messages';
 import default_boy from './images/default_boy.png';
@@ -21,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(3),
   },
   large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(12),
+    height: theme.spacing(12),
   },
 }));
 
@@ -54,9 +56,6 @@ export default function MyQrCode(props) {
   }
   return (
     <React.Fragment>
-        <BoxPanel>
-            <h2>CRM Online</h2>
-        </BoxPanel>
       <BoxPanel>
         <Avatar
           className={classes.large}
@@ -67,14 +66,18 @@ export default function MyQrCode(props) {
         {prefix}
         {first_name} {last_name}
       </BoxPanel>
-      <div style={{background: 'gray', padding: '10px'}}>
-        <BoxPanel>วันเกิด: {birthday}</BoxPanel>
-        <BoxPanel>เบอร์ติดต่อ: {mobile}</BoxPanel>
-      </div>
-      <div style={{background: 'blue', color: 'white', padding: '10px'}}>
-        <BoxPanel>คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
-        <BoxPanel>ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
-      </div>
+      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#239FE7', color: 'white'}}>
+        <BoxPanel>
+          <Cake />วันเกิด: {birthday}</BoxPanel>
+        <BoxPanel>
+          <Phone />เบอร์ติดต่อ: {mobile}</BoxPanel>
+      </Paper>
+      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#53AB67', color: 'white'}}>
+        <BoxPanel>
+          <Star />คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
+        <BoxPanel>
+          <MoneyOff />ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
+      </Paper>
       <BoxPanel>
         <FormattedMessage {...messages.myQrCode} />
       </BoxPanel>
