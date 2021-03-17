@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import CardPoint from './CardPoint';
 import messages from './messages';
 import RedeemPage from './RedeemPage';
+import MyQrCode from './MyQrCode';
 
 export default function DashboardContent(props) {
   const { onRefresh, login, profile } = props;
@@ -24,6 +25,9 @@ export default function DashboardContent(props) {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <MyQrCode code={profile.code} />
+      </Grid>
       <Grid item xs={12}>
         <Button
           variant="outlined"

@@ -7,6 +7,8 @@
   "app.containers.Dashboard.btnRefresh": "โหลดคะแนนใหม่",
   "app.containers.Dashboard.topicRedeem": "รายการโปรโมชั่น",
   "app.containers.Dashboard.notFoundPromotion": "ไม่พบข้อมูลโปรโมชั่น",
+  "app.containers.Dashboard.myQrCode": "คิวอาร์โค้ดของฉัน",
+  "app.containers.Dashboard.loadQrCode": "โหลดข้อมูลคิวอาร์โค้ด...",
   "app.containers.ForgotPassword.emailIncorrectPattern": "",
   "app.containers.ForgotPassword.emailShouldNotEmpty": "กรุณาระบุอีเมล์",
   "app.containers.ForgotPassword.enterEmail": "",
