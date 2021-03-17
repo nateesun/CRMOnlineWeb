@@ -2,7 +2,7 @@
   "app.components.ButtonLink.header": "",
   "app.components.RenderField.header": "",
   "app.containers.Dashboard.header": "",
-  "app.containers.Dashboard.totalScore": "คะแนนรวม",
+  "app.containers.Dashboard.totalScore": "คะแนนสะสมทั้งหมด",
   "app.containers.Dashboard.totalPurchase": "ยอดซื้อสินค้า",
   "app.containers.Dashboard.btnRefresh": "โหลดคะแนนใหม่",
   "app.containers.Dashboard.topicRedeem": "รายการโปรโมชั่น",

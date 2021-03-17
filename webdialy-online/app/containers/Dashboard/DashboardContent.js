@@ -26,32 +26,7 @@ export default function DashboardContent(props) {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <MyQrCode code={profile.code} />
-      </Grid>
-      <Grid item xs={12}>
-        <Button
-          variant="outlined"
-          startIcon={<RefreshIcon />}
-          onClick={() => refreshDataInit()}
-        >
-          <FormattedMessage {...messages.btnRefresh} />
-        </Button>
-      </Grid>
-      <Grid item xs={12} md={6} lg={4}>
-        <CardPoint
-          label={<FormattedMessage {...messages.totalScore} />}
-          point={profile.total_score}
-          bg="#1aa4b4"
-          fbg="#17828f"
-        />
-      </Grid>
-      <Grid item xs={12} md={6} lg={4}>
-        <CardPoint
-          label={<FormattedMessage {...messages.totalPurchase} />}
-          point={profile.total_purchase}
-          bg="#07B975"
-          fbg="#028A57"
-        />
+        <MyQrCode profile={profile} />
       </Grid>
       <Grid item xs={12}>
         <RedeemPage {...props} />
