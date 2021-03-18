@@ -66,8 +66,7 @@ const msBranchReducer = (state = initialState, action) =>
         draft.response.message = 'Load data to edit error!';
         break;
       case constants.CREATE_ITEM:
-        draft.data = action.payload;
-        draft.data.uuid_index = v4();
+        draft.data = {...action.payload, uuid_index : v4()};
         break;
       case constants.CREATE_ITEM_SUCCESS:
         draft.response.status = 'Success';

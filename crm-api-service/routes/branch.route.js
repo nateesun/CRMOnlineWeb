@@ -143,9 +143,8 @@ module.exports = args => {
 
     // find data exists or not
     const { code } = req.body;
-    const foundCode = await Task(req.headers.database).findByCode(code)
-    const result = JSON.parse(foundCode.data);
-    if(result.length>0){
+    const foundCode = await Controller(req.headers.database).findByCode(code)
+    if(foundCode.length>0){
       return res
       .status(400)
       .json({ status: "Information Incorrect", msg: 'Code is already exists' })
