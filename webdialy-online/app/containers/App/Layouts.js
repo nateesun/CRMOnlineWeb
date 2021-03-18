@@ -189,7 +189,7 @@ const styles = {
   main: {
     flex: 1,
     padding: theme.spacing(1),
-    background: '#eaeff1',
+    background: 'white',
   },
   footer: {
     padding: theme.spacing(2),
@@ -230,9 +230,9 @@ function Layouts(props) {
             />
           </Hidden>
         </nav>
+        <SubMenu {...props} />
         <div className={classes.app}>
           <Header profile={props.profile} onDrawerToggle={handleDrawerToggle} />
-          <SubMenu leftMenu={props.leftMenu} profile={props.profile} />
           <main className={classes.main}>
             <Switch>
               <Route exact path={`${path.publicPath}/`} component={HomePage} />

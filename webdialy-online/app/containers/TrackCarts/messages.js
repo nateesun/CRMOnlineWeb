@@ -9,72 +9,56 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.TrackCarts';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the TrackCarts container!',
-  },
-  newItemHeader: {
-    id: `${scope}.newItemHeader`,
-    defaultMessage: 'Add new item',
-  },
-  updateItemHeader: {
-    id: `${scope}.updateItemHeader`,
-    defaultMessage: 'Update old item',
-  },
   headerContentPage: {
     id: `${scope}.headerContentPage`,
     defaultMessage: 'Content Page',
-  },
-  headerEditItem: {
-    id: `${scope}.headerEditItem`,
-    defaultMessage: 'Edit Item Form',
   },
   headerViewItem: {
     id: `${scope}.headerViewItem`,
     defaultMessage: 'View Item Detail',
   },
-  headerNewItem: {
-    id: `${scope}.headerNewItem`,
-    defaultMessage: 'New Item Form',
-  },
   headerTableItems: {
     id: `${scope}.headerTableItems`,
-    defaultMessage: 'Table List Items',
+    defaultMessage: 'TrackCarts Table List',
   },
-  col1ShouldNotEmpty: {
-    id: `${scope}.col1ShouldNotEmpty`,
-    defaultMessage: 'Column1 should not empty',
+  refresh: {
+    id: `${scope}.refresh`,
+    defaultMessage: 'Refresh',
   },
-  col2ShouldNotEmpty: {
-    id: `${scope}.col2ShouldNotEmpty`,
-    defaultMessage: 'Column2 should not empty',
+  no: {
+    id: `${scope}.no`,
+    defaultMessage: 'No',
   },
-  col3ShouldNotEmpty: {
-    id: `${scope}.col3ShouldNotEmpty`,
-    defaultMessage: 'Column3 should not empty',
+  cartNo: {
+    id: `${scope}.cartNo`,
+    defaultMessage: 'Cart No',
   },
-  col1: {
-    id: `${scope}.col1`,
-    defaultMessage: 'Column1',
+  createDate: {
+    id: `${scope}.createDate`,
+    defaultMessage: 'Create Date',
   },
-  col2: {
-    id: `${scope}.col2`,
-    defaultMessage: 'Column2',
+  member: {
+    id: `${scope}.member`,
+    defaultMessage: 'Member',
   },
-  col3: {
-    id: `${scope}.col3`,
-    defaultMessage: 'Column3',
+  items: {
+    id: `${scope}.items`,
+    defaultMessage: 'Items',
   },
-  btnSave: {
-    id: `${scope}.btnSave`,
-    defaultMessage: 'Save',
+  amount: {
+    id: `${scope}.amount`,
+    defaultMessage: 'Amount',
   },
-  btnReset: {
-    id: `${scope}.btnReset`,
-    defaultMessage: 'Reset',
+  point: {
+    id: `${scope}.point`,
+    defaultMessage: 'Point',
   },
-  btnBack: {
-    id: `${scope}.btnBack`,
-    defaultMessage: 'Back',
+  step: {
+    id: `${scope}.step`,
+    defaultMessage: 'Step',
+  },
+  active: {
+    id: `${scope}.active`,
+    defaultMessage: 'Active',
   },
 });

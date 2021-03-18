@@ -76,7 +76,7 @@ const LoginForm = props => {
         <form className={classes.form} onSubmit={handleSubmit}>
           <Field name="type" 
             component={InputCheckBox}
-            label={`Login by ${type}`}
+            label={type === 'mobile' ? <FormattedMessage {...messages.signInMobile} />:<FormattedMessage {...messages.signIn} />}
             onChange={()=>setType(type === 'mobile' ? 'email':'mobile')} 
           />
           {type==='email' && <Field

@@ -70,7 +70,7 @@ export default defineMessages({
     defaultMessage: 'Line Id',
   },
   lineOfficial: {
-    id: `${scope}.lineId`,
+    id: `${scope}.lineOfficial`,
     defaultMessage: 'Line Company Official',
   },
   btnEditProfile: {

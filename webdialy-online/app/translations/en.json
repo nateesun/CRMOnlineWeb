@@ -2,6 +2,11 @@
   "app.components.ButtonLink.header": "This is the ButtonLink component!",
   "app.components.RenderField.header": "This is the RenderField component!",
   "app.containers.Dashboard.header": "Dashboard container!",
+  "app.containers.Dashboard.totalScore": "Total Score",
+  "app.containers.Dashboard.totalPurchase": "Total Purchase",
+  "app.containers.Dashboard.btnRefresh": "Refresh Point",
+  "app.containers.Dashboard.topicRedeem": "Redeem Promotion List Item",
+  "app.containers.Dashboard.notFoundPromotion": "Not found Promotion",
   "app.containers.ForgotPassword.emailIncorrectPattern": "Incorrect format email.",
   "app.containers.ForgotPassword.emailShouldNotEmpty": "Email should not be blank.",
   "app.containers.ForgotPassword.enterEmail": "Email",
@@ -20,6 +25,9 @@
   "app.containers.Login.passwordShouldNotEmpty": "Password should not be blank.",
   "app.containers.Login.submit": "Sign in",
   "app.containers.Login.signIn": "Login by Email",
+  "app.containers.Login.signInMobile": "Login by Mobile",
+  "app.containers.Login.email": "Email",
+  "app.containers.Login.mobile": "Mobile",
   "app.containers.Logout.header": "You have successfully logged out.",
   "app.containers.NotFoundPage.header": "404 - Page Not Found !",
   "app.containers.Profile.header": "Profile container!",
@@ -38,5 +46,6 @@
   "app.containers.Register.passwordShouldNotEmpty": "Password should not be blank.",
   "app.containers.Register.submit": "Confrim Send",
   "app.containers.LocaleToggle.th": "Thai",
-  "app.containers.LocaleToggle.en": "English"
+  "app.containers.LocaleToggle.en": "English",
+  "app.containers.Shopping.search": "Search"
 }

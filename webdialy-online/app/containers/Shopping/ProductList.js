@@ -5,7 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import ProductTopic from './ProductTopic';
-import * as constants from './constants';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
@@ -24,7 +25,7 @@ export default function ProductList(props) {
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>
       <Grid item xs={12}>
-        {data && data.length===0 && <h1>ไม่พบข้อมูลสินค้า</h1>}
+        {data && data.length===0 && <h1><FormattedMessage {...messages.notfoundProduct} /></h1>}
       </Grid>
       {data &&
         data.map(item => (
