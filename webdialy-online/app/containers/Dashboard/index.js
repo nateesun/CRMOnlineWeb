@@ -43,6 +43,10 @@ export function Dashboard(props) {
       props.onRefresh(JSON.parse(getToken));
       props.onLoadRedeem();
     })
+    socket.on("update_member", (data) => {
+      props.onRefresh(JSON.parse(getToken));
+      props.onLoadRedeem();
+    })
   }, []);
 
   return props.login && <DashboardContent {...props} />;

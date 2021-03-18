@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,6 +18,7 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import ButtonLink from 'components/ButtonLink';
 import * as constants from './constants';
+import messages from './messages';
 
 const leftMenus = [];
 
@@ -96,7 +98,7 @@ function Navigator(props) {
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
           <ButtonLink to={`${constants.publicPath}/`} color="white">
-            Main Menu
+            <FormattedMessage {...messages.mainMenu} />
           </ButtonLink>
         </ListItem>
         <ListItem className={clsx(classes.item, classes.itemCategory)}>
@@ -109,7 +111,7 @@ function Navigator(props) {
             }}
           >
             <ButtonLink to={`${constants.publicPath}/`} color="white">
-              Home
+              <FormattedMessage {...messages.homeTitle} />
             </ButtonLink>
           </ListItemText>
         </ListItem>
@@ -121,7 +123,7 @@ function Navigator(props) {
                   primary: classes.categoryHeaderPrimary,
                 }}
               >
-                {id}
+                <FormattedMessage {...messages[`menuTitle${id}`]} />
               </ListItemText>
             </ListItem>
             {children.map(({ id, icon, active, to_path: to }) => (
@@ -147,7 +149,7 @@ function Navigator(props) {
                       primary: classes.itemPrimary,
                     }}
                   >
-                    {id}
+                    <FormattedMessage {...messages[`menu${id}`]} />
                   </ListItemText>
                 </ListItem>
               </ButtonLink>
