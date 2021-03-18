@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
+import ContentNotFound from 'components/ContentNotFound';
 import RedeemCard from './RedeemCard';
 import messages from './messages';
 
@@ -39,7 +40,7 @@ export default function RedeemPage(props) {
         </div>
       </Grid>
       <Grid item xs={12}>
-        {listRedeem && listRedeem.length===0 && <h1><FormattedMessage {...messages.notFoundPromotion} /></h1>}
+        {listRedeem && listRedeem.length===0 && <ContentNotFound label={<FormattedMessage {...messages.notFoundPromotion} />} />}
         <Grid container justify="center" spacing={1}>
           {listRedeem &&
             listRedeem.map((item, index) => (
