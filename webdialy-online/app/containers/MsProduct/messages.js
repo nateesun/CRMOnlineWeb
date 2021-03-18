@@ -37,116 +37,116 @@ export default defineMessages({
     id: `${scope}.headerTableItems`,
     defaultMessage: 'Table List Items',
   },
-  col1ShouldNotEmpty: {
-    id: `${scope}.col1ShouldNotEmpty`,
+  codeShouldNotEmpty: {
+    id: `${scope}.codeShouldNotEmpty`,
     defaultMessage: 'Product code should not empty',
   },
-  col2ShouldNotEmpty: {
-    id: `${scope}.col2ShouldNotEmpty`,
+  nameShouldNotEmpty: {
+    id: `${scope}.nameShouldNotEmpty`,
     defaultMessage: 'Product name should not empty',
   },
-  col3ShouldNotEmpty: {
-    id: `${scope}.col3ShouldNotEmpty`,
+  unitSaleShouldNotEmpty: {
+    id: `${scope}.unitSaleShouldNotEmpty`,
     defaultMessage: 'Unit sale should not empty',
   },
-  col4ShouldNotEmpty: {
-    id: `${scope}.col4ShouldNotEmpty`,
+  groupCodeShouldNotEmpty: {
+    id: `${scope}.groupCodeShouldNotEmpty`,
     defaultMessage: 'Group code should not empty',
   },
-  col5ShouldNotEmpty: {
-    id: `${scope}.col5ShouldNotEmpty`,
+  pointShouldNotEmpty: {
+    id: `${scope}.pointShouldNotEmpty`,
     defaultMessage: 'Point should not empty or < 0',
   },
-  col6ShouldNotEmpty: {
-    id: `${scope}.col6ShouldNotEmpty`,
+  stkCodeShouldNotEmpty: {
+    id: `${scope}.stkCodeShouldNotEmpty`,
     defaultMessage: 'Stock code should not empty',
   },
-  col7ShouldNotEmpty: {
-    id: `${scope}.col7ShouldNotEmpty`,
+  eatInShouldNotEmpty: {
+    id: `${scope}.eatInShouldNotEmpty`,
     defaultMessage: 'Price eat-in should not empty or < 0',
   },
-  col8ShouldNotEmpty: {
-    id: `${scope}.col8ShouldNotEmpty`,
+  takeAwayShouldNotEmpty: {
+    id: `${scope}.takeAwayShouldNotEmpty`,
     defaultMessage: 'Price takeaway should not empty or < 0',
   },
-  col9ShouldNotEmpty: {
-    id: `${scope}.col9ShouldNotEmpty`,
+  deliveryShouldNotEmpty: {
+    id: `${scope}.deliveryShouldNotEmpty`,
     defaultMessage: 'Price delivery should not empty or < 0',
   },
-  col10ShouldNotEmpty: {
-    id: `${scope}.col10ShouldNotEmpty`,
+  maxStockShouldNotEmpty: {
+    id: `${scope}.maxStockShouldNotEmpty`,
     defaultMessage: 'Max stock should not empty or < 0',
   },
-  col11ShouldNotEmpty: {
-    id: `${scope}.col11ShouldNotEmpty`,
+  minStockShouldNotEmpty: {
+    id: `${scope}.minStockShouldNotEmpty`,
     defaultMessage: 'Min stock should not empty or < 0',
   },
-  col12ShouldNotEmpty: {
-    id: `${scope}.col12ShouldNotEmpty`,
+  unitStockShouldNotEmpty: {
+    id: `${scope}.unitStockShouldNotEmpty`,
     defaultMessage: 'Unit in stock not empty',
   },
-  col13ShouldNotEmpty: {
-    id: `${scope}.col13ShouldNotEmpty`,
+  imagePathShouldNotEmpty: {
+    id: `${scope}.imagePathShouldNotEmpty`,
     defaultMessage: 'Image path not empty',
   },
-  col14ShouldNotEmpty: {
-    id: `${scope}.col14ShouldNotEmpty`,
+  checkQtyOrNotShouldNotEmpty: {
+    id: `${scope}.checkQtyOrNotShouldNotEmpty`,
     defaultMessage: 'Flag to check qty or not',
   },
-  col1: {
-    id: `${scope}.col1`,
+  code: {
+    id: `${scope}.code`,
     defaultMessage: 'Product Code',
   },
-  col2: {
-    id: `${scope}.col2`,
+  name: {
+    id: `${scope}.name`,
     defaultMessage: 'Product Name',
   },
-  col3: {
-    id: `${scope}.col3`,
+  unitSale: {
+    id: `${scope}.unitSale`,
     defaultMessage: 'Unit Sale',
   },
-  col4: {
-    id: `${scope}.col4`,
+  groupCode: {
+    id: `${scope}.groupCode`,
     defaultMessage: 'Group Code',
   },
-  col5: {
-    id: `${scope}.col5`,
+  imagePath: {
+    id: `${scope}.imagePath`,
     defaultMessage: 'Image Path',
   },
-  col6: {
-    id: `${scope}.col6`,
+  point: {
+    id: `${scope}.point`,
     defaultMessage: 'Point',
   },
-  col7: {
-    id: `${scope}.col7`,
+  stkCode: {
+    id: `${scope}.stkCode`,
     defaultMessage: 'Stock Code',
   },
-  col8: {
-    id: `${scope}.col8`,
+  eatIn: {
+    id: `${scope}.eatIn`,
     defaultMessage: 'EatIn Price',
   },
-  col9: {
-    id: `${scope}.col9`,
+  takeAway: {
+    id: `${scope}.takeAway`,
     defaultMessage: 'Takeaway Price',
   },
-  col10: {
-    id: `${scope}.col10`,
+  delivery: {
+    id: `${scope}.delivery`,
     defaultMessage: 'Delivery Price',
   },
-  col11: {
-    id: `${scope}.col11`,
+  maxStock: {
+    id: `${scope}.maxStock`,
     defaultMessage: 'Max Stock',
   },
-  col12: {
-    id: `${scope}.col12`,
+  minStock: {
+    id: `${scope}.minStock`,
     defaultMessage: 'Min Stock',
   },
-  col13: {
-    id: `${scope}.col13`,
+  unitStock: {
+    id: `${scope}.unitStock`,
     defaultMessage: 'Unit Code Stock',
   },
-  col14: {
-    id: `${scope}.col14`,
+  qtyNoLimit: {
+    id: `${scope}.qtyNoLimit`,
     defaultMessage: 'Qty No limit',
   },
   btnSave: {

@@ -51,6 +51,9 @@ const EditItem = props => {
   const [file, setFile] = useState(null);
   const { img_path } = props.initialValues;
 
+  const loc = window.location.href.split('/');
+  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+
   const onValidated = formValues => {
     updateData(formValues);
   };
@@ -99,7 +102,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
+                label={<FormattedMessage {...messages.code} />}
                 required
                 disabled
               />
@@ -110,7 +113,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
+                label={<FormattedMessage {...messages.name} />}
                 required
               />
             </Grid>
@@ -120,7 +123,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
+                label={<FormattedMessage {...messages.unitSale} />}
                 required
               />
             </Grid>
@@ -130,7 +133,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
+                label={<FormattedMessage {...messages.groupCode} />}
                 required
               />
             </Grid>
@@ -140,7 +143,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
+                label={<FormattedMessage {...messages.point} />}
                 required
               />
             </Grid>
@@ -150,7 +153,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col7} />}
+                label={<FormattedMessage {...messages.stkCode} />}
                 required
               />
             </Grid>
@@ -160,7 +163,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col8} />}
+                label={<FormattedMessage {...messages.eatIn} />}
                 required
               />
             </Grid>
@@ -170,7 +173,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col9} />}
+                label={<FormattedMessage {...messages.takeAway} />}
                 required
               />
             </Grid>
@@ -180,7 +183,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col10} />}
+                label={<FormattedMessage {...messages.delivery} />}
                 required
               />
             </Grid>
@@ -190,7 +193,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col11} />}
+                label={<FormattedMessage {...messages.maxStock} />}
                 required
               />
             </Grid>
@@ -200,7 +203,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col12} />}
+                label={<FormattedMessage {...messages.minStock} />}
                 required
               />
             </Grid>
@@ -210,7 +213,7 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col13} />}
+                label={<FormattedMessage {...messages.unitStock} />}
                 required
               />
             </Grid>
@@ -220,24 +223,24 @@ const EditItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col14} />}
+                label={<FormattedMessage {...messages.qtyNoLimit} />}
                 required
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12}>
               <Field
                 name="img_path"
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col5} />}
+                label={<FormattedMessage {...messages.imagePath} />}
                 required
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <input type="file" name="file" onChange={onChangeHandler} />
             </Grid>
-            <Grid item xs={6} md={6}>
+            <Grid item xs={12}>
               <Button
                 variant="contained"
                 color="primary"
@@ -249,7 +252,7 @@ const EditItem = props => {
             {img_path && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={img_path} width="250" alt="" />
+                  <img src={`${apiServiceEndpoint}${img_path}`} width="250" alt="" />
                 </Paper>
               </Grid>
             )}

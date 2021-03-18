@@ -48,6 +48,9 @@ const NewItem = props => {
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
 
+  const loc = window.location.href.split('/');
+  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+
   const onValidated = formValues => {
     saveData(formValues);
   };
@@ -111,7 +114,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
+                label={<FormattedMessage {...messages.code} />}
                 required
                 autoFocus
               />
@@ -122,7 +125,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
+                label={<FormattedMessage {...messages.name} />}
                 required
               />
             </Grid>
@@ -132,7 +135,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
+                label={<FormattedMessage {...messages.unitSale} />}
                 required
               />
             </Grid>
@@ -142,7 +145,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
+                label={<FormattedMessage {...messages.groupCode} />}
                 required
               />
             </Grid>
@@ -152,7 +155,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
+                label={<FormattedMessage {...messages.point} />}
                 required
               />
             </Grid>
@@ -162,7 +165,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col7} />}
+                label={<FormattedMessage {...messages.stkCode} />}
                 required
               />
             </Grid>
@@ -172,7 +175,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col8} />}
+                label={<FormattedMessage {...messages.eatIn} />}
                 required
               />
             </Grid>
@@ -182,7 +185,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col9} />}
+                label={<FormattedMessage {...messages.takeAway} />}
                 required
               />
             </Grid>
@@ -192,7 +195,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col10} />}
+                label={<FormattedMessage {...messages.delivery} />}
                 required
               />
             </Grid>
@@ -202,7 +205,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col11} />}
+                label={<FormattedMessage {...messages.maxStock} />}
                 required
               />
             </Grid>
@@ -212,7 +215,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
-                label={<FormattedMessage {...messages.col12} />}
+                label={<FormattedMessage {...messages.minStock} />}
                 required
               />
             </Grid>
@@ -222,7 +225,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col13} />}
+                label={<FormattedMessage {...messages.unitStock} />}
                 required
               />
             </Grid>
@@ -232,7 +235,7 @@ const NewItem = props => {
                 component={RenderField}
                 type="text"
                 margin="normal"
-                label={<FormattedMessage {...messages.col14} />}
+                label={<FormattedMessage {...messages.qtyNoLimit} />}
                 required
               />
             </Grid>
@@ -248,7 +251,7 @@ const NewItem = props => {
             {showImg && (
                 <Paper elevation={3} className={classes.paddingImg}>
                   <img
-                    src={`/images/${file.name}`}
+                    src={`${apiServiceEndpoint}/images/${file.name}`}
                     width="250"
                     alt=""
                   />
@@ -297,46 +300,46 @@ const NewItem = props => {
 const validate = formValues => {
   const errors = {};
   if (!formValues.code) {
-    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+    errors.code = <FormattedMessage {...messages.codeShouldNotEmpty} />;
   }
   if (!formValues.name) {
-    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+    errors.name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.unit_code_sale) {
-    errors.unit_code_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+    errors.unit_code_sale = <FormattedMessage {...messages.unitSaleShouldNotEmpty} />;
   }
   if (!formValues.product_group_code) {
-    errors.product_group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.product_group_code = <FormattedMessage {...messages.groupCodeShouldNotEmpty} />;
   }
   if (!formValues.point || formValues.point < 0) {
-    errors.point = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
+    errors.point = <FormattedMessage {...messages.pointShouldNotEmpty} />;
   }
   if (!formValues.stock_code) {
-    errors.stock_code = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
+    errors.stock_code = <FormattedMessage {...messages.stkCodeShouldNotEmpty} />;
   }
   if (!formValues.price_e || formValues.price_e < 0) {
-    errors.price_e = <FormattedMessage {...messages.col7ShouldNotEmpty} />;
+    errors.price_e = <FormattedMessage {...messages.eatInShouldNotEmpty} />;
   }
   if (!formValues.price_t || formValues.price_t < 0) {
-    errors.price_t = <FormattedMessage {...messages.col8ShouldNotEmpty} />;
+    errors.price_t = <FormattedMessage {...messages.takeAwayShouldNotEmpty} />;
   }
   if (!formValues.price_d || formValues.price_d < 0) {
-    errors.price_d = <FormattedMessage {...messages.col9ShouldNotEmpty} />;
+    errors.price_d = <FormattedMessage {...messages.deliveryShouldNotEmpty} />;
   }
   if (!formValues.max_stock || formValues.max_stock < 0) {
-    errors.max_stock = <FormattedMessage {...messages.col10ShouldNotEmpty} />;
+    errors.max_stock = <FormattedMessage {...messages.maxStockShouldNotEmpty} />;
   }
   if (!formValues.min_stock || formValues.min_stock < 0) {
-    errors.min_stock = <FormattedMessage {...messages.col11ShouldNotEmpty} />;
+    errors.min_stock = <FormattedMessage {...messages.minStockShouldNotEmpty} />;
   }
   if (!formValues.unit_code_stock) {
-    errors.unit_code_stock = <FormattedMessage {...messages.col12ShouldNotEmpty} />;
+    errors.unit_code_stock = <FormattedMessage {...messages.unitStockShouldNotEmpty} />;
   }
   if (!formValues.img_path) {
-    errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
+    errors.img_path = <FormattedMessage {...messages.imagePathShouldNotEmpty} />;
   }
   if (!formValues.qty_over_stock) {
-    errors.qty_over_stock = <FormattedMessage {...messages.col14ShouldNotEmpty} />;
+    errors.qty_over_stock = <FormattedMessage {...messages.checkQtyOrNotShouldNotEmpty} />;
   }
   return errors;
 };
