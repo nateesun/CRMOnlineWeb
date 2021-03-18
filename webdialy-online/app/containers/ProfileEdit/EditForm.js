@@ -146,8 +146,8 @@ const EditForm = props => {
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={3} lg={3}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} lg={3}>
               <div style={{ width: '100%', paddingTop: '14px' }}>
                 <Field
                   name="prefix"
@@ -163,7 +163,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={3} lg={3}>
+            <Grid item xs={12} lg={3}>
               <Field
                 name="first_name"
                 component={RenderField}
@@ -173,7 +173,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={12} lg={6}>
               <Field
                 name="last_name"
                 component={RenderField}
@@ -183,7 +183,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={7} lg={6}>
               <Field
                 name="birthday"
                 component={DateInput}
@@ -192,7 +192,7 @@ const EditForm = props => {
                 label={<FormattedMessage {...messages.dateOfBirth} />}
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={5} lg={6}>
               <Field
                 name="mobile"
                 component={RenderField}
@@ -224,7 +224,7 @@ const EditForm = props => {
               />
             </Grid>
 
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={12} lg={6}>
               <span style={{ color: 'green' }}>
                 * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
                 โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
@@ -238,7 +238,7 @@ const EditForm = props => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={12} lg={6}>
               <span style={{ color: 'blue' }}>
                 สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
                 เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
@@ -252,8 +252,8 @@ const EditForm = props => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={3} md={3}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={3}>
               <Button
                 type="submit"
                 fullWidth
@@ -264,7 +264,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={12} md={3}>
               <Button
                 fullWidth
                 variant="contained"
@@ -274,7 +274,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
             </Grid>
-            <Grid item xs={3} md={3}>
+            <Grid item xs={12} md={3}>
               <ButtonLink to={`${constants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />

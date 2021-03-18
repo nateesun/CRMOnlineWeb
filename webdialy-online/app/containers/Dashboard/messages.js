@@ -33,4 +33,16 @@ export default defineMessages({
     id: `${scope}.topicRedeem`,
     defaultMessage: 'Redeem Promotion List Item',
   },
+  notFoundPromotion: {
+    id: `${scope}.notFoundPromotion`,
+    defaultMessage: 'Not found Promotion',
+  },
+  myQrCode: {
+    id: `${scope}.myQrCode`,
+    defaultMessage: 'My QR Code',
+  },
+  loadQrCode: {
+    id: `${scope}.loadQrCode`,
+    defaultMessage: 'Loading...',
+  },
 });

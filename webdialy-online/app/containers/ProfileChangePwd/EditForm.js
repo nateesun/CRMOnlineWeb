@@ -88,8 +88,8 @@ const EditForm = props => {
           <FormattedMessage {...messages.header} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={6}>
               <Field
                 name="email"
                 component={RenderField}
@@ -99,7 +99,7 @@ const EditForm = props => {
                 disabled
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Field
                 name="mobile"
                 component={RenderField}
@@ -109,7 +109,7 @@ const EditForm = props => {
                 disabled
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Field
                 name="old_password"
                 component={RenderField}
@@ -118,7 +118,7 @@ const EditForm = props => {
                 label={<FormattedMessage {...messages.oldPassword} />}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Field
                 name="new_password"
                 component={RenderField}
@@ -127,7 +127,7 @@ const EditForm = props => {
                 label={<FormattedMessage {...messages.newPassword} />}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Field
                 name="confirm_password"
                 component={RenderField}
@@ -137,8 +137,8 @@ const EditForm = props => {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={4}>
               <Button
                 type="submit"
                 fullWidth
@@ -149,7 +149,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnSaveProfile} />
               </Button>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} md={4}>
               <Button
                 fullWidth
                 variant="contained"
@@ -159,7 +159,7 @@ const EditForm = props => {
                 <FormattedMessage {...messages.btnResetForm} />
               </Button>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} md={4}>
               <ButtonLink to={`${constants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
