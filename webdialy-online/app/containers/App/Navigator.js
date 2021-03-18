@@ -18,6 +18,7 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import ButtonLink from 'components/ButtonLink';
 import * as constants from './constants';
+import { scope } from './messages';
 import messages from './messages';
 
 const leftMenus = [];
@@ -123,7 +124,7 @@ function Navigator(props) {
                   primary: classes.categoryHeaderPrimary,
                 }}
               >
-                <FormattedMessage {...messages[`menuTitle${id}`]} />
+                <FormattedMessage id={`${scope}.menuTitle${id}`} />
               </ListItemText>
             </ListItem>
             {children.map(({ id, icon, active, to_path: to }) => (
@@ -149,7 +150,7 @@ function Navigator(props) {
                       primary: classes.itemPrimary,
                     }}
                   >
-                    <FormattedMessage {...messages[`menu${id}`]} />
+                    <FormattedMessage id={`${scope}.menu${id}`} />
                   </ListItemText>
                 </ListItem>
               </ButtonLink>

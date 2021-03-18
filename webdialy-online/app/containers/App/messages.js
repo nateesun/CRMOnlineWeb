@@ -65,8 +65,8 @@ export default defineMessages({
     id: `${scope}.menuTrackOrder`,
     defaultMessage: 'Track Order',
   },
-  menuCheckcartlist: {
-    id: `${scope}.menuCheckcartlist`,
+  menuCheckCartList: {
+    id: `${scope}.menuCheckCartList`,
     defaultMessage: 'Check cart list',
   },
   menuMemberList: {

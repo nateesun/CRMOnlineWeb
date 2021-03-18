@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
@@ -7,6 +8,8 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import history from 'utils/history';
 import * as path from './constants';
+import { scope } from './messages';
+import messages from './messages';
 
 const useStyles = makeStyles({
   root: {
@@ -50,7 +53,7 @@ const SubMenu = props => {
             <BottomNavigationAction
               key={item.id}
               icon={icon}
-              label={item.id}
+              label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
               style={{border: '1px solid chocolate', borderRadius: '10px 10px 5px 5px', margin: '1px'}}
               onClick={()=>handleClick(path.publicPath+item.to_path)}
             />
