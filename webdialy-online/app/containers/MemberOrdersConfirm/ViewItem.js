@@ -56,6 +56,7 @@ const ViewItem = props => {
   const classes = useStyles();
   const { orders, orders_detail } = props.getOrderList;
   const [mobileNo, setMobileNo] = useState(null);
+  const [imgSigUrl, setImgSigUrl] = useState(null);
 
   useEffect(() => {
     if (orders && orders.signature) {

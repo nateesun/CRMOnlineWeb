@@ -49,11 +49,11 @@ const PaymentForm = (props) => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        ข้อมูลการรับชำระ (จำนวนเงิน {carts && carts[0].total_amount} บาท)
+        ข้อมูลการรับชำระ (จำนวนเงิน {carts && carts[0] && carts[0].total_amount} บาท)
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12} md={6}>
             <Field
               name="account_from_name"
@@ -126,6 +126,8 @@ const PaymentForm = (props) => {
           </Grid>
           <Grid item xs={12}>
             อัพโหลดไฟล์ Slip <input type="file" name="file" onChange={onChangeHandler} />
+          </Grid>
+          <Grid item xs={12}>
             <button onClick={() => onUploadImageFile()} style={{marginRight: '10px'}}>Upload Slip</button>
             <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip</button>
           </Grid>
