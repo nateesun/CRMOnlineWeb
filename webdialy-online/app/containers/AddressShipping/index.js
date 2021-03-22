@@ -14,6 +14,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import { makeSelectProfileData } from 'containers/Profile/selectors';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -29,11 +31,16 @@ export function AddressShipping(props) {
     props.initLoad(props.profile.code);
   }, []);
 
-  if(!props.profile.code){
-    return <Redirect to={`${constants.publicPath}/profile`} />
+  if (!props.profile.code) {
+    return <Redirect to={`${constants.publicPath}/profile`} />;
   }
 
-  return <EditForm {...props} />;
+  return (
+    <React.Fragment>
+      <SubMenu {...props} />
+      <EditForm {...props} />
+    </React.Fragment>
+  );
 }
 
 AddressShipping.propTypes = {
@@ -49,6 +56,7 @@ const mapStateToProps = createStructuredSelector({
   shipping: selectors.makeSelectAddressShipping,
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

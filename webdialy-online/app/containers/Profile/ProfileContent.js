@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -58,6 +58,10 @@ export default function ProfileContent(props) {
   ProfileContent.propTypes = {
     profile: PropTypes.object,
   };
+
+  if(!data.code){
+    return <h3 style={{padding: '20px'}}>Loading...</h3>
+  }
 
   return (
     <Card className={classes.root}>

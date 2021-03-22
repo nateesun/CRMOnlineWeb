@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     top: 'auto',
-    bottom: '0 auto',
+    bottom: '0',
     background: 'chocolate',
   },
   grow: {
@@ -47,7 +47,7 @@ export default function OrderFooter(props) {
         <Toolbar>
           <Grid container>
             <Grid item xs={12}>
-              <div style={{color: 'black'}}>ไม่พบข้อมูลการสั่งซื้อ</div>
+              <div style={{color: 'black', textAlign: 'center'}}>ไม่พบข้อมูลการสั่งซื้อ</div>
             </Grid>
           </Grid>
         </Toolbar>

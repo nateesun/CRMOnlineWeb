@@ -11,6 +11,8 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as dashboardSelectors from 'containers/Dashboard/selectors'
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -27,6 +29,7 @@ export function Shopping(props) {
 
   return (
     <div style={{ width: '100%' }}>
+      <SubMenu {...props} />
       <ShoppingContent {...props} />
     </div>
   );
@@ -39,6 +42,7 @@ const mapStateToProps = createStructuredSelector({
   productList: selectors.makeSelectProductList(),
   profile: dashboardSelectors.makeSelectProfile(),
   cart: selectors.makeSelectCart(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

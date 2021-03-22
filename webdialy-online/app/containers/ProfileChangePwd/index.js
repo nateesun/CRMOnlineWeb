@@ -13,6 +13,8 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -30,7 +32,12 @@ export function ProfileChangePwd(props) {
     }
   }, []);
 
-  return <EditForm {...props} />;
+  return (
+    <React.Fragment>
+      <SubMenu {...props} />
+      <EditForm {...props} />
+    </React.Fragment>
+  );
 }
 
 ProfileChangePwd.propTypes = {
@@ -45,6 +52,7 @@ const mapStateToProps = createStructuredSelector({
   profile: selectors.makeSelectProfile(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

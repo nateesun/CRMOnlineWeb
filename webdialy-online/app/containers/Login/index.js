@@ -1,6 +1,7 @@
 /**
  *
  * Login
+ * This is the first thing users see of our App, at the '/' route
  *
  */
 
@@ -9,8 +10,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-
+import useCookie, { getCookie } from 'react-use-cookie';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
@@ -22,10 +22,12 @@ import * as actions from './actions';
 const Login = (props) => {
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
+  const [database, setDatabase] = useCookie('database', '');
 
   useEffect(()=>{
-    const data = getCookie('database')||'';
+    const data = new URLSearchParams(props.location.search).get('data') || '';
     if(data){
+      setDatabase(data);
       props.initDatabase(data);
     }
   }, [])

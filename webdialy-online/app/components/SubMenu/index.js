@@ -7,13 +7,13 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import history from 'utils/history';
-import * as path from './constants';
-import { scope } from './messages';
+import * as path from 'containers/App/constants';
+import { scope } from 'containers/App/messages';
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    position: 'fixed',
+    // position: 'fixed',
     bottom: 0,
     zIndex: 999,
   },
@@ -24,9 +24,9 @@ const SubMenu = props => {
   const [value, setValue] = React.useState(0);
   const handleClick = (path) => history.push(path);
 
-  if (props.profile.member_role !== 'member') {
-    return <span />;
-  }
+  // if (props.profile.member_role !== 'member') {
+  //   return <span />;
+  // }
   return (
     <BottomNavigation
       value={value}

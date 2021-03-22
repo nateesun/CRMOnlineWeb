@@ -13,6 +13,8 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
@@ -31,7 +33,14 @@ export function Profile(props) {
     }
   }, []);
 
-  return <ProfileContent {...props} />;
+  return (
+    props.login && (
+      <React.Fragment>
+        <SubMenu {...props} />
+        <ProfileContent {...props} />
+      </React.Fragment>
+    )
+  );
 }
 
 Profile.propTypes = {
@@ -43,6 +52,7 @@ const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
   profile: selectors.makeSelectProfile(),
   company: selectors.makeSelectCompany(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -234,7 +234,42 @@ function Layouts(props) {
         <div className={classes.app}>
           <Header profile={props.profile} onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
-            
+            <Switch>
+              <Route exact path={`${path.publicPath}/`} component={HomePage} />
+              <Route path={path.PATH_LOGIN} component={Login} />
+              <Route path={path.PATH_LOGOUT} component={Logout} />
+              <Route path={path.PATH_DASHBOARD} component={Dashboard} />
+              <Route path={path.PATH_REGISTER} component={Register} />
+              <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
+              <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
+              <Route path={path.PATH_PROFILE} component={Profile} />
+              <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+              <Route path={path.PATH_ADDRESS_SHIPPING} component={AddressShipping} />
+              <Route
+                path={path.PATH_PROFILE_CHANGE_PWD}
+                component={ProfileChangePwd}
+              />
+              <Route path={path.PATH_MEMBER} component={Members} />
+              <Route path={path.PATH_SHOPPING} component={Shopping} />
+              <Route
+                path={path.PATH_CHECKOUT_ORDER}
+                component={CheckoutOrder}
+              />
+              <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
+              <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
+              <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
+              <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
+              <Route path={path.PATH_MS_STOCK} component={MsStock} />
+              <Route path={path.PATH_MS_ROLE} component={MsRole} />
+              <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
+              <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
+              <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
+              <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
+              <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
+              <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
+              <Route path={path.PATH_USE_PROMOTION} component={UsePromotion} />
+              <Route component={NotFoundPage} />
+            </Switch>
           </main>
           <footer className={classes.footer}>
             <Copyright />

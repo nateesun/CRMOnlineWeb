@@ -15,6 +15,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import reducer from './reducer';
@@ -25,14 +27,17 @@ export function MemberTracking(props) {
   useInjectSaga({ key: 'memberTracking', saga });
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <TrackCarts {...props} showCommand={false} />
+    <React.Fragment>
+      <SubMenu {...props} />
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <TrackCarts {...props} showCommand={false} />
+        </Grid>
+        <Grid item xs={12}>
+          <TrackOrders {...props} showCommand={false} />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <TrackOrders {...props} showCommand={false} />
-      </Grid>
-    </Grid>
+    </React.Fragment>
   );
 }
 
@@ -41,6 +46,7 @@ MemberTracking.propTypes = {};
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),
   profile: dashboardSelectors.makeSelectProfile(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

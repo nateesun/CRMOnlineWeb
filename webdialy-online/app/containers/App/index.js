@@ -8,7 +8,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import GlobalStyle from '../../global-styles';
-import Layout from './Layouts';
+import NewLayout from './NewLayout';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -24,7 +24,7 @@ export function App(props) {
 
   return (
     <React.Fragment>
-      <Layout {...props} />
+      <NewLayout {...props} />
       <GlobalStyle />
     </React.Fragment>
   );
