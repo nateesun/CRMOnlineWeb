@@ -16,7 +16,7 @@ export default function ProductList(props) {
 
   ProductList.propTypes = {
     data: PropTypes.array,
-    topic: PropTypes.string,
+    topic: PropTypes.object,
     handleClickOpen: PropTypes.func,
   };
 

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 export default function ProductTopic(props) {
   const { label, bgColor, textColor } = props;
   ProductTopic.propTypes = {
-    label: PropTypes.string,
+    label: PropTypes.object,
     bgColor: PropTypes.string,
     textColor: PropTypes.string,
   };
