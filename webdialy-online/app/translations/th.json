@@ -115,6 +115,7 @@
   "app.containers.App.menuStock": "ข้อมูลคลังสินค้า",
   "app.containers.App.menuPromotion": "ข้อมูลโปรโมชั่น",
   "app.containers.MemberOrdersConfirm.btnSave": "ยืนยันรับสินค้า",
+  "app.containers.MemberOrdersConfirm.notfoundOrder": "ไม่พบข้อมูลรายการสินค้า หรือยังไม่ได้รับการอนุมัติ",
   "app.containers.ProfileChangePwd.header": "เปลี่ยนรหัสผ่าน",
   "app.containers.ProfileChangePwd.email": "ที่อยู่อีเมล์",
   "app.containers.ProfileChangePwd.mobile": "เบอร์โทรศัพท์",

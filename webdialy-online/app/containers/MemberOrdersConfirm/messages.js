@@ -120,5 +120,9 @@ export default defineMessages({
   btnLoadOrder: {
     id: `${scope}.btnLoadOrder`,
     defaultMessage: 'Load Order',
-  }
+  },
+  notfoundOrder: {
+    id: `${scope}.notfoundOrder`,
+    defaultMessage: 'Notfound order or not approve',
+  },
 });
