@@ -75,7 +75,7 @@ export default function Orders(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>
-            {carts && carts[0].total_amount}
+            {carts && carts[0] && carts[0].total_amount}
           </Typography>
         </ListItem>
       </List>

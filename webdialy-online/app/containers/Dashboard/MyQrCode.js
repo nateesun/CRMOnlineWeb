@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import { Cake, Phone, MoneyOff, Star } from '@material-ui/icons';
+import { Cake, Phone, MoneyOff, Star, AssignmentInd} from '@material-ui/icons';
 const QRCode = require('qrcode.react');
 import messages from './messages';
 import default_boy from './images/default_boy.png';
@@ -46,6 +46,7 @@ export default function MyQrCode(props) {
     birthday,
     total_score,
     total_purchase,
+    member_role
   } = props.profile;
   if (!code) {
     return (
@@ -77,6 +78,10 @@ export default function MyQrCode(props) {
           <Star />คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
         <BoxPanel>
           <MoneyOff />ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
+      </Paper>
+      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#FFC36C'}}>
+        <BoxPanel>
+          <AssignmentInd />สถานะ: {member_role}</BoxPanel>
       </Paper>
       <BoxPanel>
         <FormattedMessage {...messages.myQrCode} />

@@ -56,6 +56,7 @@ export default function SearchBar(props) {
       <SelectType value={key} onChange={e => setKey(e.target.value)}>
         <option value="code">code</option>
         <option value="email">email</option>
+        <option value="mobile">mobile</option>
       </SelectType>
       <InputSearch
         type="text"

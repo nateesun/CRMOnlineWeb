@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
+import ContentNotFound from 'components/ContentNotFound';
 import SignatureForm from './SignatureForm';
 import messages from './messages';
 import * as selectors from './selectors';
@@ -56,6 +57,7 @@ const ViewItem = props => {
   const classes = useStyles();
   const { orders, orders_detail } = props.getOrderList;
   const [mobileNo, setMobileNo] = useState(null);
+  const [imgSigUrl, setImgSigUrl] = useState(null);
 
   useEffect(() => {
     if (orders && orders.signature) {
@@ -79,7 +81,7 @@ const ViewItem = props => {
   };
 
   if(!orders){
-    return <h1>Notfound orders</h1>
+    return <ContentNotFound label={<FormattedMessage {...messages.notfoundOrder} />} />
   }
 
   return (

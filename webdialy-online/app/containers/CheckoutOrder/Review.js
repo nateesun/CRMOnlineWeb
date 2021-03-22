@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import NumberFormat from 'react-number-format';
 import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
 
 const origin = {
@@ -85,7 +86,7 @@ export default function Review(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวมสินค้า" />
           <Typography variant="subtitle1" className={classes.total}>
-            {carts && carts[0].total_amount}
+            {carts && carts[0] && carts[0].total_amount}
           </Typography>
         </ListItem>
       </List>
@@ -186,9 +187,9 @@ export default function Review(props) {
         </Grid>
         <Grid item xs={12}>
           <div align="center" style={{ marginBottom: '25px' }}>
-            ระยะทาง {distance} กิโลเมตร
+            ระยะทาง {distance.toFixed(2)} กิโลเมตร
             <br />
-            ระยะเวลา {duration} นาที
+            ระยะเวลา {duration.toFixed(2)} นาที
           </div>
         </Grid>
       </Grid>

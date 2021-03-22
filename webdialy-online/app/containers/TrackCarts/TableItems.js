@@ -84,11 +84,6 @@ export default function TableItems(props) {
     props.onLoadView(item);
   };
 
-  const onEditItem = item => {
-    props.onChangePage('EDIT');
-    props.onLoadEdit(item);
-  };
-
   TableItems.propTypes = {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,

@@ -50,7 +50,7 @@ const AddressForm = props => {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={4}>
             <Field
               name="member_name"
@@ -130,7 +130,7 @@ const AddressForm = props => {
               required
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <FormControlLabel
               control={
                 <Checkbox color="secondary" name="saveAddress" value="yes" />
@@ -138,7 +138,7 @@ const AddressForm = props => {
               label={<FormattedMessage {...messages.useForShpping} />}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Button 
               type="submit" 
               variant="contained" 
@@ -146,14 +146,14 @@ const AddressForm = props => {
               disabled={pristine || submitting}
               style={{marginRight: '10px'}}
             >
-              Update data
+              <FormattedMessage {...messages.btnFormUpdateButton} />
             </Button>
             <Button 
               variant="contained" 
               disabled={pristine || submitting}
               onClick={reset}
             >
-              Reset
+              <FormattedMessage {...messages.btnFormResetButton} />
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -169,7 +169,7 @@ const AddressForm = props => {
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>
-                Position: {latitude},{longitude}
+                <FormattedMessage {...messages.markerPosition} />: {latitude},{longitude}
               </div>
             </Grid>
         </Grid>

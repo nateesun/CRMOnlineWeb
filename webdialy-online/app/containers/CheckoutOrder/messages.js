@@ -141,4 +141,16 @@ export default defineMessages({
     id: `${scope}.transferAmount`,
     defaultMessage: 'จำนวนเงิน (บาท)',
   },
+  btnFormUpdateButton: {
+    id: `${scope}.btnFormUpdateButton`,
+    defaultMessage: 'Update Data',
+  },
+  btnFormResetButton: {
+    id: `${scope}.btnFormResetButton`,
+    defaultMessage: 'Reset',
+  },
+  markerPosition: {
+    id: `${scope}.markerPosition`,
+    defaultMessage: 'Position',
+  },
 });
