@@ -1,6 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -11,7 +12,7 @@ const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/promotion`;
+    const requestURL = `${appConstants.publicPath}/api/promotion`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -32,7 +33,7 @@ export function* saveData() {
     const data = yield select(selectors.makeSelectForm());
     const file = yield select(selectors.makeSelectFileUpload());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/promotion`;
+    const requestURL = `${appConstants.publicPath}/api/promotion`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -53,7 +54,7 @@ export function* updateData() {
     const data = yield select(selectors.makeSelectForm());
     const file = yield select(selectors.makeSelectFileUpload());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/promotion`;
+    const requestURL = `${appConstants.publicPath}/api/promotion`;
     let response;
     if (file) {
       response = yield call(request, requestURL, {
@@ -83,7 +84,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/promotion/${
+    const requestURL = `${appConstants.publicPath}/api/promotion/${
       data.uuid_index
     }`;
     const response = yield call(request, requestURL, {

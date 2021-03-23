@@ -2,13 +2,14 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
 export function* onValidLogin() {
   try {
-    const requestURL = `${constants.publicPath}/api/login`;
+    const requestURL = `${appConstants.publicPath}/api/login`;
     const loginForm = yield select(selectors.makeSelectLogin());
     const database = getCookie('database');
     const { email, mobile, password, type } = loginForm;
@@ -19,8 +20,8 @@ export function* onValidLogin() {
       body: JSON.stringify({ email, mobile, password: encryptPassword, type }),
     });
     if (response.status === 'Success') {
-      yield put(actions.checkLoginSuccess(response));
-      yield put(push(`${constants.publicPath}/dashboard`));
+      yield put(actions.checkLoginSuccess({...response, email, mobile}));
+      yield put(push(`${appConstants.publicPath}/dashboard`));
     } else if (response.status === 'Missing Role') {
       yield put(actions.checkLoginError(response.msg));
     } else {

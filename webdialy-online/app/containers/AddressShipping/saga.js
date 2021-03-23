@@ -1,6 +1,7 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -9,7 +10,7 @@ export function* initLoad() {
   try {
     const { member_code } = yield select(selectors.makeSelectAddressShipping());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/shipping/${member_code}`;
+    const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
     try {
       const response = yield call(request, requestURL, {
         database,
@@ -26,7 +27,7 @@ export function* initLoad() {
 
 export function* onEditShipping() {
   try {
-    const requestURL = `${constants.publicPath}/api/shipping`;
+    const requestURL = `${appConstants.publicPath}/api/shipping`;
     const addressData = yield select(selectors.makeSelectAddressData());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {

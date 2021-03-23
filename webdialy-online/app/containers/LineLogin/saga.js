@@ -2,13 +2,14 @@ import { put, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 
 export function* onVerifyTokenLogin(data) {
   try {
     // verify token for username, password
     const { token } = data.payload;
-    const reqURL = `${constants.publicPath}/api/line/login`;
+    const reqURL = `${appConstants.publicPath}/api/line/login`;
     const responseToken = yield call(request, reqURL, {
       method: 'POST',
       body: JSON.stringify({ token }),
@@ -16,7 +17,7 @@ export function* onVerifyTokenLogin(data) {
     if (responseToken.status === 'Success') {
       // send to login api
       const { username, password, database } = responseToken.data;
-      const requestURL = `${constants.publicPath}/api/member/login`;
+      const requestURL = `${appConstants.publicPath}/api/member/login`;
       const response = yield call(request, requestURL, {
         database,
         method: 'POST',
@@ -27,7 +28,7 @@ export function* onVerifyTokenLogin(data) {
       });
       if (response.status === 'Success') {
         yield put(checkLoginSuccess(response));
-        yield put(push(`${constants.publicPath}/dashboard`));
+        yield put(push(`${appConstants.publicPath}/dashboard`));
       } else {
         yield put(checkLoginError('Email or password invalid'));
       }

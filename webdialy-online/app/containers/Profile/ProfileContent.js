@@ -10,10 +10,10 @@ import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import * as constants from './constants';
 
 const Label = styled.span`
   border: 0px solid;
@@ -180,17 +180,17 @@ export default function ProfileContent(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <ButtonLink to={`${constants.publicPath}/profile-change-pwd`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />
           </Button>
         </ButtonLink>
-        <ButtonLink to={`${constants.publicPath}/profile-edit`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-edit`}>
           <Button variant="contained" color="primary" size="small">
             <FormattedMessage {...messages.btnEditProfile} />
           </Button>
         </ButtonLink>
-        <ButtonLink to={`${constants.publicPath}/profile-shipping`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-shipping`}>
           <Button variant="contained" size="small">
             <FormattedMessage {...messages.headerEditShipping} />
           </Button>

@@ -8,9 +8,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as dashboardSelectors from 'containers/Dashboard/selectors'
+import * as appConstants from 'containers/App/constants';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
@@ -22,6 +25,11 @@ import saga from './saga';
 export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });
   useInjectSaga({ key: 'shopping', saga });
+
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
 
   useEffect(() => {
     props.onLoadProduct();

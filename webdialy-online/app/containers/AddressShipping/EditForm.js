@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
+import * as appConstants from 'containers/App/constants';
 import RenderField from 'components/RenderField';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
@@ -353,7 +354,7 @@ const EditForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12} md={3}>
-              <ButtonLink to={`${constants.publicPath}/profile`}>
+              <ButtonLink to={`${appConstants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>

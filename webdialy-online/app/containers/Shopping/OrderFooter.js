@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import { Grid } from '@material-ui/core';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
-import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -60,7 +60,7 @@ export default function OrderFooter(props) {
       <Toolbar>
         <Grid container>
           <Grid item xs={12}>
-            <ButtonLink to={`${constants.publicPath}/checkout-orders`} color="white">
+            <ButtonLink to={`${appConstants.publicPath}/checkout-orders`} color="white">
               <div align="right">
                 <ShoppingBasket style={{ marginRight: '5px' }} />
                 <span style={{ marginRight: '10px' }}>

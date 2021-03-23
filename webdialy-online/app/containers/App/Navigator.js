@@ -16,8 +16,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
-import * as constants from './constants';
 import { scope } from './messages';
 import messages from './messages';
 
@@ -98,7 +98,7 @@ function Navigator(props) {
         <ListItem
           className={clsx(classes.firebase, classes.item, classes.itemCategory)}
         >
-          <ButtonLink to={`${constants.publicPath}/`} color="white">
+          <ButtonLink to={`${appConstants.publicPath}/`} color="white">
             <FormattedMessage {...messages.mainMenu} />
           </ButtonLink>
         </ListItem>
@@ -111,7 +111,7 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            <ButtonLink to={`${constants.publicPath}/`} color="white">
+            <ButtonLink to={`${appConstants.publicPath}/`} color="white">
               <FormattedMessage {...messages.homeTitle} />
             </ButtonLink>
           </ListItemText>
@@ -128,7 +128,7 @@ function Navigator(props) {
               </ListItemText>
             </ListItem>
             {children.map(({ id, icon, active, to_path: to }) => (
-              <ButtonLink to={constants.publicPath+to} key={`menu${id}`}>
+              <ButtonLink to={appConstants.publicPath+to} key={`menu${id}`}>
                 <ListItem
                   key={id}
                   button

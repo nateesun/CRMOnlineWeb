@@ -16,12 +16,12 @@ import { makeSelectLogin } from 'containers/Login/selectors';
 import { makeSelectProfileData } from 'containers/Profile/selectors';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
+import * as appConstants from 'containers/App/constants';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import EditForm from './EditForm';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 export function AddressShipping(props) {
   useInjectReducer({ key: 'addressShipping', reducer });
@@ -32,7 +32,7 @@ export function AddressShipping(props) {
   }, []);
 
   if (!props.profile.code) {
-    return <Redirect to={`${constants.publicPath}/profile`} />;
+    return <Redirect to={`${appConstants.publicPath}/profile`} />;
   }
 
   return (

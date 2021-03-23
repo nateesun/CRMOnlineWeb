@@ -12,11 +12,11 @@ import { createStructuredSelector } from 'reselect';
 import RenderField from 'components/RenderField';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -160,7 +160,7 @@ const EditForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12} md={4}>
-              <ButtonLink to={`${constants.publicPath}/profile`}>
+              <ButtonLink to={`${appConstants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>

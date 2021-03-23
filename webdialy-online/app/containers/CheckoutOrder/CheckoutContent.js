@@ -7,13 +7,13 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import Orders from './Orders';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import FinishOrder from './FinishOrder';
-import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -122,7 +122,7 @@ export default function CheckoutContent(props) {
                     {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                   </Button>
                 </div>
-                <ButtonLink to={`${constants.publicPath}/shopping`}>
+                <ButtonLink to={`${appConstants.publicPath}/shopping`}>
                   <Button variant="contained">
                     กลับหน้าสั่งสินค้า
                   </Button>

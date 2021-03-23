@@ -1,6 +1,7 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -8,7 +9,7 @@ import * as actions from './actions';
 export function* loadProduct() {
   try {
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/product`;
+    const requestURL = `${appConstants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -27,7 +28,7 @@ export function* saveCartItem() {
   try {
     const data = yield select(selectors.makeSelectItemCart());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/carts`;
+    const requestURL = `${appConstants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -47,7 +48,7 @@ export function* updateCartItem() {
   try {
     const data = yield select(selectors.makeSelectItemCart());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/carts`;
+    const requestURL = `${appConstants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
@@ -67,7 +68,7 @@ export function* searchProduct() {
   try {
     const database = getCookie('database');
     const { data } = yield select(selectors.makeSelectSearchData());
-    const requestURL = `${constants.publicPath}/api/product/search/${data||'no_data'}`;
+    const requestURL = `${appConstants.publicPath}/api/product/search/${data||'no_data'}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',

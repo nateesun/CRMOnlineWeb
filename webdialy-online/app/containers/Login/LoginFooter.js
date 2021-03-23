@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import ButtonLink from 'components/ButtonLink';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
-import { publicPath } from './constants';
+import * as appConstants from 'containers/App/constants';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -37,12 +37,12 @@ export default function LoginFooter() {
     return (
         <Grid container className={classes.loginFooter}>
           <Grid item xs={12} lg={4}>
-            <ButtonLink color="purple" to={`${publicPath}/forgot-password`}>
+            <ButtonLink color="purple" to={`${appConstants.publicPath}/forgot-password`}>
               {<FormattedMessage {...messages.forgotPassword} />}
             </ButtonLink>
           </Grid>
           <Grid item xs={12} lg={8}>
-            <ButtonLink color="purple" to={`${publicPath}/register`}>
+            <ButtonLink color="purple" to={`${appConstants.publicPath}/register`}>
               {<FormattedMessage {...messages.register} />}
             </ButtonLink>
           </Grid>

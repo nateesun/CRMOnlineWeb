@@ -1,13 +1,14 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/member`;
+    const requestURL = `${appConstants.publicPath}/api/member`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -25,7 +26,7 @@ export function* initLoad() {
 export function* searchItem({ payload }) {
   const { key, value } = payload;
   try {
-    const requestURL = `${constants.publicPath}/api/member/search`;
+    const requestURL = `${appConstants.publicPath}/api/member/search`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -46,7 +47,7 @@ export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member`;
+    const requestURL = `${appConstants.publicPath}/api/member`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -66,7 +67,7 @@ export function* updateMemberData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member/${data.uuid_index}`;
+    const requestURL = `${appConstants.publicPath}/api/member/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
@@ -86,7 +87,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member/${data.email}`;
+    const requestURL = `${appConstants.publicPath}/api/member/${data.email}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
@@ -104,7 +105,7 @@ export function* deleteData() {
 
 export function* onLoadRolesList() {
   try {
-    const requestURL = `${constants.publicPath}/api/role`;
+    const requestURL = `${appConstants.publicPath}/api/role`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
 import Login from 'containers/Login/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
@@ -32,7 +31,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import * as path from './constants';
 
-export default function Layout2() {
+export default function NewLayout() {
   return (
     <Switch>
       <Route exact path={`${path.publicPath}/`} component={Login} />

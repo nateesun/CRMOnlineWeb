@@ -10,9 +10,11 @@ import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import * as appConstants from 'containers/App/constants';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
@@ -25,13 +27,18 @@ export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
-    const getToken = getCookie('token') || '';
-    if (getToken !== '') {
-      props.initLoad(JSON.parse(getToken));
+    if (token !== '') {
+      props.initLoad(JSON.parse(token));
       props.initLoadCompany();
     }
   }, []);
+
 
   return (
     props.login && (
