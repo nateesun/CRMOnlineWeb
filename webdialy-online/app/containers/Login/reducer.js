@@ -6,7 +6,7 @@
 import produce from 'immer';
 import { INIT_LOAD_SUCCESS } from 'containers/Dashboard/constants';
 import * as constants from './constants';
-import { setCookie } from 'react-use-cookie';
+import { setCookie, save } from 'react-use-cookie';
 
 export const initialState = {
   loginForm: {

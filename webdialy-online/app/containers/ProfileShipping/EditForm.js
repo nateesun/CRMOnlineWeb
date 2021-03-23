@@ -404,7 +404,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectAddressShippingInit(),
+  initialValues: selectors.makeSelectProfileShippingInit(),
 });
 
 export default connect(mapStateToProps)(

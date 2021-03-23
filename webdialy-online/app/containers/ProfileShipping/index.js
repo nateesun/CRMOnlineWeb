@@ -1,6 +1,6 @@
 /**
  *
- * AddressShipping
+ * ProfileShipping
  *
  */
 
@@ -24,9 +24,9 @@ import saga from './saga';
 import EditForm from './EditForm';
 import * as selectors from './selectors';
 
-export function AddressShipping(props) {
-  useInjectReducer({ key: 'addressShipping', reducer });
-  useInjectSaga({ key: 'addressShipping', saga });
+export function ProfileShipping(props) {
+  useInjectReducer({ key: 'profileShipping', reducer });
+  useInjectSaga({ key: 'profileShipping', saga });
 
   const token = getCookie('token') || '';
   if (!token) {
@@ -34,12 +34,10 @@ export function AddressShipping(props) {
   }
 
   useEffect(() => {
-    props.initLoad(props.profile.code);
+    if (token !== '') {
+      props.initLoad(JSON.parse(token));
+    }
   }, []);
-
-  if (!props.profile.code) {
-    return <Redirect to={`${appConstants.publicPath}/profile`} />;
-  }
 
   return (
     <React.Fragment>
@@ -49,7 +47,7 @@ export function AddressShipping(props) {
   );
 }
 
-AddressShipping.propTypes = {
+ProfileShipping.propTypes = {
   dispatch: PropTypes.func,
   clearData: PropTypes.func,
   initLoad: PropTypes.func,
@@ -59,7 +57,7 @@ AddressShipping.propTypes = {
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
   profile: makeSelectProfileData(),
-  shipping: selectors.makeSelectAddressShipping,
+  shipping: selectors.makeSelectProfileShipping,
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
@@ -79,4 +77,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(AddressShipping);
+export default compose(withConnect)(ProfileShipping);

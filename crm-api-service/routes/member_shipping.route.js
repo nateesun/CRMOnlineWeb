@@ -34,7 +34,7 @@ module.exports = args => {
   router.get("/:member_code", async (req, res, next) => {
     try {
       const member_code = req.params.member_code
-      const response = await Task(req.headers.database).findByMemberCode(
+      const response = await Task(req.headers.database).findByMemberCodeOrEmail(
         member_code
       )
       const data = JSON.parse(response.data)

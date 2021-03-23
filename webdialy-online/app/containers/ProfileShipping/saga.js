@@ -8,7 +8,7 @@ import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { member_code } = yield select(selectors.makeSelectAddressShipping());
+    const { member_code } = yield select(selectors.makeSelectProfileShipping());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
     try {
@@ -46,7 +46,7 @@ export function* onEditShipping() {
 }
 
 // Individual exports for testing
-export default function* addressShippingSaga() {
+export default function* profileShippingSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.EDIT_SHIPPING, onEditShipping);
 }

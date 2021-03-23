@@ -1,17 +1,17 @@
 /*
- * AddressShipping Messages
+ * ProfileShipping Messages
  *
- * This contains all the text for the AddressShipping container.
+ * This contains all the text for the ProfileShipping container.
  */
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AddressShipping';
+export const scope = 'app.containers.ProfileShipping';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the AddressShipping container!',
+    defaultMessage: 'This is the ProfileShipping container!',
   },
   enterEmail: {
     id: `${scope}.enterEmail`,

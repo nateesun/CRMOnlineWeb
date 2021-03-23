@@ -2,50 +2,50 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the addressShipping state domain
+ * Direct selector to the ProfileShipping state domain
  */
 
-const selectAddressShippingDomain = state => state.addressShipping || initialState;
+const selectProfileShippingDomain = state => state.profileShipping || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by AddressShipping
+ * Default selector used by ProfileShipping
  */
 
-const makeSelectAddressShipping = () =>
+const makeSelectProfileShipping = () =>
   createSelector(
-    selectAddressShippingDomain,
+    selectProfileShippingDomain,
     substate => substate,
   );
-const makeSelectAddressShippingInit = () =>
+const makeSelectProfileShippingInit = () =>
   createSelector(
-    selectAddressShippingDomain,
+    selectProfileShippingDomain,
     substate => substate.data,
   );
 const makeSelectAddressData = () =>
   createSelector(
-    selectAddressShippingDomain,
+    selectProfileShippingDomain,
     substate => substate.address,
   );
 const makeUpdateStatus = () =>
   createSelector(
-    selectAddressShippingDomain,
+    selectProfileShippingDomain,
     substate => substate.status,
   );
 const makeErrorUpdate = () =>
   createSelector(
-    selectAddressShippingDomain,
+    selectProfileShippingDomain,
     substate => substate.error,
   );
 
 export {
-  selectAddressShippingDomain,
-  makeSelectAddressShipping,
+  selectProfileShippingDomain,
+  makeSelectProfileShipping,
   makeUpdateStatus,
   makeErrorUpdate,
-  makeSelectAddressShippingInit,
+  makeSelectProfileShippingInit,
   makeSelectAddressData,
 };

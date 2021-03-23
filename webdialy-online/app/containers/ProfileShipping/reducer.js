@@ -1,6 +1,6 @@
 /*
  *
- * AddressShipping reducer
+ * ProfileShipping reducer
  *
  */
 import produce from 'immer';
@@ -15,7 +15,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const addressShippingReducer = (state = initialState, action) =>
+const profileShippingReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
@@ -48,4 +48,4 @@ const addressShippingReducer = (state = initialState, action) =>
     }
   });
 
-export default addressShippingReducer;
+export default profileShippingReducer;
