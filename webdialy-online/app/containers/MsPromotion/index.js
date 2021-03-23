@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
@@ -21,6 +22,11 @@ import saga from './saga';
 export function MsPromotion(props) {
   useInjectReducer({ key: 'msPromotion', reducer });
   useInjectSaga({ key: 'msPromotion', saga });
+
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
 
   useEffect(() => {
     props.onInitLoad();

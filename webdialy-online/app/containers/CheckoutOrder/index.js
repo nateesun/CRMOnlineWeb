@@ -9,12 +9,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import * as loginSelectors from 'containers/Login/selectors';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as loginSelectors from 'containers/Login/selectors';
+import * as appConstants from 'containers/App/constants';
+import * as shoppingSelectors from 'containers/Shopping/selectors';
 import * as selectors from './selectors';
-import * as shoppingSelectors from '../Shopping/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
@@ -23,6 +25,11 @@ import * as actions from './actions';
 export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
+
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
 
   useEffect(() => {
     props.initLoadCart(props.cart.cart_no);

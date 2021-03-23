@@ -10,8 +10,10 @@ import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -25,10 +27,14 @@ export function ProfileChangePwd(props) {
   useInjectReducer({ key: 'profileChangePwd', reducer });
   useInjectSaga({ key: 'profileChangePwd', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
-    const getToken = getCookie('token') || '';
-    if (getToken !== '') {
-      props.initLoad(JSON.parse(getToken));
+    if (token) {
+      props.initLoad(JSON.parse(token));
     }
   }, []);
 

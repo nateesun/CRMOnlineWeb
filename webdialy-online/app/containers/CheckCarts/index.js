@@ -9,9 +9,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -21,6 +23,11 @@ import saga from './saga';
 export function CheckCarts(props) {
   useInjectReducer({ key: 'checkCarts', reducer });
   useInjectSaga({ key: 'checkCarts', saga });
+
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
 
   useEffect(() => {
     props.onInitLoad();

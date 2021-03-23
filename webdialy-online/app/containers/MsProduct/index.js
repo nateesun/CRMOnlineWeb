@@ -9,19 +9,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
-import * as constants from './constants';
 
 export function MsProduct(props) {
   useInjectReducer({ key: 'msProduct', reducer });
   useInjectSaga({ key: 'msProduct', saga });
+
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
 
   useEffect(() => {
     props.onInitLoad();
