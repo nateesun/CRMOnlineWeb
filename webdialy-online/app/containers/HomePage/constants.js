@@ -3,8 +3,6 @@
  * HomePage constants
  *
  */
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/HomePage/INIT_STATE';
 
 export const INIT_LOAD = 'app/HomePage/INIT_LOAD';

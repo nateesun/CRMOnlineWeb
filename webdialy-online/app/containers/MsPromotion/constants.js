@@ -3,9 +3,6 @@
  * MsPromotion constants
  *
  */
-
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/MsPromotion/INIT_STATE';
 
 export const CHANGE_PAGE = 'app/MsPromotion/CHANGE_PAGE';

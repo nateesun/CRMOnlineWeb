@@ -4,8 +4,6 @@
  *
  */
 
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/LineLogin/INIT_STATE';
 
 export const VERIFY_TOKEN = 'app/LineLogin/VERIFY_TOKEN';

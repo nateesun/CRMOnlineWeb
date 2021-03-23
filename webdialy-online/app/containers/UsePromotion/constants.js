@@ -4,7 +4,6 @@
  *
  */
 
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 export const INIT_STATE = 'app/UsePromotion/INIT_STATE';
 
 export const CHANGE_PAGE = 'app/UsePromotion/CHANGE_PAGE';

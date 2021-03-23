@@ -3,9 +3,6 @@
  * AddressShipping constants
  *
  */
-
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/AddressShipping/INIT_STATE';
 
 export const EDIT_SHIPPING = 'containers/AddressShipping/EDIT_SHIPPING';
