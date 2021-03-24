@@ -258,5 +258,8 @@
   "app.containers.Checkout.subDistrictShouldNotEmpty": "กรุณาระบุ ตำบล",
   "app.containers.Checkout.districtShouldNotEmpty": "กรุณาระบุ อำเภอ",
   "app.containers.Checkout.provinceShouldNotEmpty": "กรุณาระบุ จังหวัด",
-  "app.containers.Checkout.postcodeShouldNotEmpty": "กรุณาระบุ รหัสไปรษณีย์"
+  "app.containers.Checkout.postcodeShouldNotEmpty": "กรุณาระบุ รหัสไปรษณีย์",
+  "app.components.MainLayout.headerLogin": "เข้าสู่ระบบ",
+  "app.components.MainLayout.headerLogout": "ลงชื่อออก",
+  "app.containers.Logout.loginButton": "เข้าสู่ระบบอีกครั้ง"
 }

@@ -14,8 +14,14 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { FormattedMessage } from 'react-intl';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Helmet } from 'react-helmet';
+import Button from '@material-ui/core/Button';
+import LocaleToggle from 'containers/LocaleToggle';
+import ButtonLink from 'components/ButtonLink';
 import { mainListItems, secondaryListItems } from './listItems';
+import messages from './messages';
 
 const drawerWidth = 240;
 
@@ -39,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    background: 'chocolate',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -98,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard(props) {
+export default function MainLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -107,6 +114,9 @@ export default function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const publicPath = '/web-daily-online';
+  const loggedIn = true;
 
   return (
     <div className={classes.root}>
@@ -128,11 +138,25 @@ export default function Dashboard(props) {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             {props.title}
           </Typography>
-          <IconButton color="inherit">
+          <LocaleToggle />
+          {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
+          {loggedIn ? (
+            <ButtonLink to={`${publicPath}/logout`}>
+              <Button size="large" startIcon={<ExitToApp />}>
+                <FormattedMessage {...messages.headerLogout} />
+              </Button>
+            </ButtonLink>
+          ) : (
+            <ButtonLink to={`${publicPath}/login`}>
+              <Button size="large" startIcon={<LockIcon />}>
+                <FormattedMessage {...messages.headerLogin} />
+              </Button>
+            </ButtonLink>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer

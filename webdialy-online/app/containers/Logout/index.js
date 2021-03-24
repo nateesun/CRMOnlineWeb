@@ -12,11 +12,14 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import styled from 'styled-components';
-
+import LockIcon from '@material-ui/icons/Lock';
+import ButtonLink from 'components/ButtonLink';
+import Button from '@material-ui/core/Button';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
 import * as appActions from 'containers/App/actions';
+import * as appConstant from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -42,12 +45,19 @@ export function Logout(props) {
   }, []);
 
   return (
-    <Wrapper>
-      <img src={LogoutIcon} border={0} width={100} alt="" />
-      <h4>
-        <FormattedMessage {...messages.header} />
-      </h4>
-    </Wrapper>
+    <React.Fragment>
+      <Wrapper>
+        <img src={LogoutIcon} border={0} width={100} alt="" />
+        <h4>
+          <FormattedMessage {...messages.header} />
+        </h4>
+      <ButtonLink to={`${appConstant.publicPath}/login`}>
+        <Button size="large" startIcon={<LockIcon />}>
+          <FormattedMessage {...messages.loginButton} />
+        </Button>
+      </ButtonLink>
+      </Wrapper>
+    </React.Fragment>
   );
 }
 

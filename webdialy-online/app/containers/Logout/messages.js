@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'You have successfully logged out.',
   },
+  loginButton: {
+    id: `${scope}.loginButton`,
+    defaultMessage: 'Try to login again',
+  },
 });
