@@ -5,42 +5,11 @@ import {
   ThemeProvider,
   withStyles,
 } from '@material-ui/core/styles';
-import { Switch, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
-import Login from 'containers/Login/Loadable';
-import Logout from 'containers/Logout/Loadable';
-import Dashboard from 'containers/Dashboard/Loadable';
-import LineLogin from 'containers/LineLogin/Loadable';
-import Register from 'containers/Register/Loadable';
-import ForgotPassword from 'containers/ForgotPassword/Loadable';
-import RecoverPassword from 'containers/RecoverPassword/Loadable';
-import Profile from 'containers/Profile/Loadable';
-import ProfileEdit from 'containers/ProfileEdit/Loadable';
-import AddressShipping from 'containers/AddressShipping/Loadable';
-import ProfileChangePwd from 'containers/ProfileChangePwd/Loadable';
-import Members from 'containers/Members/Loadable';
-import MsCompany from 'containers/MsCompany/Loadable';
-import MsBranch from 'containers/MsBranch/Loadable';
-import MsProduct from 'containers/MsProduct/Loadable';
-import MsStock from 'containers/MsStock/Loadable';
-import MsPromotion from 'containers/MsPromotion/Loadable';
-import MsRole from 'containers/MsRole/Loadable';
-import Shopping from 'containers/Shopping/Loadable';
-import CheckoutOrder from 'containers/CheckoutOrder/Loadable';
-import GoogleMap from 'containers/GoogleMap/Loadable';
-import MemberTracking from 'containers/MemberTracking/Loadable';
-import CheckCarts from 'containers/CheckCarts/Loadable';
-import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
-import DatabaseConfig from 'containers/DatabaseConfig/Loadable';
-import UsePromotion from 'containers/UsePromotion/Loadable';
-import * as path from './constants';
 import Navigator from './Navigator';
 import Header from './Header';
 import SubMenu from './SubMenu';

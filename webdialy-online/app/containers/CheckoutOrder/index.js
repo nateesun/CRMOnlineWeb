@@ -16,6 +16,9 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
 import * as shoppingSelectors from 'containers/Shopping/selectors';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -36,7 +39,12 @@ export function Checkout(props) {
     props.initLoadMemberShipping(props.cart.member_code);
   }, []);
 
-  return <CheckoutContent {...props} />;
+  return (
+    <MainLayout title='Checkout Order'>
+      <SubMenu {...props} />
+      <CheckoutContent {...props} />
+    </MainLayout>
+  );
 }
 
 Checkout.propTypes = {
@@ -53,6 +61,7 @@ const mapStateToProps = createStructuredSelector({
   imgValid: selectors.makeSelectSlipValidateStatus(),
   currentCartNo: selectors.makeSelectCartsNo(),
   database: loginSelectors.makeSelectDatabase(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

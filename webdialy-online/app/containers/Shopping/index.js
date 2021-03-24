@@ -14,6 +14,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as dashboardSelectors from 'containers/Dashboard/selectors'
 import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
@@ -36,10 +37,10 @@ export function Shopping(props) {
   }, []);
 
   return (
-    <div style={{ width: '100%' }}>
+    <MainLayout title='Shopping'>
       <SubMenu {...props} />
       <ShoppingContent {...props} />
-    </div>
+    </MainLayout>
   );
 }
 

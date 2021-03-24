@@ -15,6 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
@@ -42,10 +43,10 @@ export function Profile(props) {
 
   return (
     props.login && (
-      <React.Fragment>
+      <MainLayout title='Profile'>
         <SubMenu {...props} />
         <ProfileContent {...props} />
-      </React.Fragment>
+      </MainLayout>
     )
   );
 }

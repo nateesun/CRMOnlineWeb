@@ -23,7 +23,6 @@ const SubMenu = props => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleClick = (path) => history.push(path);
-
   // if (props.profile.member_role !== 'member') {
   //   return <span />;
   // }

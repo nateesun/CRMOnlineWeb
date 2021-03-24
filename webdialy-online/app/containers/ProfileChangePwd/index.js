@@ -15,6 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
@@ -39,10 +40,10 @@ export function ProfileChangePwd(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <MainLayout title='Change Password'>
       <SubMenu {...props} />
       <EditForm {...props} />
-    </React.Fragment>
+    </MainLayout>
   );
 }
 

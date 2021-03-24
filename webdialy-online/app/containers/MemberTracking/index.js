@@ -16,6 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
@@ -33,7 +34,7 @@ export function MemberTracking(props) {
   }
 
   return (
-    <React.Fragment>
+    <MainLayout title='Member Tracking'>
       <SubMenu {...props} />
       <Grid container spacing={1}>
         <Grid item xs={12}>
@@ -43,7 +44,7 @@ export function MemberTracking(props) {
           <TrackOrders {...props} showCommand={false} />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </MainLayout>
   );
 }
 

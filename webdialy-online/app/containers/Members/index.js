@@ -14,6 +14,9 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -34,7 +37,12 @@ export function Members(props) {
     props.onLoadRoles();
   }, []);
 
-  return <ContentPage {...props} />;
+  return (
+    <MainLayout title='Members List'>
+      <SubMenu {...props} />
+      <ContentPage {...props} />
+    </MainLayout>
+  );
 }
 
 Members.propTypes = {
@@ -56,6 +64,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   rolesList: selectors.makeSelectRolesList(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

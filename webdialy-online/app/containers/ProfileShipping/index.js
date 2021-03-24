@@ -16,6 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import { makeSelectProfileData } from 'containers/Profile/selectors';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
@@ -40,10 +41,10 @@ export function ProfileShipping(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <MainLayout title='Edit Shipping'>
       <SubMenu {...props} />
       <EditForm {...props} />
-    </React.Fragment>
+    </MainLayout>
   );
 }
 

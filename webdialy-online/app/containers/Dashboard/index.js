@@ -16,6 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appActions from 'containers/App/actions';
+import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
@@ -55,13 +56,12 @@ export function Dashboard(props) {
     }
   }, []);
 
-
   return (
     props.login && (
-      <React.Fragment>
+      <MainLayout title='Dashboard'>
         <SubMenu {...props} />
         <DashboardContent {...props} />;
-      </React.Fragment>
+      </MainLayout>
     )
   );
 }

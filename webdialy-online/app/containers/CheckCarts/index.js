@@ -13,6 +13,9 @@ import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -33,7 +36,12 @@ export function CheckCarts(props) {
     props.onInitLoad();
   }, []);
 
-  return <ContentPage {...props} />;
+  return (
+    <MainLayout title='Check Cart'>
+      <SubMenu {...props} />
+      <ContentPage {...props} />
+    </MainLayout>
+  );
 }
 
 CheckCarts.propTypes = {
@@ -52,6 +60,7 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

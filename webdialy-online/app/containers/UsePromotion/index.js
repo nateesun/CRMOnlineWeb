@@ -14,6 +14,9 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -33,7 +36,12 @@ export function UsePromotion(props) {
     props.onInitLoad();
   }, []);
 
-  return <ContentPage {...props} />;
+  return (
+    <MainLayout title='Promotion Using'>
+      <SubMenu {...props} />
+      <ContentPage {...props} />
+    </MainLayout>
+  );
 }
 
 UsePromotion.propTypes = {
@@ -47,6 +55,7 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

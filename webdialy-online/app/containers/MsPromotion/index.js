@@ -13,6 +13,9 @@ import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -33,7 +36,10 @@ export function MsPromotion(props) {
   }, []);
 
   return (
-    <ContentPage {...props} />
+    <MainLayout title='Promotion Master'>
+      <SubMenu {...props} />
+      <ContentPage {...props} />
+    </MainLayout>
   );
 }
 
@@ -51,6 +57,7 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
