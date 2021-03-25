@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +15,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import { FormattedMessage } from 'react-intl';
+import ButtonLink from 'components/ButtonLink';
+import * as appConstants from 'containers/App/constants';
 import SearchBar from './SearchBar';
 import messages from './messages';
 
@@ -146,7 +149,11 @@ export default function TableItems(props) {
                       className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.order_no}</TableCell>
+                      <TableCell align="center">
+                        <ButtonLink color="primary" to={`${appConstants.publicPath}/order_confirm/${item.cart_no}/${getCookie('database')}`}>
+                          {item.order_no}
+                        </ButtonLink>
+                      </TableCell>
                       <TableCell align="center">{item.cart_no}</TableCell>
                       <TableCell align="center">
                         {item.cart_create_date}

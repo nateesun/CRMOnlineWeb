@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${props => (props.color ? props.color : 'black')};
+  font-weight: ${props => (props.size ? props.size : 'plain')};
 `;
 
 function ButtonLink(props) {

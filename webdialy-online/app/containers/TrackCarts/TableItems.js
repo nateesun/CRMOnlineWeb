@@ -13,6 +13,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import ButtonLink from 'components/ButtonLink';
+import * as appConstants from 'containers/App/constants';
 import { FormattedMessage } from 'react-intl';
 import SearchBar from './SearchBar';
 import messages from './messages';
@@ -138,7 +140,10 @@ export default function TableItems(props) {
                       className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.cart_no}</TableCell>
+                      <TableCell align="center">
+                        {item.shopping_step==='order' && <ButtonLink size='bold' title='ทำรายการสั่งซื้อต่อ' to={`${appConstants.publicPath}/checkout-orders/${item.cart_no}`} color="primary">{item.cart_no}</ButtonLink>}
+                        {item.shopping_step!=='order' && <span>{item.cart_no}</span>}
+                      </TableCell>
                       <TableCell align="center">
                         {item.cart_create_date}
                       </TableCell>
