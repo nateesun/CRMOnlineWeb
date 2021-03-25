@@ -17,7 +17,6 @@ import * as loginSelectors from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
 import * as shoppingSelectors from 'containers/Shopping/selectors';
 import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -35,13 +34,13 @@ export function Checkout(props) {
   }
 
   useEffect(() => {
-    props.initLoadCart(props.cart.cart_no);
+    const cart_no = props.match.params.cart_no;
+    props.initLoadCart(cart_no);
     props.initLoadMemberShipping(props.cart.member_code);
   }, []);
 
   return (
     <MainLayout title='Checkout Order' {...props}>
-      <SubMenu {...props} />
       <CheckoutContent {...props} />
     </MainLayout>
   );

@@ -17,7 +17,7 @@ import { FormattedMessage } from 'react-intl';
 import SearchBar from './SearchBar';
 import messages from './messages';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
+    minWidth: 650,
   },
   buttonNew: {
     marginRight: '5px',
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   dataWidth: {
     overflow: 'auto',
   },
-});
+}));
 
 export default function TableItems(props) {
   const { getList, showCommand = true } = props;
@@ -94,8 +94,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>
@@ -111,11 +111,7 @@ export default function TableItems(props) {
         </div>
         {props.profile.member_role !== 'member' && <SearchBar {...props} />}
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table}>
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center"><FormattedMessage {...messages.no} /></TableCell>
@@ -190,6 +186,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

@@ -12,23 +12,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
-// import Badge from '@material-ui/core/Badge';
 import { FormattedMessage } from 'react-intl';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Helmet } from 'react-helmet';
-import Button from '@material-ui/core/Button';
 // menu items start
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import HomeIcon from '@material-ui/icons/Home';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PeopleIcon from '@material-ui/icons/People';
@@ -40,7 +30,6 @@ import * as appConstants from 'containers/App/constants';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import { scope } from './messages';
-import messages from './messages';
 
 const drawerWidth = 240;
 
@@ -189,7 +178,7 @@ const MainLayout = props => {
         <Divider />
         <List>
           <React.Fragment>
-            {leftMenu.map(({ id, icon, active, to_path: to }) => (
+            {leftMenu && leftMenu.map(({ id, icon, active, to_path: to }) => (
               <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
                 <ListItem
                   key={id}
@@ -199,14 +188,18 @@ const MainLayout = props => {
                     active === 'Y' && classes.itemActiveItem,
                   )}
                 >
-                  <ListItemIcon className={classes.itemIcon}>
-                    {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
-                    {icon === 'CardGiftcardIcon' && <CardGiftcardIcon />}
-                    {icon === 'LocalMallIcon' && <LocalMallIcon />}
-                    {icon === 'PeopleIcon' && <PeopleIcon />}
-                    {icon === 'LockIcon' && <LockIcon />}
-                    {icon === 'RecentActorsIcon' && <RecentActorsIcon />}
-                  </ListItemIcon>
+                  <FormattedMessage id={`${scope}.menu${id}`}>
+                    {title => (
+                      <ListItemIcon className={classes.itemIcon} title={title}>
+                        {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
+                        {icon === 'CardGiftcardIcon' && <CardGiftcardIcon />}
+                        {icon === 'LocalMallIcon' && <LocalMallIcon />}
+                        {icon === 'PeopleIcon' && <PeopleIcon />}
+                        {icon === 'LockIcon' && <LockIcon />}
+                        {icon === 'RecentActorsIcon' && <RecentActorsIcon />}
+                      </ListItemIcon>
+                    )}
+                  </FormattedMessage>
                   <ListItemText
                     classes={{
                       primary: classes.itemPrimary,

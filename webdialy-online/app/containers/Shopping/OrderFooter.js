@@ -40,8 +40,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function OrderFooter(props) {
   const classes = useStyles();
+  const { cart } = props;
 
-  if(Object.keys(props.cart).length===0){
+  if(Object.keys(cart).length===0){
     return (
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
@@ -60,11 +61,11 @@ export default function OrderFooter(props) {
       <Toolbar>
         <Grid container>
           <Grid item xs={12}>
-            <ButtonLink to={`${appConstants.publicPath}/checkout-orders`} color="white">
+            <ButtonLink to={`${appConstants.publicPath}/checkout-orders/${cart.cart_no}`} color="white">
               <div align="right">
                 <ShoppingBasket style={{ marginRight: '5px' }} />
                 <span style={{ marginRight: '10px' }}>
-                  รหัสสั่งซื้อสินค้า:
+                  รายการ :
                   <span
                     style={{
                       background: 'yellow',
@@ -72,12 +73,12 @@ export default function OrderFooter(props) {
                       color: 'black',
                     }}
                   >
-                    {props.cart.cart_no}
+                    {cart.cart_no}
                   </span>
                   |
                 </span>
-                <span>QTY {props.cart.total_item} | </span>
-                TOTAL: {props.cart.total_amount} บาท
+                <span>จน. {cart.total_item} | </span>
+                รวม: {cart.total_amount} บาท
               </div>
             </ButtonLink>
           </Grid>

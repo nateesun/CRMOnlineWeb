@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['สินค้าที่สั่ง', 'ที่อยู่จัดส่ง', 'ข้อมูลชำระ', 'รีวิว'];
+const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'รีวิว'];
 
 export default function CheckoutContent(props) {
   const classes = useStyles();
@@ -87,7 +87,7 @@ export default function CheckoutContent(props) {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            ขั้นตอนการสั่งซื้อสินค้า
+            ขั้นตอนการสั่ง
           </Typography>
           <Stepper
             activeStep={activeStep}
