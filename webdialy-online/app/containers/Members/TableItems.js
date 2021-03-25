@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
   root: {
@@ -112,7 +112,11 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} />
+        <SearchBar {...props} items={[
+          { key: 'code', value: 'Code' },
+          { key: 'email', value: 'Email' },
+          { key: 'mobile', value: 'Mobile' },
+          ]} />
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow className={classes.colRow}>

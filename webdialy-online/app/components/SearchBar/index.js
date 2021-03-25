@@ -7,7 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 export default function SearchBar(props) {
-  const [key, setKey] = useState('cart_no');
+  const { items } = props;
+  const [key, setKey] = useState('');
   const [value, setValue] = useState('');
 
   const onSearchData = () => {
@@ -21,17 +22,26 @@ export default function SearchBar(props) {
   return (
     <Grid container spacing={1}>
       <Grid item xs={3}>
-        <Select value={key} onChange={e => setKey(e.target.value)}>
-          <MenuItem value="cart_no">Cart No</MenuItem>
-          <MenuItem value="member_code">Member Code</MenuItem>
-          <MenuItem value="cart_active">Status</MenuItem>
+        <Select onChange={e => setKey(e.target.value)}>
+          {items &&
+            items.map((value1, key1) => (
+              <MenuItem key={key1} value={value1.key}>
+                {value1.value}
+              </MenuItem>
+            ))}
         </Select>
       </Grid>
       <Grid item xs={5}>
         <TextField value={value} onChange={e => setValue(e.target.value)} />
       </Grid>
       <Grid item xs={4}>
-        <Button variant="contained" color="primary" onClick={() => onSearchData()}>Search</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => onSearchData()}
+        >
+          Search
+        </Button>
       </Grid>
     </Grid>
   );

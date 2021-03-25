@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
 import { FormattedMessage } from 'react-intl';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -112,7 +112,12 @@ export default function TableItems(props) {
             <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
-        {props.profile.member_role !== 'member' && <SearchBar {...props} />}
+        {props.profile.member_role !== 'member' && 
+        <SearchBar {...props} items={[
+          { key: 'cart_no', value: 'Cart No' },
+          { key: 'member_code', value: 'Member Code' },
+          { key: 'cart_active', value: 'Status' },
+          ]} />}
         <div className={classes.dataWidth}>
           <Table className={classes.table}>
             <TableHead>

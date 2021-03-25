@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 
 const ALink = styled.a`
   text-decoration: none;
@@ -122,7 +122,11 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} />
+        <SearchBar {...props} items={[
+          { key: 'cart_no', value: 'Cart No' },
+          { key: 'member_code', value: 'Member Code' },
+          { key: 'cart_active', value: 'Status' },
+          ]} />
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
