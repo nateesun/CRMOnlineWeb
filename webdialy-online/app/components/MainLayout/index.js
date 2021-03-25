@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -156,12 +157,11 @@ const MainLayout = props => {
             {props.title}
           </Typography>
           <LocaleToggle />
-          <React.Fragment>
-            <ButtonLink to={`${appConstants.publicPath}/logout`}>
+          <ButtonLink to={`${appConstants.publicPath}/logout`}>
               <ExitToApp />
             </ButtonLink>
-          </React.Fragment>
         </Toolbar>
+        {/* <div style={{paddingBottom: '5px', paddingRight: '5px', textAlign: 'right'}}>สวัสดีคุณนที สังข์ทองงาม</div> */}
       </AppBar>
       <Drawer
         variant="permanent"

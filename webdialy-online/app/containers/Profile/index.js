@@ -23,6 +23,7 @@ import saga from './saga';
 import * as actions from './actions';
 import ProfileContent from './ProfileContent';
 import * as selectors from './selectors';
+import { Grid } from '@material-ui/core';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
@@ -43,8 +44,14 @@ export function Profile(props) {
   return (
     props.login && (
       <MainLayout title='Profile' {...props}>
-        <SubMenu {...props} />
-        <ProfileContent {...props} />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <SubMenu {...props} />
+          </Grid>
+          <Grid item xs={12}>
+            <ProfileContent {...props} />
+          </Grid>
+      </Grid>
       </MainLayout>
     )
   );

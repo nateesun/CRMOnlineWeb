@@ -165,7 +165,7 @@ export default function TableItems(props) {
                   ))}
                   {getList.length === 0 && (
                     <TableRow>
-                      <TableCell align="center" colSpan={6}>
+                      <TableCell align="left" colSpan={6}>
                         ไม่พบข้อมูลบริษัท
                       </TableCell>
                     </TableRow>

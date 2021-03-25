@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
@@ -39,8 +40,14 @@ export function DatabaseConfig(props) {
 
   return (
     <MainLayout title='Database Config' {...props}>
-      <SubMenu {...props} />
-      <ContentPage {...props} />
+      <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+        <Grid item xs={12}>
+          <SubMenu {...props} />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentPage {...props} />
+        </Grid>
+      </Grid>
     </MainLayout>
   );
 }

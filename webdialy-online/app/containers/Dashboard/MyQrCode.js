@@ -10,6 +10,7 @@ const QRCode = require('qrcode.react');
 import messages from './messages';
 import default_boy from './images/default_boy.png';
 import default_girl from './images/default_girl.png';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,38 +58,51 @@ export default function MyQrCode(props) {
   }
   return (
     <React.Fragment>
-      <BoxPanel>
-        <Avatar
-          className={classes.large}
-          src={gender === 'M' ? default_boy : default_girl}
-        />
-      </BoxPanel>
-      <BoxPanel>
-        {prefix}
-        {first_name} {last_name}
-      </BoxPanel>
-      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#239FE7', color: 'white'}}>
-        <BoxPanel>
-          <Cake />วันเกิด: {birthday}</BoxPanel>
-        <BoxPanel>
-          <Phone />เบอร์ติดต่อ: {mobile}</BoxPanel>
-      </Paper>
-      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#53AB67', color: 'white'}}>
-        <BoxPanel>
-          <Star />คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
-        <BoxPanel>
-          <MoneyOff />ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
-      </Paper>
-      <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#FFC36C'}}>
-        <BoxPanel>
-          <AssignmentInd />สถานะ: {member_role}</BoxPanel>
-      </Paper>
-      <BoxPanel>
-        <FormattedMessage {...messages.myQrCode} />
-      </BoxPanel>
-      <BoxPanel>
-        <QRCode value={code} />
-      </BoxPanel>
+      <Grid container>
+        <Grid item xs={12}>
+          <BoxPanel>
+            <Avatar
+              className={classes.large}
+              src={gender === 'M' ? default_boy : default_girl}
+            />
+          </BoxPanel>
+          <BoxPanel>
+            {prefix}
+            {first_name} {last_name}
+          </BoxPanel>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#239FE7', color: 'white'}}>
+            <BoxPanel>
+              <Cake />วันเกิด: {birthday}</BoxPanel>
+            <BoxPanel>
+              <Phone />เบอร์ติดต่อ: {mobile}</BoxPanel>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#53AB67', color: 'white'}}>
+            <BoxPanel>
+              <Star />คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
+            <BoxPanel>
+              <MoneyOff />ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#FFC36C'}}>
+            <BoxPanel>
+              <AssignmentInd />สถานะ: {member_role}
+            </BoxPanel>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <BoxPanel>
+            <QRCode value={code} />
+          </BoxPanel>
+          <BoxPanel>
+            <FormattedMessage {...messages.myQrCode} />
+          </BoxPanel>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 }

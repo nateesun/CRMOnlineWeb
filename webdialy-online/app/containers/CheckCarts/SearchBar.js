@@ -1,43 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  padding-bottom: 10px;
-`;
-const SelectType = styled.select`
-  margin-right: 5px;
-  width: 100px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 5px;
-  outline: none;
-`;
-const InputSearch = styled.input`
-  margin-right: 5px;
-  width: 200px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 5px;
-  outline: none;
-`;
-const ButtonSearch = styled.button`
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 3px;
-  width: 100px;
-  background: #eee;
-  color: black;
-  outline: none;
-  &:hover {
-    background: #ccc;
-    cursor: pointer;
-    box-shadow: 1px 1px #bbb;
-  }
-`;
+import { Grid } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
 export default function SearchBar(props) {
   const [key, setKey] = useState('cart_no');
@@ -52,18 +19,20 @@ export default function SearchBar(props) {
   };
 
   return (
-    <Wrapper>
-      <SelectType value={key} onChange={e => setKey(e.target.value)}>
-        <option value="cart_no">Cart No</option>
-        <option value="member_code">Member Code</option>
-        <option value="cart_active">Status</option>
-      </SelectType>
-      <InputSearch
-        type="text"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-      <ButtonSearch onClick={() => onSearchData()}>Search</ButtonSearch>
-    </Wrapper>
+    <Grid container spacing={1}>
+      <Grid item xs={3}>
+        <Select value={key} onChange={e => setKey(e.target.value)}>
+          <MenuItem value="cart_no">Cart No</MenuItem>
+          <MenuItem value="member_code">Member Code</MenuItem>
+          <MenuItem value="cart_active">Status</MenuItem>
+        </Select>
+      </Grid>
+      <Grid item xs={5}>
+        <TextField value={value} onChange={e => setValue(e.target.value)} />
+      </Grid>
+      <Grid item xs={4}>
+        <Button variant="contained" color="primary" onClick={() => onSearchData()}>Search</Button>
+      </Grid>
+    </Grid>
   );
 }

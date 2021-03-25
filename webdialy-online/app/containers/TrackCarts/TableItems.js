@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     padding: '5px',
-    minWidth: 650,
+    minWidth: '650px',
+    overflow: 'auto',
   },
   buttonNew: {
     marginRight: '5px',
@@ -97,7 +98,7 @@ export default function TableItems(props) {
 
   return (
     <React.Fragment>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>
@@ -211,7 +212,7 @@ export default function TableItems(props) {
                   ))}
               {getList.length === 0 && (
                 <TableRow>
-                  <TableCell align="center" colSpan={9}>
+                  <TableCell align="left" colSpan={9}>
                     ไม่พบข้อมูลรายการสินค้าในตระกร้า
                   </TableCell>
                 </TableRow>

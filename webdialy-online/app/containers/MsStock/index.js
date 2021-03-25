@@ -23,6 +23,7 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
+import { Grid } from '@material-ui/core';
 
 export function MsStock(props) {
   useInjectReducer({ key: 'msStock', reducer });
@@ -39,8 +40,14 @@ export function MsStock(props) {
 
   return (
     <MainLayout title='Stock Master' {...props}>
-      <SubMenu {...props} />
-      <ContentPage {...props} />
+      <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+        <Grid item xs={12}>
+          <SubMenu {...props} />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentPage {...props} />
+        </Grid>
+      </Grid>
     </MainLayout>
   );
 }

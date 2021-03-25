@@ -35,9 +35,17 @@ export function MemberTracking(props) {
 
   return (
     <MainLayout title='Member Tracking' {...props}>
-      <SubMenu {...props} />
-      <TrackCarts {...props} showCommand={false} />
-      <TrackOrders {...props} showCommand={false} />
+      <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+        <Grid item xs={12}>
+          <SubMenu {...props} />
+        </Grid>
+        <Grid item xs={12}>
+          <TrackCarts {...props} showCommand={false} />
+        </Grid>
+        <Grid item xs={12}>
+          <TrackOrders {...props} showCommand={false} />
+        </Grid>
+      </Grid>
     </MainLayout>
   );
 }

@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     backgroundColor: 'green',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'darkgreen'
+      backgroundColor: 'darkgreen',
     },
   },
   wrapButtonAction: {
@@ -127,7 +127,11 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -156,13 +160,18 @@ export default function TableItems(props) {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={item.uuid_index} className={classes.colRow}
+                      key={item.uuid_index}
+                      className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
                       <TableCell align="left">{item.name}</TableCell>
-                      <TableCell align="center">{item.unit_code_sale}</TableCell>
-                      <TableCell align="center">{item.product_group_code}</TableCell>
+                      <TableCell align="center">
+                        {item.unit_code_sale}
+                      </TableCell>
+                      <TableCell align="center">
+                        {item.product_group_code}
+                      </TableCell>
                       <TableCell align="center">{item.point}</TableCell>
                       <TableCell align="center">{item.stock_code}</TableCell>
                       <TableCell align="center">{item.price_e}</TableCell>
@@ -170,38 +179,36 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.price_d}</TableCell>
                       <TableCell align="center">{item.max_stock}</TableCell>
                       <TableCell align="center">{item.min_stock}</TableCell>
-                      <TableCell align="center">{item.unit_code_stock}</TableCell>
+                      <TableCell align="center">
+                        {item.unit_code_stock}
+                      </TableCell>
                       <TableCell align="left">{item.img_path}</TableCell>
                       <TableCell align="center">
-                        <Grid container spacing={1} justify="center">
-                          <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onEditItem(item)}
-                            >
-                              Edit
-                            </Button>
-                          </Grid>
-                          <Grid item>
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => handleDelete(item.uuid_index)}
-                            >
-                              Delete
-                            </Button>
-                          </Grid>
-                        </Grid>
+                        <Button
+                          variant="outlined"
+                          onClick={() => onEditItem(item)}
+                          style={{ margin: '5px' }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleDelete(item.uuid_index)}
+                          style={{ margin: '5px' }}
+                        >
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="center" colSpan={15}>
-                        ไม่พบข้อมูลสินค้า
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={15}>
+                    ไม่พบข้อมูลสินค้า
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

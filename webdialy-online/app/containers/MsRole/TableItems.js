@@ -161,7 +161,7 @@ export default function TableItems(props) {
                   ))}
                   {getList.length === 0 && (
                     <TableRow>
-                      <TableCell align="center" colSpan={4}>
+                      <TableCell align="left" colSpan={4}>
                         ไม่พบข้อมูลสิทธิ์การใช้งาน
                       </TableCell>
                     </TableRow>
