@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
@@ -57,7 +57,7 @@ Profile.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfileData(),
   company: selectors.makeSelectCompany(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
@@ -76,4 +76,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Profile);
+export default compose(withConnect, memo)(Profile);

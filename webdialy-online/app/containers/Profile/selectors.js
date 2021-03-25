@@ -27,7 +27,7 @@ const makeSelectCompany = () =>
 const makeSelectProfileData = () =>
   createSelector(
     selectProfileDomain,
-    substate => substate.data,
+    substate => substate.profile,
   );
 
 const makeUpdateStatus = () =>
