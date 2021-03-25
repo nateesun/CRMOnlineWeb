@@ -34,7 +34,6 @@ export function* saveData() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    console.log('create:', response);
     if (response.status===200) {
       yield put(actions.createItemSuccess(response));
     } else {

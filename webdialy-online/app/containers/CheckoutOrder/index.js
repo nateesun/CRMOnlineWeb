@@ -40,7 +40,7 @@ export function Checkout(props) {
   }, []);
 
   return (
-    <MainLayout title='Checkout Order'>
+    <MainLayout title='Checkout Order' {...props}>
       <SubMenu {...props} />
       <CheckoutContent {...props} />
     </MainLayout>

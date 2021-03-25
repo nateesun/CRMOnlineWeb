@@ -17,6 +17,7 @@ import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as appConstants from 'containers/App/constants';
+import * as dashboardSelector from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -37,7 +38,7 @@ export function CheckCarts(props) {
   }, []);
 
   return (
-    <MainLayout title='Check Cart'>
+    <MainLayout title='Check Cart' {...props}>
       <SubMenu {...props} />
       <ContentPage {...props} />
     </MainLayout>
@@ -61,6 +62,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: dashboardSelector.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

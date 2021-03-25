@@ -37,7 +37,7 @@ export function Shopping(props) {
   }, []);
 
   return (
-    <MainLayout title='Shopping'>
+    <MainLayout title='Shopping' {...props}>
       <SubMenu {...props} />
       <ShoppingContent {...props} />
     </MainLayout>

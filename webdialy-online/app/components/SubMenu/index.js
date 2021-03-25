@@ -22,10 +22,18 @@ const useStyles = makeStyles({
 const SubMenu = props => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const handleClick = (path) => history.push(path);
-  // if (props.profile.member_role !== 'member') {
-  //   return <span />;
-  // }
+  const handleClick = path => history.push(path);
+  const { profile } = props;
+  if (profile && profile.member_role) {
+    if (profile.member_role !== 'member') {
+      return <span />;
+    }
+  } else if (profile && profile.data) {
+    if (profile.data.member_role !== 'member') {
+      return <span />;
+    }
+  }
+
   return (
     <BottomNavigation
       value={value}
@@ -52,8 +60,12 @@ const SubMenu = props => {
               key={item.id}
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
-              style={{border: '1px solid chocolate', borderRadius: '10px 10px 5px 5px', margin: '1px'}}
-              onClick={()=>handleClick(path.publicPath+item.to_path)}
+              style={{
+                border: '1px solid chocolate',
+                borderRadius: '10px 10px 5px 5px',
+                margin: '1px',
+              }}
+              onClick={() => handleClick(path.publicPath + item.to_path)}
             />
           );
         })}

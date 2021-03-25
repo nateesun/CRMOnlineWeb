@@ -14,6 +14,7 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
+import * as dashboardSelector from 'containers/Dashboard/selectors';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -38,7 +39,7 @@ export function Members(props) {
   }, []);
 
   return (
-    <MainLayout title='Members List'>
+    <MainLayout title='Members List' {...props}>
       <SubMenu {...props} />
       <ContentPage {...props} />
     </MainLayout>
@@ -65,6 +66,7 @@ const mapStateToProps = createStructuredSelector({
   response: selectors.makeSelectResponse(),
   rolesList: selectors.makeSelectRolesList(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: dashboardSelector.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

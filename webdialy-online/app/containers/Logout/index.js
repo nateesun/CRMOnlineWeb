@@ -52,7 +52,7 @@ export function Logout(props) {
           <FormattedMessage {...messages.header} />
         </h4>
       <ButtonLink to={`${appConstant.publicPath}/login`}>
-        <Button size="large" startIcon={<LockIcon />}>
+        <Button color="primary" size="large" startIcon={<LockIcon />}>
           <FormattedMessage {...messages.loginButton} />
         </Button>
       </ButtonLink>

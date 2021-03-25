@@ -41,7 +41,7 @@ export function ProfileShipping(props) {
   }, []);
 
   return (
-    <MainLayout title='Edit Shipping'>
+    <MainLayout title='Edit Shipping' {...props}>
       <SubMenu {...props} />
       <EditForm {...props} />
     </MainLayout>

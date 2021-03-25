@@ -58,9 +58,9 @@ export function Dashboard(props) {
 
   return (
     props.login && (
-      <MainLayout title='Dashboard'>
+      <MainLayout title='Dashboard' {...props}>
         <SubMenu {...props} />
-        <DashboardContent {...props} />;
+        <DashboardContent {...props} />
       </MainLayout>
     )
   );

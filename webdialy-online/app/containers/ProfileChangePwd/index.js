@@ -40,7 +40,7 @@ export function ProfileChangePwd(props) {
   }, []);
 
   return (
-    <MainLayout title='Change Password'>
+    <MainLayout title='Change Password' {...props}>
       <SubMenu {...props} />
       <EditForm {...props} />
     </MainLayout>

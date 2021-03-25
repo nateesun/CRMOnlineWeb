@@ -34,7 +34,7 @@ export function MemberTracking(props) {
   }
 
   return (
-    <MainLayout title='Member Tracking'>
+    <MainLayout title='Member Tracking' {...props}>
       <SubMenu {...props} />
       <Grid container spacing={1}>
         <Grid item xs={12}>

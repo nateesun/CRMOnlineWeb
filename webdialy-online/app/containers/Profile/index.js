@@ -40,10 +40,9 @@ export function Profile(props) {
     }
   }, []);
 
-
   return (
     props.login && (
-      <MainLayout title='Profile'>
+      <MainLayout title='Profile' {...props}>
         <SubMenu {...props} />
         <ProfileContent {...props} />
       </MainLayout>

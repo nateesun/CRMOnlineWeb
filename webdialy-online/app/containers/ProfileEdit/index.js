@@ -40,7 +40,7 @@ export function ProfileEdit(props) {
   }, []);
 
   return (
-    <MainLayout title='Edit Profile'>
+    <MainLayout title='Edit Profile' {...props}>
       <SubMenu {...props} />
       <EditForm {...props} />
     </MainLayout>
