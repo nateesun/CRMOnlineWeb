@@ -22,7 +22,6 @@ import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -404,7 +403,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileShippingInit(),
+  initialValues: selectors.makeSelectShipping(),
 });
 
 export default connect(mapStateToProps)(

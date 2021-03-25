@@ -15,7 +15,6 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import { makeSelectProfileData } from 'containers/Profile/selectors';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -37,6 +36,7 @@ export function ProfileShipping(props) {
   useEffect(() => {
     if (token !== '') {
       props.initLoad(JSON.parse(token));
+      props.initLoadProfile();
     }
   }, []);
 
@@ -57,8 +57,8 @@ ProfileShipping.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: makeSelectProfileData(),
-  shipping: selectors.makeSelectProfileShipping,
+  profile: selectors.makeSelectProfileData(),
+  shipping: selectors.makeSelectProfileShipping(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
@@ -67,6 +67,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoad: memberCode => dispatch(actions.initLoad(memberCode)),
+    initLoadProfile: () => dispatch(actions.initLoadProfile()),
     onEditShipping: address => dispatch(actions.editShipping(address)),
     onChangeMapsValue: mapsData => dispatch(actions.changeMapsValue(mapsData)),
     clearData: () => dispatch(actions.initState()),

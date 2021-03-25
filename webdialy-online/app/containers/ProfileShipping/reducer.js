@@ -8,7 +8,8 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  data: {},
+  profile: {},
+  shipping: {},
   address: {},
   status: '',
   error: '',
@@ -28,7 +29,7 @@ const profileShippingReducer = (state = initialState, action) =>
         draft.member_code = action.payload;
         break;
       case constants.INIT_LOAD_SUCCESS:
-        draft.data = action.payload;
+        draft.shipping = action.payload;
         break;
       case constants.INIT_LOAD_ERROR:
         break;
@@ -42,8 +43,15 @@ const profileShippingReducer = (state = initialState, action) =>
         draft.error = action.payload;
         break;
       case constants.CHANGE_MAPS_VALUE:
-        draft.data.map_latitude = action.payload.map_latitude;
-        draft.data.map_longitude = action.payload.map_longitude;
+        draft.shipping.map_latitude = action.payload.map_latitude;
+        draft.shipping.map_longitude = action.payload.map_longitude;
+        break;
+      case constants.INIT_LOAD_PROFILE:
+        break;
+      case constants.INIT_LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.INIT_LOAD_PROFILE_ERROR:
         break;
     }
   });

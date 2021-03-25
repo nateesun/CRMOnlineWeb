@@ -59,3 +59,24 @@ export function changeMapsValue(payload) {
     payload,
   };
 }
+
+export function initLoadProfile(payload) {
+  return {
+    type: constants.INIT_LOAD_PROFILE,
+    payload,
+  };
+}
+
+export function initLoadProfileSuccess(payload) {
+  return {
+    type: constants.INIT_LOAD_PROFILE_SUCCESS,
+    payload,
+  };
+}
+
+export function initLoadProfileError(error) {
+  return {
+    type: constants.INIT_LOAD_PROFILE_ERROR,
+    payload: error,
+  };
+}

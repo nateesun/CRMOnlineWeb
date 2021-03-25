@@ -36,7 +36,7 @@ export function Dashboard(props) {
   
   useEffect(() => {
     if (token !== '') {
-      props.onRefresh(JSON.parse(token));
+      props.onInitLoad(JSON.parse(token));
       props.onLoadRedeem();
       props.onLoadMenu();
 
@@ -46,11 +46,11 @@ export function Dashboard(props) {
         transports: ['websocket'],
       });
       socket.on('update_redeem', data => {
-        props.onRefresh(JSON.parse(token));
+        props.onInitLoad(JSON.parse(token));
         props.onLoadRedeem();
       });
       socket.on('update_member', data => {
-        props.onRefresh(JSON.parse(token));
+        props.onInitLoad(JSON.parse(token));
         props.onLoadRedeem();
       });
     }
@@ -78,7 +78,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRefresh: email => {
+    onInitLoad: email => {
       dispatch(actions.initLoad(email));
     },
     onLoadRedeem: () => {
