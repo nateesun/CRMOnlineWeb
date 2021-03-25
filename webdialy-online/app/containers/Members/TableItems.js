@@ -179,6 +179,13 @@ export default function TableItems(props) {
                     </TableCell>
                   </TableRow>
                 ))}
+                {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="center" colSpan={9}>
+                        ไม่พบข้อมูลสมาชิก
+                      </TableCell>
+                    </TableRow>
+                  )}
           </TableBody>
         </Table>
       </TableContainer>

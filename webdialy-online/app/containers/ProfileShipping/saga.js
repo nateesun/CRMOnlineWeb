@@ -35,7 +35,6 @@ export function* initLoad() {
         database,
         method: 'GET',
       });
-      console.log('saga:', response);
       yield put(actions.initLoadSuccess(response.data[0]));
     } catch (error) {
       yield put(actions.initLoadError(error));

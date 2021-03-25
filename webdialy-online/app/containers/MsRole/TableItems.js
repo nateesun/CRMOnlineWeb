@@ -159,6 +159,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="center" colSpan={4}>
+                        ไม่พบข้อมูลสิทธิ์การใช้งาน
+                      </TableCell>
+                    </TableRow>
+                  )}
             </TableBody>
           </Table>
         </div>

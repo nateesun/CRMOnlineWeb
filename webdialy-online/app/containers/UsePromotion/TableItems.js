@@ -129,6 +129,13 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.active}</TableCell>
                     </TableRow>
                   ))}
+                  {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="center" colSpan={18}>
+                        ไม่พบข้อมูลรายการโปรโมชั่น
+                      </TableCell>
+                    </TableRow>
+                  )}
             </TableBody>
           </Table>
         </div>

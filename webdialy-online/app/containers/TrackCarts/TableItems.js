@@ -116,15 +116,33 @@ export default function TableItems(props) {
           <Table className={classes.table}>
             <TableHead>
               <TableRow className={classes.colRow}>
-                <TableCell align="center"><FormattedMessage {...messages.no} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.cartNo} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.createDate} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.member} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.items} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.amount} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.point} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.step} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.active} /></TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.no} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.cartNo} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.createDate} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.member} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.items} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.amount} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.point} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.step} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.active} />
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -141,8 +159,21 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">
-                        {item.shopping_step==='order' && <ButtonLink size='bold' title='ทำรายการสั่งซื้อต่อ' to={`${appConstants.publicPath}/checkout-orders/${item.cart_no}`} color="primary">{item.cart_no}</ButtonLink>}
-                        {item.shopping_step!=='order' && <span>{item.cart_no}</span>}
+                        {item.shopping_step === 'order' && (
+                          <ButtonLink
+                            size="bold"
+                            title="ทำรายการสั่งซื้อต่อ"
+                            to={`${appConstants.publicPath}/checkout-orders/${
+                              item.cart_no
+                            }`}
+                            color="primary"
+                          >
+                            {item.cart_no}
+                          </ButtonLink>
+                        )}
+                        {item.shopping_step !== 'order' && (
+                          <span>{item.cart_no}</span>
+                        )}
                       </TableCell>
                       <TableCell align="center">
                         {item.cart_create_date}
@@ -153,8 +184,8 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">{item.shopping_step}</TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                        {showCommand && (
-                      <TableCell align="center">
+                      {showCommand && (
+                        <TableCell align="center">
                           <Grid container spacing={1} justify="center">
                             <Grid item>
                               <Button
@@ -174,10 +205,17 @@ export default function TableItems(props) {
                               </Button>
                             </Grid>
                           </Grid>
-                      </TableCell>
-                        )}
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="center" colSpan={9}>
+                    ไม่พบข้อมูลรายการสินค้าในตระกร้า
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
