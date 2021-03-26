@@ -68,6 +68,7 @@ const mapStateToProps = createStructuredSelector({
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
   profile: selectors.makeSelectProfile(),
+  productImports: selectors.makeSelectProductImport(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -78,8 +79,11 @@ function mapDispatchToProps(dispatch) {
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
-    onUploadImage: (file) => dispatch(actions.uploadImage(file)),
+    onUploadImage: file => dispatch(actions.uploadImage(file)),
     onLoadProfile: () => dispatch(actions.loadProfile()),
+    onLoadDataFromFile: data => dispatch(actions.loadDataFromFile(data)),
+    onSaveDataImport: () => dispatch(actions.saveDataImport()),
+    onSetHeaders: (headers) => dispatch(actions.setHeaders(headers)),
   };
 }
 

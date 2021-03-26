@@ -21,7 +21,7 @@ export default function ProductList(props) {
   };
 
   return (
-    <Grid container spacing={3} style={{ marginTop: '1px' }}>
+    <Grid container spacing={1} style={{ marginTop: '1px' }}>
       <Grid item xs={12}>
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>

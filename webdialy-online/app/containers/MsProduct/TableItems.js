@@ -23,16 +23,9 @@ const useStyles = makeStyles({
   },
   table: {
     minWidth: 690,
-    padding: '5px',
-  },
-  buttonNew: {
-    marginRight: '5px',
-  },
-  buttonRefresh: {
-    marginRight: '5px',
+    paddingTop: '5px',
   },
   buttonUpload: {
-    marginRight: '5px',
     backgroundColor: 'green',
     color: 'white',
     '&:hover': {
@@ -40,7 +33,7 @@ const useStyles = makeStyles({
     },
   },
   wrapButtonAction: {
-    marginTop: '15px',
+    // marginTop: '15px',
   },
   colRow: {
     whiteSpace: 'nowrap',
@@ -102,36 +95,26 @@ export default function TableItems(props) {
         <Typography color="textSecondary" variant="h6">
           Product Table List
         </Typography>
-        <div className={classes.wrapButtonAction}>
-          <Button
-            variant="contained"
-            className={classes.buttonNew}
-            onClick={() => props.onChangePage('NEW')}
-          >
-            CREATE
-          </Button>
-          <Button
-            variant="contained"
-            className={classes.buttonUpload}
-            onClick={() => props.onChangePage('LOAD_PRODUCT')}
-          >
-            UPLOAD FILE
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.buttonRefresh}
-            onClick={() => props.onInitLoad()}
-          >
-            REFRESH
-          </Button>
-        </div>
+        <Grid container spacing={1}>
+          <Grid item>
+            <Button variant="contained" onClick={() => props.onChangePage('NEW')}>
+              Create
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" 
+            onClick={() => props.onChangePage('LOAD_PRODUCT')} className={classes.buttonUpload}>
+              Upload
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" onClick={() => props.onInitLoad()}>
+              Refresh
+            </Button>
+          </Grid>
+        </Grid>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>

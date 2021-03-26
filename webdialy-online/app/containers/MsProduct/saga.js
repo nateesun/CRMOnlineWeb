@@ -10,6 +10,27 @@ const fetch = require('node-fetch');
 const loc = window.location.href.split('/');
 const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
+export function* saveDataImport() {
+  try {
+    const productImports = yield select(selectors.makeSelectProductImport());
+    const productImportHeaders = yield select(selectors.makeSelectProductImportHeader());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/product/save_list`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'POST',
+      body: JSON.stringify({ headers: productImportHeaders, data: productImports }),
+    });
+    if (response.status==='Success') {
+      yield put(actions.saveDataImportSuccess(response));
+    } else {
+      yield put(actions.saveDataImportError('Cannot create data'));
+    }
+  } catch (err) {
+    yield put(actions.saveDataImportError(err));
+  }
+}
+
 export function* loadProfile() {
   try {
     const email = JSON.parse(getCookie('token')||'');
@@ -142,4 +163,5 @@ export default function* msProductSaga() {
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
   yield takeEvery(constants.LOAD_PROFILE, loadProfile);
+  yield takeEvery(constants.SAVE_DATA_IMPORT, saveDataImport);
 }

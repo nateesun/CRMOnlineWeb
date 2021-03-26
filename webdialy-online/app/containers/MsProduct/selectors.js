@@ -56,6 +56,16 @@ const makeSelectProfile = () =>
     selectMsProductDomain,
     substate => substate.profile,
   );
+const makeSelectProductImport = () =>
+  createSelector(
+    selectMsProductDomain,
+    substate => substate.productImports,
+  );
+const makeSelectProductImportHeader = () =>
+  createSelector(
+    selectMsProductDomain,
+    substate => substate.productImportHeaders,
+  );
 
 export {
   selectMsProductDomain,
@@ -67,4 +77,6 @@ export {
   makeSelectResponse,
   makeSelectFileUpload,
   makeSelectProfile,
+  makeSelectProductImport,
+  makeSelectProductImportHeader,
 };
