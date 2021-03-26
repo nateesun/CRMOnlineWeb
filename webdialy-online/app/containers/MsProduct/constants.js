@@ -30,3 +30,7 @@ export const DELETE_ITEM_ERROR = 'app/MsProduct/DELETE_ITEM_ERROR';
 export const UPLOAD_IMG = 'app/MsProduct/UPLOAD_IMG';
 export const UPLOAD_IMG_SUCCESS = 'app/MsProduct/UPLOAD_IMG_SUCCESS';
 export const UPLOAD_IMG_ERROR = 'app/MsProduct/UPLOAD_IMG_ERROR';
+
+export const LOAD_PROFILE = 'app/MsProduct/LOAD_PROFILE';
+export const LOAD_PROFILE_SUCCESS = 'app/MsProduct/LOAD_PROFILE_SUCCESS';
+export const LOAD_PROFILE_ERROR = 'app/MsProduct/LOAD_PROFILE_ERROR';

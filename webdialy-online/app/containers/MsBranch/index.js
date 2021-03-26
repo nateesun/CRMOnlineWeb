@@ -36,6 +36,7 @@ export function MsBranch(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
@@ -67,7 +68,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -78,6 +79,7 @@ function mapDispatchToProps(dispatch) {
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

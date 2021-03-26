@@ -26,6 +26,7 @@ export const initialState = {
     status: null,
     message: null,
   },
+  profile: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -111,6 +112,13 @@ const msProductReducer = (state = initialState, action) =>
       case constants.UPLOAD_IMG_ERROR:
         draft.response.status = 'Upload_Error';
         draft.response.message = 'Upload file image error!';
+        break;
+      case constants.LOAD_PROFILE:
+        break;
+      case constants.LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.LOAD_PROFILE_ERROR:
         break;
     }
   });

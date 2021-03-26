@@ -14,7 +14,6 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import * as dashboardSelector from 'containers/Dashboard/selectors';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -36,6 +35,7 @@ export function MsProduct(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
@@ -67,7 +67,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -79,6 +79,7 @@ function mapDispatchToProps(dispatch) {
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onUploadImage: (file) => dispatch(actions.uploadImage(file)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

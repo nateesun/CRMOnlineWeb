@@ -15,7 +15,6 @@ import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import * as dashboardSelector from 'containers/Dashboard/selectors';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -36,6 +35,7 @@ export function DatabaseConfig(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
@@ -69,7 +69,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -82,6 +82,7 @@ function mapDispatchToProps(dispatch) {
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onLoadView: item => dispatch(actions.loadView(item)),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

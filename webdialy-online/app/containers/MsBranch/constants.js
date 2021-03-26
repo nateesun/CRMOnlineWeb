@@ -26,3 +26,7 @@ export const UPDATE_ITEM_ERROR = 'app/MsBranch/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsBranch/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsBranch/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsBranch/DELETE_ITEM_ERROR';
+
+export const LOAD_PROFILE = 'app/MsBranch/LOAD_PROFILE';
+export const LOAD_PROFILE_SUCCESS = 'app/MsBranch/LOAD_PROFILE_SUCCESS';
+export const LOAD_PROFILE_ERROR = 'app/MsBranch/LOAD_PROFILE_ERROR';

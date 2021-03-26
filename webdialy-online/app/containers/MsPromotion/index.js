@@ -16,7 +16,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
-import * as dashboardSelector from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -35,6 +34,7 @@ export function MsPromotion(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
@@ -66,7 +66,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -78,6 +78,7 @@ function mapDispatchToProps(dispatch) {
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onUploadImage: (file) => dispatch(actions.uploadImage(file)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 
