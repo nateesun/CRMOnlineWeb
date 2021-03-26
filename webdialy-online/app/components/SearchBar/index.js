@@ -22,7 +22,7 @@ export default function SearchBar(props) {
   return (
     <Grid container spacing={1}>
       <Grid item xs={3}>
-        <Select onChange={e => setKey(e.target.value)}>
+        <Select onChange={e => setKey(e.target.value)} defaultValue={items[0].key} style={{width: '100%'}}>
           {items &&
             items.map((value1, key1) => (
               <MenuItem key={key1} value={value1.key}>
@@ -31,10 +31,10 @@ export default function SearchBar(props) {
             ))}
         </Select>
       </Grid>
-      <Grid item xs={5}>
-        <TextField value={value} onChange={e => setValue(e.target.value)} />
-      </Grid>
       <Grid item xs={4}>
+        <TextField value={value} onChange={e => setValue(e.target.value)} style={{width: '100%'}} />
+      </Grid>
+      <Grid item xs={5}>
         <Button
           variant="contained"
           color="primary"
