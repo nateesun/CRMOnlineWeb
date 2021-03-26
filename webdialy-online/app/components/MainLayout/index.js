@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -126,7 +126,7 @@ const useStyles = makeStyles(theme => ({
 const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
-  const [open, setOpen] = React.useState(window.innerWidth>500?true:false);
+  const [open, setOpen] = useState(window.innerWidth>500?true:false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -170,7 +170,6 @@ const MainLayout = props => {
               <ExitToApp />
             </ButtonLink>
         </Toolbar>
-        {/* <div style={{paddingBottom: '5px', paddingRight: '5px', textAlign: 'right'}}>สวัสดีคุณนที สังข์ทองงาม</div> */}
       </AppBar>
       <Drawer
         variant="permanent"

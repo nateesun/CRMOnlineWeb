@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 const SubMenu = props => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const handleClick = (path) => history.push(path);
 
   if (props.profile.member_role !== 'member') {
