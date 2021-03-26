@@ -9,7 +9,7 @@ import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   username: '',
-  data: {},
+  profile: {},
   editForm: {},
   status: '',
   error: '',
@@ -23,13 +23,13 @@ const profileChangePwdReducer = (state = initialState, action) =>
       case constants.INIT_STATE:
         draft.status = '';
         draft.error = '';
-        draft.data = {};
+        draft.profile = {};
         break;
       case constants.INIT_LOAD:
         draft.username = action.payload;
         break;
       case constants.INIT_LOAD_SUCCESS:
-        draft.data = action.payload;
+        draft.profile = action.payload;
         break;
       case constants.INIT_LOAD_ERROR:
         draft.error = action.payload;

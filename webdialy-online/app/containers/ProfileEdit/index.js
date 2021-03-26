@@ -56,7 +56,7 @@ ProfileEdit.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfileData(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
   leftMenu: appSelectors.makeSelectLeftMenu(),

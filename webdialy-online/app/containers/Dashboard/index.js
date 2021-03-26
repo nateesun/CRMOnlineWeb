@@ -59,7 +59,7 @@ export function Dashboard(props) {
 
   return (
     props.login && (
-      <MainLayout title='Dashboard' {...props}>
+      <MainLayout title='Overview' {...props}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <SubMenu {...props} />

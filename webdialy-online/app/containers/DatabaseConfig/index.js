@@ -39,7 +39,7 @@ export function DatabaseConfig(props) {
   }, []);
 
   return (
-    <MainLayout title='Database Config' {...props}>
+    <MainLayout title='Database' {...props}>
       <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
         <Grid item xs={12}>
           <SubMenu {...props} />

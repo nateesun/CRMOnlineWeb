@@ -39,7 +39,7 @@ export function MsProduct(props) {
   }, []);
 
   return (
-    <MainLayout title='Product Master' {...props}>
+    <MainLayout title='Product' {...props}>
       <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
         <Grid item xs={12}>
           <SubMenu {...props} />

@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import { FormattedMessage } from 'react-intl';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Helmet } from 'react-helmet';
@@ -31,6 +31,7 @@ import * as appConstants from 'containers/App/constants';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import { scope } from './messages';
+import { Button } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -47,6 +48,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
+    background: '#BE6C4E',
+    color: 'white',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -97,10 +100,10 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     height: '100vh',
-    // overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(1),
+    paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -112,12 +115,18 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  divider: {
+    marginTop: theme.spacing(2),
+  },
+  itemActiveItem: {
+    background: '#f1e6e2',
+  },
 }));
 
 const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(window.innerWidth>500?true:false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -171,12 +180,15 @@ const MainLayout = props => {
         open={open}
       >
         <div className={classes.toolbarIcon}>
+          <Typography component="span" color="inherit">
+            CRM Online
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon style={{color: 'white'}} />
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List style={{background: '#FBF9F8'}}>
           <React.Fragment>
             {leftMenu && leftMenu.map(({ id, icon, active, to_path: to }) => (
               <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
@@ -185,7 +197,7 @@ const MainLayout = props => {
                   button
                   className={clsx(
                     classes.item,
-                    active === 'Y' && classes.itemActiveItem,
+                    id === props.title && classes.itemActiveItem,
                   )}
                 >
                   <FormattedMessage id={`${scope}.menu${id}`}>
@@ -212,6 +224,9 @@ const MainLayout = props => {
             ))}
           </React.Fragment>
         </List>
+        <Button onClick={open ? handleDrawerClose: handleDrawerOpen}>
+          {open ? <span><ChevronLeftIcon />ซ่อนเมนู</span>:<DoubleArrow color="disabled" />}
+        </Button>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

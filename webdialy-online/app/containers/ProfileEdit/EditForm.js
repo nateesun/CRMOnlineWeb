@@ -120,11 +120,6 @@ const EditForm = props => {
     onEditMember(formValues);
   };
 
-  const handlePlace = (latitude, longitude) => {
-    setLatitude(latitude);
-    setLongitude(longitude);
-  };
-
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert
@@ -331,7 +326,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileInit(),
+  initialValues: selectors.makeSelectProfileData(),
 });
 
 export default connect(mapStateToProps)(

@@ -26,11 +26,7 @@ const SubMenu = props => {
   const { profile } = props;
   if (profile && profile.member_role) {
     if (profile.member_role !== 'member') {
-      return <span />;
-    }
-  } else if (profile && profile.data) {
-    if (profile.data.member_role !== 'member') {
-      return <span />;
+      return null;
     }
   }
 

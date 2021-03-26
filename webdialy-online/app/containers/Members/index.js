@@ -14,7 +14,6 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import * as dashboardSelector from 'containers/Dashboard/selectors';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
@@ -37,10 +36,11 @@ export function Members(props) {
   useEffect(() => {
     props.onInitLoad();
     props.onLoadRoles();
+    props.onLoadProfile();
   }, []);
 
   return (
-    <MainLayout title='Members List' {...props}>
+    <MainLayout title='MemberList' {...props}>
       <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
         <Grid item xs={12}>
           <SubMenu {...props} />
@@ -73,7 +73,7 @@ const mapStateToProps = createStructuredSelector({
   response: selectors.makeSelectResponse(),
   rolesList: selectors.makeSelectRolesList(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -87,6 +87,7 @@ function mapDispatchToProps(dispatch) {
     onLoadView: item => dispatch(actions.loadView(item)),
     onLoadRoles: () => dispatch(actions.loadRoles()),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

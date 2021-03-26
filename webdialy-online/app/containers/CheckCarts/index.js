@@ -18,7 +18,6 @@ import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as appConstants from 'containers/App/constants';
-import * as dashboardSelector from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -36,10 +35,11 @@ export function CheckCarts(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
-    <MainLayout title='Check Cart' {...props}>
+    <MainLayout title='CheckCartList' {...props}>
       <Grid container spacing={3} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
         <Grid item xs={12}>
           <SubMenu {...props} />
@@ -69,7 +69,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: dashboardSelector.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -84,6 +84,7 @@ function mapDispatchToProps(dispatch) {
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
     onUpdateShoppingStep: data => dispatch(actions.updateShoppingStep(data)),
     onLoadViewOrder: data => dispatch(actions.loadViewOrder(data)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

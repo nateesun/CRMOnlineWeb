@@ -12,7 +12,6 @@ import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import * as dashboardSelectors from 'containers/Dashboard/selectors'
 import * as appConstants from 'containers/App/constants';
 import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
@@ -33,6 +32,7 @@ export function Shopping(props) {
   }
 
   useEffect(() => {
+    props.onLoadProfile();
     props.onLoadProduct();
   }, []);
 
@@ -49,7 +49,7 @@ Shopping.propTypes = {};
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),
   productList: selectors.makeSelectProductList(),
-  profile: dashboardSelectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
   cart: selectors.makeSelectCart(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
@@ -60,6 +60,7 @@ function mapDispatchToProps(dispatch) {
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
     onSearch: data => dispatch(actions.searchProduct(data)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -20,7 +20,7 @@ import MainLayout from 'components/MainLayout';
 import SubMenu from 'components/SubMenu';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
-import * as dashboardSelectors from 'containers/Dashboard/selectors';
+import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -33,8 +33,12 @@ export function MemberTracking(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />
   }
 
+  useEffect(() => {
+    props.onLoadProfile();
+  }, []);
+
   return (
-    <MainLayout title='Member Tracking' {...props}>
+    <MainLayout title='TrackOrder' {...props}>
       <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
         <Grid item xs={12}>
           <SubMenu {...props} />
@@ -54,13 +58,14 @@ MemberTracking.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),
-  profile: dashboardSelectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 
