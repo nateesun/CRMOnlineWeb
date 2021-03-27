@@ -1,6 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -8,7 +9,7 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const { cart_no, database } = yield select(selectors.makeSelectData());
-    const requestURL = `${constants.publicPath}/api/orders/confirm_order/${cart_no}`;
+    const requestURL = `${appConstants.publicPath}/api/orders/confirm_order/${cart_no}`;
     const dbFromLogin = getCookie('database');
     const dbFromUrl = database || dbFromLogin;
     const response = yield call(request, requestURL, {
@@ -25,7 +26,7 @@ export function* initLoad() {
 
 export function* onApproveConfirmOrder() {
   try {
-    const requestURL = `${constants.publicPath}/api/orders`;
+    const requestURL = `${appConstants.publicPath}/api/orders`;
     const { database } = yield select(selectors.makeSelectData());
     const { 
       order_no,

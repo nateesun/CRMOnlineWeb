@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
@@ -15,7 +16,6 @@ import SweetAlert from 'sweetalert2-react';
 import styled from 'styled-components';
 import messages from './messages';
 import RegisterLogo from '../../images/register.png';
-import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -211,7 +211,7 @@ const RegisterForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <ButtonLink to={`${constants.publicPath}/login`}>
+              <ButtonLink to={`${appConstants.publicPath}/login`}>
                 <FormattedMessage {...messages.backLogin} />
               </ButtonLink>
             </Grid>

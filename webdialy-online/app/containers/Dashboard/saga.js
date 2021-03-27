@@ -1,6 +1,7 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -9,7 +10,7 @@ export function* initLoad() {
   try {
     const email = JSON.parse(getCookie('token')||'');
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member/${email}`;
+    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -26,7 +27,7 @@ export function* initLoad() {
 
 export function* loadRedeem() {
   try {
-    const requestURL = `${constants.publicPath}/api/redeem`;
+    const requestURL = `${appConstants.publicPath}/api/redeem`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -47,7 +48,7 @@ export function* createRedeemCode() {
     const { code } = yield select(selectors.makeSelectProfile());
     const { uuid_index, product_code } = yield select(selectors.makeSelectRedeemPoint());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/redeem`;
+    const requestURL = `${appConstants.publicPath}/api/redeem`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',

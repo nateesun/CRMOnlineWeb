@@ -59,6 +59,20 @@ module.exports = args => {
     }
   })
   
+  router.post("/save_list", async (req, res, next) => {
+    try {
+      // find data exists or not
+      const { headers, data } = req.body;
+      const response = await Task(req.headers.database).createList(headers, data)
+      const responseData = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", responseData })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
+  
   router.put("/", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).update(req.body)

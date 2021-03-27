@@ -1,6 +1,7 @@
 import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -9,7 +10,7 @@ export function* initLoad() {
   try {
     const { username } = yield select(selectors.makeSelectProfile());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/member/${username}`;
+    const requestURL = `${appConstants.publicPath}/api/member/${username}`;
     try {
       const response = yield call(request, requestURL, {
         database,
@@ -26,7 +27,7 @@ export function* initLoad() {
 
 export function* onUpdatePassword() {
   try {
-    const requestURL = `${constants.publicPath}/api/login`;
+    const requestURL = `${appConstants.publicPath}/api/login`;
     const { mobile, email, new_password } = yield select(selectors.makeSelectEditForm());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {

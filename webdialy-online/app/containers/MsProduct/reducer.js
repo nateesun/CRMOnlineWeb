@@ -17,6 +17,8 @@ export const initialState = {
     unit_sale: '',
     group_code: '',
   },
+  productImportHeaders: [],
+  productImports: [],
   page: 'LIST',
   img_upload: null,
   status: null,
@@ -26,6 +28,7 @@ export const initialState = {
     status: null,
     message: null,
   },
+  profile: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -111,6 +114,25 @@ const msProductReducer = (state = initialState, action) =>
       case constants.UPLOAD_IMG_ERROR:
         draft.response.status = 'Upload_Error';
         draft.response.message = 'Upload file image error!';
+        break;
+      case constants.LOAD_PROFILE:
+        break;
+      case constants.LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.LOAD_PROFILE_ERROR:
+        break;
+      case constants.LOAD_DATA_FROM_FILE:
+        draft.productImports = action.payload;
+      case constants.SAVE_DATA_IMPORT:
+        break;
+      case constants.SAVE_DATA_IMPORT_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.SAVE_DATA_IMPORT_ERROR:
+        break;
+      case constants.SET_HEADERS:
+        draft.productImportHeaders = action.payload;
         break;
     }
   });

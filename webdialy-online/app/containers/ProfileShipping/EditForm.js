@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
+import * as appConstants from 'containers/App/constants';
 import RenderField from 'components/RenderField';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
@@ -21,7 +22,6 @@ import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -353,7 +353,7 @@ const EditForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12} md={3}>
-              <ButtonLink to={`${constants.publicPath}/profile`}>
+              <ButtonLink to={`${appConstants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>
@@ -403,7 +403,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectAddressShippingInit(),
+  initialValues: selectors.makeSelectShipping(),
 });
 
 export default connect(mapStateToProps)(

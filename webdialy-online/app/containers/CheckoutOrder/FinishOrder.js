@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 const QRCode = require('qrcode.react');
 import Typography from '@material-ui/core/Typography';
-import ButtonLink from 'components/ButtonLink';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import * as appConstants from 'containers/App/constants';
+import ButtonLink from 'components/ButtonLink';
 import Thanks from './images/thanks.jpg';
-import * as constants from './constants';
 
 export default function FinishOrder(props) {
   const loc = window.location.href.split('/');
-  const hostUrl = `${loc[0]}//${loc[2]}${constants.publicPath}`;
+  const hostUrl = `${loc[0]}//${loc[2]}${appConstants.publicPath}`;
   return (
     <React.Fragment>
       <div align="center">
@@ -50,7 +50,7 @@ export default function FinishOrder(props) {
             marginTop: '10px',
           }}
         />
-        <ButtonLink to={`${constants.publicPath}/shopping`}>
+        <ButtonLink to={`${appConstants.publicPath}/shopping`}>
           <Button color="primary" variant="contained">
             กลับหน้าสั่งสินค้า
           </Button>

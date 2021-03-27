@@ -3,9 +3,6 @@
  * Members constants
  *
  */
-
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/Members/INIT_STATE';
 
 export const CHANGE_PAGE = 'app/Members/CHANGE_PAGE';
@@ -41,3 +38,7 @@ export const SEARCH_ERROR = 'app/Members/SEARCH_ERROR';
 export const LOAD_ROLES = 'app/Members/LOAD_ROLES';
 export const LOAD_ROLES_SUCCESS = 'app/Members/LOAD_ROLES_SUCCESS';
 export const LOAD_ROLES_ERROR = 'app/Members/LOAD_ROLES_ERROR';
+
+export const LOAD_PROFILE = 'app/Members/LOAD_PROFILE';
+export const LOAD_PROFILE_SUCCESS = 'app/Members/LOAD_PROFILE_SUCCESS';
+export const LOAD_PROFILE_ERROR = 'app/Members/LOAD_PROFILE_ERROR';

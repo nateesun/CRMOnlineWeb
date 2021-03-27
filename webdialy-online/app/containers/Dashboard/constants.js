@@ -3,8 +3,6 @@
  * Dashboard constants
  *
  */
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/Dashboard/INIT_STATE';
 
 export const INIT_LOAD = 'app/Dashboard/INIT_LOAD';

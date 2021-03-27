@@ -8,9 +8,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import * as dashboardSelectors from 'containers/Dashboard/selectors'
+import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -21,14 +26,21 @@ export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });
   useInjectSaga({ key: 'shopping', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
+    props.onLoadProfile();
     props.onLoadProduct();
   }, []);
 
   return (
-    <div style={{ width: '100%' }}>
+    <MainLayout title='Shopping' {...props}>
+      <SubMenu {...props} />
       <ShoppingContent {...props} />
-    </div>
+    </MainLayout>
   );
 }
 
@@ -37,8 +49,9 @@ Shopping.propTypes = {};
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),
   productList: selectors.makeSelectProductList(),
-  profile: dashboardSelectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfile(),
   cart: selectors.makeSelectCart(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -47,6 +60,7 @@ function mapDispatchToProps(dispatch) {
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
     onSearch: data => dispatch(actions.searchProduct(data)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

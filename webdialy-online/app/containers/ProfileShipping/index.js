@@ -1,6 +1,6 @@
 /**
  *
- * AddressShipping
+ * ProfileShipping
  *
  */
 
@@ -9,34 +9,46 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import { makeSelectProfileData } from 'containers/Profile/selectors';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import EditForm from './EditForm';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
-export function AddressShipping(props) {
-  useInjectReducer({ key: 'addressShipping', reducer });
-  useInjectSaga({ key: 'addressShipping', saga });
+export function ProfileShipping(props) {
+  useInjectReducer({ key: 'profileShipping', reducer });
+  useInjectSaga({ key: 'profileShipping', saga });
 
-  useEffect(() => {
-    props.initLoad(props.profile.code);
-  }, []);
-
-  if(!props.profile.code){
-    return <Redirect to={`${constants.publicPath}/profile`} />
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
   }
 
-  return <EditForm {...props} />;
+  useEffect(() => {
+    if (token !== '') {
+      props.initLoad(JSON.parse(token));
+      props.initLoadProfile();
+    }
+  }, []);
+
+  return (
+    <MainLayout title='Edit Shipping' {...props}>
+      <SubMenu {...props} />
+      <EditForm {...props} />
+    </MainLayout>
+  );
 }
 
-AddressShipping.propTypes = {
+ProfileShipping.propTypes = {
   dispatch: PropTypes.func,
   clearData: PropTypes.func,
   initLoad: PropTypes.func,
@@ -45,15 +57,17 @@ AddressShipping.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: makeSelectProfileData(),
-  shipping: selectors.makeSelectAddressShipping,
+  profile: selectors.makeSelectProfileData(),
+  shipping: selectors.makeSelectProfileShipping(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     initLoad: memberCode => dispatch(actions.initLoad(memberCode)),
+    initLoadProfile: () => dispatch(actions.initLoadProfile()),
     onEditShipping: address => dispatch(actions.editShipping(address)),
     onChangeMapsValue: mapsData => dispatch(actions.changeMapsValue(mapsData)),
     clearData: () => dispatch(actions.initState()),
@@ -65,4 +79,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(AddressShipping);
+export default compose(withConnect)(ProfileShipping);

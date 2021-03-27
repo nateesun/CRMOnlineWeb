@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { publicPath } from './constants';
+import * as appConstants from 'containers/App/constants';
 
 const useStyles = makeStyles({
   root: {
@@ -105,7 +105,7 @@ export default function TableItems(props) {
                       <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                             <Grid item>
-                              <a target="_blank" href={`${window.location.origin}${publicPath}${item.query}`} style={{textDecoration: 'none'}}>
+                              <a target="_blank" href={`${window.location.origin}${appConstants.publicPath}${item.query}`} style={{textDecoration: 'none'}}>
                                 <Button>Link Test</Button>
                               </a>
                             </Grid>
@@ -113,6 +113,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="left" colSpan={4}>
+                        ไม่พบข้อมูลฐานข้อมูล
+                      </TableCell>
+                    </TableRow>
+                  )}
             </TableBody>
           </Table>
         </div>

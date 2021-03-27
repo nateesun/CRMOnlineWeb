@@ -4,7 +4,6 @@
  *
  */
 
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
 export const INIT_STATE = 'app/DatabaseConfig/INIT_STATE';
 
 export const CHANGE_PAGE = 'app/DatabaseConfig/CHANGE_PAGE';
@@ -36,3 +35,7 @@ export const DELETE_ITEM_ERROR = 'app/DatabaseConfig/DELETE_ITEM_ERROR';
 export const SEARCH = 'app/DatabaseConfig/SEARCH';
 export const SEARCH_SUCCESS = 'app/DatabaseConfig/SEARCH_SUCCESS';
 export const SEARCH_ERROR = 'app/DatabaseConfig/SEARCH_ERROR';
+
+export const LOAD_PROFILE = 'app/DatabaseConfig/LOAD_PROFILE';
+export const LOAD_PROFILE_SUCCESS = 'app/DatabaseConfig/LOAD_PROFILE_SUCCESS';
+export const LOAD_PROFILE_ERROR = 'app/DatabaseConfig/LOAD_PROFILE_ERROR';

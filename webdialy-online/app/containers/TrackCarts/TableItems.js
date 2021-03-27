@@ -13,11 +13,13 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
+import ButtonLink from 'components/ButtonLink';
+import * as appConstants from 'containers/App/constants';
 import { FormattedMessage } from 'react-intl';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 import messages from './messages';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
@@ -25,8 +27,9 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
+    minWidth: '650px',
+    overflow: 'auto',
   },
   buttonNew: {
     marginRight: '5px',
@@ -44,7 +47,7 @@ const useStyles = makeStyles({
   dataWidth: {
     overflow: 'auto',
   },
-});
+}));
 
 export default function TableItems(props) {
   const { getList, showCommand = true } = props;
@@ -94,8 +97,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>
@@ -109,24 +112,43 @@ export default function TableItems(props) {
             <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
-        {props.profile.member_role !== 'member' && <SearchBar {...props} />}
+        {props.profile.member_role !== 'member' && 
+        <SearchBar {...props} items={[
+          { key: 'cart_no', value: 'Cart No' },
+          { key: 'member_code', value: 'Member Code' },
+          { key: 'cart_active', value: 'Status' },
+          ]} />}
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table}>
             <TableHead>
               <TableRow className={classes.colRow}>
-                <TableCell align="center"><FormattedMessage {...messages.no} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.cartNo} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.createDate} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.member} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.items} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.amount} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.point} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.step} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.active} /></TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.no} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.cartNo} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.createDate} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.member} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.items} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.amount} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.point} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.step} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.active} />
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -142,7 +164,23 @@ export default function TableItems(props) {
                       className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.cart_no}</TableCell>
+                      <TableCell align="center">
+                        {item.shopping_step === 'order' && (
+                          <ButtonLink
+                            size="bold"
+                            title="ทำรายการสั่งซื้อต่อ"
+                            to={`${appConstants.publicPath}/checkout-orders/${
+                              item.cart_no
+                            }`}
+                            color="primary"
+                          >
+                            {item.cart_no}
+                          </ButtonLink>
+                        )}
+                        {item.shopping_step !== 'order' && (
+                          <span>{item.cart_no}</span>
+                        )}
+                      </TableCell>
                       <TableCell align="center">
                         {item.cart_create_date}
                       </TableCell>
@@ -152,8 +190,8 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">{item.shopping_step}</TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                        {showCommand && (
-                      <TableCell align="center">
+                      {showCommand && (
+                        <TableCell align="center">
                           <Grid container spacing={1} justify="center">
                             <Grid item>
                               <Button
@@ -173,10 +211,17 @@ export default function TableItems(props) {
                               </Button>
                             </Grid>
                           </Grid>
-                      </TableCell>
-                        )}
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={9}>
+                    ไม่พบข้อมูลรายการสินค้าในตระกร้า
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
@@ -190,6 +235,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

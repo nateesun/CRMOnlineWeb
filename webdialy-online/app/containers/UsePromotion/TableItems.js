@@ -10,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
   root: {
@@ -68,7 +68,10 @@ export default function TableItems(props) {
         <Typography color="textSecondary" variant="h6">
           Use Promotion List
         </Typography>
-        <SearchBar {...props} />
+        <SearchBar {...props} items={[
+          { key: 'redeem_code', value: 'Redeem Code' },
+          { key: 'bill_no', value: 'Bill No' },
+          ]} />
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
@@ -129,6 +132,13 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.active}</TableCell>
                     </TableRow>
                   ))}
+                  {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="left" colSpan={18}>
+                        ไม่พบข้อมูลรายการโปรโมชั่น
+                      </TableCell>
+                    </TableRow>
+                  )}
             </TableBody>
           </Table>
         </div>

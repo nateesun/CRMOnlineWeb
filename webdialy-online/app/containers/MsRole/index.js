@@ -9,9 +9,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -22,12 +28,27 @@ export function MsRole(props) {
   useInjectReducer({ key: 'msRole', reducer });
   useInjectSaga({ key: 'msRole', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
     props.onInitLoad();
+    props.onLoadProfile();
   }, []);
 
   return (
-    <ContentPage {...props} />
+    <MainLayout title='Roles' {...props}>
+      <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+        <Grid item xs={12}>
+          <SubMenu {...props} />
+        </Grid>
+        <Grid item xs={12}>
+          <ContentPage {...props} />
+        </Grid>
+      </Grid>
+    </MainLayout>
   );
 }
 
@@ -45,6 +66,8 @@ const mapStateToProps = createStructuredSelector({
   getList: selectors.makeSelectListItems(),
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -55,6 +78,7 @@ function mapDispatchToProps(dispatch) {
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
+    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

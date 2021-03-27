@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -10,10 +10,10 @@ import { Grid } from '@material-ui/core';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import * as constants from './constants';
 
 const Label = styled.span`
   border: 0px solid;
@@ -51,21 +51,24 @@ const useStyles = makeStyles({
 });
 
 export default function ProfileContent(props) {
-  const { company } = props;
-  const { data } = props.profile;
+  const { company, profile } = props;
   const classes = useStyles();
 
   ProfileContent.propTypes = {
     profile: PropTypes.object,
   };
 
+  if(!profile.code){
+    return <h3 style={{padding: '20px'}}>Loading...</h3>
+  }
+
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Grid container spacing={3} justify="center">
+        <Grid container spacing={2} justify="center">
           <Grid item xs={12}>
             <Typography variant="h5" component="h2">
-              {`${data.prefix}${data.first_name} ${data.last_name}`}
+              {`${profile.prefix}${profile.first_name} ${profile.last_name}`}
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
@@ -76,7 +79,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.code} />
               </Label>
-              <LabelContent>{data.code}</LabelContent>
+              <LabelContent>{profile.code}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
@@ -87,7 +90,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.email} />
               </Label>{' '}
-              <LabelContent>{data.email}</LabelContent>
+              <LabelContent>{profile.email}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -95,7 +98,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.mobile} />
               </Label>{' '}
-              <LabelContent>{data.mobile}</LabelContent>
+              <LabelContent>{profile.mobile}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
@@ -107,7 +110,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.birthDay} />
               </Label>
               <LabelContent>
-                {moment(data.birthday).format('DD/MM/YYYY')}
+                {moment(profile.birthday).format('DD/MM/YYYY')}
               </LabelContent>
             </Typography>
           </Grid>
@@ -121,7 +124,7 @@ export default function ProfileContent(props) {
               </Label>
               <LabelContent>
                 <NumberFormat
-                  value={data.total_score}
+                  value={profile.total_score}
                   displayType="text"
                   thousandSeparator
                 />
@@ -135,7 +138,7 @@ export default function ProfileContent(props) {
               </Label>
               <LabelContent>
                 <NumberFormat
-                  value={data.total_purchase}
+                  value={profile.total_purchase}
                   displayType="text"
                   thousandSeparator
                 />
@@ -150,7 +153,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.username} />
               </Label>{' '}
-              <LabelContent>{data.email}</LabelContent>
+              <LabelContent>{profile.email}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -158,7 +161,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.lineId} />
               </Label>{' '}
-              <LabelContent>{data.line_id}</LabelContent>
+              <LabelContent>{profile.line_id}</LabelContent>
             </Typography>
           </Grid>
           {company && <Grid item xs={12}>
@@ -176,17 +179,17 @@ export default function ProfileContent(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <ButtonLink to={`${constants.publicPath}/profile-change-pwd`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />
           </Button>
         </ButtonLink>
-        <ButtonLink to={`${constants.publicPath}/profile-edit`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-edit`}>
           <Button variant="contained" color="primary" size="small">
             <FormattedMessage {...messages.btnEditProfile} />
           </Button>
         </ButtonLink>
-        <ButtonLink to={`${constants.publicPath}/profile-shipping`}>
+        <ButtonLink to={`${appConstants.publicPath}/profile-shipping`}>
           <Button variant="contained" size="small">
             <FormattedMessage {...messages.headerEditShipping} />
           </Button>

@@ -1,6 +1,7 @@
 /**
  *
  * Login
+ * This is the first thing users see of our App, at the '/' route
  *
  */
 
@@ -9,31 +10,38 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-
+import useCookie, { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './LoginForm';
 import * as actions from './actions';
 
-const Login = (props) => {
+const Login = props => {
   useInjectReducer({ key: 'login', reducer });
   useInjectSaga({ key: 'login', saga });
 
-  useEffect(()=>{
-    const data = getCookie('database')||'';
-    if(data){
+  const [database, setDatabase] = useCookie('database', '');
+  const token = getCookie('token') || '';
+
+  useEffect(() => {
+    const data = new URLSearchParams(props.location.search).get('data') || '';
+    if (data) {
+      setDatabase(data);
       props.initDatabase(data);
     }
-  }, [])
+  }, []);
 
-  return (
-    <LoginForm {...props} />
-  );
-}
+  if (token && database) {
+    return <Redirect to={`${appConstants.publicPath}/dashboard`} />;
+  }
+
+  return <LoginForm {...props} />;
+};
 
 Login.propTypes = {
   onSubmit: PropTypes.func,
@@ -53,9 +61,9 @@ function mapDispatchToProps(dispatch) {
     clearData: () => {
       dispatch(actions.initState());
     },
-    initDatabase: (db) => {
-      dispatch(actions.initDatabase(db))
-    }
+    initDatabase: db => {
+      dispatch(actions.initDatabase(db));
+    },
   };
 }
 

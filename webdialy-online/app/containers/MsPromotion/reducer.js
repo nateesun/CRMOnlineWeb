@@ -111,6 +111,13 @@ const msPromotionReducer = (state = initialState, action) =>
         draft.response.status = 'Upload_Error';
         draft.response.message = 'Upload file image error!';
         break;
+      case constants.LOAD_PROFILE:
+        break;
+      case constants.LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.LOAD_PROFILE_ERROR:
+        break;
     }
   });
 

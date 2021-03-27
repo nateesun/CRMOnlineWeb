@@ -24,6 +24,7 @@ export const initialState = {
     status: null,
     message: null,
   },
+  profile: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -116,6 +117,13 @@ const databaseConfigReducer = (state = initialState, action) =>
       case constants.LOAD_VIEW_ERROR:
         draft.response.status = 'Error';
         draft.response.message = 'Load data to view error!';
+        break;
+      case constants.LOAD_PROFILE:
+        break;
+      case constants.LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.LOAD_PROFILE_ERROR:
         break;
     }
   });

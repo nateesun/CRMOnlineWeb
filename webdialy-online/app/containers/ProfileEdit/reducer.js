@@ -8,7 +8,7 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  data: {},
+  profile: {},
   status: '',
   error: '',
 };
@@ -21,18 +21,18 @@ const profileEditReducer = (state = initialState, action) =>
       case constants.INIT_STATE:
         draft.status = '';
         draft.error = '';
-        draft.data = {};
+        draft.profile = {};
         break;
       case constants.INIT_LOAD:
         draft.email = action.payload;
         break;
       case constants.INIT_LOAD_SUCCESS:
-        draft.data = action.payload;
+        draft.profile = action.payload;
         break;
       case constants.INIT_LOAD_ERROR:
         break;
       case constants.EDIT_MEMBER:
-        draft.data = action.payload;
+        draft.profile = action.payload;
         break;
       case constants.EDIT_MEMBER_SUCCESS:
         draft.status = 'Success';

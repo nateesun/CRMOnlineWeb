@@ -17,11 +17,11 @@ import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
 import * as selectors from './selectors';
-import * as constants from './constants';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -118,11 +118,6 @@ const EditForm = props => {
 
   const onValidated = formValues => {
     onEditMember(formValues);
-  };
-
-  const handlePlace = (latitude, longitude) => {
-    setLatitude(latitude);
-    setLongitude(longitude);
   };
 
   return (
@@ -275,7 +270,7 @@ const EditForm = props => {
               </Button>
             </Grid>
             <Grid item xs={12} md={3}>
-              <ButtonLink to={`${constants.publicPath}/profile`}>
+              <ButtonLink to={`${appConstants.publicPath}/profile`}>
                 <Button fullWidth variant="contained" onClick={reset}>
                   <FormattedMessage {...messages.btnBack} />
                 </Button>
@@ -331,7 +326,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileInit(),
+  initialValues: selectors.makeSelectProfileData(),
 });
 
 export default connect(mapStateToProps)(

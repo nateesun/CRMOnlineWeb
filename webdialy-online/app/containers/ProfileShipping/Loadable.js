@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for AddressShipping
+ * Asynchronously loads the component for ProfileShipping
  *
  */
 

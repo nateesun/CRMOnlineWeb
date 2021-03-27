@@ -113,7 +113,11 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -141,33 +145,42 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
                       <TableCell align="left">{item.redeem_name}</TableCell>
-                      <TableCell align="right">{item.point_to_redeem}</TableCell>
-                      <TableCell align="center">{moment(item.start_time).format('DD/MM/YYYY')}</TableCell>
-                      <TableCell align="center">{moment(item.finish_time).format('DD/MM/YYYY')}</TableCell>
+                      <TableCell align="right">
+                        {item.point_to_redeem}
+                      </TableCell>
+                      <TableCell align="center">
+                        {moment(item.start_time).format('DD/MM/YYYY')}
+                      </TableCell>
+                      <TableCell align="center">
+                        {moment(item.finish_time).format('DD/MM/YYYY')}
+                      </TableCell>
                       <TableCell align="right">{item.qty_in_stock}</TableCell>
                       <TableCell align="center">
-                        <Grid container spacing={1} justify="center">
-                          <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onEditItem(item)}
-                            >
-                              Edit
-                            </Button>
-                          </Grid>
-                          <Grid item>
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => handleDelete(item.uuid_index)}
-                            >
-                              Delete
-                            </Button>
-                          </Grid>
-                        </Grid>
+                        <Button
+                          variant="outlined"
+                          onClick={() => onEditItem(item)}
+                          style={{margin: '5px'}}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleDelete(item.uuid_index)}
+                          style={{margin: '5px'}}
+                        >
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={8}>
+                    ไม่พบข้อมูลโปรโมชั่น
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

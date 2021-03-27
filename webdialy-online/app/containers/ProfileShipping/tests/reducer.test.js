@@ -1,9 +1,9 @@
 // import produce from 'immer';
-import addressShippingReducer from '../reducer';
+import profileShippingReducer from '../reducer';
 // import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
-describe('addressShippingReducer', () => {
+describe('profileShippingReducer', () => {
   let state;
   beforeEach(() => {
     state = {
@@ -13,7 +13,7 @@ describe('addressShippingReducer', () => {
 
   it('returns the initial state', () => {
     const expectedResult = state;
-    expect(addressShippingReducer(undefined, {})).toEqual(expectedResult);
+    expect(profileShippingReducer(undefined, {})).toEqual(expectedResult);
   });
 
   /**

@@ -6,6 +6,7 @@ const { getDB } = require("./FuncUtil")()
 module.exports = (db) => {
   const module = {}
   const table_name = getDB(db, "member_shipping")
+  const tableMember = getDB(db, "member")
 
   module.findByMemberCode = (member_code) => {
     logger.debug(`findByMemberCode: ${member_code}`)
@@ -14,6 +15,22 @@ module.exports = (db) => {
         const sql = `select * from ${table_name} where member_code=?;`;
         logger.debug(sql);
         const result = await pool.query(sql, [member_code])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.findByMemberCodeOrEmail = (member_code) => {
+    logger.debug(`findByMemberCodeOrEmail: ${member_code}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} ms inner join ${tableMember} m on ms.member_code =m.code 
+        where m.code=? or m.email =?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [member_code, member_code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err);

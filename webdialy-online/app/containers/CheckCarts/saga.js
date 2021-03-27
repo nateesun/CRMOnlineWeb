@@ -2,14 +2,34 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
+export function* loadProfile() {
+  try {
+    const email = JSON.parse(getCookie('token')||'');
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'GET',
+    });
+    if (response.status === 'Success') {
+      yield put(actions.loadProfileSuccess(response.data));
+    } else {
+      yield put(actions.loadProfileError('Cannot load profile data'));
+    }
+  } catch (err) {
+    yield put(actions.loadProfileError(err));
+  }
+}
+
 export function* initLoad() {
   try {
-    const requestURL = `${constants.publicPath}/api/carts`;
+    const requestURL = `${appConstants.publicPath}/api/carts`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -27,7 +47,7 @@ export function* initLoad() {
 export function* searchItem({ payload }) {
   const { key, value } = payload;
   try {
-    const requestURL = `${constants.publicPath}/api/carts/search`;
+    const requestURL = `${appConstants.publicPath}/api/carts/search`;
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -48,7 +68,7 @@ export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/carts`;
+    const requestURL = `${appConstants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
@@ -68,7 +88,7 @@ export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/carts`;
+    const requestURL = `${appConstants.publicPath}/api/carts`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
@@ -88,7 +108,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${constants.publicPath}/api/carts/${data.uuid_index}`;
+    const requestURL = `${appConstants.publicPath}/api/carts/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
@@ -107,7 +127,7 @@ export function* deleteData() {
 export function* onUpdateShoppingStep() {
   try {
     const { cart_no, approve, reason } = yield select(selectors.makeSelectCartStatus());
-    const requestURL = `${constants.publicPath}/api/carts/shopping_approve`;
+    const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
     const database = getCookie('database');
     const { code } = yield select(dashboardSelectors.makeSelectProfile());
     let response = yield call(request, requestURL, {
@@ -134,7 +154,7 @@ export function* onLoadViewOrder() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    yield put(push(`${constants.publicPath}/order_confirm/${data.cart_no}/${database}`));
+    yield put(push(`${appConstants.publicPath}/order_confirm/${data.cart_no}/${database}`));
     yield put(actions.loadViewOrderSuccess('Success'))
   } catch (err) {
     yield put(actions.loadViewOrderError(err));
@@ -149,4 +169,5 @@ export default function* checkCartsSaga() {
   yield takeEvery(constants.SEARCH, searchItem);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.LOAD_VIEW_ORDER, onLoadViewOrder);
+  yield takeEvery(constants.LOAD_PROFILE, loadProfile);
 }

@@ -9,12 +9,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import * as loginSelectors from 'containers/Login/selectors';
-
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as loginSelectors from 'containers/Login/selectors';
+import * as appConstants from 'containers/App/constants';
+import * as shoppingSelectors from 'containers/Shopping/selectors';
+import MainLayout from 'components/MainLayout';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
-import * as shoppingSelectors from '../Shopping/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import CheckoutContent from './CheckoutContent';
@@ -24,12 +28,22 @@ export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
-    props.initLoadCart(props.cart.cart_no);
+    const cart_no = props.match.params.cart_no;
+    props.initLoadCart(cart_no);
     props.initLoadMemberShipping(props.cart.member_code);
   }, []);
 
-  return <CheckoutContent {...props} />;
+  return (
+    <MainLayout title='Checkout Order' {...props}>
+      <CheckoutContent {...props} />
+    </MainLayout>
+  );
 }
 
 Checkout.propTypes = {
@@ -46,6 +60,7 @@ const mapStateToProps = createStructuredSelector({
   imgValid: selectors.makeSelectSlipValidateStatus(),
   currentCartNo: selectors.makeSelectCartsNo(),
   database: loginSelectors.makeSelectDatabase(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
