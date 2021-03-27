@@ -96,6 +96,14 @@ export default function TableItems(props) {
     onInitLoad: PropTypes.func,
   };
 
+  const handleRefreshPage = () => {
+    if(props.profile.member_role==='member'){
+      props.onSearch('member_code', props.profile.code)
+    }else{
+      props.onInitLoad();
+    }
+  }
+
   return (
     <React.Fragment>
       <TableContainer component={Paper} className={classes.container}>
@@ -107,7 +115,7 @@ export default function TableItems(props) {
             variant="contained"
             color="primary"
             className={classes.buttonRefresh}
-            onClick={() => props.onInitLoad()}
+            onClick={handleRefreshPage}
           >
             <FormattedMessage {...messages.refresh} />
           </Button>
