@@ -13,8 +13,7 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
 import * as selectors from './selectors';
@@ -37,10 +36,9 @@ export function Shopping(props) {
   }, []);
 
   return (
-    <MainLayout title='Shopping' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Shopping' {...props}>
       <ShoppingContent {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 

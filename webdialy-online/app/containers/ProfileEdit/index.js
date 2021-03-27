@@ -15,8 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -40,10 +39,9 @@ export function ProfileEdit(props) {
   }, []);
 
   return (
-    <MainLayout title='Edit Profile' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Edit Profile' {...props}>
       <EditForm {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 

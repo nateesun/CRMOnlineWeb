@@ -27,6 +27,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 // menu items end
+import SubMenu from 'components/SubMenu';
 import * as appConstants from 'containers/App/constants';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
@@ -187,7 +188,7 @@ const MainLayout = props => {
           </IconButton>
         </div>
         <Divider />
-        <List style={{background: '#FBF9F8'}}>
+        <List style={{background: '#fbf9f8'}}>
           <React.Fragment>
             {leftMenu && leftMenu.map(({ id, icon, active, to_path: to }) => (
               <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
@@ -230,6 +231,7 @@ const MainLayout = props => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          <SubMenu {...props} />
           {props.children}
         </Container>
       </main>

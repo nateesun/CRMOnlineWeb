@@ -15,8 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -43,16 +42,9 @@ export function Profile(props) {
 
   return (
     props.login && (
-      <MainLayout title='Profile' {...props}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <SubMenu {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <ProfileContent {...props} />
-          </Grid>
-      </Grid>
-      </MainLayout>
+      <MainLayoutApp title="Profile" {...props}>
+        <ProfileContent {...props} />
+      </MainLayoutApp>
     )
   );
 }

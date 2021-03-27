@@ -16,8 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -38,11 +37,8 @@ export function MemberTracking(props) {
   }, []);
 
   return (
-    <MainLayout title='TrackOrder' {...props}>
+    <MainLayoutApp title='TrackOrder' {...props}>
       <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
-        <Grid item xs={12}>
-          <SubMenu {...props} />
-        </Grid>
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>
@@ -50,7 +46,7 @@ export function MemberTracking(props) {
           <TrackOrders {...props} showCommand={false} />
         </Grid>
       </Grid>
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 

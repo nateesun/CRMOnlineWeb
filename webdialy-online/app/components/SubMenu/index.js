@@ -13,7 +13,6 @@ import { scope } from 'containers/App/messages';
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    // position: 'fixed',
     bottom: 0,
     zIndex: 999,
   },
@@ -23,7 +22,9 @@ const SubMenu = props => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const handleClick = path => history.push(path);
+
   const { profile } = props;
+
   if (profile && profile.member_role) {
     if (profile.member_role !== 'member') {
       return null;

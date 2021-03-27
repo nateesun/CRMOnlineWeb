@@ -15,8 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -41,10 +40,9 @@ export function ProfileShipping(props) {
   }, []);
 
   return (
-    <MainLayout title='Edit Shipping' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Edit Shipping' {...props}>
       <EditForm {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 

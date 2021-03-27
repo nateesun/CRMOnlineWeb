@@ -16,15 +16,13 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appActions from 'containers/App/actions';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import DashboardContent from './DashboardContent';
-import { Grid } from '@material-ui/core';
 
 export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
@@ -59,16 +57,9 @@ export function Dashboard(props) {
 
   return (
     props.login && (
-      <MainLayout title='Overview' {...props}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <SubMenu {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <DashboardContent {...props} />
-          </Grid>
-        </Grid>
-      </MainLayout>
+      <MainLayoutApp title="Overview" {...props}>
+        <DashboardContent {...props} />
+      </MainLayoutApp>
     )
   );
 }
