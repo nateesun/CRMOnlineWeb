@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -13,7 +13,8 @@ import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import MainLayout from 'components/MainLayout';
-import makeSelectMainLayoutApp from './selectors';
+import * as selectors from './selectors';
+import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -21,10 +22,14 @@ export function MainLayoutApp(props) {
   useInjectReducer({ key: 'mainLayoutApp', reducer });
   useInjectSaga({ key: 'mainLayoutApp', saga });
 
+  useEffect(() => {
+    props.onLoadProfile();
+  }, []);
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <MainLayout title='Overview' {...props}>
+        <MainLayout {...props}>
           {props.children}
         </MainLayout>
       </Grid>
@@ -33,16 +38,18 @@ export function MainLayoutApp(props) {
 }
 
 MainLayoutApp.propTypes = {
-  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  mainLayoutApp: makeSelectMainLayoutApp(),
+  mainLayoutApp: selectors.makeSelectMainLayoutApp(),
+  profile: selectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLoadProfile: () => {
+      dispatch(actions.loadProfile());
+    },
   };
 }
 

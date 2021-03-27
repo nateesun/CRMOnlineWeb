@@ -29,10 +29,9 @@ export function loadCartError(payload) {
     payload,
   };
 }
-export function loadMemberShipping(payload) {
+export function loadMemberShipping() {
   return {
     type: constants.LOAD_MEMBER_SHIPPING,
-    payload,
   };
 }
 export function loadMemberShippingSuccess(payload) {
