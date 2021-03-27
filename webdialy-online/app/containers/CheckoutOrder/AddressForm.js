@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -27,6 +27,10 @@ const AddressForm = props => {
   const { handleSubmit, pristine, reset, submitting, shipping } = props;
   const [latitude, setLatitude] = useState(13.809992);
   const [longitude, setLongitude] = useState(100.413130);
+
+  useEffect(()=>{
+    props.initLoadMemberShipping();
+  }, []);
 
   const onValidated = formValues => {
     props.onUpdateAddressForm({

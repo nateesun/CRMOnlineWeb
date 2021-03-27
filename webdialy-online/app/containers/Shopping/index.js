@@ -13,8 +13,8 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import ShoppingContent from './ShoppingContent';
 import * as selectors from './selectors';
@@ -32,15 +32,13 @@ export function Shopping(props) {
   }
 
   useEffect(() => {
-    props.onLoadProfile();
     props.onLoadProduct();
   }, []);
 
   return (
-    <MainLayout title='Shopping' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Shopping' {...props}>
       <ShoppingContent {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -49,7 +47,7 @@ Shopping.propTypes = {};
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),
   productList: selectors.makeSelectProductList(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
   cart: selectors.makeSelectCart(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
@@ -60,7 +58,6 @@ function mapDispatchToProps(dispatch) {
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
     onSearch: data => dispatch(actions.searchProduct(data)),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

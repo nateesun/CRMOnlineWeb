@@ -14,8 +14,8 @@ import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
@@ -35,20 +35,14 @@ export function CheckCarts(props) {
 
   useEffect(() => {
     props.onInitLoad();
-    props.onLoadProfile();
   }, []);
 
   return (
-    <MainLayout title='CheckCartList' {...props}>
+    <MainLayoutApp title='CheckCartList' {...props}>
       <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
-        <Grid item xs={12}>
-          <SubMenu {...props} />
-        </Grid>
-        <Grid item xs={12}>
-          <ContentPage {...props} />
-        </Grid>
+        <ContentPage {...props} />
       </Grid>
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -69,7 +63,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -84,7 +78,6 @@ function mapDispatchToProps(dispatch) {
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
     onUpdateShoppingStep: data => dispatch(actions.updateShoppingStep(data)),
     onLoadViewOrder: data => dispatch(actions.loadViewOrder(data)),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

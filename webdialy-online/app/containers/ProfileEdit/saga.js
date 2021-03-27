@@ -6,25 +6,6 @@ import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
-export function* initLoad() {
-  try {
-    const email = JSON.parse(getCookie('token')||'');
-    const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
-    try {
-      const response = yield call(request, requestURL, {
-        database,
-        method: 'GET',
-      });
-      yield put(actions.initLoadSuccess(response.data));
-    } catch (error) {
-      yield put(actions.initLoadError(error));
-    }
-  } catch (err) {
-    yield put(actions.initLoadError(err));
-  }
-}
-
 export function* onEditMember() {
   try {
     const email = JSON.parse(getCookie('token')||'');
@@ -48,6 +29,5 @@ export function* onEditMember() {
 
 // Individual exports for testing
 export default function* profileEditSaga() {
-  yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.EDIT_MEMBER, onEditMember);
 }

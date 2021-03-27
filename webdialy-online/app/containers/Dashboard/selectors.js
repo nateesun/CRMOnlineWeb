@@ -20,11 +20,6 @@ const makeSelectDashboard = () =>
     selectDashboardDomain,
     substate => substate,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectDashboardDomain,
-    substate => substate.profile,
-  );
 const makeSelectRedeem = () =>
   createSelector(
     selectDashboardDomain,
@@ -39,7 +34,6 @@ const makeSelectRedeemPoint = () =>
 export {
   selectDashboardDomain,
   makeSelectDashboard,
-  makeSelectProfile,
   makeSelectRedeem,
   makeSelectRedeemPoint,
 };

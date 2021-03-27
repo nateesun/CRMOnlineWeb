@@ -59,7 +59,6 @@ const checkoutReducer = (state = initialState, action) =>
         draft.response.message = 'Load order error!';
         break;
       case constants.LOAD_MEMBER_SHIPPING:
-        draft.member_code = action.payload;
         break;
       case constants.LOAD_MEMBER_SHIPPING_SUCCESS:
         draft.memberShipping = action.payload;

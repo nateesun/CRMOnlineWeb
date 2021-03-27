@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -16,11 +16,10 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
-import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -33,16 +32,9 @@ export function MemberTracking(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />
   }
 
-  useEffect(() => {
-    props.onLoadProfile();
-  }, []);
-
   return (
-    <MainLayout title='TrackOrder' {...props}>
+    <MainLayoutApp title='TrackOrder' {...props}>
       <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
-        <Grid item xs={12}>
-          <SubMenu {...props} />
-        </Grid>
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>
@@ -50,7 +42,7 @@ export function MemberTracking(props) {
           <TrackOrders {...props} showCommand={false} />
         </Grid>
       </Grid>
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -58,14 +50,13 @@ MemberTracking.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

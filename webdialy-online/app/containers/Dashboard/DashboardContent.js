@@ -5,7 +5,6 @@ import RedeemPage from './RedeemPage';
 import MyQrCode from './MyQrCode';
 
 export default function DashboardContent(props) {
-  const { onRefresh, login, profile } = props;
 
   DashboardContent.propTypes = {
     onRefresh: PropTypes.func,
@@ -17,7 +16,7 @@ export default function DashboardContent(props) {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <MyQrCode profile={profile} />
+        <MyQrCode {...props} />
       </Grid>
       <Grid item xs={12}>
         <RedeemPage {...props} />

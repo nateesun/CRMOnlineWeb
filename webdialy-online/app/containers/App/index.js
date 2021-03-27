@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
-import * as dashboardSelectors from 'containers/Dashboard/selectors';
 import GlobalStyle from '../../global-styles';
 import NewLayout from './NewLayout';
 import * as actions from './actions';
@@ -33,7 +32,6 @@ export function App(props) {
 const mapStateToProps = createStructuredSelector({
   login: loginSelectors.makeSelectLogin(),
   loggedIn: loginSelectors.makeSelectLoggedIn(),
-  profile: dashboardSelectors.makeSelectProfile(),
   leftMenu: selectors.makeSelectLeftMenu(),
 });
 

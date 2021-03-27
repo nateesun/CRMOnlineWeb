@@ -16,15 +16,14 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appActions from 'containers/App/actions';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import DashboardContent from './DashboardContent';
-import { Grid } from '@material-ui/core';
 
 export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
@@ -37,7 +36,6 @@ export function Dashboard(props) {
   
   useEffect(() => {
     if (token !== '') {
-      props.onInitLoad(JSON.parse(token));
       props.onLoadRedeem();
       props.onLoadMenu();
 
@@ -46,12 +44,10 @@ export function Dashboard(props) {
       const socket = socketIOClient(apiServiceEndpoint, {
         transports: ['websocket'],
       });
-      socket.on('update_redeem', data => {
-        props.onInitLoad(JSON.parse(token));
+      socket.on('update_redeem', () => {
         props.onLoadRedeem();
       });
-      socket.on('update_member', data => {
-        props.onInitLoad(JSON.parse(token));
+      socket.on('update_member', () => {
         props.onLoadRedeem();
       });
     }
@@ -59,16 +55,9 @@ export function Dashboard(props) {
 
   return (
     props.login && (
-      <MainLayout title='Overview' {...props}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <SubMenu {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <DashboardContent {...props} />
-          </Grid>
-        </Grid>
-      </MainLayout>
+      <MainLayoutApp title="Overview" {...props}>
+        <DashboardContent {...props} />
+      </MainLayoutApp>
     )
   );
 }
@@ -77,17 +66,14 @@ Dashboard.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   login: loginSelectors.makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
   listRedeem: selectors.makeSelectRedeem(),
   redeemPoint: selectors.makeSelectRedeemPoint(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitLoad: email => {
-      dispatch(actions.initLoad(email));
-    },
     onLoadRedeem: () => {
       dispatch(actions.loadRedeem());
     },

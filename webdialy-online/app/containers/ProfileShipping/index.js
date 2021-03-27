@@ -15,8 +15,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -36,15 +36,13 @@ export function ProfileShipping(props) {
   useEffect(() => {
     if (token !== '') {
       props.initLoad(JSON.parse(token));
-      props.initLoadProfile();
     }
   }, []);
 
   return (
-    <MainLayout title='Edit Shipping' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Edit Shipping' {...props}>
       <EditForm {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -57,7 +55,7 @@ ProfileShipping.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfileData(),
+  profile: mainSelectors.makeSelectProfile(),
   shipping: selectors.makeSelectProfileShipping(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
@@ -67,7 +65,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoad: memberCode => dispatch(actions.initLoad(memberCode)),
-    initLoadProfile: () => dispatch(actions.initLoadProfile()),
     onEditShipping: address => dispatch(actions.editShipping(address)),
     onChangeMapsValue: mapsData => dispatch(actions.changeMapsValue(mapsData)),
     clearData: () => dispatch(actions.initState()),

@@ -8,7 +8,6 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  profile: {},
   company: {},
   email: '',
   error: '',
@@ -23,15 +22,6 @@ const profileReducer = (state = initialState, action) =>
         draft.data= {};
         draft.email= '';
         draft.error= '';
-        break;
-      case constants.INIT_LOAD:
-        draft.email = action.payload;
-        break;
-      case constants.INIT_LOAD_SUCCESS:
-        draft.profile = action.payload;
-        break;
-      case constants.INIT_LOAD_ERROR:
-        draft.error = action.payload;
         break;
       case constants.INIT_LOAD_COMPANY:
         break;

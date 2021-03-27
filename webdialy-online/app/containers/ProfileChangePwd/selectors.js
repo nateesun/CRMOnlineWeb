@@ -21,11 +21,6 @@ const makeSelectProfile = () =>
     selectProfileChangePwdDomain,
     substate => substate,
   );
-const makeSelectProfileData = () =>
-  createSelector(
-    selectProfileChangePwdDomain,
-    substate => substate.profile,
-  );
 const makeSelectEditForm = () =>
   createSelector(
     selectProfileChangePwdDomain,
@@ -47,6 +42,5 @@ export {
   makeSelectProfile,
   makeUpdateStatus,
   makeErrorUpdate,
-  makeSelectProfileData,
   makeSelectEditForm,
 };

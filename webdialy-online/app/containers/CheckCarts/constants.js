@@ -43,7 +43,3 @@ export const UPDATE_SHOPPING_STEP_ERROR = 'app/CheckCarts/UPDATE_SHOPPING_STEP_E
 export const LOAD_VIEW_ORDER = 'app/CheckCarts/LOAD_VIEW_ORDER';
 export const LOAD_VIEW_ORDER_SUCCESS = 'app/CheckCarts/LOAD_VIEW_ORDER_SUCCESS';
 export const LOAD_VIEW_ORDER_ERROR = 'app/CheckCarts/LOAD_VIEW_ORDER_ERROR';
-
-export const LOAD_PROFILE = 'app/CheckCarts/LOAD_PROFILE';
-export const LOAD_PROFILE_SUCCESS = 'app/CheckCarts/LOAD_PROFILE_SUCCESS';
-export const LOAD_PROFILE_ERROR = 'app/CheckCarts/LOAD_PROFILE_ERROR';
