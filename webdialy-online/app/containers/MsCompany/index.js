@@ -15,6 +15,7 @@ import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
@@ -34,7 +35,6 @@ export function MsCompany(props) {
 
   useEffect(() => {
     props.onInitLoad();
-    props.onLoadProfile();
   }, []);
 
   return (
@@ -61,7 +61,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -73,7 +73,6 @@ function mapDispatchToProps(dispatch) {
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onUploadImage: (file) => dispatch(actions.uploadImage(file)),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

@@ -34,7 +34,6 @@ export function MsStock(props) {
 
   useEffect(() => {
     props.onInitLoad();
-    props.onLoadProfile();
   }, []);
 
   return (
@@ -61,7 +60,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -72,7 +71,6 @@ function mapDispatchToProps(dispatch) {
     onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

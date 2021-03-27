@@ -31,25 +31,6 @@ export function* saveDataImport() {
   }
 }
 
-export function* loadProfile() {
-  try {
-    const email = JSON.parse(getCookie('token')||'');
-    const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
-    const response = yield call(request, requestURL, {
-      database,
-      method: 'GET',
-    });
-    if (response.status === 'Success') {
-      yield put(actions.loadProfileSuccess(response.data));
-    } else {
-      yield put(actions.loadProfileError('Cannot load profile data'));
-    }
-  } catch (err) {
-    yield put(actions.loadProfileError(err));
-  }
-}
-
 export function* initLoad() {
   try {
     const requestURL = `${appConstants.publicPath}/api/product`;
@@ -162,6 +143,5 @@ export default function* msProductSaga() {
   yield takeEvery(constants.UPDATE_ITEM, updateData);
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
-  yield takeEvery(constants.LOAD_PROFILE, loadProfile);
   yield takeEvery(constants.SAVE_DATA_IMPORT, saveDataImport);
 }

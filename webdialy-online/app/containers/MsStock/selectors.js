@@ -46,11 +46,6 @@ const makeSelectResponse = () =>
     selectMsStockDomain,
     substate => substate.response,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectMsStockDomain,
-    substate => substate.profile,
-  );
 
 export {
   selectMsStockDomain,
@@ -60,5 +55,4 @@ export {
   makeSelectForm,
   makeSelectCurrentId,
   makeSelectResponse,
-  makeSelectProfile,
 };

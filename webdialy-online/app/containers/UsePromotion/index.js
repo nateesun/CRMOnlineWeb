@@ -34,7 +34,6 @@ export function UsePromotion(props) {
 
   useEffect(() => {
     props.onInitLoad();
-    props.onLoadProfile();
   }, []);
 
   return (
@@ -58,7 +57,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -66,7 +65,6 @@ function mapDispatchToProps(dispatch) {
     onInitLoad: () => dispatch(actions.initLoad()),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 

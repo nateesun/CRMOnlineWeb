@@ -14,6 +14,7 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
@@ -35,7 +36,6 @@ export function Members(props) {
   useEffect(() => {
     props.onInitLoad();
     props.onLoadRoles();
-    props.onLoadProfile();
   }, []);
 
   return (
@@ -67,7 +67,7 @@ const mapStateToProps = createStructuredSelector({
   response: selectors.makeSelectResponse(),
   rolesList: selectors.makeSelectRolesList(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -81,7 +81,6 @@ function mapDispatchToProps(dispatch) {
     onLoadView: item => dispatch(actions.loadView(item)),
     onLoadRoles: () => dispatch(actions.loadRoles()),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 
