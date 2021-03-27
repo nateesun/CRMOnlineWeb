@@ -8,7 +8,6 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  profile: {},
   shipping: {},
   address: {},
   status: '',
@@ -45,13 +44,6 @@ const profileShippingReducer = (state = initialState, action) =>
       case constants.CHANGE_MAPS_VALUE:
         draft.shipping.map_latitude = action.payload.map_latitude;
         draft.shipping.map_longitude = action.payload.map_longitude;
-        break;
-      case constants.INIT_LOAD_PROFILE:
-        break;
-      case constants.INIT_LOAD_PROFILE_SUCCESS:
-        draft.profile = action.payload;
-        break;
-      case constants.INIT_LOAD_PROFILE_ERROR:
         break;
     }
   });

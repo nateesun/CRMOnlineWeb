@@ -15,8 +15,9 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as shoppingSelectors from 'containers/Shopping/selectors';
-import MainLayout from 'components/MainLayout';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -36,13 +37,13 @@ export function Checkout(props) {
   useEffect(() => {
     const cart_no = props.match.params.cart_no;
     props.initLoadCart(cart_no);
-    props.initLoadMemberShipping(props.cart.member_code);
+    props.initLoadMemberShipping();
   }, []);
 
   return (
-    <MainLayout title='Checkout Order' {...props}>
+    <MainLayoutApp title='Checkout Order' {...props}>
       <CheckoutContent {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -61,13 +62,14 @@ const mapStateToProps = createStructuredSelector({
   currentCartNo: selectors.makeSelectCartsNo(),
   database: loginSelectors.makeSelectDatabase(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
-    initLoadMemberShipping: member_code =>
-      dispatch(actions.loadMemberShipping(member_code)),
+    initLoadMemberShipping: () =>
+      dispatch(actions.loadMemberShipping()),
     onUploadImage: file => dispatch(actions.uploadImage(file)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),

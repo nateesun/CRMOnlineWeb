@@ -23,7 +23,3 @@ export const UPDATE_ITEM_CART_ERROR = 'app/Shopping/UPDATE_ITEM_CART_ERROR';
 export const SEARCH_PRODUCT = 'app/Shopping/SEARCH_PRODUCT';
 export const SEARCH_PRODUCT_SUCCESS = 'app/Shopping/SEARCH_PRODUCT_SUCCESS';
 export const SEARCH_PRODUCT_ERROR = 'app/Shopping/SEARCH_PRODUCT_ERROR';
-
-export const LOAD_PROFILE = 'app/Shopping/LOAD_PROFILE';
-export const LOAD_PROFILE_SUCCESS = 'app/Shopping/LOAD_PROFILE_SUCCESS';
-export const LOAD_PROFILE_ERROR = 'app/Shopping/LOAD_PROFILE_ERROR';

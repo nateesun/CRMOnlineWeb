@@ -40,11 +40,6 @@ const makeErrorUpdate = () =>
     selectProfileShippingDomain,
     substate => substate.error,
   );
-const makeSelectProfileData = () =>
-  createSelector(
-    selectProfileShippingDomain,
-    substate => substate.profile,
-  );
 
 export {
   selectProfileShippingDomain,
@@ -53,5 +48,4 @@ export {
   makeErrorUpdate,
   makeSelectShipping,
   makeSelectAddressData,
-  makeSelectProfileData,
 };

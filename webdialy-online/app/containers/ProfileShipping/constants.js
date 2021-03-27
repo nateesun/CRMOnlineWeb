@@ -12,6 +12,3 @@ export const INIT_LOAD = 'containers/ProfileShipping/INIT_LOAD';
 export const INIT_LOAD_SUCCESS = 'containers/ProfileShipping/INIT_LOAD_SUCCESS';
 export const INIT_LOAD_ERROR = 'containers/ProfileShipping/INIT_LOAD_ERROR';
 export const CHANGE_MAPS_VALUE = 'containers/ProfileShipping/CHANGE_MAPS_VALUE';
-export const INIT_LOAD_PROFILE = 'containers/ProfileShipping/INIT_LOAD_PROFILE';
-export const INIT_LOAD_PROFILE_SUCCESS = 'containers/ProfileShipping/INIT_LOAD_PROFILE_SUCCESS';
-export const INIT_LOAD_PROFILE_ERROR = 'containers/ProfileShipping/INIT_LOAD_PROFILE_ERROR';

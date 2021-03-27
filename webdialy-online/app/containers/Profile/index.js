@@ -15,15 +15,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import ProfileContent from './ProfileContent';
 import * as selectors from './selectors';
-import { Grid } from '@material-ui/core';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
@@ -36,35 +35,26 @@ export function Profile(props) {
 
   useEffect(() => {
     if (token !== '') {
-      props.initLoad(JSON.parse(token));
       props.initLoadCompany();
     }
   }, []);
 
   return (
     props.login && (
-      <MainLayout title='Profile' {...props}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <SubMenu {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <ProfileContent {...props} />
-          </Grid>
-      </Grid>
-      </MainLayout>
+      <MainLayoutApp title="Profile" {...props}>
+        <ProfileContent {...props} />
+      </MainLayoutApp>
     )
   );
 }
 
 Profile.propTypes = {
-  initLoad: PropTypes.func,
   login: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfileData(),
+  profile: mainSelectors.makeSelectProfile(),
   company: selectors.makeSelectCompany(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
@@ -72,9 +62,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoadCompany: () => dispatch(actions.initLoadCompany()),
-    initLoad: email => {
-      dispatch(actions.initLoad(email));
-    },
   };
 }
 

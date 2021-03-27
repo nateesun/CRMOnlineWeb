@@ -42,11 +42,6 @@ const makeSelectSearchData = () =>
     selectShoppingDomain,
     substate => substate.search,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectShoppingDomain,
-    substate => substate.profile,
-  );
 
 export {
   makeSelectShopping,
@@ -55,5 +50,4 @@ export {
   makeSelectItemCart,
   makeSelectCart,
   makeSelectSearchData,
-  makeSelectProfile,
 };

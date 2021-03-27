@@ -2,6 +2,7 @@ import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -31,7 +32,7 @@ export function* loadCartList() {
 
 export function* loadMemberShipping() {
   try {
-    const member_code = yield select(selectors.makeSelectMemberCode());
+    const { code: member_code } = yield select(mainSelectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
     const response = yield call(request, requestURL, {

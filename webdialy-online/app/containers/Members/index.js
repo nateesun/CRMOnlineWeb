@@ -14,8 +14,7 @@ import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -40,16 +39,11 @@ export function Members(props) {
   }, []);
 
   return (
-    <MainLayout title='MemberList' {...props}>
+    <MainLayoutApp title='MemberList' {...props}>
       <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
-        <Grid item xs={12}>
-          <SubMenu {...props} />
-        </Grid>
-        <Grid item xs={12}>
-          <ContentPage {...props} />
-        </Grid>
-    </Grid>
-    </MainLayout>
+        <ContentPage {...props} />
+      </Grid>
+    </MainLayoutApp>
   );
 }
 

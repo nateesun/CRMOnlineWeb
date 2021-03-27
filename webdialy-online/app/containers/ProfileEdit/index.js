@@ -15,8 +15,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import * as appConstants from 'containers/App/constants';
-import MainLayout from 'components/MainLayout';
-import SubMenu from 'components/SubMenu';
+import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -33,17 +33,10 @@ export function ProfileEdit(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />
   }
 
-  useEffect(() => {
-    if (token !== '') {
-      props.initLoad(JSON.parse(token));
-    }
-  }, []);
-
   return (
-    <MainLayout title='Edit Profile' {...props}>
-      <SubMenu {...props} />
+    <MainLayoutApp title='Edit Profile' {...props}>
       <EditForm {...props} />
-    </MainLayout>
+    </MainLayoutApp>
   );
 }
 
@@ -56,7 +49,7 @@ ProfileEdit.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfileData(),
+  profile: mainSelectors.makeSelectProfile(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
@@ -64,7 +57,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    initLoad: email => dispatch(actions.initLoad(email)),
     onEditMember: member => dispatch(actions.editMember(member)),
     clearData: () => dispatch(actions.initState()),
   };

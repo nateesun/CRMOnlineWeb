@@ -51,12 +51,6 @@ const makeSelectCartStatus = () =>
     selectCheckCartsDomain,
     substate => substate.carts,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectCheckCartsDomain,
-    substate => substate.profile,
-  );
-
 export {
   selectCheckCartsDomain,
   makeSelectCheckCarts,
@@ -66,5 +60,4 @@ export {
   makeSelectCurrentId,
   makeSelectResponse,
   makeSelectCartStatus,
-  makeSelectProfile,
 };
