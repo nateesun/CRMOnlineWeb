@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -17,9 +17,9 @@ import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
 import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
-import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -31,10 +31,6 @@ export function MemberTracking(props) {
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />
   }
-
-  useEffect(() => {
-    props.onLoadProfile();
-  }, []);
 
   return (
     <MainLayoutApp title='TrackOrder' {...props}>
@@ -54,14 +50,13 @@ MemberTracking.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   memberTracking: selectors.makeSelectMemberTracking(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    onLoadProfile: () => dispatch(actions.loadProfile()),
   };
 }
 
