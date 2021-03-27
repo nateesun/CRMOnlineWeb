@@ -11,6 +11,7 @@ import * as checkoutOrderConstants from 'containers/CheckoutOrder/constants';
 import * as constants from './constants';
 
 export const initialState = {
+  profile: {},
   productList: [],
   cart: {},
   itemCart: {
@@ -144,6 +145,13 @@ const shoppingReducer = (state = initialState, action) =>
       case constants.SEARCH_PRODUCT_ERROR:
         draft.response.status = 'Search_Product_Error';
         draft.response.message = 'Search product error!';
+        break;
+      case constants.LOAD_PROFILE:
+        break;
+      case constants.LOAD_PROFILE_SUCCESS:
+        draft.profile = action.payload;
+        break;
+      case constants.LOAD_PROFILE_ERROR:
         break;
     }
   });

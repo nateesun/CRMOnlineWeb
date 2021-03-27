@@ -11,10 +11,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
-import SearchBar from './SearchBar';
+import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
   root: {
@@ -113,7 +112,11 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} />
+        <SearchBar {...props} items={[
+          { key: 'code', value: 'Code' },
+          { key: 'email', value: 'Email' },
+          { key: 'mobile', value: 'Mobile' },
+          ]} />
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow className={classes.colRow}>
@@ -146,39 +149,44 @@ export default function TableItems(props) {
                     <TableCell align="left">{item.first_name}</TableCell>
                     <TableCell align="left">{item.last_name}</TableCell>
                     <TableCell align="center">{item.member_role}</TableCell>
-                    <TableCell align="left">{dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}</TableCell>
-                    <TableCell align="left">{dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}</TableCell>
                     <TableCell align="left">
-                      <Grid container spacing={1} justify="center">
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onViewItem(item)}
-                          >
-                            View
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onEditItem(item)}
-                          >
-                            Edit
-                          </Button>
-                        </Grid>
-                        {item.member_role !== 'admin' && <Grid item>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => handleDelete(item.email)}
-                          >
-                            Delete
-                          </Button>
-                        </Grid>}
-                      </Grid>
+                      {dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}
+                    </TableCell>
+                    <TableCell align="left">
+                      {dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}
+                    </TableCell>
+                    <TableCell align="left" className={classes.colRow}>
+                      <Button
+                        variant="outlined"
+                        onClick={() => onViewItem(item)} style={{margin: '5px'}}
+                      >
+                        View
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => onEditItem(item)} style={{margin: '5px'}}
+                      >
+                        Edit
+                      </Button>
+                      {item.member_role !== 'admin' && (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleDelete(item.email)} style={{margin: '5px'}}
+                        >
+                          Delete
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
+            {getList.length === 0 && (
+              <TableRow>
+                <TableCell align="left" colSpan={9}>
+                  ไม่พบข้อมูลสมาชิก
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

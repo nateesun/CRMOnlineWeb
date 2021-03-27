@@ -2,13 +2,14 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
 export function* onRequestChangePassword() {
   try {
-    const requestURL = `${constants.publicPath}/api/member/change_password`;
+    const requestURL = `${appConstants.publicPath}/api/member/change_password`;
     const { email, mobile, secret } = yield select(selectors.makeSelectRequest());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
@@ -18,7 +19,7 @@ export function* onRequestChangePassword() {
     });
     if (response.status === 'Success') {
       yield put(actions.requestPasswordSuccess(response));
-      yield put(push(`${constants.publicPath}/login`));
+      yield put(push(`${appConstants.publicPath}/login`));
     } else {
       yield put(actions.requestPasswordError(response.msg));
     }

@@ -58,3 +58,20 @@ export function searchError(payload) {
     payload,
   };
 }
+export function loadProfile() {
+  return {
+    type: constants.LOAD_PROFILE,
+  };
+}
+export function loadProfileSuccess(payload) {
+  return {
+    type: constants.LOAD_PROFILE_SUCCESS,
+    payload,
+  };
+}
+export function loadProfileError(payload) {
+  return {
+    type: constants.LOAD_PROFILE_ERROR,
+    payload,
+  };
+}

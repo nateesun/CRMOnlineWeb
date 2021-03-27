@@ -10,9 +10,14 @@ import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -23,14 +28,23 @@ export function ProfileChangePwd(props) {
   useInjectReducer({ key: 'profileChangePwd', reducer });
   useInjectSaga({ key: 'profileChangePwd', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
-    const getToken = getCookie('token') || '';
-    if (getToken !== '') {
-      props.initLoad(JSON.parse(getToken));
+    if (token) {
+      props.initLoad(JSON.parse(token));
     }
   }, []);
 
-  return <EditForm {...props} />;
+  return (
+    <MainLayout title='Change Password' {...props}>
+      <SubMenu {...props} />
+      <EditForm {...props} />
+    </MainLayout>
+  );
 }
 
 ProfileChangePwd.propTypes = {
@@ -42,9 +56,10 @@ ProfileChangePwd.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfileData(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {

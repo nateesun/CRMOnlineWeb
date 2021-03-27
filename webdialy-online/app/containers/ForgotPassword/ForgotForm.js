@@ -8,11 +8,11 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import LoginLogo from '../../images/login.png';
-import { publicPath } from './constants';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -119,7 +119,7 @@ const ForgotForm = props => {
           </Grid>
           <Grid container className={classes.footer}>
             <Grid item xs>
-              <ButtonLink to={`${publicPath}/login`}>
+              <ButtonLink to={`${appConstants.publicPath}/login`}>
                 <FormattedMessage {...messages.backToLogin} />
               </ButtonLink>
             </Grid>

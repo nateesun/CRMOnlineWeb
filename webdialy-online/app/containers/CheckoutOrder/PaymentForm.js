@@ -49,7 +49,7 @@ const PaymentForm = (props) => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        ข้อมูลการรับชำระ (จำนวนเงิน {carts && carts[0] && carts[0].total_amount} บาท)
+        ยอดรับชำระ (จำนวน {carts && carts[0] && carts[0].total_amount} บาท)
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>

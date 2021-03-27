@@ -6,14 +6,8 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
-import messages from './messages';
+import notfound_page_images from './404_notfound.png';
 
 export default function NotFound() {
-  return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
-  );
+  return <img src={notfound_page_images} width="100%" style={{ border: 0 }} />;
 }

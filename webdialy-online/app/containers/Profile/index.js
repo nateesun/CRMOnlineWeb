@@ -4,34 +4,57 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
+import * as appConstants from 'containers/App/constants';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import ProfileContent from './ProfileContent';
 import * as selectors from './selectors';
+import { Grid } from '@material-ui/core';
 
 export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+
   useEffect(() => {
-    const getToken = getCookie('token') || '';
-    if (getToken !== '') {
-      props.initLoad(JSON.parse(getToken));
+    if (token !== '') {
+      props.initLoad(JSON.parse(token));
       props.initLoadCompany();
     }
   }, []);
 
-  return <ProfileContent {...props} />;
+  return (
+    props.login && (
+      <MainLayout title='Profile' {...props}>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <SubMenu {...props} />
+          </Grid>
+          <Grid item xs={12}>
+            <ProfileContent {...props} />
+          </Grid>
+      </Grid>
+      </MainLayout>
+    )
+  );
 }
 
 Profile.propTypes = {
@@ -41,8 +64,9 @@ Profile.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
+  profile: selectors.makeSelectProfileData(),
   company: selectors.makeSelectCompany(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -59,4 +83,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Profile);
+export default compose(withConnect, memo)(Profile);

@@ -3,9 +3,6 @@
  * MsRole constants
  *
  */
-
-export const publicPath = process.env.REACT_APP_PUBLIC_PATH || '';
-
 export const INIT_STATE = 'app/MsRole/INIT_STATE';
 
 export const CHANGE_PAGE = 'app/MsRole/CHANGE_PAGE';
@@ -29,3 +26,7 @@ export const UPDATE_ITEM_ERROR = 'app/MsRole/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsRole/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsRole/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsRole/DELETE_ITEM_ERROR';
+
+export const LOAD_PROFILE = 'app/MsRole/LOAD_PROFILE';
+export const LOAD_PROFILE_SUCCESS = 'app/MsRole/LOAD_PROFILE_SUCCESS';
+export const LOAD_PROFILE_ERROR = 'app/MsRole/LOAD_PROFILE_ERROR';

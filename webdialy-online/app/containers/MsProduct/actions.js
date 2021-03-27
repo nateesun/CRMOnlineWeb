@@ -141,3 +141,49 @@ export function uploadImageError(payload) {
     payload,
   };
 }
+export function loadProfile() {
+  return {
+    type: constants.LOAD_PROFILE,
+  };
+}
+export function loadProfileSuccess(payload) {
+  return {
+    type: constants.LOAD_PROFILE_SUCCESS,
+    payload,
+  };
+}
+export function loadProfileError(payload) {
+  return {
+    type: constants.LOAD_PROFILE_ERROR,
+    payload,
+  };
+}
+export function loadDataFromFile(payload) {
+  return {
+    type: constants.LOAD_DATA_FROM_FILE,
+    payload,
+  };
+}
+export function saveDataImport() {
+  return {
+    type: constants.SAVE_DATA_IMPORT,
+  };
+}
+export function saveDataImportSuccess(payload) {
+  return {
+    type: constants.SAVE_DATA_IMPORT_SUCCESS,
+    payload,
+  };
+}
+export function saveDataImportError(payload) {
+  return {
+    type: constants.SAVE_DATA_IMPORT_ERROR,
+    payload,
+  };
+}
+export function setHeaders(payload) {
+  return {
+    type: constants.SET_HEADERS,
+    payload,
+  };
+}

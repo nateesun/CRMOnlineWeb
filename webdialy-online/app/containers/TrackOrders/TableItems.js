@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -14,10 +15,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import { FormattedMessage } from 'react-intl';
-import SearchBar from './SearchBar';
+import ButtonLink from 'components/ButtonLink';
+import * as appConstants from 'containers/App/constants';
+import SearchBar from 'components/SearchBar';
 import messages from './messages';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
@@ -25,8 +28,9 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
+    minWidth: '650px',
+    overflow: 'auto',
   },
   buttonNew: {
     marginRight: '5px',
@@ -44,7 +48,7 @@ const useStyles = makeStyles({
   dataWidth: {
     overflow: 'auto',
   },
-});
+}));
 
 export default function TableItems(props) {
   const { getList, showCommand = true } = props;
@@ -84,11 +88,6 @@ export default function TableItems(props) {
     props.onLoadView(item);
   };
 
-  const onEditItem = item => {
-    props.onChangePage('EDIT');
-    props.onLoadEdit(item);
-  };
-
   TableItems.propTypes = {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,
@@ -99,8 +98,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer className={classes.container} component={Paper}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>
@@ -114,7 +113,13 @@ export default function TableItems(props) {
             <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
-        {props.profile.member_role !== 'member' && <SearchBar {...props} />}
+        {props.profile.member_role !== 'member' && 
+          <SearchBar {...props} items={[
+            { key: 'order_no', value: 'Order' },
+            { key: 'cart_no', value: 'Cart' },
+            { key: 'member_code', value: 'Member' },
+          ]} />
+        }
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
@@ -151,7 +156,11 @@ export default function TableItems(props) {
                       className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.order_no}</TableCell>
+                      <TableCell align="center">
+                        <ButtonLink color="primary" to={`${appConstants.publicPath}/order_confirm/${item.cart_no}/${getCookie('database')}`}>
+                          {item.order_no}
+                        </ButtonLink>
+                      </TableCell>
                       <TableCell align="center">{item.cart_no}</TableCell>
                       <TableCell align="center">
                         {item.cart_create_date}
@@ -191,6 +200,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
+                  {getList.length === 0 && (
+                    <TableRow>
+                      <TableCell align="left" colSpan={13}>
+                        ไม่พบข้อมูลสินค้าที่สั่งซื้อ
+                      </TableCell>
+                    </TableRow>
+                  )}
             </TableBody>
           </Table>
         </div>
@@ -204,6 +220,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

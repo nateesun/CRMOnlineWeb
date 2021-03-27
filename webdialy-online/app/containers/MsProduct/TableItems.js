@@ -23,24 +23,17 @@ const useStyles = makeStyles({
   },
   table: {
     minWidth: 690,
-    padding: '5px',
-  },
-  buttonNew: {
-    marginRight: '5px',
-  },
-  buttonRefresh: {
-    marginRight: '5px',
+    paddingTop: '5px',
   },
   buttonUpload: {
-    marginRight: '5px',
     backgroundColor: 'green',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'darkgreen'
+      backgroundColor: 'darkgreen',
     },
   },
   wrapButtonAction: {
-    marginTop: '15px',
+    // marginTop: '15px',
   },
   colRow: {
     whiteSpace: 'nowrap',
@@ -102,30 +95,24 @@ export default function TableItems(props) {
         <Typography color="textSecondary" variant="h6">
           Product Table List
         </Typography>
-        <div className={classes.wrapButtonAction}>
-          <Button
-            variant="contained"
-            className={classes.buttonNew}
-            onClick={() => props.onChangePage('NEW')}
-          >
-            CREATE
-          </Button>
-          <Button
-            variant="contained"
-            className={classes.buttonUpload}
-            onClick={() => props.onChangePage('LOAD_PRODUCT')}
-          >
-            UPLOAD FILE
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.buttonRefresh}
-            onClick={() => props.onInitLoad()}
-          >
-            REFRESH
-          </Button>
-        </div>
+        <Grid container spacing={1}>
+          <Grid item>
+            <Button variant="contained" onClick={() => props.onChangePage('NEW')}>
+              Create
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" 
+            onClick={() => props.onChangePage('LOAD_PRODUCT')} className={classes.buttonUpload}>
+              Upload
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" onClick={() => props.onInitLoad()}>
+              Refresh
+            </Button>
+          </Grid>
+        </Grid>
         <div className={classes.dataWidth}>
           <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
@@ -156,13 +143,18 @@ export default function TableItems(props) {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={item.uuid_index} className={classes.colRow}
+                      key={item.uuid_index}
+                      className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
                       <TableCell align="left">{item.name}</TableCell>
-                      <TableCell align="center">{item.unit_code_sale}</TableCell>
-                      <TableCell align="center">{item.product_group_code}</TableCell>
+                      <TableCell align="center">
+                        {item.unit_code_sale}
+                      </TableCell>
+                      <TableCell align="center">
+                        {item.product_group_code}
+                      </TableCell>
                       <TableCell align="center">{item.point}</TableCell>
                       <TableCell align="center">{item.stock_code}</TableCell>
                       <TableCell align="center">{item.price_e}</TableCell>
@@ -170,31 +162,36 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.price_d}</TableCell>
                       <TableCell align="center">{item.max_stock}</TableCell>
                       <TableCell align="center">{item.min_stock}</TableCell>
-                      <TableCell align="center">{item.unit_code_stock}</TableCell>
+                      <TableCell align="center">
+                        {item.unit_code_stock}
+                      </TableCell>
                       <TableCell align="left">{item.img_path}</TableCell>
                       <TableCell align="center">
-                        <Grid container spacing={1} justify="center">
-                          <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onEditItem(item)}
-                            >
-                              Edit
-                            </Button>
-                          </Grid>
-                          <Grid item>
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => handleDelete(item.uuid_index)}
-                            >
-                              Delete
-                            </Button>
-                          </Grid>
-                        </Grid>
+                        <Button
+                          variant="outlined"
+                          onClick={() => onEditItem(item)}
+                          style={{ margin: '5px' }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleDelete(item.uuid_index)}
+                          style={{ margin: '5px' }}
+                        >
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={15}>
+                    ไม่พบข้อมูลสินค้า
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

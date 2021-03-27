@@ -91,6 +91,22 @@ module.exports = (db) => {
     })
   }
 
+  module.createList = (headers, objectArray) => {
+    logger.debug(`createList: ${headers}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        let values = objectArray.map( obj => headers.map( key => obj[key]));
+        let sql = `INSERT INTO ${table_name} (${headers.join(',')}) VALUES ? ON DUPLICATE KEY UPDATE uuid_index=VALUES(uuid_index)`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [values]);
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: 'Error', msg: err.message })
+      }
+    })
+  }
+
   module.update = (data) => {
     logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {

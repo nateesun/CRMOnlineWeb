@@ -1,7 +1,6 @@
 /*
  * HomePage
  *
- * This is the first thing users see of our App, at the '/' route
  *
  */
 
@@ -21,8 +20,6 @@ import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import messages from './messages';
-
-const intro = '';
 
 const Img = styled.img`
   border-radius: 2px 10px 2px 10px;

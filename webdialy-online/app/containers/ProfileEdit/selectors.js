@@ -20,10 +20,10 @@ const makeSelectProfile = () =>
     selectProfileEditDomain,
     substate => substate,
   );
-const makeSelectProfileInit = () =>
+const makeSelectProfileData = () =>
   createSelector(
     selectProfileEditDomain,
-    substate => substate.data,
+    substate => substate.profile,
   );
 const makeUpdateStatus = () =>
   createSelector(
@@ -41,5 +41,5 @@ export {
   makeSelectProfile,
   makeUpdateStatus,
   makeErrorUpdate,
-  makeSelectProfileInit,
+  makeSelectProfileData,
 };

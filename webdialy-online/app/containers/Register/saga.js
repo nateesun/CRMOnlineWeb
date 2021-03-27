@@ -3,13 +3,14 @@ import moment from 'moment';
 import { push } from 'connected-react-router';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
+import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
 export function* onAddRegisterMember() {
   try {
-    const requestURL = `${constants.publicPath}/api/member`;
+    const requestURL = `${appConstants.publicPath}/api/member`;
     const data = yield select(selectors.makeSelectMember());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
@@ -42,7 +43,7 @@ export function* onAddRegisterMember() {
     });
     if (response.status === 'Success') {
       yield put(actions.addRegisterMemberSuccess());
-      yield put(push(`${constants.publicPath}/login`));
+      yield put(push(`${appConstants.publicPath}/login`));
     } else {
       yield put(actions.addRegisterMemberError(response.Error));
     }

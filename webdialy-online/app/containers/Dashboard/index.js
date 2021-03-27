@@ -8,48 +8,69 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import useCookie, { getCookie } from 'react-use-cookie';
-import socketIOClient from "socket.io-client"
+import { getCookie } from 'react-use-cookie';
+import { Redirect } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import * as appConstants from 'containers/App/constants';
 import * as loginSelectors from 'containers/Login/selectors';
+import * as appActions from 'containers/App/actions';
+import MainLayout from 'components/MainLayout';
+import SubMenu from 'components/SubMenu';
+import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
-import * as appActions from 'containers/App/actions';
 import DashboardContent from './DashboardContent';
+import { Grid } from '@material-ui/core';
 
 export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
   useInjectSaga({ key: 'dashboard', saga });
-  const [token, setToken] = useCookie('token', '');
 
+  const token = getCookie('token') || '';
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />
+  }
+  
   useEffect(() => {
-    if (props.login.email||props.login.mobile) {
-      setToken(JSON.stringify(props.login.email||props.login.mobile));
-    }
-    const getToken = getCookie('token') || '';
-    if (getToken !== '') {
-      props.onRefresh(JSON.parse(getToken));
+    if (token !== '') {
+      props.onInitLoad(JSON.parse(token));
       props.onLoadRedeem();
       props.onLoadMenu();
-    }
 
-    const loc = window.location.href.split('/');
-    const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
-    const socket = socketIOClient(apiServiceEndpoint, { transports: ['websocket'] })
-    socket.on("update_redeem", (data) => {
-      props.onRefresh(JSON.parse(getToken));
-      props.onLoadRedeem();
-    })
-    socket.on("update_member", (data) => {
-      props.onRefresh(JSON.parse(getToken));
-      props.onLoadRedeem();
-    })
+      const loc = window.location.href.split('/');
+      const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
+      const socket = socketIOClient(apiServiceEndpoint, {
+        transports: ['websocket'],
+      });
+      socket.on('update_redeem', data => {
+        props.onInitLoad(JSON.parse(token));
+        props.onLoadRedeem();
+      });
+      socket.on('update_member', data => {
+        props.onInitLoad(JSON.parse(token));
+        props.onLoadRedeem();
+      });
+    }
   }, []);
 
-  return props.login && <DashboardContent {...props} />;
+  return (
+    props.login && (
+      <MainLayout title='Overview' {...props}>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <SubMenu {...props} />
+          </Grid>
+          <Grid item xs={12}>
+            <DashboardContent {...props} />
+          </Grid>
+        </Grid>
+      </MainLayout>
+    )
+  );
 }
 
 Dashboard.propTypes = {};
@@ -59,11 +80,12 @@ const mapStateToProps = createStructuredSelector({
   profile: selectors.makeSelectProfile(),
   listRedeem: selectors.makeSelectRedeem(),
   redeemPoint: selectors.makeSelectRedeemPoint(),
+  leftMenu: appSelectors.makeSelectLeftMenu(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRefresh: email => {
+    onInitLoad: email => {
       dispatch(actions.initLoad(email));
     },
     onLoadRedeem: () => {
