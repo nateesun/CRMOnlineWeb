@@ -16,6 +16,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -31,12 +32,6 @@ export function ProfileChangePwd(props) {
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />
   }
-
-  useEffect(() => {
-    if (token) {
-      props.initLoad(JSON.parse(token));
-    }
-  }, []);
 
   return (
     <MainLayoutApp title='Change Password' {...props}>
@@ -54,7 +49,7 @@ ProfileChangePwd.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
-  profile: selectors.makeSelectProfileData(),
+  profile: mainSelectors.makeSelectProfile(),
   updateStatus: selectors.makeUpdateStatus(),
   errorUpdate: selectors.makeErrorUpdate(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
@@ -62,7 +57,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    initLoad: email => dispatch(actions.initLoad(email)),
     onEditMember: member => dispatch(actions.updatePassword(member)),
     clearData: () => dispatch(actions.initState()),
   };

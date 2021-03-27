@@ -31,24 +31,3 @@ export function editMemberError(error) {
     payload: error,
   };
 }
-
-export function initLoad(payload) {
-  return {
-    type: constants.INIT_LOAD,
-    payload,
-  };
-}
-
-export function initLoadSuccess(payload) {
-  return {
-    type: constants.INIT_LOAD_SUCCESS,
-    payload,
-  };
-}
-
-export function initLoadError(error) {
-  return {
-    type: constants.INIT_LOAD_ERROR,
-    payload: error,
-  };
-}

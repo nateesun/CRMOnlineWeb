@@ -13,6 +13,7 @@ import RenderField from 'components/RenderField';
 import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
@@ -221,7 +222,7 @@ const validate = formValues => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  initialValues: selectors.makeSelectProfileData(),
+  initialValues: mainSelectors.makeSelectProfile(),
 });
 
 export default connect(mapStateToProps)(

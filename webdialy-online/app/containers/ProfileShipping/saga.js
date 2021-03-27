@@ -6,25 +6,6 @@ import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
-export function* initLoadProfile() {
-  try {
-    const email = JSON.parse(getCookie('token')||'');
-    const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
-    try {
-      const response = yield call(request, requestURL, {
-        database,
-        method: 'GET',
-      });
-      yield put(actions.initLoadProfileSuccess(response.data));
-    } catch (error) {
-      yield put(actions.initLoadProfileError(error));
-    }
-  } catch (err) {
-    yield put(actions.initLoadProfileError(err));
-  }
-}
-
 export function* initLoad() {
   try {
     const { member_code } = yield select(selectors.makeSelectProfileShipping());
@@ -67,6 +48,5 @@ export function* onEditShipping() {
 // Individual exports for testing
 export default function* profileShippingSaga() {
   yield takeEvery(constants.INIT_LOAD, initLoad);
-  yield takeEvery(constants.INIT_LOAD_PROFILE, initLoadProfile);
   yield takeEvery(constants.EDIT_SHIPPING, onEditShipping);
 }
