@@ -18,6 +18,7 @@ import * as loginSelectors from 'containers/Login/selectors';
 import * as appActions from 'containers/App/actions';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as appSelectors from 'containers/App/selectors';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -35,7 +36,6 @@ export function Dashboard(props) {
   
   useEffect(() => {
     if (token !== '') {
-      props.onInitLoad(JSON.parse(token));
       props.onLoadRedeem();
       props.onLoadMenu();
 
@@ -44,12 +44,10 @@ export function Dashboard(props) {
       const socket = socketIOClient(apiServiceEndpoint, {
         transports: ['websocket'],
       });
-      socket.on('update_redeem', data => {
-        props.onInitLoad(JSON.parse(token));
+      socket.on('update_redeem', () => {
         props.onLoadRedeem();
       });
-      socket.on('update_member', data => {
-        props.onInitLoad(JSON.parse(token));
+      socket.on('update_member', () => {
         props.onLoadRedeem();
       });
     }
@@ -68,17 +66,14 @@ Dashboard.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   login: loginSelectors.makeSelectLogin(),
-  profile: selectors.makeSelectProfile(),
   listRedeem: selectors.makeSelectRedeem(),
   redeemPoint: selectors.makeSelectRedeemPoint(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
+  profile: mainSelectors.makeSelectProfile(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitLoad: email => {
-      dispatch(actions.initLoad(email));
-    },
     onLoadRedeem: () => {
       dispatch(actions.loadRedeem());
     },

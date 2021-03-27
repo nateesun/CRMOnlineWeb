@@ -4,10 +4,22 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import * as constants from './constants';
 
-export function defaultAction() {
+export function loadProfile() {
   return {
-    type: DEFAULT_ACTION,
+    type: constants.LOAD_PROFILE,
+  };
+}
+export function loadProfileSuccess(payload) {
+  return {
+    type: constants.LOAD_PROFILE_SUCCESS,
+    payload,
+  };
+}
+export function loadProfileError(error) {
+  return {
+    type: constants.LOAD_PROFILE_ERROR,
+    error,
   };
 }

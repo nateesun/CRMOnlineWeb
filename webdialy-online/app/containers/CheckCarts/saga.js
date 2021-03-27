@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as appConstants from 'containers/App/constants';
-import * as dashboardSelectors from 'containers/Dashboard/selectors';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
@@ -129,7 +129,7 @@ export function* onUpdateShoppingStep() {
     const { cart_no, approve, reason } = yield select(selectors.makeSelectCartStatus());
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
     const database = getCookie('database');
-    const { code } = yield select(dashboardSelectors.makeSelectProfile());
+    const { code } = yield select(mainSelectors.makeSelectProfile());
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',

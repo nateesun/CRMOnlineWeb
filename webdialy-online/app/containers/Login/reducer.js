@@ -4,9 +4,8 @@
  *
  */
 import produce from 'immer';
-import { INIT_LOAD_SUCCESS } from 'containers/Dashboard/constants';
 import * as constants from './constants';
-import { setCookie, save } from 'react-use-cookie';
+import { setCookie } from 'react-use-cookie';
 
 export const initialState = {
   loginForm: {
@@ -75,11 +74,6 @@ const loginReducer = (state = initialState, action) =>
         break;
       case constants.LOAD_PROFILE_TOKEN:
         draft.profile = action.payload;
-        break;
-      case INIT_LOAD_SUCCESS:
-        if (action.payload.data) {
-          draft.profile = action.payload.data;
-        }
         break;
     }
   });

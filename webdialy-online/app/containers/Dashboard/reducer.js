@@ -9,7 +9,6 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  profile: {},
   redeem: [],
   redeemPoint: {
     uuid_index: '',
@@ -26,20 +25,10 @@ const dashboardReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.profile= {};
         draft.redeem= [];
         draft.redeemPoint= {};
         draft.email= '';
         draft.error= '';
-        break;
-      case constants.INIT_LOAD:
-        draft.email = action.payload;
-        break;
-      case constants.INIT_LOAD_SUCCESS:
-        draft.profile = action.payload;
-        break;
-      case constants.INIT_LOAD_ERROR:
-        draft.error = action.payload;
         break;
       case constants.LOAD_REDEEM:
         break;

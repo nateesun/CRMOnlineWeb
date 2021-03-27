@@ -2,28 +2,10 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
-
-export function* initLoad() {
-  try {
-    const email = JSON.parse(getCookie('token')||'');
-    const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
-    const response = yield call(request, requestURL, {
-      database,
-      method: 'GET',
-    });
-    if (response.status === 'Success') {
-      yield put(actions.initLoadSuccess(response.data));
-    } else {
-      yield put(actions.initLoadError('Cannot load data'));
-    }
-  } catch (err) {
-    yield put(actions.initLoadError(err));
-  }
-}
 
 export function* loadRedeem() {
   try {
@@ -45,7 +27,7 @@ export function* loadRedeem() {
 
 export function* createRedeemCode() {
   try {
-    const { code } = yield select(selectors.makeSelectProfile());
+    const { code } = yield select(mainSelectors.makeSelectProfile());
     const { uuid_index, product_code } = yield select(selectors.makeSelectRedeemPoint());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/redeem`;
@@ -70,7 +52,6 @@ export function* createRedeemCode() {
 
 // Individual exports for testing
 export default function* dashboardSaga() {
-  yield takeEvery(constants.INIT_LOAD, initLoad);
   yield takeEvery(constants.LOAD_REDEEM, loadRedeem);
   yield takeEvery(constants.CREATE_REDEEM, createRedeemCode);
 }
