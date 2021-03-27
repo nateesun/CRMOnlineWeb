@@ -51,11 +51,6 @@ const makeSelectRolesList = () =>
     selectMembersDomain,
     substate => substate.rolesList,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectMembersDomain,
-    substate => substate.profile,
-  );
 
 export {
   selectMembersDomain,
@@ -66,5 +61,4 @@ export {
   makeSelectCurrentId,
   makeSelectResponse,
   makeSelectRolesList,
-  makeSelectProfile,
 };
