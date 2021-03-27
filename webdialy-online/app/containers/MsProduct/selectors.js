@@ -51,11 +51,6 @@ const makeSelectFileUpload = () =>
     selectMsProductDomain,
     substate => substate.img_upload,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectMsProductDomain,
-    substate => substate.profile,
-  );
 const makeSelectProductImport = () =>
   createSelector(
     selectMsProductDomain,
@@ -76,7 +71,6 @@ export {
   makeSelectCurrentId,
   makeSelectResponse,
   makeSelectFileUpload,
-  makeSelectProfile,
   makeSelectProductImport,
   makeSelectProductImportHeader,
 };

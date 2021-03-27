@@ -47,11 +47,6 @@ const makeSelectResponse = () =>
     selectDatabaseConfigDomain,
     substate => substate.response,
   );
-const makeSelectProfile = () =>
-  createSelector(
-    selectDatabaseConfigDomain,
-    substate => substate.profile,
-  );
 
 export {
   selectDatabaseConfigDomain,
@@ -61,5 +56,4 @@ export {
   makeSelectForm,
   makeSelectCurrentId,
   makeSelectResponse,
-  makeSelectProfile,
 };

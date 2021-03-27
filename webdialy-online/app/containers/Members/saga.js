@@ -6,24 +6,6 @@ import * as selectors from './selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 
-export function* loadProfile() {
-  try {
-    const email = JSON.parse(getCookie('token')||'');
-    const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/member/${email}`;
-    const response = yield call(request, requestURL, {
-      database,
-      method: 'GET',
-    });
-    if (response.status === 'Success') {
-      yield put(actions.loadProfileSuccess(response.data));
-    } else {
-      yield put(actions.loadProfileError('Cannot load profile data'));
-    }
-  } catch (err) {
-    yield put(actions.loadProfileError(err));
-  }
-}
 export function* initLoad() {
   try {
     const requestURL = `${appConstants.publicPath}/api/member`;
@@ -145,5 +127,4 @@ export default function* membersSaga() {
   yield takeEvery(constants.DELETE_ITEM, deleteData);
   yield takeEvery(constants.SEARCH, searchItem);
   yield takeEvery(constants.LOAD_ROLES, onLoadRolesList);
-  yield takeEvery(constants.LOAD_PROFILE, loadProfile);
 }

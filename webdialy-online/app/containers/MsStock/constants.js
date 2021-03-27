@@ -26,7 +26,3 @@ export const UPDATE_ITEM_ERROR = 'app/MsStock/UPDATE_ITEM_ERROR';
 export const DELETE_ITEM = 'app/MsStock/DELETE_ITEM';
 export const DELETE_ITEM_SUCCESS = 'app/MsStock/DELETE_ITEM_SUCCESS';
 export const DELETE_ITEM_ERROR = 'app/MsStock/DELETE_ITEM_ERROR';
-
-export const LOAD_PROFILE = 'app/MsStock/LOAD_PROFILE';
-export const LOAD_PROFILE_SUCCESS = 'app/MsStock/LOAD_PROFILE_SUCCESS';
-export const LOAD_PROFILE_ERROR = 'app/MsStock/LOAD_PROFILE_ERROR';

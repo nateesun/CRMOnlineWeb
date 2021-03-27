@@ -15,6 +15,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
 import MainLayoutApp from 'containers/MainLayoutApp';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -34,7 +35,6 @@ export function MsProduct(props) {
 
   useEffect(() => {
     props.onInitLoad();
-    props.onLoadProfile();
   }, []);
 
   return (
@@ -61,7 +61,7 @@ const mapStateToProps = createStructuredSelector({
   getData: selectors.makeSelectForm(),
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
-  profile: selectors.makeSelectProfile(),
+  profile: mainSelectors.makeSelectProfile(),
   productImports: selectors.makeSelectProductImport(),
 });
 
@@ -74,7 +74,6 @@ function mapDispatchToProps(dispatch) {
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
     onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onUploadImage: file => dispatch(actions.uploadImage(file)),
-    onLoadProfile: () => dispatch(actions.loadProfile()),
     onLoadDataFromFile: data => dispatch(actions.loadDataFromFile(data)),
     onSaveDataImport: () => dispatch(actions.saveDataImport()),
     onSetHeaders: (headers) => dispatch(actions.setHeaders(headers)),
