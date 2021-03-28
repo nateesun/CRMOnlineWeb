@@ -47,7 +47,6 @@ module.exports = args => {
   })
   
   router.post("/", async (req, res, next) => {
-    console.log(req.body);
     try {
       const { member_code } = req.body
       const response = await Task(req.headers.database).deleteByMemberCode(

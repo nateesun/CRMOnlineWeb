@@ -76,6 +76,7 @@ module.exports = (db) => {
     logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
+        delete params.create;//remove create property :)
         const sql = `INSERT INTO ${table_name} SET ?;`;
         logger.debug(sql);
         const result = await pool.query(sql, params)

@@ -61,7 +61,11 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.LOAD_MEMBER_SHIPPING:
         break;
       case constants.LOAD_MEMBER_SHIPPING_SUCCESS:
-        draft.memberShipping = action.payload;
+        if (Object.keys(action.payload).length === 0) {
+          draft.memberShipping = { ...action.payload, create: true, uuid_index: v4() }
+        } else {
+          draft.memberShipping = action.payload;
+        }
         draft.response.status = 'Load_Member_Shipping_Success';
         draft.response.message = 'Load member shipping success';
         break;
