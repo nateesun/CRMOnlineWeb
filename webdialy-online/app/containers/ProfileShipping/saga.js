@@ -2,13 +2,16 @@ import { put, select, takeEvery, call } from 'redux-saga/effects';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as appConstants from 'containers/App/constants';
+import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as constants from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { member_code } = yield select(selectors.makeSelectProfileShipping());
+    const { code: member_code } = yield select(
+      mainSelectors.makeSelectProfile(),
+    );
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
     try {
@@ -16,7 +19,15 @@ export function* initLoad() {
         database,
         method: 'GET',
       });
-      yield put(actions.initLoadSuccess(response.data[0]));
+      if (response.status === 'Success') {
+        if (response.data.length > 0) {
+          yield put(actions.initLoadSuccess(response.data[0]));
+        } else {
+          yield put(actions.initLoadSuccess(response.data));
+        }
+      } else {
+        yield put(actions.initLoadError(response.msg));
+      }
     } catch (error) {
       yield put(actions.initLoadError(error));
     }
@@ -36,7 +47,7 @@ export function* onEditShipping() {
       body: JSON.stringify(addressData),
     });
     if (response.status === 'Success') {
-      yield put(actions.editShippingSuccess());
+      yield put(actions.editShippingSuccess(response.data));
     } else {
       yield put(actions.editShippingError(response.msg));
     }

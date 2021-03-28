@@ -127,8 +127,10 @@ const EditForm = props => {
 
   const handleLoadMap = show => {
     setLoadMap(show);
-    setLatitude(props.initialValues.map_latitude);
-    setLongitude(props.initialValues.map_longitude);
+    if(props.initialValues){
+      setLatitude(props.initialValues.map_latitude || 13.752434);
+      setLongitude(props.initialValues.map_longitude || 100.494122);
+    }
   }
 
   const handlePlace = (latitude, longitude) => {
