@@ -8,12 +8,7 @@ const {
   InfoWindow,
 } = require('react-google-maps');
 
-const MapMarker = compose(
-  withStateHandlers(
-    () => ({
-      isOpen: false,
-    }),
-    {
+const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
       onToggleOpen: ({ isOpen }) => () => ({
         isOpen: !isOpen,
       }),
