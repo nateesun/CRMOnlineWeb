@@ -4,11 +4,23 @@
  *
  */
 import produce from 'immer';
+const { v4 } = require('uuid');
 import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
   shipping: {
+    address_type: "",
+    member_prefix: "",
+    member_code: "",
+    member_name: "",
+    member_lastname: "",
+    address1: "",
+    address2: "",
+    province: "",
+    district: "",
+    sub_district: "",
+    postcode: "",
     map_latitude: 13.752434,
     map_longitude: 100.494122,
   },
@@ -31,7 +43,11 @@ const profileShippingReducer = (state = initialState, action) =>
         draft.member_code = action.payload;
         break;
       case constants.INIT_LOAD_SUCCESS:
-        draft.shipping = action.payload;
+        if (Object.keys(action.payload).length === 0) {
+          draft.shipping = { ...action.payload, create: true, uuid_index: v4() }
+        } else {
+          draft.shipping = action.payload;
+        }
         break;
       case constants.INIT_LOAD_ERROR:
         break;
