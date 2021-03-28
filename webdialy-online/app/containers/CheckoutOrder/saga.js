@@ -39,8 +39,12 @@ export function* loadMemberShipping() {
       database,
       method: 'GET',
     });
-    if (response.data) {
-      yield put(actions.loadMemberShippingSuccess(response.data[0]));
+    if (response.status === 'Success') {
+      if (response.data.length > 0) {
+        yield put(actions.loadMemberShippingSuccess(response.data[0]));
+      } else {
+        yield put(actions.loadMemberShippingSuccess({}));
+      }
     } else {
       yield put(actions.loadMemberShippingError('Not found member shipping'));
     }
@@ -134,13 +138,13 @@ export function* onUpdateItemCart() {
 
 export function* onUpdateAddressForm() {
   try {
-    const member_code = yield select(selectors.makeSelectMemberCode());
+    const { code: member_code } = yield select(mainSelectors.makeSelectProfile());
     const addressFormData = yield select(selectors.makeSelectAddressForm());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping`;
     let response = yield call(request, requestURL, {
       database,
-      method: 'POST',
+      method: addressFormData.create===true ? 'POST': 'PUT',
       body: JSON.stringify({...addressFormData, member_code}),
     });
     if (response.status === 'Success') {
@@ -156,7 +160,7 @@ export function* onUpdateAddressForm() {
 export function* onUpdatePaymentForm() {
   try {
     const cart_no = yield select(selectors.makeSelectCartsNo());
-    const member_code = yield select(selectors.makeSelectMemberCode());
+    const { code: member_code } = yield select(mainSelectors.makeSelectProfile());
     const paymentData = yield select(selectors.makeSelectPaymentData());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/carts/payment`;

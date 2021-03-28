@@ -9,9 +9,7 @@ import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { code: member_code } = yield select(
-      mainSelectors.makeSelectProfile(),
-    );
+    const { code: member_code } = yield select(mainSelectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
     try {
@@ -23,7 +21,7 @@ export function* initLoad() {
         if (response.data.length > 0) {
           yield put(actions.initLoadSuccess(response.data[0]));
         } else {
-          yield put(actions.initLoadSuccess(response.data));
+          yield put(actions.initLoadSuccess({}));
         }
       } else {
         yield put(actions.initLoadError(response.msg));
@@ -43,7 +41,7 @@ export function* onEditShipping() {
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
-      method: 'PUT',
+      method: addressData.create===true ? 'POST': 'PUT',
       body: JSON.stringify(addressData),
     });
     if (response.status === 'Success') {
