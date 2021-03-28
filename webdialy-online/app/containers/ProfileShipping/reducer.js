@@ -8,7 +8,10 @@ import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
 
 export const initialState = {
-  shipping: {},
+  shipping: {
+    map_latitude: 13.752434,
+    map_longitude: 100.494122,
+  },
   address: {},
   status: '',
   error: '',
@@ -42,8 +45,8 @@ const profileShippingReducer = (state = initialState, action) =>
         draft.error = action.payload;
         break;
       case constants.CHANGE_MAPS_VALUE:
-        draft.shipping.map_latitude = action.payload.map_latitude;
-        draft.shipping.map_longitude = action.payload.map_longitude;
+        draft.shipping.map_latitude = action.payload.map_latitude || 13.752434;
+        draft.shipping.map_longitude = action.payload.map_longitude || 100.494122;
         break;
     }
   });

@@ -34,9 +34,7 @@ export function ProfileShipping(props) {
   }
 
   useEffect(() => {
-    if (token !== '') {
-      props.initLoad(JSON.parse(token));
-    }
+    props.initLoad(JSON.parse(token));
   }, []);
 
   return (
