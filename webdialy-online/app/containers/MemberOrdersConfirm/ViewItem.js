@@ -204,7 +204,7 @@ const ViewItem = props => {
         </Grid>
         {!orders.signature && (
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <SignatureForm
                 {...props}
                 onExit={data => onShowImageSignature(data)}
@@ -221,7 +221,7 @@ const ViewItem = props => {
           </Grid>
         )}
         {orders.order_status!=='member_approve' && <Grid container spacing={3} style={{marginTop: '10px'}}>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Button
               fullWidth
               variant="contained"

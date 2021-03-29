@@ -281,5 +281,9 @@
   "app.components.MainLayout.menuBranch": "ข้อมูลสาขา",
   "app.components.MainLayout.menuProduct": "ข้อมูลสินค้า",
   "app.components.MainLayout.menuStock": "ข้อมูลคลังสินค้า",
-  "app.components.MainLayout.menuPromotion": "ข้อมูลโปรโมชั่น"
+  "app.components.MainLayout.menuPromotion": "ข้อมูลโปรโมชั่น",
+  "app.containers.TrackCarts.approve": "อนุมัติ",
+  "app.containers.TrackCarts.order": "รอจัดส่ง",
+  "app.containers.TrackCarts.not_approve": "ไม่อนุมัติ",
+  "app.containers.TrackCarts.wait_confirm": "รออนุมัติ"
 }

@@ -61,4 +61,20 @@ export default defineMessages({
     id: `${scope}.active`,
     defaultMessage: 'Active',
   },
+  approve: {
+    id: `${scope}.approve`,
+    defaultMessage: 'approve',
+  },
+  order: {
+    id: `${scope}.order`,
+    defaultMessage: 'order',
+  },
+  not_approve: {
+    id: `${scope}.not_approve`,
+    defaultMessage: 'not_approve',
+  },
+  wait_confirm: {
+    id: `${scope}.wait_confirm`,
+    defaultMessage: 'wait_confirm',
+  },
 });

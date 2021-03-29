@@ -11,14 +11,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
-import { FormattedMessage } from 'react-intl';
 import SearchBar from 'components/SearchBar';
-import messages from './messages';
+import messages, { scope } from './messages';
 import ShowQRCode from './ShowQRCode';
 
 const useStyles = makeStyles(theme => ({
@@ -212,7 +212,9 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_item}</TableCell>
                       <TableCell align="center">{item.total_amount}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
-                      <TableCell align="center">{item.shopping_step}</TableCell>
+                      <TableCell align="center">
+                        <FormattedMessage id={`${scope}.${item.shopping_step}`} />
+                      </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
                       <TableCell align="center">
                         <Button variant="outlined" color="primary" onClick={handleClickOpen}>

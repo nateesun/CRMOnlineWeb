@@ -1,3 +1,4 @@
+import { Grid } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import styled from 'styled-components';
@@ -18,25 +19,22 @@ const SignatureForm = props => {
   };
 
   const trim = () => {
-    props.onExit(sigPad.current.getTrimmedCanvas().toDataURL('image/png'))
+    props.onExit(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
   };
-  
+
   return (
-    <div style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-      <div
-        style={{
-          background: 'white',
-          border: '1px solid #bbb',
-          padding: '10px',
-          marginBottom: '10px',
-        }}
-      >
+    <Grid container spacing={1}>
+      <Grid item xs={12} md={3} style={{background: 'white', margin: '10px', border: '1px solid gray'}}>
         <SignatureCanvas
-          canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }} 
+          canvasProps={{
+            width: '250px',
+            height: '200px',
+            className: 'sigCanvas',
+          }}
           ref={sigPad}
         />
-      </div>
-      <div>
+      </Grid>
+      <Grid item xs={12}>
         <ButtonCommand
           onClick={() => clear()}
           style={{
@@ -54,8 +52,8 @@ const SignatureForm = props => {
         >
           Confirm Signature
         </ButtonCommand>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 
