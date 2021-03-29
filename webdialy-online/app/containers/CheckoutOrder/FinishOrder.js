@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 const QRCode = require('qrcode.react');
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';

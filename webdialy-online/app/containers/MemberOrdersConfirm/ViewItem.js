@@ -90,6 +90,9 @@ const ViewItem = props => {
         <Typography variant="h5" className={classes.updateItemHeader}>
           <FormattedMessage {...messages.headerViewItem} />
         </Typography>
+        <div>
+          Show QR Code
+        </div>
         <Grid container spacing={2} className={classes.divContent}>
           <Grid item xs={3}>
             <FormattedMessage {...messages.col1} />
