@@ -50,24 +50,8 @@ const useStyles = makeStyles({
 });
 
 export default function TableItems(props) {
-  const { getList, showCommand = true } = props;
-  const handleDelete = id => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Confirm to delete this member!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then(result => {
-      if (result.value) {
-        props.onDeleteItem(id);
-        props.onInitLoad();
-        Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
-      }
-    });
-  };
+  const { getList, profile } = props;
+  const { member_role } = profile;
 
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -180,7 +164,7 @@ export default function TableItems(props) {
                               Detail
                             </Button>
                           </Grid>
-                          {item.shopping_step === 'approve' && <Grid item>
+                          {item.shopping_step === 'approve' && member_role === 'member' && <Grid item>
                             <Button variant="outlined" onClick={()=>loadViewOrder(item)}>
                                 View Signature
                               </Button>

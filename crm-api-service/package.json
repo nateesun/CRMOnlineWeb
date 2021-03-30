@@ -38,6 +38,7 @@
     "plop": "^2.7.4",
     "qrcode": "^1.4.4",
     "qrcode-reader": "^1.0.4",
+    "request": "^2.88.2",
     "socket.io": "^2.4.0",
     "swagger-jsdoc": "^4.2.3",
     "swagger-ui-express": "^4.1.4",

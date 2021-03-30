@@ -114,7 +114,9 @@
   "app.containers.App.menuProduct": "ข้อมูลสินค้า",
   "app.containers.App.menuStock": "ข้อมูลคลังสินค้า",
   "app.containers.App.menuPromotion": "ข้อมูลโปรโมชั่น",
-  "app.containers.MemberOrdersConfirm.btnSave": "ยืนยันรับสินค้า",
+  "app.containers.MemberOrdersConfirm.btnSave": "Confirm Recieve",
+  "app.containers.MemberOrdersConfirm.notfoundOrder": "Notfound Carts Or Not Approve Status",
+  "app.containers.MemberOrdersConfirm.btnBack": "Back",
   "app.containers.ProfileChangePwd.header": "เปลี่ยนรหัสผ่าน",
   "app.containers.ProfileChangePwd.email": "ที่อยู่อีเมล์",
   "app.containers.ProfileChangePwd.mobile": "เบอร์โทรศัพท์",
@@ -280,5 +282,10 @@
   "app.components.MainLayout.menuBranch": "Branch",
   "app.components.MainLayout.menuProduct": "Product",
   "app.components.MainLayout.menuStock": "Stock",
-  "app.components.MainLayout.menuPromotion": "Promotion"
+  "app.components.MainLayout.menuPromotion": "Promotion",
+  "app.containers.TrackCarts.approve": "Approve",
+  "app.containers.TrackCarts.order": "Not Complete",
+  "app.containers.TrackCarts.not_approve": "Not Approve",
+  "app.containers.TrackCarts.wait_confirm": "Wait Confirm",
+  "app.containers.TrackOrders.member_approve": "Member Approve Order"
 }

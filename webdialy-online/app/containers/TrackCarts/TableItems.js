@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,14 +11,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import { FormattedMessage } from 'react-intl';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
-import { FormattedMessage } from 'react-intl';
 import SearchBar from 'components/SearchBar';
-import messages from './messages';
+import messages, { scope } from './messages';
+import ShowQRCode from './ShowQRCode';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,6 +53,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function TableItems(props) {
   const { getList, showCommand = true } = props;
+  const database = getCookie('database');
+
   const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
@@ -103,6 +107,17 @@ export default function TableItems(props) {
       props.onInitLoad();
     }
   }
+
+  //show qrcode dialog
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   return (
     <React.Fragment>
@@ -171,6 +186,7 @@ export default function TableItems(props) {
                       key={item.uuid_index}
                       className={classes.colRow}
                     >
+                      <ShowQRCode open={open} onClose={handleClose} cart={item.cart_no} db={database} />
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">
                         {item.shopping_step === 'order' && (
@@ -196,8 +212,15 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_item}</TableCell>
                       <TableCell align="center">{item.total_amount}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
-                      <TableCell align="center">{item.shopping_step}</TableCell>
+                      <TableCell align="center">
+                        <FormattedMessage id={`${scope}.${item.shopping_step}`} />
+                      </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
+                      {item.shopping_step==='approve' && <TableCell align="center">
+                        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                          Show QRCode
+                        </Button>
+                      </TableCell>}
                       {showCommand && (
                         <TableCell align="center">
                           <Grid container spacing={1} justify="center">

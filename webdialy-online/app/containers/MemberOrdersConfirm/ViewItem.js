@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import SweetAlert from 'sweetalert2-react';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Typography from '@material-ui/core/Typography';
@@ -55,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 const ViewItem = props => {
   const classes = useStyles();
+  const { response, onChangePage } = props;
   const { orders, orders_detail } = props.getOrderList;
   const [mobileNo, setMobileNo] = useState(null);
   const [imgSigUrl, setImgSigUrl] = useState(null);
@@ -86,10 +88,20 @@ const ViewItem = props => {
 
   return (
     <Container component="main" maxWidth="lg">
+      <SweetAlert
+        show={response.status === 'Success'}
+        title="Confirm Status"
+        type="success"
+        text="ยืนยันการรับสินค้าเสร็จสมบูรณ์"
+        onConfirm={()=>props.history.goBack()}
+      />
       <div className={classes.paper}>
         <Typography variant="h5" className={classes.updateItemHeader}>
           <FormattedMessage {...messages.headerViewItem} />
         </Typography>
+        <div>
+          Show QR Code
+        </div>
         <Grid container spacing={2} className={classes.divContent}>
           <Grid item xs={3}>
             <FormattedMessage {...messages.col1} />
@@ -201,7 +213,7 @@ const ViewItem = props => {
         </Grid>
         {!orders.signature && (
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <SignatureForm
                 {...props}
                 onExit={data => onShowImageSignature(data)}
@@ -217,8 +229,9 @@ const ViewItem = props => {
             </Grid>
           </Grid>
         )}
-        {orders.order_status!=='member_approve' && <Grid container spacing={3} style={{marginTop: '10px'}}>
-          <Grid item xs={4}>
+        <Grid container spacing={3} style={{marginTop: '10px'}}>
+        {orders.order_status !== 'member_approve' && 
+          <Grid item xs={6}>
             <Button
               fullWidth
               variant="contained"
@@ -227,8 +240,13 @@ const ViewItem = props => {
             >
               <FormattedMessage {...messages.btnSave} />
             </Button>
+          </Grid>}
+          <Grid item xs={6}>
+            <Button fullWidth variant="outlined" onClick={()=>props.history.goBack()}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
           </Grid>
-        </Grid>}
+        </Grid>
       </div>
     </Container>
   );

@@ -193,3 +193,24 @@ export function updateShoppingStepError(payload) {
     payload,
   };
 }
+
+export function updateSlipPath(payload) {
+  return {
+    type: constants.UPDATE_SLIP_PATH,
+    payload,
+  };
+}
+
+export function updateSlipPathSuccess(payload) {
+  return {
+    type: constants.UPDATE_SLIP_PATH_SUCCESS,
+    payload,
+  };
+}
+
+export function updateSlipPathError(payload) {
+  return {
+    type: constants.UPDATE_SLIP_PATH_ERROR,
+    payload,
+  };
+}

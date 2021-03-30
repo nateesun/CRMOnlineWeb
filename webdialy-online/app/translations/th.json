@@ -116,6 +116,7 @@
   "app.containers.App.menuPromotion": "ข้อมูลโปรโมชั่น",
   "app.containers.MemberOrdersConfirm.btnSave": "ยืนยันรับสินค้า",
   "app.containers.MemberOrdersConfirm.notfoundOrder": "ไม่พบข้อมูลรายการสินค้า หรือยังไม่ได้รับการอนุมัติ",
+  "app.containers.MemberOrdersConfirm.btnBack": "ย้อนกลับ",
   "app.containers.ProfileChangePwd.header": "เปลี่ยนรหัสผ่าน",
   "app.containers.ProfileChangePwd.email": "ที่อยู่อีเมล์",
   "app.containers.ProfileChangePwd.mobile": "เบอร์โทรศัพท์",
@@ -281,5 +282,10 @@
   "app.components.MainLayout.menuBranch": "ข้อมูลสาขา",
   "app.components.MainLayout.menuProduct": "ข้อมูลสินค้า",
   "app.components.MainLayout.menuStock": "ข้อมูลคลังสินค้า",
-  "app.components.MainLayout.menuPromotion": "ข้อมูลโปรโมชั่น"
+  "app.components.MainLayout.menuPromotion": "ข้อมูลโปรโมชั่น",
+  "app.containers.TrackCarts.approve": "อนุมัติ",
+  "app.containers.TrackCarts.order": "ส่ังยังไม่เสร็จ",
+  "app.containers.TrackCarts.not_approve": "ไม่อนุมัติ",
+  "app.containers.TrackCarts.wait_confirm": "รออนุมัติ",
+  "app.containers.TrackOrders.member_approve": "ลูกค้าเซ็นต์รับสินค้า"
 }

@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import SweetAlert from 'sweetalert2-react';
 import SlipImage from '../../images/example/slip.png';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
@@ -51,6 +52,7 @@ const ViewItem = props => {
   const classes = useStyles();
   const [approve, setApprove] = useState('');
   const [reason, setReason] = useState('');
+  const { showAlertResponse, onChangePage } = props;
   const {
     cart_no,
     cart_create_date,
@@ -59,11 +61,21 @@ const ViewItem = props => {
     total_amount,
     total_point,
     shopping_step,
-    cart_active
+    cart_active,
   } = props.initialValues;
+
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   return (
     <Container component="main" maxWidth="lg">
+      <SweetAlert
+        show={showAlertResponse.status === 'Success'}
+        title="Update Status"
+        type="success"
+        text="Approve Cart Status Success"
+        onConfirm={()=>onChangePage('LIST')}
+      />
       <div className={classes.paper}>
         <Typography variant="h5" className={classes.updateItemHeader}>
           <FormattedMessage {...messages.headerViewItem} />

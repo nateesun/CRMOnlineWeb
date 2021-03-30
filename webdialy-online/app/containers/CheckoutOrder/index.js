@@ -68,9 +68,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
-    initLoadMemberShipping: () =>
-      dispatch(actions.loadMemberShipping()),
+    initLoadMemberShipping: () =>dispatch(actions.loadMemberShipping()),
     onUploadImage: file => dispatch(actions.uploadImage(file)),
+    onUpdateSlipPath: filePath => dispatch(actions.updateSlipPath(filePath)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
     deleteItemCart: product_code =>
