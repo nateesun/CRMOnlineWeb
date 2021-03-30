@@ -71,6 +71,11 @@ const makeSelectAddressForm = () =>
     selectCheckoutDomain,
     substate => substate.addressForm,
   );
+const makeSelectSlipPath = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.slipPath,
+  );
   
 export {
   selectCheckoutDomain,
@@ -85,4 +90,5 @@ export {
   makeSelectSlipValidateStatus,
   makeSelectProduct,
   makeSelectAddressForm,
+  makeSelectSlipPath,
 };

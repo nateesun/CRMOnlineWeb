@@ -23,6 +23,7 @@ export const initialState = {
   slipFileName: '',
   slipValidateStatus: '',
   addressForm: {},
+  slipPath: '',
   response: {
     status: '',
     message: '',
@@ -43,10 +44,10 @@ const checkoutReducer = (state = initialState, action) =>
         draft.paymentData= {};
         draft.img_upload= null;
         draft.slipFileName= '';
-        draft.slipValidateStatus= '';
         draft.response = {};
         break;
       case constants.LOAD_CART:
+        draft.slipValidateStatus = '';
         draft.cart_no = action.payload;
         break;
       case constants.LOAD_CART_SUCCESS:
@@ -118,6 +119,13 @@ const checkoutReducer = (state = initialState, action) =>
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
       case constants.UPDATE_ADDRESS_FORM_ERROR:
+        break;
+      case constants.UPDATE_SLIP_PATH:
+        draft.slipPath = action.payload;
+        break;
+      case constants.UPDATE_SLIP_PATH_SUCCESS:
+        break;
+      case constants.UPDATE_SLIP_PATH_ERROR:
         break;
     }
   });

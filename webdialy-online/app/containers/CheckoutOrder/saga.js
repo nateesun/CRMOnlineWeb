@@ -200,6 +200,27 @@ export function* onUpdateShoppingStep() {
   }
 }
 
+export function* onUpdateSlipPath() {
+  try {
+    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const slipPath = yield select(selectors.makeSelectSlipPath());
+    const requestURL = `${appConstants.publicPath}/api/carts/slip_path`;
+    const database = getCookie('database');
+    let response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no, slip_path: `/images/${slipPath}`}),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.updateSlipPathSuccess('Update slip path success'));
+    } else {
+      yield put(actions.updateSlipPathError('Cannot update slip path'));
+    }
+  } catch (err) {
+    yield put(actions.updateShoppingStepError(err));
+  }
+}
+
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
@@ -210,4 +231,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
+  yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
 }

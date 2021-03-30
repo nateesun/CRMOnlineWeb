@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 
@@ -31,8 +31,14 @@ const PaymentForm = (props) => {
   const validateSlipUpload = () => {
     if(file){
       props.checkSlipImage(file.name)
+      props.onUpdateSlipPath(file.name);
     }else{
-      // console.log('Please upload file.');
+      <SweetAlert
+        show={true}
+        title="Notfound Image File"
+        type="warning"
+        text="Please upload slip image file"
+      />
     }
   }
 
@@ -45,6 +51,9 @@ const PaymentForm = (props) => {
     props.onUploadImage(file);
     setShowImg(true);
   };
+
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
 
   return (
     <React.Fragment>
@@ -125,34 +134,22 @@ const PaymentForm = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            อัพโหลดไฟล์ Slip <input type="file" name="file" onChange={onChangeHandler} />
+            อัพโหลดไฟล์ Slip (1) <input type="file" name="file" onChange={onChangeHandler} />
           </Grid>
           <Grid item xs={12}>
-            <button onClick={() => onUploadImageFile()} style={{marginRight: '10px'}}>Upload Slip</button>
-            <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip</button>
+            <button onClick={() => onUploadImageFile()} style={{marginRight: '10px'}}>Upload Slip (2)</button>
+            <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip (3)</button>
           </Grid>
           <Grid item xs={12}>
             {showImg && <div align="center">
-              <img src={`/images/${file.name}`} width={150} alt="" /><br /><br />
+              <img src={`${apiServiceHost}/images/${file.name}`} width={150} alt="" /><br /><br />
                รูปสลิปที่โอนเงิน<br />
             </div>}
           </Grid>
           <Grid item xs={6} lg={6}>
-            {props.imgValid && props.imgValid==='Success' && <Alert severity="success">ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน</Alert>}
-            {props.imgValid && props.imgValid==='Warning' && <Alert severity="error">ข้อมูลใน QR Code ไม่ถูกต้องตาม Format</Alert>}
-            {props.imgValid && props.imgValid==='Error' && <Alert severity="error">ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน</Alert>}
-          </Grid>
-          <Grid item xs={6} lg={6} />
-          <Grid item xs={4} lg={3}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={pristine || submitting} style={{marginBottom: '20px'}}
-            >
-              บันทึกข้อมูล
-            </Button>
+            {props.imgValid==='Success' && <Alert severity="success">ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน</Alert>}
+            {props.imgValid==='Warning' && <Alert severity="error">ข้อมูลใน QR Code ไม่ถูกต้องตาม Format</Alert>}
+            {props.imgValid==='Error' && <Alert severity="error">ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน</Alert>}
           </Grid>
         </Grid>
       </form>

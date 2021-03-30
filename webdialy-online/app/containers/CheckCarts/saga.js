@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { push } from 'react-router-redux';
 import { getCookie } from 'react-use-cookie';
 import request from 'utils/request';
 import * as appConstants from 'containers/App/constants';
@@ -131,6 +131,7 @@ export function* onUpdateShoppingStep() {
     yield put(actions.updateShoppingStepError(err));
   }
 }
+
 export function* onLoadViewOrder() {
   try {
     const data = yield select(selectors.makeSelectForm());
