@@ -64,6 +64,7 @@ const mapStateToProps = createStructuredSelector({
   response: selectors.makeSelectResponse(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
   profile: mainSelectors.makeSelectProfile(),
+  showAlertResponse: selectors.makeSelectResponse(),
 });
 
 function mapDispatchToProps(dispatch) {

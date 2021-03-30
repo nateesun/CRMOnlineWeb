@@ -216,11 +216,11 @@ export default function TableItems(props) {
                         <FormattedMessage id={`${scope}.${item.shopping_step}`} />
                       </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                      <TableCell align="center">
+                      {item.shopping_step==='approve' && <TableCell align="center">
                         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                           Show QRCode
                         </Button>
-                      </TableCell>
+                      </TableCell>}
                       {showCommand && (
                         <TableCell align="center">
                           <Grid container spacing={1} justify="center">

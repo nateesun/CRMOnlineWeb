@@ -130,6 +130,14 @@ const checkCartsReducer = (state = initialState, action) =>
       case constants.UPDATE_SHOPPING_STEP:
         draft.carts = action.payload;
         break;
+      case constants.UPDATE_SHOPPING_STEP_SUCCESS:
+        draft.response.status = 'Success';
+        draft.response.message = 'Delete data success';
+        break;
+      case constants.UPDATE_SHOPPING_STEP_ERROR:
+        draft.response.status = 'Error';
+        draft.response.message = 'Load data to view order error!';
+        break;
     }
   });
 

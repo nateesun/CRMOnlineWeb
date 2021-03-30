@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
 import SearchBar from 'components/SearchBar';
-import messages from './messages';
+import messages, { scope } from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -144,7 +144,6 @@ export default function TableItems(props) {
                 <TableCell align="center"><FormattedMessage {...messages.item} /></TableCell>
                 <TableCell align="center"><FormattedMessage {...messages.amount} /></TableCell>
                 <TableCell align="center"><FormattedMessage {...messages.statusAction} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.step} /></TableCell>
                 <TableCell align="center"><FormattedMessage {...messages.point} /></TableCell>
                 <TableCell align="center"><FormattedMessage {...messages.approveStatus} /></TableCell>
                 <TableCell align="center"><FormattedMessage {...messages.notApproveComment} /></TableCell>
@@ -177,9 +176,10 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_item}</TableCell>
                       <TableCell align="center">{item.total_amount}</TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                      <TableCell align="center">{item.shopping_step}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
-                      <TableCell align="center">{item.order_status}</TableCell>
+                      <TableCell align="center">
+                        {item.order_status && <FormattedMessage id={`${scope}.${item.order_status}`} />}
+                      </TableCell>
                       <TableCell align="center">
                         {item.member_remark}
                       </TableCell>

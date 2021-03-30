@@ -220,7 +220,8 @@ const ViewItem = props => {
             </Grid>
           </Grid>
         )}
-        {orders.order_status!=='member_approve' && <Grid container spacing={3} style={{marginTop: '10px'}}>
+        <Grid container spacing={3} style={{marginTop: '10px'}}>
+        {orders.order_status !== 'member_approve' && 
           <Grid item xs={6}>
             <Button
               fullWidth
@@ -230,8 +231,13 @@ const ViewItem = props => {
             >
               <FormattedMessage {...messages.btnSave} />
             </Button>
+          </Grid>}
+          <Grid item xs={6}>
+            <Button fullWidth variant="outlined">
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
           </Grid>
-        </Grid>}
+        </Grid>
       </div>
     </Container>
   );

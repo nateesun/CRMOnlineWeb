@@ -77,4 +77,8 @@ export default defineMessages({
     id: `${scope}.actions`,
     defaultMessage: 'Actions',
   },
+  member_approve: {
+    id: `${scope}.member_approve`,
+    defaultMessage: 'Actions',
+  },
 });
