@@ -18,15 +18,12 @@ module.exports = args => {
   const serviceProvider = (req, res) => {
     const { method, baseUrl, path } = req;
     const completeUrl = `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`;
-    console.log(completeUrl);
     const options = {
       ...req.headers,
       url: completeUrl,
       method,
       path,
     };
-    console.log(options);
-
     if (method !== 'GET') {
       options.body = req.body;
       options.json = true;

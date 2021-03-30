@@ -169,6 +169,24 @@ module.exports = (db) => {
     })
   }
 
+  module.updateSlipPath = (data) => {
+    logger.debug(`updateSlipPath: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `UPDATE ${table_name} SET slip_path=? WHERE cart_no=?;`;
+        logger.debug(sql);
+        const result = await pool.query(sql, [
+          data.slip_path,
+          data.cart_no,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err);
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.updateShoppingApprove = (data) => {
     logger.debug(`updateShoppingApprove: ${data}`)
     return new Promise(async (resolve, reject) => {

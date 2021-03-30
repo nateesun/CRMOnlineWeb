@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TableItems(props) {
-  const { getList, showCommand = true } = props;
+  const { getList, showCommand = true, profile } = props;
   const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
@@ -164,9 +164,11 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">
+                        {
+                        profile.member_role === 'member' ? 
                         <ButtonLink color="primary" to={`${appConstants.publicPath}/order_confirm/${item.cart_no}/${getCookie('database')}`}>
                           {item.order_no}
-                        </ButtonLink>
+                        </ButtonLink>:<span>{item.order_no}</span>}
                       </TableCell>
                       <TableCell align="center">{item.cart_no}</TableCell>
                       <TableCell align="center">

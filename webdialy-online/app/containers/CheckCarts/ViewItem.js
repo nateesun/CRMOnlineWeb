@@ -64,6 +64,9 @@ const ViewItem = props => {
     cart_active,
   } = props.initialValues;
 
+  const loc = window.location.href.split('/');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+
   return (
     <Container component="main" maxWidth="lg">
       <SweetAlert

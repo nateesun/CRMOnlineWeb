@@ -12,6 +12,7 @@ const ButtonCommand = styled.button`
 `;
 
 const SignatureForm = props => {
+  const [showLabel, setShowLabel] = useState(false);
   const sigPad = useRef({});
 
   const clear = () => {
@@ -47,11 +48,12 @@ const SignatureForm = props => {
           Clear
         </ButtonCommand>
         <ButtonCommand
-          onClick={() => trim()}
+          onClick={() => {trim(); setShowLabel(true)}}
           style={{ background: 'green', color: 'white' }}
         >
           Confirm Signature
         </ButtonCommand>
+        {showLabel && <div style={{color: 'blue'}}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>}
       </Grid>
     </Grid>
   );
