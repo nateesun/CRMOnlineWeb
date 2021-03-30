@@ -62,6 +62,7 @@ const ViewItem = props => {
     total_point,
     shopping_step,
     cart_active,
+    slip_path,
   } = props.initialValues;
 
   const loc = window.location.href.split('/');
@@ -132,7 +133,7 @@ const ViewItem = props => {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <img src={SlipImage} width={250} alt="sample slip upload" />
+            <img src={`${apiServiceHost}${slip_path}`} width={250} alt="sample slip upload" />
           </Grid>
           {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
             <FormControl component="fieldset">

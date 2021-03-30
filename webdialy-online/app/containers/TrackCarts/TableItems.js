@@ -110,9 +110,11 @@ export default function TableItems(props) {
 
   //show qrcode dialog
   const [open, setOpen] = useState(false);
+  const [cart, setCart] = useState('');
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (cart_no) => {
     setOpen(true);
+    setCart(cart_no);
   };
 
   const handleClose = (value) => {
@@ -186,7 +188,6 @@ export default function TableItems(props) {
                       key={item.uuid_index}
                       className={classes.colRow}
                     >
-                      <ShowQRCode open={open} onClose={handleClose} cart={item.cart_no} db={database} />
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">
                         {item.shopping_step === 'order' && (
@@ -217,7 +218,7 @@ export default function TableItems(props) {
                       </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
                       {item.shopping_step==='approve' && <TableCell align="center">
-                        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                        <Button variant="outlined" color="primary" onClick={()=>handleClickOpen(item.cart_no)}>
                           Show QRCode
                         </Button>
                       </TableCell>}
@@ -266,6 +267,7 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
+      <ShowQRCode open={open} onClose={handleClose} cart={cart} db={database} />
     </React.Fragment>
   );
 }
