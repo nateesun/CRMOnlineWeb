@@ -1,15 +1,8 @@
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import React, { useRef, useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import styled from 'styled-components';
-
-const ButtonCommand = styled.button`
-  padding: 10px;
-  border: 0px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  outline: none;
-`;
 
 const SignatureForm = props => {
   const [showLabel, setShowLabel] = useState(false);
@@ -24,36 +17,32 @@ const SignatureForm = props => {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12} md={3} style={{background: 'white', margin: '10px', border: '1px solid gray'}}>
-        <SignatureCanvas
-          canvasProps={{
+    <Grid container>
+      <Grid item style={{border: '1px solid #eee'}}>
+        <SignatureCanvas 
+          canvasProps={{ 
+            className: 'sigCanvas', 
             width: '250px',
             height: '200px',
-            className: 'sigCanvas',
-          }}
-          ref={sigPad}
-        />
+          }} 
+        ref={sigPad} />
       </Grid>
       <Grid item xs={12}>
-        <ButtonCommand
-          onClick={() => clear()}
-          style={{
-            background: '#bbb',
-            color: 'black',
-            marginRight: '5px',
-            width: '100px',
-          }}
-        >
-          Clear
-        </ButtonCommand>
-        <ButtonCommand
-          onClick={() => {trim(); setShowLabel(true)}}
-          style={{ background: 'green', color: 'white' }}
-        >
-          Confirm Signature
-        </ButtonCommand>
-        {showLabel && <div style={{color: 'blue'}}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>}
+        <Grid container style={{padding: '5px'}}>
+          <Grid item>
+            <Button onClick={() => clear()}>
+              Clear
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" style={{background: 'green', color: 'white'}} onClick={() => {trim(); setShowLabel(true)}}>
+              Confirm Signature
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            {showLabel && <div style={{color: 'blue', padding: '10px'}}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>}
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
