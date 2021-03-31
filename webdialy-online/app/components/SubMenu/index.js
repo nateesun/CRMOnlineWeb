@@ -13,8 +13,11 @@ import { scope } from 'containers/App/messages';
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    bottom: 0,
+    bottom: 5,
     zIndex: 999,
+    boxShadow: '1px 2px #aaa',
+    borderRadius: '5px 5px 5px 5px',
+    position: 'fixed',
   },
 });
 
@@ -44,6 +47,7 @@ const SubMenu = props => {
       }}
       showLabels
       className={classes.root}
+      style={{position: props.title==='Shopping' ? 'relative': 'fixed'}}
     >
       {props.leftMenu &&
         props.leftMenu.map(item => {
@@ -61,8 +65,9 @@ const SubMenu = props => {
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
               style={{
-                border: '1px solid chocolate',
+                // border: '1px solid chocolate',
                 borderRadius: '10px 10px 5px 5px',
+                background: 'none',
                 margin: '1px',
               }}
               onClick={() => handleClick(path.publicPath + item.to_path)}

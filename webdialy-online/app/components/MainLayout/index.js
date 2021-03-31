@@ -127,6 +127,7 @@ const useStyles = makeStyles(theme => ({
 const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
+  const { profile } = props;
   const [open, setOpen] = useState(window.innerWidth>500?true:false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -150,7 +151,7 @@ const MainLayout = props => {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            // onClick={handleDrawerOpen}
             className={clsx(
               classes.menuButton,
               open && classes.menuButtonHidden,
@@ -172,7 +173,7 @@ const MainLayout = props => {
             </ButtonLink>
         </Toolbar>
       </AppBar>
-      <Drawer
+      {profile && profile.member_role !== 'member' && <Drawer
         variant="permanent"
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
@@ -227,7 +228,7 @@ const MainLayout = props => {
         <Button onClick={open ? handleDrawerClose: handleDrawerOpen}>
           {open ? <span><ChevronLeftIcon />ซ่อนเมนู</span>:<DoubleArrow color="disabled" />}
         </Button>
-      </Drawer>
+      </Drawer>}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>

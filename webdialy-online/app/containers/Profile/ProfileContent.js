@@ -32,6 +32,7 @@ const LabelContent = styled.span`
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    marginTop: '5px',
   },
   bullet: {
     display: 'inline-block',
