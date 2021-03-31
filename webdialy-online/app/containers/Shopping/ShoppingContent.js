@@ -26,7 +26,7 @@ const Media = (props) => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', marginBottom: '50px' }}>
       <SearchProduct {...props} />
       <ProductList 
         {...props}

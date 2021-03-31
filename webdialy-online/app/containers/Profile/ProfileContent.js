@@ -179,7 +179,7 @@ export default function ProfileContent(props) {
           </Grid>}
         </Grid>
       </CardContent>
-      <CardActions>
+      <CardActions style={{marginBottom: '50px'}}>
         <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />
