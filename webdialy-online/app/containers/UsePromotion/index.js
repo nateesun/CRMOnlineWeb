@@ -39,7 +39,7 @@ export function UsePromotion(props) {
 
   return (
     <MainLayoutApp title='UsePromotion' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>
