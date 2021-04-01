@@ -23,6 +23,7 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
+import TabLayout from './TabLayout';
 
 export function CheckCarts(props) {
   useInjectReducer({ key: 'checkCarts', reducer });
@@ -39,9 +40,7 @@ export function CheckCarts(props) {
 
   return (
     <MainLayoutApp title='CheckCartList' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
-        <ContentPage {...props} />
-      </Grid>
+      <TabLayout {...props} />
     </MainLayoutApp>
   );
 }

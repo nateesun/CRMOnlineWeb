@@ -12,24 +12,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Swal from 'sweetalert2';
 import SearchBar from 'components/SearchBar';
-
-const ALink = styled.a`
-  text-decoration: none;
-`;
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
   },
   container: {
-    padding: '10px',
+    paddingTop: '20px',
   },
   table: {
-    minWidth: 690,
-    padding: '5px',
+    // minWidth: 690,
+    // padding: '5px',
   },
   buttonNew: {
     marginRight: '5px',
@@ -44,15 +37,18 @@ const useStyles = makeStyles({
   colRow: {
     whiteSpace: 'nowrap',
   },
-  dataWidth: {
-    overflow: 'auto',
-  },
 });
 
 export default function TableItems(props) {
-  const { getList, profile } = props;
+  const { getList, profile, approve } = props;
   const { member_role } = profile;
 
+  let showList = getList;
+  if(approve===true){
+    showList = getList.filter(item => item.shopping_step=== 'approve');
+  }else{
+    showList = getList.filter(item => item.shopping_step=== 'wait_confirm');
+  }
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -93,47 +89,24 @@ export default function TableItems(props) {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Typography color="textSecondary" variant="h6">
-          CheckCarts Table List
-        </Typography>
-        <div className={classes.wrapButtonAction}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.buttonRefresh}
-            onClick={() => props.onInitLoad()}
-          >
-            REFRESH
-          </Button>
-        </div>
         <SearchBar {...props} items={[
+          { key: '', value: '' },
           { key: 'cart_no', value: 'Cart No' },
           { key: 'member_code', value: 'Member Code' },
-          { key: 'cart_active', value: 'Status' },
           ]} />
-        <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+        <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
                 <TableCell align="center">Cart No</TableCell>
                 <TableCell align="center">Create Date</TableCell>
                 <TableCell align="center">Member</TableCell>
-                <TableCell align="center">Items</TableCell>
-                <TableCell align="center">Amount</TableCell>
-                <TableCell align="center">Point</TableCell>
-                <TableCell align="center">Step</TableCell>
-                <TableCell align="center">Active</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {getList &&
-                getList
+              {showList &&
+                showList
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <TableRow
@@ -149,11 +122,6 @@ export default function TableItems(props) {
                         {item.cart_create_date}
                       </TableCell>
                       <TableCell align="center">{item.member_code}</TableCell>
-                      <TableCell align="center">{item.total_item}</TableCell>
-                      <TableCell align="center">{item.total_amount}</TableCell>
-                      <TableCell align="center">{item.total_point}</TableCell>
-                      <TableCell align="center">{item.shopping_step}</TableCell>
-                      <TableCell align="center">{item.cart_active}</TableCell>
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
@@ -164,16 +132,18 @@ export default function TableItems(props) {
                               Detail
                             </Button>
                           </Grid>
-                          {item.shopping_step === 'approve' && member_role === 'member' && <Grid item>
+                          {item.shopping_step === 'approve' && member_role === 'member' && 
+                          <Grid item>
                             <Button variant="outlined" onClick={()=>loadViewOrder(item)}>
                                 View Signature
                               </Button>
-                          </Grid>}
+                          </Grid>
+                          }
                         </Grid>
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
+                  {showList.length === 0 && (
                     <TableRow>
                       <TableCell align="left" colSpan={10}>
                         ไม่พบข้อมูลสินค้าที่สั่งซื้อ
@@ -182,12 +152,11 @@ export default function TableItems(props) {
                   )}
             </TableBody>
           </Table>
-        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={getList.length}
+        count={showList.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

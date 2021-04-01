@@ -65,7 +65,6 @@ const SubMenu = props => {
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
               style={{
-                // border: '1px solid chocolate',
                 borderRadius: '10px 10px 5px 5px',
                 background: 'none',
                 margin: '1px',
