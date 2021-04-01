@@ -127,13 +127,16 @@ const useStyles = makeStyles(theme => ({
 const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
-  const [open, setOpen] = useState(window.innerWidth>500?true:false);
+  const { profile } = props;
+  const [open, setOpen] = useState(window.innerWidth > 500 ? true : false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const notMemberRole = profile && profile.member_role !== 'member';
 
   return (
     <div className={classes.root}>
@@ -143,21 +146,23 @@ const MainLayout = props => {
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        className={clsx(classes.appBar, open && notMemberRole && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden,
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
+          {notMemberRole && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden,
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography
             component="span"
             color="inherit"
@@ -168,66 +173,86 @@ const MainLayout = props => {
           </Typography>
           <LocaleToggle />
           <ButtonLink to={`${appConstants.publicPath}/logout`}>
-              <ExitToApp />
-            </ButtonLink>
+            <ExitToApp />
+          </ButtonLink>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <Typography component="span" color="inherit">
-            CRM Online
-          </Typography>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon style={{color: 'white'}} />
-          </IconButton>
-        </div>
-        <Divider />
-        <List style={{background: '#fbf9f8'}}>
-          <React.Fragment>
-            {leftMenu && leftMenu.map(({ id, icon, active, to_path: to }) => (
-              <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
-                <ListItem
-                  key={id}
-                  button
-                  className={clsx(
-                    classes.item,
-                    id === props.title && classes.itemActiveItem,
-                  )}
-                >
-                  <FormattedMessage id={`${scope}.menu${id}`}>
-                    {title => (
-                      <ListItemIcon className={classes.itemIcon} title={title}>
-                        {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
-                        {icon === 'CardGiftcardIcon' && <CardGiftcardIcon />}
-                        {icon === 'LocalMallIcon' && <LocalMallIcon />}
-                        {icon === 'PeopleIcon' && <PeopleIcon />}
-                        {icon === 'LockIcon' && <LockIcon />}
-                        {icon === 'RecentActorsIcon' && <RecentActorsIcon />}
-                      </ListItemIcon>
-                    )}
-                  </FormattedMessage>
-                  <ListItemText
-                    classes={{
-                      primary: classes.itemPrimary,
-                    }}
+      {notMemberRole && (
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <Typography component="span" color="inherit">
+              CRM Online
+            </Typography>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon style={{ color: 'white' }} />
+            </IconButton>
+          </div>
+          <Divider />
+          <List style={{ background: '#fbf9f8' }}>
+            <React.Fragment>
+              {leftMenu &&
+                leftMenu.map(({ id, icon, active, to_path: to }) => (
+                  <ButtonLink
+                    to={appConstants.publicPath + to}
+                    key={`menu${id}`}
                   >
-                    <FormattedMessage id={`${scope}.menu${id}`} />
-                  </ListItemText>
-                </ListItem>
-              </ButtonLink>
-            ))}
-          </React.Fragment>
-        </List>
-        <Button onClick={open ? handleDrawerClose: handleDrawerOpen}>
-          {open ? <span><ChevronLeftIcon />ซ่อนเมนู</span>:<DoubleArrow color="disabled" />}
-        </Button>
-      </Drawer>
+                    <ListItem
+                      key={id}
+                      button
+                      className={clsx(
+                        classes.item,
+                        id === props.title && classes.itemActiveItem,
+                      )}
+                    >
+                      <FormattedMessage id={`${scope}.menu${id}`}>
+                        {title => (
+                          <ListItemIcon
+                            className={classes.itemIcon}
+                            title={title}
+                          >
+                            {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
+                            {icon === 'CardGiftcardIcon' && (
+                              <CardGiftcardIcon />
+                            )}
+                            {icon === 'LocalMallIcon' && <LocalMallIcon />}
+                            {icon === 'PeopleIcon' && <PeopleIcon />}
+                            {icon === 'LockIcon' && <LockIcon />}
+                            {icon === 'RecentActorsIcon' && (
+                              <RecentActorsIcon />
+                            )}
+                          </ListItemIcon>
+                        )}
+                      </FormattedMessage>
+                      <ListItemText
+                        classes={{
+                          primary: classes.itemPrimary,
+                        }}
+                      >
+                        <FormattedMessage id={`${scope}.menu${id}`} />
+                      </ListItemText>
+                    </ListItem>
+                  </ButtonLink>
+                ))}
+            </React.Fragment>
+          </List>
+          <Button onClick={open ? handleDrawerClose : handleDrawerOpen}>
+            {open ? (
+              <span>
+                <ChevronLeftIcon />
+                ซ่อนเมนู
+              </span>
+            ) : (
+              <DoubleArrow color="disabled" />
+            )}
+          </Button>
+        </Drawer>
+      )}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>

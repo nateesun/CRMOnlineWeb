@@ -31,7 +31,7 @@ export default defineMessages({
   },
   headerViewItem: {
     id: `${scope}.headerViewItem`,
-    defaultMessage: 'Carts Paper Detail',
+    defaultMessage: 'รายละเอียดคำสั่งซื้อที่รับชำระ',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,

@@ -10,7 +10,6 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
-import socketIOClient from 'socket.io-client';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
@@ -38,18 +37,6 @@ export function Dashboard(props) {
     if (token !== '') {
       props.onLoadRedeem();
       props.onLoadMenu();
-
-      const loc = window.location.href.split('/');
-      const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
-      const socket = socketIOClient(apiServiceEndpoint, {
-        transports: ['websocket'],
-      });
-      socket.on('update_redeem', () => {
-        props.onLoadRedeem();
-      });
-      socket.on('update_member', () => {
-        props.onLoadRedeem();
-      });
     }
   }, []);
 

@@ -48,7 +48,7 @@ export default function OrderFooter(props) {
         <Toolbar>
           <Grid container>
             <Grid item xs={12}>
-              <div style={{color: 'black', textAlign: 'center'}}>ไม่พบข้อมูลการสั่งซื้อ</div>
+              <div style={{color: 'white', textAlign: 'center', fontWeight: 'bold', textShadow: '2px 2px gray'}}>ยังไม่มีรายการสั่งซื้อ</div>
             </Grid>
           </Grid>
         </Toolbar>

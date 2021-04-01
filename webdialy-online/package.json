@@ -124,6 +124,7 @@
     "react-router-dom": "5.0.0",
     "react-router-redux": "^4.0.8",
     "react-signature-canvas": "^1.0.3",
+    "react-swipeable-views": "^0.13.9",
     "react-use-cookie": "^1.2.0",
     "react-watermark-component": "^2.2.1",
     "recharts": "^1.8.5",
