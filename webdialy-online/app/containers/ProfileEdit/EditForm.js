@@ -121,7 +121,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" style={{marginBottom: '50px'}}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"

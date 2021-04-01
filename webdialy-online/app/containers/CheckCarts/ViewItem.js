@@ -15,9 +15,10 @@ import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import SweetAlert from 'sweetalert2-react';
-import SlipImage from '../../images/example/slip.png';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
+import PaymentDetail from './PaymentDetail';
+import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,15 +38,22 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '10px',
     paddingTop: '10px',
     paddingBottom: '10px',
-    border: '1px solid #ddd',
+    // border: '1px solid #ddd',
     borderRadius: '10px',
   },
   likeText: {
-    border: '1px solid #ddd',
+    // border: '1px solid #ddd',
     marginBottom: '2px',
-    background: 'white',
+    background: '#eee',
     borderRadius: '5px',
-  }
+  },
+  title: {
+    marginTop: theme.spacing(2),
+    background: 'blue',
+    color: 'white',
+    padding: '5px',
+    width: '75vw',
+  },
 }));
 
 const ViewItem = props => {
@@ -81,82 +89,92 @@ const ViewItem = props => {
         <Typography variant="h5" className={classes.updateItemHeader}>
           <FormattedMessage {...messages.headerViewItem} />
         </Typography>
-        <Grid container spacing={3} className={classes.divContent}>
-          <Grid item xs={2}>
+        <Grid container spacing={1} className={classes.divContent}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col1} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {cart_no}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col2} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {cart_create_date}
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col3} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {member_code}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col4} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {total_item}
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col5} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {total_amount}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col6} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {total_point}
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col7} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {shopping_step}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormattedMessage {...messages.col8} />
           </Grid>
-          <Grid item xs={3} className={classes.likeText}>
+          <Grid item xs={8} className={classes.likeText}>
             {cart_active}
           </Grid>
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12}>
+            <Typography variant="h6" gutterBottom className={classes.title}>
+              รูปภาพสลิปที่โอนเงินเข้าระบบ
+            </Typography>
             <img src={`${apiServiceHost}${slip_path}`} width={250} alt="sample slip upload" />
           </Grid>
-          {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Approve Slip</FormLabel>
-              <RadioGroup
-                row
-                aria-label="position"
-                name="position"
-                defaultValue="top"
-              >
-                <FormControlLabel
-                  value="approve"
-                  control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                  label="Approve"
-                />
-                <FormControlLabel
-                  value="not_approve"
-                  control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                  label="Not Approve"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>}
+          <Grid item xs={12}>
+           {props.getData && <PaymentDetail payment={props.getData} />}
+          </Grid>
+          <Grid item xs={6}>
+            <Paper elevation={3} style={{padding: '20px', background: '#ddd', width: '75vw'}}>
+              {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Approve Slip</FormLabel>
+                  <RadioGroup
+                    row
+                    aria-label="position"
+                    name="position"
+                    defaultValue="top"
+                  >
+                    <FormControlLabel
+                      value="approve"
+                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
+                      label="Approve"
+                    />
+                    <FormControlLabel
+                      value="not_approve"
+                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
+                      label="Not Approve"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>}
+            </Paper>
+          </Grid>
           {shopping_step && shopping_step !== 'approve' && <Grid item xs={10}>
             <TextField
               fullWidth

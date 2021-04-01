@@ -22,9 +22,6 @@ import * as selectors from './selectors';
 import { Paper, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   colRow: {
     whiteSpace: 'nowrap',
   },

@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   layout: {
     width: 'auto',
+    marginTop: '5px',
   },
   paper: {
     marginBottom: theme.spacing(3),
