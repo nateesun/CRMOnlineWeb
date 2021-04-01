@@ -38,7 +38,7 @@ export function MsPromotion(props) {
 
   return (
     <MainLayoutApp title='Promotion' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', maxWidth: window.innerWidth-(window.innerWidth*20/100)}}>
+      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>
