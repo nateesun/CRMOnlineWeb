@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -19,10 +19,8 @@ const useStyles = makeStyles(theme => ({
 
 const PaymentForm = (props) => {
   const classes = useStyles();
-  const { carts, carts_detail } = props.cartList;
-  const { handleSubmit, pristine, reset, submitting } = props;
-  const [file, setFile] = useState(null);
-  const [showImg, setShowImg] = useState(false);
+  const { carts } = props.cartList;
+  const { handleSubmit, file } = props;
 
   const onValidated = formValues => {
     props.setPaymentData(formValues);
@@ -43,13 +41,13 @@ const PaymentForm = (props) => {
   }
 
   const onChangeHandler = event => {
-    setShowImg(false);
-    setFile(event.target.files[0]);
+    props.setShowImg(false);
+    props.setFile(event.target.files[0]);
   };
 
   const onUploadImageFile = () => {
     props.onUploadImage(file);
-    setShowImg(true);
+    props.setShowImg(true);
   };
 
   const loc = window.location.href.split('/');
@@ -141,7 +139,7 @@ const PaymentForm = (props) => {
             <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip (3)</button>
           </Grid>
           <Grid item xs={12}>
-            {showImg && <div align="center">
+            {props.showImg && <div align="center">
               <img src={`${apiServiceHost}/images/${file.name}`} width={150} alt="" /><br /><br />
                รูปสลิปที่โอนเงิน<br />
             </div>}
@@ -183,9 +181,6 @@ const validate = formValues => {
   if (formValues.transfer_amount < 1) {
     errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldMoreZero} />;
   }
-  // if (formValues.transfer_amount !== carts[0].total_amount) {
-  //   errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldEqualAmount} />;
-  // }
   return errors;
 };
 

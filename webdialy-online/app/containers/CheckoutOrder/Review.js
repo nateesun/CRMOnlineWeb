@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -7,20 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
-
-const origin = {
-  position: {
-    lat: () => 13.809992,
-    lng: () => 100.41313,
-  },
-};
-
-const destination = {
-  position: {
-    lat: () => 13.828941,
-    lng: () => 100.525943,
-  },
-};
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -47,14 +33,29 @@ export default function Review(props) {
     district,
     province,
     postcode,
+    map_latitude,
+    map_longitude,
   } = props.shipping;
   const { paymentData: payment } = props;
-  const [distance, setDistance] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const { map_latitude: latitude, map_longitude: longitude } = props.branch;
+
+  const origin = {
+    position: {
+      lat: () => map_latitude,
+      lng: () => map_longitude,
+    },
+  };
+
+  const destination = {
+    position: {
+      lat: () => latitude,
+      lng: () => longitude,
+    },
+  };
 
   const handleDirection = (distance, duration) => {
-    setDistance(distance / 1000);
-    setDuration(duration / 60);
+    props.setDistance(distance / 1000);
+    props.setDuration(duration / 60);
   };
 
   return (
@@ -98,9 +99,8 @@ export default function Review(props) {
           <Typography
             gutterBottom
           >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
-          <Typography
-            gutterBottom
-          >{`${address1} ${address2||''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
+          <Typography gutterBottom>{`${address1} ${address2 ||
+            ''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
@@ -186,9 +186,9 @@ export default function Review(props) {
         </Grid>
         <Grid item xs={12}>
           <div align="center" style={{ marginBottom: '25px' }}>
-            ระยะทาง {distance.toFixed(2)} กิโลเมตร
+            ระยะทาง {props.distance.toFixed(2)} กิโลเมตร
             <br />
-            ระยะเวลา {duration.toFixed(2)} นาที
+            ระยะเวลา {props.duration.toFixed(2)} นาที
           </div>
         </Grid>
       </Grid>
