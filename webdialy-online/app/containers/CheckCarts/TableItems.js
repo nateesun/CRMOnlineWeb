@@ -70,12 +70,7 @@ export default function TableItems(props) {
   const loadViewOrder = item => {
     props.onLoadViewOrder(item);
   };
-
-  const onEditItem = item => {
-    props.onChangePage('EDIT');
-    props.onLoadEdit(item);
-  };
-
+  
   TableItems.propTypes = {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,

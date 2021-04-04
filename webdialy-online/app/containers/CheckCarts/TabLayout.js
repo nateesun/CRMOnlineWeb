@@ -8,7 +8,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ContentPage from './ContentPage';
-import { Grid, Paper } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,7 +62,7 @@ export default function TabLayout(props) {
   };
 
   return (
-    <div style={{width: '100vw'}}>
+    <React.Fragment>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -87,6 +86,6 @@ export default function TabLayout(props) {
           <ContentPage approve={true} {...props} />
         </TabPanel>
       </SwipeableViews>
-    </div>
+    </React.Fragment>
   );
 }
