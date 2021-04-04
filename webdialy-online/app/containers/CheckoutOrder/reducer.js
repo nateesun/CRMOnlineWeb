@@ -118,6 +118,11 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ADDRESS_FORM:
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
+      case constants.UPDATE_ADDRESS_FORM_SUCCESS:
+        draft.response =  {
+          status: 'Success_Update_Address',
+          message: 'Update Address Success'
+        }
       case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
       case constants.UPDATE_SLIP_PATH:

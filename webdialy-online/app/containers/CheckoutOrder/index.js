@@ -77,6 +77,7 @@ Checkout.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  response: selectors.makeSelectResponse(),
   checkout: selectors.makeSelectCheckout(),
   cartList: selectors.makeSelectCarts(),
   shipping: selectors.makeSelectMemberShipping(),
@@ -91,6 +92,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch,
     initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
     initLoadMemberShipping: () => dispatch(actions.loadMemberShipping()),
     onUploadImage: file => dispatch(actions.uploadImage(file)),

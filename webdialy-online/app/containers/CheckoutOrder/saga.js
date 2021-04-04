@@ -148,7 +148,7 @@ export function* onUpdateAddressForm() {
       body: JSON.stringify({...addressFormData, member_code}),
     });
     if (response.status === 'Success') {
-      yield loadMemberShipping();
+      yield put(actions.updateAddressFormSuccess(response));
     } else {
       yield put(actions.updateAddressFormError('Cannot update address form'));
     }

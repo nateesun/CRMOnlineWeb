@@ -8,20 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
 
-const origin = {
-  position: {
-    lat: () => 13.809992,
-    lng: () => 100.41313,
-  },
-};
-
-const destination = {
-  position: {
-    lat: () => 13.828941,
-    lng: () => 100.525943,
-  },
-};
-
 const useStyles = makeStyles(theme => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -47,8 +33,24 @@ export default function Review(props) {
     district,
     province,
     postcode,
+    map_latitude,
+    map_longitude
   } = props.shipping;
-  const { paymentData: payment } = props;
+  const { paymentData: payment, latitude, longitude } = props;
+
+  const origin = {
+    position: {
+      lat: () => map_latitude,
+      lng: () => map_longitude,
+    },
+  };
+  
+  const destination = {
+    position: {
+      lat: () => latitude,
+      lng: () => longitude,
+    },
+  };
 
   const handleDirection = (distance, duration) => {
     props.setDistance(distance / 1000);

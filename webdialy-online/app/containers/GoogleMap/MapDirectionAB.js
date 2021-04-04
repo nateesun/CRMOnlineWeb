@@ -51,7 +51,6 @@ const MapDirectionAB = compose(
     },
   }),
 )(props => {
-  // console.log('MapDirectionAB init:', props);
   if (props.distance) {
     props.onExit(props.distance, props.duration);
   }

@@ -109,6 +109,14 @@ export default defineMessages({
     id: `${scope}.postcode`,
     defaultMessage: 'Post Code',
   },
+  latitude: {
+    id: `${scope}.latitude`,
+    defaultMessage: 'Latitude',
+  },
+  longitude: {
+    id: `${scope}.longitude`,
+    defaultMessage: 'Longitude',
+  },
   useForShpping: {
     id: `${scope}.useForShpping`,
     defaultMessage: 'ใช้ที่อยู่นี้ กับข้อมูลที่อยู่สำหรับรับชำระ',
