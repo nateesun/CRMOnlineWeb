@@ -24,7 +24,7 @@ const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
   withScriptjs,
   withGoogleMap,
 )(props => {
-  console.log('MapMarker init:', props);
+  // console.log('MapMarker init:', props);
   const [latitude, setLatitude] = useState(props.lat);
   const [longitude, setLongitude] = useState(props.lng);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -49,12 +49,10 @@ export default function Review(props) {
     postcode,
   } = props.shipping;
   const { paymentData: payment } = props;
-  const [distance, setDistance] = useState(0);
-  const [duration, setDuration] = useState(0);
 
   const handleDirection = (distance, duration) => {
-    setDistance(distance / 1000);
-    setDuration(duration / 60);
+    props.setDistance(distance / 1000);
+    props.setDuration(duration / 60);
   };
 
   return (
@@ -186,9 +184,9 @@ export default function Review(props) {
         </Grid>
         <Grid item xs={12}>
           <div align="center" style={{ marginBottom: '25px' }}>
-            ระยะทาง {distance.toFixed(2)} กิโลเมตร
+            ระยะทาง {props.distance.toFixed(2)} กิโลเมตร
             <br />
-            ระยะเวลา {duration.toFixed(2)} นาที
+            ระยะเวลา {props.duration.toFixed(2)} นาที
           </div>
         </Grid>
       </Grid>
