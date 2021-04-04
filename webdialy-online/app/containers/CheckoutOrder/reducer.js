@@ -27,7 +27,8 @@ export const initialState = {
   response: {
     status: '',
     message: '',
-  }
+  },
+  branch: {}
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -131,6 +132,17 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_SLIP_PATH_SUCCESS:
         break;
       case constants.UPDATE_SLIP_PATH_ERROR:
+        break;
+      case constants.LOAD_BRANCH_LOCATION:
+        break;
+      case constants.LOAD_BRANCH_LOCATION_SUCCESS:
+        draft.branch = action.payload;
+        break;
+      case constants.LOAD_BRANCH_LOCATION_ERROR:
+        draft.response =  {
+          status: 'Load_Branch_Location_Error',
+          message: 'Load branch locaation error'
+        }
         break;
     }
   });

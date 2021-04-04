@@ -29,8 +29,6 @@ export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
   const [activeStep, setActiveStep] = useState(0);
-  const [latitude, setLatitude] = useState(13.809992);
-  const [longitude, setLongitude] = useState(100.41313);
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
   const [distance, setDistance] = useState(0);
@@ -45,17 +43,13 @@ export function Checkout(props) {
     const cart_no = props.match.params.cart_no;
     props.initLoadCart(cart_no);
     props.initLoadMemberShipping();
-    props.initLoadMemberShipping();
+    props.intiLoadBranchLocation();
   }, []);
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
       <CheckoutContent
-        latitude={latitude}
-        longitude={longitude}
         activeStep={activeStep}
-        setLatitude={setLatitude}
-        setLongitude={setLongitude}
         setActiveStep={setActiveStep}
         file={file}
         showImg={showImg}
@@ -88,6 +82,7 @@ const mapStateToProps = createStructuredSelector({
   database: loginSelectors.makeSelectDatabase(),
   leftMenu: appSelectors.makeSelectLeftMenu(),
   profile: mainSelectors.makeSelectProfile(),
+  branch: selectors.makeSelectBranch(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -105,6 +100,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(actions.updateItemCart({ product_code, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
+    intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),
   };
 }
 

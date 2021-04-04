@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import messages from './messages';
+import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,9 +43,8 @@ const useStyles = makeStyles(theme => ({
 
 const NewItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response } = props;
-  const [latitude, setLatitude] = useState(13.809992);
-  const [longitude, setLongitude] = useState(100.413130);
+  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
+  const { map_latitude, map_longitude } = props.getData;
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -58,9 +60,14 @@ const NewItem = props => {
   };
 
   const handlePlace = (latitude, longitude) => {
-    setLatitude(latitude);
-    setLongitude(longitude);
+    dispatch(change('newForm', 'map_latitude', latitude))
+    dispatch(change('newForm', 'map_longitude', longitude))
   };
+
+  useEffect(()=>{
+    dispatch(change('newForm', 'map_latitude', map_latitude))
+    dispatch(change('newForm', 'map_longitude', map_longitude))
+  }, [])
 
   NewItem.propTypes = {
     handleSubmit: PropTypes.func,
@@ -141,18 +148,11 @@ const NewItem = props => {
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>
-                {latitude && longitude && (
-                  <MapMarker
-                    lat={parseFloat(latitude)}
-                    lng={parseFloat(longitude)}
-                    onExit={handlePlace}
-                  />
-                )}
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
-                Position: {latitude},{longitude}
+                <MapMarker
+                  lat={parseFloat(map_latitude)}
+                  lng={parseFloat(map_longitude)}
+                  onExit={handlePlace}
+                />
               </div>
             </Grid>
           </Grid>
@@ -213,7 +213,15 @@ const validate = formValues => {
   return errors;
 };
 
-export default reduxForm({
-  form: 'newForm',
-  validate,
-})(NewItem);
+const mapStateToProps = createStructuredSelector({
+  initialValues: selectors.makeSelectForm(),
+});
+
+
+export default connect(mapStateToProps)(
+  reduxForm({
+    form: 'newForm',
+    validate,
+    enableReinitialize: true,
+  })(NewItem),
+);

@@ -81,6 +81,11 @@ const makeSelectResponse = () =>
     selectCheckoutDomain,
     substate => substate.response,
   );
+const makeSelectBranch = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.branch,
+  );
   
 export {
   selectCheckoutDomain,
@@ -97,4 +102,5 @@ export {
   makeSelectAddressForm,
   makeSelectSlipPath,
   makeSelectResponse,
+  makeSelectBranch,
 };

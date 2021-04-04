@@ -221,6 +221,28 @@ export function* onUpdateSlipPath() {
   }
 }
 
+export function* loadBranchLocation() {
+  try {
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/branch`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'GET',
+    });
+    if (response.status === 200) {
+      if (response.data.length > 0) {
+        yield put(actions.loadBranchLocationSuccess(response.data[0]));
+      } else {
+        yield put(actions.loadBranchLocationSuccess({}));
+      }
+    } else {
+      yield put(actions.loadBranchLocationError('Not found branch location'));
+    }
+  } catch (err) {
+    yield put(actions.loadBranchLocationError(err));
+  }
+}
+
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
@@ -232,4 +254,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
+  yield takeEvery(constants.LOAD_BRANCH_LOCATION, loadBranchLocation);
 }

@@ -34,9 +34,10 @@ export default function Review(props) {
     province,
     postcode,
     map_latitude,
-    map_longitude
+    map_longitude,
   } = props.shipping;
-  const { paymentData: payment, latitude, longitude } = props;
+  const { paymentData: payment } = props;
+  const { map_latitude: latitude, map_longitude: longitude } = props.branch;
 
   const origin = {
     position: {
@@ -44,7 +45,7 @@ export default function Review(props) {
       lng: () => map_longitude,
     },
   };
-  
+
   const destination = {
     position: {
       lat: () => latitude,
@@ -98,9 +99,8 @@ export default function Review(props) {
           <Typography
             gutterBottom
           >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
-          <Typography
-            gutterBottom
-          >{`${address1} ${address2||''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
+          <Typography gutterBottom>{`${address1} ${address2 ||
+            ''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>

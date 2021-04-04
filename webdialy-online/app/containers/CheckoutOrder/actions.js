@@ -214,3 +214,23 @@ export function updateSlipPathError(payload) {
     payload,
   };
 }
+
+export function loadBranchLocation() {
+  return {
+    type: constants.LOAD_BRANCH_LOCATION,
+  };
+}
+
+export function loadBranchLocationSuccess(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LOCATION_SUCCESS,
+    payload,
+  };
+}
+
+export function loadBranchLocationError(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LOCATION_ERROR,
+    payload,
+  };
+}
