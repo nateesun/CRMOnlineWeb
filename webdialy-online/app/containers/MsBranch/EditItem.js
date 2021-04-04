@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Typography from '@material-ui/core/Typography';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,10 +43,8 @@ const useStyles = makeStyles(theme => ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response } = props;
+  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
   const { map_latitude, map_longitude } = props.initialValues;
-  const [latitude, setLatitude] = useState(map_latitude);
-  const [longitude, setLongitude] = useState(map_longitude);
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -62,8 +60,8 @@ const EditItem = props => {
   };
 
   const handlePlace = (latitude, longitude) => {
-    setLatitude(latitude);
-    setLongitude(longitude);
+    dispatch(change('editItem', 'map_latitude', latitude))
+    dispatch(change('editItem', 'map_longitude', longitude))
   };
 
   return (
@@ -130,18 +128,11 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{marginBottom: '25px'}}>
-                {latitude && longitude && (
-                  <MapMarker
-                    lat={parseFloat(latitude)}
-                    lng={parseFloat(longitude)}
-                    onExit={handlePlace}
-                  />
-                )}
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
-                Position: {latitude},{longitude}
+                <MapMarker
+                  lat={parseFloat(map_latitude)}
+                  lng={parseFloat(map_longitude)}
+                  onExit={handlePlace}
+                />
               </div>
             </Grid>
           </Grid>

@@ -5,11 +5,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import { createStructuredSelector } from 'reselect';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
-import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import RenderField from 'components/RenderField';
 import * as selectors from './selectors';
@@ -24,27 +24,32 @@ const useStyles = makeStyles(theme => ({
 
 const AddressForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, shipping } = props;
-  const [latitude, setLatitude] = useState(13.809992);
-  const [longitude, setLongitude] = useState(100.413130);
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    dispatch,
+    initialValues,
+    response,
+  } = props;
+  const { map_latitude, map_longitude } = initialValues;
 
-  useEffect(()=>{
+  useEffect(() => {
     props.initLoadMemberShipping();
   }, []);
 
   const onValidated = formValues => {
     props.onUpdateAddressForm({
-      ...formValues, 
-      map_latitude: latitude, 
-      map_longitude: longitude,
+      ...formValues,
       address_type: 'Shipping',
       member_prefix: '',
     });
   };
 
   const handlePlace = (latitude, longitude) => {
-    setLatitude(latitude);
-    setLongitude(longitude);
+    dispatch(change('addressForm', 'map_latitude', latitude));
+    dispatch(change('addressForm', 'map_longitude', longitude));
   };
 
   return (
@@ -134,6 +139,26 @@ const AddressForm = props => {
               required
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="map_latitude"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.latitude} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
+              name="map_longitude"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.longitude} />}
+              required
+            />
+          </Grid>
           <Grid item xs={12} md={6}>
             <FormControlLabel
               control={
@@ -143,44 +168,40 @@ const AddressForm = props => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button 
-              type="submit" 
-              variant="contained" 
+            <Button
+              type="submit"
+              variant="contained"
               color="primary"
               disabled={pristine || submitting}
-              style={{marginRight: '10px'}}
+              style={{ marginRight: '10px' }}
             >
               <FormattedMessage {...messages.btnFormUpdateButton} />
             </Button>
-            <Button 
-              variant="contained" 
+            <Button
+              variant="contained"
               disabled={pristine || submitting}
               onClick={reset}
             >
               <FormattedMessage {...messages.btnFormResetButton} />
             </Button>
           </Grid>
+          {response && response.status === 'Success_Update_Address' && <Grid item>
+            <span style={{color: 'green'}}>{response.message}</span>
+          </Grid>}
           <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
-                {latitude && longitude && (
-                  <MapMarker
-                    lat={parseFloat(latitude)}
-                    lng={parseFloat(longitude)}
-                    onExit={handlePlace}
-                  />
-                )}
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
-                <FormattedMessage {...messages.markerPosition} />: {latitude},{longitude}
-              </div>
-            </Grid>
+            <div align="center" style={{ marginBottom: '25px' }}>
+              <MapMarker
+                lat={parseFloat(map_latitude)}
+                lng={parseFloat(map_longitude)}
+                onExit={handlePlace}
+              />
+            </div>
+          </Grid>
         </Grid>
       </form>
     </React.Fragment>
   );
-}
+};
 
 const validate = formValues => {
   const errors = {};
@@ -188,13 +209,17 @@ const validate = formValues => {
     errors.member_name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.member_lastname) {
-    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+    errors.member_lastname = (
+      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
+    );
   }
   if (!formValues.address1) {
     errors.address1 = <FormattedMessage {...messages.address1ShouldNotEmpty} />;
   }
   if (!formValues.sub_district) {
-    errors.sub_district = <FormattedMessage {...messages.subDistrictShouldNotEmpty} />;
+    errors.sub_district = (
+      <FormattedMessage {...messages.subDistrictShouldNotEmpty} />
+    );
   }
   if (!formValues.district) {
     errors.district = <FormattedMessage {...messages.districtShouldNotEmpty} />;

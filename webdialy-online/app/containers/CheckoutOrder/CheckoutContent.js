@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -44,7 +44,7 @@ const steps = ['สินค้า', 'ที่อยู่', 'รับชำ�
 
 export default function CheckoutContent(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const { activeStep, setActiveStep } = props;
 
   const handleNext = () => {
     if(activeStep+1 === 4){

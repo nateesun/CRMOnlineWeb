@@ -51,12 +51,14 @@ const MapDirectionAB = compose(
     },
   }),
 )(props => {
-  console.log('MapDirectionAB init:', props);
   if (props.distance) {
     props.onExit(props.distance, props.duration);
   }
-  const position = new google.maps.LatLng(props.lat || 13.828941, props.lng) || {
-    lat: props.lat || 13.828941, lng: props.lng || 100.525943
+  const latValue = props.lat || 13.828941;
+  const lngValue = props.lng || 100.525943;
+
+  const position = new google.maps.LatLng(latValue, lngValue) || {
+    lat: latValue, lng: lngValue
   };
   return (
     <GoogleMap defaultZoom={7} defaultCenter={position}>

@@ -27,7 +27,8 @@ export const initialState = {
   response: {
     status: '',
     message: '',
-  }
+  },
+  branch: {}
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -118,6 +119,11 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ADDRESS_FORM:
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
+      case constants.UPDATE_ADDRESS_FORM_SUCCESS:
+        draft.response =  {
+          status: 'Success_Update_Address',
+          message: 'Update Address Success'
+        }
       case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
       case constants.UPDATE_SLIP_PATH:
@@ -126,6 +132,17 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_SLIP_PATH_SUCCESS:
         break;
       case constants.UPDATE_SLIP_PATH_ERROR:
+        break;
+      case constants.LOAD_BRANCH_LOCATION:
+        break;
+      case constants.LOAD_BRANCH_LOCATION_SUCCESS:
+        draft.branch = action.payload;
+        break;
+      case constants.LOAD_BRANCH_LOCATION_ERROR:
+        draft.response =  {
+          status: 'Load_Branch_Location_Error',
+          message: 'Load branch locaation error'
+        }
         break;
     }
   });
