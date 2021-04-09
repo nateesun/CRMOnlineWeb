@@ -28,7 +28,9 @@ export function* loadRedeem() {
 export function* createRedeemCode() {
   try {
     const { code } = yield select(mainSelectors.makeSelectProfile());
-    const { uuid_index, product_code } = yield select(selectors.makeSelectRedeemPoint());
+    const { uuid_index, product_code } = yield select(
+      selectors.makeSelectRedeemPoint(),
+    );
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/redeem`;
     const response = yield call(request, requestURL, {
@@ -38,7 +40,7 @@ export function* createRedeemCode() {
         uuid_index,
         product_code,
         member_code_use: code,
-      })
+      }),
     });
     if (response.status === 'Success') {
       yield put(actions.createRedeemSuccess(response.data));

@@ -112,7 +112,11 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -138,8 +142,12 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
                       <TableCell align="left">{item.name}</TableCell>
-                      <TableCell align="left">{item.line_official_id}</TableCell>
-                      <TableCell align="right">{item.member_register_point}</TableCell>
+                      <TableCell align="left">
+                        {item.line_official_id}
+                      </TableCell>
+                      <TableCell align="right">
+                        {item.member_register_point}
+                      </TableCell>
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
@@ -163,13 +171,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={6}>
-                        ไม่พบข้อมูลบริษัท
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={6}>
+                    ไม่พบข้อมูลบริษัท
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

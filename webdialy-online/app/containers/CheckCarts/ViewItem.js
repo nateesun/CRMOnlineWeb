@@ -74,7 +74,7 @@ const ViewItem = props => {
   } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   return (
     <Container component="main" maxWidth="lg">
@@ -83,7 +83,7 @@ const ViewItem = props => {
         title="Update Status"
         type="success"
         text="Approve Cart Status Success"
-        onConfirm={()=>onChangePage('LIST')}
+        onConfirm={() => onChangePage('LIST')}
       />
       <div className={classes.paper}>
         <Typography variant="h5" className={classes.updateItemHeader}>
@@ -144,47 +144,69 @@ const ViewItem = props => {
             <Typography variant="h6" gutterBottom className={classes.title}>
               รูปภาพสลิปที่โอนเงินเข้าระบบ
             </Typography>
-            <img src={`${apiServiceHost}${slip_path}`} width={250} alt="sample slip upload" />
+            <img
+              src={`${apiServiceHost}${slip_path}`}
+              width={250}
+              alt="sample slip upload"
+            />
           </Grid>
           <Grid item xs={12}>
-           {props.getData && <PaymentDetail payment={props.getData} />}
+            {props.getData && <PaymentDetail payment={props.getData} />}
           </Grid>
           <Grid item xs={6}>
-            <Paper elevation={3} style={{padding: '20px', background: '#ddd', width: '75vw'}}>
-              {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Approve Slip</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-label="position"
-                    name="position"
-                    defaultValue="top"
-                  >
-                    <FormControlLabel
-                      value="approve"
-                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                      label="Approve"
-                    />
-                    <FormControlLabel
-                      value="not_approve"
-                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                      label="Not Approve"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>}
+            <Paper
+              elevation={3}
+              style={{ padding: '20px', background: '#ddd', width: '75vw' }}
+            >
+              {shopping_step && shopping_step !== 'approve' && (
+                <Grid item xs={12}>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend">Approve Slip</FormLabel>
+                    <RadioGroup
+                      row
+                      aria-label="position"
+                      name="position"
+                      defaultValue="top"
+                    >
+                      <FormControlLabel
+                        value="approve"
+                        control={
+                          <Radio
+                            color="primary"
+                            onChange={e => setApprove(e.target.value)}
+                          />
+                        }
+                        label="Approve"
+                      />
+                      <FormControlLabel
+                        value="not_approve"
+                        control={
+                          <Radio
+                            color="primary"
+                            onChange={e => setApprove(e.target.value)}
+                          />
+                        }
+                        label="Not Approve"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+              )}
             </Paper>
           </Grid>
-          {shopping_step && shopping_step !== 'approve' && <Grid item xs={10}>
-            <TextField
-              fullWidth
-              id="standard-basic"
-              label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ" disabled={approve!=='not_approve'}
-              required
-              value={reason}
-              onChange={e=>setReason(e.target.value)}
-            />
-          </Grid>}
+          {shopping_step && shopping_step !== 'approve' && (
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                id="standard-basic"
+                label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ"
+                disabled={approve !== 'not_approve'}
+                required
+                value={reason}
+                onChange={e => setReason(e.target.value)}
+              />
+            </Grid>
+          )}
           <Grid item xs={3}>
             <Button
               fullWidth
@@ -194,16 +216,25 @@ const ViewItem = props => {
               <FormattedMessage {...messages.btnBack} />
             </Button>
           </Grid>
-          {shopping_step && shopping_step !== 'approve' && <Grid item xs={5}>
-            <Button
-              color="primary"
-              fullWidth
-              variant="contained"
-              onClick={() => props.onUpdateShoppingStep({ cart_no, cart_create_date, approve, reason })}
-            >
-              <FormattedMessage {...messages.btnApprove} />
-            </Button>
-          </Grid>}
+          {shopping_step && shopping_step !== 'approve' && (
+            <Grid item xs={5}>
+              <Button
+                color="primary"
+                fullWidth
+                variant="contained"
+                onClick={() =>
+                  props.onUpdateShoppingStep({
+                    cart_no,
+                    cart_create_date,
+                    approve,
+                    reason,
+                  })
+                }
+              >
+                <FormattedMessage {...messages.btnApprove} />
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </div>
     </Container>

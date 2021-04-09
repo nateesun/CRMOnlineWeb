@@ -34,7 +34,7 @@ export function* saveCartItem() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.createItemCartSuccess(response.data[0]));
     } else {
       yield put(actions.createItemCartError('Cannot create data'));
@@ -54,7 +54,7 @@ export function* updateCartItem() {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.updateItemCartSuccess(response.data));
     } else {
       yield put(actions.updateItemCartError('Cannot create data'));
@@ -68,7 +68,8 @@ export function* searchProduct() {
   try {
     const database = getCookie('database');
     const { data } = yield select(selectors.makeSelectSearchData());
-    const requestURL = `${appConstants.publicPath}/api/product/search/${data||'no_data'}`;
+    const requestURL = `${appConstants.publicPath}/api/product/search/${data ||
+      'no_data'}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',

@@ -12,7 +12,7 @@ import messages from './messages';
 export default function ProductList(props) {
   const { data, topic, handleClickOpen } = props;
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   ProductList.propTypes = {
     data: PropTypes.array,
@@ -26,12 +26,16 @@ export default function ProductList(props) {
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>
       <Grid item xs={12}>
-        {data && data.length===0 && <ContentNotFound label={<FormattedMessage {...messages.notfoundProduct} />} />}
+        {data && data.length === 0 && (
+          <ContentNotFound
+            label={<FormattedMessage {...messages.notfoundProduct} />}
+          />
+        )}
       </Grid>
       {data &&
         data.map(item => (
           <Grid item xs={6} sm={4} md={3} lg={2} key={item.code}>
-            <div align="center" style={{marginBottom: '4px'}}>
+            <div align="center" style={{ marginBottom: '4px' }}>
               <Paper elevation={3}>
                 <Box key={item.code} onClick={() => handleClickOpen(item)}>
                   <img
@@ -98,7 +102,7 @@ export default function ProductList(props) {
                           marginRight: '2px',
                         }}
                       >
-                        คงเหลือ ({`${item.in_stock|0}/${item.max_stock}`})
+                        คงเหลือ ({`${item.in_stock | 0}/${item.max_stock}`})
                       </span>
                     </Typography>
                   </Box>

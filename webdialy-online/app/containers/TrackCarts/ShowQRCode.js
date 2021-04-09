@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,15 +23,15 @@ const ShowQRCode = props => {
     >
       <DialogTitle id="simple-dialog-title">QR CODE</DialogTitle>
       <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <QRCode value={`${hostUrl}/order_confirm/${cart_no}/${database}`} />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
+        <DialogContentText id="alert-dialog-description">
+          <QRCode value={`${hostUrl}/order_confirm/${cart_no}/${database}`} />
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary" autoFocus>
+          Close
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };

@@ -18,14 +18,12 @@ import saga from './saga';
 import * as actions from './actions';
 import ForgotForm from './ForgotForm';
 
-const ForgotPassword = (props) => {
+const ForgotPassword = props => {
   useInjectReducer({ key: 'forgotPassword', reducer });
   useInjectSaga({ key: 'forgotPassword', saga });
 
-  return (
-    <ForgotForm {...props} />
-  );
-}
+  return <ForgotForm {...props} />;
+};
 
 ForgotPassword.propTypes = {};
 
@@ -37,7 +35,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onSendRequest: payload => {
       dispatch(actions.requestPassword(payload));
-    }
+    },
   };
 }
 

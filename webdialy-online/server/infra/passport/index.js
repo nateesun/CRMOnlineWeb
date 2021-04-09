@@ -1,12 +1,11 @@
-module.exports = args => {
-  const passport = require('passport');
-  const { Strategy: CookieStrategy } = require('passport-cookie');
-  const { loggerApp: logger, jwtUseCases } = args;
+const passport = require('passport');
+const { Strategy: CookieStrategy } = require('passport-cookie');
 
+module.exports = args => {
+  const { loggerApp: logger, jwtUseCases } = args;
   passport.use(
     'validate-cookie',
     new CookieStrategy(async (token, done) => {
-      // logger.log('info', `validate-cookie:${token}`);
       if (token) {
         const payload = await jwtUseCases
           .readWebToken(token)

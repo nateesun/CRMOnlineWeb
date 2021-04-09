@@ -30,9 +30,9 @@ export function Dashboard(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-  
+
   useEffect(() => {
     if (token !== '') {
       props.onLoadRedeem();

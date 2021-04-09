@@ -22,10 +22,14 @@ const makeSelectMemberTracking = () =>
     substate => substate,
   );
 
-  const makeSelectProfile = () =>
+const makeSelectProfile = () =>
   createSelector(
     selectMemberTrackingDomain,
     substate => substate.profile,
   );
 
-export { selectMemberTrackingDomain, makeSelectMemberTracking, makeSelectProfile };
+export {
+  selectMemberTrackingDomain,
+  makeSelectMemberTracking,
+  makeSelectProfile,
+};

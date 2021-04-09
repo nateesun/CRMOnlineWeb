@@ -8,12 +8,12 @@ const {
   InfoWindow,
 } = require('react-google-maps');
 
-const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
-      onToggleOpen: ({ isOpen }) => () => ({
-        isOpen: !isOpen,
-      }),
-    },
-  ),
+const MapMarker = compose(
+  withStateHandlers(() => ({ isOpen: false }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: !isOpen,
+    }),
+  }),
   withProps({
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCE9HPrREFNujIAtNwsn20dKFfLj4TRXp0&libraries=geometry,drawing,places',
@@ -32,7 +32,10 @@ const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
     props.onExit(latitude, longitude);
   }
 
-  const position = new google.maps.LatLng(props.lat, props.lng) || {lat: latitude, lng: longitude};
+  const position = new google.maps.LatLng(props.lat, props.lng) || {
+    lat: latitude,
+    lng: longitude,
+  };
 
   return (
     <GoogleMap

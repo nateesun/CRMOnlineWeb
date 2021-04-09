@@ -29,7 +29,7 @@ export function CheckCarts(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function CheckCarts(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='CheckCartList' {...props}>
+    <MainLayoutApp title="CheckCartList" {...props}>
       <TabLayout {...props} />
     </MainLayoutApp>
   );

@@ -29,12 +29,16 @@ export function MemberTracking(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   return (
-    <MainLayoutApp title='TrackOrder' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw', marginBottom: '50px'}}>
+    <MainLayoutApp title="TrackOrder" {...props}>
+      <Grid
+        container
+        spacing={1}
+        style={{ overflow: 'auto', width: '100vw', marginBottom: '50px' }}
+      >
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>

@@ -108,7 +108,7 @@ const EditItem = props => {
   const { img_path } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -232,8 +232,12 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.col8} />}
                   required
                 >
-                  <option key="F" value="F">Free</option>
-                  <option key="R" value="R">Redeem</option>
+                  <option key="F" value="F">
+                    Free
+                  </option>
+                  <option key="R" value="R">
+                    Redeem
+                  </option>
                 </Field>
               </div>
             </Grid>
@@ -276,7 +280,11 @@ const EditItem = props => {
             {img_path && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
+                  <img
+                    src={`${apiServiceHost}${img_path}`}
+                    width="250"
+                    alt=""
+                  />
                 </Paper>
               </Grid>
             )}
@@ -355,8 +363,12 @@ const validate = formValues => {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
-    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
-    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_amt = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
+    errors.discount_percent = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
   }
   return errors;
 };

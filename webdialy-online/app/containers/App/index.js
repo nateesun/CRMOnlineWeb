@@ -39,7 +39,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loadAuthMenu: () => {
       dispatch(actions.initLoad());
-    }
+    },
   };
 }
 

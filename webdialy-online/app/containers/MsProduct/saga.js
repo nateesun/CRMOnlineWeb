@@ -8,20 +8,25 @@ import * as actions from './actions';
 
 const fetch = require('node-fetch');
 const loc = window.location.href.split('/');
-const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
 export function* saveDataImport() {
   try {
     const productImports = yield select(selectors.makeSelectProductImport());
-    const productImportHeaders = yield select(selectors.makeSelectProductImportHeader());
+    const productImportHeaders = yield select(
+      selectors.makeSelectProductImportHeader(),
+    );
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/product/save_list`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ headers: productImportHeaders, data: productImports }),
+      body: JSON.stringify({
+        headers: productImportHeaders,
+        data: productImports,
+      }),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.saveDataImportSuccess(response));
     } else {
       yield put(actions.saveDataImportError('Cannot create data'));
@@ -54,7 +59,7 @@ export function* saveData() {
     const data = yield select(selectors.makeSelectForm());
     const file = yield select(selectors.makeSelectFileUpload());
     let image_path = '';
-    if(file){
+    if (file) {
       image_path = `/images/${file.name}`;
     }
     const database = getCookie('database');
@@ -62,9 +67,9 @@ export function* saveData() {
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({...data, img_path: image_path}),
+      body: JSON.stringify({ ...data, img_path: image_path }),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
     } else {
       yield put(actions.createItemError('Cannot create data'));
@@ -84,7 +89,7 @@ export function* updateData() {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.updateItemSuccess(response));
     } else {
       yield put(actions.updateItemError('Cannot update data'));
@@ -98,13 +103,15 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/product/${data.uuid_index}`;
+    const requestURL = `${appConstants.publicPath}/api/product/${
+      data.uuid_index
+    }`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.deleteItemSuccess(response));
     } else {
       yield put(actions.deleteItemError('Cannot update data'));
@@ -123,7 +130,7 @@ export function* uploadFile() {
       method: 'POST',
       body: formdata,
       redirect: 'follow',
-    }
+    };
     const response = yield fetch(`${apiServiceHost}/api/upload`, options)
       .then(response => response.json())
       .catch(error => console.log('error', error));

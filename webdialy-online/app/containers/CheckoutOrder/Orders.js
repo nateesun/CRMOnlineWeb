@@ -26,23 +26,23 @@ export default function Orders(props) {
   const classes = useStyles();
   const { carts, carts_detail } = props.cartList;
 
-  const handleDelete = (product_code) => {
+  const handleDelete = product_code => {
     props.deleteItemCart(product_code);
-  }
+  };
   const handleAdd = (product_code, qty) => {
-    if(qty===0){
+    if (qty === 0) {
       handleDelete(product_code);
-    }else{
+    } else {
       props.updateItemCart(product_code, qty);
     }
-  }
+  };
   const handleRemove = (product_code, qty) => {
-    if(qty===0){
+    if (qty === 0) {
       handleDelete(product_code);
-    }else{
+    } else {
       props.updateItemCart(product_code, qty);
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -51,26 +51,40 @@ export default function Orders(props) {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {carts_detail && carts_detail.map(product => (
-          <ListItem className={classes.listItem} key={product.uuid_index}>
-            <ListItemText
-              primary={product.product_name}
-              secondary={`${product.total_amount} บาท`}
-            />
-            <IconButton aria-label="delete" onClick={()=>handleDelete(product.product_code)}>
-              <RemoveIcon style={{ color: 'red' }} />
-            </IconButton>
-            <React.Fragment>
-              <IconButton aria-label="Remove" onClick={()=>handleAdd(product.product_code, product.qty-1)}>
-                <MinusIcon style={{ color: 'red' }} />
+        {carts_detail &&
+          carts_detail.map(product => (
+            <ListItem className={classes.listItem} key={product.uuid_index}>
+              <ListItemText
+                primary={product.product_name}
+                secondary={`${product.total_amount} บาท`}
+              />
+              <IconButton
+                aria-label="delete"
+                onClick={() => handleDelete(product.product_code)}
+              >
+                <RemoveIcon style={{ color: 'red' }} />
               </IconButton>
-              {product.qty}
-              <IconButton aria-label="Add" onClick={()=>handleRemove(product.product_code, product.qty+1)}>
-                <PlusIcon style={{ color: 'green' }} />
-              </IconButton>
-            </React.Fragment>
-          </ListItem>
-        ))}
+              <React.Fragment>
+                <IconButton
+                  aria-label="Remove"
+                  onClick={() =>
+                    handleAdd(product.product_code, product.qty - 1)
+                  }
+                >
+                  <MinusIcon style={{ color: 'red' }} />
+                </IconButton>
+                {product.qty}
+                <IconButton
+                  aria-label="Add"
+                  onClick={() =>
+                    handleRemove(product.product_code, product.qty + 1)
+                  }
+                >
+                  <PlusIcon style={{ color: 'green' }} />
+                </IconButton>
+              </React.Fragment>
+            </ListItem>
+          ))}
         <Divider style={{ border: '1px solid #eee' }} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวม" />

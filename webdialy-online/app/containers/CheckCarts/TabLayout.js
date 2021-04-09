@@ -17,11 +17,11 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`} 
+      aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
       {value === index && (
-        <Box style={{marginTop: '5px'}}>
+        <Box style={{ marginTop: '5px' }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -42,7 +42,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     // backgroundColor: theme.palette.background.paper,
   },
@@ -57,7 +57,7 @@ export default function TabLayout(props) {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
+  const handleChangeIndex = index => {
     setValue(index);
   };
 

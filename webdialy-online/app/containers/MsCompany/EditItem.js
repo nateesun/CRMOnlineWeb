@@ -53,7 +53,7 @@ const EditItem = props => {
   const { img_path } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -240,20 +240,31 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={6}>
-              <input type="file" name="file" onChange={onChangeHandler} /><br />
+              <input type="file" name="file" onChange={onChangeHandler} />
+              <br />
             </Grid>
             <Grid item xs={12}>
               {preview && <img src={preview} width={200} height={200} />}
             </Grid>
             <Grid item xs={6}>
-              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                Please press upload button
-              </Button>}
+              {file && file.name && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => onUploadImageFile()}
+                >
+                  Please press upload button
+                </Button>
+              )}
             </Grid>
             {img_path && (
-            <Grid item xs={12}>
+              <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
+                  <img
+                    src={`${apiServiceHost}${img_path}`}
+                    width="250"
+                    alt=""
+                  />
                 </Paper>
               </Grid>
             )}

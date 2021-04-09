@@ -64,12 +64,12 @@ const EditForm = props => {
   } = props;
 
   const onValidated = formValues => {
-    const { mobile, email, new_password } = formValues
-    onEditMember({mobile, email, new_password});
+    const { mobile, email, new_password } = formValues;
+    onEditMember({ mobile, email, new_password });
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{marginBottom: '50px'}}>
+    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"

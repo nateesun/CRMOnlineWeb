@@ -25,10 +25,10 @@ const dashboardReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.redeem= [];
-        draft.redeemPoint= {};
-        draft.email= '';
-        draft.error= '';
+        draft.redeem = [];
+        draft.redeemPoint = {};
+        draft.email = '';
+        draft.error = '';
         break;
       case constants.LOAD_REDEEM:
         break;

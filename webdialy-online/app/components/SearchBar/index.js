@@ -22,7 +22,11 @@ export default function SearchBar(props) {
   return (
     <Grid container spacing={1}>
       <Grid item>
-        <Select onChange={e => setKey(e.target.value)} defaultValue={items[0].key} style={{width: '100%'}}>
+        <Select
+          onChange={e => setKey(e.target.value)}
+          defaultValue={items[0].key}
+          style={{ width: '100%' }}
+        >
           {items &&
             items.map((value1, key1) => (
               <MenuItem key={key1} value={value1.key}>
@@ -32,7 +36,11 @@ export default function SearchBar(props) {
         </Select>
       </Grid>
       <Grid item>
-        <TextField value={value} onChange={e => setValue(e.target.value)} style={{width: '100%'}} />
+        <TextField
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          style={{ width: '100%' }}
+        />
       </Grid>
       <Grid item>
         <Button

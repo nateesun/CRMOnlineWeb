@@ -30,11 +30,11 @@ export function ProfileChangePwd(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   return (
-    <MainLayoutApp title='Change Password' {...props}>
+    <MainLayoutApp title="Change Password" {...props}>
       <EditForm {...props} />
     </MainLayoutApp>
   );

@@ -1,20 +1,21 @@
 const express = require('express');
-const logger = require('./logger');
-const argv = require('./argv');
-const port = require('./port');
-const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
     ? require('ngrok')
     : false;
 const { resolve } = require('path');
+const logger = require('./logger');
+const argv = require('./argv');
+const port = require('./port');
+const setup = require('./middlewares/frontendMiddleware');
 const app = express();
 
 const httpRequest = require('./infra/httpRequest')();
 const envConfig = require('../config/envConfig');
 
-const appBasePath = process.env.REACT_APP_PUBLIC_PATH || envConfig('APP_BASE_PATH');
+const appBasePath =
+  process.env.REACT_APP_PUBLIC_PATH || envConfig('APP_BASE_PATH');
 const appName = process.env.REACT_APP_NAME || envConfig('APP_NAME');
 let serviceApiHost = envConfig('SERVICE_API_HOST');
 const isDemo = process.env.NODE_ENV === 'demo';
@@ -25,16 +26,16 @@ if (isDemo) {
 const loggerApp = require('./infra/logger')({
   appName,
   logLevel: 'info',
-})
+});
 
 const jwtUseCases = require('./infra/jwt')({
   tokenAge: 3600,
-  secret: 'softpos2013'
-})
+  secret: 'softpos2013',
+});
 const passport = require('./infra/passport')({
   loggerApp,
   jwtUseCases,
-})
+});
 
 const options = {
   serviceApiHost,
@@ -47,8 +48,14 @@ const options = {
 };
 
 const basePathForAPI = appBasePath.replace(/\/*$/, '');
-app.use(`${basePathForAPI}/api/verifyUser`, require('./routes/verifyUser')(options));
-app.use(`${basePathForAPI}/api/member/login`, require('./routes/login')(options));
+app.use(
+  `${basePathForAPI}/api/verifyUser`,
+  require('./routes/verifyUser')(options),
+);
+app.use(
+  `${basePathForAPI}/api/member/login`,
+  require('./routes/login')(options),
+);
 app.use(`${basePathForAPI}/api/upload`, require('./routes/upload')(options));
 app.use(`${basePathForAPI}/api`, require('./routes/api')(options));
 

@@ -7,7 +7,7 @@ import * as actions from './actions';
 
 export function* loadProfile() {
   try {
-    const email = JSON.parse(getCookie('token')||'');
+    const email = JSON.parse(getCookie('token') || '');
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {

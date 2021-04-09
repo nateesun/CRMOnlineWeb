@@ -47,7 +47,7 @@ const SubMenu = props => {
       }}
       showLabels
       className={classes.root}
-      style={{position: props.title==='Shopping' ? 'relative': 'fixed'}}
+      style={{ position: props.title === 'Shopping' ? 'relative' : 'fixed' }}
     >
       {props.leftMenu &&
         props.leftMenu.map(item => {

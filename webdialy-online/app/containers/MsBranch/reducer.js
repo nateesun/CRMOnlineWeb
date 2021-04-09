@@ -15,7 +15,7 @@ export const initialState = {
     code: '',
     name: '',
     map_latitude: 13.809992,
-    map_longitude: 100.413130,
+    map_longitude: 100.41313,
   },
   page: 'LIST',
   status: null,
@@ -33,13 +33,13 @@ const msBranchReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.list= [];
-        draft.data= {};
-        draft.page= 'LIST';
-        draft.status= null;
-        draft.message= null;
-        draft.currentId= '';
-        draft.response= {};
+        draft.list = [];
+        draft.data = {};
+        draft.page = 'LIST';
+        draft.status = null;
+        draft.message = null;
+        draft.currentId = '';
+        draft.response = {};
         break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;
@@ -66,7 +66,7 @@ const msBranchReducer = (state = initialState, action) =>
         draft.response.message = 'Load data to edit error!';
         break;
       case constants.CREATE_ITEM:
-        draft.data = {...action.payload, uuid_index : v4()};
+        draft.data = { ...action.payload, uuid_index: v4() };
         break;
       case constants.CREATE_ITEM_SUCCESS:
         draft.response.status = 'Success';

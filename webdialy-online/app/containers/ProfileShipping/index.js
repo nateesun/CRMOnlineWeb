@@ -30,7 +30,7 @@ export function ProfileShipping(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export function ProfileShipping(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='Edit Shipping' {...props}>
+    <MainLayoutApp title="Edit Shipping" {...props}>
       <EditForm {...props} />
     </MainLayoutApp>
   );

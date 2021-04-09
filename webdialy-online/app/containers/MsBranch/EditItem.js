@@ -43,7 +43,14 @@ const useStyles = makeStyles(theme => ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    response,
+    dispatch,
+  } = props;
   const { map_latitude, map_longitude } = props.initialValues;
 
   const onValidated = formValues => {
@@ -60,8 +67,8 @@ const EditItem = props => {
   };
 
   const handlePlace = (latitude, longitude) => {
-    dispatch(change('editItem', 'map_latitude', latitude))
-    dispatch(change('editItem', 'map_longitude', longitude))
+    dispatch(change('editItem', 'map_latitude', latitude));
+    dispatch(change('editItem', 'map_longitude', longitude));
   };
 
   return (
@@ -127,7 +134,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
+              <div align="center" style={{ marginBottom: '25px' }}>
                 <MapMarker
                   lat={parseFloat(map_latitude)}
                   lng={parseFloat(map_longitude)}

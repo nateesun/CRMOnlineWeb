@@ -40,7 +40,11 @@ export default function RedeemPage(props) {
         </div>
       </Grid>
       <Grid item xs={12}>
-        {listRedeem && listRedeem.length===0 && <ContentNotFound label={<FormattedMessage {...messages.notFoundPromotion} />} />}
+        {listRedeem && listRedeem.length === 0 && (
+          <ContentNotFound
+            label={<FormattedMessage {...messages.notFoundPromotion} />}
+          />
+        )}
         <Grid container justify="center" spacing={1}>
           {listRedeem &&
             listRedeem.map((item, index) => (
@@ -50,15 +54,19 @@ export default function RedeemPage(props) {
                     code: item.product_code,
                     name: item.redeem_name,
                     label: item.product_name,
-                    expiredPro: 'หมดเขต: '+moment(item.finish_time).format('DD/MM/YYYY'),
+                    expiredPro:
+                      'หมดเขต: ' +
+                      moment(item.finish_time).format('DD/MM/YYYY'),
                     pointUse: 'ใช้คะแนน: ' + item.point_to_redeem + ' คะแนน',
                     inStock: item.qty_in_stock,
                     status:
                       profile.total_score >= item.point_to_redeem
                         ? 'สถานะ: สามารถแลกได้'
-                        : 'ขาดอีก ' + (item.point_to_redeem-profile.total_score) + ' คะแนน',
+                        : 'ขาดอีก ' +
+                          (item.point_to_redeem - profile.total_score) +
+                          ' คะแนน',
                   }}
-                  img={item.img_path} 
+                  img={item.img_path}
                   free={profile.total_score >= item.point_to_redeem}
                   {...props}
                 />

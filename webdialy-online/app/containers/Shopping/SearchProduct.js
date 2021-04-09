@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SearchProduct = (props) => {
+const SearchProduct = props => {
   const classes = useStyles();
 
   return (
@@ -53,16 +53,18 @@ const SearchProduct = (props) => {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder={props.intl.formatMessage({id: 'app.containers.Shopping.search'})}
+        placeholder={props.intl.formatMessage({
+          id: 'app.containers.Shopping.search',
+        })}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search' }} 
-        onChange={(e)=>props.onSearch(e.target.value)}
+        inputProps={{ 'aria-label': 'search' }}
+        onChange={e => props.onSearch(e.target.value)}
       />
     </div>
   );
-}
+};
 
 export default injectIntl(SearchProduct);

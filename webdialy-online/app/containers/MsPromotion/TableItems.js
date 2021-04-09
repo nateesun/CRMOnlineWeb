@@ -159,7 +159,7 @@ export default function TableItems(props) {
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{margin: '5px'}}
+                          style={{ margin: '5px' }}
                         >
                           Edit
                         </Button>
@@ -167,7 +167,7 @@ export default function TableItems(props) {
                           variant="contained"
                           color="secondary"
                           onClick={() => handleDelete(item.uuid_index)}
-                          style={{margin: '5px'}}
+                          style={{ margin: '5px' }}
                         >
                           Delete
                         </Button>

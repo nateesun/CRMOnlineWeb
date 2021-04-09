@@ -30,7 +30,7 @@ export function Profile(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -70,4 +70,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect, memo)(Profile);
+export default compose(
+  withConnect,
+  memo,
+)(Profile);

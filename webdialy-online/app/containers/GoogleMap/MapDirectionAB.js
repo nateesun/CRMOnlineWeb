@@ -58,7 +58,8 @@ const MapDirectionAB = compose(
   const lngValue = props.lng || 100.525943;
 
   const position = new google.maps.LatLng(latValue, lngValue) || {
-    lat: latValue, lng: lngValue
+    lat: latValue,
+    lng: lngValue,
   };
   return (
     <GoogleMap defaultZoom={7} defaultCenter={position}>

@@ -30,16 +30,17 @@ export function UsePromotion(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (
-    <MainLayoutApp title='UsePromotion' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="UsePromotion" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

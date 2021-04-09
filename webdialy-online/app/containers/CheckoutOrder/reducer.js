@@ -28,7 +28,7 @@ export const initialState = {
     status: '',
     message: '',
   },
-  branch: {}
+  branch: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -41,10 +41,10 @@ const checkoutReducer = (state = initialState, action) =>
         draft.cart_no = '';
         draft.product = {};
         draft.member_code = '';
-        draft.memberShipping= {};
-        draft.paymentData= {};
-        draft.img_upload= null;
-        draft.slipFileName= '';
+        draft.memberShipping = {};
+        draft.paymentData = {};
+        draft.img_upload = null;
+        draft.slipFileName = '';
         draft.response = {};
         break;
       case constants.LOAD_CART:
@@ -64,7 +64,11 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.LOAD_MEMBER_SHIPPING_SUCCESS:
         if (Object.keys(action.payload).length === 0) {
-          draft.memberShipping = { ...action.payload, create: true, uuid_index: v4() }
+          draft.memberShipping = {
+            ...action.payload,
+            create: true,
+            uuid_index: v4(),
+          };
         } else {
           draft.memberShipping = action.payload;
         }
@@ -88,7 +92,9 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.SET_PAYMENT_DATA:
         draft.paymentData = action.payload;
-        draft.paymentData.transfer_date = moment().format('YYYY-MM-DD HH:mm:ss');
+        draft.paymentData.transfer_date = moment().format(
+          'YYYY-MM-DD HH:mm:ss',
+        );
         break;
       case constants.SET_PAYMENT_DATA_ERROR:
         break;
@@ -120,10 +126,10 @@ const checkoutReducer = (state = initialState, action) =>
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
       case constants.UPDATE_ADDRESS_FORM_SUCCESS:
-        draft.response =  {
+        draft.response = {
           status: 'Success_Update_Address',
-          message: 'Update Address Success'
-        }
+          message: 'Update Address Success',
+        };
       case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
       case constants.UPDATE_SLIP_PATH:
@@ -139,10 +145,10 @@ const checkoutReducer = (state = initialState, action) =>
         draft.branch = action.payload;
         break;
       case constants.LOAD_BRANCH_LOCATION_ERROR:
-        draft.response =  {
+        draft.response = {
           status: 'Load_Branch_Location_Error',
-          message: 'Load branch locaation error'
-        }
+          message: 'Load branch locaation error',
+        };
         break;
     }
   });

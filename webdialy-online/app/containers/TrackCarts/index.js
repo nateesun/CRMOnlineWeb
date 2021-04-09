@@ -26,16 +26,15 @@ export function TrackCarts(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
-    if(props.profile.member_role==='member'){
-      props.onSearch('member_code', props.profile.code)
-    }else{
+    if (props.profile.member_role === 'member') {
+      props.onSearch('member_code', props.profile.code);
+    } else {
       props.onInitLoad();
     }
-      
   }, []);
 
   return <ContentPage {...props} />;

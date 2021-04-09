@@ -30,7 +30,7 @@ export function MsRole(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export function MsRole(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='Roles' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="Roles" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

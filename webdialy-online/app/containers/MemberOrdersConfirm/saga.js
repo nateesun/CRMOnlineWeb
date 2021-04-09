@@ -9,7 +9,9 @@ import * as actions from './actions';
 export function* initLoad() {
   try {
     const { cart_no, database } = yield select(selectors.makeSelectData());
-    const requestURL = `${appConstants.publicPath}/api/orders/confirm_order/${cart_no}`;
+    const requestURL = `${
+      appConstants.publicPath
+    }/api/orders/confirm_order/${cart_no}`;
     const dbFromLogin = getCookie('database');
     const dbFromUrl = database || dbFromLogin;
     const response = yield call(request, requestURL, {
@@ -28,24 +30,24 @@ export function* onApproveConfirmOrder() {
   try {
     const requestURL = `${appConstants.publicPath}/api/orders`;
     const { database } = yield select(selectors.makeSelectData());
-    const { 
+    const {
       order_no,
-      member_code_update, 
-      member_remark, 
+      member_code_update,
+      member_remark,
       signature,
       order_status,
-      member_mobile
+      member_mobile,
     } = yield select(selectors.makeSelectConfirmData());
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         order_no,
-        member_code_update, 
-        member_remark, 
+        member_code_update,
+        member_remark,
         signature,
         order_status,
-        member_mobile
+        member_mobile,
       }),
     });
     if (response.status === 'Success') {

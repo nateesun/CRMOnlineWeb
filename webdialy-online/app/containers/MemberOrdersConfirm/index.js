@@ -22,11 +22,11 @@ export function MemberOrdersConfirm(props) {
   useInjectReducer({ key: 'memberOrdersConfirm', reducer });
   useInjectSaga({ key: 'memberOrdersConfirm', saga });
 
-  useEffect(()=>{
+  useEffect(() => {
     const cart_no = props.match.params.cart_no;
     const database = props.match.params.database || '';
-    props.onInitLoad({ cart_no, database })
-  }, [])
+    props.onInitLoad({ cart_no, database });
+  }, []);
 
   return <ViewItem {...props} />;
 }

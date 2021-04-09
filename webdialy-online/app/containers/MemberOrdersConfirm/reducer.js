@@ -31,11 +31,11 @@ const memberOrdersConfirmReducer = (state = initialState, action) =>
       case constants.INIT_LOAD:
         draft.data.cart_no = action.payload.cart_no;
         draft.data.database = action.payload.database;
-        draft.response = {}
+        draft.response = {};
         break;
       case constants.INIT_LOAD_SUCCESS:
         draft.list = action.payload;
-        draft.response = {}
+        draft.response = {};
         break;
       case constants.INIT_LOAD_ERROR:
         draft.response.status = 'Error';
@@ -43,7 +43,7 @@ const memberOrdersConfirmReducer = (state = initialState, action) =>
         break;
       case constants.CONFIRM_ORDERS:
         draft.confirmData = action.payload;
-        draft.response = {}
+        draft.response = {};
         break;
       case constants.CONFIRM_ORDERS_SUCCESS:
         draft.response.status = 'Success';

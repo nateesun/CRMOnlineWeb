@@ -45,7 +45,7 @@ const styles = theme => ({
 function Header(props) {
   const { classes, onDrawerToggle, profile } = props;
   const loggedIn = getCookie('token') || '';
-  const email = loggedIn ? JSON.parse(getCookie('token')): '';
+  const email = loggedIn ? JSON.parse(getCookie('token')) : '';
 
   return (
     <React.Fragment>
@@ -68,7 +68,7 @@ function Header(props) {
                 </IconButton>
               </Grid>
             </Hidden>
-            <Grid item xs></Grid>
+            <Grid item xs />
             <Grid item>
               <LocaleToggle />
             </Grid>

@@ -59,11 +59,11 @@ export default function RedeemCard(props) {
   const { options } = props;
   const [showDialog, setShowDialog] = useState(false);
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const showRedeemCode = () => {
     setShowDialog(true);
-  }
+  };
 
   return (
     <Card className={classes.root}>
@@ -105,7 +105,11 @@ export default function RedeemCard(props) {
       <CardActions>
         <Grid container justify="center">
           {options.inStock > 0 ? (
-            <Button variant="contained" className={classes.buttonFooter} onClick={()=>showRedeemCode()}>
+            <Button
+              variant="contained"
+              className={classes.buttonFooter}
+              onClick={() => showRedeemCode()}
+            >
               กดรับสิทธิ์
             </Button>
           ) : (
@@ -119,7 +123,13 @@ export default function RedeemCard(props) {
           )}
         </Grid>
       </CardActions>
-      {showDialog && <DialogRedeemCode {...props} code={options.code} handleClose={()=>setShowDialog(false)} />}
+      {showDialog && (
+        <DialogRedeemCode
+          {...props}
+          code={options.code}
+          handleClose={() => setShowDialog(false)}
+        />
+      )}
     </Card>
   );
 }

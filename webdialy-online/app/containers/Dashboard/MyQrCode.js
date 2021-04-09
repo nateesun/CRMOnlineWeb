@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import { Cake, Phone, MoneyOff, Star, AssignmentInd} from '@material-ui/icons';
+import { Cake, Phone, MoneyOff, Star, AssignmentInd } from '@material-ui/icons';
 const QRCode = require('qrcode.react');
 import messages from './messages';
 import default_boy from './images/default_boy.png';
@@ -47,7 +47,7 @@ export default function MyQrCode(props) {
     birthday,
     total_score,
     total_purchase,
-    member_role
+    member_role,
   } = props.profile;
   if (!code) {
     return (
@@ -72,25 +72,53 @@ export default function MyQrCode(props) {
           </BoxPanel>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#239FE7', color: 'white'}}>
+          <Paper
+            elevation={3}
+            style={{
+              padding: '5px',
+              margin: '5px',
+              background: '#239FE7',
+              color: 'white',
+            }}
+          >
             <BoxPanel>
-              <Cake />วันเกิด: {birthday}</BoxPanel>
+              <Cake />
+              วันเกิด: {birthday}
+            </BoxPanel>
             <BoxPanel>
-              <Phone />เบอร์ติดต่อ: {mobile}</BoxPanel>
+              <Phone />
+              เบอร์ติดต่อ: {mobile}
+            </BoxPanel>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#53AB67', color: 'white'}}>
+          <Paper
+            elevation={3}
+            style={{
+              padding: '5px',
+              margin: '5px',
+              background: '#53AB67',
+              color: 'white',
+            }}
+          >
             <BoxPanel>
-              <Star />คะแนนสะสมทั้งหมด: {total_score}</BoxPanel>
+              <Star />
+              คะแนนสะสมทั้งหมด: {total_score}
+            </BoxPanel>
             <BoxPanel>
-              <MoneyOff />ยอดซื้อสินค้า: {total_purchase}</BoxPanel>
+              <MoneyOff />
+              ยอดซื้อสินค้า: {total_purchase}
+            </BoxPanel>
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper elevation={3} style={{padding: '5px', margin: '5px', background: '#FFC36C'}}>
+          <Paper
+            elevation={3}
+            style={{ padding: '5px', margin: '5px', background: '#FFC36C' }}
+          >
             <BoxPanel>
-              <AssignmentInd />สถานะ: {member_role}
+              <AssignmentInd />
+              สถานะ: {member_role}
             </BoxPanel>
           </Paper>
         </Grid>

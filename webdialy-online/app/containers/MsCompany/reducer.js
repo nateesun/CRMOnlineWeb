@@ -33,13 +33,13 @@ const msCompanyReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.list= [];
-        draft.data= {};
-        draft.page= 'LIST';
-        draft.status= null;
-        draft.message= null;
-        draft.currentId= '';
-        draft.response= {};
+        draft.list = [];
+        draft.data = {};
+        draft.page = 'LIST';
+        draft.status = null;
+        draft.message = null;
+        draft.currentId = '';
+        draft.response = {};
         break;
       case constants.CHANGE_PAGE:
         draft.page = action.payload;

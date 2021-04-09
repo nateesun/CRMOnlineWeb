@@ -116,7 +116,7 @@ const EditForm = props => {
     clearData,
     onChangeMapsValue,
   } = props;
-  
+
   const [latitude, setLatitude] = useState(13.752434);
   const [longitude, setLongitude] = useState(100.494122);
   const [loadMap, setLoadMap] = useState(false);
@@ -127,11 +127,11 @@ const EditForm = props => {
 
   const handleLoadMap = show => {
     setLoadMap(show);
-    if(props.initialValues){
+    if (props.initialValues) {
       setLatitude(props.initialValues.map_latitude || 13.752434);
       setLongitude(props.initialValues.map_longitude || 100.494122);
     }
-  }
+  };
 
   const handlePlace = (latitude, longitude) => {
     onChangeMapsValue({
@@ -143,7 +143,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{marginBottom: '50px'}}>
+    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"

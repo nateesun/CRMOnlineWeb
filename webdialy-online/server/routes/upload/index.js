@@ -2,14 +2,7 @@ const { Router } = require('express');
 const { json, urlencoded } = require('body-parser');
 
 module.exports = args => {
-  const {
-    appName,
-    serviceApiHost,
-    httpRequest,
-    jwtUseCases,
-    loggerApp: logger,
-    passport,
-  } = args;
+  const { appName, serviceApiHost, httpRequest } = args;
   const router = Router();
 
   router.use(json());
@@ -17,7 +10,10 @@ module.exports = args => {
 
   const serviceProvider = (req, res) => {
     const { method, baseUrl, path } = req;
-    const completeUrl = `${serviceApiHost}${baseUrl.replace(new RegExp(`/${appName}`), '')}${path}`;
+    const completeUrl = `${serviceApiHost}${baseUrl.replace(
+      new RegExp(`/${appName}`),
+      '',
+    )}${path}`;
     const options = {
       ...req.headers,
       url: completeUrl,

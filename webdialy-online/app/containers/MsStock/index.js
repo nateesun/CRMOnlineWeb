@@ -30,7 +30,7 @@ export function MsStock(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export function MsStock(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='Stock' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="Stock" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

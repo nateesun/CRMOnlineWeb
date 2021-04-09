@@ -47,18 +47,18 @@ export default function CheckoutContent(props) {
   const { activeStep, setActiveStep } = props;
 
   const handleNext = () => {
-    if(activeStep+1 === 4){
+    if (activeStep + 1 === 4) {
       // if last step or finish step
       setActiveStep(activeStep + 1);
       props.onUpdateShoppingStep();
     } else {
-      if(activeStep + 1 === 2){
-        if(props.shipping){
+      if (activeStep + 1 === 2) {
+        if (props.shipping) {
           setActiveStep(activeStep + 1);
-        }else{
-          alert("กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน")
+        } else {
+          alert('กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน');
         }
-      }else{
+      } else {
         setActiveStep(activeStep + 1);
       }
     }
@@ -81,7 +81,7 @@ export default function CheckoutContent(props) {
       default:
         throw new Error('Unknown step');
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -120,13 +120,13 @@ export default function CheckoutContent(props) {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
+                    {activeStep === steps.length - 1
+                      ? 'ดำเนินการเสร็จสิ้น'
+                      : 'ถัดไป'}
                   </Button>
                 </div>
                 <ButtonLink to={`${appConstants.publicPath}/shopping`}>
-                  <Button variant="contained">
-                    กลับหน้าสั่งสินค้า
-                  </Button>
+                  <Button variant="contained">กลับหน้าสั่งสินค้า</Button>
                 </ButtonLink>
               </React.Fragment>
             )}

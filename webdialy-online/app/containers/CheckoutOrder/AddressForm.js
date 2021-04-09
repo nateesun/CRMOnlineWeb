@@ -185,9 +185,11 @@ const AddressForm = props => {
               <FormattedMessage {...messages.btnFormResetButton} />
             </Button>
           </Grid>
-          {response && response.status === 'Success_Update_Address' && <Grid item>
-            <span style={{color: 'green'}}>{response.message}</span>
-          </Grid>}
+          {response && response.status === 'Success_Update_Address' && (
+            <Grid item>
+              <span style={{ color: 'green' }}>{response.message}</span>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <div align="center" style={{ marginBottom: '25px' }}>
               <MapMarker

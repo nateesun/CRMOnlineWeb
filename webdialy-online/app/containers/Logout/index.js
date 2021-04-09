@@ -51,11 +51,11 @@ export function Logout(props) {
         <h4>
           <FormattedMessage {...messages.header} />
         </h4>
-      <ButtonLink to={`${appConstant.publicPath}/login`}>
-        <Button color="primary" size="large" startIcon={<LockIcon />}>
-          <FormattedMessage {...messages.loginButton} />
-        </Button>
-      </ButtonLink>
+        <ButtonLink to={`${appConstant.publicPath}/login`}>
+          <Button color="primary" size="large" startIcon={<LockIcon />}>
+            <FormattedMessage {...messages.loginButton} />
+          </Button>
+        </ButtonLink>
       </Wrapper>
     </React.Fragment>
   );

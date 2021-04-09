@@ -28,7 +28,7 @@ export function Shopping(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export function Shopping(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='Shopping' {...props}>
+    <MainLayoutApp title="Shopping" {...props}>
       <ShoppingContent {...props} />
     </MainLayoutApp>
   );
@@ -54,7 +54,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadProduct: ()=> dispatch(actions.loadProduct()),
+    onLoadProduct: () => dispatch(actions.loadProduct()),
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
     onSearch: data => dispatch(actions.searchProduct(data)),

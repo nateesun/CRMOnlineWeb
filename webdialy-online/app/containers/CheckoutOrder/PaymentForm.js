@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PaymentForm = (props) => {
+const PaymentForm = props => {
   const classes = useStyles();
   const { carts } = props.cartList;
   const { handleSubmit, file } = props;
@@ -27,18 +27,18 @@ const PaymentForm = (props) => {
   };
 
   const validateSlipUpload = () => {
-    if(file){
-      props.checkSlipImage(file.name)
+    if (file) {
+      props.checkSlipImage(file.name);
       props.onUpdateSlipPath(file.name);
-    }else{
+    } else {
       <SweetAlert
         show={true}
         title="Notfound Image File"
         type="warning"
         text="Please upload slip image file"
-      />
+      />;
     }
-  }
+  };
 
   const onChangeHandler = event => {
     props.setShowImg(false);
@@ -51,7 +51,7 @@ const PaymentForm = (props) => {
   };
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   return (
     <React.Fragment>
@@ -132,59 +132,107 @@ const PaymentForm = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            อัพโหลดไฟล์ Slip (1) <input type="file" name="file" onChange={onChangeHandler} />
+            อัพโหลดไฟล์ Slip (1){' '}
+            <input type="file" name="file" onChange={onChangeHandler} />
           </Grid>
           <Grid item xs={12}>
-            <button onClick={() => onUploadImageFile()} style={{marginRight: '10px'}}>Upload Slip (2)</button>
-            <button onClick={() => validateSlipUpload()} style={{background: 'chocolate'}}>Validate Slip (3)</button>
+            <button
+              onClick={() => onUploadImageFile()}
+              style={{ marginRight: '10px' }}
+            >
+              Upload Slip (2)
+            </button>
+            <button
+              onClick={() => validateSlipUpload()}
+              style={{ background: 'chocolate' }}
+            >
+              Validate Slip (3)
+            </button>
           </Grid>
           <Grid item xs={12}>
-            {props.showImg && <div align="center">
-              <img src={`${apiServiceHost}/images/${file.name}`} width={150} alt="" /><br /><br />
-               รูปสลิปที่โอนเงิน<br />
-            </div>}
+            {props.showImg && (
+              <div align="center">
+                <img
+                  src={`${apiServiceHost}/images/${file.name}`}
+                  width={150}
+                  alt=""
+                />
+                <br />
+                <br />
+                รูปสลิปที่โอนเงิน
+                <br />
+              </div>
+            )}
           </Grid>
           <Grid item xs={6} lg={6}>
-            {props.imgValid==='Success' && <Alert severity="success">ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน</Alert>}
-            {props.imgValid==='Warning' && <Alert severity="error">ข้อมูลใน QR Code ไม่ถูกต้องตาม Format</Alert>}
-            {props.imgValid==='Error' && <Alert severity="error">ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน</Alert>}
+            {props.imgValid === 'Success' && (
+              <Alert severity="success">
+                ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน
+              </Alert>
+            )}
+            {props.imgValid === 'Warning' && (
+              <Alert severity="error">
+                ข้อมูลใน QR Code ไม่ถูกต้องตาม Format
+              </Alert>
+            )}
+            {props.imgValid === 'Error' && (
+              <Alert severity="error">
+                ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน
+              </Alert>
+            )}
           </Grid>
         </Grid>
       </form>
     </React.Fragment>
   );
-}
+};
 
 const validate = formValues => {
   const errors = {};
   if (!formValues.account_from_name) {
-    errors.account_from_name = <FormattedMessage {...messages.accFromNameShouldNotEmpty} />;
+    errors.account_from_name = (
+      <FormattedMessage {...messages.accFromNameShouldNotEmpty} />
+    );
   }
   if (!formValues.account_to_name) {
-    errors.account_to_name = <FormattedMessage {...messages.accToNameShouldNotEmpty} />;
+    errors.account_to_name = (
+      <FormattedMessage {...messages.accToNameShouldNotEmpty} />
+    );
   }
   if (!formValues.from_account_no) {
-    errors.from_account_no = <FormattedMessage {...messages.fromAccShouldNotEmpty} />;
+    errors.from_account_no = (
+      <FormattedMessage {...messages.fromAccShouldNotEmpty} />
+    );
   }
   if (!formValues.to_account_no) {
-    errors.to_account_no = <FormattedMessage {...messages.toAccShouldNotEmpty} />;
+    errors.to_account_no = (
+      <FormattedMessage {...messages.toAccShouldNotEmpty} />
+    );
   }
   if (!formValues.transfer_date) {
-    errors.transfer_date = <FormattedMessage {...messages.transferDateShouldNotEmpty} />;
+    errors.transfer_date = (
+      <FormattedMessage {...messages.transferDateShouldNotEmpty} />
+    );
   }
   if (!formValues.transfer_ref) {
-    errors.transfer_ref = <FormattedMessage {...messages.transferRefShouldNotEmpty} />;
+    errors.transfer_ref = (
+      <FormattedMessage {...messages.transferRefShouldNotEmpty} />
+    );
   }
   if (!formValues.transfer_amount) {
-    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldNotEmpty} />;
+    errors.transfer_amount = (
+      <FormattedMessage {...messages.transferAmtShouldNotEmpty} />
+    );
   }
   if (formValues.transfer_amount < 1) {
-    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldMoreZero} />;
+    errors.transfer_amount = (
+      <FormattedMessage {...messages.transferAmtShouldMoreZero} />
+    );
   }
   return errors;
 };
 
 export default reduxForm({
-    form: 'paymentForm',
-    validate,
-  })(PaymentForm);
+  form: 'paymentForm',
+  validate,
+})(PaymentForm);

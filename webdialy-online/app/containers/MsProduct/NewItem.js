@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
   },
   paddingImg: {
     margin: '10px',
-    background: '#aaa'
-  }
+    background: '#aaa',
+  },
 }));
 
 const NewItem = props => {
@@ -49,7 +49,7 @@ const NewItem = props => {
   const [showImg, setShowImg] = useState(false);
 
   const loc = window.location.href.split('/');
-  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -243,12 +243,18 @@ const NewItem = props => {
               <input type="file" name="file" onChange={onChangeHandler} />
             </Grid>
             <Grid item xs={12} md={6}>
-              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                Upload
-              </Button>}
+              {file && file.name && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => onUploadImageFile()}
+                >
+                  Upload
+                </Button>
+              )}
             </Grid>
             <Grid item xs={12}>
-            {showImg && (
+              {showImg && (
                 <Paper elevation={3} className={classes.paddingImg}>
                   <img
                     src={`${apiServiceEndpoint}/images/${file.name}`}
@@ -306,16 +312,22 @@ const validate = formValues => {
     errors.name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.unit_code_sale) {
-    errors.unit_code_sale = <FormattedMessage {...messages.unitSaleShouldNotEmpty} />;
+    errors.unit_code_sale = (
+      <FormattedMessage {...messages.unitSaleShouldNotEmpty} />
+    );
   }
   if (!formValues.product_group_code) {
-    errors.product_group_code = <FormattedMessage {...messages.groupCodeShouldNotEmpty} />;
+    errors.product_group_code = (
+      <FormattedMessage {...messages.groupCodeShouldNotEmpty} />
+    );
   }
   if (!formValues.point || formValues.point < 0) {
     errors.point = <FormattedMessage {...messages.pointShouldNotEmpty} />;
   }
   if (!formValues.stock_code) {
-    errors.stock_code = <FormattedMessage {...messages.stkCodeShouldNotEmpty} />;
+    errors.stock_code = (
+      <FormattedMessage {...messages.stkCodeShouldNotEmpty} />
+    );
   }
   if (!formValues.price_e || formValues.price_e < 0) {
     errors.price_e = <FormattedMessage {...messages.eatInShouldNotEmpty} />;
@@ -327,19 +339,29 @@ const validate = formValues => {
     errors.price_d = <FormattedMessage {...messages.deliveryShouldNotEmpty} />;
   }
   if (!formValues.max_stock || formValues.max_stock < 0) {
-    errors.max_stock = <FormattedMessage {...messages.maxStockShouldNotEmpty} />;
+    errors.max_stock = (
+      <FormattedMessage {...messages.maxStockShouldNotEmpty} />
+    );
   }
   if (!formValues.min_stock || formValues.min_stock < 0) {
-    errors.min_stock = <FormattedMessage {...messages.minStockShouldNotEmpty} />;
+    errors.min_stock = (
+      <FormattedMessage {...messages.minStockShouldNotEmpty} />
+    );
   }
   if (!formValues.unit_code_stock) {
-    errors.unit_code_stock = <FormattedMessage {...messages.unitStockShouldNotEmpty} />;
+    errors.unit_code_stock = (
+      <FormattedMessage {...messages.unitStockShouldNotEmpty} />
+    );
   }
   if (!formValues.img_path) {
-    errors.img_path = <FormattedMessage {...messages.imagePathShouldNotEmpty} />;
+    errors.img_path = (
+      <FormattedMessage {...messages.imagePathShouldNotEmpty} />
+    );
   }
   if (!formValues.qty_over_stock) {
-    errors.qty_over_stock = <FormattedMessage {...messages.checkQtyOrNotShouldNotEmpty} />;
+    errors.qty_over_stock = (
+      <FormattedMessage {...messages.checkQtyOrNotShouldNotEmpty} />
+    );
   }
   return errors;
 };

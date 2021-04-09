@@ -59,8 +59,8 @@ export default function ProfileContent(props) {
     profile: PropTypes.object,
   };
 
-  if(!profile.code){
-    return <h3 style={{padding: '20px'}}>Loading...</h3>
+  if (!profile.code) {
+    return <h3 style={{ padding: '20px' }}>Loading...</h3>;
   }
 
   return (
@@ -165,21 +165,34 @@ export default function ProfileContent(props) {
               <LabelContent>{profile.line_id}</LabelContent>
             </Typography>
           </Grid>
-          {company && <Grid item xs={12}>
-            <Typography>
-              <Label>
-                <FormattedMessage {...messages.lineOfficial} />
-              </Label>{' '}
-              <LabelContent>
-                <a href={`http://line.me/ti/p/${company.line_official_id}`} target="_blank">
-                  <button style={{background: 'green', color: 'white', border: '0'}}>Add Line</button>
-                </a>
-              </LabelContent>
-            </Typography>
-          </Grid>}
+          {company && (
+            <Grid item xs={12}>
+              <Typography>
+                <Label>
+                  <FormattedMessage {...messages.lineOfficial} />
+                </Label>{' '}
+                <LabelContent>
+                  <a
+                    href={`http://line.me/ti/p/${company.line_official_id}`}
+                    target="_blank"
+                  >
+                    <button
+                      style={{
+                        background: 'green',
+                        color: 'white',
+                        border: '0',
+                      }}
+                    >
+                      Add Line
+                    </button>
+                  </a>
+                </LabelContent>
+              </Typography>
+            </Grid>
+          )}
         </Grid>
       </CardContent>
-      <CardActions style={{marginBottom: '50px'}}>
+      <CardActions style={{ marginBottom: '50px' }}>
         <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />

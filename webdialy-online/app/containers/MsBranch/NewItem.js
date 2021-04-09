@@ -43,7 +43,14 @@ const useStyles = makeStyles(theme => ({
 
 const NewItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    response,
+    dispatch,
+  } = props;
   const { map_latitude, map_longitude } = props.getData;
 
   const onValidated = formValues => {
@@ -60,14 +67,14 @@ const NewItem = props => {
   };
 
   const handlePlace = (latitude, longitude) => {
-    dispatch(change('newForm', 'map_latitude', latitude))
-    dispatch(change('newForm', 'map_longitude', longitude))
+    dispatch(change('newForm', 'map_latitude', latitude));
+    dispatch(change('newForm', 'map_longitude', longitude));
   };
 
-  useEffect(()=>{
-    dispatch(change('newForm', 'map_latitude', map_latitude))
-    dispatch(change('newForm', 'map_longitude', map_longitude))
-  }, [])
+  useEffect(() => {
+    dispatch(change('newForm', 'map_latitude', map_latitude));
+    dispatch(change('newForm', 'map_longitude', map_longitude));
+  }, []);
 
   NewItem.propTypes = {
     handleSubmit: PropTypes.func,
@@ -147,7 +154,7 @@ const NewItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
+              <div align="center" style={{ marginBottom: '25px' }}>
                 <MapMarker
                   lat={parseFloat(map_latitude)}
                   lng={parseFloat(map_longitude)}
@@ -216,7 +223,6 @@ const validate = formValues => {
 const mapStateToProps = createStructuredSelector({
   initialValues: selectors.makeSelectForm(),
 });
-
 
 export default connect(mapStateToProps)(
   reduxForm({

@@ -15,8 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
-  root: {
-  },
+  root: {},
   container: {
     paddingTop: '20px',
   },
@@ -44,10 +43,10 @@ export default function TableItems(props) {
   const { member_role } = profile;
 
   let showList = getList;
-  if(approve===true){
-    showList = getList.filter(item => item.shopping_step=== 'approve');
-  }else{
-    showList = getList.filter(item => item.shopping_step=== 'wait_confirm');
+  if (approve === true) {
+    showList = getList.filter(item => item.shopping_step === 'approve');
+  } else {
+    showList = getList.filter(item => item.shopping_step === 'wait_confirm');
   }
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -70,7 +69,7 @@ export default function TableItems(props) {
   const loadViewOrder = item => {
     props.onLoadViewOrder(item);
   };
-  
+
   TableItems.propTypes = {
     getList: PropTypes.array,
     onDeleteItem: PropTypes.func,
@@ -84,69 +83,76 @@ export default function TableItems(props) {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <SearchBar {...props} items={[
-          { key: '', value: '' },
-          { key: 'cart_no', value: 'Cart No' },
-          { key: 'member_code', value: 'Member Code' },
-          ]} />
+        <SearchBar
+          {...props}
+          items={[
+            { key: '', value: '' },
+            { key: 'cart_no', value: 'Cart No' },
+            { key: 'member_code', value: 'Member Code' },
+          ]}
+        />
         <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow className={classes.colRow}>
-                <TableCell align="center">No</TableCell>
-                <TableCell align="center">Cart No</TableCell>
-                <TableCell align="center">Create Date</TableCell>
-                <TableCell align="center">Member</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {showList &&
-                showList
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((item, index) => (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={item.uuid_index}
-                      className={classes.colRow}
-                    >
-                      <TableCell align="center">{index + 1}</TableCell>
-                      <TableCell align="center">{item.cart_no}</TableCell>
-                      <TableCell align="center">
-                        {item.cart_create_date}
-                      </TableCell>
-                      <TableCell align="center">{item.member_code}</TableCell>
-                      <TableCell align="center">
-                        <Grid container spacing={1} justify="center">
-                          <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onViewItem(item)}
-                            >
-                              Detail
-                            </Button>
-                          </Grid>
-                          {item.shopping_step === 'approve' && member_role === 'member' && 
-                          <Grid item>
-                            <Button variant="outlined" onClick={()=>loadViewOrder(item)}>
+          <TableHead>
+            <TableRow className={classes.colRow}>
+              <TableCell align="center">No</TableCell>
+              <TableCell align="center">Cart No</TableCell>
+              <TableCell align="center">Create Date</TableCell>
+              <TableCell align="center">Member</TableCell>
+              <TableCell align="center">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {showList &&
+              showList
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item, index) => (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={item.uuid_index}
+                    className={classes.colRow}
+                  >
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell align="center">{item.cart_no}</TableCell>
+                    <TableCell align="center">
+                      {item.cart_create_date}
+                    </TableCell>
+                    <TableCell align="center">{item.member_code}</TableCell>
+                    <TableCell align="center">
+                      <Grid container spacing={1} justify="center">
+                        <Grid item>
+                          <Button
+                            variant="outlined"
+                            onClick={() => onViewItem(item)}
+                          >
+                            Detail
+                          </Button>
+                        </Grid>
+                        {item.shopping_step === 'approve' &&
+                          member_role === 'member' && (
+                            <Grid item>
+                              <Button
+                                variant="outlined"
+                                onClick={() => loadViewOrder(item)}
+                              >
                                 View Signature
                               </Button>
-                          </Grid>
-                          }
-                        </Grid>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  {showList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={10}>
-                        ไม่พบข้อมูลสินค้าที่สั่งซื้อ
-                      </TableCell>
-                    </TableRow>
-                  )}
-            </TableBody>
-          </Table>
+                            </Grid>
+                          )}
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            {showList.length === 0 && (
+              <TableRow>
+                <TableCell align="left" colSpan={10}>
+                  ไม่พบข้อมูลสินค้าที่สั่งซื้อ
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}

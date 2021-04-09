@@ -18,29 +18,39 @@ const SignatureForm = props => {
 
   return (
     <Grid container>
-      <Grid item style={{border: '1px solid #eee'}}>
-        <SignatureCanvas 
-          canvasProps={{ 
-            className: 'sigCanvas', 
+      <Grid item style={{ border: '1px solid #eee' }}>
+        <SignatureCanvas
+          canvasProps={{
+            className: 'sigCanvas',
             width: '250px',
             height: '200px',
-          }} 
-        ref={sigPad} />
+          }}
+          ref={sigPad}
+        />
       </Grid>
       <Grid item xs={12}>
-        <Grid container style={{padding: '5px'}}>
+        <Grid container style={{ padding: '5px' }}>
           <Grid item>
-            <Button onClick={() => clear()}>
-              Clear
-            </Button>
+            <Button onClick={() => clear()}>Clear</Button>
           </Grid>
           <Grid item>
-            <Button variant="contained" style={{background: 'green', color: 'white'}} onClick={() => {trim(); setShowLabel(true)}}>
+            <Button
+              variant="contained"
+              style={{ background: 'green', color: 'white' }}
+              onClick={() => {
+                trim();
+                setShowLabel(true);
+              }}
+            >
               Confirm Signature
             </Button>
           </Grid>
           <Grid item xs={12}>
-            {showLabel && <div style={{color: 'blue', padding: '10px'}}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>}
+            {showLabel && (
+              <div style={{ color: 'blue', padding: '10px' }}>
+                บันทึกข้อมูลลายเซ็นต์แล้ว
+              </div>
+            )}
           </Grid>
         </Grid>
       </Grid>

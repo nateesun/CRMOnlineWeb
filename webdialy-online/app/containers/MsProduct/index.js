@@ -30,7 +30,7 @@ export function MsProduct(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export function MsProduct(props) {
   }, []);
 
   return (
-    <MainLayoutApp title='Product' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="Product" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>
@@ -76,7 +76,7 @@ function mapDispatchToProps(dispatch) {
     onUploadImage: file => dispatch(actions.uploadImage(file)),
     onLoadDataFromFile: data => dispatch(actions.loadDataFromFile(data)),
     onSaveDataImport: () => dispatch(actions.saveDataImport()),
-    onSetHeaders: (headers) => dispatch(actions.setHeaders(headers)),
+    onSetHeaders: headers => dispatch(actions.setHeaders(headers)),
   };
 }
 

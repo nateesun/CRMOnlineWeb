@@ -13,11 +13,11 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { FormattedMessage } from 'react-intl';
-import CSVReader from 'react-csv-reader'
+import CSVReader from 'react-csv-reader';
 const { v4 } = require('uuid');
 import messages from './messages';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
@@ -46,23 +46,23 @@ export default function LoadProduct(props) {
     const result = [];
     const headers = lines[0];
     props.onSetHeaders(headers);
-    for (let i = 1; i < lines.length; i++) {        
-        if (!lines[i]) {
-          continue;
-        }
-        const obj = {};
-        const currentline = lines[i];
-        for (let j = 0; j < headers.length; j++) {
-            obj[headers[j]] = currentline[j];
-        }
-        result.push({...obj, uuid_index: v4()});
+    for (let i = 1; i < lines.length; i++) {
+      if (!lines[i]) {
+        continue;
+      }
+      const obj = {};
+      const currentline = lines[i];
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+      }
+      result.push({ ...obj, uuid_index: v4() });
     }
     return result;
-}
+  };
 
   const handleFileData = list => {
     props.onLoadDataFromFile(csvJSON(list));
-  }
+  };
 
   return (
     <Container component="main" maxWidth="lg">
@@ -78,7 +78,7 @@ export default function LoadProduct(props) {
               onFileLoaded={handleFileData}
               inputId="fileUpload"
               inputName="fileUpload"
-              inputStyle={{color: 'red'}}
+              inputStyle={{ color: 'red' }}
             />
           </Grid>
         </Grid>
@@ -103,43 +103,56 @@ export default function LoadProduct(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows.map((row, index) => (
-              <TableRow key={index} className={classes.colRow}>
-                <TableCell component="th" scope="row">{index+1}</TableCell>
-                <TableCell align="left">{row.code}</TableCell>
-                <TableCell align="left">{row.name}</TableCell>
-                <TableCell align="left">{row.unit_code_sale}</TableCell>
-                <TableCell align="center">{row.product_group_code}</TableCell>
-                <TableCell align="left">{row.img_path}</TableCell>
-                <TableCell align="right">{row.point}</TableCell>
-                <TableCell align="right">{row.stock_code}</TableCell>
-                <TableCell align="right">{row.price_e}</TableCell>
-                <TableCell align="right">{row.price_t}</TableCell>
-                <TableCell align="right">{row.price_d}</TableCell>
-                <TableCell align="right">{row.max_stock}</TableCell>
-                <TableCell align="right">{row.min_stock}</TableCell>
-                <TableCell align="right">{row.unit_code_stock}</TableCell>
-                <TableCell align="right">{row.qty_over_stock}</TableCell>
-              </TableRow>
-            ))}
-            {rows.length === 0 && (
-                <TableRow>
-                  <TableCell align="left" colSpan={15}>
-                    ไม่พบข้อมูลสินค้าสำหรับโหลดเข้าระบบ
+            {rows &&
+              rows.map((row, index) => (
+                <TableRow key={index} className={classes.colRow}>
+                  <TableCell component="th" scope="row">
+                    {index + 1}
                   </TableCell>
+                  <TableCell align="left">{row.code}</TableCell>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.unit_code_sale}</TableCell>
+                  <TableCell align="center">{row.product_group_code}</TableCell>
+                  <TableCell align="left">{row.img_path}</TableCell>
+                  <TableCell align="right">{row.point}</TableCell>
+                  <TableCell align="right">{row.stock_code}</TableCell>
+                  <TableCell align="right">{row.price_e}</TableCell>
+                  <TableCell align="right">{row.price_t}</TableCell>
+                  <TableCell align="right">{row.price_d}</TableCell>
+                  <TableCell align="right">{row.max_stock}</TableCell>
+                  <TableCell align="right">{row.min_stock}</TableCell>
+                  <TableCell align="right">{row.unit_code_stock}</TableCell>
+                  <TableCell align="right">{row.qty_over_stock}</TableCell>
                 </TableRow>
-              )}
+              ))}
+            {rows.length === 0 && (
+              <TableRow>
+                <TableCell align="left" colSpan={15}>
+                  ไม่พบข้อมูลสินค้าสำหรับโหลดเข้าระบบ
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
       <Grid container spacing={1}>
         <Grid item xs={4} lg={3}>
-          <Button type="button" fullWidth variant="contained" color="primary" onClick={() => props.onSaveDataImport()}>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => props.onSaveDataImport()}
+          >
             <FormattedMessage {...messages.btnSave} />
           </Button>
         </Grid>
         <Grid item xs={4} lg={3}>
-          <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={() => props.onChangePage('LIST')}
+          >
             <FormattedMessage {...messages.btnBack} />
           </Button>
         </Grid>

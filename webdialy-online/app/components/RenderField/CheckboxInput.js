@@ -1,6 +1,6 @@
 import React from 'react';
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const InputCheckBox = ({ input, label }) => (
   <div>
@@ -16,4 +16,4 @@ const InputCheckBox = ({ input, label }) => (
   </div>
 );
 
-export default InputCheckBox
+export default InputCheckBox;

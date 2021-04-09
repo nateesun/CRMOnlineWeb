@@ -5,16 +5,13 @@
  *
  * @return {object}          The parsed JSON from the request
  */
-import fetchWithTimeout from './fetchWithTimeout';
 
 function parseJSON(response) {
-  if (response.status === 204 || response.status === 205) {
+  const { status, headers } = response;
+  if (status === 204 || status === 205) {
     return null;
   }
-  if (
-    response.status === 200 &&
-    parseInt(response.headers.get('content-length'), 10) === 0
-  ) {
+  if (status === 200 && parseInt(headers.get('content-length'), 10) === 0) {
     return {};
   }
   return response.json();
@@ -28,15 +25,16 @@ function parseJSON(response) {
  * @return {object|undefined} Returns either the response, or throws an error
  */
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
+  const { status } = response;
+  if (status >= 200 && status < 300) {
     return response;
   }
 
-  if (response.status >= 400 && response.status < 500) {
+  if (status >= 400 && status < 500) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  const error = new Error(statusText);
   error.response = response;
   throw error;
 }
@@ -50,14 +48,15 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
+  const { headers: headersInOptions, database } = options;
   let headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     Authorization: `Basic YWRtaW46c29mdHBvczIwMTM=`,
-    database: options.database || '',
+    database: database || '',
   };
-  if (options.headers) {
-    headers = options.headers;
+  if (headersInOptions) {
+    headers = headersInOptions;
   }
   return fetch(url, { ...options, headers })
     .then(checkStatus)

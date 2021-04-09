@@ -203,7 +203,7 @@ const ViewItem = props => {
                 />
               </Grid>
             ) : (
-              <Grid item xs={6} style={{padding: '10px'}}>
+              <Grid item xs={6} style={{ padding: '10px' }}>
                 <h4>Signature:</h4>
                 <img src={orders.signature} alt="show signature" />
               </Grid>
@@ -211,7 +211,7 @@ const ViewItem = props => {
           </Paper>
         </Grid>
       </Grid>
-      <Grid container style={{marginTop: '10px'}}>
+      <Grid container style={{ marginTop: '10px' }}>
         <Grid item xs={12}>
           <Grid container spacing={1} justify="flex-end">
             {orders.order_status !== 'member_approve' && (

@@ -146,7 +146,10 @@ const MainLayout = props => {
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && notMemberRole && classes.appBarShift)}
+        className={clsx(
+          classes.appBar,
+          open && notMemberRole && classes.appBarShift,
+        )}
       >
         <Toolbar className={classes.toolbar}>
           {notMemberRole && (

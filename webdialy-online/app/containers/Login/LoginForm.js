@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     textShadow: '2px 2px #ff0000',
     marginTop: '0px',
     position: 'absolute',
-  }
+  },
 }));
 
 const ImgLogo = styled.img`

@@ -41,7 +41,7 @@ export default function DialogDetail(props) {
   const [special_text, setSpecialText] = useState('');
   const classes = useStyles();
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const handleCloseDialog = () => {
     handleClose();
@@ -80,7 +80,7 @@ export default function DialogDetail(props) {
 
   const addQty = qtyAmt => {
     setQty(qtyAmt + 1);
-    if(item.qty_over_stock === 'N'){
+    if (item.qty_over_stock === 'N') {
       if (item.in_stock && qtyAmt + 1 > item.in_stock) {
         setQty(item.in_stock);
       }

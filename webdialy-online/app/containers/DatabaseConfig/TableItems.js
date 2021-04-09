@@ -103,23 +103,29 @@ export default function TableItems(props) {
                       <TableCell align="left">{item.database}</TableCell>
                       <TableCell align="left">{item.query}</TableCell>
                       <TableCell align="center">
-                      <Grid container spacing={1} justify="center">
-                            <Grid item>
-                              <a target="_blank" href={`${window.location.origin}${appConstants.publicPath}${item.query}`} style={{textDecoration: 'none'}}>
-                                <Button>Link Test</Button>
-                              </a>
-                            </Grid>
+                        <Grid container spacing={1} justify="center">
+                          <Grid item>
+                            <a
+                              target="_blank"
+                              href={`${window.location.origin}${
+                                appConstants.publicPath
+                              }${item.query}`}
+                              style={{ textDecoration: 'none' }}
+                            >
+                              <Button>Link Test</Button>
+                            </a>
                           </Grid>
+                        </Grid>
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={4}>
-                        ไม่พบข้อมูลฐานข้อมูล
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={4}>
+                    ไม่พบข้อมูลฐานข้อมูล
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

@@ -27,4 +27,8 @@ const makeSelectProfile = () =>
     substate => substate.profile,
   );
 
-export { makeSelectMainLayoutApp, selectMainLayoutAppDomain, makeSelectProfile };
+export {
+  makeSelectMainLayoutApp,
+  selectMainLayoutAppDomain,
+  makeSelectProfile,
+};
