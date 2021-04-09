@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -40,10 +39,10 @@ const useStyles = makeStyles({
 
 export default function TableItems(props) {
   const { getList, profile, approve } = props;
-  const { member_role } = profile;
+  const { member_role: memberRole } = profile;
 
   let showList = getList;
-  if (approve === true) {
+  if (approve) {
     showList = getList.filter(item => item.shopping_step === 'approve');
   } else {
     showList = getList.filter(item => item.shopping_step === 'wait_confirm');
@@ -78,6 +77,8 @@ export default function TableItems(props) {
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
+    profile: PropTypes.object,
+    approve: PropTypes.bool,
   };
 
   return (
@@ -130,7 +131,7 @@ export default function TableItems(props) {
                           </Button>
                         </Grid>
                         {item.shopping_step === 'approve' &&
-                          member_role === 'member' && (
+                          memberRole === 'member' && (
                             <Grid item>
                               <Button
                                 variant="outlined"

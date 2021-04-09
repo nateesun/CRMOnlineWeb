@@ -116,20 +116,24 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.DELETE_ITEM_CART:
         draft.product.product_code = action.payload;
+        break;
       case constants.DELETE_ITEM_CART_ERROR:
         break;
       case constants.UPDATE_ITEM_CART:
         draft.product = action.payload;
+        break;
       case constants.UPDATE_ITEM_CART_ERROR:
         break;
       case constants.UPDATE_ADDRESS_FORM:
         draft.addressForm = action.payload;
         draft.addressForm.uuid_index = v4();
+        break;
       case constants.UPDATE_ADDRESS_FORM_SUCCESS:
         draft.response = {
           status: 'Success_Update_Address',
           message: 'Update Address Success',
         };
+        break;
       case constants.UPDATE_ADDRESS_FORM_ERROR:
         break;
       case constants.UPDATE_SLIP_PATH:

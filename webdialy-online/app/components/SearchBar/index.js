@@ -17,6 +17,7 @@ export default function SearchBar(props) {
 
   SearchBar.propTypes = {
     onSearch: PropTypes.func,
+    items: PropTypes.array,
   };
 
   return (

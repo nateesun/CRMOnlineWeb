@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -7,6 +8,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import SweetAlert from 'sweetalert2-react';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import Orders from './Orders';
@@ -56,7 +58,12 @@ export default function CheckoutContent(props) {
         if (props.shipping) {
           setActiveStep(activeStep + 1);
         } else {
-          alert('กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน');
+          <SweetAlert
+            show={true}
+            title="Information !"
+            type="warning"
+            text="กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน"
+          />;
         }
       } else {
         setActiveStep(activeStep + 1);
@@ -136,3 +143,10 @@ export default function CheckoutContent(props) {
     </React.Fragment>
   );
 }
+
+CheckoutContent.propTypes = {
+  activeStep: PropTypes.number,
+  setActiveStep: PropTypes.func,
+  onUpdateShoppingStep: PropTypes.func,
+  shipping: PropTypes.any,
+};

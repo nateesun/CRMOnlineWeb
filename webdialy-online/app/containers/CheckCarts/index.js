@@ -34,6 +34,7 @@ export function CheckCarts(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (

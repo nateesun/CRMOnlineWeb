@@ -13,9 +13,9 @@ const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
 export function* loadCartList() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const cartNo = yield select(selectors.makeSelectCartsNo());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/carts/${cart_no}`;
+    const requestURL = `${appConstants.publicPath}/api/carts/${cartNo}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -32,11 +32,11 @@ export function* loadCartList() {
 
 export function* loadMemberShipping() {
   try {
-    const { code: member_code } = yield select(
+    const { code: memberCode } = yield select(
       mainSelectors.makeSelectProfile(),
     );
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
+    const requestURL = `${appConstants.publicPath}/api/shipping/${memberCode}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -80,11 +80,11 @@ export function* uploadFile() {
 
 export function* validateSlipUpload() {
   try {
-    const img_file = yield select(selectors.makeSelectSlipFile());
+    const imgFile = yield select(selectors.makeSelectSlipFile());
     const requestURL = `${appConstants.publicPath}/api/validate_slip`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify({ img_file: '' + img_file }),
+      body: JSON.stringify({ imgFile: '' + imgFile }),
     });
     if (response.data) {
       yield put(actions.checkSlipSuccess(response.data));
@@ -98,14 +98,14 @@ export function* validateSlipUpload() {
 
 export function* onDeleteItemCart() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
-    const { product_code } = yield select(selectors.makeSelectProduct());
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { product_code: productCode } = yield select(selectors.makeSelectProduct());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
-      body: JSON.stringify({ cart_no, product_code }),
+      body: JSON.stringify({ cartNo, product_code: productCode }),
     });
     if (response.status === 'Success') {
       yield loadCartList();
@@ -119,14 +119,14 @@ export function* onDeleteItemCart() {
 
 export function* onUpdateItemCart() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const cartNo = yield select(selectors.makeSelectCartsNo());
     const database = getCookie('database');
-    const { product_code, qty } = yield select(selectors.makeSelectProduct());
+    const { product_code: productCode, qty } = yield select(selectors.makeSelectProduct());
     const requestURL = `${appConstants.publicPath}/api/carts_detail`;
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cart_no, product_code, qty }),
+      body: JSON.stringify({ cartNo, product_code: productCode, qty }),
     });
     if (response.status === 'Success') {
       yield loadCartList();
@@ -140,7 +140,7 @@ export function* onUpdateItemCart() {
 
 export function* onUpdateAddressForm() {
   try {
-    const { code: member_code } = yield select(
+    const { code: memberCode } = yield select(
       mainSelectors.makeSelectProfile(),
     );
     const addressFormData = yield select(selectors.makeSelectAddressForm());
@@ -149,7 +149,7 @@ export function* onUpdateAddressForm() {
     let response = yield call(request, requestURL, {
       database,
       method: addressFormData.create === true ? 'POST' : 'PUT',
-      body: JSON.stringify({ ...addressFormData, member_code }),
+      body: JSON.stringify({ ...addressFormData, memberCode }),
     });
     if (response.status === 'Success') {
       yield put(actions.updateAddressFormSuccess(response));
@@ -163,8 +163,8 @@ export function* onUpdateAddressForm() {
 
 export function* onUpdatePaymentForm() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
-    const { code: member_code } = yield select(
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { code: memberCode } = yield select(
       mainSelectors.makeSelectProfile(),
     );
     const paymentData = yield select(selectors.makeSelectPaymentData());
@@ -173,7 +173,7 @@ export function* onUpdatePaymentForm() {
     let response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ ...paymentData, member_code, cart_no }),
+      body: JSON.stringify({ ...paymentData, member_code: memberCode, cart_no: cartNo }),
     });
     if (response.status === 'Success') {
       yield loadMemberShipping();
@@ -187,13 +187,13 @@ export function* onUpdatePaymentForm() {
 
 export function* onUpdateShoppingStep() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const cartNo = yield select(selectors.makeSelectCartsNo());
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_step`;
     const database = getCookie('database');
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cart_no, shopping_step: 'wait_confirm' }),
+      body: JSON.stringify({ cart_no: cartNo, shopping_step: 'wait_confirm' }),
     });
     if (response.status === 'Success') {
       yield loadMemberShipping();
@@ -210,14 +210,14 @@ export function* onUpdateShoppingStep() {
 
 export function* onUpdateSlipPath() {
   try {
-    const cart_no = yield select(selectors.makeSelectCartsNo());
+    const cartNo = yield select(selectors.makeSelectCartsNo());
     const slipPath = yield select(selectors.makeSelectSlipPath());
     const requestURL = `${appConstants.publicPath}/api/carts/slip_path`;
     const database = getCookie('database');
     let response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cart_no, slip_path: `/images/${slipPath}` }),
+      body: JSON.stringify({ cart_no: cartNo, slip_path: `/images/${slipPath}` }),
     });
     if (response.status === 'Success') {
       yield put(actions.updateSlipPathSuccess('Update slip path success'));

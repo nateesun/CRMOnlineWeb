@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
@@ -10,8 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Button } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import DialogRedeemCode from './DialogRedeemCode';
 
 const useStyles = makeStyles(theme => ({
@@ -133,3 +133,9 @@ export default function RedeemCard(props) {
     </Card>
   );
 }
+
+RedeemCard.propTypes = {
+  options: PropTypes.object,
+  img: PropTypes.string,
+  free: PropTypes.bool,
+};

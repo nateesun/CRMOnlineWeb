@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -33,7 +34,7 @@ const AddressForm = props => {
     initialValues,
     response,
   } = props;
-  const { map_latitude, map_longitude } = initialValues;
+  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = initialValues;
 
   useEffect(() => {
     props.initLoadMemberShipping();
@@ -193,8 +194,8 @@ const AddressForm = props => {
           <Grid item xs={12}>
             <div align="center" style={{ marginBottom: '25px' }}>
               <MapMarker
-                lat={parseFloat(map_latitude)}
-                lng={parseFloat(map_longitude)}
+                lat={parseFloat(mapLatitude)}
+                lng={parseFloat(mapLongitude)}
                 onExit={handlePlace}
               />
             </div>
@@ -204,6 +205,18 @@ const AddressForm = props => {
     </React.Fragment>
   );
 };
+
+AddressForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  pristine: PropTypes.bool,
+  reset: PropTypes.func,
+  submitting: PropTypes.bool,
+  dispatch: PropTypes.any,
+  initialValues: PropTypes.object,
+  response: PropTypes.any,
+  initLoadMemberShipping: PropTypes.func,
+  onUpdateAddressForm: PropTypes.func,
+}
 
 const validate = formValues => {
   const errors = {};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '@material-ui/core/Avatar';
 import { FormattedMessage } from 'react-intl';
@@ -6,11 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import { Cake, Phone, MoneyOff, Star, AssignmentInd } from '@material-ui/icons';
-const QRCode = require('qrcode.react');
-import messages from './messages';
-import default_boy from './images/default_boy.png';
-import default_girl from './images/default_girl.png';
 import { Grid } from '@material-ui/core';
+import QRCode from 'qrcode.react';
+import messages from './messages';
+import defaultBoy from './images/default_boy.png';
+import defaultGirl from './images/default_girl.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,14 +41,14 @@ export default function MyQrCode(props) {
   const {
     code,
     prefix,
-    first_name,
-    last_name,
+    first_name: firstName,
+    last_name: lastName,
     gender,
     mobile,
     birthday,
-    total_score,
-    total_purchase,
-    member_role,
+    total_score: totalScore,
+    total_purchase: totalPurchase,
+    member_role: memberRole,
   } = props.profile;
   if (!code) {
     return (
@@ -63,12 +64,12 @@ export default function MyQrCode(props) {
           <BoxPanel>
             <Avatar
               className={classes.large}
-              src={gender === 'M' ? default_boy : default_girl}
+              src={gender === 'M' ? defaultBoy : defaultGirl}
             />
           </BoxPanel>
           <BoxPanel>
             {prefix}
-            {first_name} {last_name}
+            {firstName} {lastName}
           </BoxPanel>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -103,11 +104,11 @@ export default function MyQrCode(props) {
           >
             <BoxPanel>
               <Star />
-              คะแนนสะสมทั้งหมด: {total_score}
+              คะแนนสะสมทั้งหมด: {totalScore}
             </BoxPanel>
             <BoxPanel>
               <MoneyOff />
-              ยอดซื้อสินค้า: {total_purchase}
+              ยอดซื้อสินค้า: {totalPurchase}
             </BoxPanel>
           </Paper>
         </Grid>
@@ -118,7 +119,7 @@ export default function MyQrCode(props) {
           >
             <BoxPanel>
               <AssignmentInd />
-              สถานะ: {member_role}
+              สถานะ: {memberRole}
             </BoxPanel>
           </Paper>
         </Grid>
@@ -134,3 +135,7 @@ export default function MyQrCode(props) {
     </React.Fragment>
   );
 }
+
+MyQrCode.propTypes = {
+  profile: PropTypes.object,
+};

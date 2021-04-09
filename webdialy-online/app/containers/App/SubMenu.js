@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 const SubMenu = props => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  const handleClick = path => history.push(path);
+  const handleClick = p => history.push(p);
 
   if (props.profile.member_role !== 'member') {
     return <span />;
@@ -32,8 +33,6 @@ const SubMenu = props => {
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);
-        if (newValue === 0) {
-        }
       }}
       showLabels
       className={classes.root}
@@ -65,5 +64,10 @@ const SubMenu = props => {
     </BottomNavigation>
   );
 };
+
+SubMenu.propTypes = {
+  profile: PropTypes.object,
+  leftMenu: PropTypes.array,
+}
 
 export default SubMenu;

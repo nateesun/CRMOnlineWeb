@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -24,23 +25,23 @@ const useStyles = makeStyles(theme => ({
 
 export default function Orders(props) {
   const classes = useStyles();
-  const { carts, carts_detail } = props.cartList;
+  const { carts, carts_detail: cartsDetail } = props.cartList;
 
-  const handleDelete = product_code => {
-    props.deleteItemCart(product_code);
+  const handleDelete = productCode => {
+    props.deleteItemCart(productCode);
   };
-  const handleAdd = (product_code, qty) => {
+  const handleAdd = (productCode, qty) => {
     if (qty === 0) {
-      handleDelete(product_code);
+      handleDelete(productCode);
     } else {
-      props.updateItemCart(product_code, qty);
+      props.updateItemCart(productCode, qty);
     }
   };
-  const handleRemove = (product_code, qty) => {
+  const handleRemove = (productCode, qty) => {
     if (qty === 0) {
-      handleDelete(product_code);
+      handleDelete(productCode);
     } else {
-      props.updateItemCart(product_code, qty);
+      props.updateItemCart(productCode, qty);
     }
   };
 
@@ -51,8 +52,8 @@ export default function Orders(props) {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {carts_detail &&
-          carts_detail.map(product => (
+        {cartsDetail &&
+          cartsDetail.map(product => (
             <ListItem className={classes.listItem} key={product.uuid_index}>
               <ListItemText
                 primary={product.product_name}
@@ -95,4 +96,10 @@ export default function Orders(props) {
       </List>
     </React.Fragment>
   );
+}
+
+Orders.propTypes = {
+  cartList: PropTypes.array,
+  deleteItemCart: PropTypes.func,
+  updateItemCart: PropTypes.func,
 }

@@ -1,5 +1,6 @@
 import React, { memo, useState } from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -26,13 +27,14 @@ import PeopleIcon from '@material-ui/icons/People';
 import LockIcon from '@material-ui/icons/Lock';
 import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import { Button } from '@material-ui/core';
+
 // menu items end
 import SubMenu from 'components/SubMenu';
 import * as appConstants from 'containers/App/constants';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import { scope } from './messages';
-import { Button } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -128,7 +130,7 @@ const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
   const { profile } = props;
-  const [open, setOpen] = useState(window.innerWidth > 500 ? true : false);
+  const [open, setOpen] = useState(window.innerWidth > 500);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -266,5 +268,12 @@ const MainLayout = props => {
     </div>
   );
 };
+
+MainLayout.propTypes = {
+  leftMenu: PropTypes.array,
+  profile: PropTypes.object,
+  title: PropTypes.string,
+  children: PropTypes.any,
+}
 
 export default memo(MainLayout);

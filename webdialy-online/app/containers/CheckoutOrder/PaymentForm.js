@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -185,6 +186,21 @@ const PaymentForm = props => {
       </form>
     </React.Fragment>
   );
+};
+
+PaymentForm.propTypes = {
+  cartList: PropTypes.array,
+  handleSubmit: PropTypes.func,
+  file: PropTypes.any,
+  setPaymentData: PropTypes.func,
+  checkSlipImage: PropTypes.func,
+  onUpdateSlipPath: PropTypes.func,
+  setShowImg: PropTypes.func,
+  setFile: PropTypes.func,
+  onUploadImage: PropTypes.func,
+  setShowImg: PropTypes.func,
+  showImg: PropTypes.bool,
+  imgValid: PropTypes.string,
 };
 
 const validate = formValues => {

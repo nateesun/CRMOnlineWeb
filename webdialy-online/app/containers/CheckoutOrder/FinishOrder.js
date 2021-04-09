@@ -1,5 +1,6 @@
 import React from 'react';
-const QRCode = require('qrcode.react');
+import PropTypes from 'prop-types';
+import QRCode from 'qrcode.react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
@@ -63,3 +64,8 @@ export default function FinishOrder(props) {
     </React.Fragment>
   );
 }
+
+FinishOrder.propTypes = {
+  currentCartNo: PropTypes.string,
+  database: PropTypes.string,
+};

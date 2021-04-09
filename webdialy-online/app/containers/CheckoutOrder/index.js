@@ -40,10 +40,11 @@ export function Checkout(props) {
   }
 
   useEffect(() => {
-    const cart_no = props.match.params.cart_no;
-    props.initLoadCart(cart_no);
+    const { cart_no: cartNo } = props.match.params;
+    props.initLoadCart(cartNo);
     props.initLoadMemberShipping();
     props.intiLoadBranchLocation();
+    return () => {}
   }, []);
 
   return (
@@ -68,6 +69,7 @@ export function Checkout(props) {
 Checkout.propTypes = {
   initLoadCart: PropTypes.func,
   initLoadMemberShipping: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -88,16 +90,16 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
+    initLoadCart: cartNo => dispatch(actions.loadCart(cartNo)),
     initLoadMemberShipping: () => dispatch(actions.loadMemberShipping()),
     onUploadImage: file => dispatch(actions.uploadImage(file)),
     onUpdateSlipPath: filePath => dispatch(actions.updateSlipPath(filePath)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
-    deleteItemCart: product_code =>
-      dispatch(actions.deleteItemCart(product_code)),
-    updateItemCart: (product_code, qty) =>
-      dispatch(actions.updateItemCart({ product_code, qty })),
+    deleteItemCart: productCode =>
+      dispatch(actions.deleteItemCart(productCode)),
+    updateItemCart: (productCode, qty) =>
+      dispatch(actions.updateItemCart({ productCode, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),

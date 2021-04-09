@@ -28,7 +28,7 @@ export function* loadRedeem() {
 export function* createRedeemCode() {
   try {
     const { code } = yield select(mainSelectors.makeSelectProfile());
-    const { uuid_index, product_code } = yield select(
+    const { uuid_index: uuidIndex, product_code: productCode } = yield select(
       selectors.makeSelectRedeemPoint(),
     );
     const database = getCookie('database');
@@ -37,8 +37,8 @@ export function* createRedeemCode() {
       database,
       method: 'POST',
       body: JSON.stringify({
-        uuid_index,
-        product_code,
+        uuid_index: uuidIndex,
+        product_code: productCode,
         member_code_use: code,
       }),
     });

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -45,7 +46,6 @@ const styles = theme => ({
 function Header(props) {
   const { classes, onDrawerToggle, profile } = props;
   const loggedIn = getCookie('token') || '';
-  const email = loggedIn ? JSON.parse(getCookie('token')) : '';
 
   return (
     <React.Fragment>
@@ -112,6 +112,7 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
+  profile: PropTypes.object,
 };
 
 export default withStyles(styles)(Header);
