@@ -46,7 +46,7 @@ module.exports = args => {
       const data = JSON.parse(response.data)
 
       mailer.recoverPassword({
-        recipients: data.email,
+        recipients: email,
         password: data.password,
       });
 
