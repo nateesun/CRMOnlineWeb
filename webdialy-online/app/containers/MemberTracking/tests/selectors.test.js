@@ -1,7 +1,12 @@
-// import { selectMemberTrackingDomain } from '../selectors';
+import * as selectors from '../selectors';
+
+const mockPayload = {
+  memberTracking: {},
+};
 
 describe('selectMemberTrackingDomain', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('Expect mock state and initial state from selectMemberTrackingDomain is equal', () => {
+    const state = selectors.selectMemberTrackingDomain(mockPayload);
+    expect(state).toEqual(mockPayload.memberTracking);
   });
 });

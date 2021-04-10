@@ -3,13 +3,17 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-// import lineLoginSaga from '../saga';
+import { takeEvery } from 'redux-saga/effects';
+import lineLoginSaga, { onVerifyTokenLogin } from '../saga';
+import * as constants from '../constants';
 
-// const generator = lineLoginSaga();
+const generator = lineLoginSaga();
 
 describe('lineLoginSaga Saga', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should start task to watch for VERIFY_TOKEN', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeEvery(constants.VERIFY_TOKEN, onVerifyTokenLogin),
+    );
   });
 });
