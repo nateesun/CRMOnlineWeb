@@ -8,7 +8,6 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 
@@ -32,13 +31,6 @@ const PaymentForm = props => {
     if (file) {
       props.checkSlipImage(file.name);
       props.onUpdateSlipPath(file.name);
-    } else {
-      <SweetAlert
-        show
-        title="Notfound Image File"
-        type="warning"
-        text="Please upload slip image file"
-      />;
     }
   };
 

@@ -8,7 +8,6 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import SweetAlert from 'sweetalert2-react';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import Orders from './Orders';
@@ -43,31 +42,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'รีวิว'];
+const handleStep4 = activeStep => activeStep + 1 === 4;
+const handleStep2 = activeStep => activeStep + 1 === 2;
 
 export default function CheckoutContent(props) {
   const classes = useStyles();
   const { activeStep, setActiveStep } = props;
 
   const handleNext = () => {
-    if (activeStep + 1 === 4) {
+    if (handleStep4) {
       // if last step or finish step
       setActiveStep(activeStep + 1);
       props.onUpdateShoppingStep();
-    } else {
-      if (activeStep + 1 === 2) {
-        if (props.shipping) {
-          setActiveStep(activeStep + 1);
-        } else {
-          <SweetAlert
-            show
-            title="Information !"
-            type="warning"
-            text="กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน"
-          />;
-        }
-      } else {
+    }
+    if (handleStep2) {
+      if (props.shipping) {
         setActiveStep(activeStep + 1);
       }
+    } else {
+      setActiveStep(activeStep + 1);
     }
   };
 

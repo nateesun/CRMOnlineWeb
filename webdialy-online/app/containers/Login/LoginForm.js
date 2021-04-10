@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import RenderField from 'components/RenderField';
-import InputCheckBox from 'components/RenderField/CheckboxInput';
+import CheckboxInput from 'components/RenderField/CheckboxInput';
 import SweetAlert from 'sweetalert2-react';
 import { Paper } from '@material-ui/core';
 import messages from './messages';
@@ -77,11 +77,16 @@ const LoginForm = props => {
     submitting,
     errorLogin,
     clearData,
+    onValidateLogin,
   } = props;
 
   useEffect(() => {
     setType('mobile');
   }, []);
+
+  const onValidate = formValues => {
+    onValidateLogin({ ...formValues, type: type ? 'email' : 'mobile' });
+  };
 
   return (
     <Grid container className={classes.root}>
@@ -96,10 +101,10 @@ const LoginForm = props => {
         <div className={classes.header}>CRM ONLINE</div>
         <Paper elevation={3} className={classes.paper}>
           <ImgLogo src={LoginLogo} width="128" height="128" />
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onValidate)}>
             <Field
               name="type"
-              component={InputCheckBox}
+              component={CheckboxInput}
               label={
                 type === 'mobile' ? (
                   <FormattedMessage {...messages.signInMobile} />
@@ -173,6 +178,7 @@ LoginForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   clearData: PropTypes.func,
+  onValidateLogin: PropTypes.func,
 };
 
 const validate = formValues => {

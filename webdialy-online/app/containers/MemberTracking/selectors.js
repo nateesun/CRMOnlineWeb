@@ -1,12 +1,10 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
 /**
  * Direct selector to the memberTracking state domain
  */
 
-const selectMemberTrackingDomain = state =>
-  state.memberTracking || initialState;
+const selectMemberTrackingDomain = state => state.memberTracking;
 
 /**
  * Other specific selectors

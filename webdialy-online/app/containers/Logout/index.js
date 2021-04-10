@@ -15,14 +15,10 @@ import styled from 'styled-components';
 import LockIcon from '@material-ui/icons/Lock';
 import ButtonLink from 'components/ButtonLink';
 import Button from '@material-ui/core/Button';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
 import * as appActions from 'containers/App/actions';
 import * as appConstant from 'containers/App/constants';
 import * as selectors from './selectors';
-import reducer from './reducer';
-import saga from './saga';
 import messages from './messages';
 import LogoutIcon from '../../images/logout.png';
 
@@ -35,14 +31,11 @@ const Wrapper = styled.div`
 `;
 
 export function Logout(props) {
-  useInjectReducer({ key: 'logout', reducer });
-  useInjectSaga({ key: 'logout', saga });
   const [token, setToken] = useCookie('token', '');
 
   useEffect(() => {
     props.onCheckLogout();
     setToken('');
-    return () => token;
   }, []);
 
   return (
