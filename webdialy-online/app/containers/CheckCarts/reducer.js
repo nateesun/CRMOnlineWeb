@@ -46,8 +46,6 @@ const checkCartsReducer = (state = initialState, action) =>
         draft.response.status = '';
         draft.response.message = '';
         break;
-      case constants.INIT_LOAD:
-        break;
       case constants.INIT_LOAD_SUCCESS:
         draft.list = action.payload;
         break;
@@ -99,8 +97,6 @@ const checkCartsReducer = (state = initialState, action) =>
         draft.response.status = 'Error';
         draft.response.message = 'Delete data error!';
         break;
-      case constants.SEARCH:
-        break;
       case constants.SEARCH_SUCCESS:
         draft.list = action.payload;
         break;
@@ -120,8 +116,6 @@ const checkCartsReducer = (state = initialState, action) =>
         break;
       case constants.LOAD_VIEW_ORDER:
         draft.data = action.payload;
-        break;
-      case constants.LOAD_VIEW_ORDER_SUCCESS:
         break;
       case constants.LOAD_VIEW_ORDER_ERROR:
         draft.response.status = 'Error';
