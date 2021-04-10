@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
 /**
  * Direct selector to the googleMap state domain
  */
 
-const selectGoogleMapDomain = state => state.googleMap || initialState;
+const selectGoogleMapDomain = state => state.googleMap;
 
 /**
  * Other specific selectors
