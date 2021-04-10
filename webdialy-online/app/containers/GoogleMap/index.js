@@ -12,9 +12,16 @@ import MapMarker from './MapMarker';
 import * as selectors from './selectors';
 
 export function GoogleMap(props) {
+  const handlePlace = () => {};
+
   return (
     <React.Fragment>
-      <MapMarker {...props} lat={13.844903} lng={100.525943} />
+      <MapMarker
+        {...props}
+        lat={13.844903}
+        lng={100.525943}
+        onExit={handlePlace}
+      />
     </React.Fragment>
   );
 }

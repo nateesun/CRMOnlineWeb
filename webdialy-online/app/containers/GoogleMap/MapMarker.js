@@ -24,7 +24,6 @@ const MapMarker = compose(
   withScriptjs,
   withGoogleMap,
 )(props => {
-  // console.log('MapMarker init:', props);
   const [latitude, setLatitude] = useState(props.lat);
   const [longitude, setLongitude] = useState(props.lng);
 
@@ -32,11 +31,10 @@ const MapMarker = compose(
     props.onExit(latitude, longitude);
   }
 
-  const position = new google.maps.LatLng(props.lat, props.lng) || {
+  const position = new window.google.maps.LatLng(props.lat, props.lng) || {
     lat: latitude,
     lng: longitude,
   };
-
   return (
     <GoogleMap
       defaultZoom={18}

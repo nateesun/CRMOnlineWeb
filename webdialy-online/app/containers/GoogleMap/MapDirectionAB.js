@@ -20,22 +20,22 @@ const MapDirectionAB = compose(
   lifecycle({
     componentDidMount() {
       const { origin, destination } = this.props;
-      const DirectionsService = new google.maps.DirectionsService();
+      const DirectionsService = new window.google.maps.DirectionsService();
 
       DirectionsService.route(
         {
-          origin: new google.maps.LatLng(
+          origin: new window.google.maps.LatLng(
             origin.position.lat(),
             origin.position.lng(),
           ),
-          destination: new google.maps.LatLng(
+          destination: new window.google.maps.LatLng(
             destination.position.lat(),
             destination.position.lng(),
           ),
-          travelMode: google.maps.TravelMode.DRIVING,
+          travelMode: window.google.maps.TravelMode.DRIVING,
         },
         (result, status) => {
-          if (status === google.maps.DirectionsStatus.OK) {
+          if (status === window.google.maps.DirectionsStatus.OK) {
             this.setState({
               lat: origin.position.lat(),
               lng: origin.position.lng(),
@@ -57,7 +57,7 @@ const MapDirectionAB = compose(
   const latValue = props.lat || 13.828941;
   const lngValue = props.lng || 100.525943;
 
-  const position = new google.maps.LatLng(latValue, lngValue) || {
+  const position = new window.google.maps.LatLng(latValue, lngValue) || {
     lat: latValue,
     lng: lngValue,
   };
