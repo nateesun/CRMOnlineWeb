@@ -75,6 +75,7 @@ const NewItem = props => {
     onInitLoad: PropTypes.func,
     onChangePage: PropTypes.func,
     onCreateItem: PropTypes.func,
+    onUploadImage: PropTypes.func,
   };
 
   const onChangeHandler = event => {

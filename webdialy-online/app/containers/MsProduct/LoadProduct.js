@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -11,10 +12,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { FormattedMessage } from 'react-intl';
 import CSVReader from 'react-csv-reader';
-const { v4 } = require('uuid');
+import { v4 } from 'uuid';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -46,16 +46,15 @@ export default function LoadProduct(props) {
     const result = [];
     const headers = lines[0];
     props.onSetHeaders(headers);
-    for (let i = 1; i < lines.length; i++) {
-      if (!lines[i]) {
-        continue;
+    for (let i = 1; i < lines.length; i += 1) {
+      if (lines[i]) {
+        const obj = {};
+        const currentline = lines[i];
+        for (let j = 0; j < headers.length; j += 1) {
+          obj[headers[j]] = currentline[j];
+        }
+        result.push({ ...obj, uuid_index: v4() });
       }
-      const obj = {};
-      const currentline = lines[i];
-      for (let j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
-      }
-      result.push({ ...obj, uuid_index: v4() });
     }
     return result;
   };
@@ -105,7 +104,7 @@ export default function LoadProduct(props) {
           <TableBody>
             {rows &&
               rows.map((row, index) => (
-                <TableRow key={index} className={classes.colRow}>
+                <TableRow key={v4()} className={classes.colRow}>
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>
@@ -160,3 +159,11 @@ export default function LoadProduct(props) {
     </Container>
   );
 }
+
+LoadProduct.propTypes = {
+  productImports: PropTypes.array,
+  onSetHeaders: PropTypes.func,
+  onLoadDataFromFile: PropTypes.func,
+  onSaveDataImport: PropTypes.func,
+  onChangePage: PropTypes.func,
+};

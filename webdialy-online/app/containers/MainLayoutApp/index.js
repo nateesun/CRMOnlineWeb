@@ -35,7 +35,10 @@ export function MainLayoutApp(props) {
   );
 }
 
-MainLayoutApp.propTypes = {};
+MainLayoutApp.propTypes = {
+  onLoadProfile: PropTypes.func,
+  children: PropTypes.object,
+};
 
 const mapStateToProps = createStructuredSelector({
   mainLayoutApp: selectors.makeSelectMainLayoutApp(),

@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 import { FormattedMessage } from 'react-intl';
@@ -16,9 +17,9 @@ const Media = props => {
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState(null);
 
-  const handleClickOpen = item => {
+  const handleClickOpen = itemAt => {
     setOpen(true);
-    setItem(item);
+    setItem(itemAt);
   };
 
   const handleClose = () => {
@@ -30,7 +31,7 @@ const Media = props => {
       <SearchProduct {...props} />
       <ProductList
         {...props}
-        handleClickOpen={item => handleClickOpen(item)}
+        handleClickOpen={it => handleClickOpen(it)}
         data={props.productList}
         topic={<FormattedMessage {...messages.productListTopic} />}
       />
@@ -46,6 +47,11 @@ const Media = props => {
       )}
     </div>
   );
+};
+
+Media.propTypes = {
+  productList: PropTypes.array,
+  cart: PropTypes.object,
 };
 
 export default function ShoppingContent(props) {

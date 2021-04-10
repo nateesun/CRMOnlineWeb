@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
@@ -33,7 +34,7 @@ const PaymentForm = props => {
       props.onUpdateSlipPath(file.name);
     } else {
       <SweetAlert
-        show={true}
+        show
         title="Notfound Image File"
         type="warning"
         text="Please upload slip image file"
@@ -137,18 +138,18 @@ const PaymentForm = props => {
             <input type="file" name="file" onChange={onChangeHandler} />
           </Grid>
           <Grid item xs={12}>
-            <button
+            <Button
               onClick={() => onUploadImageFile()}
               style={{ marginRight: '10px' }}
             >
               Upload Slip (2)
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => validateSlipUpload()}
               style={{ background: 'chocolate' }}
             >
               Validate Slip (3)
-            </button>
+            </Button>
           </Grid>
           <Grid item xs={12}>
             {props.showImg && (
@@ -198,7 +199,6 @@ PaymentForm.propTypes = {
   setShowImg: PropTypes.func,
   setFile: PropTypes.func,
   onUploadImage: PropTypes.func,
-  setShowImg: PropTypes.func,
   showImg: PropTypes.bool,
   imgValid: PropTypes.string,
 };

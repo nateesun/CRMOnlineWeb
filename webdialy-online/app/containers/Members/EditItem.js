@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { v4 } from 'uuid';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import * as selectors from './selectors';
@@ -155,8 +156,8 @@ const EditItem = props => {
                   required
                 >
                   {rolesList &&
-                    rolesList.map((item, index) => (
-                      <option key={item.code} value={item.code}>
+                    rolesList.map(item => (
+                      <option key={v4()} value={item.code}>
                         {item.name}
                       </option>
                     ))}
@@ -274,6 +275,7 @@ EditItem.propTypes = {
   onUpdateItem: PropTypes.func,
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
+  rolesList: PropTypes.array,
 };
 
 const validate = formValues => {

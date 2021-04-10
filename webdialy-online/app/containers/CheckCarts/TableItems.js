@@ -55,6 +55,9 @@ export default function TableItems(props) {
     setPage(newPage);
   };
 
+  const checkRole = (shoppingStep, mRole) =>
+    shoppingStep === 'approve' && mRole === 'member';
+
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -130,17 +133,16 @@ export default function TableItems(props) {
                             Detail
                           </Button>
                         </Grid>
-                        {item.shopping_step === 'approve' &&
-                          memberRole === 'member' && (
-                            <Grid item>
-                              <Button
-                                variant="outlined"
-                                onClick={() => loadViewOrder(item)}
-                              >
-                                View Signature
-                              </Button>
-                            </Grid>
-                          )}
+                        {checkRole(item.shopping_step, memberRole) && (
+                          <Grid item>
+                            <Button
+                              variant="outlined"
+                              onClick={() => loadViewOrder(item)}
+                            >
+                              View Signature
+                            </Button>
+                          </Grid>
+                        )}
                       </Grid>
                     </TableCell>
                   </TableRow>

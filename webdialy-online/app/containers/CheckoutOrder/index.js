@@ -44,7 +44,7 @@ export function Checkout(props) {
     props.initLoadCart(cartNo);
     props.initLoadMemberShipping();
     props.intiLoadBranchLocation();
-    return () => {}
+    return () => {};
   }, []);
 
   return (
@@ -70,6 +70,7 @@ Checkout.propTypes = {
   initLoadCart: PropTypes.func,
   initLoadMemberShipping: PropTypes.func,
   match: PropTypes.object,
+  intiLoadBranchLocation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

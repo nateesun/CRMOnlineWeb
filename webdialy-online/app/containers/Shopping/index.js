@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -33,6 +34,7 @@ export function Shopping(props) {
 
   useEffect(() => {
     props.onLoadProduct();
+    return () => {};
   }, []);
 
   return (
@@ -42,7 +44,9 @@ export function Shopping(props) {
   );
 }
 
-Shopping.propTypes = {};
+Shopping.propTypes = {
+  onLoadProduct: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),

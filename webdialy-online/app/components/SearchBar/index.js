@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import { v4 } from 'uuid';
 
 export default function SearchBar(props) {
   const { items } = props;
@@ -29,8 +30,8 @@ export default function SearchBar(props) {
           style={{ width: '100%' }}
         >
           {items &&
-            items.map((value1, key1) => (
-              <MenuItem key={key1} value={value1.key}>
+            items.map(value1 => (
+              <MenuItem key={v4()} value={value1.key}>
                 {value1.value}
               </MenuItem>
             ))}

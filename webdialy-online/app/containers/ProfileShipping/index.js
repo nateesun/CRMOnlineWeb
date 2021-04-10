@@ -35,6 +35,7 @@ export function ProfileShipping(props) {
 
   useEffect(() => {
     props.initLoad(JSON.parse(token));
+    return () => {};
   }, []);
 
   return (

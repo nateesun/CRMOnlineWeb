@@ -202,7 +202,7 @@ const MainLayout = props => {
           <List style={{ background: '#fbf9f8' }}>
             <React.Fragment>
               {leftMenu &&
-                leftMenu.map(({ id, icon, active, to_path: to }) => (
+                leftMenu.map(({ id, icon, to_path: to }) => (
                   <ButtonLink
                     to={appConstants.publicPath + to}
                     key={`menu${id}`}
@@ -274,6 +274,6 @@ MainLayout.propTypes = {
   profile: PropTypes.object,
   title: PropTypes.string,
   children: PropTypes.any,
-}
+};
 
 export default memo(MainLayout);

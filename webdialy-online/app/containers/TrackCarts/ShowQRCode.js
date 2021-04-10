@@ -10,7 +10,7 @@ import QRCode from 'qrcode.react';
 import * as appConstants from 'containers/App/constants';
 
 const ShowQRCode = props => {
-  const { onClose, open, cart: cart_no, db: database } = props;
+  const { onClose, open, cart: cartNo, db: database } = props;
   const loc = window.location.href.split('/');
   const hostUrl = `${loc[0]}//${loc[2]}${appConstants.publicPath}`;
 
@@ -24,7 +24,7 @@ const ShowQRCode = props => {
       <DialogTitle id="simple-dialog-title">QR CODE</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <QRCode value={`${hostUrl}/order_confirm/${cart_no}/${database}`} />
+          <QRCode value={`${hostUrl}/order_confirm/${cartNo}/${database}`} />
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -38,6 +38,9 @@ const ShowQRCode = props => {
 
 ShowQRCode.propTypes = {
   open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func,
+  cart: PropTypes.object,
+  db: PropTypes.string,
 };
 
 export default ShowQRCode;

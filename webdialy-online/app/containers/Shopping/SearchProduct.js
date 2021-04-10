@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import messages from './messages';
+import { injectIntl } from 'react-intl';
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -65,6 +65,11 @@ const SearchProduct = props => {
       />
     </div>
   );
+};
+
+SearchProduct.propTypes = {
+  onSearch: PropTypes.func,
+  intl: PropTypes.any,
 };
 
 export default injectIntl(SearchProduct);

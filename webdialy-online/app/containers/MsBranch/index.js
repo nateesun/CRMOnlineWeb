@@ -35,6 +35,7 @@ export function MsBranch(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (

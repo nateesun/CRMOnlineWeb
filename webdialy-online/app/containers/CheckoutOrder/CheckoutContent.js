@@ -59,7 +59,7 @@ export default function CheckoutContent(props) {
           setActiveStep(activeStep + 1);
         } else {
           <SweetAlert
-            show={true}
+            show
             title="Information !"
             type="warning"
             text="กรุณาระบุข้อมูลที่อยู่ให้ครบถ้วน"

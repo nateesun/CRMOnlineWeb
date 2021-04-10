@@ -5,11 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
@@ -24,8 +22,6 @@ const ForgotPassword = props => {
 
   return <ForgotForm {...props} />;
 };
-
-ForgotPassword.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   forgotPassword: selectors.makeSelectForgotPassword(),

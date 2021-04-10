@@ -102,4 +102,4 @@ Orders.propTypes = {
   cartList: PropTypes.array,
   deleteItemCart: PropTypes.func,
   updateItemCart: PropTypes.func,
-}
+};

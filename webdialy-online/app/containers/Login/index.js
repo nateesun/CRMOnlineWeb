@@ -45,6 +45,8 @@ const Login = props => {
 
 Login.propTypes = {
   onSubmit: PropTypes.func,
+  location: PropTypes.object,
+  initDatabase: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

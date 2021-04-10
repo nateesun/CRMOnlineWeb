@@ -4,9 +4,9 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
+import { v4 } from 'uuid';
 import * as loginConstants from 'containers/Login/constants';
-const { v4 } = require('uuid');
+import * as constants from './constants';
 
 export const initialState = {
   list: [],
@@ -116,6 +116,7 @@ const msProductReducer = (state = initialState, action) =>
         break;
       case constants.LOAD_DATA_FROM_FILE:
         draft.productImports = action.payload;
+        break;
       case constants.SAVE_DATA_IMPORT:
         break;
       case constants.SAVE_DATA_IMPORT_SUCCESS:

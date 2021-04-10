@@ -51,6 +51,6 @@ const withConnect = connect(
 
 App.propTypes = {
   loadAuthMenu: PropTypes.func,
-}
+};
 
 export default compose(withConnect)(App);

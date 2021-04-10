@@ -20,7 +20,7 @@ import * as appConstants from 'containers/App/constants';
 import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
   },
@@ -103,6 +103,9 @@ export default function TableItems(props) {
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
+    showCommand: PropTypes.bool,
+    profile: PropTypes.object,
+    onSearch: PropTypes.func,
   };
 
   return (

@@ -35,6 +35,7 @@ export function MsRole(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (

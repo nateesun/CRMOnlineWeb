@@ -37,6 +37,7 @@ export function Profile(props) {
     if (token !== '') {
       props.initLoadCompany();
     }
+    return () => {};
   }, []);
 
   return (

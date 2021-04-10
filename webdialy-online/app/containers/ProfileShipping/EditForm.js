@@ -133,13 +133,13 @@ const EditForm = props => {
     }
   };
 
-  const handlePlace = (latitude, longitude) => {
+  const handlePlace = (lat, lng) => {
     onChangeMapsValue({
-      map_latitude: latitude,
-      map_longitude: longitude,
+      map_latitude: lat,
+      map_longitude: lng,
     });
-    setLatitude(latitude);
-    setLongitude(longitude);
+    setLatitude(lat);
+    setLongitude(lng);
   };
 
   return (

@@ -109,7 +109,7 @@ export function* deleteData() {
 
 export function* onUpdateShoppingStep() {
   try {
-    const { cart_no, approve, reason } = yield select(
+    const { cart_no: cartNo, approve, reason } = yield select(
       selectors.makeSelectCartStatus(),
     );
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
@@ -119,7 +119,7 @@ export function* onUpdateShoppingStep() {
       database,
       method: 'PATCH',
       body: JSON.stringify({
-        cart_no,
+        cart_no: cartNo,
         shopping_step: approve,
         emp_code_update: code,
         emp_reason: reason,

@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
@@ -22,7 +23,6 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
-import { Grid } from '@material-ui/core';
 
 export function Members(props) {
   useInjectReducer({ key: 'members', reducer });

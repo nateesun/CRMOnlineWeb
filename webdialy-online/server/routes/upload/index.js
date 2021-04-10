@@ -26,9 +26,9 @@ module.exports = args => {
     }
 
     try {
-      return httpRequest(options, (error, response, body) => {
-        return res.status(200).json(body);
-      });
+      return httpRequest(options, (error, response, body) =>
+        res.status(200).json(body),
+      );
     } catch (e) {
       return res.status(500).json({ Error: e });
     }

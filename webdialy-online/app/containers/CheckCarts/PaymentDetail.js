@@ -101,7 +101,7 @@ export default function PaymentDetail(props) {
 
   PaymentDetail.propTypes = {
     payment: PropTypes.object,
-  }
+  };
 
   return <div>Not found payment detail</div>;
 }

@@ -42,6 +42,7 @@ export function Logout(props) {
   useEffect(() => {
     props.onCheckLogout();
     setToken('');
+    return () => token;
   }, []);
 
   return (

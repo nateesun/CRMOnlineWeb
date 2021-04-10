@@ -25,7 +25,7 @@ function parseJSON(response) {
  * @return {object|undefined} Returns either the response, or throws an error
  */
 function checkStatus(response) {
-  const { status } = response;
+  const { status, statusText } = response;
   if (status >= 200 && status < 300) {
     return response;
   }

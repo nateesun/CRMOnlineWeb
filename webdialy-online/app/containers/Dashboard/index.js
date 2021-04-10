@@ -38,7 +38,6 @@ export function Dashboard(props) {
       props.onLoadRedeem();
       props.onLoadMenu();
     }
-    return () => {}
   }, []);
 
   return (

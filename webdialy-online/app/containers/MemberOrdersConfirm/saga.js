@@ -8,10 +8,12 @@ import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const { cart_no, database } = yield select(selectors.makeSelectData());
+    const { cart_no: cartNo, database } = yield select(
+      selectors.makeSelectData(),
+    );
     const requestURL = `${
       appConstants.publicPath
-    }/api/orders/confirm_order/${cart_no}`;
+    }/api/orders/confirm_order/${cartNo}`;
     const dbFromLogin = getCookie('database');
     const dbFromUrl = database || dbFromLogin;
     const response = yield call(request, requestURL, {
@@ -31,23 +33,23 @@ export function* onApproveConfirmOrder() {
     const requestURL = `${appConstants.publicPath}/api/orders`;
     const { database } = yield select(selectors.makeSelectData());
     const {
-      order_no,
-      member_code_update,
-      member_remark,
+      order_no: orderNo,
+      member_code_update: memberCodeUpdate,
+      member_remark: memberRemark,
       signature,
-      order_status,
-      member_mobile,
+      order_status: orderStatus,
+      member_mobile: memberMobile,
     } = yield select(selectors.makeSelectConfirmData());
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
       body: JSON.stringify({
-        order_no,
-        member_code_update,
-        member_remark,
+        order_no: orderNo,
+        member_code_update: memberCodeUpdate,
+        member_remark: memberRemark,
         signature,
-        order_status,
-        member_mobile,
+        order_status: orderStatus,
+        member_mobile: memberMobile,
       }),
     });
     if (response.status === 'Success') {

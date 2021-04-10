@@ -51,7 +51,10 @@ const EditItem = props => {
     response,
     dispatch,
   } = props;
-  const { map_latitude, map_longitude } = props.initialValues;
+  const {
+    map_latitude: mapLatitude,
+    map_longitude: mapLongitude,
+  } = props.initialValues;
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -136,8 +139,8 @@ const EditItem = props => {
             <Grid item xs={12}>
               <div align="center" style={{ marginBottom: '25px' }}>
                 <MapMarker
-                  lat={parseFloat(map_latitude)}
-                  lng={parseFloat(map_longitude)}
+                  lat={parseFloat(mapLatitude)}
+                  lng={parseFloat(mapLongitude)}
                   onExit={handlePlace}
                 />
               </div>
@@ -193,6 +196,7 @@ EditItem.propTypes = {
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
   onCreateItem: PropTypes.func,
+  dispatch: PropTypes.any,
 };
 
 const validate = formValues => {

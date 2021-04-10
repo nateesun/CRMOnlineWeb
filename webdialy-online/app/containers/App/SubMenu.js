@@ -68,6 +68,6 @@ const SubMenu = props => {
 SubMenu.propTypes = {
   profile: PropTypes.object,
   leftMenu: PropTypes.array,
-}
+};
 
 export default SubMenu;

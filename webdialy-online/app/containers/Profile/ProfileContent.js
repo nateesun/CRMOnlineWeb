@@ -7,12 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
-import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 const Label = styled.span`
@@ -57,6 +57,7 @@ export default function ProfileContent(props) {
 
   ProfileContent.propTypes = {
     profile: PropTypes.object,
+    company: PropTypes.object,
   };
 
   if (!profile.code) {
@@ -176,7 +177,8 @@ export default function ProfileContent(props) {
                     href={`http://line.me/ti/p/${company.line_official_id}`}
                     target="_blank"
                   >
-                    <button
+                    <Button
+                      variant="outlined"
                       style={{
                         background: 'green',
                         color: 'white',
@@ -184,7 +186,7 @@ export default function ProfileContent(props) {
                       }}
                     >
                       Add Line
-                    </button>
+                    </Button>
                   </a>
                 </LabelContent>
               </Typography>

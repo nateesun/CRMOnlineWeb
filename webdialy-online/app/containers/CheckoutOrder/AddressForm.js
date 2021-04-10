@@ -34,7 +34,10 @@ const AddressForm = props => {
     initialValues,
     response,
   } = props;
-  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = initialValues;
+  const {
+    map_latitude: mapLatitude,
+    map_longitude: mapLongitude,
+  } = initialValues;
 
   useEffect(() => {
     props.initLoadMemberShipping();
@@ -216,7 +219,7 @@ AddressForm.propTypes = {
   response: PropTypes.any,
   initLoadMemberShipping: PropTypes.func,
   onUpdateAddressForm: PropTypes.func,
-}
+};
 
 const validate = formValues => {
   const errors = {};

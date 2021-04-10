@@ -51,7 +51,10 @@ const NewItem = props => {
     response,
     dispatch,
   } = props;
-  const { map_latitude, map_longitude } = props.getData;
+  const {
+    map_latitude: mapLatitude,
+    map_longitude: mapLongitude,
+  } = props.getData;
 
   const onValidated = formValues => {
     saveData(formValues);
@@ -72,8 +75,8 @@ const NewItem = props => {
   };
 
   useEffect(() => {
-    dispatch(change('newForm', 'map_latitude', map_latitude));
-    dispatch(change('newForm', 'map_longitude', map_longitude));
+    dispatch(change('newForm', 'map_latitude', mapLatitude));
+    dispatch(change('newForm', 'map_longitude', mapLongitude));
   }, []);
 
   NewItem.propTypes = {
@@ -87,6 +90,8 @@ const NewItem = props => {
     onInitLoad: PropTypes.func,
     onChangePage: PropTypes.func,
     onCreateItem: PropTypes.func,
+    getData: PropTypes.object,
+    dispatch: PropTypes.any,
   };
 
   return (
@@ -138,7 +143,6 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col3} />}
-                onChange={e => setLatitude(e.target.value)}
                 required
               />
             </Grid>
@@ -149,15 +153,14 @@ const NewItem = props => {
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.col4} />}
-                onChange={e => setLongitude(e.target.value)}
                 required
               />
             </Grid>
             <Grid item xs={12}>
               <div align="center" style={{ marginBottom: '25px' }}>
                 <MapMarker
-                  lat={parseFloat(map_latitude)}
-                  lng={parseFloat(map_longitude)}
+                  lat={parseFloat(mapLatitude)}
+                  lng={parseFloat(mapLongitude)}
                   onExit={handlePlace}
                 />
               </div>

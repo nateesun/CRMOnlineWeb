@@ -1,11 +1,11 @@
 import React from 'react';
-const { compose, withProps, lifecycle } = require('recompose');
-const {
+import { compose, withProps, lifecycle } from 'recompose';
+import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer,
-} = require('react-google-maps');
+} from 'react-google-maps';
 
 const MapDirectionAB = compose(
   withProps({
@@ -44,7 +44,7 @@ const MapDirectionAB = compose(
               duration: result.routes[0].legs[0].duration.value,
             });
           } else {
-            console.error(`error fetching directions ${result}`);
+            // console.error(`error fetching directions ${result}`);
           }
         },
       );

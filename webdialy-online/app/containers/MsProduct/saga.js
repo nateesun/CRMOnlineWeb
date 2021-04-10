@@ -58,16 +58,16 @@ export function* saveData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const file = yield select(selectors.makeSelectFileUpload());
-    let image_path = '';
+    let imagePath = '';
     if (file) {
-      image_path = `/images/${file.name}`;
+      imagePath = `/images/${file.name}`;
     }
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/product`;
     const response = yield call(request, requestURL, {
       database,
       method: 'POST',
-      body: JSON.stringify({ ...data, img_path: image_path }),
+      body: JSON.stringify({ ...data, img_path: imagePath }),
     });
     if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
@@ -131,9 +131,9 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     };
-    const response = yield fetch(`${apiServiceHost}/api/upload`, options)
-      .then(response => response.json())
-      .catch(error => console.log('error', error));
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(
+      resp => resp.json(),
+    );
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {

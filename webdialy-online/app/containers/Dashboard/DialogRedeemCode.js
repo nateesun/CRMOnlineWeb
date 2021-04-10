@@ -91,4 +91,4 @@ DialogRedeemCode.propTypes = {
   code: PropTypes.string,
   onCreateRedeem: PropTypes.func,
   handleClose: PropTypes.func,
-}
+};

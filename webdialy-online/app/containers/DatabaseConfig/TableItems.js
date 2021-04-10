@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 export default function TableItems(props) {
-  const { getList, showCommand = true } = props;
+  const { getList } = props;
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -60,11 +60,6 @@ export default function TableItems(props) {
 
   TableItems.propTypes = {
     getList: PropTypes.array,
-    onDeleteItem: PropTypes.func,
-    onLoadView: PropTypes.func,
-    onChangePage: PropTypes.func,
-    onLoadEdit: PropTypes.func,
-    onInitLoad: PropTypes.func,
   };
 
   return (

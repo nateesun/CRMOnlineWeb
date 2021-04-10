@@ -4,8 +4,8 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
 import { setCookie } from 'react-use-cookie';
+import * as constants from './constants';
 
 export const initialState = {
   loginForm: {

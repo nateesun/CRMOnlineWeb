@@ -21,7 +21,7 @@ import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 import ShowQRCode from './ShowQRCode';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
   },
@@ -98,6 +98,9 @@ export default function TableItems(props) {
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
+    showCommand: PropTypes.bool,
+    profile: PropTypes.object,
+    onSearch: PropTypes.func,
   };
 
   const handleRefreshPage = () => {
@@ -108,16 +111,16 @@ export default function TableItems(props) {
     }
   };
 
-  //show qrcode dialog
+  // show qrcode dialog
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useState('');
 
-  const handleClickOpen = cart_no => {
+  const handleClickOpen = cartNo => {
     setOpen(true);
-    setCart(cart_no);
+    setCart(cartNo);
   };
 
-  const handleClose = value => {
+  const handleClose = () => {
     setOpen(false);
   };
 

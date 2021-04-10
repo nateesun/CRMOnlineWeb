@@ -35,6 +35,8 @@ export function TrackCarts(props) {
     } else {
       props.onInitLoad();
     }
+
+    return () => {};
   }, []);
 
   return <ContentPage {...props} />;
@@ -49,6 +51,7 @@ TrackCarts.propTypes = {
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
   onSearch: PropTypes.func,
+  profile: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

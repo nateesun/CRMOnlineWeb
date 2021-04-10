@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
@@ -192,16 +191,8 @@ const validate = formValues => {
   return errors;
 };
 
-const mapStateToProps = (state, props) => ({
-  initialValues: {
-    type: true,
-  },
-});
-
-export default connect(mapStateToProps)(
-  reduxForm({
-    form: 'loginForm',
-    validate,
-    enableReinitialize: true,
-  })(LoginForm),
-);
+export default reduxForm({
+  form: 'loginForm',
+  validate,
+  enableReinitialize: true,
+})(LoginForm);

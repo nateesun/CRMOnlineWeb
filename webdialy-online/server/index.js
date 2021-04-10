@@ -67,7 +67,6 @@ setup(app, {
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null;
 const prettyHost = customHost || 'localhost';
-const customPort = envConfig('PORT') || port;
 
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
@@ -77,7 +76,7 @@ app.get('*.js', (req, res, next) => {
 });
 
 // Start your app.
-app.listen(customPort, host, async err => {
+app.listen(port, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
@@ -86,12 +85,12 @@ app.listen(customPort, host, async err => {
   if (ngrok) {
     let url;
     try {
-      url = await ngrok.connect(customPort);
+      url = await ngrok.connect(port);
+      return logger.appStarted(port, prettyHost, url);
     } catch (e) {
       return logger.error(e);
     }
-    logger.appStarted(customPort, prettyHost, url);
-  } else {
-    logger.appStarted(customPort, prettyHost);
   }
+
+  return logger.appStarted(port, prettyHost);
 });

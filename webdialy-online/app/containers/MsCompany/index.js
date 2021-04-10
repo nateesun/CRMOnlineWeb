@@ -35,6 +35,7 @@ export function MsCompany(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (

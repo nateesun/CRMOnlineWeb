@@ -49,7 +49,7 @@ const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
   const [file, setFile] = useState(null);
-  const { img_path } = props.initialValues;
+  const { img_path: imgPath } = props.initialValues;
 
   const loc = window.location.href.split('/');
   const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
@@ -249,11 +249,11 @@ const EditItem = props => {
                 Upload
               </Button>
             </Grid>
-            {img_path && (
+            {imgPath && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
                   <img
-                    src={`${apiServiceEndpoint}${img_path}`}
+                    src={`${apiServiceEndpoint}${imgPath}`}
                     width="250"
                     alt=""
                   />
@@ -310,6 +310,7 @@ EditItem.propTypes = {
   onUpdateItem: PropTypes.func,
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
+  onUploadImage: PropTypes.func,
 };
 
 const validate = formValues => {

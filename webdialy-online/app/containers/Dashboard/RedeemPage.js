@@ -48,7 +48,7 @@ export default function RedeemPage(props) {
         )}
         <Grid container justify="center" spacing={1}>
           {listRedeem &&
-            listRedeem.map((item, index) => (
+            listRedeem.map(item => (
               <Grid item xs={12} md={4} key={item.product_code}>
                 <RedeemCard
                   options={{

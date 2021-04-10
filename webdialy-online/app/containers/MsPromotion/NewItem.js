@@ -8,12 +8,10 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
-import { Paper } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import messages from './messages';
@@ -125,6 +123,7 @@ const NewItem = props => {
     onInitLoad: PropTypes.func,
     onChangePage: PropTypes.func,
     onCreateItem: PropTypes.func,
+    onUploadImage: PropTypes.func,
   };
 
   const onChangeHandler = event => {
@@ -143,7 +142,6 @@ const NewItem = props => {
         title="Success"
         type="success"
         text={response.message}
-        onConfirm={() => console.log('Upload success')}
       />
       <SweetAlert
         show={response.status === 'Success'}
@@ -266,7 +264,9 @@ const NewItem = props => {
               <br />
             </Grid>
             <Grid item xs={12}>
-              {preview && <img src={preview} width={200} height={200} />}
+              {preview && (
+                <img src={preview} width={200} height={200} alt="preview" />
+              )}
             </Grid>
             <Grid item xs={6}>
               {file && file.name && (

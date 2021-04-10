@@ -100,9 +100,9 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     };
-    const response = yield fetch(`${apiServiceHost}/api/upload`, options)
-      .then(response => response.json())
-      .catch(error => console.log('error', error));
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(
+      resp => resp.json(),
+    );
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {

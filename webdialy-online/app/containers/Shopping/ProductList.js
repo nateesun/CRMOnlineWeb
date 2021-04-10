@@ -4,9 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import ProductTopic from './ProductTopic';
 import { FormattedMessage } from 'react-intl';
 import ContentNotFound from 'components/ContentNotFound';
+import ProductTopic from './ProductTopic';
 import messages from './messages';
 
 export default function ProductList(props) {
@@ -102,7 +102,7 @@ export default function ProductList(props) {
                           marginRight: '2px',
                         }}
                       >
-                        คงเหลือ ({`${item.in_stock | 0}/${item.max_stock}`})
+                        คงเหลือ ({`${item.in_stock || 0}/${item.max_stock}`})
                       </span>
                     </Typography>
                   </Box>

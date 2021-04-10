@@ -80,6 +80,6 @@ SubMenu.propTypes = {
   profile: PropTypes.object,
   title: PropTypes.string,
   leftMenu: PropTypes.array,
-}
+};
 
 export default SubMenu;

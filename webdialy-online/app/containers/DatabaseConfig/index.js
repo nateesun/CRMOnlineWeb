@@ -35,6 +35,7 @@ export function DatabaseConfig(props) {
 
   useEffect(() => {
     props.onInitLoad();
+    return () => {};
   }, []);
 
   return (
