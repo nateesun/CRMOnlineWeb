@@ -20,7 +20,4 @@ const makeSelectMemberTracking = () =>
     substate => substate,
   );
 
-export {
-  selectMemberTrackingDomain,
-  makeSelectMemberTracking,
-};
+export { selectMemberTrackingDomain, makeSelectMemberTracking };

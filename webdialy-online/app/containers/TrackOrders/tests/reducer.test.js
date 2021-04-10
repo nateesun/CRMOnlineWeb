@@ -1,13 +1,25 @@
-// import produce from 'immer';
 import trackOrdersReducer from '../reducer';
-// import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('trackOrdersReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      list: [],
+      data: {
+        uuid_index: '',
+        col1: '',
+        col2: '',
+        col3: '',
+      },
+      page: 'LIST',
+      status: null,
+      message: null,
+      currentId: '',
+      response: {
+        status: null,
+        message: null,
+      },
     };
   });
 
@@ -15,18 +27,4 @@ describe('trackOrdersReducer', () => {
     const expectedResult = state;
     expect(trackOrdersReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

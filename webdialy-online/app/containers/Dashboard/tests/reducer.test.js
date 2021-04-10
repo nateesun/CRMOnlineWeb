@@ -1,6 +1,4 @@
-import produce from 'immer';
 import dashboardReducer from '../reducer';
-import * as actions from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('dashboardReducer', () => {

@@ -1,13 +1,23 @@
-// import produce from 'immer';
 import registerReducer from '../reducer';
-// import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('registerReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      data: {
+        prefix: '',
+        firstName: '',
+        lastName: '',
+        mobile: '',
+        email: '',
+        password: '',
+        birthday: '',
+        lineId: '',
+      },
+      company: {},
+      status: '',
+      error: '',
     };
   });
 
@@ -15,18 +25,4 @@ describe('registerReducer', () => {
     const expectedResult = state;
     expect(registerReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

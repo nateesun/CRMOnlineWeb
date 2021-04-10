@@ -1,5 +1,4 @@
 import loginReducer from '../reducer';
-import * as actions from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('loginReducer', () => {

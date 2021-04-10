@@ -1,4 +1,3 @@
-import produce from 'immer';
 import forgotPasswordReducer from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
