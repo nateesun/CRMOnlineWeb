@@ -4,16 +4,16 @@
 
 /* eslint-disable redux-saga/yield-effects */
 import { takeEvery } from 'redux-saga/effects';
-import dashboardSaga, { loadRedeem } from '../saga';
+import homePageSaga, { initLoad } from '../saga';
 import * as constants from '../constants';
 
-const generator = dashboardSaga();
+const generator = homePageSaga();
 
-describe('dashboardSaga Saga', () => {
-  it('should start task to watch for LOAD_REDEEM', () => {
+describe('homePageSaga Saga', () => {
+  it('should start task to watch for INIT_LOAD', () => {
     const takeLatestDescriptor = generator.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.LOAD_REDEEM, loadRedeem),
+      takeEvery(constants.INIT_LOAD, initLoad),
     );
   });
 });

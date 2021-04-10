@@ -1,13 +1,27 @@
-// import produce from 'immer';
+import produce from 'immer';
 import databaseConfigReducer from '../reducer';
-// import { someAction } from '../actions';
+import * as actions from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('databaseConfigReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      list: [],
+      data: {
+        uuid_index: '',
+        col1: '',
+        col2: '',
+        col3: '',
+      },
+      page: 'LIST',
+      status: null,
+      message: null,
+      currentId: '',
+      response: {
+        status: null,
+        message: null,
+      },
     };
   });
 
@@ -15,18 +29,4 @@ describe('databaseConfigReducer', () => {
     const expectedResult = state;
     expect(databaseConfigReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

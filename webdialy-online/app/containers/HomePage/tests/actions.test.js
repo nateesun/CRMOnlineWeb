@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 import * as constants from '../constants';
 
-describe('Dashboard actions', () => {
+describe('HomePage actions', () => {
   describe('initState Action', () => {
     it('has a type of INIT_STATE', () => {
       const expected = {

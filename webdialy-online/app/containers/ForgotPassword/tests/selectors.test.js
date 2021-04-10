@@ -1,7 +1,18 @@
-// import { selectForgotPasswordDomain } from '../selectors';
+import * as selectors from '../selectors';
+
+const mockPayload = {
+  request: {
+    email: '',
+    mobile: '',
+    secret: '',
+  },
+  status: '',
+  msg: '',
+};
 
 describe('selectForgotPasswordDomain', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('Expect mock state and initial state from selectForgotPasswordDomain is equal', () => {
+    const state = selectors.selectForgotPasswordDomain(mockPayload);
+    expect(state).toEqual(mockPayload);
   });
 });
