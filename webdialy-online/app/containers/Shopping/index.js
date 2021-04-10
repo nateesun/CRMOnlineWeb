@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -32,10 +32,7 @@ export function Shopping(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    props.onLoadProduct();
-    return () => {};
-  }, []);
+  props.onLoadProduct();
 
   return (
     <MainLayoutApp title="Shopping" {...props}>

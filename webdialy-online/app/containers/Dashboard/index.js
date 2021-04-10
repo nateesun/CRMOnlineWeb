@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -33,12 +33,10 @@ export function Dashboard(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    if (token !== '') {
-      props.onLoadRedeem();
-      props.onLoadMenu();
-    }
-  }, []);
+  if (token !== '') {
+    props.onLoadRedeem();
+    props.onLoadMenu();
+  }
 
   return (
     props.login && (

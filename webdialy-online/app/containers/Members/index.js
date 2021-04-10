@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -33,10 +33,8 @@ export function Members(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    props.onInitLoad();
-    props.onLoadRoles();
-  }, []);
+  props.onInitLoad();
+  props.onLoadRoles();
 
   return (
     <MainLayoutApp title="MemberList" {...props}>

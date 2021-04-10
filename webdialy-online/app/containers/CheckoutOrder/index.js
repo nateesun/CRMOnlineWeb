@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -39,13 +39,10 @@ export function Checkout(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    const { cart_no: cartNo } = props.match.params;
-    props.initLoadCart(cartNo);
-    props.initLoadMemberShipping();
-    props.intiLoadBranchLocation();
-    return () => {};
-  }, []);
+  const { cart_no: cartNo } = props.match.params;
+  props.initLoadCart(cartNo);
+  props.initLoadMemberShipping();
+  props.intiLoadBranchLocation();
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>

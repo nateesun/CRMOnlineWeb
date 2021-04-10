@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,14 +29,11 @@ export function TrackOrders(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    if (props.profile.member_role === 'member') {
-      props.onSearch('member_code', props.profile.code);
-    } else {
-      props.onInitLoad();
-    }
-    return () => {};
-  }, []);
+  if (props.profile.member_role === 'member') {
+    props.onSearch('member_code', props.profile.code);
+  } else {
+    props.onInitLoad();
+  }
 
   return <ContentPage {...props} />;
 }

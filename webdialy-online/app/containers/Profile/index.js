@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
@@ -33,12 +33,7 @@ export function Profile(props) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
-  useEffect(() => {
-    if (token !== '') {
-      props.initLoadCompany();
-    }
-    return () => {};
-  }, []);
+  props.initLoadCompany();
 
   return (
     props.login && (

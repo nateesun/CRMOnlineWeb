@@ -1,12 +1,11 @@
 const express = require('express');
-const isDev = process.env.NODE_ENV !== 'production';
+const ngrokServer = require('ngrok');
 const { resolve } = require('path');
-const logger = require('./logger');
 const argv = require('./argv');
+const isDev = process.env.NODE_ENV !== 'production';
 const ngrok =
-  (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
-    ? require('ngrok')
-    : false;
+  (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? ngrokServer : false;
+const logger = require('./logger');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
 const app = express();
