@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -40,7 +41,14 @@ const Login = props => {
     return <Redirect to={`${appConstants.publicPath}/dashboard`} />;
   }
 
-  return <LoginForm {...props} />;
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
+      <LoginForm {...props} />;
+    </React.Fragment>
+  );
 };
 
 Login.propTypes = {

@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import useCookie from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -42,6 +43,9 @@ export function Logout(props) {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Logout</title>
+      </Helmet>
       <Wrapper>
         <img src={LogoutIcon} border={0} width={100} alt="" />
         <h4>
