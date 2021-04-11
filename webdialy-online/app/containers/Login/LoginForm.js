@@ -85,7 +85,10 @@ const LoginForm = props => {
   }, []);
 
   const onValidate = formValues => {
-    onValidateLogin({ ...formValues, type: type ? 'email' : 'mobile' });
+    onValidateLogin({
+      ...formValues,
+      type: type === true ? 'email' : 'mobile',
+    });
   };
 
   return (

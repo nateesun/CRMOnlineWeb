@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import useCookie from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -30,8 +31,13 @@ const Wrapper = styled.div`
 `;
 
 export function Logout(props) {
+  const [token, setToken] = useCookie('token', '');
+
   useEffect(() => {
-    props.onCheckLogout();
+    if (token) {
+      props.onCheckLogout();
+      setToken('');
+    }
   }, []);
 
   return (

@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -25,14 +25,19 @@ export function TrackCarts(props) {
   useInjectSaga({ key: 'trackCarts', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      if (props.profile.member_role === 'member') {
+        props.onSearch('member_code', props.profile.code);
+      } else {
+        props.onInitLoad();
+      }
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
-
-  if (props.profile.member_role === 'member') {
-    props.onSearch('member_code', props.profile.code);
-  } else {
-    props.onInitLoad();
   }
 
   return <ContentPage {...props} />;

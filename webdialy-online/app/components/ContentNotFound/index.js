@@ -12,5 +12,5 @@ export default function ContentNotFound(props) {
 }
 
 ContentNotFound.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.any,
 };

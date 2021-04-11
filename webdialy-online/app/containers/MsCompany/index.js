@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,11 +29,16 @@ export function MsCompany(props) {
   useInjectSaga({ key: 'msCompany', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      props.onInitLoad();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  props.onInitLoad();
 
   return (
     <MainLayoutApp title="Company" {...props}>

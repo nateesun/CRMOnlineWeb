@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,11 +29,16 @@ export function ProfileShipping(props) {
   useInjectSaga({ key: 'profileShipping', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      props.initLoad(JSON.parse(token));
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  props.initLoad(JSON.parse(token));
 
   return (
     <MainLayoutApp title="Edit Shipping" {...props}>

@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,12 +29,17 @@ export function Members(props) {
   useInjectSaga({ key: 'members', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      props.onInitLoad();
+      props.onLoadRoles();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  props.onInitLoad();
-  props.onLoadRoles();
 
   return (
     <MainLayoutApp title="MemberList" {...props}>

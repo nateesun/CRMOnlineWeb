@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -29,13 +29,16 @@ export function Dashboard(props) {
   useInjectSaga({ key: 'dashboard', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      props.onLoadRedeem();
+      props.onLoadMenu();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
-
-  if (token !== '') {
-    props.onLoadRedeem();
-    props.onLoadMenu();
   }
 
   return (

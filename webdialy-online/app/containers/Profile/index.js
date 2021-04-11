@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCookie } from 'react-use-cookie';
@@ -29,11 +29,16 @@ export function Profile(props) {
   useInjectSaga({ key: 'profile', saga });
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      props.initLoadCompany();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  props.initLoadCompany();
 
   return (
     props.login && (

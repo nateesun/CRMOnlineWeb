@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -35,14 +35,19 @@ export function Checkout(props) {
   const [duration, setDuration] = useState(0);
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      const { cart_no: cartNo } = props.match.params;
+      props.initLoadCart(cartNo);
+      props.initLoadMemberShipping();
+      props.intiLoadBranchLocation();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  const { cart_no: cartNo } = props.match.params;
-  props.initLoadCart(cartNo);
-  props.initLoadMemberShipping();
-  props.intiLoadBranchLocation();
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
