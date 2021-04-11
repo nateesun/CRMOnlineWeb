@@ -1,13 +1,26 @@
-// import produce from 'immer';
 import msBranchReducer from '../reducer';
-// import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('msBranchReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      list: [],
+      data: {
+        uuid_index: '',
+        code: '',
+        name: '',
+        map_latitude: 13.809992,
+        map_longitude: 100.41313,
+      },
+      page: 'LIST',
+      status: null,
+      message: null,
+      currentId: '',
+      response: {
+        status: null,
+        message: null,
+      },
     };
   });
 
@@ -15,18 +28,4 @@ describe('msBranchReducer', () => {
     const expectedResult = state;
     expect(msBranchReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

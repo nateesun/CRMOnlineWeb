@@ -9,9 +9,11 @@ import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { code: member_code } = yield select(mainSelectors.makeSelectProfile());
+    const { code: memberCode } = yield select(
+      mainSelectors.makeSelectProfile(),
+    );
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/shipping/${member_code}`;
+    const requestURL = `${appConstants.publicPath}/api/shipping/${memberCode}`;
     try {
       const response = yield call(request, requestURL, {
         database,
@@ -41,7 +43,7 @@ export function* onEditShipping() {
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
-      method: addressData.create===true ? 'POST': 'PUT',
+      method: addressData.create === true ? 'POST' : 'PUT',
       body: JSON.stringify(addressData),
     });
     if (response.status === 'Success') {

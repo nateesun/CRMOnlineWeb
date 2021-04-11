@@ -5,9 +5,10 @@
  */
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import useCookie from 'react-use-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import useCookie from 'react-use-cookie';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -15,14 +16,10 @@ import styled from 'styled-components';
 import LockIcon from '@material-ui/icons/Lock';
 import ButtonLink from 'components/ButtonLink';
 import Button from '@material-ui/core/Button';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
 import { checkLogout } from 'containers/Login/actions';
 import * as appActions from 'containers/App/actions';
 import * as appConstant from 'containers/App/constants';
 import * as selectors from './selectors';
-import reducer from './reducer';
-import saga from './saga';
 import messages from './messages';
 import LogoutIcon from '../../images/logout.png';
 
@@ -35,27 +32,30 @@ const Wrapper = styled.div`
 `;
 
 export function Logout(props) {
-  useInjectReducer({ key: 'logout', reducer });
-  useInjectSaga({ key: 'logout', saga });
   const [token, setToken] = useCookie('token', '');
 
   useEffect(() => {
-    props.onCheckLogout();
-    setToken('');
+    if (token) {
+      props.onCheckLogout();
+      setToken('');
+    }
   }, []);
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Logout</title>
+      </Helmet>
       <Wrapper>
         <img src={LogoutIcon} border={0} width={100} alt="" />
         <h4>
           <FormattedMessage {...messages.header} />
         </h4>
-      <ButtonLink to={`${appConstant.publicPath}/login`}>
-        <Button color="primary" size="large" startIcon={<LockIcon />}>
-          <FormattedMessage {...messages.loginButton} />
-        </Button>
-      </ButtonLink>
+        <ButtonLink to={`${appConstant.publicPath}/login`}>
+          <Button color="primary" size="large" startIcon={<LockIcon />}>
+            <FormattedMessage {...messages.loginButton} />
+          </Button>
+        </ButtonLink>
       </Wrapper>
     </React.Fragment>
   );

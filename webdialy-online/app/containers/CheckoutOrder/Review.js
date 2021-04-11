@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -22,27 +23,27 @@ const useStyles = makeStyles(theme => ({
 
 export default function Review(props) {
   const classes = useStyles();
-  const { carts, carts_detail } = props.cartList;
+  const { carts, carts_detail: cartsDetail } = props.cartList;
   const {
-    member_prefix,
-    member_name,
-    member_lastname,
+    member_prefix: memberPrefix,
+    member_name: memberName,
+    member_lastname: memberLastName,
     address1,
     address2,
-    sub_district,
+    sub_district: subDistrict,
     district,
     province,
     postcode,
-    map_latitude,
-    map_longitude,
+    map_latitude: mapLatitude,
+    map_longitude: mapLongitude,
   } = props.shipping;
   const { paymentData: payment } = props;
   const { map_latitude: latitude, map_longitude: longitude } = props.branch;
 
   const origin = {
     position: {
-      lat: () => map_latitude,
-      lng: () => map_longitude,
+      lat: () => mapLatitude,
+      lng: () => mapLongitude,
     },
   };
 
@@ -65,8 +66,8 @@ export default function Review(props) {
       </Typography>
       <Divider style={{ border: '1px solid #eee' }} />
       <List disablePadding>
-        {carts_detail &&
-          carts_detail.map(product => (
+        {cartsDetail &&
+          cartsDetail.map(product => (
             <ListItem className={classes.listItem} key={product.product_code}>
               <ListItemText
                 primary={product.product_name}
@@ -98,9 +99,9 @@ export default function Review(props) {
           </Typography>
           <Typography
             gutterBottom
-          >{`${member_prefix}${member_name} ${member_lastname}`}</Typography>
+          >{`${memberPrefix}${memberName} ${memberLastName}`}</Typography>
           <Typography gutterBottom>{`${address1} ${address2 ||
-            ''} ${sub_district} ${district} ${province} ${postcode}`}</Typography>
+            ''} ${subDistrict} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
@@ -195,3 +196,14 @@ export default function Review(props) {
     </React.Fragment>
   );
 }
+
+Review.propTypes = {
+  cartList: PropTypes.object,
+  shipping: PropTypes.object,
+  paymentData: PropTypes.object,
+  branch: PropTypes.object,
+  setDistance: PropTypes.func,
+  setDuration: PropTypes.func,
+  distance: PropTypes.number,
+  duration: PropTypes.number,
+};

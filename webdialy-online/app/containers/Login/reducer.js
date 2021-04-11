@@ -4,8 +4,8 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
 import { setCookie } from 'react-use-cookie';
+import * as constants from './constants';
 
 export const initialState = {
   loginForm: {
@@ -44,7 +44,10 @@ const loginReducer = (state = initialState, action) =>
         draft.loginForm.type = action.payload.type;
         break;
       case constants.CHECK_LOGIN_SUCCESS:
-        setCookie('token', JSON.stringify(action.payload.email || action.payload.mobile));
+        setCookie(
+          'token',
+          JSON.stringify(action.payload.email || action.payload.mobile),
+        );
         draft.loggedIn = true;
         break;
       case constants.CHECK_LOGIN_ERROR:

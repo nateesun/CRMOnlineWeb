@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -17,11 +17,11 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`} 
+      aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
       {value === index && (
-        <Box style={{marginTop: '5px'}}>
+        <Box style={{ marginTop: '5px' }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -32,7 +32,7 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any,
 };
 
 function a11yProps(index) {
@@ -42,22 +42,15 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 export default function TabLayout(props) {
-  const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
+  const handleChangeIndex = index => {
     setValue(index);
   };
 
@@ -83,7 +76,7 @@ export default function TabLayout(props) {
           <ContentPage approve={false} {...props} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <ContentPage approve={true} {...props} />
+          <ContentPage approve {...props} />
         </TabPanel>
       </SwipeableViews>
     </React.Fragment>

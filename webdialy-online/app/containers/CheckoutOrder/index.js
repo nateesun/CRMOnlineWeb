@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -35,16 +35,19 @@ export function Checkout(props) {
   const [duration, setDuration] = useState(0);
 
   const token = getCookie('token') || '';
+
+  useEffect(() => {
+    if (token) {
+      const { cart_no: cartNo } = props.match.params;
+      props.initLoadCart(cartNo);
+      props.initLoadMemberShipping();
+      props.intiLoadBranchLocation();
+    }
+  }, []);
+
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
   }
-
-  useEffect(() => {
-    const cart_no = props.match.params.cart_no;
-    props.initLoadCart(cart_no);
-    props.initLoadMemberShipping();
-    props.intiLoadBranchLocation();
-  }, []);
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
@@ -68,6 +71,8 @@ export function Checkout(props) {
 Checkout.propTypes = {
   initLoadCart: PropTypes.func,
   initLoadMemberShipping: PropTypes.func,
+  match: PropTypes.object,
+  intiLoadBranchLocation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -88,16 +93,16 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    initLoadCart: cart_no => dispatch(actions.loadCart(cart_no)),
+    initLoadCart: cartNo => dispatch(actions.loadCart(cartNo)),
     initLoadMemberShipping: () => dispatch(actions.loadMemberShipping()),
     onUploadImage: file => dispatch(actions.uploadImage(file)),
     onUpdateSlipPath: filePath => dispatch(actions.updateSlipPath(filePath)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
-    deleteItemCart: product_code =>
-      dispatch(actions.deleteItemCart(product_code)),
-    updateItemCart: (product_code, qty) =>
-      dispatch(actions.updateItemCart({ product_code, qty })),
+    deleteItemCart: productCode =>
+      dispatch(actions.deleteItemCart(productCode)),
+    updateItemCart: (productCode, qty) =>
+      dispatch(actions.updateItemCart({ productCode, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),

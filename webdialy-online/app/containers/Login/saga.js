@@ -20,7 +20,7 @@ export function* onValidLogin() {
       body: JSON.stringify({ email, mobile, password: encryptPassword, type }),
     });
     if (response.status === 'Success') {
-      yield put(actions.checkLoginSuccess({...response, email, mobile}));
+      yield put(actions.checkLoginSuccess({ ...response, email, mobile }));
       yield put(push(`${appConstants.publicPath}/dashboard`));
     } else if (response.status === 'Missing Role') {
       yield put(actions.checkLoginError(response.msg));

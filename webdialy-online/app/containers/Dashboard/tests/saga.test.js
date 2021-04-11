@@ -3,13 +3,17 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-// import dashboardSaga from '../saga';
+import { takeEvery } from 'redux-saga/effects';
+import dashboardSaga, { loadRedeem } from '../saga';
+import * as constants from '../constants';
 
-// const generator = dashboardSaga();
+const generator = dashboardSaga();
 
 describe('dashboardSaga Saga', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should start task to watch for LOAD_REDEEM', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeEvery(constants.LOAD_REDEEM, loadRedeem),
+    );
   });
 });

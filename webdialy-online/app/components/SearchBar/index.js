@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import { v4 } from 'uuid';
 
 export default function SearchBar(props) {
   const { items } = props;
@@ -17,22 +18,31 @@ export default function SearchBar(props) {
 
   SearchBar.propTypes = {
     onSearch: PropTypes.func,
+    items: PropTypes.array,
   };
 
   return (
     <Grid container spacing={1}>
       <Grid item>
-        <Select onChange={e => setKey(e.target.value)} defaultValue={items[0].key} style={{width: '100%'}}>
+        <Select
+          onChange={e => setKey(e.target.value)}
+          defaultValue={items[0].key}
+          style={{ width: '100%' }}
+        >
           {items &&
-            items.map((value1, key1) => (
-              <MenuItem key={key1} value={value1.key}>
+            items.map(value1 => (
+              <MenuItem key={v4()} value={value1.key}>
                 {value1.value}
               </MenuItem>
             ))}
         </Select>
       </Grid>
       <Grid item>
-        <TextField value={value} onChange={e => setValue(e.target.value)} style={{width: '100%'}} />
+        <TextField
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          style={{ width: '100%' }}
+        />
       </Grid>
       <Grid item>
         <Button

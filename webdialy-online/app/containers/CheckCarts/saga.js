@@ -55,7 +55,7 @@ export function* saveData() {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.createItemSuccess(response));
     } else {
       yield put(actions.createItemError('Cannot create data'));
@@ -75,7 +75,7 @@ export function* updateData() {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.updateItemSuccess(response));
     } else {
       yield put(actions.updateItemError('Cannot update data'));
@@ -89,13 +89,15 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/carts/${data.uuid_index}`;
+    const requestURL = `${appConstants.publicPath}/api/carts/${
+      data.uuid_index
+    }`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
       body: JSON.stringify(data),
     });
-    if (response.status==='Success') {
+    if (response.status === 'Success') {
       yield put(actions.deleteItemSuccess(response));
     } else {
       yield put(actions.deleteItemError('Cannot update data'));
@@ -107,23 +109,27 @@ export function* deleteData() {
 
 export function* onUpdateShoppingStep() {
   try {
-    const { cart_no, approve, reason } = yield select(selectors.makeSelectCartStatus());
+    const { cart_no: cartNo, approve, reason } = yield select(
+      selectors.makeSelectCartStatus(),
+    );
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
     const database = getCookie('database');
     const { code } = yield select(mainSelectors.makeSelectProfile());
-    let response = yield call(request, requestURL, {
+    const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ 
-        cart_no, 
-        shopping_step: approve, 
+      body: JSON.stringify({
+        cart_no: cartNo,
+        shopping_step: approve,
         emp_code_update: code,
-        emp_reason: reason ,
+        emp_reason: reason,
       }),
     });
     if (response.status === 'Success') {
       yield initLoad();
-      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
+      yield put(
+        actions.updateShoppingStepSuccess('Finish checkout order step'),
+      );
     } else {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
     }
@@ -136,8 +142,12 @@ export function* onLoadViewOrder() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    yield put(push(`${appConstants.publicPath}/order_confirm/${data.cart_no}/${database}`));
-    yield put(actions.loadViewOrderSuccess('Success'))
+    yield put(
+      push(
+        `${appConstants.publicPath}/order_confirm/${data.cart_no}/${database}`,
+      ),
+    );
+    yield put(actions.loadViewOrderSuccess('Success'));
   } catch (err) {
     yield put(actions.loadViewOrderError(err));
   }

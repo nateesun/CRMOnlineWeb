@@ -3,13 +3,17 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-// import msProductSaga from '../saga';
+import { takeEvery } from 'redux-saga/effects';
+import msProductSaga, { initLoad } from '../saga';
+import * as constants from '../constants';
 
-// const generator = msProductSaga();
+const generator = msProductSaga();
 
 describe('msProductSaga Saga', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should start task to watch for INIT_LOAD', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeEvery(constants.INIT_LOAD, initLoad),
+    );
   });
 });

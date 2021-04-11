@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import 'fontsource-roboto';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -39,7 +40,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loadAuthMenu: () => {
       dispatch(actions.initLoad());
-    }
+    },
   };
 }
 
@@ -47,5 +48,9 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
+
+App.propTypes = {
+  loadAuthMenu: PropTypes.func,
+};
 
 export default compose(withConnect)(App);

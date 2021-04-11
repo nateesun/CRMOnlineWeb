@@ -5,7 +5,8 @@ import { initialState } from './reducer';
  * Direct selector to the ProfileShipping state domain
  */
 
-const selectProfileShippingDomain = state => state.profileShipping || initialState;
+const selectProfileShippingDomain = state =>
+  state.profileShipping || initialState;
 
 /**
  * Other specific selectors

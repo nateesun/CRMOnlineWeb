@@ -5,11 +5,11 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import useCookie from 'react-use-cookie';
 import { Helmet } from 'react-helmet';
@@ -34,7 +34,7 @@ const HomePage = props => {
   const [database, setDatabase] = useCookie('database', '');
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   useEffect(() => {
     const data = new URLSearchParams(props.location.search).get('data') || '';
@@ -62,6 +62,8 @@ const HomePage = props => {
 
 HomePage.propTypes = {
   company: PropTypes.object,
+  location: PropTypes.object,
+  onInitLoad: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
