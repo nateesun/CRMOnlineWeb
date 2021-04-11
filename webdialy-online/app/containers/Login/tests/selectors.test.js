@@ -2,10 +2,8 @@ import * as selectors from '../selectors';
 
 const mockPayload = {
   loginForm: {
-    email: '',
-    mobile: '',
+    username: '',
     password: '',
-    type: '',
   },
   response: {
     status: null,
