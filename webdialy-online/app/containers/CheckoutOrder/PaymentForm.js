@@ -182,7 +182,7 @@ const PaymentForm = props => {
 };
 
 PaymentForm.propTypes = {
-  cartList: PropTypes.array,
+  cartList: PropTypes.object,
   handleSubmit: PropTypes.func,
   file: PropTypes.any,
   setPaymentData: PropTypes.func,

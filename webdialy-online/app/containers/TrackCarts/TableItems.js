@@ -108,6 +108,7 @@ export default function TableItems(props) {
     showCommand: PropTypes.bool,
     profile: PropTypes.object,
     onSearch: PropTypes.func,
+    approve: PropTypes.bool,
   };
 
   const handleRefreshPage = () => {
