@@ -65,8 +65,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onValidateLogin: ({ email, mobile, password, type }) => {
-      dispatch(actions.checkLogin(email, mobile, password, type));
+    onValidateLogin: ({ username, password }) => {
+      dispatch(actions.checkLogin(username, password));
     },
     clearData: () => {
       dispatch(actions.initState());

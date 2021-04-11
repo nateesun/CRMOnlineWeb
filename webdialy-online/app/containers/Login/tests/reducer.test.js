@@ -6,10 +6,8 @@ describe('loginReducer', () => {
   beforeEach(() => {
     state = {
       loginForm: {
-        email: '',
-        mobile: '',
+        username: '',
         password: '',
-        type: '',
       },
       response: {
         status: null,

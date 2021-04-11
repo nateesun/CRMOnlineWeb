@@ -7,27 +7,7 @@ import * as appConstants from 'containers/App/constants';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  loginFooter: {
-    marginTop: theme.spacing(1),
-  },
-  loginTopic: {
+  root: {
     marginTop: theme.spacing(1),
   },
 }));
@@ -35,8 +15,8 @@ const useStyles = makeStyles(theme => ({
 export default function LoginFooter() {
   const classes = useStyles();
   return (
-    <Grid container className={classes.loginFooter}>
-      <Grid item xs={12} lg={4}>
+    <Grid container spacing={1} className={classes.root}>
+      <Grid item xs={12}>
         <ButtonLink
           color="red"
           to={`${appConstants.publicPath}/forgot-password`}
@@ -44,7 +24,7 @@ export default function LoginFooter() {
           {<FormattedMessage {...messages.forgotPassword} />}
         </ButtonLink>
       </Grid>
-      <Grid item xs={12} lg={8}>
+      <Grid item xs={12}>
         <ButtonLink color="blue" to={`${appConstants.publicPath}/register`}>
           {<FormattedMessage {...messages.register} />}
         </ButtonLink>

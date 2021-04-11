@@ -9,8 +9,7 @@ const TaskDetail = require("../models/CartsDetail.model")
 const TaskOrders = require("../models/Orders.model")
 const TaskOrdersDetail = require("../models/OrdersDetail.model")
 
-module.exports = args => {
-
+module.exports = (args) => {
   router.get("/", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).findAll()
@@ -22,7 +21,25 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
+  router.get("/find-cart/:type/:member_code", async (req, res, next) => {
+    try {
+      const { type, member_code } = req.params
+      let response
+      if (type === "approve") {
+        response = await Task(req.headers.database).findStatusApprove(member_code)
+      } else {
+        response = await Task(req.headers.database).findStatusNotApprove(member_code)
+      }
+      const data = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
+
   router.get("/findByMember/:member_code", async (req, res, next) => {
     try {
       const member_code = req.params.member_code
@@ -37,7 +54,7 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.post("/search", async (req, res, next) => {
     try {
       const { key, value } = req.body
@@ -50,7 +67,7 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.post("/payment", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).updatePayment(req.body)
@@ -62,7 +79,7 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.patch("/shopping_step", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).updateShoppingStep(
@@ -79,9 +96,7 @@ module.exports = args => {
 
   router.patch("/slip_path", async (req, res, next) => {
     try {
-      const response = await Task(req.headers.database).updateSlipPath(
-        req.body
-      )
+      const response = await Task(req.headers.database).updateSlipPath(req.body)
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
     } catch (error) {
@@ -90,11 +105,11 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.patch("/shopping_approve", async (req, res, next) => {
     try {
       await Task(req.headers.database).updateShoppingApprove(req.body)
-  
+
       // copy to orders tables
       const Carts = await Task(req.headers.database).findByCartNo(
         req.body.cart_no
@@ -109,7 +124,7 @@ module.exports = args => {
         uuid_index: uuidv4(),
       }
       const order_no = await TaskOrders(req.headers.database).create(CartsData)
-  
+
       // copy to orders_detail tables
       const CartsDetail = await TaskDetail(req.headers.database).findByCartNo(
         req.body.cart_no
@@ -132,7 +147,7 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.get("/:cart_no", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).findByCartNo(
@@ -143,49 +158,47 @@ module.exports = args => {
         req.params.cart_no
       )
       const carts_detail = JSON.parse(response2.data)
-      res
-        .status(200)
-        .json({
-          status: response.status,
-          msg: "Success",
-          data: { carts, carts_detail },
-        })
+      res.status(200).json({
+        status: response.status,
+        msg: "Success",
+        data: { carts, carts_detail },
+      })
     } catch (error) {
       return res
         .status(500)
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.post("/", async (req, res, next) => {
     try {
       const { carts, carts_detail } = req.body
       await Task(req.headers.database).create(carts)
-  
+
       // create cart_detail
       await TaskDetail(req.headers.database).create({
         ...carts_detail,
         cart_no: carts.cart_no,
       })
-  
+
       // update summary carts
       await Task(req.headers.database).updateSummary({ cart_no: carts.cart_no })
-      let response = await Task(req.headers.database).findByCartNo(carts.cart_no)
+      let response = await Task(req.headers.database).findByCartNo(
+        carts.cart_no
+      )
       // return success create cart order
-      res
-        .status(200)
-        .json({
-          status: "Success",
-          msg: "Success",
-          data: JSON.parse(response.data),
-        })
+      res.status(200).json({
+        status: "Success",
+        msg: "Success",
+        data: JSON.parse(response.data),
+      })
     } catch (error) {
       return res
         .status(500)
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.put("/", async (req, res, next) => {
     try {
       const { carts, carts_detail } = req.body
@@ -194,7 +207,7 @@ module.exports = args => {
         carts.cart_no
       )
       const result = JSON.parse(response.data)
-  
+
       if (result.length > 0) {
         const carts_upd = {
           uuid_index: result[0].uuid_index,
@@ -204,14 +217,16 @@ module.exports = args => {
           special_text: carts_detail.special_text,
           point: carts_detail.point + result[0].point,
         }
-  
+
         // update summary
         await TaskDetail(req.headers.database).update({
           ...carts_detail,
           ...carts_upd,
         })
-        await Task(req.headers.database).updateSummary({ cart_no: carts.cart_no })
-  
+        await Task(req.headers.database).updateSummary({
+          cart_no: carts.cart_no,
+        })
+
         // find by cart no again
         const response3 = await Task(req.headers.database).findByCartNo(
           carts.cart_no
@@ -223,11 +238,13 @@ module.exports = args => {
           ...carts_detail,
           cart_no: carts.cart_no,
         })
-        await Task(req.headers.database).updateSummary({ cart_no: carts.cart_no })
+        await Task(req.headers.database).updateSummary({
+          cart_no: carts.cart_no,
+        })
         const response = await Task(req.headers.database).findByCartNo(
           carts.cart_no
         )
-  
+
         // return success create cart order
         const data = JSON.parse(response.data)[0]
         res.status(200).json({ status: response.status, msg: "Success", data })
@@ -238,7 +255,7 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   router.delete("/:id", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).delete(req.params.id)
@@ -250,7 +267,6 @@ module.exports = args => {
         .json({ status: "Internal Server Error", msg: error.sqlMessage })
     }
   })
-  
+
   return router
 }
-

@@ -99,7 +99,7 @@ export default function Orders(props) {
 }
 
 Orders.propTypes = {
-  cartList: PropTypes.array,
+  cartList: PropTypes.object,
   deleteItemCart: PropTypes.func,
   updateItemCart: PropTypes.func,
 };
