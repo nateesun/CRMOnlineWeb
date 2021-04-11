@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableItems from './TableItems';
+import TabLayout from './TabLayout';
 import ViewItem from './ViewItem';
 
 export default function ContentPage(props) {
@@ -10,7 +10,7 @@ export default function ContentPage(props) {
 
   return (
     <React.Fragment>
-      {props.getPage === 'LIST' && <TableItems {...props} />}
+      {props.getPage === 'LIST' && <TabLayout {...props} />}
       {props.getPage === 'VIEW' && <ViewItem {...props} />}
     </React.Fragment>
   );

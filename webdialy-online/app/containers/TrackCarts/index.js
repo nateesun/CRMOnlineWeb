@@ -52,7 +52,7 @@ TrackCarts.propTypes = {
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
   onSearch: PropTypes.func,
-  profile: PropTypes.func,
+  profile: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

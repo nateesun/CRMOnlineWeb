@@ -88,6 +88,21 @@ module.exports = (db) => {
     })
   }
 
+  module.findByMobileOrEmail = (username) => {
+    logger.debug(`findByMobileOrEmail: ${username}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where email=? or mobile=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [username, username])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.findByEmail = (email) => {
     logger.debug(`findByEmail: ${email}`)
     return new Promise(async (resolve, reject) => {

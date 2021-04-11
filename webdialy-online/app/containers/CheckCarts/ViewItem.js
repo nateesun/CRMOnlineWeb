@@ -222,8 +222,8 @@ const ViewItem = props => {
                 variant="contained"
                 onClick={() =>
                   props.onUpdateShoppingStep({
-                    cartNo,
-                    cartCreateDate,
+                    cart_no: cartNo,
+                    cart_create_date: cartCreateDate,
                     approve,
                     reason,
                   })

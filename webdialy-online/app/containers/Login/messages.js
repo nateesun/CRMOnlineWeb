@@ -13,25 +13,17 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Login container!',
   },
-  enterEmail: {
-    id: `${scope}.enterEmail`,
-    defaultMessage: 'Email',
+  enterUsername: {
+    id: `${scope}.enterUsername`,
+    defaultMessage: 'Username',
   },
   enterPassword: {
     id: `${scope}.enterPassword`,
     defaultMessage: 'Password',
   },
-  emailShouldNotEmpty: {
-    id: `${scope}.emailShouldNotEmpty`,
-    defaultMessage: 'Email should not be blank.',
-  },
-  mobileShouldNotEmpty: {
-    id: `${scope}.mobileShouldNotEmpty`,
-    defaultMessage: 'Mobile should not be blank.',
-  },
-  emailIncorrectPattern: {
-    id: `${scope}.emailIncorrectPattern`,
-    defaultMessage: 'Incorrect format email.',
+  usernameShouldNotEmpty: {
+    id: `${scope}.usernameShouldNotEmpty`,
+    defaultMessage: 'Username should not be blank.',
   },
   passwordShouldNotEmpty: {
     id: `${scope}.passwordShouldNotEmpty`,
@@ -47,23 +39,11 @@ export default defineMessages({
   },
   loginErrorMessage: {
     id: `${scope}.loginErrorMessage`,
-    defaultMessage: 'Incorrect email or password.',
+    defaultMessage: 'Incorrect username or password.',
   },
-  signIn: {
-    id: `${scope}.signIn`,
-    defaultMessage: 'Login by Email',
-  },
-  signInMobile: {
-    id: `${scope}.signInMobile`,
-    defaultMessage: 'Login by Mobile',
-  },
-  email: {
-    id: `${scope}.email`,
-    defaultMessage: 'Email',
-  },
-  mobile: {
-    id: `${scope}.mobile`,
-    defaultMessage: 'Mobile',
+  username: {
+    id: `${scope}.username`,
+    defaultMessage: 'Username',
   },
   password: {
     id: `${scope}.password`,
