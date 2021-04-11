@@ -39,7 +39,7 @@ const ShowQRCode = props => {
 ShowQRCode.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
-  cart: PropTypes.object,
+  cart: PropTypes.string,
   db: PropTypes.string,
 };
 
