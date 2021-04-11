@@ -52,8 +52,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function TableItems(props) {
-  const { getList, showCommand = true } = props;
   const database = getCookie('database');
+  const { getList, showCommand = true, approve } = props;
+
+  let showList = getList;
+  if (approve) {
+    showList = getList.filter(item => item.shopping_step === 'approve');
+  } else {
+    showList = getList.filter(item => item.shopping_step !== 'approve');
+  }
 
   const handleDelete = id => {
     Swal.fire({
@@ -184,8 +191,8 @@ export default function TableItems(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {getList &&
-                getList
+              {showList &&
+                showList
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <TableRow
@@ -262,7 +269,7 @@ export default function TableItems(props) {
                       )}
                     </TableRow>
                   ))}
-              {getList.length === 0 && (
+              {showList.length === 0 && (
                 <TableRow>
                   <TableCell align="left" colSpan={9}>
                     ไม่พบข้อมูลรายการสินค้าในตระกร้า
@@ -276,7 +283,7 @@ export default function TableItems(props) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={getList.length}
+        count={showList.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
