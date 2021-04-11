@@ -13,15 +13,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper, TextField } from '@material-ui/core';
 import moment from 'moment';
 import ContentNotFound from 'components/ContentNotFound';
 import GlobalAlert from 'components/GlobalAlert';
 import SignatureForm from './SignatureForm';
 import messages from './messages';
 import * as selectors from './selectors';
-import { Paper, TextField } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   colRow: {
     whiteSpace: 'nowrap',
   },
@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 const ViewItem = props => {
   const classes = useStyles();
-  const { response, onChangePage } = props;
-  const { orders, orders_detail } = props.getOrderList;
+  const { response } = props;
+  const { orders, orders_detail: ordersDetail } = props.getOrderList;
   const [mobileNo, setMobileNo] = useState(null);
   const [imgSigUrl, setImgSigUrl] = useState(null);
 
@@ -59,8 +59,8 @@ const ViewItem = props => {
     });
   };
 
-  const onShowImageSignature = img_base64 => {
-    setImgSigUrl(img_base64);
+  const onShowImageSignature = imgBase64 => {
+    setImgSigUrl(imgBase64);
   };
 
   if (!orders) {
@@ -155,8 +155,8 @@ const ViewItem = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders_detail &&
-                  orders_detail.map((item, index) => (
+                {ordersDetail &&
+                  ordersDetail.map((item, index) => (
                     <TableRow
                       hover
                       role="checkbox"
@@ -203,7 +203,7 @@ const ViewItem = props => {
                 />
               </Grid>
             ) : (
-              <Grid item xs={6} style={{padding: '10px'}}>
+              <Grid item xs={6} style={{ padding: '10px' }}>
                 <h4>Signature:</h4>
                 <img src={orders.signature} alt="show signature" />
               </Grid>
@@ -211,7 +211,7 @@ const ViewItem = props => {
           </Paper>
         </Grid>
       </Grid>
-      <Grid container style={{marginTop: '10px'}}>
+      <Grid container style={{ marginTop: '10px' }}>
         <Grid item xs={12}>
           <Grid container spacing={1} justify="flex-end">
             {orders.order_status !== 'member_approve' && (
@@ -245,6 +245,10 @@ ViewItem.propTypes = {
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
   onChangePage: PropTypes.func,
+  response: PropTypes.object,
+  getOrderList: PropTypes.object,
+  onConfirmOrder: PropTypes.func,
+  history: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({

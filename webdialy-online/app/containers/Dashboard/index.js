@@ -29,16 +29,17 @@ export function Dashboard(props) {
   useInjectSaga({ key: 'dashboard', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
-  
+
   useEffect(() => {
-    if (token !== '') {
+    if (token) {
       props.onLoadRedeem();
       props.onLoadMenu();
     }
   }, []);
+
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
 
   return (
     props.login && (

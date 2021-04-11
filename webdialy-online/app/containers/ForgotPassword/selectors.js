@@ -28,8 +28,8 @@ const makeSelectRequest = () =>
     substate => substate.request,
   );
 
-export { 
-  selectForgotPasswordDomain, 
+export {
+  selectForgotPasswordDomain,
   makeSelectForgotPassword,
   makeSelectRequest,
 };

@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 import { FormattedMessage } from 'react-intl';
@@ -12,13 +13,13 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Media = (props) => {
+const Media = props => {
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState(null);
 
-  const handleClickOpen = (item) => {
+  const handleClickOpen = itemAt => {
     setOpen(true);
-    setItem(item);
+    setItem(itemAt);
   };
 
   const handleClose = () => {
@@ -28,23 +29,30 @@ const Media = (props) => {
   return (
     <div style={{ width: '100%', marginBottom: '50px' }}>
       <SearchProduct {...props} />
-      <ProductList 
+      <ProductList
         {...props}
-        handleClickOpen={item => handleClickOpen(item)}
+        handleClickOpen={it => handleClickOpen(it)}
         data={props.productList}
         topic={<FormattedMessage {...messages.productListTopic} />}
       />
       {props.cart && props.cart.cart_no !== '' && <OrderFooter {...props} />}
-      {item && <DialogDetail
-        {...props}
-        open={open}
-        item={item}
-        handleClose={() => handleClose()}
-        Transition={Transition}
-      />}
+      {item && (
+        <DialogDetail
+          {...props}
+          open={open}
+          item={item}
+          handleClose={() => handleClose()}
+          Transition={Transition}
+        />
+      )}
     </div>
   );
-}
+};
+
+Media.propTypes = {
+  productList: PropTypes.array,
+  cart: PropTypes.object,
+};
 
 export default function ShoppingContent(props) {
   return (

@@ -25,18 +25,20 @@ export function TrackCarts(props) {
   useInjectSaga({ key: 'trackCarts', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    if(props.profile.member_role==='member'){
-      props.onSearch('member_code', props.profile.code)
-    }else{
-      props.onInitLoad();
+    if (token) {
+      if (props.profile.member_role === 'member') {
+        props.onSearch('member_code', props.profile.code);
+      } else {
+        props.onInitLoad();
+      }
     }
-      
   }, []);
+
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
 
   return <ContentPage {...props} />;
 }
@@ -50,6 +52,7 @@ TrackCarts.propTypes = {
   onUpdateItem: PropTypes.func,
   onDeleteItem: PropTypes.func,
   onSearch: PropTypes.func,
+  profile: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

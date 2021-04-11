@@ -4,23 +4,23 @@
  *
  */
 import produce from 'immer';
-const { v4 } = require('uuid');
-import * as constants from './constants';
+import { v4 } from 'uuid';
 import * as loginConstants from 'containers/Login/constants';
+import * as constants from './constants';
 
 export const initialState = {
   shipping: {
-    address_type: "",
-    member_prefix: "",
-    member_code: "",
-    member_name: "",
-    member_lastname: "",
-    address1: "",
-    address2: "",
-    province: "",
-    district: "",
-    sub_district: "",
-    postcode: "",
+    address_type: '',
+    member_prefix: '',
+    member_code: '',
+    member_name: '',
+    member_lastname: '',
+    address1: '',
+    address2: '',
+    province: '',
+    district: '',
+    sub_district: '',
+    postcode: '',
     map_latitude: 13.752434,
     map_longitude: 100.494122,
   },
@@ -44,7 +44,11 @@ const profileShippingReducer = (state = initialState, action) =>
         break;
       case constants.INIT_LOAD_SUCCESS:
         if (Object.keys(action.payload).length === 0) {
-          draft.shipping = { ...action.payload, create: true, uuid_index: v4() }
+          draft.shipping = {
+            ...action.payload,
+            create: true,
+            uuid_index: v4(),
+          };
         } else {
           draft.shipping = action.payload;
         }
@@ -62,7 +66,8 @@ const profileShippingReducer = (state = initialState, action) =>
         break;
       case constants.CHANGE_MAPS_VALUE:
         draft.shipping.map_latitude = action.payload.map_latitude || 13.752434;
-        draft.shipping.map_longitude = action.payload.map_longitude || 100.494122;
+        draft.shipping.map_longitude =
+          action.payload.map_longitude || 100.494122;
         break;
     }
   });

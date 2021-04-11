@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
@@ -22,11 +21,10 @@ export function MemberOrdersConfirm(props) {
   useInjectReducer({ key: 'memberOrdersConfirm', reducer });
   useInjectSaga({ key: 'memberOrdersConfirm', saga });
 
-  useEffect(()=>{
-    const cart_no = props.match.params.cart_no;
-    const database = props.match.params.database || '';
-    props.onInitLoad({ cart_no, database })
-  }, [])
+  useEffect(() => {
+    const { cart_no: cartNo, database = '' } = props.match.params;
+    props.onInitLoad({ cartNo, database });
+  }, []);
 
   return <ViewItem {...props} />;
 }
@@ -38,6 +36,7 @@ MemberOrdersConfirm.propTypes = {
   getConfirmData: PropTypes.object,
   response: PropTypes.object,
   onConfirmOrder: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -49,7 +48,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitLoad: cart_no => dispatch(actions.initLoad(cart_no)),
+    onInitLoad: cartNo => dispatch(actions.initLoad(cartNo)),
     onConfirmOrder: confirmData => dispatch(actions.confirmOrder(confirmData)),
   };
 }

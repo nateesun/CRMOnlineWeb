@@ -29,15 +29,15 @@ export function MainLayoutApp(props) {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <MainLayout {...props}>
-          {props.children}
-        </MainLayout>
+        <MainLayout {...props}>{props.children}</MainLayout>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 MainLayoutApp.propTypes = {
+  onLoadProfile: PropTypes.func,
+  children: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

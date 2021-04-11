@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -40,25 +41,32 @@ export default function RedeemPage(props) {
         </div>
       </Grid>
       <Grid item xs={12}>
-        {listRedeem && listRedeem.length===0 && <ContentNotFound label={<FormattedMessage {...messages.notFoundPromotion} />} />}
+        {listRedeem && listRedeem.length === 0 && (
+          <ContentNotFound
+            label={<FormattedMessage {...messages.notFoundPromotion} />}
+          />
+        )}
         <Grid container justify="center" spacing={1}>
           {listRedeem &&
-            listRedeem.map((item, index) => (
+            listRedeem.map(item => (
               <Grid item xs={12} md={4} key={item.product_code}>
                 <RedeemCard
                   options={{
                     code: item.product_code,
                     name: item.redeem_name,
                     label: item.product_name,
-                    expiredPro: 'หมดเขต: '+moment(item.finish_time).format('DD/MM/YYYY'),
-                    pointUse: 'ใช้คะแนน: ' + item.point_to_redeem + ' คะแนน',
+                    expiredPro: `หมดเขต: ${moment(item.finish_time).format(
+                      'DD/MM/YYYY',
+                    )}`,
+                    pointUse: `ใช้คะแนน: ${item.point_to_redeem} คะแนน`,
                     inStock: item.qty_in_stock,
                     status:
                       profile.total_score >= item.point_to_redeem
-                        ? 'สถานะ: สามารถแลกได้'
-                        : 'ขาดอีก ' + (item.point_to_redeem-profile.total_score) + ' คะแนน',
+                        ? `สถานะ: สามารถแลกได้`
+                        : `ขาดอีก ${item.point_to_redeem -
+                            profile.total_score} คะแนน`,
                   }}
-                  img={item.img_path} 
+                  img={item.img_path}
                   free={profile.total_score >= item.point_to_redeem}
                   {...props}
                 />
@@ -69,3 +77,8 @@ export default function RedeemPage(props) {
     </Grid>
   );
 }
+
+RedeemPage.propTypes = {
+  listRedeem: PropTypes.array,
+  profile: PropTypes.object,
+};

@@ -29,17 +29,20 @@ export function MsBranch(props) {
   useInjectSaga({ key: 'msBranch', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    props.onInitLoad();
+    if (token) {
+      props.onInitLoad();
+    }
   }, []);
 
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
+
   return (
-    <MainLayoutApp title='Branch' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="Branch" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

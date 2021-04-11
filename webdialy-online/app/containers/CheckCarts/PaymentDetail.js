@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -97,5 +98,10 @@ export default function PaymentDetail(props) {
       </Grid>
     );
   }
+
+  PaymentDetail.propTypes = {
+    payment: PropTypes.object,
+  };
+
   return <div>Not found payment detail</div>;
 }

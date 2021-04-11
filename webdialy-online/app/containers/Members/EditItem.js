@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { v4 } from 'uuid';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 import * as selectors from './selectors';
@@ -95,7 +96,14 @@ const renderSelectField = ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response, rolesList } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    response,
+    rolesList,
+  } = props;
 
   const onValidated = formValues => {
     props.onUpdateItem(formValues);
@@ -147,11 +155,16 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.role} />}
                   required
                 >
-                  {rolesList && rolesList.map((item, index) => <option key={item.code} value={item.code}>{item.name}</option>)}
+                  {rolesList &&
+                    rolesList.map(item => (
+                      <option key={v4()} value={item.code}>
+                        {item.name}
+                      </option>
+                    ))}
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={2} />
             <Grid item xs={4}>
               <Field
                 name="email"
@@ -262,16 +275,21 @@ EditItem.propTypes = {
   onUpdateItem: PropTypes.func,
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
+  rolesList: PropTypes.array,
 };
 
 const validate = formValues => {
   const errors = {};
 
   if (!formValues.first_name) {
-    errors.first_name = <FormattedMessage {...messages.firstNameSouldNotEmpty} />;
+    errors.first_name = (
+      <FormattedMessage {...messages.firstNameSouldNotEmpty} />
+    );
   }
   if (!formValues.last_name) {
-    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
+    errors.last_name = (
+      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
+    );
   }
   if (!formValues.member_role) {
     errors.member_role = <FormattedMessage {...messages.roleShouldNotEmpty} />;
@@ -279,11 +297,15 @@ const validate = formValues => {
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
-  if (!formValues.total_score||formValues.total_score < 0) {
-    errors.total_score = <FormattedMessage {...messages.totalScoreShouldNotEmpty} />;
+  if (!formValues.total_score || formValues.total_score < 0) {
+    errors.total_score = (
+      <FormattedMessage {...messages.totalScoreShouldNotEmpty} />
+    );
   }
-  if (!formValues.total_purchase||formValues.total_purchase < 0) {
-    errors.total_purchase = <FormattedMessage {...messages.totalPurchaseShouldNotEmpty} />;
+  if (!formValues.total_purchase || formValues.total_purchase < 0) {
+    errors.total_purchase = (
+      <FormattedMessage {...messages.totalPurchaseShouldNotEmpty} />
+    );
   }
 
   return errors;

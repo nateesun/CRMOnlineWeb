@@ -68,10 +68,13 @@ export default function TableItems(props) {
         <Typography color="textSecondary" variant="h6">
           Use Promotion List
         </Typography>
-        <SearchBar {...props} items={[
-          { key: 'redeem_code', value: 'Redeem Code' },
-          { key: 'bill_no', value: 'Bill No' },
-          ]} />
+        <SearchBar
+          {...props}
+          items={[
+            { key: 'redeem_code', value: 'Redeem Code' },
+            { key: 'bill_no', value: 'Bill No' },
+          ]}
+        />
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
@@ -117,13 +120,23 @@ export default function TableItems(props) {
                       <TableCell align="left">{item.redeem_name}</TableCell>
                       <TableCell align="center">{item.bill_no}</TableCell>
                       <TableCell align="right">{item.discount_amt}</TableCell>
-                      <TableCell align="right">{item.discount_percent}</TableCell>
-                      <TableCell align="center">{item.redeem_or_free}</TableCell>
+                      <TableCell align="right">
+                        {item.discount_percent}
+                      </TableCell>
+                      <TableCell align="center">
+                        {item.redeem_or_free}
+                      </TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
-                      <TableCell align="center">{item.point_to_redeem}</TableCell>
+                      <TableCell align="center">
+                        {item.point_to_redeem}
+                      </TableCell>
                       <TableCell align="center">{item.use_in_branch}</TableCell>
-                      <TableCell align="center">{item.emp_code_redeem}</TableCell>
-                      <TableCell align="center">{item.member_code_use}</TableCell>
+                      <TableCell align="center">
+                        {item.emp_code_redeem}
+                      </TableCell>
+                      <TableCell align="center">
+                        {item.member_code_use}
+                      </TableCell>
                       <TableCell align="center">{item.qty_in_use}</TableCell>
                       <TableCell align="center">{item.system_create}</TableCell>
                       <TableCell align="center">{item.redeem_date}</TableCell>
@@ -132,13 +145,13 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.active}</TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={18}>
-                        ไม่พบข้อมูลรายการโปรโมชั่น
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={18}>
+                    ไม่พบข้อมูลรายการโปรโมชั่น
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

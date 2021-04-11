@@ -4,9 +4,9 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
+import { v4 } from 'uuid';
 import * as loginConstants from 'containers/Login/constants';
-const { v4 } = require('uuid');
+import * as constants from './constants';
 
 export const initialState = {
   data: {

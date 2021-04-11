@@ -121,7 +121,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{marginBottom: '50px'}}>
+    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"
@@ -235,8 +235,8 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <span style={{ color: 'blue' }}>
-                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
-                เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
+                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า
+                Line เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
               </span>
               <Field
                 name="line_user_id"

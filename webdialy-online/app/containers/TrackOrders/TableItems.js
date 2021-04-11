@@ -20,7 +20,7 @@ import * as appConstants from 'containers/App/constants';
 import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
   },
@@ -89,12 +89,12 @@ export default function TableItems(props) {
   };
 
   const handleRefreshPage = () => {
-    if(props.profile.member_role==='member'){
-      props.onSearch('member_code', props.profile.code)
-    }else{
+    if (props.profile.member_role === 'member') {
+      props.onSearch('member_code', props.profile.code);
+    } else {
       props.onInitLoad();
     }
-  }
+  };
 
   TableItems.propTypes = {
     getList: PropTypes.array,
@@ -103,6 +103,9 @@ export default function TableItems(props) {
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
+    showCommand: PropTypes.bool,
+    profile: PropTypes.object,
+    onSearch: PropTypes.func,
   };
 
   return (
@@ -121,13 +124,16 @@ export default function TableItems(props) {
             <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
-        {props.profile.member_role !== 'member' && 
-          <SearchBar {...props} items={[
-            { key: 'order_no', value: 'Order' },
-            { key: 'cart_no', value: 'Cart' },
-            { key: 'member_code', value: 'Member' },
-          ]} />
-        }
+        {props.profile.member_role !== 'member' && (
+          <SearchBar
+            {...props}
+            items={[
+              { key: 'order_no', value: 'Order' },
+              { key: 'cart_no', value: 'Cart' },
+              { key: 'member_code', value: 'Member' },
+            ]}
+          />
+        )}
         <div className={classes.dataWidth}>
           <Table
             className={classes.table}
@@ -136,18 +142,42 @@ export default function TableItems(props) {
           >
             <TableHead>
               <TableRow className={classes.colRow}>
-                <TableCell align="center"><FormattedMessage {...messages.no} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.orderNo} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.cart} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.createDate} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.member} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.item} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.amount} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.statusAction} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.point} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.approveStatus} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.notApproveComment} /></TableCell>
-                <TableCell align="center"><FormattedMessage {...messages.actions} /></TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.no} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.orderNo} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.cart} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.createDate} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.member} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.item} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.amount} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.statusAction} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.point} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.approveStatus} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.notApproveComment} />
+                </TableCell>
+                <TableCell align="center">
+                  <FormattedMessage {...messages.actions} />
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -164,11 +194,18 @@ export default function TableItems(props) {
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">
-                        {
-                        profile.member_role === 'member' ? 
-                        <ButtonLink color="primary" to={`${appConstants.publicPath}/order_confirm/${item.cart_no}/${getCookie('database')}`}>
-                          {item.order_no}
-                        </ButtonLink>:<span>{item.order_no}</span>}
+                        {profile.member_role === 'member' ? (
+                          <ButtonLink
+                            color="primary"
+                            to={`${appConstants.publicPath}/order_confirm/${
+                              item.cart_no
+                            }/${getCookie('database')}`}
+                          >
+                            {item.order_no}
+                          </ButtonLink>
+                        ) : (
+                          <span>{item.order_no}</span>
+                        )}
                       </TableCell>
                       <TableCell align="center">{item.cart_no}</TableCell>
                       <TableCell align="center">
@@ -180,11 +217,13 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.cart_active}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">
-                        {item.order_status && <FormattedMessage id={`${scope}.${item.order_status}`} />}
+                        {item.order_status && (
+                          <FormattedMessage
+                            id={`${scope}.${item.order_status}`}
+                          />
+                        )}
                       </TableCell>
-                      <TableCell align="center">
-                        {item.member_remark}
-                      </TableCell>
+                      <TableCell align="center">{item.member_remark}</TableCell>
                       <TableCell align="center">
                         {showCommand && (
                           <Grid container spacing={1} justify="center">
@@ -210,13 +249,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={13}>
-                        ไม่พบข้อมูลสินค้าที่สั่งซื้อ
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={13}>
+                    ไม่พบข้อมูลสินค้าที่สั่งซื้อ
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

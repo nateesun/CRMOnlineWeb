@@ -112,7 +112,11 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -159,13 +163,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={4}>
-                        ไม่พบข้อมูลคลังสินค้า
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={4}>
+                    ไม่พบข้อมูลคลังสินค้า
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

@@ -43,8 +43,18 @@ const useStyles = makeStyles(theme => ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
-  const { map_latitude, map_longitude } = props.initialValues;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    response,
+    dispatch,
+  } = props;
+  const {
+    map_latitude: mapLatitude,
+    map_longitude: mapLongitude,
+  } = props.initialValues;
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -60,8 +70,8 @@ const EditItem = props => {
   };
 
   const handlePlace = (latitude, longitude) => {
-    dispatch(change('editItem', 'map_latitude', latitude))
-    dispatch(change('editItem', 'map_longitude', longitude))
+    dispatch(change('editItem', 'map_latitude', latitude));
+    dispatch(change('editItem', 'map_longitude', longitude));
   };
 
   return (
@@ -127,10 +137,10 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" style={{marginBottom: '25px'}}>
+              <div align="center" style={{ marginBottom: '25px' }}>
                 <MapMarker
-                  lat={parseFloat(map_latitude)}
-                  lng={parseFloat(map_longitude)}
+                  lat={parseFloat(mapLatitude)}
+                  lng={parseFloat(mapLongitude)}
                   onExit={handlePlace}
                 />
               </div>
@@ -186,6 +196,7 @@ EditItem.propTypes = {
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
   onCreateItem: PropTypes.func,
+  dispatch: PropTypes.any,
 };
 
 const validate = formValues => {

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-const { compose, withProps, withStateHandlers } = require('recompose');
-const {
+import { compose, withProps, withStateHandlers } from 'recompose';
+import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
   InfoWindow,
-} = require('react-google-maps');
+} from 'react-google-maps';
 
-const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
-      onToggleOpen: ({ isOpen }) => () => ({
-        isOpen: !isOpen,
-      }),
-    },
-  ),
+const MapMarker = compose(
+  withStateHandlers(() => ({ isOpen: false }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: !isOpen,
+    }),
+  }),
   withProps({
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCE9HPrREFNujIAtNwsn20dKFfLj4TRXp0&libraries=geometry,drawing,places',
@@ -24,7 +24,6 @@ const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
   withScriptjs,
   withGoogleMap,
 )(props => {
-  // console.log('MapMarker init:', props);
   const [latitude, setLatitude] = useState(props.lat);
   const [longitude, setLongitude] = useState(props.lng);
 
@@ -32,8 +31,10 @@ const MapMarker = compose(withStateHandlers(() => ({ isOpen: false }), {
     props.onExit(latitude, longitude);
   }
 
-  const position = new google.maps.LatLng(props.lat, props.lng) || {lat: latitude, lng: longitude};
-
+  const position = new window.google.maps.LatLng(props.lat, props.lng) || {
+    lat: latitude,
+    lng: longitude,
+  };
   return (
     <GoogleMap
       defaultZoom={18}

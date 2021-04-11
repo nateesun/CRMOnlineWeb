@@ -112,11 +112,14 @@ export default function TableItems(props) {
             REFRESH
           </Button>
         </div>
-        <SearchBar {...props} items={[
-          { key: 'code', value: 'Code' },
-          { key: 'email', value: 'Email' },
-          { key: 'mobile', value: 'Mobile' },
-          ]} />
+        <SearchBar
+          {...props}
+          items={[
+            { key: 'code', value: 'Code' },
+            { key: 'email', value: 'Email' },
+            { key: 'mobile', value: 'Mobile' },
+          ]}
+        />
         <Table className={classes.table} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow className={classes.colRow}>
@@ -158,13 +161,15 @@ export default function TableItems(props) {
                     <TableCell align="left" className={classes.colRow}>
                       <Button
                         variant="outlined"
-                        onClick={() => onViewItem(item)} style={{margin: '5px'}}
+                        onClick={() => onViewItem(item)}
+                        style={{ margin: '5px' }}
                       >
                         View
                       </Button>
                       <Button
                         variant="outlined"
-                        onClick={() => onEditItem(item)} style={{margin: '5px'}}
+                        onClick={() => onEditItem(item)}
+                        style={{ margin: '5px' }}
                       >
                         Edit
                       </Button>
@@ -172,7 +177,8 @@ export default function TableItems(props) {
                         <Button
                           variant="contained"
                           color="secondary"
-                          onClick={() => handleDelete(item.email)} style={{margin: '5px'}}
+                          onClick={() => handleDelete(item.email)}
+                          style={{ margin: '5px' }}
                         >
                           Delete
                         </Button>

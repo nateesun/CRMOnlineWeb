@@ -10,7 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -159,7 +158,7 @@ export default function TableItems(props) {
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{margin: '5px'}}
+                          style={{ margin: '5px' }}
                         >
                           Edit
                         </Button>
@@ -167,7 +166,7 @@ export default function TableItems(props) {
                           variant="contained"
                           color="secondary"
                           onClick={() => handleDelete(item.uuid_index)}
-                          style={{margin: '5px'}}
+                          style={{ margin: '5px' }}
                         >
                           Delete
                         </Button>

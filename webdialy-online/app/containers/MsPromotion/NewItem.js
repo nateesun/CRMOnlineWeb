@@ -8,12 +8,10 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
-import { Paper } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import messages from './messages';
@@ -44,8 +42,8 @@ const useStyles = makeStyles(theme => ({
   },
   paddingImg: {
     margin: '10px',
-    background: '#aaa'
-  }
+    background: '#aaa',
+  },
 }));
 const renderFromHelper = ({ touched, error }) => {
   renderFromHelper.propTypes = {
@@ -125,6 +123,7 @@ const NewItem = props => {
     onInitLoad: PropTypes.func,
     onChangePage: PropTypes.func,
     onCreateItem: PropTypes.func,
+    onUploadImage: PropTypes.func,
   };
 
   const onChangeHandler = event => {
@@ -143,7 +142,6 @@ const NewItem = props => {
         title="Success"
         type="success"
         text={response.message}
-        onConfirm={()=>console.log('Upload success')}
       />
       <SweetAlert
         show={response.status === 'Success'}
@@ -232,8 +230,12 @@ const NewItem = props => {
                   label={<FormattedMessage {...messages.col8} />}
                   required
                 >
-                  <option key="F" value="F">Free</option>
-                  <option key="R" value="R">Redeem</option>
+                  <option key="F" value="F">
+                    Free
+                  </option>
+                  <option key="R" value="R">
+                    Redeem
+                  </option>
                 </Field>
               </div>
             </Grid>
@@ -258,15 +260,24 @@ const NewItem = props => {
               />
             </Grid>
             <Grid item xs={6}>
-              <input type="file" name="file" onChange={onChangeHandler} /><br />
+              <input type="file" name="file" onChange={onChangeHandler} />
+              <br />
             </Grid>
             <Grid item xs={12}>
-              {preview && <img src={preview} width={200} height={200} />}
+              {preview && (
+                <img src={preview} width={200} height={200} alt="preview" />
+              )}
             </Grid>
             <Grid item xs={6}>
-              {file && file.name && <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                Please press upload button
-              </Button>}
+              {file && file.name && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => onUploadImageFile()}
+                >
+                  Please press upload button
+                </Button>
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={1}>
@@ -330,8 +341,12 @@ const validate = formValues => {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
-    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
-    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_amt = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
+    errors.discount_percent = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
   }
   return errors;
 };

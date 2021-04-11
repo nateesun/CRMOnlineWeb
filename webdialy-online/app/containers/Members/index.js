@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
@@ -22,25 +23,27 @@ import reducer from './reducer';
 import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
-import { Grid } from '@material-ui/core';
 
 export function Members(props) {
   useInjectReducer({ key: 'members', reducer });
   useInjectSaga({ key: 'members', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    props.onInitLoad();
-    props.onLoadRoles();
+    if (token) {
+      props.onInitLoad();
+      props.onLoadRoles();
+    }
   }, []);
 
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
+
   return (
-    <MainLayoutApp title='MemberList' {...props}>
-      <Grid container spacing={1} style={{overflow: 'auto', width: '100vw'}}>
+    <MainLayoutApp title="MemberList" {...props}>
+      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

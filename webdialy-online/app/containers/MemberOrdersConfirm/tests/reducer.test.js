@@ -1,13 +1,25 @@
-// import produce from 'immer';
 import memberOrdersConfirmReducer from '../reducer';
-// import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('memberOrdersConfirmReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      data: {
+        cart_no: '',
+        database: '',
+      },
+      list: {},
+      confirmData: {
+        member_mobile: '',
+        order_no: '',
+        signature: '',
+        order_status: '',
+      },
+      response: {
+        status: null,
+        message: null,
+      },
     };
   });
 
@@ -15,18 +27,4 @@ describe('memberOrdersConfirmReducer', () => {
     const expectedResult = state;
     expect(memberOrdersConfirmReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

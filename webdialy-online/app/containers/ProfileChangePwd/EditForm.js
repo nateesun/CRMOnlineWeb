@@ -17,7 +17,6 @@ import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
-import * as selectors from './selectors';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;
@@ -64,12 +63,12 @@ const EditForm = props => {
   } = props;
 
   const onValidated = formValues => {
-    const { mobile, email, new_password } = formValues
-    onEditMember({mobile, email, new_password});
+    const { mobile, email, new_password: newPassword } = formValues;
+    onEditMember({ mobile, email, new_password: newPassword });
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{marginBottom: '50px'}}>
+    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"

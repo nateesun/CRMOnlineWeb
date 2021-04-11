@@ -23,7 +23,7 @@ export function* onVerifyTokenLogin(data) {
         method: 'POST',
         body: JSON.stringify({
           email: username,
-          password: password,
+          password,
         }),
       });
       if (response.status === 'Success') {

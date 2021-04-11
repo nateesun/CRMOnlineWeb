@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import RenderField from 'components/RenderField';
-import InputCheckBox from 'components/RenderField/CheckboxInput';
+import CheckboxInput from 'components/RenderField/CheckboxInput';
 import SweetAlert from 'sweetalert2-react';
 import { Paper } from '@material-ui/core';
 import messages from './messages';
@@ -60,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     textShadow: '2px 2px #ff0000',
     marginTop: '0px',
     position: 'absolute',
-  }
+  },
 }));
 
 const ImgLogo = styled.img`
@@ -78,11 +77,19 @@ const LoginForm = props => {
     submitting,
     errorLogin,
     clearData,
+    onValidateLogin,
   } = props;
 
   useEffect(() => {
     setType('mobile');
   }, []);
+
+  const onValidate = formValues => {
+    onValidateLogin({
+      ...formValues,
+      type: type === true ? 'email' : 'mobile',
+    });
+  };
 
   return (
     <Grid container className={classes.root}>
@@ -97,10 +104,10 @@ const LoginForm = props => {
         <div className={classes.header}>CRM ONLINE</div>
         <Paper elevation={3} className={classes.paper}>
           <ImgLogo src={LoginLogo} width="128" height="128" />
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onValidate)}>
             <Field
               name="type"
-              component={InputCheckBox}
+              component={CheckboxInput}
               label={
                 type === 'mobile' ? (
                   <FormattedMessage {...messages.signInMobile} />
@@ -174,6 +181,7 @@ LoginForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   clearData: PropTypes.func,
+  onValidateLogin: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -192,16 +200,8 @@ const validate = formValues => {
   return errors;
 };
 
-const mapStateToProps = (state, props) => ({
-  initialValues: {
-    type: true,
-  },
-});
-
-export default connect(mapStateToProps)(
-  reduxForm({
-    form: 'loginForm',
-    validate,
-    enableReinitialize: true,
-  })(LoginForm),
-);
+export default reduxForm({
+  form: 'loginForm',
+  validate,
+  enableReinitialize: true,
+})(LoginForm);

@@ -1,13 +1,13 @@
-import { initLoad } from '../actions';
-import { INIT_LOAD } from '../constants';
+import * as actions from '../actions';
+import * as constants from '../constants';
 
 describe('Profile actions', () => {
-  describe('initLoad', () => {
-    it('has a type of INIT_LOAD', () => {
+  describe('initState', () => {
+    it('has a type of INIT_STATE', () => {
       const expected = {
-        type: INIT_LOAD,
+        type: constants.INIT_STATE,
       };
-      expect(initLoad()).toEqual(expected);
+      expect(actions.initState()).toEqual(expected);
     });
   });
 });
