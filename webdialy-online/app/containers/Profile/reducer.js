@@ -4,8 +4,8 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
+import * as constants from './constants';
 
 export const initialState = {
   company: {},
@@ -19,9 +19,9 @@ const profileReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.data= {};
-        draft.email= '';
-        draft.error= '';
+        draft.data = {};
+        draft.email = '';
+        draft.error = '';
         break;
       case constants.INIT_LOAD_COMPANY:
         break;

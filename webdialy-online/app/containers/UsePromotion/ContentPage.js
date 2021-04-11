@@ -8,8 +8,8 @@ export default function ContentPage(props) {
   };
 
   return (
-    <div>
+    <React.Fragment>
       {props.getPage === 'LIST' && <TableItems {...props} />}
-    </div>
+    </React.Fragment>
   );
 }

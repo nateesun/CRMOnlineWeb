@@ -3,13 +3,17 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-// import { take, call, put, select } from 'redux-saga/effects';
-// import checkoutSaga from '../saga';
+import { takeEvery } from 'redux-saga/effects';
+import checkoutSaga, { loadCartList } from '../saga';
+import * as constants from '../constants';
 
-// const generator = checkoutSaga();
+const generator = checkoutSaga();
 
 describe('checkoutSaga Saga', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should start task to watch for LOAD_CART', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(
+      takeEvery(constants.LOAD_CART, loadCartList),
+    );
   });
 });

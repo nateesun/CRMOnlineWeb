@@ -39,11 +39,11 @@ const ViewItem = props => {
   const {
     code,
     email,
-    member_role,
-    first_name,
-    last_name,
-    total_score,
-    total_purchase,
+    member_role: memberRole,
+    first_name: firstName,
+    last_name: lastName,
+    total_score: totalScore,
+    total_purchase: totalPurchase,
     mobile,
   } = props.initialValues;
 
@@ -70,31 +70,31 @@ const ViewItem = props => {
             <FormattedMessage {...messages.role} />
           </Grid>
           <Grid item xs={6}>
-            {member_role}
+            {memberRole}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.name} />
           </Grid>
           <Grid item xs={6}>
-            {first_name}
+            {firstName}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.lastName} />
           </Grid>
           <Grid item xs={6}>
-            {last_name}
+            {lastName}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.totalScore} />
           </Grid>
           <Grid item xs={6}>
-            {total_score}
+            {totalScore}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.totalPurchase} />
           </Grid>
           <Grid item xs={6}>
-            {total_purchase}
+            {totalPurchase}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.mobile} />

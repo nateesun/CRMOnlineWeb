@@ -8,7 +8,7 @@ import * as selectors from './selectors';
 
 export function* onEditMember() {
   try {
-    const email = JSON.parse(getCookie('token')||'');
+    const email = JSON.parse(getCookie('token') || '');
     const data = yield select(selectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/member/${email}`;

@@ -5,7 +5,6 @@ import RedeemPage from './RedeemPage';
 import MyQrCode from './MyQrCode';
 
 export default function DashboardContent(props) {
-
   DashboardContent.propTypes = {
     onRefresh: PropTypes.func,
     email: PropTypes.string,

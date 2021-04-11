@@ -112,7 +112,11 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -132,7 +136,8 @@ export default function TableItems(props) {
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={item.uuid_index} className={classes.colRow}
+                      key={item.uuid_index}
+                      className={classes.colRow}
                     >
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
@@ -162,13 +167,13 @@ export default function TableItems(props) {
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={6}>
-                        ไม่พบข้อมูลสาขา
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={6}>
+                    ไม่พบข้อมูลสาขา
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

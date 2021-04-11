@@ -29,16 +29,19 @@ export function ProfileShipping(props) {
   useInjectSaga({ key: 'profileShipping', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    props.initLoad(JSON.parse(token));
+    if (token) {
+      props.initLoad(JSON.parse(token));
+    }
   }, []);
 
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
+
   return (
-    <MainLayoutApp title='Edit Shipping' {...props}>
+    <MainLayoutApp title="Edit Shipping" {...props}>
       <EditForm {...props} />
     </MainLayoutApp>
   );

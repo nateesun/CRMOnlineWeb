@@ -21,7 +21,7 @@ import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 import ShowQRCode from './ShowQRCode';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
   },
@@ -98,26 +98,29 @@ export default function TableItems(props) {
     onChangePage: PropTypes.func,
     onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
+    showCommand: PropTypes.bool,
+    profile: PropTypes.object,
+    onSearch: PropTypes.func,
   };
 
   const handleRefreshPage = () => {
-    if(props.profile.member_role==='member'){
-      props.onSearch('member_code', props.profile.code)
-    }else{
+    if (props.profile.member_role === 'member') {
+      props.onSearch('member_code', props.profile.code);
+    } else {
       props.onInitLoad();
     }
-  }
+  };
 
-  //show qrcode dialog
+  // show qrcode dialog
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useState('');
 
-  const handleClickOpen = (cart_no) => {
+  const handleClickOpen = cartNo => {
     setOpen(true);
-    setCart(cart_no);
+    setCart(cartNo);
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -137,12 +140,16 @@ export default function TableItems(props) {
             <FormattedMessage {...messages.refresh} />
           </Button>
         </div>
-        {props.profile.member_role !== 'member' && 
-        <SearchBar {...props} items={[
-          { key: 'cart_no', value: 'Cart No' },
-          { key: 'member_code', value: 'Member Code' },
-          { key: 'cart_active', value: 'Status' },
-          ]} />}
+        {props.profile.member_role !== 'member' && (
+          <SearchBar
+            {...props}
+            items={[
+              { key: 'cart_no', value: 'Cart No' },
+              { key: 'member_code', value: 'Member Code' },
+              { key: 'cart_active', value: 'Status' },
+            ]}
+          />
+        )}
         <div className={classes.dataWidth}>
           <Table className={classes.table}>
             <TableHead>
@@ -214,14 +221,22 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_amount}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">
-                        <FormattedMessage id={`${scope}.${item.shopping_step}`} />
+                        <FormattedMessage
+                          id={`${scope}.${item.shopping_step}`}
+                        />
                       </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
-                      {item.shopping_step==='approve' && <TableCell align="center">
-                        <Button variant="outlined" color="primary" onClick={()=>handleClickOpen(item.cart_no)}>
-                          Show QRCode
-                        </Button>
-                      </TableCell>}
+                      {item.shopping_step === 'approve' && (
+                        <TableCell align="center">
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleClickOpen(item.cart_no)}
+                          >
+                            Show QRCode
+                          </Button>
+                        </TableCell>
+                      )}
                       {showCommand && (
                         <TableCell align="center">
                           <Grid container spacing={1} justify="center">

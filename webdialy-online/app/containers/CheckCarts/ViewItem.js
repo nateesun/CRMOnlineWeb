@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Radio from '@material-ui/core/Radio';
@@ -12,13 +13,12 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
 import PaymentDetail from './PaymentDetail';
-import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,11 +38,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '10px',
     paddingTop: '10px',
     paddingBottom: '10px',
-    // border: '1px solid #ddd',
     borderRadius: '10px',
   },
   likeText: {
-    // border: '1px solid #ddd',
     marginBottom: '2px',
     background: '#eee',
     borderRadius: '5px',
@@ -62,19 +60,19 @@ const ViewItem = props => {
   const [reason, setReason] = useState('');
   const { showAlertResponse, onChangePage } = props;
   const {
-    cart_no,
-    cart_create_date,
-    member_code,
-    total_item,
-    total_amount,
-    total_point,
-    shopping_step,
-    cart_active,
-    slip_path,
+    cart_no: cartNo,
+    cart_create_date: cartCreateDate,
+    member_code: memberCode,
+    total_item: totalItem,
+    total_amount: totalAmount,
+    total_point: totalPoint,
+    shopping_step: shoppingStep,
+    cart_active: cartActive,
+    slip_path: slipPath,
   } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   return (
     <Container component="main" maxWidth="lg">
@@ -83,7 +81,7 @@ const ViewItem = props => {
         title="Update Status"
         type="success"
         text="Approve Cart Status Success"
-        onConfirm={()=>onChangePage('LIST')}
+        onConfirm={() => onChangePage('LIST')}
       />
       <div className={classes.paper}>
         <Typography variant="h5" className={classes.updateItemHeader}>
@@ -94,49 +92,49 @@ const ViewItem = props => {
             <FormattedMessage {...messages.col1} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {cart_no}
+            {cartNo}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col2} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {cart_create_date}
+            {cartCreateDate}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col3} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {member_code}
+            {memberCode}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col4} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {total_item}
+            {totalItem}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col5} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {total_amount}
+            {totalAmount}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col6} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {total_point}
+            {totalPoint}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col7} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {shopping_step}
+            {shoppingStep}
           </Grid>
           <Grid item xs={4}>
             <FormattedMessage {...messages.col8} />
           </Grid>
           <Grid item xs={8} className={classes.likeText}>
-            {cart_active}
+            {cartActive}
           </Grid>
         </Grid>
         <Grid container spacing={3}>
@@ -144,47 +142,69 @@ const ViewItem = props => {
             <Typography variant="h6" gutterBottom className={classes.title}>
               รูปภาพสลิปที่โอนเงินเข้าระบบ
             </Typography>
-            <img src={`${apiServiceHost}${slip_path}`} width={250} alt="sample slip upload" />
+            <img
+              src={`${apiServiceHost}${slipPath}`}
+              width={250}
+              alt="sample slip upload"
+            />
           </Grid>
           <Grid item xs={12}>
-           {props.getData && <PaymentDetail payment={props.getData} />}
+            {props.getData && <PaymentDetail payment={props.getData} />}
           </Grid>
           <Grid item xs={6}>
-            <Paper elevation={3} style={{padding: '20px', background: '#ddd', width: '75vw'}}>
-              {shopping_step && shopping_step !== 'approve' && <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Approve Slip</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-label="position"
-                    name="position"
-                    defaultValue="top"
-                  >
-                    <FormControlLabel
-                      value="approve"
-                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                      label="Approve"
-                    />
-                    <FormControlLabel
-                      value="not_approve"
-                      control={<Radio color="primary" onChange={e=>setApprove(e.target.value)} />}
-                      label="Not Approve"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>}
+            <Paper
+              elevation={3}
+              style={{ padding: '20px', background: '#ddd', width: '75vw' }}
+            >
+              {shoppingStep && shoppingStep !== 'approve' && (
+                <Grid item xs={12}>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend">Approve Slip</FormLabel>
+                    <RadioGroup
+                      row
+                      aria-label="position"
+                      name="position"
+                      defaultValue="top"
+                    >
+                      <FormControlLabel
+                        value="approve"
+                        control={
+                          <Radio
+                            color="primary"
+                            onChange={e => setApprove(e.target.value)}
+                          />
+                        }
+                        label="Approve"
+                      />
+                      <FormControlLabel
+                        value="not_approve"
+                        control={
+                          <Radio
+                            color="primary"
+                            onChange={e => setApprove(e.target.value)}
+                          />
+                        }
+                        label="Not Approve"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+              )}
             </Paper>
           </Grid>
-          {shopping_step && shopping_step !== 'approve' && <Grid item xs={10}>
-            <TextField
-              fullWidth
-              id="standard-basic"
-              label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ" disabled={approve!=='not_approve'}
-              required
-              value={reason}
-              onChange={e=>setReason(e.target.value)}
-            />
-          </Grid>}
+          {shoppingStep && shoppingStep !== 'approve' && (
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                id="standard-basic"
+                label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ"
+                disabled={approve !== 'not_approve'}
+                required
+                value={reason}
+                onChange={e => setReason(e.target.value)}
+              />
+            </Grid>
+          )}
           <Grid item xs={3}>
             <Button
               fullWidth
@@ -194,16 +214,25 @@ const ViewItem = props => {
               <FormattedMessage {...messages.btnBack} />
             </Button>
           </Grid>
-          {shopping_step && shopping_step !== 'approve' && <Grid item xs={5}>
-            <Button
-              color="primary"
-              fullWidth
-              variant="contained"
-              onClick={() => props.onUpdateShoppingStep({ cart_no, cart_create_date, approve, reason })}
-            >
-              <FormattedMessage {...messages.btnApprove} />
-            </Button>
-          </Grid>}
+          {shoppingStep && shoppingStep !== 'approve' && (
+            <Grid item xs={5}>
+              <Button
+                color="primary"
+                fullWidth
+                variant="contained"
+                onClick={() =>
+                  props.onUpdateShoppingStep({
+                    cartNo,
+                    cartCreateDate,
+                    approve,
+                    reason,
+                  })
+                }
+              >
+                <FormattedMessage {...messages.btnApprove} />
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </div>
     </Container>
@@ -218,6 +247,9 @@ ViewItem.propTypes = {
   onRegister: PropTypes.func,
   initialValues: PropTypes.object,
   onChangePage: PropTypes.func,
+  showAlertResponse: PropTypes.bool,
+  getData: PropTypes.func,
+  onUpdateShoppingStep: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

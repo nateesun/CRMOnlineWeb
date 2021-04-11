@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,7 +17,6 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import * as constants from './constants';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -38,10 +37,10 @@ export default function DialogDetail(props) {
   const { open, handleClose, Transition, item, profile, cart } = props;
   const [qty, setQty] = useState(1);
   const [options, setOptions] = useState('');
-  const [special_text, setSpecialText] = useState('');
+  const [specialText, setSpecialText] = useState('');
   const classes = useStyles();
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const handleCloseDialog = () => {
     handleClose();
@@ -54,7 +53,7 @@ export default function DialogDetail(props) {
         ...item,
         qty,
         options,
-        special_text,
+        special_text: specialText,
         total_amount: item.price_d * qty,
         point_total: item.point * qty,
         member_code: profile.code,
@@ -65,7 +64,7 @@ export default function DialogDetail(props) {
         ...item,
         qty,
         options,
-        special_text,
+        special_text: specialText,
         total_amount: item.price_d * qty,
         point_total: item.point * qty,
         member_code: profile.code,
@@ -80,7 +79,7 @@ export default function DialogDetail(props) {
 
   const addQty = qtyAmt => {
     setQty(qtyAmt + 1);
-    if(item.qty_over_stock === 'N'){
+    if (item.qty_over_stock === 'N') {
       if (item.in_stock && qtyAmt + 1 > item.in_stock) {
         setQty(item.in_stock);
       }
@@ -98,6 +97,10 @@ export default function DialogDetail(props) {
     handleClose: PropTypes.func,
     Transition: PropTypes.any,
     item: PropTypes.object,
+    profile: PropTypes.object,
+    cart: PropTypes.object,
+    onUpdateCartItem: PropTypes.func,
+    onAddCartItem: PropTypes.func,
   };
 
   return (
@@ -123,7 +126,7 @@ export default function DialogDetail(props) {
         <br />
         options: {options}
         <br />
-        special_text: {special_text}
+        special_text: {specialText}
         <br />
       </Typography>
       <List>
@@ -168,7 +171,7 @@ export default function DialogDetail(props) {
             id="standard-basic"
             label="ข้อความพิเศษ"
             style={{ width: '100%' }}
-            value={special_text}
+            value={specialText}
             onChange={e => setSpecialText(e.target.value)}
           />
         </ListItem>

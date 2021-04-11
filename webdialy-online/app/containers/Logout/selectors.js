@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
 /**
  * Direct selector to the logout state domain
  */
 
-const selectLogoutDomain = state => state.logout || initialState;
+const selectLogoutDomain = state => state.logout;
 
 /**
  * Other specific selectors

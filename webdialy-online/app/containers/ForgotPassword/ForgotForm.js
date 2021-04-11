@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,7 +46,7 @@ const ImgLogo = styled.img`
 const ForgotForm = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, onSendRequest } = props;
-  const confirmRequestChangePassword = (values) => {
+  const confirmRequestChangePassword = values => {
     onSendRequest({
       email: values.email,
       mobile: values.mobile,
@@ -61,7 +61,10 @@ const ForgotForm = props => {
         <Typography component="h1" variant="h5">
           <FormattedMessage {...messages.header} />
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(confirmRequestChangePassword)}>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmit(confirmRequestChangePassword)}
+        >
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Field
@@ -135,6 +138,7 @@ ForgotForm.propTypes = {
   pristine: PropTypes.bool,
   reset: PropTypes.func,
   submitting: PropTypes.bool,
+  onSendRequest: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -146,11 +150,13 @@ const validate = formValues => {
     errors.email = <FormattedMessage {...messages.emailIncorrectPattern} />;
   }
 
-  if(typeof formValues.mobile === 'undefined') {
+  if (typeof formValues.mobile === 'undefined') {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
-  if(typeof formValues.confirm_secret === 'undefined') {
-    errors.confirm_secret = <FormattedMessage {...messages.secretShouldNotEmpty} />;
+  if (typeof formValues.confirm_secret === 'undefined') {
+    errors.confirm_secret = (
+      <FormattedMessage {...messages.secretShouldNotEmpty} />
+    );
   }
 
   return errors;

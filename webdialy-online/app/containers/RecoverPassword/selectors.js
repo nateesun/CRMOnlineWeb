@@ -1,12 +1,10 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
 /**
  * Direct selector to the recoverPassword state domain
  */
 
-const selectRecoverPasswordDomain = state =>
-  state.recoverPassword || initialState;
+const selectRecoverPasswordDomain = state => state.recoverPassword;
 
 /**
  * Other specific selectors

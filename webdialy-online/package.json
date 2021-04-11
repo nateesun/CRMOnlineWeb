@@ -22,9 +22,10 @@
     "prebuild": "npm run build:clean",
     "build": "cross-env REACT_APP_PUBLIC_PATH=/web-daily-online NODE_ENV=${NODE_ENV:-production} webpack --config ${CONFIG:-internals/webpack/webpack.prod.babel.js} --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
-    "start": "cross-env REACT_APP_PUBLIC_PATH=/web-daily-online NODE_ENV=development node server",
+    "start": "cross-env REACT_APP_PUBLIC_PATH=/web-daily-online NODE_ENV=production node server",
+    "local": "cross-env REACT_APP_PUBLIC_PATH=/web-daily-online NODE_ENV=development node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
-    "start:production": "npm run test && npm run build && npm run start:prod",
+    "start:production": "npm run pretty && npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
     "start:pm2": "cross-env REACT_APP_PUBLIC_PATH=/web-daily-online pm2 start server --name webdaily-online",
     "start:demo": "cross-env PORT=3333 NODE_ENV=demo node server",
@@ -47,7 +48,8 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "watch": "cross-env NODE_ENV=development nodemon server",
-    "watch:demo": "cross-env PORT=3333 NODE_ENV=demo nodemon server"
+    "watch:demo": "cross-env PORT=3333 NODE_ENV=demo nodemon server",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"" 
   },
   "browserslist": [
     "last 2 versions",

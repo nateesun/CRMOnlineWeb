@@ -15,7 +15,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-
 import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import messages from './messages';
@@ -105,10 +104,10 @@ const EditItem = props => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [preview, setPreview] = useState(null);
-  const { img_path } = props.initialValues;
+  const { img_path: imgPath } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -232,8 +231,12 @@ const EditItem = props => {
                   label={<FormattedMessage {...messages.col8} />}
                   required
                 >
-                  <option key="F" value="F">Free</option>
-                  <option key="R" value="R">Redeem</option>
+                  <option key="F" value="F">
+                    Free
+                  </option>
+                  <option key="R" value="R">
+                    Redeem
+                  </option>
                 </Field>
               </div>
             </Grid>
@@ -262,7 +265,9 @@ const EditItem = props => {
               <input type="text" value={fileName} />
             </Grid>
             <Grid item xs={12}>
-              {preview && <img src={preview} width={200} height={200} />}
+              {preview && (
+                <img src={preview} width={200} height={200} alt="preview" />
+              )}
             </Grid>
             <Grid item xs={12} md={6}>
               <Button
@@ -273,10 +278,10 @@ const EditItem = props => {
                 Please press upload button
               </Button>
             </Grid>
-            {img_path && (
+            {imgPath && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceHost}${img_path}`} width="250" alt="" />
+                  <img src={`${apiServiceHost}${imgPath}`} width="250" alt="" />
                 </Paper>
               </Grid>
             )}
@@ -330,6 +335,7 @@ EditItem.propTypes = {
   onUpdateItem: PropTypes.func,
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
+  onUploadImage: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -355,8 +361,12 @@ const validate = formValues => {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
-    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
-    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_amt = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
+    errors.discount_percent = (
+      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
+    );
   }
   return errors;
 };
