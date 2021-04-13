@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 export default function TableItems(props) {
-  const { getList, showCommand = true } = props;
+  const { getList } = props;
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -60,11 +60,6 @@ export default function TableItems(props) {
 
   TableItems.propTypes = {
     getList: PropTypes.array,
-    onDeleteItem: PropTypes.func,
-    onLoadView: PropTypes.func,
-    onChangePage: PropTypes.func,
-    onLoadEdit: PropTypes.func,
-    onInitLoad: PropTypes.func,
   };
 
   return (
@@ -103,23 +98,29 @@ export default function TableItems(props) {
                       <TableCell align="left">{item.database}</TableCell>
                       <TableCell align="left">{item.query}</TableCell>
                       <TableCell align="center">
-                      <Grid container spacing={1} justify="center">
-                            <Grid item>
-                              <a target="_blank" href={`${window.location.origin}${appConstants.publicPath}${item.query}`} style={{textDecoration: 'none'}}>
-                                <Button>Link Test</Button>
-                              </a>
-                            </Grid>
+                        <Grid container spacing={1} justify="center">
+                          <Grid item>
+                            <a
+                              target="_blank"
+                              href={`${window.location.origin}${
+                                appConstants.publicPath
+                              }${item.query}`}
+                              style={{ textDecoration: 'none' }}
+                            >
+                              <Button>Link Test</Button>
+                            </a>
                           </Grid>
+                        </Grid>
                       </TableCell>
                     </TableRow>
                   ))}
-                  {getList.length === 0 && (
-                    <TableRow>
-                      <TableCell align="left" colSpan={4}>
-                        ไม่พบข้อมูลฐานข้อมูล
-                      </TableCell>
-                    </TableRow>
-                  )}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={4}>
+                    ไม่พบข้อมูลฐานข้อมูล
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>

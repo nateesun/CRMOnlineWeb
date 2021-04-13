@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -40,11 +41,20 @@ const Login = props => {
     return <Redirect to={`${appConstants.publicPath}/dashboard`} />;
   }
 
-  return <LoginForm {...props} />;
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
+      <LoginForm {...props} />;
+    </React.Fragment>
+  );
 };
 
 Login.propTypes = {
   onSubmit: PropTypes.func,
+  location: PropTypes.object,
+  initDatabase: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -55,8 +65,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: ({ email, mobile, password, type }) => {
-      dispatch(actions.checkLogin(email, mobile, password, type));
+    onValidateLogin: ({ username, password }) => {
+      dispatch(actions.checkLogin(username, password));
     },
     clearData: () => {
       dispatch(actions.initState());

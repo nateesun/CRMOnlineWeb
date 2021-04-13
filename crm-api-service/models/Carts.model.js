@@ -14,12 +14,12 @@ module.exports = (db) => {
     logger.debug(`findByCartNo: ${cart_no}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where cart_no=?;`;
-        logger.debug(sql);
+        const sql = `select * from ${table_name} where cart_no=?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -29,12 +29,42 @@ module.exports = (db) => {
     logger.debug("findAll")
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} order by cart_no desc;`;
-        logger.debug(sql);
+        const sql = `select * from ${table_name} order by cart_no desc;`
+        logger.debug(sql)
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.findStatusApprove = (member_code) => {
+    logger.debug("findStatusApprove")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where shopping_step='approve' and member_code=? order by cart_no desc;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [member_code])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.findStatusNotApprove = (member_code) => {
+    logger.debug("findStatusApprove")
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where shopping_step!='approve' and member_code=? order by cart_no desc;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [member_code])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -44,12 +74,12 @@ module.exports = (db) => {
     logger.debug(`findAllByMember: ${member_code}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `select * from ${table_name} where member_code = ? order by cart_no;`;
-        logger.debug(sql);
+        const sql = `select * from ${table_name} where member_code = ? order by cart_no;`
+        logger.debug(sql)
         const result = await pool.query(sql, [member_code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -59,15 +89,15 @@ module.exports = (db) => {
     logger.debug(`searchData: ${key} ${value}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select * from ${table_name}`;
+        let sql = `select * from ${table_name}`
         if (key !== "") {
-          sql = `${sql} where ${key} like '%${value}%'`;
+          sql = `${sql} where ${key} like '%${value}%'`
         }
-        logger.debug(sql);
+        logger.debug(sql)
         const result = await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -77,23 +107,23 @@ module.exports = (db) => {
     logger.debug(`create: ${params}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select cart_running, cart_prefix, cart_size_running from ${tb_company} c limit 0,1;`;
-        logger.debug(sql);
+        let sql = `select cart_running, cart_prefix, cart_size_running from ${tb_company} c limit 0,1;`
+        logger.debug(sql)
         const config = await pool.query(sql)
         const { cart_prefix, cart_running, cart_size_running } = config[0]
         params.cart_no = cart_prefix + zeroPad(cart_running, cart_size_running) // generate prefix running
 
         sql = `INSERT INTO ${table_name} SET ? `
-        logger.debug(sql);
+        logger.debug(sql)
         await pool.query(sql, params)
 
         // update running +1
-        sql = `update ${tb_company} set cart_running=cart_running+1;`;
-        logger.debug(sql);
+        sql = `update ${tb_company} set cart_running=cart_running+1;`
+        logger.debug(sql)
         await pool.query(sql)
         resolve({ status: "Success", data: JSON.stringify(params.cart_no) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -103,8 +133,8 @@ module.exports = (db) => {
     logger.debug(`update: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `UPDATE ${table_name} SET cart_no=?, member_code=? WHERE uuid_index=?;`;
-        logger.debug(sql);
+        const sql = `UPDATE ${table_name} SET cart_no=?, member_code=? WHERE uuid_index=?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [
           data.cart_no,
           data.member_code,
@@ -112,7 +142,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -130,8 +160,8 @@ module.exports = (db) => {
         transfer_date=?,
         transfer_ref=?,
         transfer_amount=? 
-        WHERE cart_no=? and member_code=?;`;
-        logger.debug(sql);
+        WHERE cart_no=? and member_code=?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [
           data.account_from_name,
           data.account_to_name,
@@ -145,7 +175,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -155,15 +185,12 @@ module.exports = (db) => {
     logger.debug(`updateShoppingStep: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?;`;
-        logger.debug(sql);
-        const result = await pool.query(sql, [
-          data.shopping_step,
-          data.cart_no,
-        ])
+        let sql = `UPDATE ${table_name} SET shopping_step=? WHERE cart_no=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [data.shopping_step, data.cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -173,15 +200,12 @@ module.exports = (db) => {
     logger.debug(`updateSlipPath: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `UPDATE ${table_name} SET slip_path=? WHERE cart_no=?;`;
-        logger.debug(sql);
-        const result = await pool.query(sql, [
-          data.slip_path,
-          data.cart_no,
-        ])
+        let sql = `UPDATE ${table_name} SET slip_path=? WHERE cart_no=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [data.slip_path, data.cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -196,8 +220,8 @@ module.exports = (db) => {
         emp_code_update=?,
         emp_reason=?,
         emp_update_date=now() 
-        WHERE cart_no=?;`;
-        logger.debug(sql);
+        WHERE cart_no=?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [
           data.shopping_step,
           data.emp_code_update,
@@ -206,7 +230,7 @@ module.exports = (db) => {
         ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })
@@ -221,12 +245,12 @@ module.exports = (db) => {
         total_item=(select sum(qty) from ${tb_carts_detail} cd where cd.cart_no=c.cart_no),
         total_amount=(select sum(total_amount) from ${tb_carts_detail} cd where cd.cart_no=c.cart_no),
         total_point=(select sum(point) from ${tb_carts_detail} cd where cd.cart_no=c.cart_no) 
-        where cart_no=?;`;
-        logger.debug(sql);
+        where cart_no=?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [data.cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject(err, { status: "Error", msg: err.message })
       }
     })
@@ -236,12 +260,12 @@ module.exports = (db) => {
     logger.debug(`delete: ${id}`)
     return new Promise(async (resolve, reject) => {
       try {
-        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`;
-        logger.debug(sql);
+        const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`
+        logger.debug(sql)
         const result = await pool.query(sql, [id])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
-        logger.error(err);
+        logger.error(err)
         reject({ status: "Error", msg: err.message })
       }
     })

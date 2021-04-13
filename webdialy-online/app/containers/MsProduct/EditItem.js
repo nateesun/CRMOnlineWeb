@@ -49,10 +49,10 @@ const EditItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response } = props;
   const [file, setFile] = useState(null);
-  const { img_path } = props.initialValues;
+  const { img_path: imgPath } = props.initialValues;
 
   const loc = window.location.href.split('/');
-  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceEndpoint = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -249,10 +249,14 @@ const EditItem = props => {
                 Upload
               </Button>
             </Grid>
-            {img_path && (
+            {imgPath && (
               <Grid item xs={12}>
                 <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceEndpoint}${img_path}`} width="250" alt="" />
+                  <img
+                    src={`${apiServiceEndpoint}${imgPath}`}
+                    width="250"
+                    alt=""
+                  />
                 </Paper>
               </Grid>
             )}
@@ -306,6 +310,7 @@ EditItem.propTypes = {
   onUpdateItem: PropTypes.func,
   onInitLoad: PropTypes.func,
   onChangePage: PropTypes.func,
+  onUploadImage: PropTypes.func,
 };
 
 const validate = formValues => {
@@ -317,10 +322,14 @@ const validate = formValues => {
     errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   if (!formValues.unit_code_sale) {
-    errors.unit_code_sale = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+    errors.unit_code_sale = (
+      <FormattedMessage {...messages.col3ShouldNotEmpty} />
+    );
   }
   if (!formValues.product_group_code) {
-    errors.product_group_code = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.product_group_code = (
+      <FormattedMessage {...messages.col4ShouldNotEmpty} />
+    );
   }
   if (!formValues.point || formValues.point < 0) {
     errors.point = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
@@ -344,13 +353,17 @@ const validate = formValues => {
     errors.min_stock = <FormattedMessage {...messages.col11ShouldNotEmpty} />;
   }
   if (!formValues.unit_code_stock) {
-    errors.unit_code_stock = <FormattedMessage {...messages.col12ShouldNotEmpty} />;
+    errors.unit_code_stock = (
+      <FormattedMessage {...messages.col12ShouldNotEmpty} />
+    );
   }
   if (!formValues.img_path) {
     errors.img_path = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
   }
   if (!formValues.qty_over_stock) {
-    errors.qty_over_stock = <FormattedMessage {...messages.col13ShouldNotEmpty} />;
+    errors.qty_over_stock = (
+      <FormattedMessage {...messages.col13ShouldNotEmpty} />
+    );
   }
   return errors;
 };
@@ -364,5 +377,5 @@ export default connect(mapStateToProps)(
     form: 'editItem',
     validate,
     enableReinitialize: true,
-  })(EditItem)
+  })(EditItem),
 );

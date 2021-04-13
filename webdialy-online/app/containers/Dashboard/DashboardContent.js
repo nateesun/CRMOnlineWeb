@@ -5,7 +5,6 @@ import RedeemPage from './RedeemPage';
 import MyQrCode from './MyQrCode';
 
 export default function DashboardContent(props) {
-
   DashboardContent.propTypes = {
     onRefresh: PropTypes.func,
     email: PropTypes.string,
@@ -14,7 +13,7 @@ export default function DashboardContent(props) {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={{ marginBottom: '50px' }}>
       <Grid item xs={12}>
         <MyQrCode {...props} />
       </Grid>

@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import moment from 'moment';
-const { v4 } = require('uuid');
+import { v4 } from 'uuid';
 import * as loginConstants from 'containers/Login/constants';
 import * as checkoutOrderConstants from 'containers/CheckoutOrder/constants';
 import * as constants from './constants';
@@ -37,7 +37,7 @@ export const initialState = {
       options: '',
       special_text: '',
       point: 0,
-    }
+    },
   },
   search: {
     data: '',
@@ -45,7 +45,7 @@ export const initialState = {
   response: {
     status: '',
     message: '',
-  }
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -55,10 +55,10 @@ const shoppingReducer = (state = initialState, action) =>
       case loginConstants.CHECK_LOGOUT:
       case checkoutOrderConstants.UPDATE_SHOPPING_STEP_SUCCESS:
       case constants.INIT_STATE:
-        draft.productList= [];
-        draft.cart= {};
-        draft.itemCart= {};
-        draft.response= {};
+        draft.productList = [];
+        draft.cart = {};
+        draft.itemCart = {};
+        draft.response = {};
         break;
       case constants.LOAD_PRODUCT:
         break;
@@ -95,7 +95,7 @@ const shoppingReducer = (state = initialState, action) =>
           options: action.payload.options,
           special_text: action.payload.special_text,
           point: action.payload.point_total,
-        }
+        };
         break;
       case constants.CREATE_ITEM_CART_SUCCESS:
         draft.cart = action.payload;
@@ -122,7 +122,7 @@ const shoppingReducer = (state = initialState, action) =>
           options: action.payload.options,
           special_text: action.payload.special_text,
           point: action.payload.point_total,
-        }
+        };
         break;
       case constants.UPDATE_ITEM_CART_SUCCESS:
         draft.cart = action.payload;

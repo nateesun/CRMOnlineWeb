@@ -1,13 +1,13 @@
-import { defaultAction } from '../actions';
-import { DEFAULT_ACTION } from '../constants';
+import * as actions from '../actions';
+import * as constants from '../constants';
 
 describe('MainLayoutApp actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('loadProfile Action', () => {
+    it('has a type of LOAD_PROFILE', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: constants.LOAD_PROFILE,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(actions.loadProfile()).toEqual(expected);
     });
   });
 });

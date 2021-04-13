@@ -1,13 +1,26 @@
-// import produce from 'immer';
 import msCompanyReducer from '../reducer';
-// import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('msCompanyReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      list: [],
+      data: {
+        uuid_index: '',
+        code: '',
+        name: '',
+        line_official_id: '',
+      },
+      page: 'LIST',
+      status: null,
+      message: null,
+      img_upload: null,
+      currentId: '',
+      response: {
+        status: null,
+        message: null,
+      },
     };
   });
 
@@ -15,18 +28,4 @@ describe('msCompanyReducer', () => {
     const expectedResult = state;
     expect(msCompanyReducer(undefined, {})).toEqual(expectedResult);
   });
-
-  /**
-   * Example state change comparison
-   *
-   * it('should handle the someAction action correctly', () => {
-   *   const expectedResult = produce(state, draft => {
-   *     draft.loading = true;
-   *     draft.error = false;
-   *     draft.userData.nested = false;
-   *   });
-   *
-   *   expect(appReducer(state, someAction())).toEqual(expectedResult);
-   * });
-   */
 });

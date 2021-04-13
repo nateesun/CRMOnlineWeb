@@ -28,16 +28,19 @@ export function CheckCarts(props) {
   useInjectSaga({ key: 'checkCarts', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    props.onInitLoad();
+    if (token) {
+      props.onInitLoad();
+    }
   }, []);
 
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
+
   return (
-    <MainLayoutApp title='CheckCartList' {...props}>
+    <MainLayoutApp title="CheckCartList" {...props}>
       <TabLayout {...props} />
     </MainLayoutApp>
   );

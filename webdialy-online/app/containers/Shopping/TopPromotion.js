@@ -8,11 +8,13 @@ function Item(props) {
     item: PropTypes.object,
   };
   return (
-    <div style={{padding: 10}}>
+    <div style={{ padding: 10 }}>
       <h2>{props.item.name}</h2>
       <p>{props.item.description}</p>
 
-      <Button variant="outlined" className="CheckButton">ดูรายละเอียด</Button>
+      <Button variant="outlined" className="CheckButton">
+        ดูรายละเอียด
+      </Button>
     </div>
   );
 }

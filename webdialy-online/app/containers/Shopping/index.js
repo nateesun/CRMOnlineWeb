@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -27,22 +28,27 @@ export function Shopping(props) {
   useInjectSaga({ key: 'shopping', saga });
 
   const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
-  }
 
   useEffect(() => {
-    props.onLoadProduct();
+    if (token) {
+      props.onLoadProduct();
+    }
   }, []);
 
+  if (!token) {
+    return <Redirect to={`${appConstants.publicPath}/`} />;
+  }
+
   return (
-    <MainLayoutApp title='Shopping' {...props}>
+    <MainLayoutApp title="Shopping" {...props}>
       <ShoppingContent {...props} />
     </MainLayoutApp>
   );
 }
 
-Shopping.propTypes = {};
+Shopping.propTypes = {
+  onLoadProduct: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   shopping: selectors.makeSelectShopping(),
@@ -54,7 +60,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadProduct: ()=> dispatch(actions.loadProduct()),
+    onLoadProduct: () => dispatch(actions.loadProduct()),
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),
     onSearch: data => dispatch(actions.searchProduct(data)),

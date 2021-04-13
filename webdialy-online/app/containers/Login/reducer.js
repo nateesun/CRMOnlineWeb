@@ -4,15 +4,13 @@
  *
  */
 import produce from 'immer';
-import * as constants from './constants';
 import { setCookie } from 'react-use-cookie';
+import * as constants from './constants';
 
 export const initialState = {
   loginForm: {
-    email: '',
-    mobile: '',
+    username: '',
     password: '',
-    type: '',
   },
   response: {
     status: null,
@@ -38,13 +36,12 @@ const loginReducer = (state = initialState, action) =>
         draft.error = '';
         break;
       case constants.CHECK_LOGIN:
-        draft.loginForm.email = action.payload.email;
-        draft.loginForm.mobile = action.payload.mobile;
+        draft.loginForm.username = action.payload.username;
         draft.loginForm.password = action.payload.password;
         draft.loginForm.type = action.payload.type;
         break;
       case constants.CHECK_LOGIN_SUCCESS:
-        setCookie('token', JSON.stringify(action.payload.email || action.payload.mobile));
+        setCookie('token', JSON.stringify(action.payload.username));
         draft.loggedIn = true;
         break;
       case constants.CHECK_LOGIN_ERROR:
@@ -54,10 +51,8 @@ const loginReducer = (state = initialState, action) =>
       case constants.CHECK_LOGOUT:
         break;
       case constants.CHECK_LOGOUT_SUCCESS:
-        draft.loginForm.email = '';
-        draft.loginForm.mobile = '';
+        draft.loginForm.username = '';
         draft.loginForm.password = '';
-        draft.loginForm.type = 'mobile';
         draft.loggedIn = false;
         break;
       case constants.CHECK_LOGOUT_ERROR:
@@ -66,10 +61,8 @@ const loginReducer = (state = initialState, action) =>
       case constants.CLEAR_LOGIN:
         draft.error = '';
         draft.loginForm = {
-          email: '',
-          mobile: '',
+          username: '',
           password: '',
-          type: 'mobile',
         };
         break;
       case constants.LOAD_PROFILE_TOKEN:

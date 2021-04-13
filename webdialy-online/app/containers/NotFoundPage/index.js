@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
-import notfound_page_images from './404_notfound.png';
+import notfoundPageImages from './404_notfound.png';
 
 export default function NotFound() {
-  return <img src={notfound_page_images} width="100%" style={{ border: 0 }} />;
+  return (
+    <img src={notfoundPageImages} width="100%" style={{ border: 0 }} alt="" />
+  );
 }

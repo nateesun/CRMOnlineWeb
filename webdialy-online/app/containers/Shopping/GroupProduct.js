@@ -63,7 +63,7 @@ const tileData = [
   },
 ];
 
-export default function GroupProduct(props) {
+export default function GroupProduct() {
   const classes = useStyles();
 
   return (
@@ -71,7 +71,7 @@ export default function GroupProduct(props) {
       <ProductTopic label="กลุ่มสินค้า" bgColor="#f9f972" textColor="black" />
       <GridList className={classes.gridList}>
         {tileData.map(tile => (
-          <img src={`/images/food1.jpg`} alt={tile.title} />
+          <img src="/images/food1.jpg" alt={tile.title} />
         ))}
       </GridList>
     </div>

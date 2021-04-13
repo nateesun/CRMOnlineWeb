@@ -1,7 +1,14 @@
-// import { selectProfileDomain } from '../selectors';
+import * as selectors from '../selectors';
+
+const mockPayload = {
+  company: {},
+  email: '',
+  error: '',
+};
 
 describe('selectProfileDomain', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('Expect mock state and initial state from selectProfileDomain is equal', () => {
+    const state = selectors.selectProfileDomain(mockPayload);
+    expect(state).toEqual(mockPayload);
   });
 });

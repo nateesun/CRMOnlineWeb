@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -30,11 +30,11 @@ export function ProfileEdit(props) {
 
   const token = getCookie('token') || '';
   if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />
+    return <Redirect to={`${appConstants.publicPath}/`} />;
   }
 
   return (
-    <MainLayoutApp title='Edit Profile' {...props}>
+    <MainLayoutApp title="Edit Profile" {...props}>
       <EditForm {...props} />
     </MainLayoutApp>
   );

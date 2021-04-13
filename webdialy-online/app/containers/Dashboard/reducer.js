@@ -5,8 +5,8 @@
  */
 import produce from 'immer';
 import { v4 } from 'uuid';
-import * as constants from './constants';
 import * as loginConstants from 'containers/Login/constants';
+import * as constants from './constants';
 
 export const initialState = {
   redeem: [],
@@ -25,10 +25,10 @@ const dashboardReducer = (state = initialState, action) =>
     switch (action.type) {
       case loginConstants.CHECK_LOGOUT:
       case constants.INIT_STATE:
-        draft.redeem= [];
-        draft.redeemPoint= {};
-        draft.email= '';
-        draft.error= '';
+        draft.redeem = [];
+        draft.redeemPoint = {};
+        draft.email = '';
+        draft.error = '';
         break;
       case constants.LOAD_REDEEM:
         break;

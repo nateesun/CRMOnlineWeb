@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCookie } from 'react-use-cookie';
 import PropTypes from 'prop-types';
+import { getCookie } from 'react-use-cookie';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
@@ -45,7 +45,6 @@ const styles = theme => ({
 function Header(props) {
   const { classes, onDrawerToggle, profile } = props;
   const loggedIn = getCookie('token') || '';
-  const email = loggedIn ? JSON.parse(getCookie('token')): '';
 
   return (
     <React.Fragment>
@@ -68,7 +67,7 @@ function Header(props) {
                 </IconButton>
               </Grid>
             </Hidden>
-            <Grid item xs></Grid>
+            <Grid item xs />
             <Grid item>
               <LocaleToggle />
             </Grid>
@@ -112,6 +111,7 @@ function Header(props) {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
+  profile: PropTypes.object,
 };
 
 export default withStyles(styles)(Header);

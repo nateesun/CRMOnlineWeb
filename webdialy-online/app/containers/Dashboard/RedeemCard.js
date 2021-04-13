@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card';
@@ -10,8 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Button } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import DialogRedeemCode from './DialogRedeemCode';
 
 const useStyles = makeStyles(theme => ({
@@ -59,11 +59,11 @@ export default function RedeemCard(props) {
   const { options } = props;
   const [showDialog, setShowDialog] = useState(false);
   const loc = window.location.href.split('/');
-  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000',  '5000');
+  const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   const showRedeemCode = () => {
     setShowDialog(true);
-  }
+  };
 
   return (
     <Card className={classes.root}>
@@ -105,7 +105,11 @@ export default function RedeemCard(props) {
       <CardActions>
         <Grid container justify="center">
           {options.inStock > 0 ? (
-            <Button variant="contained" className={classes.buttonFooter} onClick={()=>showRedeemCode()}>
+            <Button
+              variant="contained"
+              className={classes.buttonFooter}
+              onClick={() => showRedeemCode()}
+            >
               กดรับสิทธิ์
             </Button>
           ) : (
@@ -119,7 +123,19 @@ export default function RedeemCard(props) {
           )}
         </Grid>
       </CardActions>
-      {showDialog && <DialogRedeemCode {...props} code={options.code} handleClose={()=>setShowDialog(false)} />}
+      {showDialog && (
+        <DialogRedeemCode
+          {...props}
+          code={options.code}
+          handleClose={() => setShowDialog(false)}
+        />
+      )}
     </Card>
   );
 }
+
+RedeemCard.propTypes = {
+  options: PropTypes.object,
+  img: PropTypes.string,
+  free: PropTypes.bool,
+};

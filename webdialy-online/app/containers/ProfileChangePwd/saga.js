@@ -9,7 +9,9 @@ import * as selectors from './selectors';
 export function* onUpdatePassword() {
   try {
     const requestURL = `${appConstants.publicPath}/api/login`;
-    const { mobile, email, new_password } = yield select(selectors.makeSelectEditForm());
+    const { mobile, email, new_password: newPassword } = yield select(
+      selectors.makeSelectEditForm(),
+    );
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,
@@ -17,7 +19,7 @@ export function* onUpdatePassword() {
       body: JSON.stringify({
         mobile,
         email,
-        new_password
+        new_password: newPassword,
       }),
     });
     if (response.status === 'Success') {

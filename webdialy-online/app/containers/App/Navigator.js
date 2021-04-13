@@ -18,8 +18,7 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
-import { scope } from './messages';
-import messages from './messages';
+import messages, { scope } from './messages';
 
 const leftMenus = [];
 
@@ -66,30 +65,30 @@ const styles = theme => ({
 
 const groupBy = (list, keyGetter) => {
   const map = new Map();
-  list.forEach((item) => {
+  list.forEach(item => {
     const key = keyGetter(item);
     const collection = map.get(key);
     if (!collection) {
-        map.set(key, [item]);
+      map.set(key, [item]);
     } else {
-        collection.push(item);
+      collection.push(item);
     }
   });
   return map;
-}
+};
 
 function Navigator(props) {
   const { classes, profile, ...other } = props;
   leftMenus.length = 0;
   if (profile) {
     const grouped = groupBy(props.leftmenu, item => item.menu_id);
-    grouped.forEach(item=>{
+    grouped.forEach(item => {
       leftMenus.push({
         id: item[0].menu_id,
         role: item[0].role,
         children: item,
-      })
-    })
+      });
+    });
   }
 
   return (
@@ -116,49 +115,53 @@ function Navigator(props) {
             </ButtonLink>
           </ListItemText>
         </ListItem>
-        {leftMenus && leftMenus.map(({ id, children }) => (
-          <React.Fragment key={id}>
-            <ListItem className={classes.categoryHeader}>
-              <ListItemText
-                classes={{
-                  primary: classes.categoryHeaderPrimary,
-                }}
-              >
-                <FormattedMessage id={`${scope}.menuTitle${id}`} />
-              </ListItemText>
-            </ListItem>
-            {children.map(({ id, icon, active, to_path: to }) => (
-              <ButtonLink to={appConstants.publicPath+to} key={`menu${id}`}>
-                <ListItem
-                  key={id}
-                  button
-                  className={clsx(
-                    classes.item,
-                    active==='Y' && classes.itemActiveItem,
-                  )}
+        {leftMenus &&
+          leftMenus.map(({ id, children }) => (
+            <React.Fragment key={id}>
+              <ListItem className={classes.categoryHeader}>
+                <ListItemText
+                  classes={{
+                    primary: classes.categoryHeaderPrimary,
+                  }}
                 >
-                  <ListItemIcon className={classes.itemIcon}>
-                    {icon==='DnsRoundedIcon' && <DnsRoundedIcon />}
-                    {icon==='CardGiftcardIcon' && <CardGiftcardIcon />}
-                    {icon==='LocalMallIcon' && <LocalMallIcon />}
-                    {icon==='PeopleIcon' && <PeopleIcon />}
-                    {icon==='LockIcon' && <LockIcon />}
-                    {icon==='RecentActorsIcon' && <RecentActorsIcon />}
-                  </ListItemIcon>
-                  <ListItemText
-                    classes={{
-                      primary: classes.itemPrimary,
-                    }}
+                  <FormattedMessage id={`${scope}.menuTitle${id}`} />
+                </ListItemText>
+              </ListItem>
+              {children.map(({ id2, icon, active, to_path: to }) => (
+                <ButtonLink
+                  to={appConstants.publicPath + to}
+                  key={`menu${id2}`}
+                >
+                  <ListItem
+                    key={id2}
+                    button
+                    className={clsx(
+                      classes.item,
+                      active === 'Y' && classes.itemActiveItem,
+                    )}
                   >
-                    <FormattedMessage id={`${scope}.menu${id}`} />
-                  </ListItemText>
-                </ListItem>
-              </ButtonLink>
-            ))}
+                    <ListItemIcon className={classes.itemIcon}>
+                      {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
+                      {icon === 'CardGiftcardIcon' && <CardGiftcardIcon />}
+                      {icon === 'LocalMallIcon' && <LocalMallIcon />}
+                      {icon === 'PeopleIcon' && <PeopleIcon />}
+                      {icon === 'LockIcon' && <LockIcon />}
+                      {icon === 'RecentActorsIcon' && <RecentActorsIcon />}
+                    </ListItemIcon>
+                    <ListItemText
+                      classes={{
+                        primary: classes.itemPrimary,
+                      }}
+                    >
+                      <FormattedMessage id={`${scope}.menu${id2}`} />
+                    </ListItemText>
+                  </ListItem>
+                </ButtonLink>
+              ))}
 
-            <Divider className={classes.divider} />
-          </React.Fragment>
-        ))}
+              <Divider className={classes.divider} />
+            </React.Fragment>
+          ))}
       </List>
     </Drawer>
   );
@@ -167,6 +170,7 @@ function Navigator(props) {
 Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
   profile: PropTypes.object,
+  leftmenu: PropTypes.array,
 };
 
 export default withStyles(styles)(Navigator);
