@@ -45,9 +45,16 @@ const ImgLogo = styled.img`
 
 const ForgotForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, onSendRequest, onSendEmail } = props;
-  
-  const confirmRequestChangePassword = (values) => {
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    onSendRequest,
+    onSendEmail,
+  } = props;
+
+  const confirmRequestChangePassword = values => {
     onSendRequest({
       email: values.email,
       mobile: values.mobile,
@@ -55,9 +62,9 @@ const ForgotForm = props => {
     });
   };
 
-  const handleSendEmail = (values) => {
+  const handleSendEmail = values => {
     onSendEmail(values.email);
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -158,6 +165,7 @@ ForgotForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   onSendRequest: PropTypes.func,
+  onSendEmail: PropTypes.func,
 };
 
 const validate = formValues => {

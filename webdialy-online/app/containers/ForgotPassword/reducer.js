@@ -37,7 +37,7 @@ const forgotPasswordReducer = (state = initialState, action) =>
         break;
       case constants.SEND_EMAIL:
         draft.request = {
-          email: action.payload
+          email: action.payload,
         };
         break;
       case constants.SEND_EMAIL_SUCCESS:

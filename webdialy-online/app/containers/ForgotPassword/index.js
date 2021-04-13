@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch) {
     },
     onSendEmail: payload => {
       dispatch(actions.sendEmail(payload));
-    }
+    },
   };
 }
 
