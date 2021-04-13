@@ -103,5 +103,24 @@ module.exports = (db) => {
     })
   }
 
+  module.recoveryPassword = (email) => {
+    logger.debug(`recoveryPassword: ${email}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select l.*, m.member_role 
+        from ${table_name} l 
+        inner join ${tb_member} m on l.username=m.email 
+        where l.username=? 
+        and l.member_active = 'Y';`;
+        logger.debug(sql)
+        const result = await pool.query(sql, [email])
+        resolve({ status: "Success", data: JSON.stringify(result[0]) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   return module
 }

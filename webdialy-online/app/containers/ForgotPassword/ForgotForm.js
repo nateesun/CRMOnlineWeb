@@ -45,14 +45,19 @@ const ImgLogo = styled.img`
 
 const ForgotForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, onSendRequest } = props;
-  const confirmRequestChangePassword = values => {
+  const { handleSubmit, pristine, reset, submitting, onSendRequest, onSendEmail } = props;
+  
+  const confirmRequestChangePassword = (values) => {
     onSendRequest({
       email: values.email,
       mobile: values.mobile,
       secret: values.confirm_secret,
     });
   };
+
+  const handleSendEmail = (values) => {
+    onSendEmail(values.email);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -70,11 +75,11 @@ const ForgotForm = props => {
               <Field
                 name="email"
                 component={RenderField}
+                autoComplete={false}
                 type="email"
                 margin="normal"
                 label={<FormattedMessage {...messages.emailAddress} />}
                 required
-                fullWidth
               />
             </Grid>
             <Grid item xs={6}>
@@ -83,9 +88,9 @@ const ForgotForm = props => {
                 component={RenderField}
                 type="number"
                 margin="normal"
+                autoComplete={false}
                 label={<FormattedMessage {...messages.mobile} />}
                 required
-                fullWidth
               />
             </Grid>
             <Grid item xs={6}>
@@ -94,30 +99,44 @@ const ForgotForm = props => {
                 component={RenderField}
                 type="password"
                 margin="normal"
+                autoComplete={false}
                 label={<FormattedMessage {...messages.confirmSecret} />}
                 required
-                fullWidth
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.sendEmail} />
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.clear} />
-              </Button>
+              <Grid container spacing={1}>
+                <Grid item>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={pristine || submitting}
+                  >
+                    <FormattedMessage {...messages.btnRequest} />
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    type="button"
+                    variant="contained"
+                    color="secondary"
+                    disabled={pristine || submitting}
+                    onClick={handleSubmit(handleSendEmail)}
+                  >
+                    <FormattedMessage {...messages.sendEmail} />
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    disabled={pristine || submitting}
+                    onClick={reset}
+                  >
+                    <FormattedMessage {...messages.clear} />
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
           <Grid container className={classes.footer}>

@@ -30,3 +30,22 @@ export function requestPasswordError(payload) {
     payload,
   };
 }
+
+export function sendEmail(payload) {
+  return {
+    type: constants.SEND_EMAIL,
+    payload,
+  };
+}
+export function sendEmailSuccess(payload) {
+  return {
+    type: constants.SEND_EMAIL_SUCCESS,
+    payload,
+  };
+}
+export function sendEmailError(payload) {
+  return {
+    type: constants.SEND_EMAIL_ERROR,
+    payload,
+  };
+}

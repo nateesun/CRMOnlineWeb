@@ -76,12 +76,21 @@ app.disable('etag');
 const io = socketIo();
 app.io = io;
 
+const mailer = require('./infra/mailer/usecases')({
+  smtpHost: 'smtp.ethereal.email',
+  smtpPort: 587,
+  smtpSecureProtocol: false,
+  smtpUser: 'reagan.littel54@ethereal.email',
+  smtpPassword: 'QryzWxR1vcBdumaC3R',
+  smtpSender: 'no-reply@digitalten.xyz',
+});
+
 const options = {
   imagePath: __dirname + '/public/images',
+  mailer
 }
 
 const indexRouter = require("./routes/index")(options)
-
 const branchRouter = require("./routes/branch.route")(options)
 const memberMasterRouter = require("./routes/login.route")(options)
 const lineLoginRouter = require("./routes/line_login.route")(options)
