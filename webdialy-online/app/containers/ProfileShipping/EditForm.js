@@ -23,62 +23,6 @@ import messages from './messages';
 import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
 
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
-
-const renderFromHelper = ({ touched, error }) => {
-  renderFromHelper.propTypes = {
-    touched: PropTypes.any,
-    error: PropTypes.any,
-  };
-  if (!(touched && error)) {
-    return <span />;
-  }
-  return <FormHelperText>{touched && error}</FormHelperText>;
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
-  renderSelectField.propTypes = {
-    input: PropTypes.any,
-    label: PropTypes.any,
-    meta: PropTypes.any,
-    children: PropTypes.any,
-  };
-  const classes = useStyles();
-
-  return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      className={classes.formControl}
-    >
-      <InputLabel htmlFor={input.id}>{label}</InputLabel>
-      <Select
-        labelId="demo-simple-select-outlined-label"
-        native
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'age',
-          id: input.id,
-        }}
-        label={label}
-      >
-        {children}
-      </Select>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  );
-};
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -121,6 +65,61 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
 }));
+
+const ImgLogo = styled.img`
+  border: 0px solid #bbbbbb;
+  border-radius: 5px 5px 5px 5px;
+`;
+
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+
+  return (
+    <FormControl
+      variant="outlined"
+      error={touched && error}
+      style={{ width: '100' }}
+    >
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: input.id,
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const EditForm = props => {
   const classes = useStyles();

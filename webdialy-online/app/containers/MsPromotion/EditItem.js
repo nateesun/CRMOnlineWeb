@@ -80,11 +80,12 @@ const renderSelectField = ({
     meta: PropTypes.any,
     children: PropTypes.any,
   };
+
   return (
     <FormControl
       variant="outlined"
       error={touched && error}
-      className={classes.formControl}
+      style={{ width: '100%' }}
     >
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select

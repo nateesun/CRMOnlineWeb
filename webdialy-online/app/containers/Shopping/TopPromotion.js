@@ -22,7 +22,7 @@ function Item(props) {
     item: PropTypes.object,
   };
   return (
-    <div className={classes.divItem}>
+    <div style={{ padding: 10 }}>
       <h2>{props.item.name}</h2>
       <p>{props.item.description}</p>
 

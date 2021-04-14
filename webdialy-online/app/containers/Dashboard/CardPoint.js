@@ -11,32 +11,33 @@ import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
 import messages from './messages';
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  cardContent: {
-    background: `${bg}`,
-    color: 'white',
-  },
-  cardAction: {
-    background: `${fbg}`,
-    color: 'white',
-  },
-  buttomWhite: {
-    color: 'white',
-  },
-});
-
 export default function CardPoint(props) {
-  const classes = useStyles();
   const { label, point, bg, fbg } = props;
+
+  const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    cardContent: {
+      background: `${bg}`,
+      color: 'white',
+    },
+    cardAction: {
+      background: `${fbg}`,
+      color: 'white',
+    },
+    buttomWhite: {
+      color: 'white',
+    },
+  });
+
+  const classes = useStyles();
 
   CardPoint.propTypes = {
     label: PropTypes.object,

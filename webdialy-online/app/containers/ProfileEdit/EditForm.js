@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import styled from 'styled-components';
@@ -95,13 +94,12 @@ const renderSelectField = ({
     meta: PropTypes.any,
     children: PropTypes.any,
   };
-  const classes = useStyles();
 
   return (
     <FormControl
       variant="outlined"
       error={touched && error}
-      className={classes.formControl}
+      style={{ width: '100%' }}
     >
       <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
       <Select

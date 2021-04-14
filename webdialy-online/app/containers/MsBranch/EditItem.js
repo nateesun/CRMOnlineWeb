@@ -140,7 +140,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" className={divLatLng}>
+              <div align="center" className={classes.divLatLng}>
                 <MapMarker
                   lat={parseFloat(mapLatitude)}
                   lng={parseFloat(mapLongitude)}

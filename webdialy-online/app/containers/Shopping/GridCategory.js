@@ -52,6 +52,8 @@ const GridCategory = props => {
   GridCategory.propTypes = {
     type: PropTypes.string,
   };
+  const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <Carousel animation={type}>
