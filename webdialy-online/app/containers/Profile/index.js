@@ -7,14 +7,11 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCookie } from 'react-use-cookie';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectLogin } from 'containers/Login/selectors';
-import * as appConstants from 'containers/App/constants';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
@@ -28,17 +25,9 @@ export function Profile(props) {
   useInjectReducer({ key: 'profile', reducer });
   useInjectSaga({ key: 'profile', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      props.initLoadCompany();
-    }
+    props.initLoadCompany();
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     props.login && (

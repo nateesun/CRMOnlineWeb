@@ -9,11 +9,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import * as appConstants from 'containers/App/constants';
 import { makeSelectLogin } from 'containers/Login/selectors';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
@@ -28,17 +25,9 @@ export function ProfileShipping(props) {
   useInjectReducer({ key: 'profileShipping', reducer });
   useInjectSaga({ key: 'profileShipping', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      props.initLoad(JSON.parse(token));
-    }
+    props.initLoad(props.profile.member_code);
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     <MainLayoutApp title="Edit Shipping" {...props}>

@@ -24,21 +24,13 @@ export function TrackOrders(props) {
   useInjectReducer({ key: 'trackOrders', reducer });
   useInjectSaga({ key: 'trackOrders', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      if (props.profile.member_role === 'member') {
-        props.onSearch('member_code', props.profile.code);
-      } else {
-        props.onInitLoad();
-      }
+    if (props.profile.member_role === 'member') {
+      props.onSearch('member_code', props.profile.code);
+    } else {
+      props.onInitLoad();
     }
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return <ContentPage {...props} />;
 }

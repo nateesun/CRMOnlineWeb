@@ -8,11 +8,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
-import { getCookie } from 'react-use-cookie';
 import { makeStyles } from '@material-ui/core/styles';
-import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
 import MainLayoutApp from 'containers/MainLayoutApp';
@@ -29,10 +26,6 @@ const useStyles = makeStyles(() => ({
 
 export function MemberTracking(props) {
   const classes = useStyles();
-  const token = getCookie('token') || '';
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     <MainLayoutApp title="TrackOrder" {...props}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import PrivateRoute from 'containers/Authentication/PrivateRoute'
 import Login from 'containers/Login/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
@@ -37,30 +37,30 @@ export default function NewLayout() {
       <Route exact path={`${path.publicPath}/`} component={Login} />
       <Route path={path.PATH_LOGIN} component={Login} />
       <Route path={path.PATH_LOGOUT} component={Logout} />
-      <Route path={path.PATH_DASHBOARD} component={Dashboard} />
       <Route path={path.PATH_REGISTER} component={Register} />
       <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
       <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
-      <Route path={path.PATH_PROFILE} component={Profile} />
-      <Route path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
-      <Route path={path.PATH_PROFILE_SHIPPING} component={ProfileShipping} />
-      <Route path={path.PATH_PROFILE_CHANGE_PWD} component={ProfileChangePwd} />
-      <Route path={path.PATH_MEMBER} component={Members} />
-      <Route path={path.PATH_SHOPPING} component={Shopping} />
-      <Route path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
-      <Route path={path.PATH_LINE_LOGIN} component={LineLogin} />
-      <Route path={path.PATH_MS_COMPANY} component={MsCompany} />
-      <Route path={path.PATH_MS_BRANCH} component={MsBranch} />
-      <Route path={path.PATH_MS_PRODUCT} component={MsProduct} />
-      <Route path={path.PATH_MS_STOCK} component={MsStock} />
-      <Route path={path.PATH_MS_ROLE} component={MsRole} />
-      <Route path={path.PATH_MS_PROMOTION} component={MsPromotion} />
       <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
-      <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
-      <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
-      <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
-      <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
-      <Route path={path.PATH_USE_PROMOTION} component={UsePromotion} />
+      <PrivateRoute path={path.PATH_DASHBOARD} component={Dashboard} />
+      <PrivateRoute path={path.PATH_PROFILE} component={Profile} />
+      <PrivateRoute path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
+      <PrivateRoute path={path.PATH_PROFILE_SHIPPING} component={ProfileShipping} />
+      <PrivateRoute path={path.PATH_PROFILE_CHANGE_PWD} component={ProfileChangePwd} />
+      <PrivateRoute path={path.PATH_MEMBER} component={Members} />
+      <PrivateRoute path={path.PATH_SHOPPING} component={Shopping} />
+      <PrivateRoute path={path.PATH_CHECKOUT_ORDER} component={CheckoutOrder} />
+      <PrivateRoute path={path.PATH_LINE_LOGIN} component={LineLogin} />
+      <PrivateRoute path={path.PATH_MS_COMPANY} component={MsCompany} />
+      <PrivateRoute path={path.PATH_MS_BRANCH} component={MsBranch} />
+      <PrivateRoute path={path.PATH_MS_PRODUCT} component={MsProduct} />
+      <PrivateRoute path={path.PATH_MS_STOCK} component={MsStock} />
+      <PrivateRoute path={path.PATH_MS_ROLE} component={MsRole} />
+      <PrivateRoute path={path.PATH_MS_PROMOTION} component={MsPromotion} />
+      <PrivateRoute path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
+      <PrivateRoute path={path.PATH_CHECK_CARTS} component={CheckCarts} />
+      <PrivateRoute path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
+      <PrivateRoute path={path.PATH_DATABASE} component={DatabaseConfig} />
+      <PrivateRoute path={path.PATH_USE_PROMOTION} component={UsePromotion} />
       <Route component={NotFoundPage} />
     </Switch>
   );

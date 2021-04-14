@@ -9,15 +9,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
-import * as appConstants from 'containers/App/constants';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
@@ -36,17 +33,10 @@ export function MsPromotion(props) {
   useInjectSaga({ key: 'msPromotion', saga });
 
   const classes = useStyles();
-  const token = getCookie('token') || '';
 
   useEffect(() => {
-    if (token) {
-      props.onInitLoad();
-    }
+    props.onInitLoad();
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     <MainLayoutApp title="Promotion" {...props}>

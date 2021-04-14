@@ -27,17 +27,9 @@ export function Shopping(props) {
   useInjectReducer({ key: 'shopping', reducer });
   useInjectSaga({ key: 'shopping', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      props.onLoadProduct();
-    }
+    props.onLoadProduct();
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     <MainLayoutApp title="Shopping" {...props}>
