@@ -260,8 +260,8 @@ const MainLayout = props => {
       )}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <SubMenu {...props} />
         <Container maxWidth="lg" className={classes.container}>
-          <SubMenu {...props} />
           {props.children}
         </Container>
       </main>
