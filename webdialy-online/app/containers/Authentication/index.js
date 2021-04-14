@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { getCookie } from 'react-use-cookie';
@@ -25,21 +25,11 @@ const Authentication = props => {
 
   const { component: Component, ...rest } = props;
 
-  // useEffect(() => {
-  //   const uriPath = props.path.replace(path.publicPath, '');
-  //   const user = getCookie('token') ? JSON.parse(getCookie('token')) : undefined;
-  //   props.onLoadRole({ user, uriPath });
-  // }, []);
-
-  // const isAuthenticated = props.rolesStatus && props.rolesStatus === 'Allow';
-
-  const isAuthenticated = getCookie('token') ? true : false;
-
   return (
     <Route
       {...rest}
       render={p =>
-        isAuthenticated ? <Component {...p} /> : <Redirect to={`${path.publicPath}/`} />
+        getCookie('token') ? <Component {...p} /> : <Redirect to={`${path.publicPath}/`} />
       }
     />
   );
