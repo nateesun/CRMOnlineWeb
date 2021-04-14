@@ -3,8 +3,27 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import SignatureCanvas from 'react-signature-canvas';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  rootSigCanvas: {
+    border: '1px solid #eee',
+  },
+  rootButtonAction: {
+    padding: '5px',
+  },
+  btnConfirm: {
+    background: 'green',
+    color: 'white',
+  },
+  btnSave: {
+    color: 'blue',
+    padding: '10px',
+  },
+}));
 
 const SignatureForm = props => {
+  const classes = useStyles();
   const [showLabel, setShowLabel] = useState(false);
   const sigPad = useRef({});
 
@@ -18,7 +37,7 @@ const SignatureForm = props => {
 
   return (
     <Grid container>
-      <Grid item style={{ border: '1px solid #eee' }}>
+      <Grid item className={classes.rootSigCanvas}>
         <SignatureCanvas
           canvasProps={{
             className: 'sigCanvas',
@@ -29,14 +48,14 @@ const SignatureForm = props => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Grid container style={{ padding: '5px' }}>
+        <Grid container className={classes.rootButtonAction}>
           <Grid item>
             <Button onClick={() => clear()}>Clear</Button>
           </Grid>
           <Grid item>
             <Button
               variant="contained"
-              style={{ background: 'green', color: 'white' }}
+              className={classes.btnConfirm}
               onClick={() => {
                 trim();
                 setShowLabel(true);
@@ -47,9 +66,7 @@ const SignatureForm = props => {
           </Grid>
           <Grid item xs={12}>
             {showLabel && (
-              <div style={{ color: 'blue', padding: '10px' }}>
-                บันทึกข้อมูลลายเซ็นต์แล้ว
-              </div>
+              <div className={classes.btnSave}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>
             )}
           </Grid>
         </Grid>

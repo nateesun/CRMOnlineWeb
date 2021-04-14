@@ -11,6 +11,7 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { getCookie } from 'react-use-cookie';
+import { makeStyles } from '@material-ui/core/styles';
 import * as appConstants from 'containers/App/constants';
 import TrackCarts from 'containers/TrackCarts/Loadable';
 import TrackOrders from 'containers/TrackOrders/Loadable';
@@ -19,7 +20,16 @@ import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    overflow: 'auto',
+    width: '100vw',
+    marginBottom: '50px',
+  },
+}));
+
 export function MemberTracking(props) {
+  const classes = useStyles();
   const token = getCookie('token') || '';
   if (!token) {
     return <Redirect to={`${appConstants.publicPath}/`} />;
@@ -27,11 +37,7 @@ export function MemberTracking(props) {
 
   return (
     <MainLayoutApp title="TrackOrder" {...props}>
-      <Grid
-        container
-        spacing={1}
-        style={{ overflow: 'auto', width: '100vw', marginBottom: '50px' }}
-      >
+      <Grid container spacing={1} className={classes.root}>
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>

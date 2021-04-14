@@ -6,10 +6,24 @@
  */
 
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import notfoundPageImages from './404_notfound.png';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    border: 0,
+  },
+}));
+
 export default function NotFound() {
+  const classes = useStyles();
+
   return (
-    <img src={notfoundPageImages} width="100%" style={{ border: 0 }} alt="" />
+    <img
+      src={notfoundPageImages}
+      width="100%"
+      className={classes.root}
+      alt=""
+    />
   );
 }

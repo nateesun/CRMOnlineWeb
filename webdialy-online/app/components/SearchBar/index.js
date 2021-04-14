@@ -6,8 +6,16 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { v4 } from 'uuid';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  formInput: {
+    width: '100%',
+  },
+}));
 
 export default function SearchBar(props) {
+  const classes = useStyles();
   const { items } = props;
   const [key, setKey] = useState('');
   const [value, setValue] = useState('');
@@ -27,7 +35,7 @@ export default function SearchBar(props) {
         <Select
           onChange={e => setKey(e.target.value)}
           defaultValue={items[0].key}
-          style={{ width: '100%' }}
+          className={classes.formInput}
         >
           {items &&
             items.map(value1 => (
@@ -41,7 +49,7 @@ export default function SearchBar(props) {
         <TextField
           value={value}
           onChange={e => setValue(e.target.value)}
-          style={{ width: '100%' }}
+          className={classes.formInput}
         />
       </Grid>
       <Grid item>

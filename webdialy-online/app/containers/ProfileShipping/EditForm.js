@@ -52,11 +52,13 @@ const renderSelectField = ({
     meta: PropTypes.any,
     children: PropTypes.any,
   };
+  const classes = useStyles();
+
   return (
     <FormControl
       variant="outlined"
       error={touched && error}
-      style={{ width: '100%' }}
+      className={classes.formControl}
     >
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
@@ -114,6 +116,9 @@ const useStyles = makeStyles(theme => ({
   },
   divPosition: {
     marginBottom: '25px',
+  },
+  formControl: {
+    width: '100%',
   },
 }));
 

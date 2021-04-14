@@ -12,6 +12,7 @@ import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as appConstants from 'containers/App/constants';
@@ -24,9 +25,17 @@ import * as actions from './actions';
 import ContentPage from './ContentPage';
 import saga from './saga';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    overflow: 'auto',
+    width: '100vw',
+  },
+}));
+
 export function MsCompany(props) {
   useInjectReducer({ key: 'msCompany', reducer });
   useInjectSaga({ key: 'msCompany', saga });
+  const classes = useStyles();
 
   const token = getCookie('token') || '';
 
@@ -42,7 +51,7 @@ export function MsCompany(props) {
 
   return (
     <MainLayoutApp title="Company" {...props}>
-      <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
+      <Grid container spacing={1} className={classes.root}>
         <ContentPage {...props} />
       </Grid>
     </MainLayoutApp>

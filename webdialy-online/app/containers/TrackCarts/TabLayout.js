@@ -7,9 +7,17 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import TableItems from './TableItems';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    marginTop: '5px',
+  },
+}));
+
 function TabPanel(props) {
+  const classes = useStyles();
   const { children, value, index, ...other } = props;
 
   return (
@@ -21,7 +29,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box style={{ marginTop: '5px' }}>
+        <Box className={classes.root}>
           <Typography>{children}</Typography>
         </Box>
       )}

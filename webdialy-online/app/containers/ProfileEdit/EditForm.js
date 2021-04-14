@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import styled from 'styled-components';
@@ -22,60 +23,6 @@ import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
 import EditProfileLogo from '../../images/edit_profile.png';
-
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
-
-const renderFromHelper = ({ touched, error }) => {
-  renderFromHelper.propTypes = {
-    touched: PropTypes.any,
-    error: PropTypes.any,
-  };
-  if (!(touched && error)) {
-    return <span />;
-  }
-  return <FormHelperText>{touched && error}</FormHelperText>;
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
-  renderSelectField.propTypes = {
-    input: PropTypes.any,
-    label: PropTypes.any,
-    meta: PropTypes.any,
-    children: PropTypes.any,
-  };
-  return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
-      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
-      <Select
-        labelId="demo-simple-select-outlined-label"
-        native
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'age',
-          id: 'age-native-simple',
-        }}
-        label={label}
-      >
-        {children}
-      </Select>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  );
-};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,7 +61,66 @@ const useStyles = makeStyles(theme => ({
   textBlue: {
     color: 'blue',
   },
+  formControl: {
+    width: '100%',
+  },
 }));
+
+const ImgLogo = styled.img`
+  border: 0px solid #bbbbbb;
+  border-radius: 5px 5px 5px 5px;
+`;
+
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+  const classes = useStyles();
+
+  return (
+    <FormControl
+      variant="outlined"
+      error={touched && error}
+      className={classes.formControl}
+    >
+      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: 'age-native-simple',
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const EditForm = props => {
   const classes = useStyles();

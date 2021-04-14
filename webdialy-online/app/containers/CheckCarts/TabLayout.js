@@ -7,9 +7,19 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import ContentPage from './ContentPage';
 
+const useStyles = makeStyles(() => ({
+  box: {
+    marginTop: '5px',
+  },
+  root: {
+    width: '100vw',
+  },
+}));
 function TabPanel(props) {
+  const classes = useStyles();
   const { children, value, index, ...other } = props;
 
   return (
@@ -21,7 +31,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box style={{ marginTop: '5px' }}>
+        <Box className={classes.box}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -43,6 +53,7 @@ function a11yProps(index) {
 }
 
 export default function TabLayout(props) {
+  const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -55,7 +66,7 @@ export default function TabLayout(props) {
   };
 
   return (
-    <div style={{ width: '100vw' }}>
+    <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
           value={value}

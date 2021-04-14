@@ -6,11 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Select from './Select';
 import ToggleOption from '../ToggleOption';
 
+const useStyles = makeStyles(() => ({
+  textWhite: {
+    color: 'white',
+  },
+}));
 function Toggle(props) {
+  const classes = useStyles();
   let content = <option>--</option>;
 
   if (props.values) {
@@ -23,7 +29,7 @@ function Toggle(props) {
     <Select
       value={props.value}
       onChange={props.onToggle}
-      style={{ color: 'white' }}
+      className={classes.textWhite}
     >
       {content}
     </Select>
