@@ -21,7 +21,6 @@ import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import EditProfileLogo from '../../images/edit_profile.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,11 +63,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
 }));
-
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
 
 const renderFromHelper = ({ touched, error }) => {
   renderFromHelper.propTypes = {
@@ -153,7 +147,6 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={EditProfileLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>

@@ -44,7 +44,7 @@ export default function FinishOrder(props) {
           width="270"
           height="150"
           alt="thank for your support"
-          style={classes.imageThank}
+          className={classes.imageThank}
         />
         <Typography variant="subtitle1" className={classes.textTopic}>
           เลขที่ใบสั่งซื้อสินค้า ของคุณคือ{' '}

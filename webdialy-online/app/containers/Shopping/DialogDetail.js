@@ -215,7 +215,12 @@ export default function DialogDetail(props) {
               <Typography align="right">
                 <Button
                   variant="outlined"
-                  className={classes.buttonMinus}
+                  style={{
+                    background: 'red',
+                    color: 'white',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                  }}
                   onClick={() => minusQty(qty)}
                 >
                   -
@@ -228,7 +233,14 @@ export default function DialogDetail(props) {
                   type="number"
                   value={qty || 1}
                   onChange={e => handleQty(e.target.value)}
-                  className={classes.textInputQty}
+                  style={{
+                    border: '0px solid #eee',
+                    width: '100px',
+                    height: '35px',
+                    textAlign: 'center',
+                    fontSize: '22px',
+                    fontWeight: 'bold',
+                  }}
                 />
               </Typography>
             </Grid>
@@ -236,7 +248,12 @@ export default function DialogDetail(props) {
               <Typography align="left">
                 <Button
                   variant="outlined"
-                  className={classes.buttonAdd}
+                  style={{
+                    background: 'green',
+                    color: 'white',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                  }}
                   onClick={() => addQty(qty)}
                 >
                   +
@@ -250,7 +267,11 @@ export default function DialogDetail(props) {
             <Grid item xs={12}>
               <Typography align="center">
                 <Button
-                  className={classes.buttonSave}
+                  style={{
+                    background: '#76bd5f',
+                    color: 'white',
+                    width: '80%',
+                  }}
                   onClick={() => saveCartItem()}
                 >
                   ใส่ตระกร้า {qty} รายการ = {item.price_d * qty} บาท

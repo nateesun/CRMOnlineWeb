@@ -52,7 +52,7 @@ export function DatabaseConfig(props) {
 
   return (
     <MainLayoutApp title="Database" {...props}>
-      <Grid container spacing={1} style={classes.root}>
+      <Grid container spacing={1} className={classes.root}>
         <Grid item xs={12}>
           <ContentPage {...props} />
         </Grid>

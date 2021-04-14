@@ -59,7 +59,7 @@ export default function ProductList(props) {
   };
 
   return (
-    <Grid container spacing={1} style={classes.root}>
+    <Grid container spacing={1} className={classes.root}>
       <Grid item xs={12}>
         <ProductTopic label={topic} bgColor="#009cdb" textColor="white" />
       </Grid>

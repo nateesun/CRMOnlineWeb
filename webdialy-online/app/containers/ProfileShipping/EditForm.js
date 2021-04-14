@@ -20,7 +20,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
@@ -66,11 +65,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
-
 const renderFromHelper = ({ touched, error }) => {
   renderFromHelper.propTypes = {
     touched: PropTypes.any,
@@ -100,7 +94,7 @@ const renderSelectField = ({
     <FormControl
       variant="outlined"
       error={touched && error}
-      style={{ width: '100' }}
+      style={{ width: '100%' }}
     >
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
@@ -109,7 +103,6 @@ const renderSelectField = ({
         {...input}
         {...custom}
         inputProps={{
-          name: 'age',
           id: input.id,
         }}
         label={label}
@@ -176,7 +169,6 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={LocationLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
@@ -195,9 +187,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={4} lg={4} />
-            <Grid item xs={4} lg={4} />
-            <Grid item xs={5} lg={3}>
+            <Grid item xs={5} lg={5}>
               <div className={classes.divMemberPrefix}>
                 <Field
                   id="member_prefix"
@@ -214,7 +204,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={7} lg={3}>
+            <Grid item xs={7} lg={4}>
               <Field
                 name="member_code"
                 component={RenderField}
@@ -224,7 +214,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4}>
               <Field
                 name="member_name"
                 component={RenderField}
@@ -234,7 +224,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={4}>
               <Field
                 name="member_lastname"
                 component={RenderField}
@@ -244,7 +234,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Field
                 name="address1"
                 component={RenderField}
@@ -254,7 +244,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Field
                 name="address2"
                 component={RenderField}
@@ -264,7 +254,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="province"
                 component={RenderField}
@@ -274,7 +264,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="district"
                 component={RenderField}
@@ -284,7 +274,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="sub_district"
                 component={RenderField}
@@ -294,7 +284,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="postcode"
                 component={RenderField}
@@ -304,7 +294,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="map_latitude"
                 component={RenderField}
@@ -314,7 +304,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="map_longitude"
                 component={RenderField}
