@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,27 +13,15 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
-import { FormattedMessage } from 'react-intl';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Helmet } from 'react-helmet';
-// menu items start
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PeopleIcon from '@material-ui/icons/People';
-import LockIcon from '@material-ui/icons/Lock';
-import RecentActorsIcon from '@material-ui/icons/RecentActors';
-import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import { Button } from '@material-ui/core';
-
-// menu items end
 import SubMenu from 'components/SubMenu';
 import * as appConstants from 'containers/App/constants';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
 import { scope } from './messages';
+import LeftMenu from './LeftMenu';
 
 const drawerWidth = 240;
 
@@ -130,7 +117,7 @@ const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
   const { profile } = props;
-  const [open, setOpen] = useState(window.innerWidth > 500);
+  const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -199,53 +186,7 @@ const MainLayout = props => {
             </IconButton>
           </div>
           <Divider />
-          <List style={{ background: '#fbf9f8' }}>
-            <React.Fragment>
-              {leftMenu &&
-                leftMenu.map(({ id, icon, to_path: to }) => (
-                  <ButtonLink
-                    to={appConstants.publicPath + to}
-                    key={`menu${id}`}
-                  >
-                    <ListItem
-                      key={id}
-                      button
-                      className={clsx(
-                        classes.item,
-                        id === props.title && classes.itemActiveItem,
-                      )}
-                    >
-                      <FormattedMessage id={`${scope}.menu${id}`}>
-                        {title => (
-                          <ListItemIcon
-                            className={classes.itemIcon}
-                            title={title}
-                          >
-                            {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
-                            {icon === 'CardGiftcardIcon' && (
-                              <CardGiftcardIcon />
-                            )}
-                            {icon === 'LocalMallIcon' && <LocalMallIcon />}
-                            {icon === 'PeopleIcon' && <PeopleIcon />}
-                            {icon === 'LockIcon' && <LockIcon />}
-                            {icon === 'RecentActorsIcon' && (
-                              <RecentActorsIcon />
-                            )}
-                          </ListItemIcon>
-                        )}
-                      </FormattedMessage>
-                      <ListItemText
-                        classes={{
-                          primary: classes.itemPrimary,
-                        }}
-                      >
-                        <FormattedMessage id={`${scope}.menu${id}`} />
-                      </ListItemText>
-                    </ListItem>
-                  </ButtonLink>
-                ))}
-            </React.Fragment>
-          </List>
+          <LeftMenu leftMenu={leftMenu} appConstants={appConstants} scope={scope} title={props.title} />
           <Button onClick={open ? handleDrawerClose : handleDrawerOpen}>
             {open ? (
               <span>
