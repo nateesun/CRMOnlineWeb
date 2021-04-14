@@ -41,6 +41,7 @@ ProfileShipping.propTypes = {
   clearData: PropTypes.func,
   initLoad: PropTypes.func,
   login: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -5,6 +5,7 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -37,7 +38,10 @@ export function Dashboard(props) {
   );
 }
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  onLoadRedeem: PropTypes.func,
+  onLoadMenu: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   login: loginSelectors.makeSelectLogin(),
