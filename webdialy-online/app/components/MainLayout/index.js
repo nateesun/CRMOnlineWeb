@@ -185,7 +185,12 @@ const MainLayout = props => {
             </IconButton>
           </div>
           <Divider />
-          <LeftMenu leftMenu={leftMenu} appConstants={appConstants} scope={scope} title={props.title} />
+          <LeftMenu
+            leftMenu={leftMenu}
+            appConstants={appConstants}
+            scope={scope}
+            title={props.title}
+          />
           <Button onClick={open ? handleDrawerClose : handleDrawerOpen}>
             {open ? (
               <span>

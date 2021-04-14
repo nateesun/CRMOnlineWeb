@@ -67,8 +67,8 @@ export default function LeftMenu(props) {
             className={clsx(id === title && classes.itemActiveItem)}
           >
             <FormattedMessage id={`${scope}.menu${id}`}>
-              {title => (
-                <ListItemIcon title={title}>
+              {tt => (
+                <ListItemIcon title={tt}>
                   {icon === 'DnsRoundedIcon' && <DnsRoundedIcon />}
                   {icon === 'CardGiftcardIcon' && <CardGiftcardIcon />}
                   {icon === 'LocalMallIcon' && <LocalMallIcon />}
@@ -94,7 +94,7 @@ export default function LeftMenu(props) {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" style={{ marginLeft: '55px' }}>
-          {leftMenuMaster.map(({ id, icon, to_path: to }) => (
+          {leftMenuMaster.map(({ id, to_path: to }) => (
             <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
               <ListItem
                 key={id}

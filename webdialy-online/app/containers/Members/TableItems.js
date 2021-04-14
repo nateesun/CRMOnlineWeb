@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   table: {
     minWidth: '650px',
     padding: '5px',
-    overflow: 'auto'
+    overflow: 'auto',
   },
   buttonNew: {
     marginRight: '5px',
@@ -119,7 +119,11 @@ export default function TableItems(props) {
           ]}
         />
         <div className={classes.dataWidth}>
-          <Table className={classes.table} stickyHeader aria-label="sticky table">
+          <Table
+            className={classes.table}
+            stickyHeader
+            aria-label="sticky table"
+          >
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>

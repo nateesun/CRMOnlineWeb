@@ -55,7 +55,7 @@ export default function TabLayout(props) {
   };
 
   return (
-    <div style={{width: '100vw'}}>
+    <div style={{ width: '100vw' }}>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
