@@ -27,7 +27,6 @@ const useStyles = makeStyles(() => ({
   },
   table: {
     padding: '5px',
-    minWidth: '650px',
     overflow: 'auto',
   },
   buttonNew: {

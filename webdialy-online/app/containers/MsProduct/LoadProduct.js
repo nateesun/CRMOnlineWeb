@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   table: {
-    minWidth: 1024,
   },
   colRow: {
     whiteSpace: 'nowrap',

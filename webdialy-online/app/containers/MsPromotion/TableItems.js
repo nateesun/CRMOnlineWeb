@@ -15,14 +15,10 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {

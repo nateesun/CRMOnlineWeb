@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: '650px',
     padding: '5px',
     overflow: 'auto',
   },

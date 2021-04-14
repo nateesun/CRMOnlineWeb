@@ -18,10 +18,7 @@ const useStyles = makeStyles({
   container: {
     paddingTop: '20px',
   },
-  table: {
-    // minWidth: 690,
-    // padding: '5px',
-  },
+  table: {},
   buttonNew: {
     marginRight: '5px',
   },

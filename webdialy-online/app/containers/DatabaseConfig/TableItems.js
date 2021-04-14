@@ -19,7 +19,6 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {

@@ -21,15 +21,11 @@ import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
     padding: '5px',
-    minWidth: '650px',
     overflow: 'auto',
   },
   buttonNew: {

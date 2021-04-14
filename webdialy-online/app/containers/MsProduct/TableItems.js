@@ -15,14 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     paddingTop: '5px',
   },
   buttonUpload: {

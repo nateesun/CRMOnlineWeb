@@ -13,14 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
