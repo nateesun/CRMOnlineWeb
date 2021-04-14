@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     marginBottom: '50px',
-  }
+  },
 }));
 
 const EditForm = props => {

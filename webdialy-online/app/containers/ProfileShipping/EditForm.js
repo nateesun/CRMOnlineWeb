@@ -105,14 +105,16 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '50px',
   },
   divAddressType: {
-    width: '100%', paddingTop: '14px',
+    width: '100%',
+    paddingTop: '14px',
   },
   divMemberPrefix: {
-    width: '100%', paddingTop: '14px',
+    width: '100%',
+    paddingTop: '14px',
   },
   divPosition: {
     marginBottom: '25px',
-  }
+  },
 }));
 
 const EditForm = props => {

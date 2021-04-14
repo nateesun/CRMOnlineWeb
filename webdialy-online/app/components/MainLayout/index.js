@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
   },
   iconTextWhite: {
     color: 'white',
-  }
+  },
 }));
 
 const MainLayout = props => {

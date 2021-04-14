@@ -26,8 +26,7 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none',
   },
-  table: {
-  },
+  table: {},
   colRow: {
     whiteSpace: 'nowrap',
   },

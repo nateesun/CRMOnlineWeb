@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   textGreen: {
     color: 'green',
-  }
+  },
 }));
 
 const RegisterForm = props => {

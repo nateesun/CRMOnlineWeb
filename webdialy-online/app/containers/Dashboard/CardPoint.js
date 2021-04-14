@@ -26,7 +26,8 @@ const useStyles = makeStyles({
     color: 'white',
   },
   cardAction: {
-    background: `${fbg}`, color: 'white',
+    background: `${fbg}`,
+    color: 'white',
   },
   buttomWhite: {
     color: 'white',

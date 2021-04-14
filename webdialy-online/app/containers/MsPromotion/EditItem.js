@@ -52,8 +52,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   divRedeem: {
-    width: '100%', paddingTop: '16px',
-  }
+    width: '100%',
+    paddingTop: '16px',
+  },
 }));
 
 const renderFromHelper = ({ touched, error }) => {

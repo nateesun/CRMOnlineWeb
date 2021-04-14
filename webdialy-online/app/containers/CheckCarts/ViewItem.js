@@ -157,10 +157,7 @@ const ViewItem = props => {
             {props.getData && <PaymentDetail payment={props.getData} />}
           </Grid>
           <Grid item xs={6}>
-            <Paper
-              elevation={3}
-              className={classes.paperShoppingStep}
-            >
+            <Paper elevation={3} className={classes.paperShoppingStep}>
               {shoppingStep && shoppingStep !== 'approve' && (
                 <Grid item xs={12}>
                   <FormControl component="fieldset">

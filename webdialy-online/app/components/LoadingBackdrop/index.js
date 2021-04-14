@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   },
   loading: {
     color: 'chocolate',
-  }
+  },
 }));
 
 export default function LoadingBackdrop() {

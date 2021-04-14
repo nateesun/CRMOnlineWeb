@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
   divLatLng: {
     marginBottom: '25px',
-  }
+  },
 }));
 
 const EditItem = props => {

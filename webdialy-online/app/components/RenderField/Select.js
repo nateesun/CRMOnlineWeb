@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   error: {
     color: 'red',
-  }
+  },
 }));
 
 function SelectField({ input, label, meta: { touched, error } }) {
