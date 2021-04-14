@@ -20,6 +20,11 @@ const useStyles = makeStyles({
     borderRadius: '5px 5px 5px 5px',
     position: 'fixed',
   },
+  bottom: {
+    borderRadius: '10px 10px 5px 5px',
+    background: 'none',
+    margin: '1px',
+  },
 });
 
 const SubMenu = props => {
@@ -63,11 +68,7 @@ const SubMenu = props => {
               key={item.id}
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
-              style={{
-                borderRadius: '10px 10px 5px 5px',
-                background: 'none',
-                margin: '1px',
-              }}
+              className={classes.bottom}
               onClick={() => handleClick(path.publicPath + item.to_path)}
             />
           );

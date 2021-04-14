@@ -31,6 +31,40 @@ const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1),
   },
+  textBlack: {
+    color: 'black',
+  },
+  separateLine: {
+    border: '1px solid #eee',
+  },
+  buttonMinus: {
+    background: 'red',
+    color: 'white',
+    fontSize: '18px',
+    fontWeight: 'bold',
+  },
+  textInputQty: {
+    border: '0px solid #eee',
+    width: '100px',
+    height: '35px',
+    textAlign: 'center',
+    fontSize: '22px',
+    fontWeight: 'bold',
+  },
+  buttonAdd: {
+    background: 'green',
+    color: 'white',
+    fontSize: '18px',
+    fontWeight: 'bold',
+  },
+  textSpecial: {
+    width: '100%',
+  },
+  buttonSave: {
+    background: '#76bd5f',
+    color: 'white',
+    width: '80%',
+  },
 }));
 
 export default function DialogDetail(props) {
@@ -116,7 +150,7 @@ export default function DialogDetail(props) {
           edge="start"
           onClick={() => handleCloseDialog()}
           aria-label="close"
-          style={{ color: 'black' }}
+          className={classes.textBlack}
         >
           <CloseIcon />
         </IconButton>
@@ -136,7 +170,7 @@ export default function DialogDetail(props) {
             secondary={`ราคา ${item.price_d} บาท`}
           />
         </ListItem>
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem button>
           <FormControl component="fieldset">
             <RadioGroup
@@ -165,12 +199,12 @@ export default function DialogDetail(props) {
             </RadioGroup>
           </FormControl>
         </ListItem>
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem>
           <TextField
             id="standard-basic"
             label="ข้อความพิเศษ"
-            style={{ width: '100%' }}
+            className={classes.textSpecial}
             value={specialText}
             onChange={e => setSpecialText(e.target.value)}
           />
@@ -181,12 +215,7 @@ export default function DialogDetail(props) {
               <Typography align="right">
                 <Button
                   variant="outlined"
-                  style={{
-                    background: 'red',
-                    color: 'white',
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                  }}
+                  className={classes.buttonMinus}
                   onClick={() => minusQty(qty)}
                 >
                   -
@@ -198,15 +227,8 @@ export default function DialogDetail(props) {
                 <input
                   type="number"
                   value={qty || 1}
-                  style={{
-                    border: '0px solid #eee',
-                    width: '100px',
-                    height: '35px',
-                    textAlign: 'center',
-                    fontSize: '22px',
-                    fontWeight: 'bold',
-                  }}
                   onChange={e => handleQty(e.target.value)}
+                  className={classes.textInputQty}
                 />
               </Typography>
             </Grid>
@@ -214,12 +236,7 @@ export default function DialogDetail(props) {
               <Typography align="left">
                 <Button
                   variant="outlined"
-                  style={{
-                    background: 'green',
-                    color: 'white',
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                  }}
+                  className={classes.buttonAdd}
                   onClick={() => addQty(qty)}
                 >
                   +
@@ -233,11 +250,7 @@ export default function DialogDetail(props) {
             <Grid item xs={12}>
               <Typography align="center">
                 <Button
-                  style={{
-                    background: '#76bd5f',
-                    color: 'white',
-                    width: '80%',
-                  }}
+                  className={classes.buttonSave}
                   onClick={() => saveCartItem()}
                 >
                   ใส่ตระกร้า {qty} รายการ = {item.price_d * qty} บาท

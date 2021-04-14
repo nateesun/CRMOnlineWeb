@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  divLatLng: {
+    marginBottom: '25px',
+  }
 }));
 
 const EditItem = props => {
@@ -137,7 +140,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" style={{ marginBottom: '25px' }}>
+              <div align="center" className={divLatLng}>
                 <MapMarker
                   lat={parseFloat(mapLatitude)}
                   lng={parseFloat(mapLongitude)}

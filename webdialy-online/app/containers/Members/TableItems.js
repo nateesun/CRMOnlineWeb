@@ -39,6 +39,9 @@ const useStyles = makeStyles({
   dataWidth: {
     overflow: 'auto',
   },
+  buttonMargin: {
+    margin: '5px',
+  },
 });
 
 export default function TableItems(props) {
@@ -164,14 +167,14 @@ export default function TableItems(props) {
                         <Button
                           variant="outlined"
                           onClick={() => onViewItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           View
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Edit
                         </Button>
@@ -180,7 +183,7 @@ export default function TableItems(props) {
                             variant="contained"
                             color="secondary"
                             onClick={() => handleDelete(item.email)}
-                            style={{ margin: '5px' }}
+                            className={classes.buttonMargin}
                           >
                             Delete
                           </Button>

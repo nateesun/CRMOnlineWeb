@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   topic: {
     marginTop: theme.spacing(1),
   },
+  divLatLng: {
+    marginBottom: '25px',
+  },
 }));
 
 const NewItem = props => {
@@ -157,7 +160,7 @@ const NewItem = props => {
               />
             </Grid>
             <Grid item xs={12}>
-              <div align="center" style={{ marginBottom: '25px' }}>
+              <div align="center" className={classes.divLatLng}>
                 <MapMarker
                   lat={parseFloat(mapLatitude)}
                   lng={parseFloat(mapLongitude)}

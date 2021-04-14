@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  }
 }));
 
 const EditForm = props => {
@@ -68,7 +71,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
+    <Container component="main" maxWidth="lg" className={classes.container}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"

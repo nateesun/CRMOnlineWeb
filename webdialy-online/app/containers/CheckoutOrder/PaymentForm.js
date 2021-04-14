@@ -16,6 +16,15 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  separateLine: {
+    border: '1px solid #eee',
+  },
+  buttonRight: {
+    marginRight: '10px',
+  },
+  buttonValidate: {
+    background: 'chocolate',
+  },
 }));
 
 const PaymentForm = props => {
@@ -52,7 +61,7 @@ const PaymentForm = props => {
       <Typography variant="h6" gutterBottom>
         ยอดรับชำระ (จำนวน {carts && carts[0] && carts[0].total_amount} บาท)
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateLine} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
         <Grid container spacing={1}>
           <Grid item xs={12} md={6}>
@@ -132,13 +141,13 @@ const PaymentForm = props => {
           <Grid item xs={12}>
             <Button
               onClick={() => onUploadImageFile()}
-              style={{ marginRight: '10px' }}
+              className={classes.buttonRight}
             >
               Upload Slip (2)
             </Button>
             <Button
               onClick={() => validateSlipUpload()}
-              style={{ background: 'chocolate' }}
+              className={classes.buttonValidate}
             >
               Validate Slip (3)
             </Button>

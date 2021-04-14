@@ -21,6 +21,18 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  separateStyle: {
+    border: '1px solid #eee',
+  },
+  buttonRightSpace: {
+    marginRight: '10px',
+  },
+  greenText: {
+    color: 'green',
+  },
+  divButtom: {
+    marginBottom: '25px',
+  },
 }));
 
 const AddressForm = props => {
@@ -61,7 +73,7 @@ const AddressForm = props => {
       <Typography variant="h6" gutterBottom>
         ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateStyle} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={4}>
@@ -177,7 +189,7 @@ const AddressForm = props => {
               variant="contained"
               color="primary"
               disabled={pristine || submitting}
-              style={{ marginRight: '10px' }}
+              className={classes.buttonRightSpace}
             >
               <FormattedMessage {...messages.btnFormUpdateButton} />
             </Button>
@@ -191,11 +203,11 @@ const AddressForm = props => {
           </Grid>
           {response && response.status === 'Success_Update_Address' && (
             <Grid item>
-              <span style={{ color: 'green' }}>{response.message}</span>
+              <span className={classes.greenText}>{response.message}</span>
             </Grid>
           )}
           <Grid item xs={12}>
-            <div align="center" style={{ marginBottom: '25px' }}>
+            <div align="center" className={classes.divButtom}>
               <MapMarker
                 lat={parseFloat(mapLatitude)}
                 lng={parseFloat(mapLongitude)}

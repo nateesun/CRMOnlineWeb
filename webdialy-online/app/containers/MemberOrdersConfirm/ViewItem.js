@@ -33,6 +33,15 @@ const useStyles = makeStyles(() => ({
   divContainer: {
     padding: '10px',
   },
+  paper1: {
+    overflow: 'auto',
+  },
+  showSignature: {
+    padding: '10px',
+  },
+  buttonAction: {
+    marginTop: '10px',
+  },
 }));
 
 const ViewItem = props => {
@@ -139,7 +148,7 @@ const ViewItem = props => {
       </Grid>
       <Grid container>
         <Grid item xs={12}>
-          <Paper elevation={3} style={{ overflow: 'auto' }}>
+          <Paper elevation={3} className={classes.paper1}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow className={classes.colRow}>
@@ -203,7 +212,7 @@ const ViewItem = props => {
                 />
               </Grid>
             ) : (
-              <Grid item xs={6} style={{ padding: '10px' }}>
+              <Grid item xs={6} className={classes.showSignature}>
                 <h4>Signature:</h4>
                 <img src={orders.signature} alt="show signature" />
               </Grid>
@@ -211,7 +220,7 @@ const ViewItem = props => {
           </Paper>
         </Grid>
       </Grid>
-      <Grid container style={{ marginTop: '10px' }}>
+      <Grid container className={classes.buttonAction}>
         <Grid item xs={12}>
           <Grid container spacing={1} justify="flex-end">
             {orders.order_status !== 'member_approve' && (

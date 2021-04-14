@@ -28,6 +28,23 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(12),
     height: theme.spacing(12),
   },
+  paper1: {
+    padding: '5px',
+    margin: '5px',
+    background: '#239FE7',
+    color: 'white',
+  },
+  paper2: {
+    padding: '5px',
+    margin: '5px',
+    background: '#53AB67',
+    color: 'white',
+  },
+  paper3: {
+    padding: '5px',
+    margin: '5px',
+    background: '#FFC36C',
+  },
 }));
 
 const BoxPanel = styled(Box)`
@@ -73,15 +90,7 @@ export default function MyQrCode(props) {
           </BoxPanel>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper
-            elevation={3}
-            style={{
-              padding: '5px',
-              margin: '5px',
-              background: '#239FE7',
-              color: 'white',
-            }}
-          >
+          <Paper elevation={3} className={classes.paper1}>
             <BoxPanel>
               <Cake />
               วันเกิด: {birthday}
@@ -93,15 +102,7 @@ export default function MyQrCode(props) {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper
-            elevation={3}
-            style={{
-              padding: '5px',
-              margin: '5px',
-              background: '#53AB67',
-              color: 'white',
-            }}
-          >
+          <Paper elevation={3} className={classes.paper2}>
             <BoxPanel>
               <Star />
               คะแนนสะสมทั้งหมด: {totalScore}
@@ -113,10 +114,7 @@ export default function MyQrCode(props) {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper
-            elevation={3}
-            style={{ padding: '5px', margin: '5px', background: '#FFC36C' }}
-          >
+          <Paper elevation={3} className={classes.paper3}>
             <BoxPanel>
               <AssignmentInd />
               สถานะ: {memberRole}

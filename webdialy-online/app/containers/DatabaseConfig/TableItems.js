@@ -37,6 +37,9 @@ const useStyles = makeStyles({
   dataWidth: {
     overflow: 'auto',
   },
+  textLink: {
+    textDecoration: 'none',
+  },
 });
 
 export default function TableItems(props) {
@@ -101,7 +104,7 @@ export default function TableItems(props) {
                               href={`${window.location.origin}${
                                 appConstants.publicPath
                               }${item.query}`}
-                              style={{ textDecoration: 'none' }}
+                              className={classes.textLink}
                             >
                               <Button>Link Test</Button>
                             </a>

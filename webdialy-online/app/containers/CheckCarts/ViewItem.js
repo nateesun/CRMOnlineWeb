@@ -52,6 +52,11 @@ const useStyles = makeStyles(theme => ({
     padding: '5px',
     width: '75vw',
   },
+  paperShoppingStep: {
+    padding: '20px',
+    background: '#ddd',
+    width: '75vw',
+  },
 }));
 
 const ViewItem = props => {
@@ -154,7 +159,7 @@ const ViewItem = props => {
           <Grid item xs={6}>
             <Paper
               elevation={3}
-              style={{ padding: '20px', background: '#ddd', width: '75vw' }}
+              className={classes.paperShoppingStep}
             >
               {shoppingStep && shoppingStep !== 'approve' && (
                 <Grid item xs={12}>

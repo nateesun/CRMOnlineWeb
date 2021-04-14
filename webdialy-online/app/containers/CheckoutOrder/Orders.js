@@ -21,6 +21,15 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(2),
   },
+  separateLine: {
+    border: '1px solid #eee',
+  },
+  lineRed: {
+    color: 'red',
+  },
+  textGreen: {
+    color: 'green',
+  },
 }));
 
 export default function Orders(props) {
@@ -50,7 +59,7 @@ export default function Orders(props) {
       <Typography variant="h6" gutterBottom>
         รายการสินค้า
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateLine} />
       <List disablePadding>
         {cartsDetail &&
           cartsDetail.map(product => (
@@ -63,7 +72,7 @@ export default function Orders(props) {
                 aria-label="delete"
                 onClick={() => handleDelete(product.product_code)}
               >
-                <RemoveIcon style={{ color: 'red' }} />
+                <RemoveIcon className={classes.lineRed} />
               </IconButton>
               <React.Fragment>
                 <IconButton
@@ -72,7 +81,7 @@ export default function Orders(props) {
                     handleAdd(product.product_code, product.qty - 1)
                   }
                 >
-                  <MinusIcon style={{ color: 'red' }} />
+                  <MinusIcon className={classes.lineRed} />
                 </IconButton>
                 {product.qty}
                 <IconButton
@@ -81,12 +90,12 @@ export default function Orders(props) {
                     handleRemove(product.product_code, product.qty + 1)
                   }
                 >
-                  <PlusIcon style={{ color: 'green' }} />
+                  <PlusIcon className={classes.textGreen} />
                 </IconButton>
               </React.Fragment>
             </ListItem>
           ))}
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>

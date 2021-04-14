@@ -101,6 +101,19 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  },
+  divPrefix: {
+    width: '100%',
+    paddingTop: '14px',
+  },
+  textRemark: {
+    color: 'green',
+  },
+  textBlue: {
+    color: 'blue',
+  },
 }));
 
 const EditForm = props => {
@@ -121,7 +134,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
+    <Container component="main" maxWidth="lg" className={classes.container}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"
@@ -143,7 +156,7 @@ const EditForm = props => {
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
             <Grid item xs={12} lg={3}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divPrefix}>
                 <Field
                   name="prefix"
                   component={renderSelectField}
@@ -220,7 +233,7 @@ const EditForm = props => {
             </Grid>
 
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'green' }}>
+              <span className={classes.textRemark}>
                 * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
                 โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
                 เท่านั้น
@@ -234,7 +247,7 @@ const EditForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'blue' }}>
+              <span className={classes.textBlue}>
                 สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า
                 Line เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
               </span>

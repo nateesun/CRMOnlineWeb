@@ -110,6 +110,9 @@ const useStyles = makeStyles(theme => ({
   itemActiveItem: {
     background: '#f1e6e2',
   },
+  iconTextWhite: {
+    color: 'white',
+  }
 }));
 
 const MainLayout = props => {
@@ -181,7 +184,7 @@ const MainLayout = props => {
               CRM Online
             </Typography>
             <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon style={{ color: 'white' }} />
+              <ChevronLeftIcon className={classes.iconTextWhite} />
             </IconButton>
           </div>
           <Divider />

@@ -20,8 +20,8 @@ import messages from './messages';
 import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
+  formControl: {
+    width: '100%',
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -42,6 +42,10 @@ const useStyles = makeStyles(theme => ({
   },
   loginTopic: {
     marginTop: theme.spacing(1),
+  },
+  divRole: {
+    width: '100%',
+    paddingTop: '14px',
   },
 }));
 
@@ -73,7 +77,7 @@ const renderSelectField = ({
     <FormControl
       variant="outlined"
       error={touched && error}
-      style={{ width: '100%' }}
+      className={classes.formControl}
     >
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
@@ -147,7 +151,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={4}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divRole}>
                 <Field
                   id="member_role"
                   name="member_role"

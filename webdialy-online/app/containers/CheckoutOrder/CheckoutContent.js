@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
+  separateLine: {
+    border: '1px solid #eee',
+  },
 }));
 
 const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'รีวิว'];
@@ -107,7 +110,7 @@ export default function CheckoutContent(props) {
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep)}
-                <Divider style={{ border: '1px solid #eee' }} />
+                <Divider className={classes.separateLine} />
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>

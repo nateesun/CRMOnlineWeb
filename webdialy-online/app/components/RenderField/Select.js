@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(2),
   },
+  error: {
+    color: 'red',
+  }
 }));
 
 function SelectField({ input, label, meta: { touched, error } }) {
@@ -51,7 +54,7 @@ function SelectField({ input, label, meta: { touched, error } }) {
           นางสาว
         </option>
       </Select>
-      {touched && error && <span style={{ color: 'red' }}>{error}</span>}
+      {touched && error && <span className={classes.error}>{error}</span>}
     </FormControl>
   );
 }

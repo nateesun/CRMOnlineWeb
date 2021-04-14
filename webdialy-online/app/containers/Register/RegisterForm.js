@@ -46,6 +46,9 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  textGreen: {
+    color: 'green',
+  }
 }));
 
 const RegisterForm = props => {
@@ -174,7 +177,7 @@ const RegisterForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'green' }}>
+              <span className={classes.textGreen}>
                 * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
                 โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
                 เท่านั้น

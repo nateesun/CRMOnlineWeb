@@ -43,8 +43,6 @@ const MapDirectionAB = compose(
               distance: result.routes[0].legs[0].distance.value,
               duration: result.routes[0].legs[0].duration.value,
             });
-          } else {
-            // console.error(`error fetching directions ${result}`);
           }
         },
       );

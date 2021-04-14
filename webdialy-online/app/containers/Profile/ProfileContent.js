@@ -49,6 +49,17 @@ const useStyles = makeStyles({
     background: '#eee',
     border: '0px solid',
   },
+  loading: {
+    padding: '20px',
+  },
+  buttonAddLine: {
+    background: 'green',
+    color: 'white',
+    border: '0',
+  },
+  cardAction: {
+    marginBottom: '50px',
+  },
 });
 
 export default function ProfileContent(props) {
@@ -61,7 +72,7 @@ export default function ProfileContent(props) {
   };
 
   if (!profile.code) {
-    return <h3 style={{ padding: '20px' }}>Loading...</h3>;
+    return <h3 className={classes.loading}>Loading...</h3>;
   }
 
   return (
@@ -179,11 +190,7 @@ export default function ProfileContent(props) {
                   >
                     <Button
                       variant="outlined"
-                      style={{
-                        background: 'green',
-                        color: 'white',
-                        border: '0',
-                      }}
+                      className={classes.buttonAddLine}
                     >
                       Add Line
                     </Button>
@@ -194,7 +201,7 @@ export default function ProfileContent(props) {
           )}
         </Grid>
       </CardContent>
-      <CardActions style={{ marginBottom: '50px' }}>
+      <CardActions className={classes.cardAction}>
         <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />

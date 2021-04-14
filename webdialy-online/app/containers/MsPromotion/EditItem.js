@@ -48,6 +48,12 @@ const useStyles = makeStyles(theme => ({
     margin: '10px',
     background: '#aaa',
   },
+  formControl: {
+    width: '100%',
+  },
+  divRedeem: {
+    width: '100%', paddingTop: '16px',
+  }
 }));
 
 const renderFromHelper = ({ touched, error }) => {
@@ -77,7 +83,7 @@ const renderSelectField = ({
     <FormControl
       variant="outlined"
       error={touched && error}
-      style={{ width: '100%' }}
+      className={classes.formControl}
     >
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
@@ -224,7 +230,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <div style={{ width: '100%', paddingTop: '16px' }}>
+              <div className={classes.divRedeem}>
                 <Field
                   name="redeem_or_free"
                   component={renderSelectField}

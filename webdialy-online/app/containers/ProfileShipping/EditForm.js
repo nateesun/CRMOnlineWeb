@@ -101,6 +101,18 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  },
+  divAddressType: {
+    width: '100%', paddingTop: '14px',
+  },
+  divMemberPrefix: {
+    width: '100%', paddingTop: '14px',
+  },
+  divPosition: {
+    marginBottom: '25px',
+  }
 }));
 
 const EditForm = props => {
@@ -143,7 +155,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
+    <Container component="main" maxWidth="lg" className={classes.container}>
       <SweetAlert
         show={errorUpdate}
         title="Update data error"
@@ -165,7 +177,7 @@ const EditForm = props => {
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
             <Grid item xs={12} lg={4}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divAddressType}>
                 <Field
                   id="address_type"
                   name="address_type"
@@ -180,7 +192,7 @@ const EditForm = props => {
             <Grid item xs={4} lg={4} />
             <Grid item xs={4} lg={4} />
             <Grid item xs={5} lg={3}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divMemberPrefix}>
                 <Field
                   id="member_prefix"
                   name="member_prefix"
@@ -326,7 +338,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12}>
               {loadMap && (
-                <div align="center" style={{ marginBottom: '25px' }}>
+                <div align="center" className={classes.divPosition}>
                   Position: {latitude}, {longitude}
                 </div>
               )}
