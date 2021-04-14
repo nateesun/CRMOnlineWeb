@@ -72,9 +72,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/company/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/company/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
@@ -100,9 +98,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     };
-    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(
-      resp => resp.json(),
-    );
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(resp => resp.json());
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {

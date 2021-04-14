@@ -58,10 +58,7 @@ export default function NewLayout() {
       <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
       <Route path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
       <Route path={path.PATH_CHECK_CARTS} component={CheckCarts} />
-      <Route
-        path={path.PATH_MEMBER_ORDERS_CONFIRM}
-        component={MemberOrdersConfirm}
-      />
+      <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
       <Route path={path.PATH_DATABASE} component={DatabaseConfig} />
       <Route path={path.PATH_USE_PROMOTION} component={UsePromotion} />
       <Route component={NotFoundPage} />

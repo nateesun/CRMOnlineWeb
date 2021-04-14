@@ -48,13 +48,8 @@ export default function FinishOrder(props) {
         />
         <Typography variant="subtitle1" className={classes.textTopic}>
           เลขที่ใบสั่งซื้อสินค้า ของคุณคือ{' '}
-          <span className={classes.cartBillNo}>#{props.currentCartNo}</span>{' '}
-          <br />
-          <QRCode
-            value={`${hostUrl}/order_confirm/${props.currentCartNo}/${
-              props.database
-            }`}
-          />
+          <span className={classes.cartBillNo}>#{props.currentCartNo}</span> <br />
+          <QRCode value={`${hostUrl}/order_confirm/${props.currentCartNo}/${props.database}`} />
           <br />
           ทางเราจะตรวจสอบสลิปการโอนเงินของท่าน <br />
           และแจ้งผลการตรวจสอบภายใน 1-2 วันทำการ

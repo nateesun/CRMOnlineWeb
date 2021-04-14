@@ -33,9 +33,4 @@ const makeErrorRegister = () =>
     registerState => registerState.error,
   );
 
-export {
-  selectRegisterDomain,
-  makeSelectMember,
-  makeRegisterStatus,
-  makeErrorRegister,
-};
+export { selectRegisterDomain, makeSelectMember, makeRegisterStatus, makeErrorRegister };

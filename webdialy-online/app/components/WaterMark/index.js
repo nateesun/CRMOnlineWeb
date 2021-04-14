@@ -20,11 +20,7 @@ const options = {
 
 function WaterMark(props) {
   return (
-    <ReactWaterMark
-      waterMarkText="DEMO VERSION"
-      openSecurityDefense
-      options={options}
-    >
+    <ReactWaterMark waterMarkText="DEMO VERSION" openSecurityDefense options={options}>
       {props.children}
     </ReactWaterMark>
   );

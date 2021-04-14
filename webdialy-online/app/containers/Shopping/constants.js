@@ -4,8 +4,7 @@
  *
  */
 
-export const apiServiceHost =
-  process.env.API_SERVICE || 'http://localhost:5000';
+export const apiServiceHost = process.env.API_SERVICE || 'http://localhost:5000';
 
 export const INIT_STATE = 'app/Shopping/INIT_STATE';
 

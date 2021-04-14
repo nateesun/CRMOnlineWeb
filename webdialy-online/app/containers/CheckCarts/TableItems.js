@@ -52,8 +52,7 @@ export default function TableItems(props) {
     setPage(newPage);
   };
 
-  const checkRole = (shoppingStep, mRole) =>
-    shoppingStep === 'approve' && mRole === 'member';
+  const checkRole = (shoppingStep, mRole) => shoppingStep === 'approve' && mRole === 'member';
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
@@ -116,26 +115,18 @@ export default function TableItems(props) {
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.cart_no}</TableCell>
-                    <TableCell align="center">
-                      {item.cart_create_date}
-                    </TableCell>
+                    <TableCell align="center">{item.cart_create_date}</TableCell>
                     <TableCell align="center">{item.member_code}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onViewItem(item)}
-                          >
+                          <Button variant="outlined" onClick={() => onViewItem(item)}>
                             Detail
                           </Button>
                         </Grid>
                         {checkRole(item.shopping_step, memberRole) && (
                           <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => loadViewOrder(item)}
-                            >
+                            <Button variant="outlined" onClick={() => loadViewOrder(item)}>
                               View Signature
                             </Button>
                           </Grid>

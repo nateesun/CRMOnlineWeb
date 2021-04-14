@@ -248,11 +248,7 @@ const EditItem = props => {
             </Grid>
             <Grid item xs={6}>
               {file && file.name && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => onUploadImageFile()}
-                >
+                <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
                   Please press upload button
                 </Button>
               )}
@@ -288,11 +284,7 @@ const EditItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>
@@ -326,19 +318,13 @@ const validate = formValues => {
     errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   if (!formValues.line_official_id) {
-    errors.line_official_id = (
-      <FormattedMessage {...messages.col3ShouldNotEmpty} />
-    );
+    errors.line_official_id = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.member_running) {
-    errors.member_running = (
-      <FormattedMessage {...messages.col4ShouldNotEmpty} />
-    );
+    errors.member_running = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
   }
   if (!formValues.prefix_running) {
-    errors.prefix_running = (
-      <FormattedMessage {...messages.col5ShouldNotEmpty} />
-    );
+    errors.prefix_running = <FormattedMessage {...messages.col5ShouldNotEmpty} />;
   }
   if (!formValues.size_running) {
     errors.size_running = <FormattedMessage {...messages.col6ShouldNotEmpty} />;

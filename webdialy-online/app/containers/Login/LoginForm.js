@@ -130,11 +130,7 @@ const LoginForm = props => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button
-                      variant="contained"
-                      disabled={pristine || submitting}
-                      onClick={reset}
-                    >
+                    <Button variant="contained" disabled={pristine || submitting} onClick={reset}>
                       {<FormattedMessage {...messages.clear} />}
                     </Button>
                   </Grid>

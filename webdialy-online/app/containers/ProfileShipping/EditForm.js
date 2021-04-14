@@ -75,13 +75,7 @@ const renderFromHelper = ({ touched, error }) => {
   return <FormHelperText>{touched && error}</FormHelperText>;
 };
 
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
   renderSelectField.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
@@ -90,11 +84,7 @@ const renderSelectField = ({
   };
 
   return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
@@ -154,12 +144,7 @@ const EditForm = props => {
 
   return (
     <Container component="main" maxWidth="lg" className={classes.container}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -314,11 +299,7 @@ const EditForm = props => {
               />
             </Grid>
             <Grid item xs={6} lg={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleLoadMap(true)}
-              >
+              <Button variant="contained" color="primary" onClick={() => handleLoadMap(true)}>
                 Show Maps
               </Button>
             </Grid>
@@ -392,20 +373,14 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.member_prefix) {
-    errors.member_prefix = (
-      <FormattedMessage {...messages.prefixShouldNotEmpty} />
-    );
+    errors.member_prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
   }
 
   if (!formValues.member_name) {
-    errors.member_name = (
-      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
-    );
+    errors.member_name = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }
   if (!formValues.member_lastname) {
-    errors.member_lastname = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
 
   return errors;

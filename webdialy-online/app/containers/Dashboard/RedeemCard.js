@@ -113,22 +113,14 @@ export default function RedeemCard(props) {
               กดรับสิทธิ์
             </Button>
           ) : (
-            <Button
-              variant="contained"
-              className={classes.buttonFooter}
-              disabled
-            >
+            <Button variant="contained" className={classes.buttonFooter} disabled>
               ขออภัย สิทธิ์เต็มแล้ว
             </Button>
           )}
         </Grid>
       </CardActions>
       {showDialog && (
-        <DialogRedeemCode
-          {...props}
-          code={options.code}
-          handleClose={() => setShowDialog(false)}
-        />
+        <DialogRedeemCode {...props} code={options.code} handleClose={() => setShowDialog(false)} />
       )}
     </Card>
   );

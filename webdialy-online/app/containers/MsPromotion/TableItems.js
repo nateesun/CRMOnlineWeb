@@ -111,11 +111,7 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -143,9 +139,7 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
                       <TableCell align="left">{item.redeem_name}</TableCell>
-                      <TableCell align="right">
-                        {item.point_to_redeem}
-                      </TableCell>
+                      <TableCell align="right">{item.point_to_redeem}</TableCell>
                       <TableCell align="center">
                         {moment(item.start_time).format('DD/MM/YYYY')}
                       </TableCell>

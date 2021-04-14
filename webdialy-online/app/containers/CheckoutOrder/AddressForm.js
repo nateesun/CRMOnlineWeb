@@ -37,19 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 const AddressForm = props => {
   const classes = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    dispatch,
-    initialValues,
-    response,
-  } = props;
-  const {
-    map_latitude: mapLatitude,
-    map_longitude: mapLongitude,
-  } = initialValues;
+  const { handleSubmit, pristine, reset, submitting, dispatch, initialValues, response } = props;
+  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = initialValues;
 
   useEffect(() => {
     props.initLoadMemberShipping();
@@ -177,9 +166,7 @@ const AddressForm = props => {
           </Grid>
           <Grid item xs={12} md={6}>
             <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
+              control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
               label={<FormattedMessage {...messages.useForShpping} />}
             />
           </Grid>
@@ -193,11 +180,7 @@ const AddressForm = props => {
             >
               <FormattedMessage {...messages.btnFormUpdateButton} />
             </Button>
-            <Button
-              variant="contained"
-              disabled={pristine || submitting}
-              onClick={reset}
-            >
+            <Button variant="contained" disabled={pristine || submitting} onClick={reset}>
               <FormattedMessage {...messages.btnFormResetButton} />
             </Button>
           </Grid>
@@ -239,17 +222,13 @@ const validate = formValues => {
     errors.member_name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.member_lastname) {
-    errors.member_lastname = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.address1) {
     errors.address1 = <FormattedMessage {...messages.address1ShouldNotEmpty} />;
   }
   if (!formValues.sub_district) {
-    errors.sub_district = (
-      <FormattedMessage {...messages.subDistrictShouldNotEmpty} />
-    );
+    errors.sub_district = <FormattedMessage {...messages.subDistrictShouldNotEmpty} />;
   }
   if (!formValues.district) {
     errors.district = <FormattedMessage {...messages.districtShouldNotEmpty} />;

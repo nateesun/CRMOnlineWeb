@@ -8,12 +8,8 @@ import * as actions from './actions';
 
 export function* initLoad() {
   try {
-    const { cart_no: cartNo, database } = yield select(
-      selectors.makeSelectData(),
-    );
-    const requestURL = `${
-      appConstants.publicPath
-    }/api/orders/confirm_order/${cartNo}`;
+    const { cart_no: cartNo, database } = yield select(selectors.makeSelectData());
+    const requestURL = `${appConstants.publicPath}/api/orders/confirm_order/${cartNo}`;
     const dbFromLogin = getCookie('database');
     const dbFromUrl = database || dbFromLogin;
     const response = yield call(request, requestURL, {

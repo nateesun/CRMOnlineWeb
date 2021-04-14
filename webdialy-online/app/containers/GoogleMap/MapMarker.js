@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { compose, withProps, withStateHandlers } from 'recompose';
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  InfoWindow,
-} from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
 const MapMarker = compose(
   withStateHandlers(() => ({ isOpen: false }), {

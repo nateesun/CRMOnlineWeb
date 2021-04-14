@@ -26,11 +26,7 @@ function Toggle(props) {
   }
 
   return (
-    <Select
-      value={props.value}
-      onChange={props.onToggle}
-      className={classes.textWhite}
-    >
+    <Select value={props.value} onChange={props.onToggle} className={classes.textWhite}>
       {content}
     </Select>
   );

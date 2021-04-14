@@ -75,10 +75,7 @@ export default function Review(props) {
         {cartsDetail &&
           cartsDetail.map(product => (
             <ListItem className={classes.listItem} key={product.product_code}>
-              <ListItemText
-                primary={product.product_name}
-                secondary={product.desc}
-              />
+              <ListItemText primary={product.product_name} secondary={product.desc} />
               <Typography variant="body2">{product.total_amount}</Typography>
             </ListItem>
           ))}
@@ -103,9 +100,7 @@ export default function Review(props) {
           <Typography variant="h6" gutterBottom className={classes.title}>
             ที่อยู่สำหรับจัดส่ง
           </Typography>
-          <Typography
-            gutterBottom
-          >{`${memberPrefix}${memberName} ${memberLastName}`}</Typography>
+          <Typography gutterBottom>{`${memberPrefix}${memberName} ${memberLastName}`}</Typography>
           <Typography gutterBottom>{`${address1} ${address2 ||
             ''} ${subDistrict} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
@@ -127,9 +122,7 @@ export default function Review(props) {
                 <Typography gutterBottom>บัญชีต้นทาง</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography gutterBottom>
-                  {payment.account_from_name}
-                </Typography>
+                <Typography gutterBottom>{payment.account_from_name}</Typography>
               </Grid>
             </React.Fragment>
             <React.Fragment>
@@ -184,11 +177,7 @@ export default function Review(props) {
         </Grid>
         <Grid item xs={12}>
           <div align="center" className={classes.divBottom}>
-            <MapDirectionAB
-              origin={origin}
-              destination={destination}
-              onExit={handleDirection}
-            />
+            <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
           </div>
         </Grid>
         <Grid item xs={12}>

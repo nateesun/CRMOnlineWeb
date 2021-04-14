@@ -135,31 +135,20 @@ const PaymentForm = props => {
             />
           </Grid>
           <Grid item xs={12}>
-            อัพโหลดไฟล์ Slip (1){' '}
-            <input type="file" name="file" onChange={onChangeHandler} />
+            อัพโหลดไฟล์ Slip (1) <input type="file" name="file" onChange={onChangeHandler} />
           </Grid>
           <Grid item xs={12}>
-            <Button
-              onClick={() => onUploadImageFile()}
-              className={classes.buttonRight}
-            >
+            <Button onClick={() => onUploadImageFile()} className={classes.buttonRight}>
               Upload Slip (2)
             </Button>
-            <Button
-              onClick={() => validateSlipUpload()}
-              className={classes.buttonValidate}
-            >
+            <Button onClick={() => validateSlipUpload()} className={classes.buttonValidate}>
               Validate Slip (3)
             </Button>
           </Grid>
           <Grid item xs={12}>
             {props.showImg && (
               <div align="center">
-                <img
-                  src={`${apiServiceHost}/images/${file.name}`}
-                  width={150}
-                  alt=""
-                />
+                <img src={`${apiServiceHost}/images/${file.name}`} width={150} alt="" />
                 <br />
                 <br />
                 รูปสลิปที่โอนเงิน
@@ -169,19 +158,13 @@ const PaymentForm = props => {
           </Grid>
           <Grid item xs={6} lg={6}>
             {props.imgValid === 'Success' && (
-              <Alert severity="success">
-                ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน
-              </Alert>
+              <Alert severity="success">ตรวจพบข้อมูล qrcode สำหรับรายการโอนเงิน</Alert>
             )}
             {props.imgValid === 'Warning' && (
-              <Alert severity="error">
-                ข้อมูลใน QR Code ไม่ถูกต้องตาม Format
-              </Alert>
+              <Alert severity="error">ข้อมูลใน QR Code ไม่ถูกต้องตาม Format</Alert>
             )}
             {props.imgValid === 'Error' && (
-              <Alert severity="error">
-                ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน
-              </Alert>
+              <Alert severity="error">ไฟล์ที่อัพโหลดไม่พบข้อมูล qrcode ในการโอนเงิน</Alert>
             )}
           </Grid>
         </Grid>
@@ -207,44 +190,28 @@ PaymentForm.propTypes = {
 const validate = formValues => {
   const errors = {};
   if (!formValues.account_from_name) {
-    errors.account_from_name = (
-      <FormattedMessage {...messages.accFromNameShouldNotEmpty} />
-    );
+    errors.account_from_name = <FormattedMessage {...messages.accFromNameShouldNotEmpty} />;
   }
   if (!formValues.account_to_name) {
-    errors.account_to_name = (
-      <FormattedMessage {...messages.accToNameShouldNotEmpty} />
-    );
+    errors.account_to_name = <FormattedMessage {...messages.accToNameShouldNotEmpty} />;
   }
   if (!formValues.from_account_no) {
-    errors.from_account_no = (
-      <FormattedMessage {...messages.fromAccShouldNotEmpty} />
-    );
+    errors.from_account_no = <FormattedMessage {...messages.fromAccShouldNotEmpty} />;
   }
   if (!formValues.to_account_no) {
-    errors.to_account_no = (
-      <FormattedMessage {...messages.toAccShouldNotEmpty} />
-    );
+    errors.to_account_no = <FormattedMessage {...messages.toAccShouldNotEmpty} />;
   }
   if (!formValues.transfer_date) {
-    errors.transfer_date = (
-      <FormattedMessage {...messages.transferDateShouldNotEmpty} />
-    );
+    errors.transfer_date = <FormattedMessage {...messages.transferDateShouldNotEmpty} />;
   }
   if (!formValues.transfer_ref) {
-    errors.transfer_ref = (
-      <FormattedMessage {...messages.transferRefShouldNotEmpty} />
-    );
+    errors.transfer_ref = <FormattedMessage {...messages.transferRefShouldNotEmpty} />;
   }
   if (!formValues.transfer_amount) {
-    errors.transfer_amount = (
-      <FormattedMessage {...messages.transferAmtShouldNotEmpty} />
-    );
+    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldNotEmpty} />;
   }
   if (formValues.transfer_amount < 1) {
-    errors.transfer_amount = (
-      <FormattedMessage {...messages.transferAmtShouldMoreZero} />
-    );
+    errors.transfer_amount = <FormattedMessage {...messages.transferAmtShouldMoreZero} />;
   }
   return errors;
 };

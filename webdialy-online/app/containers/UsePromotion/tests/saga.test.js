@@ -12,8 +12,6 @@ const generator = usePromotionSaga();
 describe('usePromotionSaga Saga', () => {
   it('should start task to watch for INIT_LOAD', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.INIT_LOAD, initLoad),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.INIT_LOAD, initLoad));
   });
 });

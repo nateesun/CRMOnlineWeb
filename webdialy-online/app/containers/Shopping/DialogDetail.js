@@ -165,10 +165,7 @@ export default function DialogDetail(props) {
       </Typography>
       <List>
         <ListItem button>
-          <ListItemText
-            primary={item.name}
-            secondary={`ราคา ${item.price_d} บาท`}
-          />
+          <ListItemText primary={item.name} secondary={`ราคา ${item.price_d} บาท`} />
         </ListItem>
         <Divider className={classes.separateLine} />
         <ListItem button>
@@ -181,21 +178,9 @@ export default function DialogDetail(props) {
               value={options}
               onChange={e => setOptions(e.target.value)}
             >
-              <FormControlLabel
-                value=""
-                control={<Radio color="primary" />}
-                label="No option"
-              />
-              <FormControlLabel
-                value="opt1"
-                control={<Radio color="primary" />}
-                label="Option 1"
-              />
-              <FormControlLabel
-                value="opt2"
-                control={<Radio color="primary" />}
-                label="Option 2"
-              />
+              <FormControlLabel value="" control={<Radio color="primary" />} label="No option" />
+              <FormControlLabel value="opt1" control={<Radio color="primary" />} label="Option 1" />
+              <FormControlLabel value="opt2" control={<Radio color="primary" />} label="Option 2" />
             </RadioGroup>
           </FormControl>
         </ListItem>

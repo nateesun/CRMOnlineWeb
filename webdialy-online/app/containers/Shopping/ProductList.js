@@ -65,9 +65,7 @@ export default function ProductList(props) {
       </Grid>
       <Grid item xs={12}>
         {data && data.length === 0 && (
-          <ContentNotFound
-            label={<FormattedMessage {...messages.notfoundProduct} />}
-          />
+          <ContentNotFound label={<FormattedMessage {...messages.notfoundProduct} />} />
         )}
       </Grid>
       {data &&
@@ -82,11 +80,7 @@ export default function ProductList(props) {
                     src={`${apiServiceHost}${item.img_path}`}
                   />
                   <Box pr={2}>
-                    <Typography
-                      gutterBottom
-                      variant="body2"
-                      className={classes.productName}
-                    >
+                    <Typography gutterBottom variant="body2" className={classes.productName}>
                       {item.name}
                     </Typography>
                     <Typography
@@ -95,9 +89,7 @@ export default function ProductList(props) {
                       color="textSecondary"
                       align="center"
                     >
-                      <span className={classes.productPrice}>
-                        ราคา {item.price_d} บาท
-                      </span>
+                      <span className={classes.productPrice}>ราคา {item.price_d} บาท</span>
                     </Typography>
                     <Typography
                       display="block"
@@ -105,9 +97,7 @@ export default function ProductList(props) {
                       color="textSecondary"
                       align="center"
                     >
-                      <span className={classes.productPoint}>
-                        ได้ {item.point} คะแนน
-                      </span>
+                      <span className={classes.productPoint}>ได้ {item.point} คะแนน</span>
                     </Typography>
                     <Typography
                       display="block"

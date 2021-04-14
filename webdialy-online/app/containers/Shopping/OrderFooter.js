@@ -86,8 +86,7 @@ export default function OrderFooter(props) {
               <div align="right">
                 <ShoppingBasket className={classes.shoppingBasket} />
                 <span className={classes.textItem}>
-                  รายการ :<span className={classes.cartNo}>{cart.cart_no}</span>
-                  |
+                  รายการ :<span className={classes.cartNo}>{cart.cart_no}</span>|
                 </span>
                 <span>จน. {cart.total_item} | </span>
                 รวม: {cart.total_amount} บาท

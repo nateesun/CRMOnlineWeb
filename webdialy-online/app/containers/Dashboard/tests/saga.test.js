@@ -12,8 +12,6 @@ const generator = dashboardSaga();
 describe('dashboardSaga Saga', () => {
   it('should start task to watch for LOAD_REDEEM', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.LOAD_REDEEM, loadRedeem),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.LOAD_REDEEM, loadRedeem));
   });
 });

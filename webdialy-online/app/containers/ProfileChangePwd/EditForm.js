@@ -65,12 +65,7 @@ const EditForm = props => {
 
   return (
     <Container component="main" maxWidth="lg" className={classes.container}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -191,25 +186,17 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.old_password) {
-    errors.old_password = (
-      <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />
-    );
+    errors.old_password = <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />;
   }
 
   if (!formValues.new_password) {
-    errors.new_password = (
-      <FormattedMessage {...messages.newPasswordShouldNotEmpty} />
-    );
+    errors.new_password = <FormattedMessage {...messages.newPasswordShouldNotEmpty} />;
   }
   if (!formValues.confirm_password) {
-    errors.confirm_password = (
-      <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />
-    );
+    errors.confirm_password = <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />;
   }
   if (formValues.new_password !== formValues.confirm_password) {
-    errors.confirm_password = (
-      <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />
-    );
+    errors.confirm_password = <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />;
   }
 
   return errors;

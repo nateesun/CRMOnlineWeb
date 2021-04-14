@@ -74,13 +74,7 @@ const renderFromHelper = ({ touched, error }) => {
   return <FormHelperText>{touched && error}</FormHelperText>;
 };
 
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
   renderSelectField.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
@@ -89,11 +83,7 @@ const renderSelectField = ({
   };
 
   return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
       <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
@@ -132,12 +122,7 @@ const EditForm = props => {
 
   return (
     <Container component="main" maxWidth="lg" className={classes.container}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -230,9 +215,8 @@ const EditForm = props => {
 
             <Grid item xs={12} lg={6}>
               <span className={classes.textRemark}>
-                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
-                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
-                เท่านั้น
+                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง
+                ERIC KAYSER LINE OFFICIAL เท่านั้น
               </span>
               <Field
                 name="line_id"
@@ -244,8 +228,8 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12} lg={6}>
               <span className={classes.textBlue}>
-                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า
-                Line เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
+                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
+                เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
               </span>
               <Field
                 name="line_user_id"
@@ -313,22 +297,16 @@ const validate = formValues => {
   }
 
   if (!formValues.first_name) {
-    errors.first_name = (
-      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
-    );
+    errors.first_name = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }
   if (!formValues.last_name) {
-    errors.last_name = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (!formValues.birthday) {
-    errors.birthday = (
-      <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
-    );
+    errors.birthday = <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />;
   }
 
   return errors;

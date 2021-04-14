@@ -60,13 +60,7 @@ const renderFromHelper = ({ touched, error }) => {
   return <FormHelperText>{touched && error}</FormHelperText>;
 };
 
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
   renderSelectField.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
@@ -75,11 +69,7 @@ const renderSelectField = ({
   };
 
   return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
@@ -101,14 +91,7 @@ const renderSelectField = ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    response,
-    rolesList,
-  } = props;
+  const { handleSubmit, pristine, reset, submitting, response, rolesList } = props;
 
   const onValidated = formValues => {
     props.onUpdateItem(formValues);
@@ -254,11 +237,7 @@ const EditItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>
@@ -287,14 +266,10 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.first_name) {
-    errors.first_name = (
-      <FormattedMessage {...messages.firstNameSouldNotEmpty} />
-    );
+    errors.first_name = <FormattedMessage {...messages.firstNameSouldNotEmpty} />;
   }
   if (!formValues.last_name) {
-    errors.last_name = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.member_role) {
     errors.member_role = <FormattedMessage {...messages.roleShouldNotEmpty} />;
@@ -303,14 +278,10 @@ const validate = formValues => {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (!formValues.total_score || formValues.total_score < 0) {
-    errors.total_score = (
-      <FormattedMessage {...messages.totalScoreShouldNotEmpty} />
-    );
+    errors.total_score = <FormattedMessage {...messages.totalScoreShouldNotEmpty} />;
   }
   if (!formValues.total_purchase || formValues.total_purchase < 0) {
-    errors.total_purchase = (
-      <FormattedMessage {...messages.totalPurchaseShouldNotEmpty} />
-    );
+    errors.total_purchase = <FormattedMessage {...messages.totalPurchaseShouldNotEmpty} />;
   }
 
   return errors;

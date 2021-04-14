@@ -53,11 +53,7 @@ export default function SearchBar(props) {
         />
       </Grid>
       <Grid item>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => onSearchData()}
-        >
+        <Button variant="contained" color="primary" onClick={() => onSearchData()}>
           Search
         </Button>
       </Grid>

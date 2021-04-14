@@ -79,10 +79,7 @@ export default function MyQrCode(props) {
       <Grid container>
         <Grid item xs={12}>
           <BoxPanel>
-            <Avatar
-              className={classes.large}
-              src={gender === 'M' ? defaultBoy : defaultGirl}
-            />
+            <Avatar className={classes.large} src={gender === 'M' ? defaultBoy : defaultGirl} />
           </BoxPanel>
           <BoxPanel>
             {prefix}

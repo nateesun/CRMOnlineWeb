@@ -18,12 +18,5 @@ const useStyles = makeStyles(() => ({
 export default function NotFound() {
   const classes = useStyles();
 
-  return (
-    <img
-      src={notfoundPageImages}
-      width="100%"
-      className={classes.root}
-      alt=""
-    />
-  );
+  return <img src={notfoundPageImages} width="100%" className={classes.root} alt="" />;
 }

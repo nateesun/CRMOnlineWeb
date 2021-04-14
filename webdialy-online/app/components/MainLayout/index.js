@@ -138,10 +138,7 @@ const MainLayout = props => {
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={clsx(
-          classes.appBar,
-          open && notMemberRole && classes.appBarShift,
-        )}
+        className={clsx(classes.appBar, open && notMemberRole && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           {notMemberRole && (
@@ -150,20 +147,12 @@ const MainLayout = props => {
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden,
-              )}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
             >
               <MenuIcon />
             </IconButton>
           )}
-          <Typography
-            component="span"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
+          <Typography component="span" color="inherit" noWrap className={classes.title}>
             {props.title}
           </Typography>
           <LocaleToggle />

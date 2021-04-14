@@ -34,8 +34,7 @@ export const UPLOAD_IMG_ERROR = 'app/MsProduct/UPLOAD_IMG_ERROR';
 export const LOAD_DATA_FROM_FILE = 'app/MsProduct/LOAD_DATA_FROM_FILE';
 
 export const SAVE_DATA_IMPORT = 'app/MsProduct/SAVE_DATA_IMPORT';
-export const SAVE_DATA_IMPORT_SUCCESS =
-  'app/MsProduct/SAVE_DATA_IMPORT_SUCCESS';
+export const SAVE_DATA_IMPORT_SUCCESS = 'app/MsProduct/SAVE_DATA_IMPORT_SUCCESS';
 export const SAVE_DATA_IMPORT_ERROR = 'app/MsProduct/SAVE_DATA_IMPORT_ERROR';
 
 export const SET_HEADERS = 'app/MsProduct/SET_HEADERS';

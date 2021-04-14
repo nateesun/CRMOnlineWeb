@@ -65,9 +65,7 @@ const SignatureForm = props => {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            {showLabel && (
-              <div className={classes.btnSave}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>
-            )}
+            {showLabel && <div className={classes.btnSave}>บันทึกข้อมูลลายเซ็นต์แล้ว</div>}
           </Grid>
         </Grid>
       </Grid>

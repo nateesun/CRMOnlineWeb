@@ -108,11 +108,7 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -139,10 +135,7 @@ export default function TableItems(props) {
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onEditItem(item)}
-                            >
+                            <Button variant="outlined" onClick={() => onEditItem(item)}>
                               Edit
                             </Button>
                           </Grid>

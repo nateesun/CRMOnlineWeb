@@ -105,11 +105,7 @@ const ViewItem = props => {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => props.onChangePage('LIST')}
-            >
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
               <FormattedMessage {...messages.btnBack} />
             </Button>
           </Grid>

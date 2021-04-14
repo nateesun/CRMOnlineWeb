@@ -73,11 +73,7 @@ const ViewItem = props => {
   };
 
   if (!orders) {
-    return (
-      <ContentNotFound
-        label={<FormattedMessage {...messages.notfoundOrder} />}
-      />
-    );
+    return <ContentNotFound label={<FormattedMessage {...messages.notfoundOrder} />} />;
   }
 
   return (
@@ -112,17 +108,13 @@ const ViewItem = props => {
                 <FormattedMessage {...messages.col3} />
               </Grid>
               <Grid item xs={6}>
-                {moment(new Date(orders.cart_create_date)).format(
-                  'DD/MM/YYYY HH:mm:ss',
-                )}
+                {moment(new Date(orders.cart_create_date)).format('DD/MM/YYYY HH:mm:ss')}
               </Grid>
               <Grid item xs={6}>
                 <FormattedMessage {...messages.col6} />
               </Grid>
               <Grid item xs={6}>
-                {moment(new Date(orders.transfer_date)).format(
-                  'DD/MM/YYYY HH:mm:ss',
-                )}
+                {moment(new Date(orders.transfer_date)).format('DD/MM/YYYY HH:mm:ss')}
               </Grid>
               <Grid item xs={6}>
                 <FormattedMessage {...messages.col4} />
@@ -200,16 +192,11 @@ const ViewItem = props => {
                   onChange={e => setMobileNo(e.target.value)}
                 />
               )}
-              {orders.member_mobile && (
-                <span>Mobile: {orders.member_mobile}</span>
-              )}
+              {orders.member_mobile && <span>Mobile: {orders.member_mobile}</span>}
             </Grid>
             {!orders.signature ? (
               <Grid item xs={12}>
-                <SignatureForm
-                  {...props}
-                  onExit={data => onShowImageSignature(data)}
-                />
+                <SignatureForm {...props} onExit={data => onShowImageSignature(data)} />
               </Grid>
             ) : (
               <Grid item xs={6} className={classes.showSignature}>
@@ -225,11 +212,7 @@ const ViewItem = props => {
           <Grid container spacing={1} justify="flex-end">
             {orders.order_status !== 'member_approve' && (
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => onConfirmRecieveOrder()}
-                >
+                <Button variant="contained" color="primary" onClick={() => onConfirmRecieveOrder()}>
                   <FormattedMessage {...messages.btnSave} />
                 </Button>
               </Grid>

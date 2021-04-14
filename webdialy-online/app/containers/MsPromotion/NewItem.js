@@ -62,13 +62,7 @@ const renderFromHelper = ({ touched, error }) => {
   }
   return <FormHelperText>{touched && error}</FormHelperText>;
 };
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
   renderSelectField.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
@@ -77,11 +71,7 @@ const renderSelectField = ({
   };
 
   return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
@@ -272,17 +262,11 @@ const NewItem = props => {
               <br />
             </Grid>
             <Grid item xs={12}>
-              {preview && (
-                <img src={preview} width={200} height={200} alt="preview" />
-              )}
+              {preview && <img src={preview} width={200} height={200} alt="preview" />}
             </Grid>
             <Grid item xs={6}>
               {file && file.name && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => onUploadImageFile()}
-                >
+                <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
                   Please press upload button
                 </Button>
               )}
@@ -311,11 +295,7 @@ const NewItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>
@@ -335,9 +315,7 @@ const validate = formValues => {
     errors.product_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   if (!formValues.point_to_redeem && formValues.point_to_redeem < 0) {
-    errors.point_to_redeem = (
-      <FormattedMessage {...messages.col3ShouldNotEmpty} />
-    );
+    errors.point_to_redeem = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.start_time) {
     errors.start_time = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
@@ -349,12 +327,8 @@ const validate = formValues => {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
-    errors.discount_amt = (
-      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
-    );
-    errors.discount_percent = (
-      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
-    );
+    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
   }
   return errors;
 };

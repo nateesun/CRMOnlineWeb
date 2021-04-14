@@ -5,15 +5,7 @@ import PropTypes from 'prop-types';
 export default function GlobalAlert(props) {
   const { show, title, type, text, onConfirm } = props;
 
-  return (
-    <SweetAlert
-      show={show}
-      title={title}
-      type={type}
-      text={text}
-      onConfirm={onConfirm}
-    />
-  );
+  return <SweetAlert show={show} title={title} type={type} text={text} onConfirm={onConfirm} />;
 }
 
 GlobalAlert.propTypes = {

@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the databaseConfig state domain
  */
 
-const selectDatabaseConfigDomain = state =>
-  state.databaseConfig || initialState;
+const selectDatabaseConfigDomain = state => state.databaseConfig || initialState;
 
 /**
  * Other specific selectors

@@ -68,27 +68,20 @@ export default function Orders(props) {
                 primary={product.product_name}
                 secondary={`${product.total_amount} บาท`}
               />
-              <IconButton
-                aria-label="delete"
-                onClick={() => handleDelete(product.product_code)}
-              >
+              <IconButton aria-label="delete" onClick={() => handleDelete(product.product_code)}>
                 <RemoveIcon className={classes.lineRed} />
               </IconButton>
               <div>
                 <IconButton
                   aria-label="Remove"
-                  onClick={() =>
-                    handleAdd(product.product_code, product.qty - 1)
-                  }
+                  onClick={() => handleAdd(product.product_code, product.qty - 1)}
                 >
                   <MinusIcon className={classes.lineRed} />
                 </IconButton>
                 {product.qty}
                 <IconButton
                   aria-label="Add"
-                  onClick={() =>
-                    handleRemove(product.product_code, product.qty + 1)
-                  }
+                  onClick={() => handleRemove(product.product_code, product.qty + 1)}
                 >
                   <PlusIcon className={classes.textGreen} />
                 </IconButton>

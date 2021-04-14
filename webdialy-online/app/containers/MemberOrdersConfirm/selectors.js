@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the memberOrdersConfirm state domain
  */
 
-const selectMemberOrdersConfirmDomain = state =>
-  state.memberOrdersConfirm || initialState;
+const selectMemberOrdersConfirmDomain = state => state.memberOrdersConfirm || initialState;
 
 /**
  * Other specific selectors

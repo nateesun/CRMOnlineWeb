@@ -99,10 +99,8 @@ function mapDispatchToProps(dispatch) {
     onUpdateSlipPath: filePath => dispatch(actions.updateSlipPath(filePath)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
-    deleteItemCart: productCode =>
-      dispatch(actions.deleteItemCart(productCode)),
-    updateItemCart: (productCode, qty) =>
-      dispatch(actions.updateItemCart({ productCode, qty })),
+    deleteItemCart: productCode => dispatch(actions.deleteItemCart(productCode)),
+    updateItemCart: (productCode, qty) => dispatch(actions.updateItemCart({ productCode, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),

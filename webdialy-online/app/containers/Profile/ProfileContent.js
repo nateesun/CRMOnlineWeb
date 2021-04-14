@@ -122,9 +122,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.birthDay} />
               </Label>
-              <LabelContent>
-                {moment(profile.birthday).format('DD/MM/YYYY')}
-              </LabelContent>
+              <LabelContent>{moment(profile.birthday).format('DD/MM/YYYY')}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
@@ -136,11 +134,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.pointBalance} />
               </Label>
               <LabelContent>
-                <NumberFormat
-                  value={profile.total_score}
-                  displayType="text"
-                  thousandSeparator
-                />
+                <NumberFormat value={profile.total_score} displayType="text" thousandSeparator />
               </LabelContent>
             </Typography>
           </Grid>
@@ -150,11 +144,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.pointRedemption} />
               </Label>
               <LabelContent>
-                <NumberFormat
-                  value={profile.total_purchase}
-                  displayType="text"
-                  thousandSeparator
-                />
+                <NumberFormat value={profile.total_purchase} displayType="text" thousandSeparator />
               </LabelContent>
             </Typography>
           </Grid>
@@ -184,14 +174,8 @@ export default function ProfileContent(props) {
                   <FormattedMessage {...messages.lineOfficial} />
                 </Label>{' '}
                 <LabelContent>
-                  <a
-                    href={`http://line.me/ti/p/${company.line_official_id}`}
-                    target="_blank"
-                  >
-                    <Button
-                      variant="outlined"
-                      className={classes.buttonAddLine}
-                    >
+                  <a href={`http://line.me/ti/p/${company.line_official_id}`} target="_blank">
+                    <Button variant="outlined" className={classes.buttonAddLine}>
                       Add Line
                     </Button>
                   </a>

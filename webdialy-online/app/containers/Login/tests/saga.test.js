@@ -12,14 +12,10 @@ const generator = loginSaga();
 describe('loginSaga Saga', () => {
   it('should start task to watch for CHECK_LOGIN', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.CHECK_LOGIN, onValidLogin),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.CHECK_LOGIN, onValidLogin));
   });
   it('should start task to watch for CHECK_LOGOUT', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.CHECK_LOGOUT, onLogout),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.CHECK_LOGOUT, onLogout));
   });
 });

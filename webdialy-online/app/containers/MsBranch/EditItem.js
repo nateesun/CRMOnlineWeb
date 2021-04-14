@@ -46,18 +46,8 @@ const useStyles = makeStyles(theme => ({
 
 const EditItem = props => {
   const classes = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    response,
-    dispatch,
-  } = props;
-  const {
-    map_latitude: mapLatitude,
-    map_longitude: mapLongitude,
-  } = props.initialValues;
+  const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
+  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = props.initialValues;
 
   const onValidated = formValues => {
     updateData(formValues);
@@ -172,11 +162,7 @@ const EditItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>
@@ -214,9 +200,7 @@ const validate = formValues => {
     errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = (
-      <FormattedMessage {...messages.col4ShouldNotEmpty} />
-    );
+    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
   }
   return errors;
 };

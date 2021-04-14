@@ -93,10 +93,7 @@ export default function TableItems(props) {
         </Typography>
         <Grid container spacing={1}>
           <Grid item>
-            <Button
-              variant="contained"
-              onClick={() => props.onChangePage('NEW')}
-            >
+            <Button variant="contained" onClick={() => props.onChangePage('NEW')}>
               Create
             </Button>
           </Grid>
@@ -110,21 +107,13 @@ export default function TableItems(props) {
             </Button>
           </Grid>
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => props.onInitLoad()}
-            >
+            <Button variant="contained" color="primary" onClick={() => props.onInitLoad()}>
               Refresh
             </Button>
           </Grid>
         </Grid>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -159,12 +148,8 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
                       <TableCell align="left">{item.name}</TableCell>
-                      <TableCell align="center">
-                        {item.unit_code_sale}
-                      </TableCell>
-                      <TableCell align="center">
-                        {item.product_group_code}
-                      </TableCell>
+                      <TableCell align="center">{item.unit_code_sale}</TableCell>
+                      <TableCell align="center">{item.product_group_code}</TableCell>
                       <TableCell align="center">{item.point}</TableCell>
                       <TableCell align="center">{item.stock_code}</TableCell>
                       <TableCell align="center">{item.price_e}</TableCell>
@@ -172,9 +157,7 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.price_d}</TableCell>
                       <TableCell align="center">{item.max_stock}</TableCell>
                       <TableCell align="center">{item.min_stock}</TableCell>
-                      <TableCell align="center">
-                        {item.unit_code_stock}
-                      </TableCell>
+                      <TableCell align="center">{item.unit_code_stock}</TableCell>
                       <TableCell align="left">{item.img_path}</TableCell>
                       <TableCell align="center">
                         <Button

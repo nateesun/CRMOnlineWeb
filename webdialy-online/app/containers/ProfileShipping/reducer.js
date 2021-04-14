@@ -66,8 +66,7 @@ const profileShippingReducer = (state = initialState, action) =>
         break;
       case constants.CHANGE_MAPS_VALUE:
         draft.shipping.map_latitude = action.payload.map_latitude || 13.752434;
-        draft.shipping.map_longitude =
-          action.payload.map_longitude || 100.494122;
+        draft.shipping.map_longitude = action.payload.map_longitude || 100.494122;
         break;
     }
   });

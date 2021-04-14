@@ -91,11 +91,7 @@ export default function CheckoutContent(props) {
         <Typography component="h1" variant="h4" align="center">
           ขั้นตอนการสั่ง
         </Typography>
-        <Stepper
-          activeStep={activeStep}
-          className={classes.stepper}
-          alternativeLabel
-        >
+        <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
           {steps.map(label => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -121,9 +117,7 @@ export default function CheckoutContent(props) {
                   onClick={handleNext}
                   className={classes.button}
                 >
-                  {activeStep === steps.length - 1
-                    ? 'ดำเนินการเสร็จสิ้น'
-                    : 'ถัดไป'}
+                  {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                 </Button>
               </div>
               <ButtonLink to={`${appConstants.publicPath}/shopping`}>

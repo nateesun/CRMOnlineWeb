@@ -64,12 +64,7 @@ export default function TabLayout(props) {
   return (
     <React.Fragment>
       <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-        >
+        <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary">
           <Tab label="รายการรออนุมัติ" {...a11yProps(0)} />
           <Tab label="รายการอนุมัติแล้ว" {...a11yProps(1)} />
         </Tabs>

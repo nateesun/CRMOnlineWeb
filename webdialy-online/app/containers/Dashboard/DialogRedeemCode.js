@@ -8,9 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import QRCode from 'qrcode.react';
 
-const Transition = forwardRef((props, ref) => (
-  <Slide direction="up" ref={ref} {...props} />
-));
+const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const Input = styled.input`
   text-align: center;
@@ -68,9 +66,7 @@ export default function DialogRedeemCode(props) {
         <div align="center">
           <QRCode
             value={`${
-              redeemPoint && redeemPoint.redeem_code
-                ? redeemPoint.redeem_code
-                : '00000000'
+              redeemPoint && redeemPoint.redeem_code ? redeemPoint.redeem_code : '00000000'
             }`}
           />
           <h3>Scan Qr code here</h3>

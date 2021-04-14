@@ -45,14 +45,7 @@ const ImgLogo = styled.img`
 
 const ForgotForm = props => {
   const classes = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    onSendRequest,
-    onSendEmail,
-  } = props;
+  const { handleSubmit, pristine, reset, submitting, onSendRequest, onSendEmail } = props;
 
   const confirmRequestChangePassword = values => {
     onSendRequest({
@@ -73,10 +66,7 @@ const ForgotForm = props => {
         <Typography component="h1" variant="h5">
           <FormattedMessage {...messages.header} />
         </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit(confirmRequestChangePassword)}
-        >
+        <form className={classes.form} onSubmit={handleSubmit(confirmRequestChangePassword)}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Field
@@ -135,11 +125,7 @@ const ForgotForm = props => {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button
-                    variant="contained"
-                    disabled={pristine || submitting}
-                    onClick={reset}
-                  >
+                  <Button variant="contained" disabled={pristine || submitting} onClick={reset}>
                     <FormattedMessage {...messages.clear} />
                   </Button>
                 </Grid>
@@ -181,9 +167,7 @@ const validate = formValues => {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (typeof formValues.confirm_secret === 'undefined') {
-    errors.confirm_secret = (
-      <FormattedMessage {...messages.secretShouldNotEmpty} />
-    );
+    errors.confirm_secret = <FormattedMessage {...messages.secretShouldNotEmpty} />;
   }
 
   return errors;

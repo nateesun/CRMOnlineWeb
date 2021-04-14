@@ -16,12 +16,7 @@ export function GoogleMap(props) {
 
   return (
     <React.Fragment>
-      <MapMarker
-        {...props}
-        lat={13.844903}
-        lng={100.525943}
-        onExit={handlePlace}
-      />
+      <MapMarker {...props} lat={13.844903} lng={100.525943} onExit={handlePlace} />
     </React.Fragment>
   );
 }
