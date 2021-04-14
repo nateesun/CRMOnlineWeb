@@ -74,7 +74,7 @@ export default function Orders(props) {
               >
                 <RemoveIcon className={classes.lineRed} />
               </IconButton>
-              <React.Fragment>
+              <div>
                 <IconButton
                   aria-label="Remove"
                   onClick={() =>
@@ -92,7 +92,7 @@ export default function Orders(props) {
                 >
                   <PlusIcon className={classes.textGreen} />
                 </IconButton>
-              </React.Fragment>
+              </div>
             </ListItem>
           ))}
         <Divider className={classes.separateLine} />

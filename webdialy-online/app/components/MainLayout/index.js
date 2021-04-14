@@ -89,6 +89,7 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     height: '100vh',
+    width: '100vw',
   },
   container: {
     paddingTop: theme.spacing(1),

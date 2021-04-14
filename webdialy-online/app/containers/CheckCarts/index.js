@@ -11,6 +11,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { getCookie } from 'react-use-cookie';
 import { Redirect } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import MainLayoutApp from 'containers/MainLayoutApp';
@@ -23,9 +25,17 @@ import * as actions from './actions';
 import saga from './saga';
 import TabLayout from './TabLayout';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    overflow: 'auto',
+    marginBottom: '50px',
+  },
+}));
+
 export function CheckCarts(props) {
   useInjectReducer({ key: 'checkCarts', reducer });
   useInjectSaga({ key: 'checkCarts', saga });
+  const classes = useStyles();
 
   const token = getCookie('token') || '';
 
@@ -41,7 +51,11 @@ export function CheckCarts(props) {
 
   return (
     <MainLayoutApp title="CheckCartList" {...props}>
-      <TabLayout {...props} />
+      <Grid container spacing={1} className={classes.root}>
+        <Grid item xs={12}>
+          <TabLayout {...props} />
+        </Grid>
+      </Grid>
     </MainLayoutApp>
   );
 }

@@ -23,7 +23,6 @@ import * as selectors from './selectors';
 const useStyles = makeStyles(() => ({
   root: {
     overflow: 'auto',
-    width: '100vw',
     marginBottom: '50px',
   },
 }));

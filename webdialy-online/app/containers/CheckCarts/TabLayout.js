@@ -13,9 +13,6 @@ const useStyles = makeStyles(() => ({
   box: {
     marginTop: '5px',
   },
-  root: {
-    width: '100vw',
-  },
 }));
 function TabPanel(props) {
   const classes = useStyles();
@@ -52,7 +49,6 @@ function a11yProps(index) {
 }
 
 export default function TabLayout(props) {
-  const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -65,7 +61,7 @@ export default function TabLayout(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -89,6 +85,6 @@ export default function TabLayout(props) {
           <ContentPage approve {...props} />
         </TabPanel>
       </SwipeableViews>
-    </div>
+    </React.Fragment>
   );
 }

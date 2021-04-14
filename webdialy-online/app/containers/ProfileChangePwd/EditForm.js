@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import RenderField from 'components/RenderField';
-import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';

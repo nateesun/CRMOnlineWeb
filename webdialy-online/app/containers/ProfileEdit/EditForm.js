@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
-import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
