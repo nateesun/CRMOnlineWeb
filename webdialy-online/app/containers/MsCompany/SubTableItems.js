@@ -51,8 +51,8 @@ export default function SubTableItems() {
   SubTableItems.propTypes = {};
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Sub Table List
         </Typography>
@@ -94,6 +94,6 @@ export default function SubTableItems() {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

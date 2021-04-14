@@ -64,7 +64,7 @@ export default function LoadProduct(props) {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <React.Fragment>
       <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Load product page
@@ -156,7 +156,7 @@ export default function LoadProduct(props) {
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    </React.Fragment>
   );
 }
 

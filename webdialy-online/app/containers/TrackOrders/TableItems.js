@@ -110,7 +110,7 @@ export default function TableItems(props) {
 
   return (
     <React.Fragment>
-      <TableContainer className={classes.container} component={Paper}>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>

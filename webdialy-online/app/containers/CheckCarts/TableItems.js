@@ -85,8 +85,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <SearchBar
           {...props}
           items={[
@@ -166,6 +166,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }
