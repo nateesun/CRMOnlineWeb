@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,19 +11,18 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import Swal from 'sweetalert2';
 import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
+    minWidth: '650px',
     padding: '5px',
+    overflow: 'auto'
   },
   buttonNew: {
     marginRight: '5px',
@@ -97,8 +95,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Members Table List
         </Typography>
@@ -120,81 +118,83 @@ export default function TableItems(props) {
             { key: 'mobile', value: 'Mobile' },
           ]}
         />
-        <Table className={classes.table} stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow className={classes.colRow}>
-              <TableCell align="center">No</TableCell>
-              <TableCell align="center">Code</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Surname</TableCell>
-              <TableCell align="right">Role</TableCell>
-              <TableCell align="left">Created Date</TableCell>
-              <TableCell align="left">Updated Date</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {getList &&
-              getList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((item, index) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={item.uuid_index}
-                    className={classes.colRow}
-                  >
-                    <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{item.code}</TableCell>
-                    <TableCell align="left">{item.email}</TableCell>
-                    <TableCell align="left">{item.first_name}</TableCell>
-                    <TableCell align="left">{item.last_name}</TableCell>
-                    <TableCell align="center">{item.member_role}</TableCell>
-                    <TableCell align="left">
-                      {dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}
-                    </TableCell>
-                    <TableCell align="left">
-                      {dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}
-                    </TableCell>
-                    <TableCell align="left" className={classes.colRow}>
-                      <Button
-                        variant="outlined"
-                        onClick={() => onViewItem(item)}
-                        style={{ margin: '5px' }}
-                      >
-                        View
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => onEditItem(item)}
-                        style={{ margin: '5px' }}
-                      >
-                        Edit
-                      </Button>
-                      {item.member_role !== 'admin' && (
+        <div className={classes.dataWidth}>
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow className={classes.colRow}>
+                <TableCell align="center">No</TableCell>
+                <TableCell align="center">Code</TableCell>
+                <TableCell align="left">Email</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Surname</TableCell>
+                <TableCell align="right">Role</TableCell>
+                <TableCell align="left">Created Date</TableCell>
+                <TableCell align="left">Updated Date</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {getList &&
+                getList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={item.uuid_index}
+                      className={classes.colRow}
+                    >
+                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">{item.code}</TableCell>
+                      <TableCell align="left">{item.email}</TableCell>
+                      <TableCell align="left">{item.first_name}</TableCell>
+                      <TableCell align="left">{item.last_name}</TableCell>
+                      <TableCell align="center">{item.member_role}</TableCell>
+                      <TableCell align="left">
+                        {dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}
+                      </TableCell>
+                      <TableCell align="left">
+                        {dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}
+                      </TableCell>
+                      <TableCell align="left" className={classes.colRow}>
                         <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => handleDelete(item.email)}
+                          variant="outlined"
+                          onClick={() => onViewItem(item)}
                           style={{ margin: '5px' }}
                         >
-                          Delete
+                          View
                         </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-            {getList.length === 0 && (
-              <TableRow>
-                <TableCell align="left" colSpan={9}>
-                  ไม่พบข้อมูลสมาชิก
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+                        <Button
+                          variant="outlined"
+                          onClick={() => onEditItem(item)}
+                          style={{ margin: '5px' }}
+                        >
+                          Edit
+                        </Button>
+                        {item.member_role !== 'admin' && (
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => handleDelete(item.email)}
+                            style={{ margin: '5px' }}
+                          >
+                            Delete
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              {getList.length === 0 && (
+                <TableRow>
+                  <TableCell align="left" colSpan={9}>
+                    ไม่พบข้อมูลสมาชิก
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
@@ -205,6 +205,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

@@ -43,7 +43,9 @@ export function DatabaseConfig(props) {
   return (
     <MainLayoutApp title="Database" {...props}>
       <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
-        <ContentPage {...props} />
+        <Grid item xs={12}>
+          <ContentPage {...props} />
+        </Grid>
       </Grid>
     </MainLayoutApp>
   );

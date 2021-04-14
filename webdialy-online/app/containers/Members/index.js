@@ -44,7 +44,9 @@ export function Members(props) {
   return (
     <MainLayoutApp title="MemberList" {...props}>
       <Grid container spacing={1} style={{ overflow: 'auto', width: '100vw' }}>
-        <ContentPage {...props} />
+        <Grid item xs={12}>
+          <ContentPage {...props} />
+        </Grid>
       </Grid>
     </MainLayoutApp>
   );

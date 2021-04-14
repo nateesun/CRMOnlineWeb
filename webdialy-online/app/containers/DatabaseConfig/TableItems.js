@@ -15,9 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import * as appConstants from 'containers/App/constants';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
@@ -63,12 +60,12 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Show all database
         </Typography>
-        <div>
+        <div className={classes.dataWidth}>
           <Table
             className={classes.table}
             stickyHeader
@@ -134,6 +131,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

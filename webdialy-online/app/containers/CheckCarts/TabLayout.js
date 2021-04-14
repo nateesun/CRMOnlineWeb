@@ -55,7 +55,7 @@ export default function TabLayout(props) {
   };
 
   return (
-    <React.Fragment>
+    <div style={{width: '100vw'}}>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -79,6 +79,6 @@ export default function TabLayout(props) {
           <ContentPage approve {...props} />
         </TabPanel>
       </SwipeableViews>
-    </React.Fragment>
+    </div>
   );
 }

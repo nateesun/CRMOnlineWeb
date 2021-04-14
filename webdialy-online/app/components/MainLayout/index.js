@@ -88,7 +88,6 @@ const useStyles = makeStyles(theme => ({
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
     height: '100vh',
   },
   container: {
@@ -117,7 +116,7 @@ const MainLayout = props => {
   const classes = useStyles();
   const { leftMenu } = props;
   const { profile } = props;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(window.innerWidth > 500);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

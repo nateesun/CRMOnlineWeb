@@ -22,9 +22,6 @@ import messages, { scope } from './messages';
 import ShowQRCode from './ShowQRCode';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
