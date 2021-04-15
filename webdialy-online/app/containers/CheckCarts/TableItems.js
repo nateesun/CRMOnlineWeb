@@ -18,10 +18,7 @@ const useStyles = makeStyles({
   container: {
     paddingTop: '20px',
   },
-  table: {
-    // minWidth: 690,
-    // padding: '5px',
-  },
+  table: {},
   buttonNew: {
     marginRight: '5px',
   },
@@ -55,8 +52,7 @@ export default function TableItems(props) {
     setPage(newPage);
   };
 
-  const checkRole = (shoppingStep, mRole) =>
-    shoppingStep === 'approve' && mRole === 'member';
+  const checkRole = (shoppingStep, mRole) => shoppingStep === 'approve' && mRole === 'member';
 
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
@@ -85,8 +81,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <SearchBar
           {...props}
           items={[
@@ -119,26 +115,18 @@ export default function TableItems(props) {
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.cart_no}</TableCell>
-                    <TableCell align="center">
-                      {item.cart_create_date}
-                    </TableCell>
+                    <TableCell align="center">{item.cart_create_date}</TableCell>
                     <TableCell align="center">{item.member_code}</TableCell>
                     <TableCell align="center">
                       <Grid container spacing={1} justify="center">
                         <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => onViewItem(item)}
-                          >
+                          <Button variant="outlined" onClick={() => onViewItem(item)}>
                             Detail
                           </Button>
                         </Grid>
                         {checkRole(item.shopping_step, memberRole) && (
                           <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => loadViewOrder(item)}
-                            >
+                            <Button variant="outlined" onClick={() => loadViewOrder(item)}>
                               View Signature
                             </Button>
                           </Grid>
@@ -166,6 +154,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

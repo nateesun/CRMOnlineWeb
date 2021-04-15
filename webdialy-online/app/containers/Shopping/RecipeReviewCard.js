@@ -36,11 +36,7 @@ export default function RecipeReviewCard() {
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image="/images/food1.jpg"
-        title="Paella dish"
-      />
+      <CardMedia className={classes.media} image="/images/food1.jpg" title="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           aaa

@@ -41,9 +41,13 @@ export default defineMessages({
     id: `${scope}.confirmSecret`,
     defaultMessage: 'Confirm Secret',
   },
+  btnRequest: {
+    id: `${scope}.btnRequest`,
+    defaultMessage: 'Request password',
+  },
   sendEmail: {
     id: `${scope}.sendEmail`,
-    defaultMessage: 'Request password',
+    defaultMessage: 'Send email',
   },
   clear: {
     id: `${scope}.clear`,

@@ -12,8 +12,6 @@ const generator = lineLoginSaga();
 describe('lineLoginSaga Saga', () => {
   it('should start task to watch for VERIFY_TOKEN', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.VERIFY_TOKEN, onVerifyTokenLogin),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.VERIFY_TOKEN, onVerifyTokenLogin));
   });
 });

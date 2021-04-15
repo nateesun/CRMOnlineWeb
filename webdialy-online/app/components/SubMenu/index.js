@@ -18,6 +18,26 @@ const useStyles = makeStyles({
     zIndex: 999,
     boxShadow: '1px 2px #aaa',
     borderRadius: '5px 5px 5px 5px',
+  },
+  bottom: {
+    borderRadius: '10px 10px 5px 5px',
+    background: 'none',
+    margin: '1px',
+  },
+  layoutRelative: {
+    width: '100%',
+    bottom: 5,
+    zIndex: 999,
+    boxShadow: '1px 2px #aaa',
+    borderRadius: '5px 5px 5px 5px',
+    position: 'relative',
+  },
+  layoutFixed: {
+    width: '100%',
+    bottom: 5,
+    zIndex: 999,
+    boxShadow: '1px 2px #aaa',
+    borderRadius: '5px 5px 5px 5px',
     position: 'fixed',
   },
 });
@@ -27,7 +47,7 @@ const SubMenu = props => {
   const [value, setValue] = useState(0);
   const handleClick = p => history.push(p);
 
-  const { profile } = props;
+  const { profile, title } = props;
 
   if (profile && profile.member_role) {
     if (profile.member_role !== 'member') {
@@ -45,8 +65,9 @@ const SubMenu = props => {
         setValue(newValue);
       }}
       showLabels
-      className={classes.root}
-      style={{ position: props.title === 'Shopping' ? 'relative' : 'fixed' }}
+      className={{
+        position: title === 'Shopping' ? classes.layoutRelative : classes.layoutFixed,
+      }}
     >
       {props.leftMenu &&
         props.leftMenu.map(item => {
@@ -63,11 +84,7 @@ const SubMenu = props => {
               key={item.id}
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
-              style={{
-                borderRadius: '10px 10px 5px 5px',
-                background: 'none',
-                margin: '1px',
-              }}
+              className={classes.bottom}
               onClick={() => handleClick(path.publicPath + item.to_path)}
             />
           );

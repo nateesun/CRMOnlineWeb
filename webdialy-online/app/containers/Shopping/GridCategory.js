@@ -6,12 +6,26 @@ import styled from 'styled-components';
 import ShoppingIcon from '@material-ui/icons/ShoppingCart';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import RemoveShoppingCart from '@material-ui/icons/RemoveShoppingCart';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    paddingTop: '5px',
+  },
+  container: {
+    width: '100%',
+    background: 'white',
+    marginTop: '5px',
+  },
+}));
 
 const GroupItem = styled.div`
   text-align: center;
 `;
 
 const Item = props => {
+  const classes = useStyles();
+
   let showIcon = null;
   if (props.type === 'shopping') {
     showIcon = <ShoppingIcon />;
@@ -25,7 +39,7 @@ const Item = props => {
     description: PropTypes.string,
   };
   return (
-    <div style={{ paddingTop: '5px' }}>
+    <div className={classes.root}>
       {showIcon}
       <br />
       <span>{props.description}</span>
@@ -38,14 +52,10 @@ const GridCategory = props => {
   GridCategory.propTypes = {
     type: PropTypes.string,
   };
+  const classes = useStyles();
+
   return (
-    <div
-      style={{
-        width: '100%',
-        background: 'white',
-        marginTop: '5px',
-      }}
-    >
+    <div className={classes.container}>
       <Carousel animation={type}>
         <Grid container key={1}>
           <Grid item xs={3}>

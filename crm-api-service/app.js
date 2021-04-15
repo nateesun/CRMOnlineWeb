@@ -76,12 +76,21 @@ app.disable('etag');
 const io = socketIo();
 app.io = io;
 
+const mailer = require('./infra/mailer/usecases')({
+  smtpHost: 'smtp.ethereal.email',
+  smtpPort: 587,
+  smtpSecureProtocol: false,
+  smtpUser: 'reagan.littel54@ethereal.email',
+  smtpPassword: 'QryzWxR1vcBdumaC3R',
+  smtpSender: 'no-reply@digitalten.xyz',
+});
+
 const options = {
   imagePath: __dirname + '/public/images',
+  mailer
 }
 
 const indexRouter = require("./routes/index")(options)
-
 const branchRouter = require("./routes/branch.route")(options)
 const memberMasterRouter = require("./routes/login.route")(options)
 const lineLoginRouter = require("./routes/line_login.route")(options)
@@ -91,6 +100,7 @@ const productRouter = require("./routes/product.route")(options)
 const stockRouter = require("./routes/stock.route")(options)
 const promotionRouter = require("./routes/promotion.route")(io)
 const roleRouter = require("./routes/role.route")(options)
+const roleMappingRouter = require("./routes/roles_mapping.route")(options)
 const memberRouter = require("./routes/member.route")(io)
 const redeemRouter = require("./routes/redeem.route")(io)
 
@@ -135,6 +145,7 @@ app.use("/api/promotion", basicAuth({ users: { admin: fixPassword } }), promotio
 app.use("/api/redeem", basicAuth({ users: { admin: fixPassword } }), redeemRouter)
 app.use("/api/role", basicAuth({ users: { admin: fixPassword } }), roleRouter)
 app.use("/api/member", basicAuth({ users: { admin: fixPassword } }), memberRouter)
+app.use("/api/roles_mapping", basicAuth({ users: { admin: fixPassword } }), roleMappingRouter)
 
 // order shopping
 app.use("/api/carts", basicAuth({ users: { admin: fixPassword } }), cartsRouter)

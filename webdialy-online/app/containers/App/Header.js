@@ -21,6 +21,9 @@ import { publicPath } from './constants';
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const styles = theme => ({
+  container: {
+    background: 'chocolate',
+  },
   secondaryBar: {
     zIndex: 0,
   },
@@ -40,6 +43,12 @@ const styles = theme => ({
   button: {
     borderColor: lightColor,
   },
+  loggedInText: {
+    textAlign: 'right',
+    fontSize: '12px',
+    paddingRight: '26px',
+    paddingBottom: '5px',
+  },
 });
 
 function Header(props) {
@@ -47,64 +56,50 @@ function Header(props) {
   const loggedIn = getCookie('token') || '';
 
   return (
-    <React.Fragment>
-      <AppBar
-        position="sticky"
-        elevation={0}
-        style={{ background: 'chocolate' }}
-      >
-        <Toolbar>
-          <Grid container spacing={1} alignItems="center">
-            <Hidden smUp>
-              <Grid item>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={onDrawerToggle}
-                  className={classes.menuButton}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Grid>
-            </Hidden>
-            <Grid item xs />
+    <AppBar position="sticky" elevation={0} className={classes.container}>
+      <Toolbar>
+        <Grid container spacing={1} alignItems="center">
+          <Hidden smUp>
             <Grid item>
-              <LocaleToggle />
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={onDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
             </Grid>
-            <Grid item>
-              {loggedIn ? (
-                <ButtonLink to={`${publicPath}/logout`}>
-                  <Button size="large" startIcon={<ExitToApp />}>
-                    <FormattedMessage {...messages.headerLogout} />
-                  </Button>
-                </ButtonLink>
-              ) : (
-                <ButtonLink to={`${publicPath}/login`}>
-                  <Button size="large" startIcon={<LockIcon />}>
-                    <FormattedMessage {...messages.headerLogin} />
-                  </Button>
-                </ButtonLink>
-              )}
-            </Grid>
+          </Hidden>
+          <Grid item xs />
+          <Grid item>
+            <LocaleToggle />
           </Grid>
-        </Toolbar>
-        {loggedIn && (
-          <Typography
-            component="span"
-            style={{
-              textAlign: 'right',
-              fontSize: '12px',
-              paddingRight: '26px',
-              paddingBottom: '5px',
-            }}
-          >
-            <ButtonLink to={`${publicPath}/profile`} color="white">
-              สวัสดี {profile.prefix} {profile.first_name} {profile.last_name}
-            </ButtonLink>
-          </Typography>
-        )}
-      </AppBar>
-    </React.Fragment>
+          <Grid item>
+            {loggedIn ? (
+              <ButtonLink to={`${publicPath}/logout`}>
+                <Button size="large" startIcon={<ExitToApp />}>
+                  <FormattedMessage {...messages.headerLogout} />
+                </Button>
+              </ButtonLink>
+            ) : (
+              <ButtonLink to={`${publicPath}/login`}>
+                <Button size="large" startIcon={<LockIcon />}>
+                  <FormattedMessage {...messages.headerLogin} />
+                </Button>
+              </ButtonLink>
+            )}
+          </Grid>
+        </Grid>
+      </Toolbar>
+      {loggedIn && (
+        <Typography component="span" className={classes.loggedInText}>
+          <ButtonLink to={`${publicPath}/profile`} color="white">
+            สวัสดี {profile.prefix} {profile.first_name} {profile.last_name}
+          </ButtonLink>
+        </Typography>
+      )}
+    </AppBar>
   );
 }
 

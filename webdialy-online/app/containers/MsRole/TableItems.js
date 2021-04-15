@@ -15,14 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
@@ -89,8 +85,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Role Table List
         </Typography>
@@ -112,11 +108,7 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -143,10 +135,7 @@ export default function TableItems(props) {
                       <TableCell align="center">
                         <Grid container spacing={1} justify="center">
                           <Grid item>
-                            <Button
-                              variant="outlined"
-                              onClick={() => onEditItem(item)}
-                            >
+                            <Button variant="outlined" onClick={() => onEditItem(item)}>
                               Edit
                             </Button>
                           </Grid>
@@ -183,6 +172,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

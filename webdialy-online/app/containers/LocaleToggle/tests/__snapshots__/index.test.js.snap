@@ -5,8 +5,7 @@ exports[`<LocaleToggle /> should match the snapshot 1`] = `
   class="Wrapper-sc-1eh3f0x-0 hdXGaY"
 >
   <select
-    class="Select-qnzjgx-0 cQQWoM"
-    style="color: white;"
+    class="makeStyles-textWhite-1 Select-qnzjgx-0 cQQWoM"
   >
     <option
       value="en"

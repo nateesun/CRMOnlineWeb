@@ -46,7 +46,7 @@ const Login = props => {
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <LoginForm {...props} />;
+      <LoginForm {...props} />
     </React.Fragment>
   );
 };

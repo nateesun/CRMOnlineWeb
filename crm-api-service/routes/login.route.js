@@ -53,5 +53,21 @@ module.exports = (args) => {
     }
   })
 
+  router.patch('/recover-password', async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const response = await Task(req.headers.database).recoveryPassword(email);
+      const data = JSON.parse(response.data)
+
+      mailer.recoverPassword({
+        recipients: email,
+        password: data.password,
+      });
+
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res.status(500).json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
   return router
 }

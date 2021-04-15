@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
 import * as appConstants from 'containers/App/constants';
 import RenderField from 'components/RenderField';
-import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -20,62 +19,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import LocationLogo from '../../images/location.png';
 import * as selectors from './selectors';
-
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
-
-const renderFromHelper = ({ touched, error }) => {
-  renderFromHelper.propTypes = {
-    touched: PropTypes.any,
-    error: PropTypes.any,
-  };
-  if (!(touched && error)) {
-    return <span />;
-  }
-  return <FormHelperText>{touched && error}</FormHelperText>;
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
-  renderSelectField.propTypes = {
-    input: PropTypes.any,
-    label: PropTypes.any,
-    meta: PropTypes.any,
-    children: PropTypes.any,
-  };
-  return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
-      <InputLabel htmlFor={input.id}>{label}</InputLabel>
-      <Select
-        labelId="demo-simple-select-outlined-label"
-        native
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'age',
-          id: input.id,
-        }}
-        label={label}
-      >
-        {children}
-      </Select>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  );
-};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -101,7 +45,63 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  },
+  divAddressType: {
+    width: '100%',
+    paddingTop: '14px',
+  },
+  divMemberPrefix: {
+    width: '100%',
+    paddingTop: '14px',
+  },
+  divPosition: {
+    marginBottom: '25px',
+  },
+  formControl: {
+    width: '100%',
+  },
 }));
+
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+
+  return (
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
+      <InputLabel htmlFor={input.id}>{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          id: input.id,
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const EditForm = props => {
   const classes = useStyles();
@@ -143,13 +143,8 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+    <Container component="main" maxWidth="lg" className={classes.container}>
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -158,14 +153,13 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={LocationLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
             <Grid item xs={12} lg={4}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divAddressType}>
                 <Field
                   id="address_type"
                   name="address_type"
@@ -177,10 +171,8 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={4} lg={4} />
-            <Grid item xs={4} lg={4} />
-            <Grid item xs={5} lg={3}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+            <Grid item xs={5} lg={5}>
+              <div className={classes.divMemberPrefix}>
                 <Field
                   id="member_prefix"
                   name="member_prefix"
@@ -196,7 +188,7 @@ const EditForm = props => {
                 </Field>
               </div>
             </Grid>
-            <Grid item xs={7} lg={3}>
+            <Grid item xs={7} lg={4}>
               <Field
                 name="member_code"
                 component={RenderField}
@@ -206,7 +198,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4}>
               <Field
                 name="member_name"
                 component={RenderField}
@@ -216,7 +208,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={4}>
               <Field
                 name="member_lastname"
                 component={RenderField}
@@ -226,7 +218,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Field
                 name="address1"
                 component={RenderField}
@@ -236,7 +228,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={6}>
               <Field
                 name="address2"
                 component={RenderField}
@@ -246,7 +238,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="province"
                 component={RenderField}
@@ -256,7 +248,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="district"
                 component={RenderField}
@@ -266,7 +258,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="sub_district"
                 component={RenderField}
@@ -276,7 +268,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="postcode"
                 component={RenderField}
@@ -286,7 +278,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="map_latitude"
                 component={RenderField}
@@ -296,7 +288,7 @@ const EditForm = props => {
                 required
               />
             </Grid>
-            <Grid item xs={6} lg={6}>
+            <Grid item xs={6} lg={4}>
               <Field
                 name="map_longitude"
                 component={RenderField}
@@ -307,11 +299,7 @@ const EditForm = props => {
               />
             </Grid>
             <Grid item xs={6} lg={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleLoadMap(true)}
-              >
+              <Button variant="contained" color="primary" onClick={() => handleLoadMap(true)}>
                 Show Maps
               </Button>
             </Grid>
@@ -326,7 +314,7 @@ const EditForm = props => {
             </Grid>
             <Grid item xs={12}>
               {loadMap && (
-                <div align="center" style={{ marginBottom: '25px' }}>
+                <div align="center" className={classes.divPosition}>
                   Position: {latitude}, {longitude}
                 </div>
               )}
@@ -385,20 +373,14 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.member_prefix) {
-    errors.member_prefix = (
-      <FormattedMessage {...messages.prefixShouldNotEmpty} />
-    );
+    errors.member_prefix = <FormattedMessage {...messages.prefixShouldNotEmpty} />;
   }
 
   if (!formValues.member_name) {
-    errors.member_name = (
-      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
-    );
+    errors.member_name = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }
   if (!formValues.member_lastname) {
-    errors.member_lastname = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
 
   return errors;

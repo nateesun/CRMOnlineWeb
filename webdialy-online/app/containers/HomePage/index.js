@@ -13,6 +13,7 @@ import { compose } from 'redux';
 import styled from 'styled-components';
 import useCookie from 'react-use-cookie';
 import { Helmet } from 'react-helmet';
+import { makeStyles } from '@material-ui/core/styles';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
@@ -20,6 +21,13 @@ import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 import messages from './messages';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    textAlign: 'center',
+    verticalAlign: 'middle',
+  },
+}));
 
 const Img = styled.img`
   border-radius: 2px 10px 2px 10px;
@@ -32,6 +40,7 @@ const HomePage = props => {
   useInjectReducer({ key: 'homepage', reducer });
   useInjectSaga({ key: 'homepage', saga });
   const [database, setDatabase] = useCookie('database', '');
+  const classes = useStyles();
 
   const loc = window.location.href.split('/');
   const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
@@ -47,7 +56,7 @@ const HomePage = props => {
   const imgCompany = `${apiServiceHost}/${props.company.img_path}`;
 
   return (
-    <div style={{ textAlign: 'center', verticalAlign: 'middle' }}>
+    <div className={classes.root}>
       <Helmet>
         <title>{props.company.name}</title>
       </Helmet>

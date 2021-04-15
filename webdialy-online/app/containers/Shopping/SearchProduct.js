@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    marginTop: '10px',
+    // marginTop: '10px',
     width: '100%',
     border: '1px solid #ddd',
   },

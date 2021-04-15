@@ -5,14 +5,12 @@
  */
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import * as appConstants from 'containers/App/constants';
 import * as loginSelectors from 'containers/Login/selectors';
 import * as appActions from 'containers/App/actions';
 import MainLayoutApp from 'containers/MainLayoutApp';
@@ -28,29 +26,22 @@ export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
   useInjectSaga({ key: 'dashboard', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      props.onLoadRedeem();
-      props.onLoadMenu();
-    }
+    props.onLoadRedeem();
+    props.onLoadMenu();
   }, []);
 
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
-
   return (
-    props.login && (
-      <MainLayoutApp title="Overview" {...props}>
-        <DashboardContent {...props} />
-      </MainLayoutApp>
-    )
+    <MainLayoutApp title="Overview" {...props}>
+      <DashboardContent {...props} />
+    </MainLayoutApp>
   );
 }
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  onLoadRedeem: PropTypes.func,
+  onLoadMenu: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   login: loginSelectors.makeSelectLogin(),

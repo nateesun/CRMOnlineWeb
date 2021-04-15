@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import RedeemPage from './RedeemPage';
 import MyQrCode from './MyQrCode';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    marginBottom: '50px',
+  },
+}));
+
 export default function DashboardContent(props) {
-  DashboardContent.propTypes = {
-    onRefresh: PropTypes.func,
-    email: PropTypes.string,
-    login: PropTypes.object,
-    profile: PropTypes.object,
-  };
+  const classes = useStyles();
 
   return (
-    <Grid container spacing={2} style={{ marginBottom: '50px' }}>
+    <Grid container spacing={2} className={classes.root}>
       <Grid item xs={12}>
         <MyQrCode {...props} />
       </Grid>
@@ -23,3 +25,10 @@ export default function DashboardContent(props) {
     </Grid>
   );
 }
+
+DashboardContent.propTypes = {
+  onRefresh: PropTypes.func,
+  email: PropTypes.string,
+  login: PropTypes.object,
+  profile: PropTypes.object,
+};

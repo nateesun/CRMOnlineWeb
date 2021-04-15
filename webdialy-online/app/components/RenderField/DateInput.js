@@ -7,8 +7,17 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  errorLabel: {
+    color: 'red',
+  },
+}));
 
 function DateInput({ input, label, required, meta: { touched, error } }) {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <TextField
@@ -23,7 +32,7 @@ function DateInput({ input, label, required, meta: { touched, error } }) {
           shrink: true,
         }}
       />
-      {touched && error && <span style={{ color: 'red' }}>{error}</span>}
+      {touched && error && <span className={classes.errorLabel}>{error}</span>}
     </React.Fragment>
   );
 }

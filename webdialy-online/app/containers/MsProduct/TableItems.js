@@ -15,14 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     paddingTop: '5px',
   },
   buttonUpload: {
@@ -32,14 +28,14 @@ const useStyles = makeStyles({
       backgroundColor: 'darkgreen',
     },
   },
-  wrapButtonAction: {
-    // marginTop: '15px',
-  },
   colRow: {
     whiteSpace: 'nowrap',
   },
   dataWidth: {
     overflow: 'auto',
+  },
+  buttonMargin: {
+    margin: '5px',
   },
 });
 
@@ -90,17 +86,14 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Product Table List
         </Typography>
         <Grid container spacing={1}>
           <Grid item>
-            <Button
-              variant="contained"
-              onClick={() => props.onChangePage('NEW')}
-            >
+            <Button variant="contained" onClick={() => props.onChangePage('NEW')}>
               Create
             </Button>
           </Grid>
@@ -114,21 +107,13 @@ export default function TableItems(props) {
             </Button>
           </Grid>
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => props.onInitLoad()}
-            >
+            <Button variant="contained" color="primary" onClick={() => props.onInitLoad()}>
               Refresh
             </Button>
           </Grid>
         </Grid>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -163,12 +148,8 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.code}</TableCell>
                       <TableCell align="left">{item.name}</TableCell>
-                      <TableCell align="center">
-                        {item.unit_code_sale}
-                      </TableCell>
-                      <TableCell align="center">
-                        {item.product_group_code}
-                      </TableCell>
+                      <TableCell align="center">{item.unit_code_sale}</TableCell>
+                      <TableCell align="center">{item.product_group_code}</TableCell>
                       <TableCell align="center">{item.point}</TableCell>
                       <TableCell align="center">{item.stock_code}</TableCell>
                       <TableCell align="center">{item.price_e}</TableCell>
@@ -176,15 +157,13 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.price_d}</TableCell>
                       <TableCell align="center">{item.max_stock}</TableCell>
                       <TableCell align="center">{item.min_stock}</TableCell>
-                      <TableCell align="center">
-                        {item.unit_code_stock}
-                      </TableCell>
+                      <TableCell align="center">{item.unit_code_stock}</TableCell>
                       <TableCell align="left">{item.img_path}</TableCell>
                       <TableCell align="center">
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Edit
                         </Button>
@@ -192,7 +171,7 @@ export default function TableItems(props) {
                           variant="contained"
                           color="secondary"
                           onClick={() => handleDelete(item.uuid_index)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Delete
                         </Button>
@@ -219,6 +198,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

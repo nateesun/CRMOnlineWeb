@@ -21,6 +21,15 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(2),
   },
+  separateLine: {
+    border: '1px solid #eee',
+  },
+  lineRed: {
+    color: 'red',
+  },
+  textGreen: {
+    color: 'green',
+  },
 }));
 
 export default function Orders(props) {
@@ -50,7 +59,7 @@ export default function Orders(props) {
       <Typography variant="h6" gutterBottom>
         รายการสินค้า
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateLine} />
       <List disablePadding>
         {cartsDetail &&
           cartsDetail.map(product => (
@@ -59,34 +68,27 @@ export default function Orders(props) {
                 primary={product.product_name}
                 secondary={`${product.total_amount} บาท`}
               />
-              <IconButton
-                aria-label="delete"
-                onClick={() => handleDelete(product.product_code)}
-              >
-                <RemoveIcon style={{ color: 'red' }} />
+              <IconButton aria-label="delete" onClick={() => handleDelete(product.product_code)}>
+                <RemoveIcon className={classes.lineRed} />
               </IconButton>
-              <React.Fragment>
+              <div>
                 <IconButton
                   aria-label="Remove"
-                  onClick={() =>
-                    handleAdd(product.product_code, product.qty - 1)
-                  }
+                  onClick={() => handleAdd(product.product_code, product.qty - 1)}
                 >
-                  <MinusIcon style={{ color: 'red' }} />
+                  <MinusIcon className={classes.lineRed} />
                 </IconButton>
                 {product.qty}
                 <IconButton
                   aria-label="Add"
-                  onClick={() =>
-                    handleRemove(product.product_code, product.qty + 1)
-                  }
+                  onClick={() => handleRemove(product.product_code, product.qty + 1)}
                 >
-                  <PlusIcon style={{ color: 'green' }} />
+                  <PlusIcon className={classes.textGreen} />
                 </IconButton>
-              </React.Fragment>
+              </div>
             </ListItem>
           ))}
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวม" />
           <Typography variant="subtitle1" className={classes.total}>

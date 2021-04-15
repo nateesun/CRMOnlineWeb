@@ -31,9 +31,4 @@ const makeSelectRedeemPoint = () =>
     substate => substate.redeemPoint,
   );
 
-export {
-  selectDashboardDomain,
-  makeSelectDashboard,
-  makeSelectRedeem,
-  makeSelectRedeemPoint,
-};
+export { selectDashboardDomain, makeSelectDashboard, makeSelectRedeem, makeSelectRedeemPoint };

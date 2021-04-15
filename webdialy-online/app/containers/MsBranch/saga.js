@@ -48,9 +48,7 @@ export function* updateData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/branch/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/branch/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
@@ -70,9 +68,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/branch/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/branch/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',

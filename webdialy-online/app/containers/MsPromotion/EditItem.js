@@ -48,6 +48,13 @@ const useStyles = makeStyles(theme => ({
     margin: '10px',
     background: '#aaa',
   },
+  formControl: {
+    width: '100%',
+  },
+  divRedeem: {
+    width: '100%',
+    paddingTop: '16px',
+  },
 }));
 
 const renderFromHelper = ({ touched, error }) => {
@@ -60,25 +67,16 @@ const renderFromHelper = ({ touched, error }) => {
   }
   return <FormHelperText>{touched && error}</FormHelperText>;
 };
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
   renderSelectField.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
     meta: PropTypes.any,
     children: PropTypes.any,
   };
+
   return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
       <InputLabel htmlFor={input.id}>{label}</InputLabel>
       <Select
         labelId="demo-simple-select-outlined-label"
@@ -224,7 +222,7 @@ const EditItem = props => {
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <div style={{ width: '100%', paddingTop: '16px' }}>
+              <div className={classes.divRedeem}>
                 <Field
                   name="redeem_or_free"
                   component={renderSelectField}
@@ -265,16 +263,10 @@ const EditItem = props => {
               <input type="text" value={fileName} />
             </Grid>
             <Grid item xs={12}>
-              {preview && (
-                <img src={preview} width={200} height={200} alt="preview" />
-              )}
+              {preview && <img src={preview} width={200} height={200} alt="preview" />}
             </Grid>
             <Grid item xs={12} md={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => onUploadImageFile()}
-              >
+              <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
                 Please press upload button
               </Button>
             </Grid>
@@ -309,11 +301,7 @@ const EditItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>
@@ -347,9 +335,7 @@ const validate = formValues => {
     errors.product_name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
   }
   if (!formValues.point_to_redeem && formValues.point_to_redeem < 0) {
-    errors.point_to_redeem = (
-      <FormattedMessage {...messages.col3ShouldNotEmpty} />
-    );
+    errors.point_to_redeem = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
   }
   if (!formValues.start_time) {
     errors.start_time = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
@@ -361,12 +347,8 @@ const validate = formValues => {
     errors.qty_in_stock = <FormattedMessage {...messages.col6ShouldNotEmpty} />;
   }
   if (formValues.discount_amt > 0 && formValues.discount_percent > 0) {
-    errors.discount_amt = (
-      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
-    );
-    errors.discount_percent = (
-      <FormattedMessage {...messages.discountAmtOrPercentOnly} />
-    );
+    errors.discount_amt = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
+    errors.discount_percent = <FormattedMessage {...messages.discountAmtOrPercentOnly} />;
   }
   return errors;
 };

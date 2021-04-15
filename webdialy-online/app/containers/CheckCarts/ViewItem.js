@@ -52,6 +52,11 @@ const useStyles = makeStyles(theme => ({
     padding: '5px',
     width: '75vw',
   },
+  paperShoppingStep: {
+    padding: '20px',
+    background: '#ddd',
+    width: '75vw',
+  },
 }));
 
 const ViewItem = props => {
@@ -142,47 +147,29 @@ const ViewItem = props => {
             <Typography variant="h6" gutterBottom className={classes.title}>
               รูปภาพสลิปที่โอนเงินเข้าระบบ
             </Typography>
-            <img
-              src={`${apiServiceHost}${slipPath}`}
-              width={250}
-              alt="sample slip upload"
-            />
+            <img src={`${apiServiceHost}${slipPath}`} width={250} alt="sample slip upload" />
           </Grid>
           <Grid item xs={12}>
             {props.getData && <PaymentDetail payment={props.getData} />}
           </Grid>
           <Grid item xs={6}>
-            <Paper
-              elevation={3}
-              style={{ padding: '20px', background: '#ddd', width: '75vw' }}
-            >
+            <Paper elevation={3} className={classes.paperShoppingStep}>
               {shoppingStep && shoppingStep !== 'approve' && (
                 <Grid item xs={12}>
                   <FormControl component="fieldset">
                     <FormLabel component="legend">Approve Slip</FormLabel>
-                    <RadioGroup
-                      row
-                      aria-label="position"
-                      name="position"
-                      defaultValue="top"
-                    >
+                    <RadioGroup row aria-label="position" name="position" defaultValue="top">
                       <FormControlLabel
                         value="approve"
                         control={
-                          <Radio
-                            color="primary"
-                            onChange={e => setApprove(e.target.value)}
-                          />
+                          <Radio color="primary" onChange={e => setApprove(e.target.value)} />
                         }
                         label="Approve"
                       />
                       <FormControlLabel
                         value="not_approve"
                         control={
-                          <Radio
-                            color="primary"
-                            onChange={e => setApprove(e.target.value)}
-                          />
+                          <Radio color="primary" onChange={e => setApprove(e.target.value)} />
                         }
                         label="Not Approve"
                       />
@@ -206,11 +193,7 @@ const ViewItem = props => {
             </Grid>
           )}
           <Grid item xs={3}>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => props.onChangePage('LIST')}
-            >
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
               <FormattedMessage {...messages.btnBack} />
             </Button>
           </Grid>

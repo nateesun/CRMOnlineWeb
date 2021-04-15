@@ -26,9 +26,7 @@ module.exports = args => {
         if (response.statusCode === 200) {
           return res.status(200).json(body);
         }
-        return res
-          .status(response.statusCode)
-          .json({ Error: response.statusMessage });
+        return res.status(response.statusCode).json({ Error: response.statusMessage });
       });
     } catch (e) {
       return res.status(500).json({ Error: e });

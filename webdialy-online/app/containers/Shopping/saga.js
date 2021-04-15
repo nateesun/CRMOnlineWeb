@@ -68,8 +68,7 @@ export function* searchProduct() {
   try {
     const database = getCookie('database');
     const { data } = yield select(selectors.makeSelectSearchData());
-    const requestURL = `${appConstants.publicPath}/api/product/search/${data ||
-      'no_data'}`;
+    const requestURL = `${appConstants.publicPath}/api/product/search/${data || 'no_data'}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',

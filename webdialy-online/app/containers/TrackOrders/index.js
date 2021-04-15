@@ -9,11 +9,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
@@ -24,21 +21,13 @@ export function TrackOrders(props) {
   useInjectReducer({ key: 'trackOrders', reducer });
   useInjectSaga({ key: 'trackOrders', saga });
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      if (props.profile.member_role === 'member') {
-        props.onSearch('member_code', props.profile.code);
-      } else {
-        props.onInitLoad();
-      }
+    if (props.profile.member_role === 'member') {
+      props.onSearch('member_code', props.profile.code);
+    } else {
+      props.onInitLoad();
     }
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return <ContentPage {...props} />;
 }

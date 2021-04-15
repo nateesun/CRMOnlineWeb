@@ -21,23 +21,24 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  separateStyle: {
+    border: '1px solid #eee',
+  },
+  buttonRightSpace: {
+    marginRight: '10px',
+  },
+  greenText: {
+    color: 'green',
+  },
+  divButtom: {
+    marginBottom: '25px',
+  },
 }));
 
 const AddressForm = props => {
   const classes = useStyles();
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    dispatch,
-    initialValues,
-    response,
-  } = props;
-  const {
-    map_latitude: mapLatitude,
-    map_longitude: mapLongitude,
-  } = initialValues;
+  const { handleSubmit, pristine, reset, submitting, dispatch, initialValues, response } = props;
+  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = initialValues;
 
   useEffect(() => {
     props.initLoadMemberShipping();
@@ -61,7 +62,7 @@ const AddressForm = props => {
       <Typography variant="h6" gutterBottom>
         ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateStyle} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={4}>
@@ -165,9 +166,7 @@ const AddressForm = props => {
           </Grid>
           <Grid item xs={12} md={6}>
             <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
+              control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
               label={<FormattedMessage {...messages.useForShpping} />}
             />
           </Grid>
@@ -177,25 +176,21 @@ const AddressForm = props => {
               variant="contained"
               color="primary"
               disabled={pristine || submitting}
-              style={{ marginRight: '10px' }}
+              className={classes.buttonRightSpace}
             >
               <FormattedMessage {...messages.btnFormUpdateButton} />
             </Button>
-            <Button
-              variant="contained"
-              disabled={pristine || submitting}
-              onClick={reset}
-            >
+            <Button variant="contained" disabled={pristine || submitting} onClick={reset}>
               <FormattedMessage {...messages.btnFormResetButton} />
             </Button>
           </Grid>
           {response && response.status === 'Success_Update_Address' && (
             <Grid item>
-              <span style={{ color: 'green' }}>{response.message}</span>
+              <span className={classes.greenText}>{response.message}</span>
             </Grid>
           )}
           <Grid item xs={12}>
-            <div align="center" style={{ marginBottom: '25px' }}>
+            <div align="center" className={classes.divButtom}>
               <MapMarker
                 lat={parseFloat(mapLatitude)}
                 lng={parseFloat(mapLongitude)}
@@ -227,17 +222,13 @@ const validate = formValues => {
     errors.member_name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.member_lastname) {
-    errors.member_lastname = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.member_lastname = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.address1) {
     errors.address1 = <FormattedMessage {...messages.address1ShouldNotEmpty} />;
   }
   if (!formValues.sub_district) {
-    errors.sub_district = (
-      <FormattedMessage {...messages.subDistrictShouldNotEmpty} />
-    );
+    errors.sub_district = <FormattedMessage {...messages.subDistrictShouldNotEmpty} />;
   }
   if (!formValues.district) {
     errors.district = <FormattedMessage {...messages.districtShouldNotEmpty} />;

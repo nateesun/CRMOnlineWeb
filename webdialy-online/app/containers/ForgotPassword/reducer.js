@@ -35,6 +35,19 @@ const forgotPasswordReducer = (state = initialState, action) =>
         draft.status = 'Error';
         draft.msg = 'Error to Change password !!!';
         break;
+      case constants.SEND_EMAIL:
+        draft.request = {
+          email: action.payload,
+        };
+        break;
+      case constants.SEND_EMAIL_SUCCESS:
+        draft.status = 'Success';
+        draft.msg = 'Change password to default success';
+        break;
+      case constants.SEND_EMAIL_ERROR:
+        draft.status = 'Error';
+        draft.msg = 'Error to Change password !!!';
+        break;
     }
   });
 

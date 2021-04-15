@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   layout: {
-    width: 'auto',
     marginTop: '5px',
   },
   paper: {
@@ -38,6 +37,9 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
+  },
+  separateLine: {
+    border: '1px solid #eee',
   },
 }));
 
@@ -84,56 +86,48 @@ export default function CheckoutContent(props) {
   };
 
   return (
-    <React.Fragment>
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            ขั้นตอนการสั่ง
-          </Typography>
-          <Stepper
-            activeStep={activeStep}
-            className={classes.stepper}
-            alternativeLabel
-          >
-            {steps.map(label => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <FinishOrder {...props} />
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <Divider style={{ border: '1px solid #eee' }} />
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      ย้อนกลับ
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1
-                      ? 'ดำเนินการเสร็จสิ้น'
-                      : 'ถัดไป'}
+    <main className={classes.layout}>
+      <Paper className={classes.paper}>
+        <Typography component="h1" variant="h4" align="center">
+          ขั้นตอนการสั่ง
+        </Typography>
+        <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <React.Fragment>
+          {activeStep === steps.length ? (
+            <FinishOrder {...props} />
+          ) : (
+            <React.Fragment>
+              {getStepContent(activeStep)}
+              <Divider className={classes.separateLine} />
+              <div className={classes.buttons}>
+                {activeStep !== 0 && (
+                  <Button onClick={handleBack} className={classes.button}>
+                    ย้อนกลับ
                   </Button>
-                </div>
-                <ButtonLink to={`${appConstants.publicPath}/shopping`}>
-                  <Button variant="contained">กลับหน้าสั่งสินค้า</Button>
-                </ButtonLink>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        </Paper>
-      </main>
-    </React.Fragment>
+                )}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
+                </Button>
+              </div>
+              <ButtonLink to={`${appConstants.publicPath}/shopping`}>
+                <Button variant="contained">กลับหน้าสั่งสินค้า</Button>
+              </ButtonLink>
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      </Paper>
+    </main>
   );
 }
 

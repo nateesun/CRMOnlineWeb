@@ -9,12 +9,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { getCookie } from 'react-use-cookie';
-import { Redirect } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
-import * as appConstants from 'containers/App/constants';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as shoppingSelectors from 'containers/Shopping/selectors';
@@ -34,20 +31,12 @@ export function Checkout(props) {
   const [distance, setDistance] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const token = getCookie('token') || '';
-
   useEffect(() => {
-    if (token) {
-      const { cart_no: cartNo } = props.match.params;
-      props.initLoadCart(cartNo);
-      props.initLoadMemberShipping();
-      props.intiLoadBranchLocation();
-    }
+    const { cart_no: cartNo } = props.match.params;
+    props.initLoadCart(cartNo);
+    props.initLoadMemberShipping();
+    props.intiLoadBranchLocation();
   }, []);
-
-  if (!token) {
-    return <Redirect to={`${appConstants.publicPath}/`} />;
-  }
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
@@ -99,10 +88,8 @@ function mapDispatchToProps(dispatch) {
     onUpdateSlipPath: filePath => dispatch(actions.updateSlipPath(filePath)),
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
-    deleteItemCart: productCode =>
-      dispatch(actions.deleteItemCart(productCode)),
-    updateItemCart: (productCode, qty) =>
-      dispatch(actions.updateItemCart({ productCode, qty })),
+    deleteItemCart: productCode => dispatch(actions.deleteItemCart(productCode)),
+    updateItemCart: (productCode, qty) => dispatch(actions.updateItemCart({ productCode, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),

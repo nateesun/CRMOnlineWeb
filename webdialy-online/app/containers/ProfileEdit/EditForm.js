@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
-import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -21,61 +20,6 @@ import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import EditProfileLogo from '../../images/edit_profile.png';
-
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
-
-const renderFromHelper = ({ touched, error }) => {
-  renderFromHelper.propTypes = {
-    touched: PropTypes.any,
-    error: PropTypes.any,
-  };
-  if (!(touched && error)) {
-    return <span />;
-  }
-  return <FormHelperText>{touched && error}</FormHelperText>;
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
-  renderSelectField.propTypes = {
-    input: PropTypes.any,
-    label: PropTypes.any,
-    meta: PropTypes.any,
-    children: PropTypes.any,
-  };
-  return (
-    <FormControl
-      variant="outlined"
-      error={touched && error}
-      style={{ width: '100%' }}
-    >
-      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
-      <Select
-        labelId="demo-simple-select-outlined-label"
-        native
-        {...input}
-        {...custom}
-        inputProps={{
-          name: 'age',
-          id: 'age-native-simple',
-        }}
-        label={label}
-      >
-        {children}
-      </Select>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  );
-};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -101,7 +45,63 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  },
+  divPrefix: {
+    width: '100%',
+    paddingTop: '14px',
+  },
+  textRemark: {
+    color: 'green',
+  },
+  textBlue: {
+    color: 'blue',
+  },
+  formControl: {
+    width: '100%',
+  },
 }));
+
+const renderFromHelper = ({ touched, error }) => {
+  renderFromHelper.propTypes = {
+    touched: PropTypes.any,
+    error: PropTypes.any,
+  };
+  if (!(touched && error)) {
+    return <span />;
+  }
+  return <FormHelperText>{touched && error}</FormHelperText>;
+};
+
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
+  renderSelectField.propTypes = {
+    input: PropTypes.any,
+    label: PropTypes.any,
+    meta: PropTypes.any,
+    children: PropTypes.any,
+  };
+
+  return (
+    <FormControl variant="outlined" error={touched && error} style={{ width: '100%' }}>
+      <InputLabel htmlFor="age-native-simple">Prefix</InputLabel>
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        native
+        {...input}
+        {...custom}
+        inputProps={{
+          name: 'age',
+          id: 'age-native-simple',
+        }}
+        label={label}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  );
+};
 
 const EditForm = props => {
   const classes = useStyles();
@@ -121,13 +121,8 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+    <Container component="main" maxWidth="lg" className={classes.container}>
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -136,14 +131,13 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={EditProfileLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.headerEditForm} />
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
           <Grid container spacing={1}>
             <Grid item xs={12} lg={3}>
-              <div style={{ width: '100%', paddingTop: '14px' }}>
+              <div className={classes.divPrefix}>
                 <Field
                   name="prefix"
                   component={renderSelectField}
@@ -220,10 +214,9 @@ const EditForm = props => {
             </Grid>
 
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'green' }}>
-                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
-                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
-                เท่านั้น
+              <span className={classes.textRemark}>
+                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง
+                ERIC KAYSER LINE OFFICIAL เท่านั้น
               </span>
               <Field
                 name="line_id"
@@ -234,9 +227,9 @@ const EditForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'blue' }}>
-                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า
-                Line เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
+              <span className={classes.textBlue}>
+                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
+                เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
               </span>
               <Field
                 name="line_user_id"
@@ -304,22 +297,16 @@ const validate = formValues => {
   }
 
   if (!formValues.first_name) {
-    errors.first_name = (
-      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
-    );
+    errors.first_name = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }
   if (!formValues.last_name) {
-    errors.last_name = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (!formValues.birthday) {
-    errors.birthday = (
-      <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
-    );
+    errors.birthday = <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />;
   }
 
   return errors;

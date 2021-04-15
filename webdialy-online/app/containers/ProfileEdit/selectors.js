@@ -31,9 +31,4 @@ const makeErrorUpdate = () =>
     substate => substate.error,
   );
 
-export {
-  selectProfileEditDomain,
-  makeSelectProfile,
-  makeUpdateStatus,
-  makeErrorUpdate,
-};
+export { selectProfileEditDomain, makeSelectProfile, makeUpdateStatus, makeErrorUpdate };

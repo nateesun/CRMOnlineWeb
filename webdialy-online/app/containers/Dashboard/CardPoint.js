@@ -11,21 +11,33 @@ import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
 import messages from './messages';
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
 export default function CardPoint(props) {
-  const classes = useStyles();
   const { label, point, bg, fbg } = props;
+
+  const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    cardContent: {
+      background: `${bg}`,
+      color: 'white',
+    },
+    cardAction: {
+      background: `${fbg}`,
+      color: 'white',
+    },
+    buttomWhite: {
+      color: 'white',
+    },
+  });
+
+  const classes = useStyles();
 
   CardPoint.propTypes = {
     label: PropTypes.object,
@@ -36,7 +48,7 @@ export default function CardPoint(props) {
 
   return (
     <Card className={classes.root}>
-      <CardContent style={{ background: `${bg}`, color: 'white' }}>
+      <CardContent className={classes.cardContent}>
         <Typography variant="h6" gutterBottom>
           {label}
         </Typography>
@@ -44,8 +56,8 @@ export default function CardPoint(props) {
           <NumberFormat value={point} displayType="text" thousandSeparator />
         </Typography>
       </CardContent>
-      <CardActions style={{ background: `${fbg}`, color: 'white' }}>
-        <Button endIcon={<ArrowRight />} style={{ color: 'white' }}>
+      <CardActions className={classes.cardAction}>
+        <Button endIcon={<ArrowRight />} className={classes.buttomWhite}>
           <FormattedMessage {...messages.moreInfo} />
         </Button>
       </CardActions>

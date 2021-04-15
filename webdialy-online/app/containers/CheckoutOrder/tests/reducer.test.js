@@ -38,8 +38,6 @@ describe('checkoutReducer', () => {
       draft.slipValidateStatus = '';
       draft.cart_no = 'cartNo';
     });
-    expect(checkoutReducer(state, actions.loadCart('cartNo'))).toEqual(
-      expectedResult,
-    );
+    expect(checkoutReducer(state, actions.loadCart('cartNo'))).toEqual(expectedResult);
   });
 });

@@ -89,9 +89,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/carts/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/carts/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
@@ -109,9 +107,7 @@ export function* deleteData() {
 
 export function* onUpdateShoppingStep() {
   try {
-    const { cart_no: cartNo, approve, reason } = yield select(
-      selectors.makeSelectCartStatus(),
-    );
+    const { cart_no: cartNo, approve, reason } = yield select(selectors.makeSelectCartStatus());
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
     const database = getCookie('database');
     const { code } = yield select(mainSelectors.makeSelectProfile());
@@ -127,9 +123,7 @@ export function* onUpdateShoppingStep() {
     });
     if (response.status === 'Success') {
       yield initLoad();
-      yield put(
-        actions.updateShoppingStepSuccess('Finish checkout order step'),
-      );
+      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
     } else {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
     }
@@ -142,11 +136,7 @@ export function* onLoadViewOrder() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    yield put(
-      push(
-        `${appConstants.publicPath}/order_confirm/${data.cart_no}/${database}`,
-      ),
-    );
+    yield put(push(`${appConstants.publicPath}/order_confirm/${data.cart_no}/${database}`));
     yield put(actions.loadViewOrderSuccess('Success'));
   } catch (err) {
     yield put(actions.loadViewOrderError(err));

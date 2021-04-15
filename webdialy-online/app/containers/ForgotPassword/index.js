@@ -32,6 +32,9 @@ function mapDispatchToProps(dispatch) {
     onSendRequest: payload => {
       dispatch(actions.requestPassword(payload));
     },
+    onSendEmail: payload => {
+      dispatch(actions.sendEmail(payload));
+    },
   };
 }
 

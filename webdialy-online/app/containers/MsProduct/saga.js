@@ -13,9 +13,7 @@ const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 export function* saveDataImport() {
   try {
     const productImports = yield select(selectors.makeSelectProductImport());
-    const productImportHeaders = yield select(
-      selectors.makeSelectProductImportHeader(),
-    );
+    const productImportHeaders = yield select(selectors.makeSelectProductImportHeader());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/product/save_list`;
     const response = yield call(request, requestURL, {
@@ -103,9 +101,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/product/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/product/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
@@ -131,9 +127,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     };
-    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(
-      resp => resp.json(),
-    );
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(resp => resp.json());
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {

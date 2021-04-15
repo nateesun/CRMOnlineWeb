@@ -9,9 +9,7 @@ import * as selectors from './selectors';
 
 export function* initLoad() {
   try {
-    const { code: memberCode } = yield select(
-      mainSelectors.makeSelectProfile(),
-    );
+    const { code: memberCode } = yield select(mainSelectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${memberCode}`;
     try {

@@ -32,9 +32,7 @@ export function* loadCartList() {
 
 export function* loadMemberShipping() {
   try {
-    const { code: memberCode } = yield select(
-      mainSelectors.makeSelectProfile(),
-    );
+    const { code: memberCode } = yield select(mainSelectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping/${memberCode}`;
     const response = yield call(request, requestURL, {
@@ -65,9 +63,7 @@ export function* uploadFile() {
       body: formdata,
       redirect: 'follow',
     };
-    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(
-      resp => resp.json(),
-    );
+    const response = yield fetch(`${apiServiceHost}/api/upload`, options).then(resp => resp.json());
     if (response.status === 'Success') {
       yield put(actions.uploadImageSuccess(response));
     } else {
@@ -99,9 +95,7 @@ export function* validateSlipUpload() {
 export function* onDeleteItemCart() {
   try {
     const cartNo = yield select(selectors.makeSelectCartsNo());
-    const { product_code: productCode } = yield select(
-      selectors.makeSelectProduct(),
-    );
+    const { product_code: productCode } = yield select(selectors.makeSelectProduct());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/carts_detail`;
     const response = yield call(request, requestURL, {
@@ -123,9 +117,7 @@ export function* onUpdateItemCart() {
   try {
     const cartNo = yield select(selectors.makeSelectCartsNo());
     const database = getCookie('database');
-    const { product_code: productCode, qty } = yield select(
-      selectors.makeSelectProduct(),
-    );
+    const { product_code: productCode, qty } = yield select(selectors.makeSelectProduct());
     const requestURL = `${appConstants.publicPath}/api/carts_detail`;
     const response = yield call(request, requestURL, {
       database,
@@ -144,9 +136,7 @@ export function* onUpdateItemCart() {
 
 export function* onUpdateAddressForm() {
   try {
-    const { code: memberCode } = yield select(
-      mainSelectors.makeSelectProfile(),
-    );
+    const { code: memberCode } = yield select(mainSelectors.makeSelectProfile());
     const addressFormData = yield select(selectors.makeSelectAddressForm());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/shipping`;
@@ -168,9 +158,7 @@ export function* onUpdateAddressForm() {
 export function* onUpdatePaymentForm() {
   try {
     const cartNo = yield select(selectors.makeSelectCartsNo());
-    const { code: memberCode } = yield select(
-      mainSelectors.makeSelectProfile(),
-    );
+    const { code: memberCode } = yield select(mainSelectors.makeSelectProfile());
     const paymentData = yield select(selectors.makeSelectPaymentData());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/carts/payment`;
@@ -205,9 +193,7 @@ export function* onUpdateShoppingStep() {
     });
     if (response.status === 'Success') {
       yield loadMemberShipping();
-      yield put(
-        actions.updateShoppingStepSuccess('Finish checkout order step'),
-      );
+      yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
     } else {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
     }

@@ -13,14 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import SearchBar from 'components/SearchBar';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
@@ -63,8 +59,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Use Promotion List
         </Typography>
@@ -76,11 +72,7 @@ export default function TableItems(props) {
           ]}
         />
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -120,23 +112,13 @@ export default function TableItems(props) {
                       <TableCell align="left">{item.redeem_name}</TableCell>
                       <TableCell align="center">{item.bill_no}</TableCell>
                       <TableCell align="right">{item.discount_amt}</TableCell>
-                      <TableCell align="right">
-                        {item.discount_percent}
-                      </TableCell>
-                      <TableCell align="center">
-                        {item.redeem_or_free}
-                      </TableCell>
+                      <TableCell align="right">{item.discount_percent}</TableCell>
+                      <TableCell align="center">{item.redeem_or_free}</TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
-                      <TableCell align="center">
-                        {item.point_to_redeem}
-                      </TableCell>
+                      <TableCell align="center">{item.point_to_redeem}</TableCell>
                       <TableCell align="center">{item.use_in_branch}</TableCell>
-                      <TableCell align="center">
-                        {item.emp_code_redeem}
-                      </TableCell>
-                      <TableCell align="center">
-                        {item.member_code_use}
-                      </TableCell>
+                      <TableCell align="center">{item.emp_code_redeem}</TableCell>
+                      <TableCell align="center">{item.member_code_use}</TableCell>
                       <TableCell align="center">{item.qty_in_use}</TableCell>
                       <TableCell align="center">{item.system_create}</TableCell>
                       <TableCell align="center">{item.redeem_date}</TableCell>
@@ -165,6 +147,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

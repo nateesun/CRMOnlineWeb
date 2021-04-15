@@ -2,12 +2,20 @@ import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import SearchProduct from './SearchProduct';
 import DialogDetail from './DialogDetail';
 import OrderFooter from './OrderFooter';
 import ProductList from './ProductList';
 import messages from './messages';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    width: '100%',
+    marginBottom: '50px',
+  },
+}));
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,6 +24,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const Media = props => {
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState(null);
+  const classes = useStyles();
 
   const handleClickOpen = itemAt => {
     setOpen(true);
@@ -27,7 +36,7 @@ const Media = props => {
   };
 
   return (
-    <div style={{ width: '100%', marginBottom: '50px' }}>
+    <div className={classes.root}>
       <SearchProduct {...props} />
       <ProductList
         {...props}
