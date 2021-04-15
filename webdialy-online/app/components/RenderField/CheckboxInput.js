@@ -7,9 +7,7 @@ const CheckboxInput = props => {
   const { input, label } = props;
   return (
     <FormControlLabel
-      control={
-        <Checkbox {...input} value={input.value} onChange={input.onChange} />
-      }
+      control={<Checkbox {...input} value={input.value} onChange={input.onChange} />}
       label={label}
     />
   );

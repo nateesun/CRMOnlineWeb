@@ -2,6 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Carousel from 'react-material-ui-carousel';
 import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    width: '100%',
+    background: '#76bd5f',
+    marginTop: '5px',
+    marginBottom: '20px',
+    padding: '1px',
+  },
+  divItem: {
+    padding: 10,
+  },
+}));
 
 function Item(props) {
   Item.propTypes = {
@@ -33,21 +47,15 @@ const items = [
 ];
 
 export default function TopPromotion(props) {
+  const classes = useStyles();
+
   const { type } = props;
   TopPromotion.propTypes = {
     type: PropTypes.any,
   };
 
   return (
-    <div
-      style={{
-        width: '100%',
-        background: '#76bd5f',
-        marginTop: '5px',
-        marginBottom: '20px',
-        padding: '1px',
-      }}
-    >
+    <div className={classes.root}>
       <Carousel animation={type}>
         {items.map(item => (
           <Grid container key={item.id}>

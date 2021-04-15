@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the forgotPassword state domain
  */
 
-const selectForgotPasswordDomain = state =>
-  state.forgotPassword || initialState;
+const selectForgotPasswordDomain = state => state.forgotPassword || initialState;
 
 /**
  * Other specific selectors
@@ -28,8 +27,4 @@ const makeSelectRequest = () =>
     substate => substate.request,
   );
 
-export {
-  selectForgotPasswordDomain,
-  makeSelectForgotPassword,
-  makeSelectRequest,
-};
+export { selectForgotPasswordDomain, makeSelectForgotPassword, makeSelectRequest };

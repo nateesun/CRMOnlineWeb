@@ -11,14 +11,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
@@ -51,8 +47,8 @@ export default function SubTableItems() {
   SubTableItems.propTypes = {};
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Sub Table List
         </Typography>
@@ -70,12 +66,7 @@ export default function SubTableItems() {
               itemList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item, index) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={item.uuid_index}
-                  >
+                  <TableRow hover role="checkbox" tabIndex={-1} key={item.uuid_index}>
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item.col1}</TableCell>
                     <TableCell align="center">{item.col2}</TableCell>
@@ -94,6 +85,6 @@ export default function SubTableItems() {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

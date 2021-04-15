@@ -133,11 +133,7 @@ const NewItem = props => {
               </Button>
             </Grid>
             <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => props.onChangePage('LIST')}
-              >
+              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
                 <FormattedMessage {...messages.btnBack} />
               </Button>
             </Grid>

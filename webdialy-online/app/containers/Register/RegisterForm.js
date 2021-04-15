@@ -46,6 +46,9 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  textGreen: {
+    color: 'green',
+  },
 }));
 
 const RegisterForm = props => {
@@ -72,12 +75,7 @@ const RegisterForm = props => {
 
   return (
     <Container component="main" maxWidth="lg">
-      <SweetAlert
-        show={errorRegister}
-        title="Register Error"
-        type="error"
-        text={errorRegister}
-      />
+      <SweetAlert show={errorRegister} title="Register Error" type="error" text={errorRegister} />
       <SweetAlert
         show={registerStatus === 'Success'}
         title="Register Success"
@@ -174,10 +172,9 @@ const RegisterForm = props => {
               />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <span style={{ color: 'green' }}>
-                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ
-                โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC KAYSER LINE OFFICIAL
-                เท่านั้น
+              <span className={classes.textGreen}>
+                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง
+                ERIC KAYSER LINE OFFICIAL เท่านั้น
               </span>
               <Field
                 name="line_id"
@@ -238,22 +235,16 @@ const validate = formValues => {
   }
 
   if (!formValues.first_name) {
-    errors.first_name = (
-      <FormattedMessage {...messages.firstNameShouldNotEmpty} />
-    );
+    errors.first_name = <FormattedMessage {...messages.firstNameShouldNotEmpty} />;
   }
   if (!formValues.last_name) {
-    errors.last_name = (
-      <FormattedMessage {...messages.lastNameShouldNotEmpty} />
-    );
+    errors.last_name = <FormattedMessage {...messages.lastNameShouldNotEmpty} />;
   }
   if (!formValues.mobile) {
     errors.mobile = <FormattedMessage {...messages.mobileShouldNotEmpty} />;
   }
   if (!formValues.birthday) {
-    errors.birthday = (
-      <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />
-    );
+    errors.birthday = <FormattedMessage {...messages.dateOfBirthShouldNotEmpty} />;
   }
   if (typeof formValues.email === 'undefined') {
     errors.email = <FormattedMessage {...messages.emailShouldNotEmpty} />;
@@ -264,14 +255,10 @@ const validate = formValues => {
     errors.password = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
   }
   if (!formValues.rePassword) {
-    errors.rePassword = (
-      <FormattedMessage {...messages.passwordShouldNotEmpty} />
-    );
+    errors.rePassword = <FormattedMessage {...messages.passwordShouldNotEmpty} />;
   }
   if (formValues.password !== formValues.rePassword) {
-    errors.rePassword = (
-      <FormattedMessage {...messages.passwordConfirmShouldEqual} />
-    );
+    errors.rePassword = <FormattedMessage {...messages.passwordConfirmShouldEqual} />;
   }
 
   return errors;

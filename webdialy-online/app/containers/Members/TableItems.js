@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: '650px',
     padding: '5px',
     overflow: 'auto',
   },
@@ -39,6 +38,9 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
+  },
+  buttonMargin: {
+    margin: '5px',
   },
 });
 
@@ -119,11 +121,7 @@ export default function TableItems(props) {
           ]}
         />
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -165,14 +163,14 @@ export default function TableItems(props) {
                         <Button
                           variant="outlined"
                           onClick={() => onViewItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           View
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Edit
                         </Button>
@@ -181,7 +179,7 @@ export default function TableItems(props) {
                             variant="contained"
                             color="secondary"
                             onClick={() => handleDelete(item.email)}
-                            style={{ margin: '5px' }}
+                            className={classes.buttonMargin}
                           >
                             Delete
                           </Button>

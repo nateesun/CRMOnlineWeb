@@ -7,7 +7,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(() => ({
+  errorLabel: {
+    color: 'red',
+  },
+}));
 function RenderField({
   input,
   label,
@@ -17,6 +23,8 @@ function RenderField({
   disabled,
   meta: { touched, error },
 }) {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <TextField
@@ -30,7 +38,7 @@ function RenderField({
         autoFocus={autoFocus}
         disabled={disabled}
       />
-      {touched && error && <span style={{ color: 'red' }}>{error}</span>}
+      {touched && error && <span className={classes.errorLabel}>{error}</span>}
     </React.Fragment>
   );
 }

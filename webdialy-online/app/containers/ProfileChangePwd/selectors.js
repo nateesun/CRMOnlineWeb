@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the profileChangePwd state domain
  */
 
-const selectProfileChangePwdDomain = state =>
-  state.profileChangePwd || initialState;
+const selectProfileChangePwdDomain = state => state.profileChangePwd || initialState;
 
 /**
  * Other specific selectors

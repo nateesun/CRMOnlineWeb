@@ -49,6 +49,17 @@ const useStyles = makeStyles({
     background: '#eee',
     border: '0px solid',
   },
+  loading: {
+    padding: '20px',
+  },
+  buttonAddLine: {
+    background: 'green',
+    color: 'white',
+    border: '0',
+  },
+  cardAction: {
+    marginBottom: '50px',
+  },
 });
 
 export default function ProfileContent(props) {
@@ -61,7 +72,7 @@ export default function ProfileContent(props) {
   };
 
   if (!profile.code) {
-    return <h3 style={{ padding: '20px' }}>Loading...</h3>;
+    return <h3 className={classes.loading}>Loading...</h3>;
   }
 
   return (
@@ -111,9 +122,7 @@ export default function ProfileContent(props) {
               <Label>
                 <FormattedMessage {...messages.birthDay} />
               </Label>
-              <LabelContent>
-                {moment(profile.birthday).format('DD/MM/YYYY')}
-              </LabelContent>
+              <LabelContent>{moment(profile.birthday).format('DD/MM/YYYY')}</LabelContent>
             </Typography>
           </Grid>
           <Grid item xs={12} className={classes.item}>
@@ -125,11 +134,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.pointBalance} />
               </Label>
               <LabelContent>
-                <NumberFormat
-                  value={profile.total_score}
-                  displayType="text"
-                  thousandSeparator
-                />
+                <NumberFormat value={profile.total_score} displayType="text" thousandSeparator />
               </LabelContent>
             </Typography>
           </Grid>
@@ -139,11 +144,7 @@ export default function ProfileContent(props) {
                 <FormattedMessage {...messages.pointRedemption} />
               </Label>
               <LabelContent>
-                <NumberFormat
-                  value={profile.total_purchase}
-                  displayType="text"
-                  thousandSeparator
-                />
+                <NumberFormat value={profile.total_purchase} displayType="text" thousandSeparator />
               </LabelContent>
             </Typography>
           </Grid>
@@ -173,18 +174,8 @@ export default function ProfileContent(props) {
                   <FormattedMessage {...messages.lineOfficial} />
                 </Label>{' '}
                 <LabelContent>
-                  <a
-                    href={`http://line.me/ti/p/${company.line_official_id}`}
-                    target="_blank"
-                  >
-                    <Button
-                      variant="outlined"
-                      style={{
-                        background: 'green',
-                        color: 'white',
-                        border: '0',
-                      }}
-                    >
+                  <a href={`http://line.me/ti/p/${company.line_official_id}`} target="_blank">
+                    <Button variant="outlined" className={classes.buttonAddLine}>
                       Add Line
                     </Button>
                   </a>
@@ -194,7 +185,7 @@ export default function ProfileContent(props) {
           )}
         </Grid>
       </CardContent>
-      <CardActions style={{ marginBottom: '50px' }}>
+      <CardActions className={classes.cardAction}>
         <ButtonLink to={`${appConstants.publicPath}/profile-change-pwd`}>
           <Button variant="contained" color="secondary" size="small">
             <FormattedMessage {...messages.btnChangePassword} />

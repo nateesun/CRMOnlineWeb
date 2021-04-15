@@ -1,11 +1,6 @@
 import React from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  DirectionsRenderer,
-} from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer } from 'react-google-maps';
 
 const MapDirectionAB = compose(
   withProps({
@@ -24,10 +19,7 @@ const MapDirectionAB = compose(
 
       DirectionsService.route(
         {
-          origin: new window.google.maps.LatLng(
-            origin.position.lat(),
-            origin.position.lng(),
-          ),
+          origin: new window.google.maps.LatLng(origin.position.lat(), origin.position.lng()),
           destination: new window.google.maps.LatLng(
             destination.position.lat(),
             destination.position.lng(),
@@ -43,8 +35,6 @@ const MapDirectionAB = compose(
               distance: result.routes[0].legs[0].distance.value,
               duration: result.routes[0].legs[0].duration.value,
             });
-          } else {
-            // console.error(`error fetching directions ${result}`);
           }
         },
       );

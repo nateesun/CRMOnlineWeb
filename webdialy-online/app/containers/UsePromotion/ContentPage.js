@@ -7,9 +7,5 @@ export default function ContentPage(props) {
     getPage: PropTypes.string,
   };
 
-  return (
-    <React.Fragment>
-      {props.getPage === 'LIST' && <TableItems {...props} />}
-    </React.Fragment>
-  );
+  return <React.Fragment>{props.getPage === 'LIST' && <TableItems {...props} />}</React.Fragment>;
 }

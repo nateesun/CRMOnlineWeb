@@ -6,14 +6,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Select from './Select';
 import ToggleOption from '../ToggleOption';
 
+const useStyles = makeStyles(() => ({
+  textWhite: {
+    color: 'white',
+  },
+}));
 function Toggle(props) {
+  const classes = useStyles();
   let content = <option>--</option>;
 
-  // If we have items, render them
   if (props.values) {
     content = props.values.map(value => (
       <ToggleOption key={value} value={value} message={props.messages[value]} />
@@ -21,11 +26,7 @@ function Toggle(props) {
   }
 
   return (
-    <Select
-      value={props.value}
-      onChange={props.onToggle}
-      style={{ color: 'white' }}
-    >
+    <Select value={props.value} onChange={props.onToggle} className={classes.textWhite}>
       {content}
     </Select>
   );

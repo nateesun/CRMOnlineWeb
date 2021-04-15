@@ -10,9 +10,7 @@ import * as selectors from './selectors';
 export function* onRequestChangePassword() {
   try {
     const requestURL = `${appConstants.publicPath}/api/member/change_password`;
-    const { email, mobile, secret } = yield select(
-      selectors.makeSelectRequest(),
-    );
+    const { email, mobile, secret } = yield select(selectors.makeSelectRequest());
     const database = getCookie('database');
     const response = yield call(request, requestURL, {
       database,

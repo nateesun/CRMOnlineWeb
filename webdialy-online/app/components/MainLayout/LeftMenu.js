@@ -20,8 +20,14 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ButtonLink from 'components/ButtonLink';
 
 const useStyles = makeStyles(() => ({
+  container: {
+    background: '#fbf9f8',
+  },
   itemActiveItem: {
     background: '#f1e6e2',
+  },
+  listSubItem: {
+    marginLeft: '55px',
   },
 }));
 
@@ -43,29 +49,17 @@ export default function LeftMenu(props) {
 
   useEffect(() => {
     if (
-      [
-        'Database',
-        'Promotion',
-        'Roles',
-        'Branch',
-        'Company',
-        'Product',
-        'Stock',
-      ].includes(title)
+      ['Database', 'Promotion', 'Roles', 'Branch', 'Company', 'Product', 'Stock'].includes(title)
     ) {
       setOpen(true);
     }
   }, []);
 
   return (
-    <List style={{ background: '#fbf9f8' }}>
+    <List className={classes.container}>
       {leftMenuOther.map(({ id, icon, to_path: to }) => (
         <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
-          <ListItem
-            key={id}
-            button
-            className={clsx(id === title && classes.itemActiveItem)}
-          >
+          <ListItem key={id} button className={clsx(id === title && classes.itemActiveItem)}>
             <FormattedMessage id={`${scope}.menu${id}`}>
               {tt => (
                 <ListItemIcon title={tt}>
@@ -93,14 +87,10 @@ export default function LeftMenu(props) {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" style={{ marginLeft: '55px' }}>
+        <List component="div" className={classes.listSubItem}>
           {leftMenuMaster.map(({ id, to_path: to }) => (
             <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
-              <ListItem
-                key={id}
-                button
-                className={clsx(id === title && classes.itemActiveItem)}
-              >
+              <ListItem key={id} button className={clsx(id === title && classes.itemActiveItem)}>
                 <ListItemText>
                   <FormattedMessage id={`${scope}.menu${id}`} />
                 </ListItemText>

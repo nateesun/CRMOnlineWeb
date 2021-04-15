@@ -36,50 +36,38 @@ describe('checkCartsReducer', () => {
       draft.response.status = '';
       draft.response.message = '';
     });
-    expect(checkCartsReducer(state, actions.changePage('newPage'))).toEqual(
-      expectedResult,
-    );
+    expect(checkCartsReducer(state, actions.changePage('newPage'))).toEqual(expectedResult);
   });
   it('should handle the initLoadSuccess action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.list = 'newPage';
     });
-    expect(
-      checkCartsReducer(state, actions.initLoadSuccess('newPage')),
-    ).toEqual(expectedResult);
+    expect(checkCartsReducer(state, actions.initLoadSuccess('newPage'))).toEqual(expectedResult);
   });
   it('should handle the initLoadError action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.response.status = 'Error';
       draft.response.message = 'Load data error!';
     });
-    expect(checkCartsReducer(state, actions.initLoadError('newPage'))).toEqual(
-      expectedResult,
-    );
+    expect(checkCartsReducer(state, actions.initLoadError('newPage'))).toEqual(expectedResult);
   });
   it('should handle the loadEdit action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.data = 'newPage';
     });
-    expect(checkCartsReducer(state, actions.loadEdit('newPage'))).toEqual(
-      expectedResult,
-    );
+    expect(checkCartsReducer(state, actions.loadEdit('newPage'))).toEqual(expectedResult);
   });
   it('should handle the loadEditSuccess action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.list = 'newPage';
     });
-    expect(
-      checkCartsReducer(state, actions.loadEditSuccess('newPage')),
-    ).toEqual(expectedResult);
+    expect(checkCartsReducer(state, actions.loadEditSuccess('newPage'))).toEqual(expectedResult);
   });
   it('should handle the loadEditError action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.response.status = 'Error';
       draft.response.message = 'Load data to edit error!';
     });
-    expect(checkCartsReducer(state, actions.loadEditError('newPage'))).toEqual(
-      expectedResult,
-    );
+    expect(checkCartsReducer(state, actions.loadEditError('newPage'))).toEqual(expectedResult);
   });
 });

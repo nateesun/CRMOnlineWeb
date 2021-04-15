@@ -19,7 +19,6 @@ const useStyles = makeStyles({
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
@@ -37,6 +36,9 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
+  },
+  textLink: {
+    textDecoration: 'none',
   },
 });
 
@@ -66,11 +68,7 @@ export default function TableItems(props) {
           Show all database
         </Typography>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -99,10 +97,10 @@ export default function TableItems(props) {
                           <Grid item>
                             <a
                               target="_blank"
-                              href={`${window.location.origin}${
-                                appConstants.publicPath
-                              }${item.query}`}
-                              style={{ textDecoration: 'none' }}
+                              href={`${window.location.origin}${appConstants.publicPath}${
+                                item.query
+                              }`}
+                              className={classes.textLink}
                             >
                               <Button>Link Test</Button>
                             </a>

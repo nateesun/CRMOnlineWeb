@@ -12,8 +12,6 @@ const generator = checkoutSaga();
 describe('checkoutSaga Saga', () => {
   it('should start task to watch for LOAD_CART', () => {
     const takeLatestDescriptor = generator.next().value;
-    expect(takeLatestDescriptor).toEqual(
-      takeEvery(constants.LOAD_CART, loadCartList),
-    );
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.LOAD_CART, loadCartList));
   });
 });

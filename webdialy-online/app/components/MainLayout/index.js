@@ -89,6 +89,7 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     height: '100vh',
+    width: '100vw',
   },
   container: {
     paddingTop: theme.spacing(1),
@@ -109,6 +110,9 @@ const useStyles = makeStyles(theme => ({
   },
   itemActiveItem: {
     background: '#f1e6e2',
+  },
+  iconTextWhite: {
+    color: 'white',
   },
 }));
 
@@ -134,10 +138,7 @@ const MainLayout = props => {
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={clsx(
-          classes.appBar,
-          open && notMemberRole && classes.appBarShift,
-        )}
+        className={clsx(classes.appBar, open && notMemberRole && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
           {notMemberRole && (
@@ -146,20 +147,12 @@ const MainLayout = props => {
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden,
-              )}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
             >
               <MenuIcon />
             </IconButton>
           )}
-          <Typography
-            component="span"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
+          <Typography component="span" color="inherit" noWrap className={classes.title}>
             {props.title}
           </Typography>
           <LocaleToggle />
@@ -181,7 +174,7 @@ const MainLayout = props => {
               CRM Online
             </Typography>
             <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon style={{ color: 'white' }} />
+              <ChevronLeftIcon className={classes.iconTextWhite} />
             </IconButton>
           </div>
           <Divider />

@@ -8,13 +8,16 @@ const useStyles = makeStyles(theme => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
+  loading: {
+    color: 'chocolate',
+  },
 }));
 
 export default function LoadingBackdrop() {
   const classes = useStyles();
   return (
     <Backdrop className={classes.backdrop} open>
-      <CircularProgress style={{ color: 'chocolate' }} />
+      <CircularProgress className={classes.loading} />
     </Backdrop>
   );
 }

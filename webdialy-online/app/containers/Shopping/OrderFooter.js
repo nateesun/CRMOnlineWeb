@@ -37,6 +37,23 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     margin: '0 auto',
   },
+  noItemCart: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    textShadow: '2px 2px gray',
+  },
+  shoppingBasket: {
+    marginRight: '5px',
+  },
+  textItem: {
+    marginRight: '10px',
+  },
+  cartNo: {
+    background: 'yellow',
+    padding: '5px',
+    color: 'black',
+  },
 }));
 
 export default function OrderFooter(props) {
@@ -49,16 +66,7 @@ export default function OrderFooter(props) {
         <Toolbar>
           <Grid container>
             <Grid item xs={12}>
-              <div
-                style={{
-                  color: 'white',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  textShadow: '2px 2px gray',
-                }}
-              >
-                ยังไม่มีรายการสั่งซื้อ
-              </div>
+              <div className={classes.noItemCart}>ยังไม่มีรายการสั่งซื้อ</div>
             </Grid>
           </Grid>
         </Toolbar>
@@ -76,19 +84,9 @@ export default function OrderFooter(props) {
               color="white"
             >
               <div align="right">
-                <ShoppingBasket style={{ marginRight: '5px' }} />
-                <span style={{ marginRight: '10px' }}>
-                  รายการ :
-                  <span
-                    style={{
-                      background: 'yellow',
-                      padding: '5px',
-                      color: 'black',
-                    }}
-                  >
-                    {cart.cart_no}
-                  </span>
-                  |
+                <ShoppingBasket className={classes.shoppingBasket} />
+                <span className={classes.textItem}>
+                  รายการ :<span className={classes.cartNo}>{cart.cart_no}</span>|
                 </span>
                 <span>จน. {cart.total_item} | </span>
                 รวม: {cart.total_amount} บาท

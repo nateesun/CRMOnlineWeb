@@ -19,6 +19,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(2),
   },
+  separateLine: {
+    border: '1px solid #eee',
+  },
+  divBottom: {
+    marginBottom: '25px',
+  },
 }));
 
 export default function Review(props) {
@@ -64,26 +70,23 @@ export default function Review(props) {
       <Typography variant="h6" gutterBottom>
         สรุปยอดสั่งซื้อสินค้า และที่อยู่จัดส่ง
       </Typography>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateLine} />
       <List disablePadding>
         {cartsDetail &&
           cartsDetail.map(product => (
             <ListItem className={classes.listItem} key={product.product_code}>
-              <ListItemText
-                primary={product.product_name}
-                secondary={product.desc}
-              />
+              <ListItemText primary={product.product_name} secondary={product.desc} />
               <Typography variant="body2">{product.total_amount}</Typography>
             </ListItem>
           ))}
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ค่าจัดส่ง" />
           <Typography variant="subtitle1" className={classes.total}>
             0
           </Typography>
         </ListItem>
-        <Divider style={{ border: '1px solid #eee' }} />
+        <Divider className={classes.separateLine} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวมสินค้า" />
           <Typography variant="subtitle1" className={classes.total}>
@@ -91,15 +94,13 @@ export default function Review(props) {
           </Typography>
         </ListItem>
       </List>
-      <Divider style={{ border: '1px solid #eee' }} />
+      <Divider className={classes.separateLine} />
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             ที่อยู่สำหรับจัดส่ง
           </Typography>
-          <Typography
-            gutterBottom
-          >{`${memberPrefix}${memberName} ${memberLastName}`}</Typography>
+          <Typography gutterBottom>{`${memberPrefix}${memberName} ${memberLastName}`}</Typography>
           <Typography gutterBottom>{`${address1} ${address2 ||
             ''} ${subDistrict} ${district} ${province} ${postcode}`}</Typography>
         </Grid>
@@ -121,9 +122,7 @@ export default function Review(props) {
                 <Typography gutterBottom>บัญชีต้นทาง</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography gutterBottom>
-                  {payment.account_from_name}
-                </Typography>
+                <Typography gutterBottom>{payment.account_from_name}</Typography>
               </Grid>
             </React.Fragment>
             <React.Fragment>
@@ -177,16 +176,12 @@ export default function Review(props) {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <div align="center" style={{ marginBottom: '25px' }}>
-            <MapDirectionAB
-              origin={origin}
-              destination={destination}
-              onExit={handleDirection}
-            />
+          <div align="center" className={classes.divBottom}>
+            <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
           </div>
         </Grid>
         <Grid item xs={12}>
-          <div align="center" style={{ marginBottom: '25px' }}>
+          <div align="center" className={classes.divBottom}>
             ระยะทาง {props.distance.toFixed(2)} กิโลเมตร
             <br />
             ระยะเวลา {props.duration.toFixed(2)} นาที

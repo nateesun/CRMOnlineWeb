@@ -17,10 +17,7 @@ export default function LoginFooter() {
   return (
     <Grid container spacing={1} className={classes.root}>
       <Grid item xs={12}>
-        <ButtonLink
-          color="red"
-          to={`${appConstants.publicPath}/forgot-password`}
-        >
+        <ButtonLink color="red" to={`${appConstants.publicPath}/forgot-password`}>
           {<FormattedMessage {...messages.forgotPassword} />}
         </ButtonLink>
       </Grid>

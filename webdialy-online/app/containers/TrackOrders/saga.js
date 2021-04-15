@@ -87,9 +87,7 @@ export function* deleteData() {
   try {
     const data = yield select(selectors.makeSelectForm());
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/orders/${
-      data.uuid_index
-    }`;
+    const requestURL = `${appConstants.publicPath}/api/orders/${data.uuid_index}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',

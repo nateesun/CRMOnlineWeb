@@ -15,14 +15,10 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
-    minWidth: 690,
     padding: '5px',
   },
   buttonNew: {
@@ -39,6 +35,9 @@ const useStyles = makeStyles({
   },
   dataWidth: {
     overflow: 'auto',
+  },
+  buttonMargin: {
+    margin: '5px',
   },
 });
 
@@ -89,8 +88,8 @@ export default function TableItems(props) {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <React.Fragment>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Promotion Redeem Point
         </Typography>
@@ -112,11 +111,7 @@ export default function TableItems(props) {
           </Button>
         </div>
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">No</TableCell>
@@ -144,9 +139,7 @@ export default function TableItems(props) {
                       <TableCell align="center">{index + 1}</TableCell>
                       <TableCell align="center">{item.product_code}</TableCell>
                       <TableCell align="left">{item.redeem_name}</TableCell>
-                      <TableCell align="right">
-                        {item.point_to_redeem}
-                      </TableCell>
+                      <TableCell align="right">{item.point_to_redeem}</TableCell>
                       <TableCell align="center">
                         {moment(item.start_time).format('DD/MM/YYYY')}
                       </TableCell>
@@ -158,7 +151,7 @@ export default function TableItems(props) {
                         <Button
                           variant="outlined"
                           onClick={() => onEditItem(item)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Edit
                         </Button>
@@ -166,7 +159,7 @@ export default function TableItems(props) {
                           variant="contained"
                           color="secondary"
                           onClick={() => handleDelete(item.uuid_index)}
-                          style={{ margin: '5px' }}
+                          className={classes.buttonMargin}
                         >
                           Delete
                         </Button>
@@ -193,6 +186,6 @@ export default function TableItems(props) {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </React.Fragment>
   );
 }

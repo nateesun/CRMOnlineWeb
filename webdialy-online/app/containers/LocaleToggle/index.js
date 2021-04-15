@@ -21,12 +21,7 @@ export function LocaleToggle(props) {
 
   return (
     <Wrapper>
-      <Toggle
-        value={locale}
-        values={appLocales}
-        messages={messages}
-        onToggle={onLocaleToggle}
-      />
+      <Toggle value={locale} values={appLocales} messages={messages} onToggle={onLocaleToggle} />
     </Wrapper>
   );
 }

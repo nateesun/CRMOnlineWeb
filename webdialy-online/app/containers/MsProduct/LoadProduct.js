@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -26,9 +25,7 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none',
   },
-  table: {
-    minWidth: 1024,
-  },
+  table: {},
   colRow: {
     whiteSpace: 'nowrap',
   },
@@ -64,7 +61,7 @@ export default function LoadProduct(props) {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <React.Fragment>
       <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           Load product page
@@ -147,16 +144,12 @@ export default function LoadProduct(props) {
           </Button>
         </Grid>
         <Grid item xs={4} lg={3}>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={() => props.onChangePage('LIST')}
-          >
+          <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
             <FormattedMessage {...messages.btnBack} />
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    </React.Fragment>
   );
 }
 

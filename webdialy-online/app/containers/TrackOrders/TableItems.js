@@ -21,15 +21,11 @@ import SearchBar from 'components/SearchBar';
 import messages, { scope } from './messages';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    width: '100%',
-  },
   container: {
     padding: '10px',
   },
   table: {
     padding: '5px',
-    minWidth: '650px',
     overflow: 'auto',
   },
   buttonNew: {
@@ -110,7 +106,7 @@ export default function TableItems(props) {
 
   return (
     <React.Fragment>
-      <TableContainer className={classes.container} component={Paper}>
+      <TableContainer component={Paper} className={classes.container}>
         <Typography color="textSecondary" variant="h6">
           <FormattedMessage {...messages.headerTableItems} />
         </Typography>
@@ -135,11 +131,7 @@ export default function TableItems(props) {
           />
         )}
         <div className={classes.dataWidth}>
-          <Table
-            className={classes.table}
-            stickyHeader
-            aria-label="sticky table"
-          >
+          <Table className={classes.table} stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow className={classes.colRow}>
                 <TableCell align="center">
@@ -208,9 +200,7 @@ export default function TableItems(props) {
                         )}
                       </TableCell>
                       <TableCell align="center">{item.cart_no}</TableCell>
-                      <TableCell align="center">
-                        {item.cart_create_date}
-                      </TableCell>
+                      <TableCell align="center">{item.cart_create_date}</TableCell>
                       <TableCell align="center">{item.member_code}</TableCell>
                       <TableCell align="center">{item.total_item}</TableCell>
                       <TableCell align="center">{item.total_amount}</TableCell>
@@ -218,9 +208,7 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">
                         {item.order_status && (
-                          <FormattedMessage
-                            id={`${scope}.${item.order_status}`}
-                          />
+                          <FormattedMessage id={`${scope}.${item.order_status}`} />
                         )}
                       </TableCell>
                       <TableCell align="center">{item.member_remark}</TableCell>
@@ -228,10 +216,7 @@ export default function TableItems(props) {
                         {showCommand && (
                           <Grid container spacing={1} justify="center">
                             <Grid item>
-                              <Button
-                                variant="outlined"
-                                onClick={() => onViewItem(item)}
-                              >
+                              <Button variant="outlined" onClick={() => onViewItem(item)}>
                                 View
                               </Button>
                             </Grid>

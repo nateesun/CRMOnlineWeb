@@ -10,18 +10,11 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import RenderField from 'components/RenderField';
-import styled from 'styled-components';
 import SweetAlert from 'sweetalert2-react';
 import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
-import EditProfileLogo from '../../images/edit_profile.png';
-
-const ImgLogo = styled.img`
-  border: 0px solid #bbbbbb;
-  border-radius: 5px 5px 5px 5px;
-`;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,6 +40,9 @@ const useStyles = makeStyles(theme => ({
   loginTopic: {
     marginTop: theme.spacing(1),
   },
+  container: {
+    marginBottom: '50px',
+  },
 }));
 
 const EditForm = props => {
@@ -68,13 +64,8 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" style={{ marginBottom: '50px' }}>
-      <SweetAlert
-        show={errorUpdate}
-        title="Update data error"
-        type="error"
-        text={errorUpdate}
-      />
+    <Container component="main" maxWidth="lg" className={classes.container}>
+      <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
         title="Update data success"
@@ -83,7 +74,6 @@ const EditForm = props => {
         onConfirm={clearData}
       />
       <div className={classes.paper}>
-        <ImgLogo src={EditProfileLogo} width="100" />
         <Typography variant="h5" className={classes.loginTopic}>
           <FormattedMessage {...messages.header} />
         </Typography>
@@ -196,25 +186,17 @@ const validate = formValues => {
   const errors = {};
 
   if (!formValues.old_password) {
-    errors.old_password = (
-      <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />
-    );
+    errors.old_password = <FormattedMessage {...messages.oldPasswordShouldNotEmpty} />;
   }
 
   if (!formValues.new_password) {
-    errors.new_password = (
-      <FormattedMessage {...messages.newPasswordShouldNotEmpty} />
-    );
+    errors.new_password = <FormattedMessage {...messages.newPasswordShouldNotEmpty} />;
   }
   if (!formValues.confirm_password) {
-    errors.confirm_password = (
-      <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />
-    );
+    errors.confirm_password = <FormattedMessage {...messages.confirmPasswordShouldNotEmpty} />;
   }
   if (formValues.new_password !== formValues.confirm_password) {
-    errors.confirm_password = (
-      <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />
-    );
+    errors.confirm_password = <FormattedMessage {...messages.newPassAndConfirmPassShouldBeMatch} />;
   }
 
   return errors;

@@ -27,7 +27,6 @@ const useStyles = makeStyles(() => ({
   },
   table: {
     padding: '5px',
-    minWidth: '650px',
     overflow: 'auto',
   },
   buttonNew: {
@@ -206,29 +205,21 @@ export default function TableItems(props) {
                           <ButtonLink
                             size="bold"
                             title="ทำรายการสั่งซื้อต่อ"
-                            to={`${appConstants.publicPath}/checkout-orders/${
-                              item.cart_no
-                            }`}
+                            to={`${appConstants.publicPath}/checkout-orders/${item.cart_no}`}
                             color="primary"
                           >
                             {item.cart_no}
                           </ButtonLink>
                         )}
-                        {item.shopping_step !== 'order' && (
-                          <span>{item.cart_no}</span>
-                        )}
+                        {item.shopping_step !== 'order' && <span>{item.cart_no}</span>}
                       </TableCell>
-                      <TableCell align="center">
-                        {item.cart_create_date}
-                      </TableCell>
+                      <TableCell align="center">{item.cart_create_date}</TableCell>
                       <TableCell align="center">{item.member_code}</TableCell>
                       <TableCell align="center">{item.total_item}</TableCell>
                       <TableCell align="center">{item.total_amount}</TableCell>
                       <TableCell align="center">{item.total_point}</TableCell>
                       <TableCell align="center">
-                        <FormattedMessage
-                          id={`${scope}.${item.shopping_step}`}
-                        />
+                        <FormattedMessage id={`${scope}.${item.shopping_step}`} />
                       </TableCell>
                       <TableCell align="center">{item.cart_active}</TableCell>
                       {item.shopping_step === 'approve' && (
@@ -246,10 +237,7 @@ export default function TableItems(props) {
                         <TableCell align="center">
                           <Grid container spacing={1} justify="center">
                             <Grid item>
-                              <Button
-                                variant="outlined"
-                                onClick={() => onViewItem(item)}
-                              >
+                              <Button variant="outlined" onClick={() => onViewItem(item)}>
                                 View
                               </Button>
                             </Grid>
