@@ -28,6 +28,7 @@ import MemberOrdersConfirm from 'containers/MemberOrdersConfirm/Loadable';
 import DatabaseConfig from 'containers/DatabaseConfig/Loadable';
 import UsePromotion from 'containers/UsePromotion/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import AccessDeniedPage from 'containers/AccessDeniedPage/Loadable';
 
 import * as path from './constants';
 
@@ -61,6 +62,7 @@ export default function NewLayout() {
       <PrivateRoute path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
       <PrivateRoute path={path.PATH_DATABASE} component={DatabaseConfig} />
       <PrivateRoute path={path.PATH_USE_PROMOTION} component={UsePromotion} />
+      <Route path={path.PATH_ACCESS_DENIED} component={AccessDeniedPage} />
       <Route component={NotFoundPage} />
     </Switch>
   );
