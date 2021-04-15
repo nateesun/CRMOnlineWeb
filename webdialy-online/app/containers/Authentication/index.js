@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { getCookie } from 'react-use-cookie';
@@ -24,6 +24,20 @@ const Authentication = props => {
   useInjectSaga({ key: 'authentication', saga });
 
   const { component: Component, ...rest } = props;
+
+  useEffect(() => {
+    const uriPath = props.path.replace(path.publicPath, '');
+    const user = getCookie('token') ? JSON.parse(getCookie('token')) : undefined;
+    props.onLoadRole({ user, uriPath });
+  }, []);
+
+  if (props.rolesStatus === 'Allow') {
+    return <Route {...rest} render={p => <Component {...p} />} />;
+  }
+
+  if (props.rolesStatus === 'No') {
+    return <Redirect to={`${path.PATH_ACCESS_DENIED}`} />;
+  }
 
   return (
     <Route
