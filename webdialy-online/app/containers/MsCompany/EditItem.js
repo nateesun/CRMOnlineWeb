@@ -6,24 +6,18 @@ import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import Typography from '@material-ui/core/Typography';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
 import { makeStyles } from '@material-ui/core/styles';
 import RenderField from 'components/RenderField';
+import LabelTopic from 'components/LabelTopic';
 import messages from './messages';
 import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -78,7 +72,7 @@ const EditItem = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={response.status === 'Success'}
         title="Success"
@@ -92,205 +86,198 @@ const EditItem = props => {
         type="error"
         text={response.message}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.updateItemHeader}>
-          <FormattedMessage {...messages.headerEditItem} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={3}>
-              <Field
-                name="code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
-                required
-                disabled
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <Field
-                name="name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="line_official_id"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="prefix_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col5} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="member_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="size_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="order_prefix"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col8} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="order_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col7} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="order_size_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col9} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="cart_prefix"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col11} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="cart_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col10} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="cart_size_running"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col12} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="member_register_point"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col13} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Field
-                name="img_path"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col14} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <input type="file" name="file" onChange={onChangeHandler} />
-              <br />
-            </Grid>
-            <Grid item xs={12}>
-              {preview && <img src={preview} width={200} height={200} alt="" />}
-            </Grid>
-            <Grid item xs={6}>
-              {file && file.name && (
-                <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                  Please press upload button
-                </Button>
-              )}
-            </Grid>
-            {imgPath && (
-              <Grid item xs={12}>
-                <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceHost}${imgPath}`} width="250" alt="" />
-                </Paper>
-              </Grid>
+      <LabelTopic>
+        <FormattedMessage {...messages.headerEditItem} />
+      </LabelTopic>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <Field
+              name="code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col1} />}
+              required
+              disabled
+            />
+          </Grid>
+          <Grid item xs={9}>
+            <Field
+              name="name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col2} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Field
+              name="line_official_id"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col3} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="prefix_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col5} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="member_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col4} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="size_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col6} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="order_prefix"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col8} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="order_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col7} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="order_size_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col9} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="cart_prefix"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col11} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="cart_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col10} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="cart_size_running"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col12} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="member_register_point"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col13} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Field
+              name="img_path"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col14} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <input type="file" name="file" onChange={onChangeHandler} />
+            <br />
+          </Grid>
+          <Grid item xs={12}>
+            {preview && <img src={preview} width={200} height={200} alt="" />}
+          </Grid>
+          <Grid item xs={6}>
+            {file && file.name && (
+              <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Please press upload button
+              </Button>
             )}
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={4} lg={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
+          {imgPath && (
+            <Grid item xs={12}>
+              <Paper elevation={3} className={classes.paddingImg}>
+                <img src={`${apiServiceHost}${imgPath}`} width="250" alt="" />
+              </Paper>
             </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnReset} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-                <FormattedMessage {...messages.btnBack} />
-              </Button>
-            </Grid>
+          )}
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnReset} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

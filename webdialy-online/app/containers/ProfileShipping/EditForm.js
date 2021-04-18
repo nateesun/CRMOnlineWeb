@@ -16,6 +16,7 @@ import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Paper } from '@material-ui/core';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import ButtonLink from 'components/ButtonLink';
 import messages from './messages';
@@ -24,12 +25,6 @@ import * as selectors from './selectors';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -47,6 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     marginBottom: '50px',
+    padding: '10px',
   },
   divAddressType: {
     width: '100%',
@@ -143,7 +139,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" className={classes.container}>
+    <Container component={Paper} maxWidth="lg" className={classes.container}>
       <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
@@ -152,206 +148,199 @@ const EditForm = props => {
         text="Back to profile detail"
         onConfirm={clearData}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.loginTopic}>
-          <FormattedMessage {...messages.headerEditForm} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} lg={4}>
-              <div className={classes.divAddressType}>
-                <Field
-                  id="address_type"
-                  name="address_type"
-                  component={renderSelectField}
-                  label={<FormattedMessage {...messages.addressType} />}
-                  required
-                >
-                  <option value="shipping">Shipping</option>
-                </Field>
-              </div>
-            </Grid>
-            <Grid item xs={5} lg={5}>
-              <div className={classes.divMemberPrefix}>
-                <Field
-                  id="member_prefix"
-                  name="member_prefix"
-                  component={renderSelectField}
-                  label={<FormattedMessage {...messages.prefix} />}
-                  required
-                >
-                  <option value="" />
-                  <option value="คุณ">คุณ</option>
-                  <option value="นาย">นาย</option>
-                  <option value="นาง">นาง</option>
-                  <option value="นางสาว">นางสาว</option>
-                </Field>
-              </div>
-            </Grid>
-            <Grid item xs={7} lg={4}>
+      <Typography variant="h5" className={classes.loginTopic}>
+        <FormattedMessage {...messages.headerEditForm} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} lg={4}>
+            <div className={classes.divAddressType}>
               <Field
-                name="member_code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.code} />}
+                id="address_type"
+                name="address_type"
+                component={renderSelectField}
+                label={<FormattedMessage {...messages.addressType} />}
                 required
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <Field
-                name="member_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.firstName} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <Field
-                name="member_lastname"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.lastName} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Field
-                name="address1"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.address1} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Field
-                name="address2"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.address2} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="province"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.province} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="district"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.district} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="sub_district"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.subDistrict} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="postcode"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.postcode} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="map_latitude"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.mapLatitude} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={4}>
-              <Field
-                name="map_longitude"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.mapLongitude} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} lg={6}>
-              <Button variant="contained" color="primary" onClick={() => handleLoadMap(true)}>
-                Show Maps
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              {loadMap && (
-                <MapMarker
-                  lat={parseFloat(latitude)}
-                  lng={parseFloat(longitude)}
-                  onExit={handlePlace}
-                />
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              {loadMap && (
-                <div align="center" className={classes.divPosition}>
-                  Position: {latitude}, {longitude}
-                </div>
-              )}
-            </Grid>
-          </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
               >
-                <FormattedMessage {...messages.btnSaveProfile} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnResetForm} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <ButtonLink to={`${appConstants.publicPath}/profile`}>
-                <Button fullWidth variant="contained" onClick={reset}>
-                  <FormattedMessage {...messages.btnBack} />
-                </Button>
-              </ButtonLink>
-            </Grid>
+                <option value="shipping">Shipping</option>
+              </Field>
+            </div>
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={5} lg={5}>
+            <div className={classes.divMemberPrefix}>
+              <Field
+                id="member_prefix"
+                name="member_prefix"
+                component={renderSelectField}
+                label={<FormattedMessage {...messages.prefix} />}
+                required
+              >
+                <option value="" />
+                <option value="คุณ">คุณ</option>
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={7} lg={4}>
+            <Field
+              name="member_code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.code} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} lg={4}>
+            <Field
+              name="member_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.firstName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} lg={4}>
+            <Field
+              name="member_lastname"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.lastName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Field
+              name="address1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address1} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Field
+              name="address2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.address2} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="province"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.province} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.district} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="sub_district"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.subDistrict} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="postcode"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.postcode} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="map_latitude"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mapLatitude} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={4}>
+            <Field
+              name="map_longitude"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mapLongitude} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} lg={6}>
+            <Button variant="contained" color="primary" onClick={() => handleLoadMap(true)}>
+              Show Maps
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            {loadMap && (
+              <MapMarker
+                lat={parseFloat(latitude)}
+                lng={parseFloat(longitude)}
+                onExit={handlePlace}
+              />
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            {loadMap && (
+              <div align="center" className={classes.divPosition}>
+                Position: {latitude}, {longitude}
+              </div>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSaveProfile} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnResetForm} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <ButtonLink to={`${appConstants.publicPath}/profile`}>
+              <Button fullWidth variant="contained" onClick={reset}>
+                <FormattedMessage {...messages.btnBack} />
+              </Button>
+            </ButtonLink>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

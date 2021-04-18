@@ -8,18 +8,13 @@ import Container from '@material-ui/core/Container';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import SweetAlert from 'sweetalert2-react';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -64,7 +59,7 @@ const NewItem = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={response.status === 'Success'}
         title="Success"
@@ -78,74 +73,67 @@ const NewItem = props => {
         type="error"
         text={response.message}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.topic}>
-          <FormattedMessage {...messages.newItemHeader} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} lg={4}>
-              <Field
-                name="col1"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
-                required
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <Field
-                name="col2"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} lg={4}>
-              <Field
-                name="col3"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
-                required
-              />
-            </Grid>
+      <Typography variant="h5" className={classes.topic}>
+        <FormattedMessage {...messages.newItemHeader} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} lg={4}>
+            <Field
+              name="col1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col1} />}
+              required
+              autoFocus
+            />
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={4} lg={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnReset} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-                <FormattedMessage {...messages.btnBack} />
-              </Button>
-            </Grid>
+          <Grid item xs={12} lg={4}>
+            <Field
+              name="col2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col2} />}
+              required
+            />
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={12} lg={4}>
+            <Field
+              name="col3"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col3} />}
+              required
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnReset} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

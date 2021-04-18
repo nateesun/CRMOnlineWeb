@@ -66,7 +66,7 @@ export default function TableItems(props) {
 
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -131,7 +131,6 @@ export default function TableItems(props) {
                 <TableCell align="left">Surname</TableCell>
                 <TableCell align="right">Role</TableCell>
                 <TableCell align="left">Created Date</TableCell>
-                <TableCell align="left">Updated Date</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -155,9 +154,6 @@ export default function TableItems(props) {
                       <TableCell align="center">{item.member_role}</TableCell>
                       <TableCell align="left">
                         {dateFormat(item.system_created, 'dd/mm/yyyy hh:M:s')}
-                      </TableCell>
-                      <TableCell align="left">
-                        {dateFormat(item.system_updated, 'dd/mm/yyyy hh:M:s')}
                       </TableCell>
                       <TableCell align="left" className={classes.colRow}>
                         <Button
@@ -199,7 +195,7 @@ export default function TableItems(props) {
         </div>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+        rowsPerPageOptions={[100, 500, 1000, 10000]}
         component="div"
         count={getList.length}
         rowsPerPage={rowsPerPage}

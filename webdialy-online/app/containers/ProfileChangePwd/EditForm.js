@@ -11,6 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import RenderField from 'components/RenderField';
 import SweetAlert from 'sweetalert2-react';
+import { Paper } from '@material-ui/core';
 import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
@@ -19,12 +20,6 @@ import messages from './messages';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -42,6 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     marginBottom: '50px',
+    padding: '10px',
   },
 }));
 
@@ -64,7 +60,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" className={classes.container}>
+    <Container component={Paper} maxWidth="lg" className={classes.container}>
       <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
@@ -73,92 +69,85 @@ const EditForm = props => {
         text="Back to profile detail"
         onConfirm={clearData}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.loginTopic}>
-          <FormattedMessage {...messages.header} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={6}>
-              <Field
-                name="email"
-                component={RenderField}
-                type="email"
-                margin="normal"
-                label={<FormattedMessage {...messages.email} />}
-                disabled
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Field
-                name="mobile"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.mobile} />}
-                disabled
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Field
-                name="old_password"
-                component={RenderField}
-                type="password"
-                margin="normal"
-                label={<FormattedMessage {...messages.oldPassword} />}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Field
-                name="new_password"
-                component={RenderField}
-                type="password"
-                margin="normal"
-                label={<FormattedMessage {...messages.newPassword} />}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Field
-                name="confirm_password"
-                component={RenderField}
-                type="password"
-                margin="normal"
-                label={<FormattedMessage {...messages.confirmPassword} />}
-              />
-            </Grid>
+      <Typography variant="h5" className={classes.loginTopic}>
+        <FormattedMessage {...messages.header} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="email"
+              component={RenderField}
+              type="email"
+              margin="normal"
+              label={<FormattedMessage {...messages.email} />}
+              disabled
+            />
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={4}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.btnSaveProfile} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnResetForm} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <ButtonLink to={`${appConstants.publicPath}/profile`}>
-                <Button fullWidth variant="contained" onClick={reset}>
-                  <FormattedMessage {...messages.btnBack} />
-                </Button>
-              </ButtonLink>
-            </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="mobile"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.mobile} />}
+              disabled
+            />
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={12} md={4}>
+            <Field
+              name="old_password"
+              component={RenderField}
+              type="password"
+              margin="normal"
+              label={<FormattedMessage {...messages.oldPassword} />}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Field
+              name="new_password"
+              component={RenderField}
+              type="password"
+              margin="normal"
+              label={<FormattedMessage {...messages.newPassword} />}
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Field
+              name="confirm_password"
+              component={RenderField}
+              type="password"
+              margin="normal"
+              label={<FormattedMessage {...messages.confirmPassword} />}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSaveProfile} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnResetForm} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <ButtonLink to={`${appConstants.publicPath}/profile`}>
+              <Button fullWidth variant="contained" onClick={reset}>
+                <FormattedMessage {...messages.btnBack} />
+              </Button>
+            </ButtonLink>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

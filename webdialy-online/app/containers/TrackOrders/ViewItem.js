@@ -5,21 +5,16 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import LabelTopic from 'components/LabelTopic';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   loginTopic: {
     marginTop: theme.spacing(1),
@@ -39,39 +34,37 @@ const ViewItem = props => {
   const { col1, col2, col3 } = props.initialValues;
 
   return (
-    <Container component="main" maxWidth="lg">
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.updateItemHeader}>
-          <FormattedMessage {...messages.headerViewItem} />
-        </Typography>
-        <Grid container spacing={2} className={classes.divContent}>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col1} />
-          </Grid>
-          <Grid item xs={6}>
-            {col1}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col2} />
-          </Grid>
-          <Grid item xs={6}>
-            {col2}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col3} />
-          </Grid>
-          <Grid item xs={6}>
-            {col3}
-          </Grid>
+    <Container component={Paper} maxWidth="lg">
+      <LabelTopic>
+        <FormattedMessage {...messages.headerViewItem} />
+      </LabelTopic>
+      <Grid container spacing={2} className={classes.divContent}>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col1} />
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-              <FormattedMessage {...messages.btnBack} />
-            </Button>
-          </Grid>
+        <Grid item xs={6}>
+          {col1}
         </Grid>
-      </div>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col2} />
+        </Grid>
+        <Grid item xs={6}>
+          {col2}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col3} />
+        </Grid>
+        <Grid item xs={6}>
+          {col3}
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
+          <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+            <FormattedMessage {...messages.btnBack} />
+          </Button>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import LabelTopic from 'components/LabelTopic';
 import SweetAlert from 'sweetalert2-react';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
@@ -23,12 +24,6 @@ import PaymentDetail from './PaymentDetail';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   loginTopic: {
     marginTop: theme.spacing(1),
@@ -80,7 +75,7 @@ const ViewItem = props => {
   const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={showAlertResponse.status === 'Success'}
         title="Update Status"
@@ -88,136 +83,130 @@ const ViewItem = props => {
         text="Approve Cart Status Success"
         onConfirm={() => onChangePage('LIST')}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.updateItemHeader}>
-          <FormattedMessage {...messages.headerViewItem} />
-        </Typography>
-        <Grid container spacing={1} className={classes.divContent}>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col1} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {cartNo}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col2} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {cartCreateDate}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col3} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {memberCode}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col4} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {totalItem}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col5} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {totalAmount}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col6} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {totalPoint}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col7} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {shoppingStep}
-          </Grid>
-          <Grid item xs={4}>
-            <FormattedMessage {...messages.col8} />
-          </Grid>
-          <Grid item xs={8} className={classes.likeText}>
-            {cartActive}
-          </Grid>
+      <LabelTopic>
+        <FormattedMessage {...messages.headerViewItem} />
+      </LabelTopic>
+      <Grid container spacing={1} className={classes.divContent}>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col1} />
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h6" gutterBottom className={classes.title}>
-              รูปภาพสลิปที่โอนเงินเข้าระบบ
-            </Typography>
-            <img src={`${apiServiceHost}${slipPath}`} width={250} alt="sample slip upload" />
+        <Grid item xs={8} className={classes.likeText}>
+          {cartNo}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col2} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {cartCreateDate}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col3} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {memberCode}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col4} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {totalItem}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col5} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {totalAmount}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col6} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {totalPoint}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col7} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {shoppingStep}
+        </Grid>
+        <Grid item xs={4}>
+          <FormattedMessage {...messages.col8} />
+        </Grid>
+        <Grid item xs={8} className={classes.likeText}>
+          {cartActive}
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom className={classes.title}>
+            รูปภาพสลิปที่โอนเงินเข้าระบบ
+          </Typography>
+          <img src={`${apiServiceHost}${slipPath}`} width={250} alt="sample slip upload" />
+        </Grid>
+        <Grid item xs={12}>
+          {props.getData && <PaymentDetail payment={props.getData} />}
+        </Grid>
+        <Grid item xs={6}>
+          <Paper elevation={3} className={classes.paperShoppingStep}>
+            {shoppingStep && shoppingStep !== 'approve' && (
+              <Grid item xs={12}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Approve Slip</FormLabel>
+                  <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                    <FormControlLabel
+                      value="approve"
+                      control={<Radio color="primary" onChange={e => setApprove(e.target.value)} />}
+                      label="Approve"
+                    />
+                    <FormControlLabel
+                      value="not_approve"
+                      control={<Radio color="primary" onChange={e => setApprove(e.target.value)} />}
+                      label="Not Approve"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+            )}
+          </Paper>
+        </Grid>
+        {shoppingStep && shoppingStep !== 'approve' && (
+          <Grid item xs={10}>
+            <TextField
+              fullWidth
+              id="standard-basic"
+              label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ"
+              disabled={approve !== 'not_approve'}
+              required
+              value={reason}
+              onChange={e => setReason(e.target.value)}
+            />
           </Grid>
-          <Grid item xs={12}>
-            {props.getData && <PaymentDetail payment={props.getData} />}
-          </Grid>
-          <Grid item xs={6}>
-            <Paper elevation={3} className={classes.paperShoppingStep}>
-              {shoppingStep && shoppingStep !== 'approve' && (
-                <Grid item xs={12}>
-                  <FormControl component="fieldset">
-                    <FormLabel component="legend">Approve Slip</FormLabel>
-                    <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                      <FormControlLabel
-                        value="approve"
-                        control={
-                          <Radio color="primary" onChange={e => setApprove(e.target.value)} />
-                        }
-                        label="Approve"
-                      />
-                      <FormControlLabel
-                        value="not_approve"
-                        control={
-                          <Radio color="primary" onChange={e => setApprove(e.target.value)} />
-                        }
-                        label="Not Approve"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </Grid>
-              )}
-            </Paper>
-          </Grid>
-          {shoppingStep && shoppingStep !== 'approve' && (
-            <Grid item xs={10}>
-              <TextField
-                fullWidth
-                id="standard-basic"
-                label="เหตุผล หรือสาเหตุที่ไม่ผ่านการยืนยันอนุมัติ"
-                disabled={approve !== 'not_approve'}
-                required
-                value={reason}
-                onChange={e => setReason(e.target.value)}
-              />
-            </Grid>
-          )}
-          <Grid item xs={3}>
-            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-              <FormattedMessage {...messages.btnBack} />
+        )}
+        <Grid item xs={3}>
+          <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+            <FormattedMessage {...messages.btnBack} />
+          </Button>
+        </Grid>
+        {shoppingStep && shoppingStep !== 'approve' && (
+          <Grid item xs={5}>
+            <Button
+              color="primary"
+              fullWidth
+              variant="contained"
+              onClick={() =>
+                props.onUpdateShoppingStep({
+                  cart_no: cartNo,
+                  cart_create_date: cartCreateDate,
+                  approve,
+                  reason,
+                })
+              }
+            >
+              <FormattedMessage {...messages.btnApprove} />
             </Button>
           </Grid>
-          {shoppingStep && shoppingStep !== 'approve' && (
-            <Grid item xs={5}>
-              <Button
-                color="primary"
-                fullWidth
-                variant="contained"
-                onClick={() =>
-                  props.onUpdateShoppingStep({
-                    cart_no: cartNo,
-                    cart_create_date: cartCreateDate,
-                    approve,
-                    reason,
-                  })
-                }
-              >
-                <FormattedMessage {...messages.btnApprove} />
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-      </div>
+        )}
+      </Grid>
     </Container>
   );
 };
