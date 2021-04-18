@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
 import messages from './messages';
@@ -19,12 +20,6 @@ import messages from './messages';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -134,7 +129,7 @@ const NewItem = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={response.status === 'Upload_Success'}
         title="Success"
@@ -154,154 +149,147 @@ const NewItem = props => {
         type="error"
         text={response.message}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.topic}>
-          <FormattedMessage {...messages.newItemHeader} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={4} md={3}>
-              <Field
-                name="product_code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col1} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={8} md={6}>
-              <Field
-                name="redeem_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.col2} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <Field
-                name="point_to_redeem"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.col3} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="start_time"
-                component={DateInput}
-                type="date"
-                margin="normal"
-                label={<FormattedMessage {...messages.col4} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="finish_time"
-                component={DateInput}
-                type="date"
-                margin="normal"
-                label={<FormattedMessage {...messages.col5} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="qty_in_stock"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.col6} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <div className={classes.divRedeem}>
-                <Field
-                  name="redeem_or_free"
-                  component={renderSelectField}
-                  label={<FormattedMessage {...messages.col8} />}
-                  required
-                >
-                  <option key="F" value="F">
-                    Free
-                  </option>
-                  <option key="R" value="R">
-                    Redeem
-                  </option>
-                </Field>
-              </div>
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="discount_amt"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.col9} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="discount_percent"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.col10} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <input type="file" name="file" onChange={onChangeHandler} />
-              <br />
-            </Grid>
-            <Grid item xs={12}>
-              {preview && <img src={preview} width={200} height={200} alt="preview" />}
-            </Grid>
-            <Grid item xs={6}>
-              {file && file.name && (
-                <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                  Please press upload button
-                </Button>
-              )}
-            </Grid>
+      <Typography variant="h5" className={classes.topic}>
+        <FormattedMessage {...messages.newItemHeader} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={4} md={3}>
+            <Field
+              name="product_code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col1} />}
+              required
+            />
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={4} lg={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnReset} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-                <FormattedMessage {...messages.btnBack} />
-              </Button>
-            </Grid>
+          <Grid item xs={8} md={6}>
+            <Field
+              name="redeem_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.col2} />}
+              required
+            />
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={12} md={3}>
+            <Field
+              name="point_to_redeem"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.col3} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="start_time"
+              component={DateInput}
+              type="date"
+              margin="normal"
+              label={<FormattedMessage {...messages.col4} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="finish_time"
+              component={DateInput}
+              type="date"
+              margin="normal"
+              label={<FormattedMessage {...messages.col5} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="qty_in_stock"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.col6} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="redeem_or_free"
+                component={renderSelectField}
+                label={<FormattedMessage {...messages.col8} />}
+                required
+              >
+                <option key="F" value="F">
+                  Free
+                </option>
+                <option key="R" value="R">
+                  Redeem
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="discount_amt"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.col9} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="discount_percent"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.col10} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <input type="file" name="file" onChange={onChangeHandler} />
+            <br />
+          </Grid>
+          <Grid item xs={12}>
+            {preview && <img src={preview} width={200} height={200} alt="preview" />}
+          </Grid>
+          <Grid item xs={6}>
+            {file && file.name && (
+              <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Please press upload button
+              </Button>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnReset} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

@@ -23,7 +23,7 @@ export function MemberOrdersConfirm(props) {
 
   useEffect(() => {
     const { cart_no: cartNo, database = '' } = props.match.params;
-    props.onInitLoad({ cartNo, database });
+    props.onInitLoad({ cart_no: cartNo, database });
   }, []);
 
   return <ViewItem {...props} />;

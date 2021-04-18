@@ -16,6 +16,7 @@ import SweetAlert from 'sweetalert2-react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Paper } from '@material-ui/core';
 import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
@@ -24,12 +25,6 @@ import messages from './messages';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-  },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -47,6 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     marginBottom: '50px',
+    padding: '10px',
   },
   divPrefix: {
     width: '100%',
@@ -121,7 +117,7 @@ const EditForm = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" className={classes.container}>
+    <Container component={Paper} maxWidth="lg" className={classes.container}>
       <SweetAlert show={errorUpdate} title="Update data error" type="error" text={errorUpdate} />
       <SweetAlert
         show={updateStatus === 'Success'}
@@ -130,148 +126,141 @@ const EditForm = props => {
         text="Back to profile detail"
         onConfirm={clearData}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.loginTopic}>
-          <FormattedMessage {...messages.headerEditForm} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} lg={3}>
-              <div className={classes.divPrefix}>
-                <Field
-                  name="prefix"
-                  component={renderSelectField}
-                  label={<FormattedMessage {...messages.prefix} />}
-                  required
-                >
-                  <option value="" />
-                  <option value="คุณ">คุณ</option>
-                  <option value="นาย">นาย</option>
-                  <option value="นาง">นาง</option>
-                  <option value="นางสาว">นางสาว</option>
-                </Field>
-              </div>
-            </Grid>
-            <Grid item xs={12} lg={3}>
+      <Typography variant="h5" className={classes.loginTopic}>
+        <FormattedMessage {...messages.headerEditForm} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} lg={3}>
+            <div className={classes.divPrefix}>
               <Field
-                name="first_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.firstName} />}
+                name="prefix"
+                component={renderSelectField}
+                label={<FormattedMessage {...messages.prefix} />}
                 required
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Field
-                name="last_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.lastName} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={7} lg={6}>
-              <Field
-                name="birthday"
-                component={DateInput}
-                type="date"
-                margin="normal"
-                label={<FormattedMessage {...messages.dateOfBirth} />}
-              />
-            </Grid>
-            <Grid item xs={5} lg={6}>
-              <Field
-                name="mobile"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.mobile} />}
-                required
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Field
-                name="code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.code} />}
-                disabled
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Field
-                name="email"
-                component={RenderField}
-                type="email"
-                margin="normal"
-                label={<FormattedMessage {...messages.email} />}
-                disabled
-              />
-            </Grid>
-
-            <Grid item xs={12} lg={6}>
-              <span className={classes.textRemark}>
-                * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง
-                ERIC KAYSER LINE OFFICIAL เท่านั้น
-              </span>
-              <Field
-                name="line_id"
-                component={RenderField}
-                type="text"
-                label={<FormattedMessage {...messages.lineId} />}
-                margin="normal"
-              />
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <span className={classes.textBlue}>
-                สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
-                เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
-              </span>
-              <Field
-                name="line_user_id"
-                component={RenderField}
-                type="text"
-                label={<FormattedMessage {...messages.lineUserId} />}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
               >
-                <FormattedMessage {...messages.btnSaveProfile} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnResetForm} />
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <ButtonLink to={`${appConstants.publicPath}/profile`}>
-                <Button fullWidth variant="contained" onClick={reset}>
-                  <FormattedMessage {...messages.btnBack} />
-                </Button>
-              </ButtonLink>
-            </Grid>
+                <option value="" />
+                <option value="คุณ">คุณ</option>
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
+              </Field>
+            </div>
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={12} lg={3}>
+            <Field
+              name="first_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.firstName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Field
+              name="last_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.lastName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={7} lg={6}>
+            <Field
+              name="birthday"
+              component={DateInput}
+              type="date"
+              margin="normal"
+              label={<FormattedMessage {...messages.dateOfBirth} />}
+            />
+          </Grid>
+          <Grid item xs={5} lg={6}>
+            <Field
+              name="mobile"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.mobile} />}
+              required
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Field
+              name="code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.code} />}
+              disabled
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Field
+              name="email"
+              component={RenderField}
+              type="email"
+              margin="normal"
+              label={<FormattedMessage {...messages.email} />}
+              disabled
+            />
+          </Grid>
+
+          <Grid item xs={12} lg={6}>
+            <span className={classes.textRemark}>
+              * กรุณาใส่ LINE ID เพื่อรับสิทธิพิเศษ และ โปรโมชั่นพิเศษเฉพาะสำหรับสมาชิกผ่านทาง ERIC
+              KAYSER LINE OFFICIAL เท่านั้น
+            </span>
+            <Field
+              name="line_id"
+              component={RenderField}
+              type="text"
+              label={<FormattedMessage {...messages.lineId} />}
+              margin="normal"
+            />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <span className={classes.textBlue}>
+              สามารถระบุข้อมูล LINE USER ID ที่ได้รับจากการลงทะเบียนในหน้า Line
+              เพื่อรับการแจ้งเตือนเมื่อมีการได้รับคะแนน
+            </span>
+            <Field
+              name="line_user_id"
+              component={RenderField}
+              type="text"
+              label={<FormattedMessage {...messages.lineUserId} />}
+              margin="normal"
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSaveProfile} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnResetForm} />
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <ButtonLink to={`${appConstants.publicPath}/profile`}>
+              <Button fullWidth variant="contained" onClick={reset}>
+                <FormattedMessage {...messages.btnBack} />
+              </Button>
+            </ButtonLink>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

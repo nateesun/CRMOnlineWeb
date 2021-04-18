@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
@@ -14,20 +13,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Paper } from '@material-ui/core';
 import { v4 } from 'uuid';
 import RenderField from 'components/RenderField';
+import LabelTopic from 'components/LabelTopic';
 import messages from './messages';
 import * as selectors from './selectors';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     width: '100%',
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -103,7 +98,7 @@ const EditItem = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={response.status === 'Success'}
         title="Success"
@@ -117,133 +112,126 @@ const EditItem = props => {
         type="error"
         text={response.message}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.updateItemHeader}>
-          <FormattedMessage {...messages.headerEditItem} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Field
-                name="code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.memberCode} />}
-                required
-                disabled
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <div className={classes.divRole}>
-                <Field
-                  id="member_role"
-                  name="member_role"
-                  component={renderSelectField}
-                  label={<FormattedMessage {...messages.role} />}
-                  required
-                >
-                  {rolesList &&
-                    rolesList.map(item => (
-                      <option key={v4()} value={item.code}>
-                        {item.name}
-                      </option>
-                    ))}
-                </Field>
-              </div>
-            </Grid>
-            <Grid item xs={2} />
-            <Grid item xs={4}>
-              <Field
-                name="email"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.email} />}
-                disabled
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="first_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.name} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="last_name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.lastName} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="total_score"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.totalScore} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="total_purchase"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.totalPurchase} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Field
-                name="mobile"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.mobile} />}
-                required
-              />
-            </Grid>
+      <LabelTopic>
+        <FormattedMessage {...messages.headerEditItem} />
+      </LabelTopic>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Field
+              name="code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.memberCode} />}
+              required
+              disabled
+            />
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={4} lg={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
+          <Grid item xs={4}>
+            <div className={classes.divRole}>
+              <Field
+                id="member_role"
+                name="member_role"
+                component={renderSelectField}
+                label={<FormattedMessage {...messages.role} />}
+                required
               >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnReset} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-                <FormattedMessage {...messages.btnBack} />
-              </Button>
-            </Grid>
+                {rolesList &&
+                  rolesList.map(item => (
+                    <option key={v4()} value={item.code}>
+                      {item.name}
+                    </option>
+                  ))}
+              </Field>
+            </div>
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={2} />
+          <Grid item xs={4}>
+            <Field
+              name="email"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.email} />}
+              disabled
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="first_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.name} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="last_name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.lastName} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="total_score"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.totalScore} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="total_purchase"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.totalPurchase} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="mobile"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mobile} />}
+              required
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnReset} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };

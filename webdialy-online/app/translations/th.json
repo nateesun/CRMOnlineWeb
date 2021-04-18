@@ -283,5 +283,18 @@
   "app.containers.TrackCarts.order": "ส่ังยังไม่เสร็จ",
   "app.containers.TrackCarts.not_approve": "ไม่อนุมัติ",
   "app.containers.TrackCarts.wait_confirm": "รออนุมัติ",
-  "app.containers.TrackOrders.member_approve": "ลูกค้าเซ็นต์รับสินค้า"
+  "app.containers.TrackOrders.member_approve": "ลูกค้าเซ็นต์รับสินค้า",
+  "app.containers.Members.headerViewItem": "รายละเอียดสมาชิก",
+  "app.containers.Members.memberCode": "รหัสสมาชิก",
+  "app.containers.Members.email": "อีเมล์",
+  "app.containers.Members.role": "สิทธิ์ใช้งาน",
+  "app.containers.Members.name": "ชื่อสมาชิก",
+  "app.containers.Members.lastName": "นามสกุล",
+  "app.containers.Members.totalScore": "คะแนนสะสม",
+  "app.containers.Members.totalPurchase": "ยอดซื้อสะสม",
+  "app.containers.Members.mobile": "เบอร์โทรศัพท์",
+  "app.containers.Members.btnBack": "ย้อนกลับ",
+  "app.containers.Members.headerEditItem": "แก้ไขข้อมูลสมาชิก",
+  "app.containers.Members.btnSave": "บันทึกข้อมูล",
+  "app.containers.Members.btnReset": "ล้างข้อมูล"
 }

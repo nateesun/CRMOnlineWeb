@@ -283,5 +283,18 @@
   "app.containers.TrackCarts.order": "Not Complete",
   "app.containers.TrackCarts.not_approve": "Not Approve",
   "app.containers.TrackCarts.wait_confirm": "Wait Confirm",
-  "app.containers.TrackOrders.member_approve": "Member Approve Order"
+  "app.containers.TrackOrders.member_approve": "Member Approve Order",
+  "app.containers.Members.headerViewItem": "Member Detail",
+  "app.containers.Members.memberCode": "Code",
+  "app.containers.Members.email": "Email",
+  "app.containers.Members.role": "Role",
+  "app.containers.Members.name": "Name",
+  "app.containers.Members.lastName": "Surname",
+  "app.containers.Members.totalScore": "Total Point",
+  "app.containers.Members.totalPurchase": "Total Purchase",
+  "app.containers.Members.mobile": "Telephone/ Mobile",
+  "app.containers.Members.btnBack": "Back",
+  "app.containers.Members.headerEditItem": "Edit Member",
+  "app.containers.Members.btnSave": "Update Data",
+  "app.containers.Members.btnReset": "Reset Data"
 }

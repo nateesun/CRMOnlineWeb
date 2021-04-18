@@ -16,12 +16,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
-    marginTop: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -89,7 +83,7 @@ const NewItem = props => {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component={Paper} maxWidth="lg">
       <SweetAlert
         show={response.status === 'Success'}
         title="Success"
@@ -103,191 +97,184 @@ const NewItem = props => {
         type="error"
         text={response.message}
       />
-      <div className={classes.paper}>
-        <Typography variant="h5" className={classes.topic}>
-          <FormattedMessage {...messages.newItemHeader} />
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-          <Grid container spacing={1}>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.code} />}
-                required
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={6} md={5}>
-              <Field
-                name="name"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.name} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="unit_code_sale"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.unitSale} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="product_group_code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.groupCode} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="point"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.point} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="stock_code"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.stkCode} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="price_e"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.eatIn} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="price_t"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.takeAway} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="price_d"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.delivery} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="max_stock"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.maxStock} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Field
-                name="min_stock"
-                component={RenderField}
-                type="number"
-                margin="normal"
-                label={<FormattedMessage {...messages.minStock} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="unit_code_stock"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.unitStock} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={6} md={2}>
-              <Field
-                name="qty_over_stock"
-                component={RenderField}
-                type="text"
-                margin="normal"
-                label={<FormattedMessage {...messages.qtyNoLimit} />}
-                required
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <input type="file" name="file" onChange={onChangeHandler} />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              {file && file.name && (
-                <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
-                  Upload
-                </Button>
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              {showImg && (
-                <Paper elevation={3} className={classes.paddingImg}>
-                  <img src={`${apiServiceEndpoint}/images/${file.name}`} width="250" alt="" />
-                </Paper>
-              )}
-            </Grid>
+      <Typography variant="h5" className={classes.topic}>
+        <FormattedMessage {...messages.newItemHeader} />
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Grid container spacing={1}>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.code} />}
+              required
+              autoFocus
+            />
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={4} lg={3}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                disabled={pristine || submitting}
-              >
-                <FormattedMessage {...messages.btnSave} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={pristine || submitting}
-                onClick={reset}
-              >
-                <FormattedMessage {...messages.btnReset} />
-              </Button>
-            </Grid>
-            <Grid item xs={4} lg={3}>
-              <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
-                <FormattedMessage {...messages.btnBack} />
-              </Button>
-            </Grid>
+          <Grid item xs={6} md={5}>
+            <Field
+              name="name"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.name} />}
+              required
+            />
           </Grid>
-        </form>
-      </div>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="unit_code_sale"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.unitSale} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="product_group_code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.groupCode} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="point"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.point} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="stock_code"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.stkCode} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="price_e"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.eatIn} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="price_t"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.takeAway} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="price_d"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.delivery} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="max_stock"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.maxStock} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Field
+              name="min_stock"
+              component={RenderField}
+              type="number"
+              margin="normal"
+              label={<FormattedMessage {...messages.minStock} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="unit_code_stock"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.unitStock} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Field
+              name="qty_over_stock"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.qtyNoLimit} />}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <input type="file" name="file" onChange={onChangeHandler} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            {file && file.name && (
+              <Button variant="contained" color="primary" onClick={() => onUploadImageFile()}>
+                Upload
+              </Button>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            {showImg && (
+              <Paper elevation={3} className={classes.paddingImg}>
+                <img src={`${apiServiceEndpoint}/images/${file.name}`} width="250" alt="" />
+              </Paper>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={4} lg={3}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage {...messages.btnSave} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" disabled={pristine || submitting} onClick={reset}>
+              <FormattedMessage {...messages.btnReset} />
+            </Button>
+          </Grid>
+          <Grid item xs={4} lg={3}>
+            <Button fullWidth variant="contained" onClick={() => props.onChangePage('LIST')}>
+              <FormattedMessage {...messages.btnBack} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </Container>
   );
 };
