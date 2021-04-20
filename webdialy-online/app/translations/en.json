@@ -256,6 +256,7 @@
   "app.containers.Checkout.districtShouldNotEmpty": "District should not empty",
   "app.containers.Checkout.provinceShouldNotEmpty": "Province should not empty",
   "app.containers.Checkout.postcodeShouldNotEmpty": "Postcode should not empty",
+  "app.containers.Checkout.btnSaveDetailPayment": "Save information payment",
   "app.components.MainLayout.headerLogin": "Log In",
   "app.components.MainLayout.headerLogout": "Logout",
   "app.containers.Logout.loginButton": "Log In Again",
