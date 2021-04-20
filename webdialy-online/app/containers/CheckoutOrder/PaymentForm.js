@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import { Paper } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
@@ -15,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   separateLine: {
     border: '1px solid #eee',
@@ -135,6 +137,15 @@ const PaymentForm = props => {
             />
           </Grid>
           <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary">
+              <FormattedMessage {...messages.btnSaveDetailPayment} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+      <Paper elevation={3} style={{ padding: '10px' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
             อัพโหลดไฟล์ Slip (1) <input type="file" name="file" onChange={onChangeHandler} />
           </Grid>
           <Grid item xs={12}>
@@ -168,7 +179,7 @@ const PaymentForm = props => {
             )}
           </Grid>
         </Grid>
-      </form>
+      </Paper>
     </React.Fragment>
   );
 };

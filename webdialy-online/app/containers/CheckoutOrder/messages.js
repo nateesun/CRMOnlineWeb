@@ -161,4 +161,8 @@ export default defineMessages({
     id: `${scope}.markerPosition`,
     defaultMessage: 'Position',
   },
+  btnSaveDetailPayment: {
+    id: `${scope}.btnSaveDetailPayment`,
+    defaultMessage: 'Save information payment',
+  },
 });
