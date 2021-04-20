@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getCookie } from 'react-use-cookie';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
@@ -15,8 +16,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LabelTopic from 'components/LabelTopic';
+import QRCode from 'qrcode.react';
 import SweetAlert from 'sweetalert2-react';
+import LabelTopic from 'components/LabelTopic';
+import * as appConstants from 'containers/App/constants';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
 import PaymentDetail from './PaymentDetail';
@@ -52,9 +55,11 @@ const useStyles = makeStyles(theme => ({
     background: '#ddd',
     width: '75vw',
   },
+  showQrCode: { border: '1px dashed #ccc', padding: '10px', marginTop: '10px' },
 }));
 
 const ViewItem = props => {
+  const database = getCookie('database');
   const classes = useStyles();
   const [approve, setApprove] = useState('');
   const [reason, setReason] = useState('');
@@ -73,6 +78,7 @@ const ViewItem = props => {
 
   const loc = window.location.href.split('/');
   const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
+  const hostUrl = `${loc[0]}//${loc[2]}${appConstants.publicPath}`;
 
   return (
     <Container component={Paper} maxWidth="lg">
@@ -86,6 +92,9 @@ const ViewItem = props => {
       <LabelTopic>
         <FormattedMessage {...messages.headerViewItem} />
       </LabelTopic>
+      <div align="center" className={classes.showQrCode}>
+        <QRCode value={`${hostUrl}/order_confirm/${cartNo}/${database}`} />
+      </div>
       <Grid container spacing={1} className={classes.divContent}>
         <Grid item xs={4}>
           <FormattedMessage {...messages.col1} />
