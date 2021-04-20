@@ -18,8 +18,8 @@ import Swal from 'sweetalert2';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
 import SearchBar from 'components/SearchBar';
+import ShowQRCode from 'components/ShowQRCode';
 import messages, { scope } from './messages';
-import ShowQRCode from './ShowQRCode';
 
 const useStyles = makeStyles(() => ({
   container: {
