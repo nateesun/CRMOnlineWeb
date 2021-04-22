@@ -258,7 +258,7 @@ export default function TableItems(props) {
               {showList.length === 0 && (
                 <TableRow>
                   <TableCell align="left" colSpan={9}>
-                    ไม่พบข้อมูลรายการสินค้าในตระกร้า
+                    ไม่พบข้อมูลรายการสินค้าในตะกร้า
                   </TableCell>
                 </TableRow>
               )}
