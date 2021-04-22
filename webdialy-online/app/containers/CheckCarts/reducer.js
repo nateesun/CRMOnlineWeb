@@ -24,6 +24,7 @@ export const initialState = {
     cart_create_date: null,
     approve: '',
     reason: '',
+    member_code: '',
   },
 };
 

@@ -27,9 +27,13 @@ module.exports = (args) => {
       const { type, member_code } = req.params
       let response
       if (type === "approve") {
-        response = await Task(req.headers.database).findStatusApprove(member_code)
+        response = await Task(req.headers.database).findStatusApprove(
+          member_code
+        )
       } else {
-        response = await Task(req.headers.database).findStatusNotApprove(member_code)
+        response = await Task(req.headers.database).findStatusNotApprove(
+          member_code
+        )
       }
       const data = JSON.parse(response.data)
       res.status(200).json({ status: response.status, msg: "Success", data })
@@ -108,38 +112,56 @@ module.exports = (args) => {
 
   router.patch("/shopping_approve", async (req, res, next) => {
     try {
+      const { cart_no, shopping_step, member_code } = req.body
       await Task(req.headers.database).updateShoppingApprove(req.body)
 
-      // copy to orders tables
-      const Carts = await Task(req.headers.database).findByCartNo(
-        req.body.cart_no
-      )
-      const CartsParse = JSON.parse(Carts.data)[0]
-      const CartsData = {
-        ...CartsParse,
-        cart_create_date: moment(new Date(CartsParse.cart_create_date)).format(
-          "YYYY-MM-DD HH:mm:ss"
-        ),
-        emp_update_date: moment().format("YYYY-MM-DD HH:mm:ss"),
-        uuid_index: uuidv4(),
-      }
-      const order_no = await TaskOrders(req.headers.database).create(CartsData)
-
-      // copy to orders_detail tables
-      const CartsDetail = await TaskDetail(req.headers.database).findByCartNo(
-        req.body.cart_no
-      )
-      const CartsDetailData = JSON.parse(CartsDetail.data)
-      for (let i = 0; i < CartsDetailData.length; i += 1) {
-        const dataIns = {
-          ...CartsDetailData[i],
-          order_no: order_no.data,
+      if (shopping_step === "approve") {
+        // copy to orders tables
+        const Carts = await Task(req.headers.database).findByCartNo(
+          req.body.cart_no
+        )
+        const CartsParse = JSON.parse(Carts.data)[0]
+        const CartsData = {
+          ...CartsParse,
+          cart_create_date: moment(
+            new Date(CartsParse.cart_create_date)
+          ).format("YYYY-MM-DD HH:mm:ss"),
+          emp_update_date: moment().format("YYYY-MM-DD HH:mm:ss"),
+          uuid_index: uuidv4(),
         }
-        await TaskOrdersDetail(req.headers.database).create(dataIns)
+        const order_no = await TaskOrders(req.headers.database).create(
+          CartsData
+        )
+
+        // copy to orders_detail tables
+        const CartsDetail = await TaskDetail(req.headers.database).findByCartNo(
+          req.body.cart_no
+        )
+        const CartsDetailData = JSON.parse(CartsDetail.data)
+        for (let i = 0; i < CartsDetailData.length; i += 1) {
+          const dataIns = {
+            ...CartsDetailData[i],
+            order_no: order_no.data,
+          }
+          await TaskOrdersDetail(req.headers.database).create(dataIns)
+        }
+
+        // update point to customer
+        await Task(req.headers.database).updatePointAndPurchaseToCustomer({
+          cart_no,
+          member_code,
+        })
+
+        return res.status(200).json({
+          status: "Success",
+          msg: "Create Order Success",
+        })
       }
-      res.status(200).json({
+
+      // update other status
+      return res.status(200).json({
         status: "Success",
-        msg: "Create Order Success",
+        msg: `Update status cart to ${shopping_step}`,
       })
     } catch (error) {
       return res

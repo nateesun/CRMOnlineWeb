@@ -208,6 +208,7 @@ const ViewItem = props => {
                   cart_create_date: cartCreateDate,
                   approve,
                   reason,
+                  member_code: memberCode,
                 })
               }
             >

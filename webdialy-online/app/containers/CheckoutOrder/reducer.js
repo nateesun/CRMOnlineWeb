@@ -92,7 +92,6 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.SET_PAYMENT_DATA:
         draft.paymentData = action.payload;
-        draft.paymentData.transfer_date = moment().format('YYYY-MM-DD HH:mm:ss');
         break;
       case constants.SET_PAYMENT_DATA_ERROR:
         break;
