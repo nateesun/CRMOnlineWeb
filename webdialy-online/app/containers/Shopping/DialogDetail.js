@@ -259,7 +259,7 @@ export default function DialogDetail(props) {
                   }}
                   onClick={() => saveCartItem()}
                 >
-                  ใส่ตระกร้า {qty} รายการ = {item.price_d * qty} บาท
+                  ใส่ตะกร้า {qty} รายการ = {item.price_d * qty} บาท
                 </Button>
               </Typography>
             </Grid>

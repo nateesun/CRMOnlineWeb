@@ -78,28 +78,36 @@ export default function LeftMenu(props) {
           </ListItem>
         </ButtonLink>
       ))}
-      <Divider />
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <DnsRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="ข้อมูลระบบ" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" className={classes.listSubItem}>
-          {leftMenuMaster.map(({ id, to_path: to }) => (
-            <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
-              <ListItem key={id} button className={clsx(id === title && classes.itemActiveItem)}>
-                <ListItemText>
-                  <FormattedMessage id={`${scope}.menu${id}`} />
-                </ListItemText>
-              </ListItem>
-            </ButtonLink>
-          ))}
-        </List>
-      </Collapse>
-      <Divider />
+      {leftMenuMaster.length > 0 && (
+        <React.Fragment>
+          <Divider />
+          <ListItem button onClick={handleClick}>
+            <ListItemIcon>
+              <DnsRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="ข้อมูลระบบ" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" className={classes.listSubItem}>
+              {leftMenuMaster.map(({ id, to_path: to }) => (
+                <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
+                  <ListItem
+                    key={id}
+                    button
+                    className={clsx(id === title && classes.itemActiveItem)}
+                  >
+                    <ListItemText>
+                      <FormattedMessage id={`${scope}.menu${id}`} />
+                    </ListItemText>
+                  </ListItem>
+                </ButtonLink>
+              ))}
+            </List>
+          </Collapse>
+          <Divider />
+        </React.Fragment>
+      )}
     </List>
   );
 }
