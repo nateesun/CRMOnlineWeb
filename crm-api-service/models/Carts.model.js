@@ -9,6 +9,7 @@ module.exports = (db) => {
   const table_name = getDB(db, "carts")
   const tb_company = getDB(db, "company")
   const tb_carts_detail = getDB(db, "carts_detail")
+  const tb_member = getDB(db, "member")
 
   module.findByCartNo = (cart_no) => {
     logger.debug(`findByCartNo: ${cart_no}`)
@@ -248,6 +249,31 @@ module.exports = (db) => {
         where cart_no=?;`
         logger.debug(sql)
         const result = await pool.query(sql, [data.cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject(err, { status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.updatePointAndPurchaseToCustomer = (data) => {
+    logger.debug(`updatePointAndPurchaseToCustomer: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      const { cart_no, member_code } = data;
+      try {
+        const sql = `update ${tb_member} set 
+        total_score=total_score + (select total_point from ${table_name} c1 
+        where c1.cart_no=? 
+        and c1.shopping_step ='approve' 
+        and c1.member_code =?),
+        total_purchase=total_purchase + (select total_amount from ${table_name} c2 
+        where c2.cart_no=? 
+        and c2.shopping_step ='approve' 
+        and c2.member_code =?)
+        where code =?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [cart_no, member_code, cart_no, member_code, member_code])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err)
