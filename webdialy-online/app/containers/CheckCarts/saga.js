@@ -107,7 +107,9 @@ export function* deleteData() {
 
 export function* onUpdateShoppingStep() {
   try {
-    const { cart_no: cartNo, approve, reason, member_code: memberCode } = yield select(selectors.makeSelectCartStatus());
+    const { cart_no: cartNo, approve, reason, member_code: memberCode } = yield select(
+      selectors.makeSelectCartStatus(),
+    );
     const requestURL = `${appConstants.publicPath}/api/carts/shopping_approve`;
     const database = getCookie('database');
     const { code } = yield select(mainSelectors.makeSelectProfile());

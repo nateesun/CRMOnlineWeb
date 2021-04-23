@@ -4,7 +4,6 @@
  *
  */
 import produce from 'immer';
-import moment from 'moment';
 import { v4 } from 'uuid';
 import * as loginConstants from 'containers/Login/constants';
 import * as constants from './constants';

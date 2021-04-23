@@ -43,7 +43,6 @@ export default function Review(props) {
     map_latitude: mapLatitude,
     map_longitude: mapLongitude,
   } = props.shipping;
-  const { paymentData: payment } = props;
   const { map_latitude: latitude, map_longitude: longitude } = props.branch;
 
   const origin = {
@@ -139,7 +138,6 @@ export default function Review(props) {
 Review.propTypes = {
   cartList: PropTypes.object,
   shipping: PropTypes.object,
-  paymentData: PropTypes.object,
   branch: PropTypes.object,
   setDistance: PropTypes.func,
   setDuration: PropTypes.func,

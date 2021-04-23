@@ -16,6 +16,7 @@ const mockPayload = {
     cart_create_date: null,
     approve: '',
     reason: '',
+    member_code: '',
   },
 };
 

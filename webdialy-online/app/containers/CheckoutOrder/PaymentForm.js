@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -102,9 +102,7 @@ const PaymentForm = props => {
 
 PaymentForm.propTypes = {
   cartList: PropTypes.object,
-  handleSubmit: PropTypes.func,
   file: PropTypes.any,
-  setPaymentData: PropTypes.func,
   checkSlipImage: PropTypes.func,
   onUpdateSlipPath: PropTypes.func,
   setShowImg: PropTypes.func,
