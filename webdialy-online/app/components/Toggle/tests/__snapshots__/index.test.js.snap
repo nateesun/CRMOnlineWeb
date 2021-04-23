@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle components test snapshot 1`] = `
+<select
+  className="makeStyles-textWhite-1 Select-qnzjgx-0 cQQWoM"
+>
+  <option>
+    --
+  </option>
+</select>
+`;

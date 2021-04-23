@@ -58,6 +58,8 @@ const SubMenu = props => {
     return null;
   }
 
+  const getLayoutCss = title === 'Shopping' ? classes.layoutRelative : classes.layoutFixed;
+
   return (
     <BottomNavigation
       value={value}
@@ -65,9 +67,7 @@ const SubMenu = props => {
         setValue(newValue);
       }}
       showLabels
-      className={{
-        position: title === 'Shopping' ? classes.layoutRelative : classes.layoutFixed,
-      }}
+      className={getLayoutCss}
     >
       {props.leftMenu &&
         props.leftMenu.map(item => {
