@@ -22,7 +22,6 @@ import LabelTopic from 'components/LabelTopic';
 import * as appConstants from 'containers/App/constants';
 import messages from './messages';
 import { makeSelectForm } from './selectors';
-import PaymentDetail from './PaymentDetail';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -151,9 +150,6 @@ const ViewItem = props => {
             รูปภาพสลิปที่โอนเงินเข้าระบบ
           </Typography>
           <img src={`${apiServiceHost}${slipPath}`} width={250} alt="sample slip upload" />
-        </Grid>
-        <Grid item xs={12}>
-          {props.getData && <PaymentDetail payment={props.getData} />}
         </Grid>
         <Grid item xs={6}>
           <Paper elevation={3} className={classes.paperShoppingStep}>

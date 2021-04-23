@@ -80,7 +80,7 @@ export function* validateSlipUpload() {
     const requestURL = `${appConstants.publicPath}/api/validate_slip`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify({ imgFile }),
+      body: JSON.stringify({ img_file: imgFile }),
     });
     if (response.data) {
       yield put(actions.checkSlipSuccess(response.data));
@@ -101,7 +101,7 @@ export function* onDeleteItemCart() {
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
-      body: JSON.stringify({ cartNo, product_code: productCode }),
+      body: JSON.stringify({ cart_no: cartNo, product_code: productCode }),
     });
     if (response.status === 'Success') {
       yield loadCartList();
@@ -122,7 +122,7 @@ export function* onUpdateItemCart() {
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cartNo, product_code: productCode, qty }),
+      body: JSON.stringify({ cart_no: cartNo, product_code: productCode, qty }),
     });
     if (response.status === 'Success') {
       yield loadCartList();

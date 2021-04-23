@@ -9,7 +9,6 @@ import { Field, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import RenderField from 'components/RenderField';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -32,11 +31,7 @@ const useStyles = makeStyles(theme => ({
 const PaymentForm = props => {
   const classes = useStyles();
   const { carts } = props.cartList;
-  const { handleSubmit, file } = props;
-
-  const onValidated = formValues => {
-    props.setPaymentData(formValues);
-  };
+  const { file } = props;
 
   const validateSlipUpload = () => {
     if (file) {
@@ -64,85 +59,6 @@ const PaymentForm = props => {
         ยอดรับชำระ (จำนวน {carts && carts[0] && carts[0].total_amount} บาท)
       </Typography>
       <Divider className={classes.separateLine} />
-      <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="account_from_name"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.accountFromName} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="account_to_name"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.accountToName} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="from_account_no"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.fromAccountNo} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="to_account_no"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.toAccountNo} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="transfer_date"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.transferDate} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="transfer_ref"
-              component={RenderField}
-              type="text"
-              margin="normal"
-              label={<FormattedMessage {...messages.transferFef} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Field
-              name="transfer_amount"
-              component={RenderField}
-              type="number"
-              margin="normal"
-              label={<FormattedMessage {...messages.transferAmount} />}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
-              <FormattedMessage {...messages.btnSaveDetailPayment} />
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
       <Paper elevation={3} style={{ padding: '10px' }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
