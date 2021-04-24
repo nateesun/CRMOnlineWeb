@@ -18,18 +18,18 @@ describe('App actions', () => {
     it('has a type of INIT_LOAD_SUCCESS', () => {
       const expected = {
         type: constants.INIT_LOAD_SUCCESS,
-        payload: 'newPage',
+        payload: 'success',
       };
-      expect(actions.initLoadSuccess('newPage')).toEqual(expected);
+      expect(actions.initLoadSuccess('success')).toEqual(expected);
     });
   });
   describe('initLoadError Action', () => {
     it('has a type of INIT_LOAD_ERROR', () => {
       const expected = {
         type: constants.INIT_LOAD_ERROR,
-        payload: 'newPage',
+        payload: 'error',
       };
-      expect(actions.initLoadError('newPage')).toEqual(expected);
+      expect(actions.initLoadError('error')).toEqual(expected);
     });
   });
   describe('clearMenu Action', () => {

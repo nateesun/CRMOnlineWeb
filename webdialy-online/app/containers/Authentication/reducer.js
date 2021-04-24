@@ -3,6 +3,7 @@
  * Authentication reducer
  *
  */
+
 import produce from 'immer';
 import * as constants from './constants';
 
