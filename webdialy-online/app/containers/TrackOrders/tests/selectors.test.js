@@ -1,22 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  list: [],
-  data: {
-    uuid_index: '',
-    col1: '',
-    col2: '',
-    col3: '',
-  },
-  page: 'LIST',
-  status: null,
-  message: null,
-  currentId: '',
-  response: {
-    status: null,
-    message: null,
-  },
-};
+const mockPayload = initialState;
 
 describe('selectTrackOrdersDomain', () => {
   it('Expect mock state and initial state from selectTrackOrdersDomain is equal', () => {

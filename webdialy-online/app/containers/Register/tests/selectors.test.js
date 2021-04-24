@@ -1,20 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  data: {
-    prefix: '',
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    email: '',
-    password: '',
-    birthday: '',
-    lineId: '',
-  },
-  company: {},
-  status: '',
-  error: '',
-};
+const mockPayload = initialState;
 
 describe('selectRegisterDomain', () => {
   it('Expect mock state and initial state from selectRegisterDomain is equal', () => {

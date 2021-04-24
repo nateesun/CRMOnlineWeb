@@ -1,8 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  profile: {},
-};
+const mockPayload = initialState;
 
 describe('selectMainLayoutAppDomain', () => {
   it('Expect mock state and initial state from selectMainLayoutAppDomain is equal', () => {

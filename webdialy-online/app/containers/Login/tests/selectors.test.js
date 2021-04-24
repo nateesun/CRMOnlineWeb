@@ -1,18 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  loginForm: {
-    username: '',
-    password: '',
-  },
-  response: {
-    status: null,
-    message: null,
-  },
-  profile: {},
-  loggedIn: false,
-  queryDb: '',
-};
+const mockPayload = initialState;
 
 describe('selectLoginDomain', () => {
   it('Expect mock state and initial state from selectLogin is equal', () => {

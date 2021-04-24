@@ -1,14 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  request: {
-    email: '',
-    mobile: '',
-    secret: '',
-  },
-  status: '',
-  msg: '',
-};
+const mockPayload = initialState;
 
 describe('selectForgotPasswordDomain', () => {
   it('Expect mock state and initial state from selectForgotPasswordDomain is equal', () => {

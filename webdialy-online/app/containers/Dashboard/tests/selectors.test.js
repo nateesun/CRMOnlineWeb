@@ -1,15 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  redeem: [],
-  redeemPoint: {
-    uuid_index: '',
-    product_code: '',
-    redeem_code: '',
-  },
-  email: '',
-  error: '',
-};
+const mockPayload = initialState;
 
 describe('selectDashboardDomain', () => {
   it('Expect mock state and initial state from selectDashboardDomain is equal', () => {

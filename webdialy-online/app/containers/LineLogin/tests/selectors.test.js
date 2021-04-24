@@ -1,9 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  token: null,
-  profile: {},
-};
+const mockPayload = initialState;
 
 describe('selectLineLoginDomain', () => {
   it('Expect mock state and initial state from selectLineLoginDomain is equal', () => {

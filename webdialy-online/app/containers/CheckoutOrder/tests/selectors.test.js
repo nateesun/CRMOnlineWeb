@@ -1,26 +1,7 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  cart_no: '',
-  product: {
-    product_code: '',
-    qty: 0,
-  },
-  cartList: [],
-  member_code: '',
-  memberShipping: {},
-  paymentData: {},
-  img_upload: null,
-  slipFileName: '',
-  slipValidateStatus: '',
-  addressForm: {},
-  slipPath: '',
-  response: {
-    status: '',
-    message: '',
-  },
-  branch: {},
-};
+const mockPayload = initialState;
 
 describe('selectCheckoutDomain', () => {
   it('Expect mock state and initial state from selectCheckoutDomain is equal', () => {
