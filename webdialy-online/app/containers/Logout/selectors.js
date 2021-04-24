@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
  * Direct selector to the logout state domain
  */
 
-const selectLogoutDomain = state => state.logout;
+export const selectLogoutDomain = state => state.logout;
 
 /**
  * Other specific selectors
@@ -14,10 +14,8 @@ const selectLogoutDomain = state => state.logout;
  * Default selector used by Logout
  */
 
-const makeSelectLogout = () =>
+export const makeSelectLogout = () =>
   createSelector(
     selectLogoutDomain,
     substate => substate,
   );
-
-export { selectLogoutDomain, makeSelectLogout };

@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the databaseConfig state domain
  */
 
-const selectDatabaseConfigDomain = state => state.databaseConfig || initialState;
+export const selectDatabaseConfigDomain = state => state.databaseConfig || initialState;
 
 /**
  * Other specific selectors
@@ -15,44 +15,34 @@ const selectDatabaseConfigDomain = state => state.databaseConfig || initialState
  * Default selector used by DatabaseConfig
  */
 
-const makeSelectDatabaseConfig = () =>
+export const makeSelectDatabaseConfig = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectDatabaseConfigDomain,
     substate => substate.response,
   );
-
-export {
-  selectDatabaseConfigDomain,
-  makeSelectDatabaseConfig,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-};

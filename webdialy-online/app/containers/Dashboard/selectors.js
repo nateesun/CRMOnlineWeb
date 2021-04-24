@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the dashboard state domain
  */
 
-const selectDashboardDomain = state => state.dashboard || initialState;
+export const selectDashboardDomain = state => state.dashboard || initialState;
 
 /**
  * Other specific selectors
@@ -15,20 +15,18 @@ const selectDashboardDomain = state => state.dashboard || initialState;
  * Default selector used by Dashboard
  */
 
-const makeSelectDashboard = () =>
+export const makeSelectDashboard = () =>
   createSelector(
     selectDashboardDomain,
     substate => substate,
   );
-const makeSelectRedeem = () =>
+export const makeSelectRedeem = () =>
   createSelector(
     selectDashboardDomain,
     substate => substate.redeem,
   );
-const makeSelectRedeemPoint = () =>
+export const makeSelectRedeemPoint = () =>
   createSelector(
     selectDashboardDomain,
     substate => substate.redeemPoint,
   );
-
-export { selectDashboardDomain, makeSelectDashboard, makeSelectRedeem, makeSelectRedeemPoint };

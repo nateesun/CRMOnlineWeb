@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the shopping state domain
  */
 
-const selectShoppingDomain = state => state.shopping || initialState;
+export const selectShoppingDomain = state => state.shopping || initialState;
 
 /**
  * Other specific selectors
@@ -15,39 +15,30 @@ const selectShoppingDomain = state => state.shopping || initialState;
  * Default selector used by Shopping
  */
 
-const makeSelectShopping = () =>
+export const makeSelectShopping = () =>
   createSelector(
     selectShoppingDomain,
     substate => substate,
   );
 
-const makeSelectProductList = () =>
+export const makeSelectProductList = () =>
   createSelector(
     selectShoppingDomain,
     substate => substate.productList,
   );
 
-const makeSelectItemCart = () =>
+export const makeSelectItemCart = () =>
   createSelector(
     selectShoppingDomain,
     substate => substate.itemCart,
   );
-const makeSelectCart = () =>
+export const makeSelectCart = () =>
   createSelector(
     selectShoppingDomain,
     substate => substate.cart,
   );
-const makeSelectSearchData = () =>
+export const makeSelectSearchData = () =>
   createSelector(
     selectShoppingDomain,
     substate => substate.search,
   );
-
-export {
-  makeSelectShopping,
-  selectShoppingDomain,
-  makeSelectProductList,
-  makeSelectItemCart,
-  makeSelectCart,
-  makeSelectSearchData,
-};

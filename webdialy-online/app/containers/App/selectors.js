@@ -11,13 +11,13 @@ export const makeSelectLocation = () =>
     substate => substate.location,
   );
 
-  export const makeSelectApp = () =>
+export const makeSelectApp = () =>
   createSelector(
     selectAppDomain,
     substate => substate,
   );
 
-  export const makeSelectLeftMenu = () =>
+export const makeSelectLeftMenu = () =>
   createSelector(
     selectAppDomain,
     substate => substate.leftMenu,

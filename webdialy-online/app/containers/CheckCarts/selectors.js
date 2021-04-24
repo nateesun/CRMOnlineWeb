@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the checkCarts state domain
  */
 
-const selectCheckCartsDomain = state => state.checkCarts || initialState;
+export const selectCheckCartsDomain = state => state.checkCarts || initialState;
 
 /**
  * Other specific selectors
@@ -15,49 +15,39 @@ const selectCheckCartsDomain = state => state.checkCarts || initialState;
  * Default selector used by CheckCarts
  */
 
-const makeSelectCheckCarts = () =>
+export const makeSelectCheckCarts = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.response,
   );
-const makeSelectCartStatus = () =>
+export const makeSelectCartStatus = () =>
   createSelector(
     selectCheckCartsDomain,
     substate => substate.carts,
   );
-export {
-  selectCheckCartsDomain,
-  makeSelectCheckCarts,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-  makeSelectCartStatus,
-};
