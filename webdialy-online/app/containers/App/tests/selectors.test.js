@@ -8,7 +8,7 @@ describe('selectAppDomain', () => {
   const domain = selectors.selectAppDomain(mockPayload);
   it('Expect from selectRouter is equal', () => {
     const state = selectors.selectRouter(mockPayload);
-    expect(state).toEqual(domainRouter.router);
+    expect(state).toEqual(domainRouter);
   });
   it('Expect from selectAppDomain is equal', () => {
     const state = selectors.selectAppDomain(mockPayload);
