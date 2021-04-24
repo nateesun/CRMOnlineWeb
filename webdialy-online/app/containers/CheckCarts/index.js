@@ -52,11 +52,7 @@ export function CheckCarts(props) {
 CheckCarts.propTypes = {
   onChangePage: PropTypes.func,
   onInitLoad: PropTypes.func,
-  onLoadEdit: PropTypes.func,
   onLoadView: PropTypes.func,
-  onCreateItem: PropTypes.func,
-  onUpdateItem: PropTypes.func,
-  onDeleteItem: PropTypes.func,
   onSearch: PropTypes.func,
 };
 
@@ -73,11 +69,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onInitLoad: () => dispatch(actions.initLoad()),
-    onCreateItem: data => dispatch(actions.createItem(data)),
-    onUpdateItem: data => dispatch(actions.updateItem(data)),
-    onDeleteItem: id => dispatch(actions.deleteItem(id)),
     onChangePage: pageAt => dispatch(actions.changePage(pageAt)),
-    onLoadEdit: item => dispatch(actions.loadEdit(item)),
     onLoadView: item => dispatch(actions.loadView(item)),
     onSearch: (key, value) => dispatch(actions.search({ key, value })),
     onUpdateShoppingStep: data => dispatch(actions.updateShoppingStep(data)),

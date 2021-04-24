@@ -70,11 +70,9 @@ export default function TableItems(props) {
 
   TableItems.propTypes = {
     getList: PropTypes.array,
-    onDeleteItem: PropTypes.func,
     onLoadView: PropTypes.func,
     onLoadViewOrder: PropTypes.func,
     onChangePage: PropTypes.func,
-    onLoadEdit: PropTypes.func,
     onInitLoad: PropTypes.func,
     profile: PropTypes.object,
     approve: PropTypes.bool,
