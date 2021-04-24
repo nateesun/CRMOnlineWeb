@@ -4,42 +4,37 @@ import { initialState } from '../reducer';
 const mockPayload = initialState;
 
 describe('selectCheckCartsDomain', () => {
-  it('Expect mock state and initial state from selectCheckCartsDomain is equal', () => {
+  const domain = selectors.selectCheckCartsDomain(mockPayload);
+  it('Expect from selectCheckCartsDomain is equal', () => {
     const state = selectors.selectCheckCartsDomain(mockPayload);
     expect(state).toEqual(mockPayload);
   });
-  it('Expect mock state and initial state from makeSelectCheckCarts is equal', () => {
-    const dataSelector = selectors.makeSelectCheckCarts(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(mockPayload);
+  it('Expect from makeSelectCheckCarts is equal', () => {
+    const dataSelector = selectors.makeSelectCheckCarts();
+    expect(dataSelector(mockPayload)).toEqual(domain);
   });
-  it('Expect mock state and initial state from makeSelectCurrentId is equal', () => {
-    const { currentId } = mockPayload;
-    const dataSelector = selectors.makeSelectCurrentId(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(currentId);
+  it('Expect from makeSelectCurrentId is equal', () => {
+    const dataSelector = selectors.makeSelectCurrentId();
+    expect(dataSelector(mockPayload)).toEqual(domain.currentId);
   });
-  it('Expect mock state and initial state from makeSelectPage is equal', () => {
-    const { page } = mockPayload;
-    const dataSelector = selectors.makeSelectPage(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(page);
+  it('Expect from makeSelectPage is equal', () => {
+    const dataSelector = selectors.makeSelectPage();
+    expect(dataSelector(mockPayload)).toEqual(domain.page);
   });
-  it('Expect mock state and initial state from makeSelectListItems is equal', () => {
-    const { list } = mockPayload;
-    const dataSelector = selectors.makeSelectListItems(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(list);
+  it('Expect from makeSelectListItems is equal', () => {
+    const dataSelector = selectors.makeSelectListItems();
+    expect(dataSelector(mockPayload)).toEqual(domain.list);
   });
-  it('Expect mock state and initial state from makeSelectForm is equal', () => {
-    const { data } = mockPayload;
-    const dataSelector = selectors.makeSelectForm(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(data);
+  it('Expect from makeSelectForm is equal', () => {
+    const dataSelector = selectors.makeSelectForm();
+    expect(dataSelector(mockPayload)).toEqual(domain.data);
   });
-  it('Expect mock state and initial state from makeSelectResponse is equal', () => {
-    const { response } = mockPayload;
+  it('Expect from makeSelectResponse is equal', () => {
     const dataSelector = selectors.makeSelectResponse(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(response);
+    expect(dataSelector(mockPayload)).toEqual(domain.response);
   });
-  it('Expect mock state and initial state from makeSelectCartStatus is equal', () => {
-    const { carts } = mockPayload;
+  it('Expect from makeSelectCartStatus is equal', () => {
     const dataSelector = selectors.makeSelectCartStatus(mockPayload);
-    expect(dataSelector(mockPayload)).toEqual(carts);
+    expect(dataSelector(mockPayload)).toEqual(domain.carts);
   });
 });

@@ -4,7 +4,7 @@ import { initialState } from '../reducer';
 const mockPayload = initialState;
 
 describe('selectLoginDomain', () => {
-  it('Expect mock state and initial state from selectLogin is equal', () => {
+  it('Expect from selectLogin is equal', () => {
     const state = selectors.selectLogin(mockPayload);
     expect(state).toEqual(mockPayload);
   });

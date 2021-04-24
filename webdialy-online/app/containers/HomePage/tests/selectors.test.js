@@ -4,8 +4,17 @@ import { initialState } from '../reducer';
 const mockPayload = initialState;
 
 describe('selectHomePageDomain', () => {
-  it('Expect mock state and initial state from selectHomePageDomain is equal', () => {
+  const domain = selectors.selectHomePageDomain(mockPayload);
+  it('Expect from selectHomePageDomain is equal', () => {
     const state = selectors.selectHomePageDomain(mockPayload);
-    expect(state).toEqual(mockPayload);
+    expect(state).toEqual(domain);
+  });
+  it('Expect from makeSelectHomePage is equal', () => {
+    const state = selectors.makeSelectHomePage();
+    expect(state(mockPayload)).toEqual(domain);
+  });
+  it('Expect from makeSelectCompany is equal', () => {
+    const state = selectors.makeSelectCompany();
+    expect(state(mockPayload)).toEqual(domain.company);
   });
 });

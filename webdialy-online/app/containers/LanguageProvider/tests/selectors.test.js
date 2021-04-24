@@ -1,14 +1,16 @@
-import { selectLanguage } from '../selectors';
+import * as selectors from '../selectors';
 import { initialState } from '../reducer';
 
 const mockPayload = initialState;
 
 describe('selectLanguage', () => {
-  it('should select the global state', () => {
-    const globalState = {};
-    const mockedState = {
-      language: globalState,
-    };
-    expect(selectLanguage(mockedState)).toEqual(globalState);
+  const domain = selectors.selectLanguage(mockPayload);
+  it('Expect from selectHomePageDomain is equal', () => {
+    const state = selectors.selectLanguage(mockPayload);
+    expect(state).toEqual(domain);
+  });
+  it('Expect from makeSelectLocale is equal', () => {
+    const state = selectors.makeSelectLocale();
+    expect(state(mockPayload)).toEqual(domain.locale);
   });
 });
