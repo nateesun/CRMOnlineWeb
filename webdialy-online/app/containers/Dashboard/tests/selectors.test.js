@@ -7,7 +7,7 @@ describe('selectDashboardDomain', () => {
   const domain = selectors.selectDashboardDomain(mockPayload);
   it('Expect from selectDashboardDomain is equal', () => {
     const state = selectors.selectDashboardDomain(mockPayload);
-    expect(state).toEqual(mockPayload);
+    expect(state).toEqual(domain);
   });
   it('Expect from makeSelectDashboard is equal', () => {
     const state = selectors.makeSelectDashboard();

@@ -5,9 +5,9 @@ const mockPayload = initialState;
 
 describe('selectCheckoutDomain', () => {
   const domain = selectors.selectCheckoutDomain(mockPayload);
-
   it('Expect selectCheckoutDomain is equal', () => {
-    expect(domain).toEqual(mockPayload);
+    const state = selectors.selectCheckoutDomain(mockPayload);
+    expect(state).toEqual(domain);
   });
   it('Expect from makeSelectCheckout is equal', () => {
     const dataSelector = selectors.makeSelectCheckout();

@@ -6,14 +6,13 @@ const mockPayload = initialState;
 describe('selectAppDomain', () => {
   const domainRouter = selectors.selectRouter(mockPayload);
   const domain = selectors.selectAppDomain(mockPayload);
-
   it('Expect from selectRouter is equal', () => {
     const state = selectors.selectRouter(mockPayload);
-    expect(state).toEqual(mockPayload.router);
+    expect(state).toEqual(domainRouter.router);
   });
   it('Expect from selectAppDomain is equal', () => {
     const state = selectors.selectAppDomain(mockPayload);
-    expect(state).toEqual(mockPayload);
+    expect(state).toEqual(domain);
   });
   it('Expect from makeSelectLocation is equal', () => {
     const state = selectors.makeSelectLocation();
