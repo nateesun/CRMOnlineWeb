@@ -14,7 +14,7 @@ describe('forgotPasswordReducer', () => {
     expect(forgotPasswordReducer(undefined, {})).toEqual(expectedResult);
   });
   it('should handle the initState action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(forgotPasswordReducer(state, actions.initState())).toEqual(expectedResult);
   });
   it('should handle the requestPassword action correctly', () => {

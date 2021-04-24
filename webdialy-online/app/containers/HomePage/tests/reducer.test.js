@@ -14,7 +14,7 @@ describe('homePageReducer', () => {
     expect(homePageReducer(undefined, {})).toEqual(expectedResult);
   });
   it('should handle the initLoad action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(homePageReducer(state, actions.initLoad())).toEqual(expectedResult);
   });
   it('should handle the initLoadSuccess action correctly', () => {

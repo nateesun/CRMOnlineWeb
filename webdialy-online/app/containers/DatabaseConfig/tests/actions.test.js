@@ -14,7 +14,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of CHANGE_PAGE', () => {
       const expected = {
         type: constants.CHANGE_PAGE,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.changePage('init')).toEqual(expected);
     });
@@ -23,7 +23,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of INIT_LOAD', () => {
       const expected = {
         type: constants.INIT_LOAD,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.initLoad('init')).toEqual(expected);
     });
@@ -32,7 +32,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of INIT_LOAD_SUCCESS', () => {
       const expected = {
         type: constants.INIT_LOAD_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.initLoadSuccess('success')).toEqual(expected);
     });
@@ -41,7 +41,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of INIT_LOAD_ERROR', () => {
       const expected = {
         type: constants.INIT_LOAD_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.initLoadError('error')).toEqual(expected);
     });
@@ -50,7 +50,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_EDIT', () => {
       const expected = {
         type: constants.LOAD_EDIT,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.loadEdit('init')).toEqual(expected);
     });
@@ -59,7 +59,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_EDIT_SUCCESS', () => {
       const expected = {
         type: constants.LOAD_EDIT_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.loadEditSuccess('success')).toEqual(expected);
     });
@@ -68,7 +68,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_EDIT_ERROR', () => {
       const expected = {
         type: constants.LOAD_EDIT_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.loadEditError('error')).toEqual(expected);
     });
@@ -77,7 +77,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_VIEW', () => {
       const expected = {
         type: constants.LOAD_VIEW,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.loadView('init')).toEqual(expected);
     });
@@ -86,7 +86,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_VIEW_SUCCESS', () => {
       const expected = {
         type: constants.LOAD_VIEW_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.loadViewSuccess('success')).toEqual(expected);
     });
@@ -95,7 +95,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of LOAD_VIEW_ERROR', () => {
       const expected = {
         type: constants.LOAD_VIEW_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.loadViewError('error')).toEqual(expected);
     });
@@ -104,7 +104,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of CREATE_ITEM', () => {
       const expected = {
         type: constants.CREATE_ITEM,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.createItem('init')).toEqual(expected);
     });
@@ -113,7 +113,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of CREATE_ITEM_SUCCESS', () => {
       const expected = {
         type: constants.CREATE_ITEM_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.createItemSuccess('success')).toEqual(expected);
     });
@@ -122,7 +122,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of CREATE_ITEM_ERROR', () => {
       const expected = {
         type: constants.CREATE_ITEM_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.createItemError('error')).toEqual(expected);
     });
@@ -131,7 +131,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of UPDATE_ITEM', () => {
       const expected = {
         type: constants.UPDATE_ITEM,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.updateItem('init')).toEqual(expected);
     });
@@ -140,7 +140,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of UPDATE_ITEM_SUCCESS', () => {
       const expected = {
         type: constants.UPDATE_ITEM_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.updateItemSuccess('success')).toEqual(expected);
     });
@@ -149,7 +149,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of UPDATE_ITEM_ERROR', () => {
       const expected = {
         type: constants.UPDATE_ITEM_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.updateItemError('error')).toEqual(expected);
     });
@@ -158,7 +158,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of DELETE_ITEM', () => {
       const expected = {
         type: constants.DELETE_ITEM,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.deleteItem('init')).toEqual(expected);
     });
@@ -167,7 +167,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of DELETE_ITEM_SUCCESS', () => {
       const expected = {
         type: constants.DELETE_ITEM_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.deleteItemSuccess('success')).toEqual(expected);
     });
@@ -176,7 +176,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of DELETE_ITEM_ERROR', () => {
       const expected = {
         type: constants.DELETE_ITEM_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.deleteItemError('error')).toEqual(expected);
     });
@@ -185,7 +185,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of SEARCH', () => {
       const expected = {
         type: constants.SEARCH,
-        payload: 'init'
+        payload: 'init',
       };
       expect(actions.search('init')).toEqual(expected);
     });
@@ -194,7 +194,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of SEARCH_SUCCESS', () => {
       const expected = {
         type: constants.SEARCH_SUCCESS,
-        payload: 'success'
+        payload: 'success',
       };
       expect(actions.searchSuccess('success')).toEqual(expected);
     });
@@ -203,7 +203,7 @@ describe('DatabaseConfig actions', () => {
     it('has a type of SEARCH_ERROR', () => {
       const expected = {
         type: constants.SEARCH_ERROR,
-        payload: 'error'
+        payload: 'error',
       };
       expect(actions.searchError('error')).toEqual(expected);
     });

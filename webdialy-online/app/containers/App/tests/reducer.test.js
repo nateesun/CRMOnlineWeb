@@ -18,7 +18,7 @@ describe('appReducer', () => {
     expect(appReducer(undefined, {})).toEqual(expectedResult);
   });
   it('should handle the initLoad action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(appReducer(state, actions.initLoad())).toEqual(expectedResult);
   });
   it('should handle the initLoadSuccess action correctly', () => {

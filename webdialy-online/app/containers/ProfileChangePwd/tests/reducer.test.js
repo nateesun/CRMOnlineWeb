@@ -1,15 +1,10 @@
-import profileChangePwdReducer from '../reducer';
+import profileChangePwdReducer, { initialState } from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('profileChangePwdReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      username: '',
-      editForm: {},
-      status: '',
-      error: '',
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

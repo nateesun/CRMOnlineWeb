@@ -1,14 +1,10 @@
-import profileReducer from '../reducer';
+import profileReducer, { initialState } from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('profileReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      company: {},
-      email: '',
-      error: '',
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

@@ -6,9 +6,6 @@
 import { takeEvery } from 'redux-saga/effects';
 import checkCartsSaga, {
   initLoad,
-  saveData,
-  updateData,
-  deleteData,
   searchItem,
   onUpdateShoppingStep,
   onLoadViewOrder,

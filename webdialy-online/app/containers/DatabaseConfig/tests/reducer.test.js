@@ -34,7 +34,7 @@ describe('databaseConfigReducer', () => {
     expect(databaseConfigReducer(state, actions.changePage('newPage'))).toEqual(expectedResult);
   });
   it('should handle the changePage action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(databaseConfigReducer(state, actions.initLoad())).toEqual(expectedResult);
   });
   it('should handle the initLoadSuccess action correctly', () => {
@@ -131,7 +131,7 @@ describe('databaseConfigReducer', () => {
     expect(databaseConfigReducer(state, actions.deleteItemError())).toEqual(expectedResult);
   });
   it('should handle the search action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(databaseConfigReducer(state, actions.search('uuid_index'))).toEqual(expectedResult);
   });
   it('should handle the searchSuccess action correctly', () => {

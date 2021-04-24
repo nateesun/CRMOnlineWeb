@@ -1,24 +1,10 @@
-import registerReducer from '../reducer';
+import registerReducer, { initialState } from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('registerReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      data: {
-        prefix: '',
-        firstName: '',
-        lastName: '',
-        mobile: '',
-        email: '',
-        password: '',
-        birthday: '',
-        lineId: '',
-      },
-      company: {},
-      status: '',
-      error: '',
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

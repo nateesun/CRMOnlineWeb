@@ -1,13 +1,10 @@
-import profileEditReducer from '../reducer';
+import profileEditReducer, { initialState } from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('profileEditReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      status: '',
-      error: '',
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

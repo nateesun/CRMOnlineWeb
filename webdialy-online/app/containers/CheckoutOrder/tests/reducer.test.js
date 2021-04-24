@@ -50,7 +50,7 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.loadCartError([]))).toEqual(expectedResult);
   });
   it('should handle the loadMemberShipping action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.loadMemberShipping())).toEqual(expectedResult);
   });
   it('should handle the loadMemberShippingSuccess action correctly', () => {
@@ -95,7 +95,7 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.setPaymentData('paymentData'))).toEqual(expectedResult);
   });
   it('should handle the setPaymentDataError action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.setPaymentDataError())).toEqual(expectedResult);
   });
   it('should handle the checkSlip action correctly', () => {
@@ -125,7 +125,7 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.deleteItemCart('p001'))).toEqual(expectedResult);
   });
   it('should handle the deleteItemCartError action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.deleteItemCartError())).toEqual(expectedResult);
   });
   it('should handle the updateItemCart action correctly', () => {
@@ -135,7 +135,7 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.updateItemCart({}))).toEqual(expectedResult);
   });
   it('should handle the updateItemCartError action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.updateItemCartError())).toEqual(expectedResult);
   });
   // it('should handle the updateAddressForm action correctly', () => {
@@ -155,7 +155,7 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.updateAddressFormSuccess())).toEqual(expectedResult);
   });
   it('should handle the updateAddressFormError action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.updateAddressFormError([]))).toEqual(expectedResult);
   });
   it('should handle the updateSlipPath action correctly', () => {
@@ -165,22 +165,24 @@ describe('checkoutReducer', () => {
     expect(checkoutReducer(state, actions.updateSlipPath('/'))).toEqual(expectedResult);
   });
   it('should handle the updateSlipPathSuccess action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.updateSlipPathSuccess())).toEqual(expectedResult);
   });
   it('should handle the updateSlipPathError action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.updateSlipPathError([]))).toEqual(expectedResult);
   });
   it('should handle the loadBranchLocation action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(checkoutReducer(state, actions.loadBranchLocation('/'))).toEqual(expectedResult);
   });
   it('should handle the loadBranchLocationSuccess action correctly', () => {
     const expectedResult = produce(state, draft => {
       draft.branch = 'b001';
     });
-    expect(checkoutReducer(state, actions.loadBranchLocationSuccess('b001'))).toEqual(expectedResult);
+    expect(checkoutReducer(state, actions.loadBranchLocationSuccess('b001'))).toEqual(
+      expectedResult,
+    );
   });
   it('should handle the loadBranchLocationError action correctly', () => {
     const expectedResult = produce(state, draft => {

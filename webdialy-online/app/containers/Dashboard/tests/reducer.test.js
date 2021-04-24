@@ -23,7 +23,7 @@ describe('dashboardReducer', () => {
     expect(dashboardReducer(state, actions.initState())).toEqual(expectedResult);
   });
   it('should handle the loadRedeem action correctly', () => {
-    const expectedResult = produce(state, draft => {});
+    const expectedResult = produce(state, () => {});
     expect(dashboardReducer(state, actions.loadRedeem())).toEqual(expectedResult);
   });
   it('should handle the loadRedeemSuccess action correctly', () => {
