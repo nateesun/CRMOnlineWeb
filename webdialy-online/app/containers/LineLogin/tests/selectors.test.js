@@ -17,4 +17,8 @@ describe('selectLineLoginDomain', () => {
     const state = selectors.makeSelectLineLoginProfile();
     expect(state(mockPayload)).toEqual(domain.profile);
   });
+  it('Expect from makeSelectToken is equal', () => {
+    const state = selectors.makeSelectToken();
+    expect(state(mockPayload)).toEqual(domain.token);
+  });
 });

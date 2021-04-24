@@ -4,11 +4,12 @@ import request from 'utils/request';
 import { checkLoginSuccess, checkLoginError } from 'containers/Login/actions';
 import * as appConstants from 'containers/App/constants';
 import * as constants from './constants';
+import * as selectors from './selectors';
 
-export function* onVerifyTokenLogin(data) {
+export function* onVerifyTokenLogin() {
   try {
     // verify token for username, password
-    const { token } = data.payload;
+    const token = yield select(selectors.makeSelectToken());
     const reqURL = `${appConstants.publicPath}/api/line/login`;
     const responseToken = yield call(request, reqURL, {
       method: 'POST',

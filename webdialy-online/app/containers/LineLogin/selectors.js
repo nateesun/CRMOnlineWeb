@@ -26,3 +26,8 @@ export const makeSelectLineLoginProfile = () =>
     selectLineLoginDomain,
     substate => substate.profile,
   );
+export const makeSelectToken = () =>
+  createSelector(
+    selectLineLoginDomain,
+    substate => substate.token,
+  );

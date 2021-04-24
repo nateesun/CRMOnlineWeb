@@ -23,9 +23,9 @@ export function initLoadSuccess(payload) {
     payload,
   };
 }
-export function initLoadError(error) {
+export function initLoadError(payload) {
   return {
     type: constants.INIT_LOAD_ERROR,
-    error,
+    payload,
   };
 }
