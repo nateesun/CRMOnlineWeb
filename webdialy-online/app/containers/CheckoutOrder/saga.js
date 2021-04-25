@@ -266,7 +266,8 @@ export function* onUpdateSlipPath() {
 export function* loadBranchLocation() {
   try {
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/branch`;
+    const { branch_shipping: branchShipping } = yield select(selectors.makeSelectAddressForm());
+    const requestURL = `${appConstants.publicPath}/api/branch/getcode/${branchShipping}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -298,5 +299,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
-  yield takeEvery(constants.LOAD_BRANCH_LOCATION, loadBranchLocation);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, loadBranchLocation);
 }

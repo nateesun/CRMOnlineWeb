@@ -193,4 +193,18 @@ describe('checkoutReducer', () => {
     });
     expect(checkoutReducer(state, actions.loadBranchLocationError())).toEqual(expectedResult);
   });
+  it('should handle the loadBranchListSuccess action correctly', () => {
+    const expectedResult = produce(state, draft => {
+      draft.branchList = [];
+    });
+    expect(checkoutReducer(state, actions.loadBranchListSuccess([]))).toEqual(
+      expectedResult,
+    );
+  });
+  it('should handle the loadBranchLocationError action correctly', () => {
+    const expectedResult = produce(state, draft => {
+      draft.branchList = [];
+    });
+    expect(checkoutReducer(state, actions.loadBranchListError())).toEqual(expectedResult);
+  });
 });

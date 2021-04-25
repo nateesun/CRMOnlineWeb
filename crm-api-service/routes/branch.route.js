@@ -91,6 +91,50 @@ module.exports = args => {
         data: error.data
       })
     }
+  })
+
+  /**
+   * @swagger
+   * 
+   * /branch/getcode/{id}:
+   *  get:
+   *    tags:
+   *      - Branch
+   *    description: Show all branch list
+   *    parameters:
+   *      - name: database
+   *        type: string
+   *        in: header
+   *        required: true
+   *      - name: id
+   *        type: string
+   *        in: path
+   *    responses:
+   *      '200':
+   *        description: A successful response
+   *      '401':
+   *        description: Unauthoriztion API request
+   *      '500':
+   *        description: Internal Server Error
+   */
+  router.get("/getcode/:code", async (req, res) => {
+    try {
+      const { code } = req.params;
+      const result = await Controller(req.headers.database).findByCode(code)
+      return res.status(result.status).json({
+        status: result.status, 
+        msg: result.message, 
+        error: result.error,
+        data: result.data
+      })
+    } catch (error) {
+      return res.status(error.status).json({
+        status: error.status, 
+        msg: error.message, 
+        error: error.error,
+        data: error.data
+      })
+    }
     
   })
   

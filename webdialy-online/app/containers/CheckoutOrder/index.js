@@ -35,7 +35,6 @@ export function Checkout(props) {
   useEffect(() => {
     const { cart_no: cartNo } = props.match.params;
     props.initLoadCart(cartNo);
-    props.initLoadMemberShipping();
     props.intiLoadBranchLocation();
   }, []);
 
@@ -62,7 +61,6 @@ Checkout.propTypes = {
   initLoadCart: PropTypes.func,
   initLoadMemberShipping: PropTypes.func,
   match: PropTypes.object,
-  intiLoadBranchLocation: PropTypes.func,
   branchList: PropTypes.array,
 };
 
