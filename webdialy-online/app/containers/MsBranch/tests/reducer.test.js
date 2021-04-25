@@ -34,7 +34,12 @@ describe('msBranchReducer', () => {
     expect(msBranchReducer(state, actions.changePage('page'))).toEqual(expectedResult);
   });
   it('should handle the initLoad action correctly', () => {
-    const expectedResult = produce(state, () => {});
+    const expectedResult = produce(state, draft => {
+      draft.data = {
+        map_latitude: initialState.data.map_latitude,
+        map_longitude: initialState.data.map_longitude,
+      };
+    });
     expect(msBranchReducer(state, actions.initLoad('page'))).toEqual(expectedResult);
   });
   it('should handle the initLoadSuccess action correctly', () => {

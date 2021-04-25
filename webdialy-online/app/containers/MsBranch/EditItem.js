@@ -8,36 +8,14 @@ import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
 import SweetAlert from 'sweetalert2-react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import LabelTopic from 'components/LabelTopic';
 import MapMarker from 'containers/GoogleMap/MapMarker';
+import SelectRender from './SelectRender';
 import messages from './messages';
 import * as selectors from './selectors';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  loginTopic: {
-    marginTop: theme.spacing(1),
-  },
-  divLatLng: {
-    marginBottom: '25px',
-  },
-}));
+import { useStyles } from './styles';
 
 const EditItem = props => {
   const classes = useStyles();
@@ -88,7 +66,7 @@ const EditItem = props => {
               component={RenderField}
               type="text"
               margin="normal"
-              label={<FormattedMessage {...messages.col1} />}
+              label={<FormattedMessage {...messages.branchCode} />}
               required
               disabled
             />
@@ -99,7 +77,7 @@ const EditItem = props => {
               component={RenderField}
               type="text"
               margin="normal"
-              label={<FormattedMessage {...messages.col2} />}
+              label={<FormattedMessage {...messages.branchName} />}
               required
             />
           </Grid>
@@ -109,7 +87,7 @@ const EditItem = props => {
               component={RenderField}
               type="text"
               margin="normal"
-              label={<FormattedMessage {...messages.col3} />}
+              label={<FormattedMessage {...messages.mapLatitude} />}
               required
             />
           </Grid>
@@ -119,7 +97,7 @@ const EditItem = props => {
               component={RenderField}
               type="text"
               margin="normal"
-              label={<FormattedMessage {...messages.col3} />}
+              label={<FormattedMessage {...messages.mapLongitude} />}
               required
             />
           </Grid>
@@ -131,6 +109,123 @@ const EditItem = props => {
                 onExit={handlePlace}
               />
             </div>
+          </Grid>
+        </Grid>
+        {/* directiom #1 */}
+        <Grid container spacing={1}>
+          <Grid item xs={3}>
+            <Field
+              name="mapping_direction_length1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mapDirectionLength} />}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="mapping_type1"
+                component={SelectRender}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mappingType} />}
+              >
+                <option key="A" value="A">
+                  คิดราคาตามช่วงกิโลเมตร
+                </option>
+                <option key="B" value="B">
+                  คิดเป็นกิโลเมตร กิโลเมตรละ
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="mapping_baht1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mappingBaht} />}
+            />
+          </Grid>
+        </Grid>
+        {/* directiom #2 */}
+        <Grid container spacing={1}>
+          <Grid item xs={3}>
+            <Field
+              name="mapping_direction_length2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mapDirectionLength} />}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="mapping_type2"
+                component={SelectRender}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mappingType} />}
+              >
+                <option key="A" value="A">
+                  คิดราคาตามช่วงกิโลเมตร
+                </option>
+                <option key="B" value="B">
+                  คิดเป็นกิโลเมตร กิโลเมตรละ
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="mapping_baht2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mappingBaht} />}
+            />
+          </Grid>
+        </Grid>
+        {/* directiom #1 */}
+        <Grid container spacing={1}>
+          <Grid item xs={3}>
+            <Field
+              name="mapping_direction_length3"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mapDirectionLength} />}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="mapping_type3"
+                component={SelectRender}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mappingType} />}
+              >
+                <option key="A" value="A">
+                  คิดราคาตามช่วงกิโลเมตร
+                </option>
+                <option key="B" value="B">
+                  คิดเป็นกิโลเมตร กิโลเมตรละ
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="mapping_baht3"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mappingBaht} />}
+            />
           </Grid>
         </Grid>
         <Grid container spacing={3}>
@@ -179,16 +274,16 @@ EditItem.propTypes = {
 const validate = formValues => {
   const errors = {};
   if (!formValues.code) {
-    errors.code = <FormattedMessage {...messages.col1ShouldNotEmpty} />;
+    errors.code = <FormattedMessage {...messages.codeShouldNotEmpty} />;
   }
   if (!formValues.name) {
-    errors.name = <FormattedMessage {...messages.col2ShouldNotEmpty} />;
+    errors.name = <FormattedMessage {...messages.nameShouldNotEmpty} />;
   }
   if (!formValues.map_latitude) {
-    errors.map_latitude = <FormattedMessage {...messages.col3ShouldNotEmpty} />;
+    errors.map_latitude = <FormattedMessage {...messages.mapLatitudeShouldNotEmpty} />;
   }
   if (!formValues.map_longitude) {
-    errors.map_longitude = <FormattedMessage {...messages.col4ShouldNotEmpty} />;
+    errors.map_longitude = <FormattedMessage {...messages.mapLongitudeShouldNotEmpty} />;
   }
   return errors;
 };

@@ -37,36 +37,36 @@ export default defineMessages({
     id: `${scope}.headerTableItems`,
     defaultMessage: 'Table List Items',
   },
-  col1ShouldNotEmpty: {
-    id: `${scope}.col1ShouldNotEmpty`,
+  codeShouldNotEmpty: {
+    id: `${scope}.codeShouldNotEmpty`,
     defaultMessage: 'Branch code should not empty',
   },
-  col2ShouldNotEmpty: {
-    id: `${scope}.col2ShouldNotEmpty`,
+  nameShouldNotEmpty: {
+    id: `${scope}.nameShouldNotEmpty`,
     defaultMessage: 'Branch name should not empty',
   },
-  col3ShouldNotEmpty: {
-    id: `${scope}.col3ShouldNotEmpty`,
+  mapLatitudeShouldNotEmpty: {
+    id: `${scope}.mapLatitudeShouldNotEmpty`,
     defaultMessage: 'Map latitude should not empty',
   },
-  col4ShouldNotEmpty: {
-    id: `${scope}.col4ShouldNotEmpty`,
+  mapLongitudeShouldNotEmpty: {
+    id: `${scope}.mapLongitudeShouldNotEmpty`,
     defaultMessage: 'Map longitude should not empty',
   },
-  col1: {
-    id: `${scope}.col1`,
+  branchCode: {
+    id: `${scope}.branchCode`,
     defaultMessage: 'Branch Code',
   },
-  col2: {
-    id: `${scope}.col2`,
+  branchName: {
+    id: `${scope}.branchName`,
     defaultMessage: 'Branch Name',
   },
-  col3: {
-    id: `${scope}.col3`,
+  mapLatitude: {
+    id: `${scope}.mapLatitude`,
     defaultMessage: 'Map Latitude',
   },
-  col4: {
-    id: `${scope}.col4`,
+  mapLongitude: {
+    id: `${scope}.mapLongitude`,
     defaultMessage: 'Map Longitude',
   },
   btnSave: {
@@ -80,5 +80,17 @@ export default defineMessages({
   btnBack: {
     id: `${scope}.btnBack`,
     defaultMessage: 'Back',
+  },
+  mapDirectionLength: {
+    id: `${scope}.mapDirectionLength`,
+    defaultMessage: 'Mapping Direction',
+  },
+  mappingType: {
+    id: `${scope}.mappingType`,
+    defaultMessage: 'Mapping type',
+  },
+  mappingBaht: {
+    id: `${scope}.mappingBaht`,
+    defaultMessage: 'Mapping Price (Baht)',
   },
 });
