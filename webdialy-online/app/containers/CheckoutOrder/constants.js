@@ -16,6 +16,9 @@ export const LOAD_MEMBER_SHIPPING = 'app/Checkout/LOAD_MEMBER_SHIPPING';
 export const LOAD_MEMBER_SHIPPING_SUCCESS = 'app/Checkout/LOAD_MEMBER_SHIPPING_SUCCESS';
 export const LOAD_MEMBER_SHIPPING_ERROR = 'app/Checkout/LOAD_MEMBER_SHIPPING_ERROR';
 
+export const LOAD_BRANCH_LIST_SUCCESS = 'app/Checkout/LOAD_BRANCH_LIST_SUCCESS';
+export const LOAD_BRANCH_LIST_ERROR = 'app/Checkout/LOAD_BRANCH_LIST_ERROR';
+
 export const UPLOAD_IMG = 'app/Checkout/UPLOAD_IMG';
 export const UPLOAD_IMG_SUCCESS = 'app/Checkout/UPLOAD_IMG_SUCCESS';
 export const UPLOAD_IMG_ERROR = 'app/Checkout/UPLOAD_IMG_ERROR';

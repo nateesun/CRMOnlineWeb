@@ -86,3 +86,8 @@ export const makeSelectBranch = () =>
     selectCheckoutDomain,
     substate => substate.branch,
   );
+export const makeSelectBranchList = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.branchList,
+  );

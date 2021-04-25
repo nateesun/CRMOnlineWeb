@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Container from '@material-ui/core/Container';
+import { createStructuredSelector } from 'reselect';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import { Field, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
-import SweetAlert from 'sweetalert2-react';
+import { FormattedMessage } from 'react-intl';
 import { Paper } from '@material-ui/core';
+import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
-import LabelTopic from 'components/LabelTopic';
 import MapMarker from 'containers/GoogleMap/MapMarker';
-import SelectRender from './SelectRender';
-import messages from './messages';
-import * as selectors from './selectors';
+import InputSelectOptions from 'components/InputSelectOptions';
+import messages from '../messages';
+import * as selectors from '../selectors';
 import { useStyles } from './styles';
 
-const EditItem = props => {
+const NewItem = props => {
   const classes = useStyles();
   const { handleSubmit, pristine, reset, submitting, response, dispatch } = props;
-  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = props.initialValues;
+  const { map_latitude: mapLatitude, map_longitude: mapLongitude } = props.getData;
 
   const onValidated = formValues => {
-    updateData(formValues);
-  };
-
-  const updateData = data => {
-    props.onUpdateItem(data);
+    saveData(formValues);
   };
 
   const clearData = () => {
@@ -35,9 +31,34 @@ const EditItem = props => {
     props.onChangePage('LIST');
   };
 
+  const saveData = data => {
+    props.onCreateItem(data);
+  };
+
   const handlePlace = (latitude, longitude) => {
-    dispatch(change('editItem', 'map_latitude', latitude));
-    dispatch(change('editItem', 'map_longitude', longitude));
+    dispatch(change('newForm', 'map_latitude', latitude));
+    dispatch(change('newForm', 'map_longitude', longitude));
+  };
+
+  useEffect(() => {
+    props.onInitLoad();
+    dispatch(change('newForm', 'map_latitude', mapLatitude));
+    dispatch(change('newForm', 'map_longitude', mapLongitude));
+  }, []);
+
+  NewItem.propTypes = {
+    handleSubmit: PropTypes.func,
+    pristine: PropTypes.bool,
+    reset: PropTypes.func,
+    submitting: PropTypes.bool,
+    onRegister: PropTypes.func,
+    response: PropTypes.object,
+    onUpdateItem: PropTypes.func,
+    onInitLoad: PropTypes.func,
+    onChangePage: PropTypes.func,
+    onCreateItem: PropTypes.func,
+    getData: PropTypes.object,
+    dispatch: PropTypes.any,
   };
 
   return (
@@ -55,11 +76,11 @@ const EditItem = props => {
         type="error"
         text={response.message}
       />
-      <LabelTopic>
-        <FormattedMessage {...messages.headerEditItem} />
-      </LabelTopic>
+      <Typography variant="h5" className={classes.topic}>
+        <FormattedMessage {...messages.newItemHeader} />
+      </Typography>
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={6}>
             <Field
               name="code"
@@ -68,7 +89,7 @@ const EditItem = props => {
               margin="normal"
               label={<FormattedMessage {...messages.branchCode} />}
               required
-              disabled
+              autoFocus
             />
           </Grid>
           <Grid item xs={6}>
@@ -126,7 +147,7 @@ const EditItem = props => {
             <div className={classes.divRedeem}>
               <Field
                 name="mapping_type1"
-                component={SelectRender}
+                component={InputSelectOptions}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.mappingType} />}
@@ -165,7 +186,7 @@ const EditItem = props => {
             <div className={classes.divRedeem}>
               <Field
                 name="mapping_type2"
-                component={SelectRender}
+                component={InputSelectOptions}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.mappingType} />}
@@ -204,7 +225,7 @@ const EditItem = props => {
             <div className={classes.divRedeem}>
               <Field
                 name="mapping_type3"
-                component={SelectRender}
+                component={InputSelectOptions}
                 type="text"
                 margin="normal"
                 label={<FormattedMessage {...messages.mappingType} />}
@@ -228,7 +249,7 @@ const EditItem = props => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={4} lg={3}>
             <Button
               type="submit"
@@ -256,21 +277,6 @@ const EditItem = props => {
   );
 };
 
-EditItem.propTypes = {
-  handleSubmit: PropTypes.func,
-  pristine: PropTypes.bool,
-  reset: PropTypes.func,
-  submitting: PropTypes.bool,
-  onRegister: PropTypes.func,
-  initialValues: PropTypes.object,
-  response: PropTypes.object,
-  onUpdateItem: PropTypes.func,
-  onInitLoad: PropTypes.func,
-  onChangePage: PropTypes.func,
-  onCreateItem: PropTypes.func,
-  dispatch: PropTypes.any,
-};
-
 const validate = formValues => {
   const errors = {};
   if (!formValues.code) {
@@ -294,8 +300,8 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps)(
   reduxForm({
-    form: 'editItem',
+    form: 'newForm',
     validate,
     enableReinitialize: true,
-  })(EditItem),
+  })(NewItem),
 );

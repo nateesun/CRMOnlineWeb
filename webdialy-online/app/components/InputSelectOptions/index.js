@@ -5,8 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import RenderFromHelper from './RenderFromHelper';
 
-const RenderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => {
-  RenderSelectField.propTypes = {
+const InputSelectOptions = ({ input, label, meta: { touched, error }, children, ...custom }) => {
+  InputSelectOptions.propTypes = {
     input: PropTypes.any,
     label: PropTypes.any,
     meta: PropTypes.any,
@@ -34,4 +34,4 @@ const RenderSelectField = ({ input, label, meta: { touched, error }, children, .
   );
 };
 
-export default RenderSelectField;
+export default InputSelectOptions;

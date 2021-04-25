@@ -165,4 +165,8 @@ export default defineMessages({
     id: `${scope}.btnSaveDetailPayment`,
     defaultMessage: 'Save information payment',
   },
+  selectBranch: {
+    id: `${scope}.selectBranch`,
+    defaultMessage: 'Select Branch To Shipping',
+  },
 });

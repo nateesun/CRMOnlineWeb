@@ -19,7 +19,7 @@ import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
-import ContentPage from './ContentPage';
+import ContentPage from './components';
 import saga from './saga';
 
 const useStyles = makeStyles(() => ({

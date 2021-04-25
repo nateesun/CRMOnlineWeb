@@ -197,6 +197,21 @@ module.exports = (db) => {
     })
   }
 
+  module.updateBranchShipping = (data) => {
+    logger.debug(`updateBranchShipping: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `UPDATE ${table_name} SET branch_shipping=? WHERE cart_no=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [data.branch_shipping, data.cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   module.updateSlipPath = (data) => {
     logger.debug(`updateSlipPath: ${data}`)
     return new Promise(async (resolve, reject) => {

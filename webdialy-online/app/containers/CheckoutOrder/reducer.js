@@ -9,6 +9,7 @@ import * as loginConstants from 'containers/Login/constants';
 import * as constants from './constants';
 
 export const initialState = {
+  branchList: [],
   cart_no: '',
   product: {
     product_code: '',
@@ -149,6 +150,12 @@ const checkoutReducer = (state = initialState, action) =>
           status: 'Load_Branch_Location_Error',
           message: 'Load branch locaation error',
         };
+        break;
+      case constants.LOAD_BRANCH_LIST_SUCCESS:
+        draft.branchList = action.payload;
+        break;
+      case constants.LOAD_BRANCH_LIST_ERROR:
+        draft.branchList = [];
         break;
     }
   });

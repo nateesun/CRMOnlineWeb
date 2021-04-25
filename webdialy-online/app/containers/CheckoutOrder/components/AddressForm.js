@@ -13,8 +13,9 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@material-ui/core';
 import MapMarker from 'containers/GoogleMap/MapMarker';
 import RenderField from 'components/RenderField';
-import * as selectors from './selectors';
-import messages from './messages';
+import InputSelectOptions from 'components/InputSelectOptions';
+import * as selectors from '../selectors';
+import messages from '../messages';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -37,7 +38,16 @@ const useStyles = makeStyles(theme => ({
 
 const AddressForm = props => {
   const classes = useStyles();
-  const { handleSubmit, pristine, reset, submitting, dispatch, initialValues, response } = props;
+  const {
+    handleSubmit,
+    pristine,
+    reset,
+    submitting,
+    dispatch,
+    initialValues,
+    response,
+    branchList,
+  } = props;
   const { map_latitude: mapLatitude, map_longitude: mapLongitude } = initialValues;
 
   useEffect(() => {
@@ -59,11 +69,34 @@ const AddressForm = props => {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
-      </Typography>
-      <Divider className={classes.separateStyle} />
       <form className={classes.form} onSubmit={handleSubmit(onValidated)}>
+        <Typography variant="h6" gutterBottom>
+          ที่อยู่ร้าน สำหรับจัดส่งสินค้า
+        </Typography>
+        <Grid container spacing={1} className={classes.divButtom}>
+          <Grid item xs={12} sm={4}>
+            <Field
+              name="branch_shipping"
+              component={InputSelectOptions}
+              type="text"
+              margin="normal"
+              label=""
+              required
+            >
+              <option value="">กรุณาเลือกข้อมูล</option>
+              {branchList &&
+                branchList.map((item, index) => (
+                  <option key={`${item.code}`} value={`${item.code}`}>
+                    {item.name}
+                  </option>
+                ))}
+            </Field>
+          </Grid>
+        </Grid>
+        <Typography variant="h6" gutterBottom>
+          ที่อยู่ลูกค้า สำหรับจัดส่งสินค้า
+        </Typography>
+        <Divider className={classes.separateStyle} />
         <Grid container spacing={1}>
           <Grid item xs={12} sm={4}>
             <Field

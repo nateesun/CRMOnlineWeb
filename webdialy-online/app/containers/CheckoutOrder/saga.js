@@ -53,6 +53,22 @@ export function* loadMemberShipping() {
   }
 }
 
+export function* loadBranchShipping() {
+  try {
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/branch`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'GET',
+    });
+    if (response.status === 200) {
+      yield put(actions.loadBranchListSuccess(response.data));
+    }
+  } catch (err) {
+    yield put(actions.loadBranchListError(err));
+  }
+}
+
 export function* uploadFile() {
   try {
     const file = yield select(selectors.makeSelectFileUpload());
@@ -144,6 +160,27 @@ export function* onUpdateAddressForm() {
       database,
       method: addressFormData.create === true ? 'POST' : 'PUT',
       body: JSON.stringify({ ...addressFormData, memberCode }),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.updateAddressFormSuccess(response));
+    } else {
+      yield put(actions.updateAddressFormError('Cannot update address form'));
+    }
+  } catch (err) {
+    yield put(actions.updateAddressFormError(err));
+  }
+}
+
+export function* onUpdateCartsBranchShipping() {
+  try {
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { branch_shipping: branchShipping } = yield select(selectors.makeSelectAddressForm());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/carts/update-branch-shipping`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no: cartNo, branch_shipping: branchShipping }),
     });
     if (response.status === 'Success') {
       yield put(actions.updateAddressFormSuccess(response));
@@ -251,11 +288,13 @@ export function* loadBranchLocation() {
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
+  yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadBranchShipping);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
   yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateCartsBranchShipping);
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);

@@ -98,6 +98,20 @@ module.exports = (args) => {
     }
   })
 
+  router.patch("/update-branch-shipping", async (req, res, next) => {
+    try {
+      const response = await Task(req.headers.database).updateBranchShipping(
+        req.body
+      )
+      const data = JSON.parse(response.data)
+      res.status(200).json({ status: response.status, msg: "Success", data })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "Internal Server Error", msg: error.sqlMessage })
+    }
+  })
+
   router.patch("/slip_path", async (req, res, next) => {
     try {
       const response = await Task(req.headers.database).updateSlipPath(req.body)

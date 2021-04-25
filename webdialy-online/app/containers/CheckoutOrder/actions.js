@@ -234,3 +234,17 @@ export function loadBranchLocationError(payload) {
     payload,
   };
 }
+
+export function loadBranchListSuccess(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LIST_SUCCESS,
+    payload,
+  };
+}
+
+export function loadBranchListError(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LIST_ERROR,
+    payload,
+  };
+}
