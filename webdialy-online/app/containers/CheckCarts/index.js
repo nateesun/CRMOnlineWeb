@@ -20,7 +20,7 @@ import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
 import saga from './saga';
-import TabLayout from './TabLayout';
+import TabLayout from './components/TabLayout';
 
 const useStyles = makeStyles(() => ({
   root: {

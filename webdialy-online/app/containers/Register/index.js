@@ -15,7 +15,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import RegisterForm from './RegisterForm';
+import MainComponents from './components';
 import * as actions from './actions';
 
 export function Register(props) {
@@ -24,7 +24,7 @@ export function Register(props) {
 
   const { onRegisterMember } = props;
 
-  return <RegisterForm {...props} onRegister={onRegisterMember} />;
+  return <MainComponents {...props} onRegister={onRegisterMember} />;
 }
 
 Register.propTypes = {

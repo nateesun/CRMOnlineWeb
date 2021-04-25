@@ -11,7 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import { Paper } from '@material-ui/core';
 import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
-import MapMarker from 'containers/GoogleMap/MapMarker';
+import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import InputSelectOptions from 'components/InputSelectOptions';
 import messages from '../messages';
 import * as selectors from '../selectors';

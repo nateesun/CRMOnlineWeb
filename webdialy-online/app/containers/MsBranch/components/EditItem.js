@@ -11,7 +11,7 @@ import SweetAlert from 'sweetalert2-react';
 import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import LabelTopic from 'components/LabelTopic';
-import MapMarker from 'containers/GoogleMap/MapMarker';
+import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import InputSelectOptions from 'components/InputSelectOptions';
 import messages from '../messages';
 import * as selectors from '../selectors';

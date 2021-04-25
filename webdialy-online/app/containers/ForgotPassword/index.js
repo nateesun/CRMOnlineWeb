@@ -14,13 +14,13 @@ import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
-import ForgotForm from './ForgotForm';
+import MainComponents from './components';
 
 const ForgotPassword = props => {
   useInjectReducer({ key: 'forgotPassword', reducer });
   useInjectSaga({ key: 'forgotPassword', saga });
 
-  return <ForgotForm {...props} />;
+  return <MainComponents {...props} />;
 };
 
 const mapStateToProps = createStructuredSelector({

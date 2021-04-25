@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import MapDirectionAB from 'containers/GoogleMap/MapDirectionAB';
+import MapDirectionAB from 'containers/GoogleMap/components/MapDirectionAB';
 
 const useStyles = makeStyles(theme => ({
   listItem: {

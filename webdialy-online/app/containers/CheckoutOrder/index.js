@@ -19,13 +19,13 @@ import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import CheckoutContent from './components';
+import MainComponents from './components';
 import * as actions from './actions';
 
 export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
-  
+
   const [activeStep, setActiveStep] = useState(0);
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
@@ -40,7 +40,7 @@ export function Checkout(props) {
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
-      <CheckoutContent
+      <MainComponents
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         file={file}
@@ -62,6 +62,7 @@ Checkout.propTypes = {
   initLoadMemberShipping: PropTypes.func,
   match: PropTypes.object,
   branchList: PropTypes.array,
+  intiLoadBranchLocation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

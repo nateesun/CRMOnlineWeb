@@ -14,7 +14,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
-import ShoppingContent from './ShoppingContent';
+import MainComponents from './components';
 import * as selectors from './selectors';
 import * as actions from './actions';
 import reducer from './reducer';
@@ -30,7 +30,7 @@ export function Shopping(props) {
 
   return (
     <MainLayoutApp title="Shopping" {...props}>
-      <ShoppingContent {...props} />
+      <MainComponents {...props} />
     </MainLayoutApp>
   );
 }

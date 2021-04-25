@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const RenderFromHelper = ({ touched, error }) => {
   RenderFromHelper.propTypes = {

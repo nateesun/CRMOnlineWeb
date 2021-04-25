@@ -197,9 +197,7 @@ describe('checkoutReducer', () => {
     const expectedResult = produce(state, draft => {
       draft.branchList = [];
     });
-    expect(checkoutReducer(state, actions.loadBranchListSuccess([]))).toEqual(
-      expectedResult,
-    );
+    expect(checkoutReducer(state, actions.loadBranchListSuccess([]))).toEqual(expectedResult);
   });
   it('should handle the loadBranchLocationError action correctly', () => {
     const expectedResult = produce(state, draft => {

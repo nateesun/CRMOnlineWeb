@@ -8,7 +8,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import * as loginSelectors from 'containers/Login/selectors';
 import GlobalStyle from '../../global-styles';
-import NewLayout from './NewLayout';
+import NewLayout from './components/NewLayout';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';

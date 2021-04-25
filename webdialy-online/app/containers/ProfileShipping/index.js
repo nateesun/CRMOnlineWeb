@@ -18,7 +18,7 @@ import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import EditForm from './EditForm';
+import MainComponents from './components';
 import * as selectors from './selectors';
 
 export function ProfileShipping(props) {
@@ -31,7 +31,7 @@ export function ProfileShipping(props) {
 
   return (
     <MainLayoutApp title="Edit Shipping" {...props}>
-      <EditForm {...props} />
+      <MainComponents {...props} />
     </MainLayoutApp>
   );
 }

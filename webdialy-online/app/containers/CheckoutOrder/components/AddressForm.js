@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@material-ui/core';
-import MapMarker from 'containers/GoogleMap/MapMarker';
+import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import RenderField from 'components/RenderField';
 import InputSelectOptions from 'components/InputSelectOptions';
 import * as selectors from '../selectors';
@@ -85,7 +85,7 @@ const AddressForm = props => {
             >
               <option value="">กรุณาเลือกข้อมูล</option>
               {branchList &&
-                branchList.map((item, index) => (
+                branchList.map(item => (
                   <option key={`${item.code}`} value={`${item.code}`}>
                     {item.name}
                   </option>
@@ -247,6 +247,7 @@ AddressForm.propTypes = {
   response: PropTypes.any,
   initLoadMemberShipping: PropTypes.func,
   onUpdateAddressForm: PropTypes.func,
+  branchList: PropTypes.array,
 };
 
 const validate = formValues => {
