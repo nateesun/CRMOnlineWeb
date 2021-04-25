@@ -7,7 +7,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -17,7 +16,6 @@ import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
-import messages from './messages';
 
 export function LineLogin(props) {
   useInjectReducer({ key: 'lineLogin', reducer });
@@ -27,11 +25,7 @@ export function LineLogin(props) {
     props.verifyTokenLogin(props.match.params.token);
   }, []);
 
-  return (
-    <React.Fragment>
-      <FormattedMessage {...messages.header} />
-    </React.Fragment>
-  );
+  return <div>Line Line</div>;
 }
 
 LineLogin.propTypes = {
