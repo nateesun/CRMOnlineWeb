@@ -25,10 +25,10 @@ export function editShippingSuccess() {
   };
 }
 
-export function editShippingError(error) {
+export function editShippingError(payload) {
   return {
     type: constants.EDIT_SHIPPING_ERROR,
-    payload: error,
+    payload,
   };
 }
 
@@ -46,10 +46,10 @@ export function initLoadSuccess(payload) {
   };
 }
 
-export function initLoadError(error) {
+export function initLoadError(payload) {
   return {
     type: constants.INIT_LOAD_ERROR,
-    payload: error,
+    payload,
   };
 }
 

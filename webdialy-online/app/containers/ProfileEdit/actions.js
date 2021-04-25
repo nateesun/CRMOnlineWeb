@@ -25,9 +25,9 @@ export function editMemberSuccess() {
   };
 }
 
-export function editMemberError(error) {
+export function editMemberError(payload) {
   return {
     type: constants.EDIT_MEMBER_ERROR,
-    payload: error,
+    payload,
   };
 }
