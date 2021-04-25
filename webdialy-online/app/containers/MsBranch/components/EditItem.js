@@ -13,7 +13,7 @@ import RenderField from 'components/RenderField';
 import LabelTopic from 'components/LabelTopic';
 import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import InputSelectOptions from 'components/InputSelectOptions';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 import { useStyles } from './styles';
 

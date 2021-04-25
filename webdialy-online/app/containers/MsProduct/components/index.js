@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TableItems from './TableItems';
 import NewItem from './NewItem';
 import EditItem from './EditItem';
-import LoadProduct from '../LoadProduct';
+import LoadProduct from './LoadProduct';
 
 export default function ContentPage(props) {
   ContentPage.propTypes = {

@@ -9,7 +9,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import history from 'utils/history';
 import * as path from 'containers/App/constants';
-import { scope } from 'containers/App/messages';
+import { scope } from 'containers/App/components/messages';
 
 const useStyles = makeStyles({
   root: {

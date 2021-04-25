@@ -15,7 +15,7 @@ import SelectField from 'components/RenderField/Select';
 import SweetAlert from 'sweetalert2-react';
 import styled from 'styled-components';
 import RegisterLogo from 'images/register.png';
-import messages from '../messages';
+import messages from './messages';
 
 const ImgLogo = styled.img`
   border: 0px solid #bbbbbb;

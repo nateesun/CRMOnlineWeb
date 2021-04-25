@@ -15,7 +15,7 @@ import Select from '@material-ui/core/Select';
 import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import DateInput from 'components/RenderField/DateInput';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {

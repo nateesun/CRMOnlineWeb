@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { Cake, Phone, MoneyOff, Star, AssignmentInd } from '@material-ui/icons';
 import { Grid } from '@material-ui/core';
 import QRCode from 'qrcode.react';
-import messages from '../messages';
+import messages from './messages';
 import defaultBoy from './images/default_boy.png';
 import defaultGirl from './images/default_girl.png';
 

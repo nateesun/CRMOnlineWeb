@@ -17,7 +17,7 @@ import Select from '@material-ui/core/Select';
 import RenderField from 'components/RenderField';
 import DateTimeInput from 'components/RenderField/DateTimeInput';
 import LabelTopic from 'components/LabelTopic';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({

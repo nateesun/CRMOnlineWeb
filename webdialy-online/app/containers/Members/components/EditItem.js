@@ -17,7 +17,7 @@ import { Paper } from '@material-ui/core';
 import { v4 } from 'uuid';
 import RenderField from 'components/RenderField';
 import LabelTopic from 'components/LabelTopic';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({

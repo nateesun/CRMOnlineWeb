@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import ContentNotFound from 'components/ContentNotFound';
 import RedeemCard from './RedeemCard';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {

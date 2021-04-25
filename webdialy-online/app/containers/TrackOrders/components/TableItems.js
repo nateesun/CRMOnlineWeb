@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl';
 import ButtonLink from 'components/ButtonLink';
 import * as appConstants from 'containers/App/constants';
 import SearchBar from 'components/SearchBar';
-import messages, { scope } from '../messages';
+import messages, { scope } from './messages';
 
 const useStyles = makeStyles(() => ({
   container: {

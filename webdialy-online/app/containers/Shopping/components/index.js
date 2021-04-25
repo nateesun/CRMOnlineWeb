@@ -8,7 +8,7 @@ import SearchProduct from './SearchProduct';
 import DialogDetail from './DialogDetail';
 import OrderFooter from './OrderFooter';
 import ProductList from './ProductList';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(() => ({
   root: {

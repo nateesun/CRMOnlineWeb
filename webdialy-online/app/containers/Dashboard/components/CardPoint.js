@@ -9,7 +9,7 @@ import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Typography from '@material-ui/core/Typography';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
-import messages from '../messages';
+import messages from './messages';
 
 export default function CardPoint(props) {
   const { label, point, bg, fbg } = props;

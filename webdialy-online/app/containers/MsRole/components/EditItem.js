@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import RenderField from 'components/RenderField';
 import LabelTopic from 'components/LabelTopic';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({

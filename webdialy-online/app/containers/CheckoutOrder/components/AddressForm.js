@@ -15,7 +15,7 @@ import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import RenderField from 'components/RenderField';
 import InputSelectOptions from 'components/InputSelectOptions';
 import * as selectors from '../selectors';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   form: {

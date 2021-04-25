@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import LabelTopic from 'components/LabelTopic';
-import messages from '../messages';
+import messages from './messages';
 import { makeSelectForm } from '../selectors';
 
 const useStyles = makeStyles(theme => ({

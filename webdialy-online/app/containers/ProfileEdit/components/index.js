@@ -20,7 +20,7 @@ import { Paper } from '@material-ui/core';
 import * as appConstants from 'containers/App/constants';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import ButtonLink from 'components/ButtonLink';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {

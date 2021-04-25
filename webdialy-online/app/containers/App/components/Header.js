@@ -15,7 +15,7 @@ import { FormattedMessage } from 'react-intl';
 import Typography from '@material-ui/core/Typography';
 import LocaleToggle from 'containers/LocaleToggle';
 import ButtonLink from 'components/ButtonLink';
-import messages from '../messages';
+import messages from './messages';
 import { publicPath } from '../constants';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';

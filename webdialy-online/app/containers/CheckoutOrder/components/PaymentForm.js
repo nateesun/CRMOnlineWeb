@@ -9,7 +9,7 @@ import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   form: {

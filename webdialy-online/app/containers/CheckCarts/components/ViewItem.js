@@ -20,7 +20,7 @@ import QRCode from 'qrcode.react';
 import SweetAlert from 'sweetalert2-react';
 import LabelTopic from 'components/LabelTopic';
 import * as appConstants from 'containers/App/constants';
-import messages from '../messages';
+import messages from './messages';
 import { makeSelectForm } from '../selectors';
 
 const useStyles = makeStyles(theme => ({

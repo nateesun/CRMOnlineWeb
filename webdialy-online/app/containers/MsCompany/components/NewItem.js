@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import { Paper } from '@material-ui/core';
 import SweetAlert from 'sweetalert2-react';
 import RenderField from 'components/RenderField';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {

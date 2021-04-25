@@ -18,7 +18,7 @@ import moment from 'moment';
 import ContentNotFound from 'components/ContentNotFound';
 import GlobalAlert from 'components/GlobalAlert';
 import SignatureForm from './SignatureForm';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(() => ({

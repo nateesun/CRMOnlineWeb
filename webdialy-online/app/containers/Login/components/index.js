@@ -10,7 +10,7 @@ import RenderField from 'components/RenderField';
 import SweetAlert from 'sweetalert2-react';
 import { Paper } from '@material-ui/core';
 import LoginLogo from 'images/login.png';
-import messages from '../messages';
+import messages from './messages';
 import LoginFooter from './LoginFooter';
 
 const useStyles = makeStyles(theme => ({

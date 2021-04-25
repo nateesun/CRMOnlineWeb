@@ -9,7 +9,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import LabelTopic from 'components/LabelTopic';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({

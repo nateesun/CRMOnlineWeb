@@ -4,7 +4,7 @@ import ButtonLink from 'components/ButtonLink';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import * as appConstants from 'containers/App/constants';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import ContentNotFound from 'components/ContentNotFound';
 import ProductTopic from './ProductTopic';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(() => ({
   root: {

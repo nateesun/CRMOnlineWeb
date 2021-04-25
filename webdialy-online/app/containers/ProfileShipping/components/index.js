@@ -19,7 +19,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { Paper } from '@material-ui/core';
 import MapMarker from 'containers/GoogleMap/components/MapMarker';
 import ButtonLink from 'components/ButtonLink';
-import messages from '../messages';
+import messages from './messages';
 import * as selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({

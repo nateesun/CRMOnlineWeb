@@ -12,7 +12,7 @@ import LoginLogo from 'images/login.png';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
 import RenderField from 'components/RenderField';
-import messages from '../messages';
+import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   paper: {

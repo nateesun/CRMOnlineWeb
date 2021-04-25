@@ -13,7 +13,7 @@ import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
 import * as appConstants from 'containers/App/constants';
 import ButtonLink from 'components/ButtonLink';
-import messages from '../messages';
+import messages from './messages';
 
 const Label = styled.span`
   border: 0px solid;
