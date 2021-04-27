@@ -44,20 +44,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'รีวิว'];
-const handleStep4 = activeStep => activeStep + 1 === 4;
-const handleStep2 = activeStep => activeStep + 1 === 2;
-
 export default function CheckoutContent(props) {
   const classes = useStyles();
   const { activeStep, setActiveStep } = props;
 
   const handleNext = () => {
-    if (handleStep4) {
+    if (activeStep + 1 === 4) {
       // if last step or finish step
       setActiveStep(activeStep + 1);
       props.onUpdateShoppingStep();
     }
-    if (handleStep2) {
+    if (activeStep + 1 === 2) {
       if (props.shipping) {
         setActiveStep(activeStep + 1);
       }
