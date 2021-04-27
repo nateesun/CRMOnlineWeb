@@ -56,7 +56,9 @@ const PaymentForm = props => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        ยอดรับชำระ (จำนวน {carts && carts[0] && carts[0].total_amount} บาท)
+        ยอดรับชำระ: จำนวน {carts && carts[0] && carts[0].total_amount} + ค่าจัดส่ง{' '}
+        {carts && carts[0] && carts[0].total_transport_amt} ={' '}
+        {carts && carts[0] && carts[0].total_net_amt} บาท
       </Typography>
       <Divider className={classes.separateLine} />
       <Paper elevation={3} style={{ padding: '10px' }}>

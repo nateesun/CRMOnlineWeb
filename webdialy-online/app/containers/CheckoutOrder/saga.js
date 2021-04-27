@@ -120,7 +120,7 @@ export function* onDeleteItemCart() {
       body: JSON.stringify({ cart_no: cartNo, product_code: productCode }),
     });
     if (response.status === 'Success') {
-      yield loadCartList();
+      yield put(actions.deleteItemCartSuccess('Delete item success'));
     } else {
       yield put(actions.deleteItemCartError('Cannot delete item cart'));
     }
@@ -141,7 +141,7 @@ export function* onUpdateItemCart() {
       body: JSON.stringify({ cart_no: cartNo, product_code: productCode, qty }),
     });
     if (response.status === 'Success') {
-      yield loadCartList();
+      yield put(actions.updateItemCartSuccess('Update item success'));
     } else {
       yield put(actions.updateItemCartError('Cannot update item cart'));
     }
@@ -209,7 +209,7 @@ export function* onUpdatePaymentForm() {
       }),
     });
     if (response.status === 'Success') {
-      yield loadMemberShipping();
+      yield put(actions.setPaymentDataSuccess())
     } else {
       yield put(actions.setPaymentDataError('Cannot update payment form'));
     }
@@ -229,7 +229,6 @@ export function* onUpdateShoppingStep() {
       body: JSON.stringify({ cart_no: cartNo, shopping_step: 'wait_confirm' }),
     });
     if (response.status === 'Success') {
-      yield loadMemberShipping();
       yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
     } else {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
@@ -293,7 +292,9 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
   yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
+  yield takeEvery(constants.DELETE_ITEM_CART, loadCartList);
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
+  yield takeEvery(constants.UPDATE_ITEM_CART, loadCartList);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateCartsBranchShipping);
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);

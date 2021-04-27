@@ -82,14 +82,14 @@ export default function Review(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="ค่าจัดส่ง" />
           <Typography variant="subtitle1" className={classes.total}>
-            0
+            {carts && carts[0] && carts[0].total_transport_amt}
           </Typography>
         </ListItem>
         <Divider className={classes.separateLine} />
         <ListItem className={classes.listItem}>
           <ListItemText primary="ยอดรวมสินค้า" />
           <Typography variant="subtitle1" className={classes.total}>
-            {carts && carts[0] && carts[0].total_amount}
+            {carts && carts[0] && carts[0].total_net_amt}
           </Typography>
         </ListItem>
       </List>

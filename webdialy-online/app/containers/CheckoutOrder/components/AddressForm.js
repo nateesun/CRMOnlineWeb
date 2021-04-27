@@ -222,15 +222,17 @@ const AddressForm = props => {
               <span className={classes.greenText}>{response.message}</span>
             </Grid>
           )}
-          <Grid item xs={12}>
-            <div align="center" className={classes.divButtom}>
-              <MapMarker
-                lat={parseFloat(mapLatitude)}
-                lng={parseFloat(mapLongitude)}
-                onExit={handlePlace}
-              />
-            </div>
-          </Grid>
+          {mapLatitude && mapLongitude && (
+            <Grid item xs={12}>
+              <div align="center" className={classes.divButtom}>
+                <MapMarker
+                  lat={parseFloat(mapLatitude)}
+                  lng={parseFloat(mapLongitude)}
+                  onExit={handlePlace}
+                />
+              </div>
+            </Grid>
+          )}
         </Grid>
       </form>
     </React.Fragment>
