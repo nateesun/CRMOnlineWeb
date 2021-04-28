@@ -14,7 +14,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
-import ContentPage from './ContentPage';
+import MainComponents from './components';
 import saga from './saga';
 
 export function TrackOrders(props) {
@@ -29,7 +29,7 @@ export function TrackOrders(props) {
     }
   }, []);
 
-  return <ContentPage {...props} />;
+  return <MainComponents {...props} />;
 }
 
 TrackOrders.propTypes = {

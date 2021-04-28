@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the profile state domain
  */
 
-const selectProfileDomain = state => state.profile || initialState;
+export const selectProfileDomain = state => state.profile || initialState;
 
 /**
  * Other specific selectors
@@ -14,32 +14,24 @@ const selectProfileDomain = state => state.profile || initialState;
 /**
  * Default selector used by Profile
  */
-const makeSelectProfile = () =>
+export const makeSelectProfile = () =>
   createSelector(
     selectProfileDomain,
     substate => substate,
   );
-const makeSelectCompany = () =>
+export const makeSelectCompany = () =>
   createSelector(
     selectProfileDomain,
     substate => substate.company,
   );
-const makeUpdateStatus = () =>
+export const makeUpdateStatus = () =>
   createSelector(
     selectProfileDomain,
     substate => substate.status,
   );
 
-const makeErrorUpdate = () =>
+export const makeErrorUpdate = () =>
   createSelector(
     selectProfileDomain,
     substate => substate.error,
   );
-
-export {
-  selectProfileDomain,
-  makeUpdateStatus,
-  makeErrorUpdate,
-  makeSelectProfile,
-  makeSelectCompany,
-};

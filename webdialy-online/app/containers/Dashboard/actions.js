@@ -24,10 +24,10 @@ export function loadRedeemSuccess(payload) {
     payload,
   };
 }
-export function loadRedeemError(error) {
+export function loadRedeemError(payload) {
   return {
     type: constants.LOAD_REDEEM_ERROR,
-    error,
+    payload,
   };
 }
 
@@ -43,9 +43,9 @@ export function createRedeemSuccess(payload) {
     payload,
   };
 }
-export function createRedeemError(error) {
+export function createRedeemError(payload) {
   return {
     type: constants.CREATE_REDEEM_ERROR,
-    error,
+    payload,
   };
 }

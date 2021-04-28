@@ -29,8 +29,7 @@ const memberOrdersConfirmReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case constants.INIT_LOAD:
-        draft.data.cart_no = action.payload.cart_no;
-        draft.data.database = action.payload.database;
+        draft.data = action.payload;
         draft.response = {};
         break;
       case constants.INIT_LOAD_SUCCESS:

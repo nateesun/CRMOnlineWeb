@@ -8,6 +8,9 @@ import * as constants from './constants';
 
 export const initialState = {
   leftMenu: [],
+  router: {
+    location: '',
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */

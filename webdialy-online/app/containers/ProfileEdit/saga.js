@@ -9,13 +9,13 @@ import * as selectors from './selectors';
 export function* onEditMember() {
   try {
     const email = JSON.parse(getCookie('token') || '');
-    const data = yield select(selectors.makeSelectProfile());
+    const { profile } = yield select(selectors.makeSelectProfile());
     const database = getCookie('database');
     const requestURL = `${appConstants.publicPath}/api/member/${email}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'PUT',
-      body: JSON.stringify(data.profile),
+      body: JSON.stringify(profile),
     });
     if (response.status === 'Success') {
       yield put(actions.editMemberSuccess());

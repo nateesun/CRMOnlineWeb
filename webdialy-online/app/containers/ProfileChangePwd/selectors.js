@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the profileChangePwd state domain
  */
 
-const selectProfileChangePwdDomain = state => state.profileChangePwd || initialState;
+export const selectProfileChangePwdDomain = state => state.profileChangePwd || initialState;
 
 /**
  * Other specific selectors
@@ -15,31 +15,23 @@ const selectProfileChangePwdDomain = state => state.profileChangePwd || initialS
  * Default selector used by ProfileChangePwd
  */
 
-const makeSelectProfile = () =>
+export const makeSelectProfile = () =>
   createSelector(
     selectProfileChangePwdDomain,
     substate => substate,
   );
-const makeSelectEditForm = () =>
+export const makeSelectEditForm = () =>
   createSelector(
     selectProfileChangePwdDomain,
     substate => substate.editForm,
   );
-const makeUpdateStatus = () =>
+export const makeUpdateStatus = () =>
   createSelector(
     selectProfileChangePwdDomain,
     substate => substate.status,
   );
-const makeErrorUpdate = () =>
+export const makeErrorUpdate = () =>
   createSelector(
     selectProfileChangePwdDomain,
     substate => substate.error,
   );
-
-export {
-  selectProfileChangePwdDomain,
-  makeSelectProfile,
-  makeUpdateStatus,
-  makeErrorUpdate,
-  makeSelectEditForm,
-};

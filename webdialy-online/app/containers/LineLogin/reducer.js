@@ -22,10 +22,10 @@ const lineLoginReducer = (state = initialState, action) =>
         draft.profile = {};
         break;
       case constants.VERIFY_TOKEN:
-        draft.token = action.payload.token;
+        draft.token = action.payload;
         break;
       case constants.VERIFY_TOKEN_SUCCESS:
-        draft.profile = action.payload.data;
+        draft.profile = action.payload;
         break;
       case constants.VERIFY_TOKEN_ERROR:
         draft.error = action.payload;

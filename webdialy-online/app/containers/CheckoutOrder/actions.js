@@ -234,3 +234,38 @@ export function loadBranchLocationError(payload) {
     payload,
   };
 }
+
+export function loadBranchListSuccess(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LIST_SUCCESS,
+    payload,
+  };
+}
+
+export function loadBranchListError(payload) {
+  return {
+    type: constants.LOAD_BRANCH_LIST_ERROR,
+    payload,
+  };
+}
+
+export function updateTransportAmt(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT,
+    payload,
+  };
+}
+
+export function updateTransportAmtSuccess(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT_SUCCESS,
+    payload,
+  };
+}
+
+export function updateTransportAmtError(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT_ERROR,
+    payload,
+  };
+}

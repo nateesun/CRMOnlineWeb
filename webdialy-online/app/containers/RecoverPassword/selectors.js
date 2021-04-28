@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
  * Direct selector to the recoverPassword state domain
  */
 
-const selectRecoverPasswordDomain = state => state.recoverPassword;
+export const selectRecoverPasswordDomain = state => state.recoverPassword;
 
 /**
  * Other specific selectors
@@ -14,10 +14,8 @@ const selectRecoverPasswordDomain = state => state.recoverPassword;
  * Default selector used by RecoverPassword
  */
 
-const makeSelectRecoverPassword = () =>
+export const makeSelectRecoverPassword = () =>
   createSelector(
     selectRecoverPasswordDomain,
     substate => substate,
   );
-
-export { selectRecoverPasswordDomain, makeSelectRecoverPassword };

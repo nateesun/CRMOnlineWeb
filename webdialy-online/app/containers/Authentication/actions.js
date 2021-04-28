@@ -18,9 +18,9 @@ export function loadRoleSuccess(payload) {
     payload,
   };
 }
-export function loadRoleError(error) {
+export function loadRoleError(payload) {
   return {
     type: constants.LOAD_ROLE_ERROR,
-    error,
+    payload,
   };
 }

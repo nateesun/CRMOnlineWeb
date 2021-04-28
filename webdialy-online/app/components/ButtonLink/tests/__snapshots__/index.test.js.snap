@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonLink components test snapshot 1`] = `
+<a
+  className="ButtonLink__StyledLink-sc-1pptk3-0 gOeyQX"
+  href="/"
+  onClick={[Function]}
+>
+  Test Button
+</a>
+`;

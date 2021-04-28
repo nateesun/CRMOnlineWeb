@@ -40,15 +40,6 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-// store.subscribe(() =>
-//   console.log(
-//     store.getState().login &&
-//       store.getState().login.profile &&
-//       store.getState().login.profile.loggedIn,
-//   ),
-// );
-// store.subscribe(() => console.log(store.getState()));
-
 const AppMain = () => {
   if (process.env.NODE_ENV === 'demo') {
     return (

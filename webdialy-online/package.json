@@ -49,7 +49,7 @@
     "prettify": "prettier --write",
     "watch": "cross-env NODE_ENV=development nodemon server",
     "watch:demo": "cross-env PORT=3333 NODE_ENV=demo nodemon server",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"" 
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "browserslist": [
     "last 2 versions",
@@ -86,6 +86,7 @@
     "cross-env": "5.2.0",
     "dateformat": "^4.4.1",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
     "express": "4.16.4",
     "fontfaceobserver": "2.1.0",
     "fontsource-roboto": "^3.0.3",

@@ -19,12 +19,13 @@ import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import CheckoutContent from './CheckoutContent';
+import MainComponents from './components';
 import * as actions from './actions';
 
 export function Checkout(props) {
   useInjectReducer({ key: 'checkout', reducer });
   useInjectSaga({ key: 'checkout', saga });
+
   const [activeStep, setActiveStep] = useState(0);
   const [file, setFile] = useState(null);
   const [showImg, setShowImg] = useState(false);
@@ -34,13 +35,12 @@ export function Checkout(props) {
   useEffect(() => {
     const { cart_no: cartNo } = props.match.params;
     props.initLoadCart(cartNo);
-    props.initLoadMemberShipping();
     props.intiLoadBranchLocation();
   }, []);
 
   return (
     <MainLayoutApp title="Checkout Order" {...props}>
-      <CheckoutContent
+      <MainComponents
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         file={file}
@@ -61,6 +61,7 @@ Checkout.propTypes = {
   initLoadCart: PropTypes.func,
   initLoadMemberShipping: PropTypes.func,
   match: PropTypes.object,
+  branchList: PropTypes.array,
   intiLoadBranchLocation: PropTypes.func,
 };
 
@@ -77,6 +78,7 @@ const mapStateToProps = createStructuredSelector({
   leftMenu: appSelectors.makeSelectLeftMenu(),
   profile: mainSelectors.makeSelectProfile(),
   branch: selectors.makeSelectBranch(),
+  branchList: selectors.makeSelectBranchList(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -89,10 +91,12 @@ function mapDispatchToProps(dispatch) {
     setPaymentData: data => dispatch(actions.setPaymentData(data)),
     checkSlipImage: image => dispatch(actions.checkSlip(image)),
     deleteItemCart: productCode => dispatch(actions.deleteItemCart(productCode)),
-    updateItemCart: (productCode, qty) => dispatch(actions.updateItemCart({ productCode, qty })),
+    updateItemCart: (productCode, qty) =>
+      dispatch(actions.updateItemCart({ product_code: productCode, qty })),
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),
+    onUpdateTransportAmount: distance => dispatch(actions.updateTransportAmt(distance)),
   };
 }
 

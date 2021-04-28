@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the usePromotion state domain
  */
 
-const selectUsePromotionDomain = state => state.usePromotion || initialState;
+export const selectUsePromotionDomain = state => state.usePromotion || initialState;
 
 /**
  * Other specific selectors
@@ -15,44 +15,34 @@ const selectUsePromotionDomain = state => state.usePromotion || initialState;
  * Default selector used by UsePromotion
  */
 
-const makeSelectUsePromotion = () =>
+export const makeSelectUsePromotion = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectUsePromotionDomain,
     substate => substate.response,
   );
-
-export {
-  selectUsePromotionDomain,
-  makeSelectUsePromotion,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-};

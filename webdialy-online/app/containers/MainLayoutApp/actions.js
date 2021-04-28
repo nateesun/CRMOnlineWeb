@@ -17,9 +17,9 @@ export function loadProfileSuccess(payload) {
     payload,
   };
 }
-export function loadProfileError(error) {
+export function loadProfileError(payload) {
   return {
     type: constants.LOAD_PROFILE_ERROR,
-    error,
+    payload,
   };
 }

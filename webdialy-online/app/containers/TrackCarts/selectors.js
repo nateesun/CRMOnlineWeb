@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the trackCarts state domain
  */
 
-const selectTrackCartsDomain = state => state.trackCarts || initialState;
+export const selectTrackCartsDomain = state => state.trackCarts || initialState;
 
 /**
  * Other specific selectors
@@ -15,44 +15,34 @@ const selectTrackCartsDomain = state => state.trackCarts || initialState;
  * Default selector used by TrackCarts
  */
 
-const makeSelectTrackCarts = () =>
+export const makeSelectTrackCarts = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectTrackCartsDomain,
     substate => substate.response,
   );
-
-export {
-  selectTrackCartsDomain,
-  makeSelectTrackCarts,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-};

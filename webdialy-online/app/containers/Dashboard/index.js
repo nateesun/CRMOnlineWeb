@@ -20,7 +20,7 @@ import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
-import DashboardContent from './DashboardContent';
+import MainComponents from './components';
 
 export function Dashboard(props) {
   useInjectReducer({ key: 'dashboard', reducer });
@@ -33,7 +33,7 @@ export function Dashboard(props) {
 
   return (
     <MainLayoutApp title="Overview" {...props}>
-      <DashboardContent {...props} />
+      <MainComponents {...props} />
     </MainLayoutApp>
   );
 }

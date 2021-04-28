@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import MapMarker from './MapMarker';
+import MapMarker from './components/MapMarker';
 import * as selectors from './selectors';
 
 export function GoogleMap(props) {

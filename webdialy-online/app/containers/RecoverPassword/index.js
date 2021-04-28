@@ -6,18 +6,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import * as selectors from './selectors';
-import messages from './messages';
 
 export function RecoverPassword() {
-  return (
-    <React.Fragment>
-      <FormattedMessage {...messages.header} />
-    </React.Fragment>
-  );
+  return <div>Recover Password</div>;
 }
 
 RecoverPassword.propTypes = {};

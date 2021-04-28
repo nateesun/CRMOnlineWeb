@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the ProfileShipping state domain
  */
 
-const selectProfileShippingDomain = state => state.profileShipping || initialState;
+export const selectProfileShippingDomain = state => state.profileShipping || initialState;
 
 /**
  * Other specific selectors
@@ -15,37 +15,28 @@ const selectProfileShippingDomain = state => state.profileShipping || initialSta
  * Default selector used by ProfileShipping
  */
 
-const makeSelectProfileShipping = () =>
+export const makeSelectProfileShipping = () =>
   createSelector(
     selectProfileShippingDomain,
     substate => substate,
   );
-const makeSelectShipping = () =>
+export const makeSelectShipping = () =>
   createSelector(
     selectProfileShippingDomain,
     substate => substate.shipping,
   );
-const makeSelectAddressData = () =>
+export const makeSelectAddressData = () =>
   createSelector(
     selectProfileShippingDomain,
     substate => substate.address,
   );
-const makeUpdateStatus = () =>
+export const makeUpdateStatus = () =>
   createSelector(
     selectProfileShippingDomain,
     substate => substate.status,
   );
-const makeErrorUpdate = () =>
+export const makeErrorUpdate = () =>
   createSelector(
     selectProfileShippingDomain,
     substate => substate.error,
   );
-
-export {
-  selectProfileShippingDomain,
-  makeSelectProfileShipping,
-  makeUpdateStatus,
-  makeErrorUpdate,
-  makeSelectShipping,
-  makeSelectAddressData,
-};

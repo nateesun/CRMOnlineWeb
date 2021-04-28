@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the memberOrdersConfirm state domain
  */
 
-const selectMemberOrdersConfirmDomain = state => state.memberOrdersConfirm || initialState;
+export const selectMemberOrdersConfirmDomain = state => state.memberOrdersConfirm || initialState;
 
 /**
  * Other specific selectors
@@ -15,37 +15,28 @@ const selectMemberOrdersConfirmDomain = state => state.memberOrdersConfirm || in
  * Default selector used by MemberOrdersConfirm
  */
 
-const makeSelectMemberOrdersConfirm = () =>
+export const makeSelectMemberOrdersConfirm = () =>
   createSelector(
     selectMemberOrdersConfirmDomain,
     substate => substate,
   );
-const makeSelectData = () =>
+export const makeSelectData = () =>
   createSelector(
     selectMemberOrdersConfirmDomain,
     substate => substate.data,
   );
-const makeSelectOrderList = () =>
+export const makeSelectOrderList = () =>
   createSelector(
     selectMemberOrdersConfirmDomain,
     substate => substate.list,
   );
-const makeSelectConfirmData = () =>
+export const makeSelectConfirmData = () =>
   createSelector(
     selectMemberOrdersConfirmDomain,
     substate => substate.confirmData,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectMemberOrdersConfirmDomain,
     substate => substate.response,
   );
-
-export {
-  selectMemberOrdersConfirmDomain,
-  makeSelectMemberOrdersConfirm,
-  makeSelectData,
-  makeSelectOrderList,
-  makeSelectConfirmData,
-  makeSelectResponse,
-};

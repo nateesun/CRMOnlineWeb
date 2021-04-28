@@ -19,7 +19,7 @@ import * as appSelectors from 'containers/App/selectors';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import * as actions from './actions';
-import ContentPage from './ContentPage';
+import MainComponents from './components';
 import saga from './saga';
 
 const useStyles = makeStyles(() => ({
@@ -40,7 +40,7 @@ export function MsCompany(props) {
   return (
     <MainLayoutApp title="Company" {...props}>
       <Grid container spacing={1} className={classes.root}>
-        <ContentPage {...props} />
+        <MainComponents {...props} />
       </Grid>
     </MainLayoutApp>
   );

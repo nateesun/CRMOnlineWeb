@@ -5,8 +5,13 @@ const mockPayload = {
 };
 
 describe('selectMemberTrackingDomain', () => {
-  it('Expect mock state and initial state from selectMemberTrackingDomain is equal', () => {
+  const domain = selectors.selectMemberTrackingDomain(mockPayload);
+  it('Expect from selectMemberTrackingDomain is equal', () => {
     const state = selectors.selectMemberTrackingDomain(mockPayload);
-    expect(state).toEqual(mockPayload.memberTracking);
+    expect(state).toEqual(domain);
+  });
+  it('Expect from makeSelectMemberTracking is equal', () => {
+    const state = selectors.makeSelectMemberTracking();
+    expect(state(mockPayload)).toEqual(domain);
   });
 });

@@ -21,7 +21,23 @@ module.exports = () => {
   module.zeroPad = (num, places) => String(num).padStart(places, "0")
 
   module.getUUID = () => {
-    return uuidv4();
+    return uuidv4()
+  }
+
+  module.computeDirection = (distance, direction, mappingType, mappingBaht) => {
+    let totalTransportAmt = 0
+    const dir = direction.split("-")
+    const dir1 = parseInt(dir[0])
+    const dir2 = dir[1].toLowerCase() === "max" ? 999 : parseInt(dir[1])
+    if (distance >= dir1 && distance <= dir2) {
+      if (mappingType === "A") {
+        totalTransportAmt = mappingBaht
+      } else if (mappingType === "B") {
+        totalTransportAmt = distance * mappingBaht
+      }
+    }
+
+    return totalTransportAmt
   }
 
   return module
