@@ -27,7 +27,7 @@ export function* initLoad() {
 export function* onApproveConfirmOrder() {
   try {
     const requestURL = `${appConstants.publicPath}/api/orders`;
-    const { database } = yield select(selectors.makeSelectData());
+    const { database, cart_no: cartNo } = yield select(selectors.makeSelectData());
     const {
       order_no: orderNo,
       member_code_update: memberCodeUpdate,
@@ -46,6 +46,7 @@ export function* onApproveConfirmOrder() {
         signature,
         order_status: orderStatus,
         member_mobile: memberMobile,
+        cart_no: cartNo,
       }),
     });
     if (response.status === 'Success') {

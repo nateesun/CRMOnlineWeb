@@ -19,7 +19,7 @@ import * as appConstants from 'containers/App/constants';
 import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import LoginForm from './LoginForm';
+import MainComponents from './components';
 import * as actions from './actions';
 
 const Login = props => {
@@ -46,7 +46,7 @@ const Login = props => {
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <LoginForm {...props} />
+      <MainComponents {...props} />
     </React.Fragment>
   );
 };
@@ -66,7 +66,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onValidateLogin: ({ username, password }) => {
-      dispatch(actions.checkLogin(username, password));
+      dispatch(actions.checkLogin({ username, password }));
     },
     clearData: () => {
       dispatch(actions.initState());

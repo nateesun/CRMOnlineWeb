@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the profileEdit state domain
  */
 
-const selectProfileEditDomain = state => state.profileEdit || initialState;
+export const selectProfileEditDomain = state => state.profileEdit || initialState;
 
 /**
  * Other specific selectors
@@ -15,20 +15,18 @@ const selectProfileEditDomain = state => state.profileEdit || initialState;
  * Default selector used by ProfileEdit
  */
 
-const makeSelectProfile = () =>
+export const makeSelectProfile = () =>
   createSelector(
     selectProfileEditDomain,
     substate => substate,
   );
-const makeUpdateStatus = () =>
+export const makeUpdateStatus = () =>
   createSelector(
     selectProfileEditDomain,
     substate => substate.status,
   );
-const makeErrorUpdate = () =>
+export const makeErrorUpdate = () =>
   createSelector(
     selectProfileEditDomain,
     substate => substate.error,
   );
-
-export { selectProfileEditDomain, makeSelectProfile, makeUpdateStatus, makeErrorUpdate };

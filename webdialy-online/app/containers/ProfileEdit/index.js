@@ -18,7 +18,7 @@ import * as appSelectors from 'containers/App/selectors';
 import * as actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import EditForm from './EditForm';
+import MainComponents from './components';
 import * as selectors from './selectors';
 
 export function ProfileEdit(props) {
@@ -27,7 +27,7 @@ export function ProfileEdit(props) {
 
   return (
     <MainLayoutApp title="Edit Profile" {...props}>
-      <EditForm {...props} />
+      <MainComponents {...props} />
     </MainLayoutApp>
   );
 }

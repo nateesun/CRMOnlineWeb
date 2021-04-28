@@ -53,6 +53,22 @@ export function* loadMemberShipping() {
   }
 }
 
+export function* loadBranchShipping() {
+  try {
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/branch`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'GET',
+    });
+    if (response.status === 200) {
+      yield put(actions.loadBranchListSuccess(response.data));
+    }
+  } catch (err) {
+    yield put(actions.loadBranchListError(err));
+  }
+}
+
 export function* uploadFile() {
   try {
     const file = yield select(selectors.makeSelectFileUpload());
@@ -80,7 +96,7 @@ export function* validateSlipUpload() {
     const requestURL = `${appConstants.publicPath}/api/validate_slip`;
     const response = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify({ imgFile }),
+      body: JSON.stringify({ img_file: imgFile }),
     });
     if (response.data) {
       yield put(actions.checkSlipSuccess(response.data));
@@ -101,10 +117,10 @@ export function* onDeleteItemCart() {
     const response = yield call(request, requestURL, {
       database,
       method: 'DELETE',
-      body: JSON.stringify({ cartNo, product_code: productCode }),
+      body: JSON.stringify({ cart_no: cartNo, product_code: productCode }),
     });
     if (response.status === 'Success') {
-      yield loadCartList();
+      yield put(actions.deleteItemCartSuccess('Delete item success'));
     } else {
       yield put(actions.deleteItemCartError('Cannot delete item cart'));
     }
@@ -122,10 +138,10 @@ export function* onUpdateItemCart() {
     const response = yield call(request, requestURL, {
       database,
       method: 'PATCH',
-      body: JSON.stringify({ cartNo, product_code: productCode, qty }),
+      body: JSON.stringify({ cart_no: cartNo, product_code: productCode, qty }),
     });
     if (response.status === 'Success') {
-      yield loadCartList();
+      yield put(actions.updateItemCartSuccess('Update item success'));
     } else {
       yield put(actions.updateItemCartError('Cannot update item cart'));
     }
@@ -155,6 +171,27 @@ export function* onUpdateAddressForm() {
   }
 }
 
+export function* onUpdateCartsBranchShipping() {
+  try {
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { branch_shipping: branchShipping } = yield select(selectors.makeSelectAddressForm());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/carts/update-branch-shipping`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no: cartNo, branch_shipping: branchShipping }),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.updateAddressFormSuccess(response));
+    } else {
+      yield put(actions.updateAddressFormError('Cannot update address form'));
+    }
+  } catch (err) {
+    yield put(actions.updateAddressFormError(err));
+  }
+}
+
 export function* onUpdatePaymentForm() {
   try {
     const cartNo = yield select(selectors.makeSelectCartsNo());
@@ -172,12 +209,31 @@ export function* onUpdatePaymentForm() {
       }),
     });
     if (response.status === 'Success') {
-      yield loadMemberShipping();
+      yield put(actions.setPaymentDataSuccess());
     } else {
       yield put(actions.setPaymentDataError('Cannot update payment form'));
     }
   } catch (err) {
     yield put(actions.setPaymentDataError(err));
+  }
+}
+
+export function* updateTransportAmt() {
+  try {
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { distance } = yield select(selectors.makeSelectPaymentData());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/carts/payment-transport-amt`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no: cartNo, distance }),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.updateTransportAmtSuccess());
+    }
+  } catch (err) {
+    yield put(actions.updateTransportAmtError(err));
   }
 }
 
@@ -192,7 +248,6 @@ export function* onUpdateShoppingStep() {
       body: JSON.stringify({ cart_no: cartNo, shopping_step: 'wait_confirm' }),
     });
     if (response.status === 'Success') {
-      yield loadMemberShipping();
       yield put(actions.updateShoppingStepSuccess('Finish checkout order step'));
     } else {
       yield put(actions.updateShoppingStepError('Cannot update shopping step'));
@@ -229,7 +284,8 @@ export function* onUpdateSlipPath() {
 export function* loadBranchLocation() {
   try {
     const database = getCookie('database');
-    const requestURL = `${appConstants.publicPath}/api/branch`;
+    const { branch_shipping: branchShipping } = yield select(selectors.makeSelectAddressForm());
+    const requestURL = `${appConstants.publicPath}/api/branch/getcode/${branchShipping}`;
     const response = yield call(request, requestURL, {
       database,
       method: 'GET',
@@ -251,13 +307,18 @@ export function* loadBranchLocation() {
 export default function* checkoutSaga() {
   yield takeEvery(constants.LOAD_CART, loadCartList);
   yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadMemberShipping);
+  yield takeEvery(constants.LOAD_MEMBER_SHIPPING, loadBranchShipping);
   yield takeEvery(constants.UPLOAD_IMG, uploadFile);
   yield takeEvery(constants.CHECK_SLIP, validateSlipUpload);
   yield takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart);
+  yield takeEvery(constants.DELETE_ITEM_CART, loadCartList);
   yield takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart);
+  yield takeEvery(constants.UPDATE_ITEM_CART, loadCartList);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateAddressForm);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, onUpdateCartsBranchShipping);
   yield takeEvery(constants.SET_PAYMENT_DATA, onUpdatePaymentForm);
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
-  yield takeEvery(constants.LOAD_BRANCH_LOCATION, loadBranchLocation);
+  yield takeEvery(constants.UPDATE_ADDRESS_FORM, loadBranchLocation);
+  yield takeEvery(constants.UPDATE_TRANSPORT_AMT, updateTransportAmt);
 }

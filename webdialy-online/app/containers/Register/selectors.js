@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the register state domain
  */
 
-const selectRegisterDomain = state => state.register || initialState;
+export const selectRegisterDomain = state => state.register || initialState;
 
 /**
  * Other specific selectors
@@ -15,22 +15,20 @@ const selectRegisterDomain = state => state.register || initialState;
  * Default selector used by Register
  */
 
-const makeSelectMember = () =>
+export const makeSelectMember = () =>
   createSelector(
     selectRegisterDomain,
     registerState => registerState.data,
   );
 
-const makeRegisterStatus = () =>
+export const makeRegisterStatus = () =>
   createSelector(
     selectRegisterDomain,
     registerState => registerState.status,
   );
 
-const makeErrorRegister = () =>
+export const makeErrorRegister = () =>
   createSelector(
     selectRegisterDomain,
     registerState => registerState.error,
   );
-
-export { selectRegisterDomain, makeSelectMember, makeRegisterStatus, makeErrorRegister };

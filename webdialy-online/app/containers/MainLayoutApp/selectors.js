@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the mainLayoutApp state domain
  */
 
-const selectMainLayoutAppDomain = state => state.mainLayoutApp || initialState;
+export const selectMainLayoutAppDomain = state => state.mainLayoutApp || initialState;
 
 /**
  * Other specific selectors
@@ -15,16 +15,14 @@ const selectMainLayoutAppDomain = state => state.mainLayoutApp || initialState;
  * Default selector used by MainLayoutApp
  */
 
-const makeSelectMainLayoutApp = () =>
+export const makeSelectMainLayoutApp = () =>
   createSelector(
     selectMainLayoutAppDomain,
     substate => substate,
   );
 
-const makeSelectProfile = () =>
+export const makeSelectProfile = () =>
   createSelector(
     selectMainLayoutAppDomain,
     substate => substate.profile,
   );
-
-export { makeSelectMainLayoutApp, selectMainLayoutAppDomain, makeSelectProfile };

@@ -12,12 +12,10 @@ export function initState() {
   };
 }
 
-export function verifyToken(token) {
+export function verifyToken(payload) {
   return {
     type: constants.VERIFY_TOKEN,
-    payload: {
-      token,
-    },
+    payload,
   };
 }
 
@@ -28,9 +26,9 @@ export function verifyTokenSuccess(payload) {
   };
 }
 
-export function verifyTokenError(error) {
+export function verifyTokenError(payload) {
   return {
     type: constants.VERIFY_TOKEN_ERROR,
-    payload: error,
+    payload,
   };
 }

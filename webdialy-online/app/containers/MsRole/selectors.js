@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the msRole state domain
  */
 
-const selectMsRoleDomain = state => state.msRole || initialState;
+export const selectMsRoleDomain = state => state.msRole || initialState;
 
 /**
  * Other specific selectors
@@ -15,44 +15,34 @@ const selectMsRoleDomain = state => state.msRole || initialState;
  * Default selector used by MsRole
  */
 
-const makeSelectMsRole = () =>
+export const makeSelectMsRole = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectMsRoleDomain,
     substate => substate.response,
   );
-
-export {
-  selectMsRoleDomain,
-  makeSelectMsRole,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-};

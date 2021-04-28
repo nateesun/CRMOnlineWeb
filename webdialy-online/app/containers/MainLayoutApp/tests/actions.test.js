@@ -10,4 +10,22 @@ describe('MainLayoutApp actions', () => {
       expect(actions.loadProfile()).toEqual(expected);
     });
   });
+  describe('loadProfileSuccess Action', () => {
+    it('has a type of LOAD_PROFILE_SUCCESS', () => {
+      const expected = {
+        type: constants.LOAD_PROFILE_SUCCESS,
+        payload: 'success',
+      };
+      expect(actions.loadProfileSuccess('success')).toEqual(expected);
+    });
+  });
+  describe('loadProfileError Action', () => {
+    it('has a type of LOAD_PROFILE_ERROR', () => {
+      const expected = {
+        type: constants.LOAD_PROFILE_ERROR,
+        payload: 'error',
+      };
+      expect(actions.loadProfileError('error')).toEqual(expected);
+    });
+  });
 });

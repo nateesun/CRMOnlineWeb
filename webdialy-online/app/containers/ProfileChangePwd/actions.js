@@ -25,9 +25,9 @@ export function updatePasswordSuccess() {
   };
 }
 
-export function updatePasswordError(error) {
+export function updatePasswordError(payload) {
   return {
     type: constants.UPDATE_PASSWORD_ERROR,
-    payload: error,
+    payload,
   };
 }

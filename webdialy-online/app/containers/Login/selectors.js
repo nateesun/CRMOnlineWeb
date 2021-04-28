@@ -5,42 +5,33 @@ import { initialState } from './reducer';
  * Direct selector to the login state domain
  */
 
-const selectLogin = state => state.login || initialState;
+export const selectLogin = state => state.login || initialState;
 
-const makeSelectLogin = () =>
+export const makeSelectLogin = () =>
   createSelector(
     selectLogin,
     loginState => loginState.loginForm,
   );
 
-const makeSelectProfile = () =>
+export const makeSelectProfile = () =>
   createSelector(
     selectLogin,
     loginState => loginState.profile,
   );
 
-const makeLoginError = () =>
+export const makeLoginError = () =>
   createSelector(
     selectLogin,
     loginState => loginState.error,
   );
 
-const makeSelectLoggedIn = () =>
+export const makeSelectLoggedIn = () =>
   createSelector(
     selectLogin,
     loginState => loginState.loggedIn,
   );
-const makeSelectDatabase = () =>
+export const makeSelectDatabase = () =>
   createSelector(
     selectLogin,
     loginState => loginState.queryDb,
   );
-
-export {
-  selectLogin,
-  makeSelectLogin,
-  makeSelectProfile,
-  makeLoginError,
-  makeSelectLoggedIn,
-  makeSelectDatabase,
-};

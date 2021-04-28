@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the msCompany state domain
  */
 
-const selectMsCompanyDomain = state => state.msCompany || initialState;
+export const selectMsCompanyDomain = state => state.msCompany || initialState;
 
 /**
  * Other specific selectors
@@ -15,50 +15,39 @@ const selectMsCompanyDomain = state => state.msCompany || initialState;
  * Default selector used by MsCompany
  */
 
-const makeSelectMsCompany = () =>
+export const makeSelectMsCompany = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.data,
   );
-const makeSelectFileUpload = () =>
+export const makeSelectFileUpload = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.img_upload,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectMsCompanyDomain,
     substate => substate.response,
   );
-
-export {
-  selectMsCompanyDomain,
-  makeSelectMsCompany,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-  makeSelectFileUpload,
-};

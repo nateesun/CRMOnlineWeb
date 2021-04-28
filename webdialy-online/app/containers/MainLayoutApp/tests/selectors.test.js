@@ -1,12 +1,20 @@
 import * as selectors from '../selectors';
+import { initialState } from '../reducer';
 
-const mockPayload = {
-  profile: {},
-};
+const mockPayload = initialState;
 
 describe('selectMainLayoutAppDomain', () => {
-  it('Expect mock state and initial state from selectMainLayoutAppDomain is equal', () => {
+  const domain = selectors.selectMainLayoutAppDomain(mockPayload);
+  it('Expect from selectMainLayoutAppDomain is equal', () => {
     const state = selectors.selectMainLayoutAppDomain(mockPayload);
-    expect(state).toEqual(mockPayload);
+    expect(state).toEqual(domain);
+  });
+  it('Expect from makeSelectMainLayoutApp is equal', () => {
+    const state = selectors.makeSelectMainLayoutApp();
+    expect(state(mockPayload)).toEqual(domain);
+  });
+  it('Expect from makeSelectProfile is equal', () => {
+    const state = selectors.makeSelectProfile();
+    expect(state(mockPayload)).toEqual(domain.profile);
   });
 });

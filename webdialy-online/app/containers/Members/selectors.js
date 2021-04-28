@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the members state domain
  */
 
-const selectMembersDomain = state => state.members || initialState;
+export const selectMembersDomain = state => state.members || initialState;
 
 /**
  * Other specific selectors
@@ -15,50 +15,39 @@ const selectMembersDomain = state => state.members || initialState;
  * Default selector used by Members
  */
 
-const makeSelectMembers = () =>
+export const makeSelectMembers = () =>
   createSelector(
     selectMembersDomain,
     substate => substate,
   );
 
-const makeSelectCurrentId = () =>
+export const makeSelectCurrentId = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.currentId,
   );
-const makeSelectPage = () =>
+export const makeSelectPage = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.page,
   );
-const makeSelectListItems = () =>
+export const makeSelectListItems = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.list,
   );
-const makeSelectForm = () =>
+export const makeSelectForm = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.data,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.response,
   );
-const makeSelectRolesList = () =>
+export const makeSelectRolesList = () =>
   createSelector(
     selectMembersDomain,
     substate => substate.rolesList,
   );
-
-export {
-  selectMembersDomain,
-  makeSelectMembers,
-  makeSelectPage,
-  makeSelectListItems,
-  makeSelectForm,
-  makeSelectCurrentId,
-  makeSelectResponse,
-  makeSelectRolesList,
-};

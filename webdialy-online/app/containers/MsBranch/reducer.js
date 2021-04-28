@@ -16,6 +16,15 @@ export const initialState = {
     name: '',
     map_latitude: 13.809992,
     map_longitude: 100.41313,
+    mapping_direction_length1: '',
+    mapping_direction_length2: '',
+    mapping_direction_length3: '',
+    mapping_type1: '',
+    mapping_type2: '',
+    mapping_type3: '',
+    mapping_baht1: '',
+    mapping_baht2: '',
+    mapping_baht3: '',
   },
   page: 'LIST',
   status: null,
@@ -47,6 +56,10 @@ const msBranchReducer = (state = initialState, action) =>
         draft.response.message = '';
         break;
       case constants.INIT_LOAD:
+        draft.data = {
+          map_latitude: initialState.data.map_latitude,
+          map_longitude: initialState.data.map_longitude,
+        };
         break;
       case constants.INIT_LOAD_SUCCESS:
         draft.list = action.payload;

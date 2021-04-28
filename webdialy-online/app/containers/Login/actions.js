@@ -24,14 +24,10 @@ export function clearLogin() {
   };
 }
 
-export function checkLogin(username, password, type) {
+export function checkLogin(payload) {
   return {
     type: constants.CHECK_LOGIN,
-    payload: {
-      username,
-      password,
-      type,
-    },
+    payload,
   };
 }
 
@@ -42,10 +38,10 @@ export function checkLoginSuccess(payload) {
   };
 }
 
-export function checkLoginError(error) {
+export function checkLoginError(payload) {
   return {
     type: constants.CHECK_LOGIN_ERROR,
-    payload: error,
+    payload,
   };
 }
 
@@ -61,16 +57,16 @@ export function checkLogoutSuccess() {
   };
 }
 
-export function checkLogoutError(error) {
+export function checkLogoutError(payload) {
   return {
     type: constants.CHECK_LOGOUT_ERROR,
-    payload: error,
+    payload,
   };
 }
 
-export function loadProfileFromToken(token) {
+export function loadProfileFromToken(payload) {
   return {
     type: constants.LOAD_PROFILE_TOKEN,
-    payload: token,
+    payload,
   };
 }

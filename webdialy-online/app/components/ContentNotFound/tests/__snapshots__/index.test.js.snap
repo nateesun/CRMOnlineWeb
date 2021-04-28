@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentNotFound components test snapshot 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <img
+    alt=""
+    src="IMAGE_MOCK"
+    width={100}
+  />
+  <h1 />
+</div>
+`;

@@ -9,7 +9,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import history from 'utils/history';
 import * as path from 'containers/App/constants';
-import { scope } from 'containers/App/messages';
+import { scope } from 'containers/App/components/messages';
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +58,8 @@ const SubMenu = props => {
     return null;
   }
 
+  const getLayoutCss = title === 'Shopping' ? classes.layoutRelative : classes.layoutFixed;
+
   return (
     <BottomNavigation
       value={value}
@@ -65,9 +67,7 @@ const SubMenu = props => {
         setValue(newValue);
       }}
       showLabels
-      className={{
-        position: title === 'Shopping' ? classes.layoutRelative : classes.layoutFixed,
-      }}
+      className={getLayoutCss}
     >
       {props.leftMenu &&
         props.leftMenu.map(item => {

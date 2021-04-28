@@ -1,25 +1,23 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectRouter = state => state.router;
-const selectAppDomain = state => state.app || initialState;
+export const selectAppDomain = state => state.app || initialState;
+export const selectRouter = state => state.router;
 
-const makeSelectLocation = () =>
+export const makeSelectLocation = () =>
   createSelector(
     selectRouter,
-    routerState => routerState.location,
+    substate => substate.location,
   );
 
-const makeSelectApp = () =>
+export const makeSelectApp = () =>
   createSelector(
     selectAppDomain,
     substate => substate,
   );
 
-const makeSelectLeftMenu = () =>
+export const makeSelectLeftMenu = () =>
   createSelector(
     selectAppDomain,
     substate => substate.leftMenu,
   );
-
-export { makeSelectLocation, makeSelectApp, makeSelectLeftMenu };

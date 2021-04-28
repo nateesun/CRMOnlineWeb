@@ -284,6 +284,7 @@
   "app.containers.TrackCarts.order": "ส่ังยังไม่เสร็จ",
   "app.containers.TrackCarts.not_approve": "ไม่อนุมัติ",
   "app.containers.TrackCarts.wait_confirm": "รออนุมัติ",
+  "app.containers.TrackCarts.finish": "เสร็จสมบูรณ์",
   "app.containers.TrackOrders.member_approve": "ลูกค้าเซ็นต์รับสินค้า",
   "app.containers.Members.headerViewItem": "รายละเอียดสมาชิก",
   "app.containers.Members.memberCode": "รหัสสมาชิก",

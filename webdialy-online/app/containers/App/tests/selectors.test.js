@@ -1,13 +1,33 @@
-import { makeSelectLocation } from 'containers/App/selectors';
+/**
+ * App selectors
+ */
 
-describe('makeSelectLocation', () => {
-  it('should select the location', () => {
-    const router = {
-      location: { pathname: '/foo' },
-    };
-    const mockedState = {
-      router,
-    };
-    expect(makeSelectLocation()(mockedState)).toEqual(router.location);
+import * as selectors from '../selectors';
+import { initialState } from '../reducer';
+
+const mockPayload = initialState;
+
+describe('selectAppDomain', () => {
+  const domainRouter = selectors.selectRouter(mockPayload);
+  const domain = selectors.selectAppDomain(mockPayload);
+  it('Expect from selectRouter is equal', () => {
+    const state = selectors.selectRouter(mockPayload);
+    expect(state).toEqual(domainRouter);
+  });
+  it('Expect from selectAppDomain is equal', () => {
+    const state = selectors.selectAppDomain(mockPayload);
+    expect(state).toEqual(domain);
+  });
+  it('Expect from makeSelectLocation is equal', () => {
+    const state = selectors.makeSelectLocation();
+    expect(state(mockPayload)).toEqual(domainRouter.location);
+  });
+  it('Expect from makeSelectApp is equal', () => {
+    const state = selectors.makeSelectApp();
+    expect(state(mockPayload)).toEqual(domain);
+  });
+  it('Expect from makeSelectLeftMenu is equal', () => {
+    const state = selectors.makeSelectLeftMenu();
+    expect(state(mockPayload)).toEqual(domain.leftMenu);
   });
 });

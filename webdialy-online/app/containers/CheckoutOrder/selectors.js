@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the checkout state domain
  */
 
-const selectCheckoutDomain = state => state.checkout || initialState;
+export const selectCheckoutDomain = state => state.checkout || initialState;
 
 /**
  * Other specific selectors
@@ -15,92 +15,79 @@ const selectCheckoutDomain = state => state.checkout || initialState;
  * Default selector used by Checkout
  */
 
-const makeSelectCheckout = () =>
+export const makeSelectCheckout = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate,
   );
 
-const makeSelectCarts = () =>
+export const makeSelectCarts = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.cartList,
   );
-const makeSelectCartsNo = () =>
+export const makeSelectCartsNo = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.cart_no,
   );
-const makeSelectProduct = () =>
+export const makeSelectProduct = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.product,
   );
-const makeSelectMemberCode = () =>
+export const makeSelectMemberCode = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.member_code,
   );
-const makeSelectMemberShipping = () =>
+export const makeSelectMemberShipping = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.memberShipping,
   );
-const makeSelectFileUpload = () =>
+export const makeSelectFileUpload = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.img_upload,
   );
-const makeSelectPaymentData = () =>
+export const makeSelectPaymentData = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.paymentData,
   );
-const makeSelectSlipFile = () =>
+export const makeSelectSlipFile = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.slipFileName,
   );
-const makeSelectSlipValidateStatus = () =>
+export const makeSelectSlipValidateStatus = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.slipValidateStatus,
   );
-const makeSelectAddressForm = () =>
+export const makeSelectAddressForm = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.addressForm,
   );
-const makeSelectSlipPath = () =>
+export const makeSelectSlipPath = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.slipPath,
   );
-const makeSelectResponse = () =>
+export const makeSelectResponse = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.response,
   );
-const makeSelectBranch = () =>
+export const makeSelectBranch = () =>
   createSelector(
     selectCheckoutDomain,
     substate => substate.branch,
   );
-
-export {
-  selectCheckoutDomain,
-  makeSelectCheckout,
-  makeSelectCarts,
-  makeSelectCartsNo,
-  makeSelectMemberCode,
-  makeSelectMemberShipping,
-  makeSelectFileUpload,
-  makeSelectPaymentData,
-  makeSelectSlipFile,
-  makeSelectSlipValidateStatus,
-  makeSelectProduct,
-  makeSelectAddressForm,
-  makeSelectSlipPath,
-  makeSelectResponse,
-  makeSelectBranch,
-};
+export const makeSelectBranchList = () =>
+  createSelector(
+    selectCheckoutDomain,
+    substate => substate.branchList,
+  );
