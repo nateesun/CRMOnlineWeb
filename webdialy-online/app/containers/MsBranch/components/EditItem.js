@@ -189,7 +189,7 @@ const EditItem = props => {
             />
           </Grid>
         </Grid>
-        {/* directiom #1 */}
+        {/* directiom #3 */}
         <Grid container spacing={1}>
           <Grid item xs={3}>
             <Field
@@ -221,6 +221,84 @@ const EditItem = props => {
           <Grid item xs={4}>
             <Field
               name="mapping_baht3"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mappingBaht} />}
+            />
+          </Grid>
+        </Grid>
+        {/* directiom #4 */}
+        <Grid container spacing={1} className={classes.greenPaper}>
+          <Grid item xs={3}>
+            <Field
+              name="mapping_bill_amt1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.billTotalAmount} />}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="bill_type1"
+                component={InputSelectOptions}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mappingType} />}
+              >
+                <option key="A" value="A">
+                  ฟรีค่าส่งสินค้า
+                </option>
+                <option key="B" value="B">
+                  คิดค่าส่งสินค้าเพิ่ม
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="add_money1"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.mappingBaht} />}
+            />
+          </Grid>
+        </Grid>
+        {/* directiom #5 */}
+        <Grid container spacing={1} className={classes.greenPaper}>
+          <Grid item xs={3}>
+            <Field
+              name="mapping_bill_amt2"
+              component={RenderField}
+              type="text"
+              margin="normal"
+              label={<FormattedMessage {...messages.billTotalAmount} />}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <div className={classes.divRedeem}>
+              <Field
+                name="bill_type2"
+                component={InputSelectOptions}
+                type="text"
+                margin="normal"
+                label={<FormattedMessage {...messages.mappingType} />}
+              >
+                <option key="A" value="A">
+                  ฟรีค่าส่งสินค้า
+                </option>
+                <option key="B" value="B">
+                  คิดค่าส่งสินค้าเพิ่ม
+                </option>
+              </Field>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <Field
+              name="add_money2"
               component={RenderField}
               type="text"
               margin="normal"

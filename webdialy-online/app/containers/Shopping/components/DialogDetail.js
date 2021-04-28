@@ -82,7 +82,7 @@ export default function DialogDetail(props) {
   };
 
   const saveCartItem = () => {
-    if (cart.cart_no) {
+    if (cart && cart.cart_no) {
       props.onUpdateCartItem({
         ...item,
         qty,

@@ -13,6 +13,7 @@ import * as constants from './constants';
 export const initialState = {
   productList: [],
   cart: {},
+  cart_no: '',
   itemCart: {
     carts: {
       uuid_index: '',
@@ -144,6 +145,24 @@ const shoppingReducer = (state = initialState, action) =>
       case constants.SEARCH_PRODUCT_ERROR:
         draft.response.status = 'Search_Product_Error';
         draft.response.message = 'Search product error!';
+        break;
+      case constants.LOAD_CART:
+        draft.cart_no = action.payload;
+        break;
+      case constants.LOAD_CART_SUCCESS:
+        if (action.payload !== 'Not found carts') {
+          draft.cart = action.payload;
+          draft.response.status = 'Load_Cart_Success';
+          draft.response.message = 'Load cart success';
+        } else {
+          draft.cart = {
+            cart_no: '',
+          };
+        }
+        break;
+      case constants.LOAD_CART_ERROR:
+        draft.response.status = 'Load_Cart_Error';
+        draft.response.message = 'Load cart error!';
         break;
     }
   });
