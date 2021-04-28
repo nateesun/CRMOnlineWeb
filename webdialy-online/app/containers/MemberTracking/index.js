@@ -33,9 +33,9 @@ export function MemberTracking(props) {
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <TrackOrders {...props} showCommand={false} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </MainLayoutApp>
   );

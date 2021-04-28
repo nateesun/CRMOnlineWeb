@@ -65,8 +65,10 @@ export default function TabLayout(props) {
     <React.Fragment>
       <AppBar position="static" color="default">
         <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary">
-          <Tab label="รายการรออนุมัติ" {...a11yProps(0)} />
-          <Tab label="รายการอนุมัติแล้ว" {...a11yProps(1)} />
+          <Tab label="รายการสินค้าในตะกร้า" {...a11yProps(0)} />
+          <Tab label="รออนุมัติ" {...a11yProps(1)} />
+          <Tab label="ระหว่างจัดส่ง" {...a11yProps(2)} />
+          <Tab label="จัดส่งสำเร็จ" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -75,10 +77,16 @@ export default function TabLayout(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0}>
-          <TableItems {...props} />
+          <TableItems tabFilter="order" {...props} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TableItems approve {...props} />
+          <TableItems tabFilter="wait_confirm" {...props} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <TableItems tabFilter="approve" {...props} />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <TableItems tabFilter="finish" {...props} />
         </TabPanel>
       </SwipeableViews>
     </React.Fragment>

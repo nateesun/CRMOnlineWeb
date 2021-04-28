@@ -49,15 +49,9 @@ const useStyles = makeStyles(() => ({
 
 export default function TableItems(props) {
   const database = getCookie('database');
-  const { getList, showCommand = true, approve } = props;
-
-  let showList = getList;
-  if (approve) {
-    showList = getList.filter(item => item.shopping_step === 'approve');
-  } else {
-    showList = getList.filter(item => item.shopping_step !== 'approve');
-  }
-
+  const { getList, showCommand = true, tabFilter } = props;
+  let showList = getList.slice()
+  showList = showList.filter(item => item.shopping_step === tabFilter);
   const handleDelete = id => {
     Swal.fire({
       title: 'Are you sure?',
@@ -258,7 +252,7 @@ export default function TableItems(props) {
               {showList.length === 0 && (
                 <TableRow>
                   <TableCell align="left" colSpan={9}>
-                    ไม่พบข้อมูลรายการสินค้าในตะกร้า
+                    ไม่พบข้อมูล
                   </TableCell>
                 </TableRow>
               )}
