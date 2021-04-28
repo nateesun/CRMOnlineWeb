@@ -25,6 +25,8 @@ export function Shopping(props) {
   useInjectSaga({ key: 'shopping', saga });
 
   useEffect(() => {
+    const { cart_no: cartNo } = props.match.params;
+    props.initLoadCart(cartNo);
     props.onLoadProduct();
   }, []);
 
@@ -37,6 +39,7 @@ export function Shopping(props) {
 
 Shopping.propTypes = {
   onLoadProduct: PropTypes.func,
+  initLoadCart: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -49,6 +52,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    initLoadCart: cartNo => dispatch(actions.loadCart(cartNo)),
     onLoadProduct: () => dispatch(actions.loadProduct()),
     onAddCartItem: item => dispatch(actions.createItemCart(item)),
     onUpdateCartItem: item => dispatch(actions.updateItemCart(item)),

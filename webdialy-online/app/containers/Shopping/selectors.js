@@ -42,3 +42,8 @@ export const makeSelectSearchData = () =>
     selectShoppingDomain,
     substate => substate.search,
   );
+export const makeSelectCartsNo = () =>
+  createSelector(
+    selectShoppingDomain,
+    substate => substate.cart_no,
+  );

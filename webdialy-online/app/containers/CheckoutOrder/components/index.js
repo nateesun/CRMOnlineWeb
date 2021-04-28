@@ -41,9 +41,17 @@ const useStyles = makeStyles(theme => ({
   separateLine: {
     border: '1px solid #eee',
   },
+  buttonAddItem: {
+    background: 'green',
+    color: 'white',
+    '&:hover': {
+      color: 'white',
+      background: 'darkgreen',
+    },
+  }
 }));
 
-const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'รีวิว'];
+const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'ยืนยันคำสั่งซื้อ'];
 export default function CheckoutContent(props) {
   const classes = useStyles();
   const { activeStep, setActiveStep } = props;
@@ -117,8 +125,8 @@ export default function CheckoutContent(props) {
                   {activeStep === steps.length - 1 ? 'ดำเนินการเสร็จสิ้น' : 'ถัดไป'}
                 </Button>
               </div>
-              <ButtonLink to={`${appConstants.publicPath}/shopping`}>
-                <Button variant="contained">กลับหน้าสั่งสินค้า</Button>
+              <ButtonLink to={`${appConstants.publicPath}/shopping/${props.currentCartNo}`}>
+                <Button variant="contained" className={classes.buttonAddItem}>เลือกสินค้าเพิ่ม</Button>
               </ButtonLink>
             </React.Fragment>
           )}

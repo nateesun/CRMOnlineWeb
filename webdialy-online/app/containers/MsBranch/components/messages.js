@@ -83,14 +83,14 @@ export default defineMessages({
   },
   mapDirectionLength: {
     id: `${scope}.mapDirectionLength`,
-    defaultMessage: 'Mapping Direction',
+    defaultMessage: 'ระยะทาง(กิโลเมตร)',
   },
   mappingType: {
     id: `${scope}.mappingType`,
-    defaultMessage: 'Mapping type',
+    defaultMessage: 'ประเภทการคำนวณ',
   },
   mappingBaht: {
     id: `${scope}.mappingBaht`,
-    defaultMessage: 'Mapping Price (Baht)',
+    defaultMessage: 'ราคา(บาท)',
   },
 });

@@ -400,5 +400,20 @@ module.exports = (db) => {
     })
   }
 
+  module.findByCartToShopping = (cart_no) => {
+    logger.debug(`findByCartToShopping: ${cart_no}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=? and shopping_step='order';`
+        logger.debug(sql)
+        const result = await pool.query(sql, [cart_no])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
   return module
 }

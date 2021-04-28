@@ -42,6 +42,7 @@ export default function NewLayout() {
       <Route path={path.PATH_FORGOT_PWD} component={ForgotPassword} />
       <Route path={path.PATH_RECOVER_PWD} component={RecoverPassword} />
       <Route path={path.PATH_TEST_GOOGLE_MAP} component={GoogleMap} />
+      <Route path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
       <PrivateRoute path={path.PATH_DASHBOARD} component={Dashboard} />
       <PrivateRoute path={path.PATH_PROFILE} component={Profile} />
       <PrivateRoute path={path.PATH_PROFILE_EDIT} component={ProfileEdit} />
@@ -59,7 +60,6 @@ export default function NewLayout() {
       <PrivateRoute path={path.PATH_MS_PROMOTION} component={MsPromotion} />
       <PrivateRoute path={path.PATH_ORDERS_TRACKING} component={MemberTracking} />
       <PrivateRoute path={path.PATH_CHECK_CARTS} component={CheckCarts} />
-      <PrivateRoute path={path.PATH_MEMBER_ORDERS_CONFIRM} component={MemberOrdersConfirm} />
       <PrivateRoute path={path.PATH_DATABASE} component={DatabaseConfig} />
       <PrivateRoute path={path.PATH_USE_PROMOTION} component={UsePromotion} />
       <Route path={path.PATH_ACCESS_DENIED} component={AccessDeniedPage} />
