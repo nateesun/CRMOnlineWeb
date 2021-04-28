@@ -209,12 +209,31 @@ export function* onUpdatePaymentForm() {
       }),
     });
     if (response.status === 'Success') {
-      yield put(actions.setPaymentDataSuccess())
+      yield put(actions.setPaymentDataSuccess());
     } else {
       yield put(actions.setPaymentDataError('Cannot update payment form'));
     }
   } catch (err) {
     yield put(actions.setPaymentDataError(err));
+  }
+}
+
+export function* updateTransportAmt() {
+  try {
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const { distance } = yield select(selectors.makeSelectPaymentData());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/carts/payment-transport-amt`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'PATCH',
+      body: JSON.stringify({ cart_no: cartNo, distance }),
+    });
+    if (response.status === 'Success') {
+      yield put(actions.updateTransportAmtSuccess());
+    }
+  } catch (err) {
+    yield put(actions.updateTransportAmtError(err));
   }
 }
 
@@ -301,4 +320,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.UPDATE_SHOPPING_STEP, onUpdateShoppingStep);
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, loadBranchLocation);
+  yield takeEvery(constants.UPDATE_TRANSPORT_AMT, updateTransportAmt);
 }

@@ -2,7 +2,7 @@
 
 const logger = require("../logger")
 const pool = require("../mysql-connect")
-const { getDB, zeroPad } = require("./FuncUtil")()
+const { getDB, zeroPad, computeDirection } = require("./FuncUtil")()
 
 module.exports = (db) => {
   const module = {}
@@ -10,6 +10,7 @@ module.exports = (db) => {
   const tb_company = getDB(db, "company")
   const tb_carts_detail = getDB(db, "carts_detail")
   const tb_member = getDB(db, "member")
+  const branch_table = getDB(db, "branch")
 
   module.findByCartNo = (cart_no) => {
     logger.debug(`findByCartNo: ${cart_no}`)
@@ -203,7 +204,88 @@ module.exports = (db) => {
       try {
         let sql = `UPDATE ${table_name} SET branch_shipping=? WHERE cart_no=?;`
         logger.debug(sql)
-        const result = await pool.query(sql, [data.branch_shipping, data.cart_no])
+        const result = await pool.query(sql, [
+          data.branch_shipping,
+          data.cart_no,
+        ])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.updateTransportAmount = (data) => {
+    logger.debug(`updateTransportAmount: ${data}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        let sql = `select 
+        b.mapping_direction_length1,
+        b.mapping_direction_length2,
+        b.mapping_direction_length3,
+        b.mapping_type1,
+        b.mapping_type2,
+        b.mapping_type3,
+        b.mapping_baht1,
+        b.mapping_baht2,
+        b.mapping_baht3 
+        from ${table_name} c 
+        inner join ${branch_table} b on c.branch_shipping = b.code 
+        where c.cart_no=?;`
+        const query = await pool.query(sql, [data.cart_no])
+        const transportConfig = query[0];
+
+        let total_transport_amt = 0
+
+        // direction 1
+        let direction = transportConfig.mapping_direction_length1
+        let mappingType = transportConfig.mapping_type1
+        let mappingBaht = transportConfig.mapping_baht1
+        total_transport_amt = computeDirection(
+          data.distance,
+          direction,
+          mappingType,
+          mappingBaht
+        )
+
+        if (total_transport_amt === 0) {
+          // direction 2
+          direction = transportConfig.mapping_direction_length2
+          mappingType = transportConfig.mapping_type2
+          mappingBaht = transportConfig.mapping_baht2
+          total_transport_amt = computeDirection(
+            data.distance,
+            direction,
+            mappingType,
+            mappingBaht
+          )
+        }
+
+        if (total_transport_amt === 0) {
+          // direction 3
+          direction = transportConfig.mapping_direction_length3
+          mappingType = transportConfig.mapping_type3
+          mappingBaht = transportConfig.mapping_baht3
+          total_transport_amt = computeDirection(
+            data.distance,
+            direction,
+            mappingType,
+            mappingBaht
+          )
+        }
+
+        sql = `UPDATE ${table_name} 
+        SET distance=?,
+        total_transport_amt=?,
+        total_net_amt=(total_amount+total_transport_amt) 
+        WHERE cart_no=?;`
+        logger.debug(sql)
+        const result = await pool.query(sql, [
+          data.distance,
+          total_transport_amt,
+          data.cart_no,
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err)
@@ -275,7 +357,7 @@ module.exports = (db) => {
   module.updatePointAndPurchaseToCustomer = (data) => {
     logger.debug(`updatePointAndPurchaseToCustomer: ${data}`)
     return new Promise(async (resolve, reject) => {
-      const { cart_no, member_code } = data;
+      const { cart_no, member_code } = data
       try {
         const sql = `update ${tb_member} set 
         total_score=total_score + (select total_point from ${table_name} c1 
@@ -288,7 +370,13 @@ module.exports = (db) => {
         and c2.member_code =?)
         where code =?;`
         logger.debug(sql)
-        const result = await pool.query(sql, [cart_no, member_code, cart_no, member_code, member_code])
+        const result = await pool.query(sql, [
+          cart_no,
+          member_code,
+          cart_no,
+          member_code,
+          member_code,
+        ])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err)

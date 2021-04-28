@@ -7,7 +7,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import MapDirectionAB from 'containers/GoogleMap/components/MapDirectionAB';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -40,29 +39,8 @@ export default function Review(props) {
     district,
     province,
     postcode,
-    map_latitude: mapLatitude,
-    map_longitude: mapLongitude,
+    
   } = props.shipping;
-  const { map_latitude: latitude, map_longitude: longitude } = props.branch;
-
-  const origin = {
-    position: {
-      lat: () => mapLatitude,
-      lng: () => mapLongitude,
-    },
-  };
-
-  const destination = {
-    position: {
-      lat: () => latitude,
-      lng: () => longitude,
-    },
-  };
-
-  const handleDirection = (distance, duration) => {
-    props.setDistance(distance / 1000);
-    props.setDuration(duration / 60);
-  };
 
   return (
     <React.Fragment>
@@ -117,18 +95,6 @@ export default function Review(props) {
               </Grid>
             </React.Fragment>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <div align="center" className={classes.divBottom}>
-            <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
-          </div>
-        </Grid>
-        <Grid item xs={12}>
-          <div align="center" className={classes.divBottom}>
-            ระยะทาง {props.distance.toFixed(2)} กิโลเมตร
-            <br />
-            ระยะเวลา {props.duration.toFixed(2)} นาที
-          </div>
         </Grid>
       </Grid>
     </React.Fragment>

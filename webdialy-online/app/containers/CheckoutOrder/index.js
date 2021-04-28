@@ -95,6 +95,7 @@ function mapDispatchToProps(dispatch) {
     onUpdateAddressForm: data => dispatch(actions.updateAddressForm(data)),
     onUpdateShoppingStep: () => dispatch(actions.updateShoppingStep()),
     intiLoadBranchLocation: () => dispatch(actions.loadBranchLocation()),
+    onUpdateTransportAmount: distance => dispatch(actions.updateTransportAmt(distance)),
   };
 }
 

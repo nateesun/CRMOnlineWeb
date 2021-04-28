@@ -9,6 +9,8 @@ import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+
+import MapDirectionAB from 'containers/GoogleMap/components/MapDirectionAB';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -32,6 +34,8 @@ const PaymentForm = props => {
   const classes = useStyles();
   const { carts } = props.cartList;
   const { file } = props;
+  const { map_latitude: branchLatitude, map_longitude: branchLongitude } = props.branch;
+  const { map_latitude: customerLatitude, map_longitude: customerLongitude } = props.shipping;
 
   const validateSlipUpload = () => {
     if (file) {
@@ -53,13 +57,54 @@ const PaymentForm = props => {
   const loc = window.location.href.split('/');
   const apiServiceHost = `${loc[0]}//${loc[2]}`.replace('3000', '5000');
 
+  const origin = {
+    position: {
+      lat: () => branchLatitude,
+      lng: () => branchLongitude,
+    },
+  };
+
+  const destination = {
+    position: {
+      lat: () => customerLatitude,
+      lng: () => customerLongitude,
+    },
+  };
+
+  const handleDirection = (distance, duration) => {
+    props.setDistance(distance / 1000);
+    props.setDuration(duration / 60);
+
+    // update transport amount
+    props.onUpdateTransportAmount(distance / 1000);
+  };
+
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        ยอดรับชำระ: จำนวน {carts && carts[0] && carts[0].total_amount} + ค่าจัดส่ง{' '}
-        {carts && carts[0] && carts[0].total_transport_amt} ={' '}
-        {carts && carts[0] && carts[0].total_net_amt} บาท
-      </Typography>
+      {customerLatitude && branchLatitude && (
+        <Grid container>
+          <Grid item xs={12}>
+            <div align="center" className={classes.divBottom}>
+              <MapDirectionAB origin={origin} destination={destination} onExit={handleDirection} />
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <div align="center" className={classes.divBottom}>
+              ระยะทาง {props.distance.toFixed(2)} กิโลเมตร
+              <br />
+              ระยะเวลา {props.duration.toFixed(2)} นาที
+            </div>
+          </Grid>
+        </Grid>
+      )}
+
+      {carts && carts[0] && (
+        <Typography variant="h6" gutterBottom>
+          ยอดรับชำระ: จำนวน {carts[0].total_amount} + ค่าจัดส่ง{' '}
+          {carts[0].total_transport_amt ? carts[0].total_transport_amt : 0} ={' '}
+          {carts[0].total_net_amt} บาท
+        </Typography>
+      )}
       <Divider className={classes.separateLine} />
       <Paper elevation={3} style={{ padding: '10px' }}>
         <Grid container spacing={3}>

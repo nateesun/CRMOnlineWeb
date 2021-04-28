@@ -248,3 +248,24 @@ export function loadBranchListError(payload) {
     payload,
   };
 }
+
+export function updateTransportAmt(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT,
+    payload,
+  };
+}
+
+export function updateTransportAmtSuccess(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT_SUCCESS,
+    payload,
+  };
+}
+
+export function updateTransportAmtError(payload) {
+  return {
+    type: constants.UPDATE_TRANSPORT_AMT_ERROR,
+    payload,
+  };
+}

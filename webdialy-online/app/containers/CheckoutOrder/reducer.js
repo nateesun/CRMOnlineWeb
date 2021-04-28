@@ -122,8 +122,11 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ITEM_CART_ERROR:
         break;
       case constants.UPDATE_ADDRESS_FORM:
+        console.log('UPDATE_ADDRESS_FORM:', action.payload);
         draft.addressForm = action.payload;
-        draft.addressForm.uuid_index = v4();
+        if (!action.payload.uuid_index) {
+          draft.addressForm = { ...action.payload, uuid_index: v4() };
+        }
         break;
       case constants.UPDATE_ADDRESS_FORM_SUCCESS:
         draft.response = {
@@ -156,6 +159,13 @@ const checkoutReducer = (state = initialState, action) =>
         break;
       case constants.LOAD_BRANCH_LIST_ERROR:
         draft.branchList = [];
+        break;
+      case constants.UPDATE_TRANSPORT_AMT:
+        draft.paymentData.distance = action.payload;
+        break;
+      case constants.UPDATE_TRANSPORT_AMT_SUCCESS:
+        break;
+      case constants.UPDATE_TRANSPORT_AMT_ERROR:
         break;
     }
   });
