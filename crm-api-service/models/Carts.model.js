@@ -220,17 +220,7 @@ module.exports = (db) => {
     logger.debug(`updateTransportAmount: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select 
-        b.mapping_direction_length1,
-        b.mapping_direction_length2,
-        b.mapping_direction_length3,
-        b.mapping_type1,
-        b.mapping_type2,
-        b.mapping_type3,
-        b.mapping_baht1,
-        b.mapping_baht2,
-        b.mapping_baht3 
-        from ${table_name} c 
+        let sql = `select b.* from ${table_name} c 
         inner join ${branch_table} b on c.branch_shipping = b.code 
         where c.cart_no=?;`
         const query = await pool.query(sql, [data.cart_no])

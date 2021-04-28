@@ -15,7 +15,7 @@ export default defineMessages({
   },
   newItemHeader: {
     id: `${scope}.newItemHeader`,
-    defaultMessage: 'New Branch',
+    defaultMessage: 'เพิ่มข้อมูลสาขาใหม่',
   },
   updateItemHeader: {
     id: `${scope}.updateItemHeader`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   headerEditItem: {
     id: `${scope}.headerEditItem`,
-    defaultMessage: 'Update Branch',
+    defaultMessage: 'แก้ไขข้อมูลสาขา',
   },
   headerNewItem: {
     id: `${scope}.headerNewItem`,
@@ -92,5 +92,9 @@ export default defineMessages({
   mappingBaht: {
     id: `${scope}.mappingBaht`,
     defaultMessage: 'ราคา(บาท)',
+  },
+  billTotalAmount: {
+    id: `${scope}.billTotalAmount`,
+    defaultMessage: 'ยอดซื้อสินค้า(บาท)',
   },
 });
