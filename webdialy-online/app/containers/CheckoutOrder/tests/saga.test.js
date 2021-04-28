@@ -52,9 +52,17 @@ describe('checkoutSaga Saga', () => {
     const takeLatestDescriptor = generator.next().value;
     expect(takeLatestDescriptor).toEqual(takeEvery(constants.DELETE_ITEM_CART, onDeleteItemCart));
   });
+  it('should start task to watch for DELETE_ITEM_CART', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.DELETE_ITEM_CART, loadCartList));
+  });
   it('should start task to watch for UPDATE_ITEM_CART', () => {
     const takeLatestDescriptor = generator.next().value;
     expect(takeLatestDescriptor).toEqual(takeEvery(constants.UPDATE_ITEM_CART, onUpdateItemCart));
+  });
+  it('should start task to watch for UPDATE_ITEM_CART', () => {
+    const takeLatestDescriptor = generator.next().value;
+    expect(takeLatestDescriptor).toEqual(takeEvery(constants.UPDATE_ITEM_CART, loadCartList));
   });
   it('should start task to watch for UPDATE_ADDRESS_FORM', () => {
     const takeLatestDescriptor = generator.next().value;

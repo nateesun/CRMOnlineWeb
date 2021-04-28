@@ -11,7 +11,6 @@ import { compose } from 'redux';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TrackCarts from 'containers/TrackCarts/Loadable';
-import TrackOrders from 'containers/TrackOrders/Loadable';
 import MainLayoutApp from 'containers/MainLayoutApp';
 import * as mainSelectors from 'containers/MainLayoutApp/selectors';
 import * as appSelectors from 'containers/App/selectors';
@@ -33,9 +32,6 @@ export function MemberTracking(props) {
         <Grid item xs={12}>
           <TrackCarts {...props} showCommand={false} />
         </Grid>
-        {/* <Grid item xs={12}>
-          <TrackOrders {...props} showCommand={false} />
-        </Grid> */}
       </Grid>
     </MainLayoutApp>
   );

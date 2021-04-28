@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
 export default function TableItems(props) {
   const database = getCookie('database');
   const { getList, showCommand = true, tabFilter } = props;
-  let showList = getList.slice()
+  let showList = getList.slice();
   showList = showList.filter(item => item.shopping_step === tabFilter);
   const handleDelete = id => {
     Swal.fire({
@@ -98,7 +98,7 @@ export default function TableItems(props) {
     showCommand: PropTypes.bool,
     profile: PropTypes.object,
     onSearch: PropTypes.func,
-    approve: PropTypes.bool,
+    tabFilter: PropTypes.string,
   };
 
   const handleRefreshPage = () => {

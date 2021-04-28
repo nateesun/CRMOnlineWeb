@@ -39,7 +39,6 @@ export default function Review(props) {
     district,
     province,
     postcode,
-    
   } = props.shipping;
 
   return (
@@ -104,9 +103,4 @@ export default function Review(props) {
 Review.propTypes = {
   cartList: PropTypes.object,
   shipping: PropTypes.object,
-  branch: PropTypes.object,
-  setDistance: PropTypes.func,
-  setDuration: PropTypes.func,
-  distance: PropTypes.number,
-  duration: PropTypes.number,
 };

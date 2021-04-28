@@ -157,6 +157,13 @@ PaymentForm.propTypes = {
   onUploadImage: PropTypes.func,
   showImg: PropTypes.bool,
   imgValid: PropTypes.string,
+  branch: PropTypes.string,
+  shipping: PropTypes.string,
+  setDistance: PropTypes.func,
+  setDuration: PropTypes.func,
+  onUpdateTransportAmount: PropTypes.func,
+  distance: PropTypes.number,
+  duration: PropTypes.number,
 };
 
 const validate = formValues => {

@@ -122,7 +122,6 @@ const checkoutReducer = (state = initialState, action) =>
       case constants.UPDATE_ITEM_CART_ERROR:
         break;
       case constants.UPDATE_ADDRESS_FORM:
-        console.log('UPDATE_ADDRESS_FORM:', action.payload);
         draft.addressForm = action.payload;
         if (!action.payload.uuid_index) {
           draft.addressForm = { ...action.payload, uuid_index: v4() };
