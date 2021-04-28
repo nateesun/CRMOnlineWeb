@@ -40,6 +40,7 @@ export function Shopping(props) {
 Shopping.propTypes = {
   onLoadProduct: PropTypes.func,
   initLoadCart: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

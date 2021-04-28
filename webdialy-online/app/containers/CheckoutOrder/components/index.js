@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
       color: 'white',
       background: 'darkgreen',
     },
-  }
+  },
 }));
 
 const steps = ['สินค้า', 'ที่อยู่', 'รับชำระ', 'ยืนยันคำสั่งซื้อ'];
@@ -126,7 +126,9 @@ export default function CheckoutContent(props) {
                 </Button>
               </div>
               <ButtonLink to={`${appConstants.publicPath}/shopping/${props.currentCartNo}`}>
-                <Button variant="contained" className={classes.buttonAddItem}>เลือกสินค้าเพิ่ม</Button>
+                <Button variant="contained" className={classes.buttonAddItem}>
+                  เลือกสินค้าเพิ่ม
+                </Button>
               </ButtonLink>
             </React.Fragment>
           )}
@@ -141,4 +143,5 @@ CheckoutContent.propTypes = {
   setActiveStep: PropTypes.func,
   onUpdateShoppingStep: PropTypes.func,
   shipping: PropTypes.any,
+  currentCartNo: PropTypes.string,
 };

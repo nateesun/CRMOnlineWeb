@@ -85,7 +85,9 @@ const SubMenu = props => {
               icon={icon}
               label={<FormattedMessage id={`${scope}.menu${item.id}`} />}
               className={classes.bottom}
-              onClick={() => handleClick(path.publicPath + item.to_path.replace('shopping', 'shopping/new'))}
+              onClick={() =>
+                handleClick(path.publicPath + item.to_path.replace('shopping', 'shopping/new'))
+              }
             />
           );
         })}
