@@ -93,7 +93,9 @@ module.exports = (db) => {
         SET code=?, name=?, map_latitude=?, map_longitude=?,
         mapping_direction_length1=?, mapping_direction_length2=?, mapping_direction_length3=?,
         mapping_type1=?, mapping_type2=?, mapping_type3=?,
-        mapping_baht1=?, mapping_baht2=?, mapping_baht3=? 
+        mapping_baht1=?, mapping_baht2=?, mapping_baht3=?,
+        mapping_bill_amt1=?, bill_type1=?, add_money1=?,
+        mapping_bill_amt2=?, bill_type2=?, add_money2=? 
         WHERE uuid_index=?;`
         logger.debug(sql)
         const result = await pool.query(sql, [
@@ -109,7 +111,13 @@ module.exports = (db) => {
           data.mapping_type3,
           data.mapping_baht1,
           data.mapping_baht2,
-          data.mapping_baht3, 
+          data.mapping_baht3,
+          data.mapping_bill_amt1,
+          data.bill_type1,
+          data.add_money1,
+          data.mapping_bill_amt2,
+          data.bill_type2,
+          data.add_money2,
           data.uuid_index,
         ])
         if (result.affectedRows > 0) {

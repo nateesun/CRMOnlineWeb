@@ -83,9 +83,30 @@ export function* searchProduct() {
   }
 }
 
+export function* loadCartToShopping() {
+  try {
+    const cartNo = yield select(selectors.makeSelectCartsNo());
+    const database = getCookie('database');
+    const requestURL = `${appConstants.publicPath}/api/carts/load-cart-to-shopping`;
+    const response = yield call(request, requestURL, {
+      database,
+      method: 'POST',
+      body: JSON.stringify({ cart_no: cartNo }),
+    });
+    if (response.data) {
+      yield put(actions.loadCartSuccess(response.data[0]));
+    } else {
+      yield put(actions.loadCartSuccess('Not found carts'));
+    }
+  } catch (err) {
+    yield put(actions.loadCartError(err));
+  }
+}
+
 export default function* shoppingSaga() {
   yield takeEvery(constants.LOAD_PRODUCT, loadProduct);
   yield takeEvery(constants.CREATE_ITEM_CART, saveCartItem);
   yield takeEvery(constants.UPDATE_ITEM_CART, updateCartItem);
   yield takeEvery(constants.SEARCH_PRODUCT, searchProduct);
+  yield takeEvery(constants.LOAD_CART, loadCartToShopping);
 }

@@ -321,4 +321,5 @@ export default function* checkoutSaga() {
   yield takeEvery(constants.UPDATE_SLIP_PATH, onUpdateSlipPath);
   yield takeEvery(constants.UPDATE_ADDRESS_FORM, loadBranchLocation);
   yield takeEvery(constants.UPDATE_TRANSPORT_AMT, updateTransportAmt);
+  yield takeEvery(constants.UPDATE_TRANSPORT_AMT, loadCartList);
 }

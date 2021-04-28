@@ -220,17 +220,7 @@ module.exports = (db) => {
     logger.debug(`updateTransportAmount: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select 
-        b.mapping_direction_length1,
-        b.mapping_direction_length2,
-        b.mapping_direction_length3,
-        b.mapping_type1,
-        b.mapping_type2,
-        b.mapping_type3,
-        b.mapping_baht1,
-        b.mapping_baht2,
-        b.mapping_baht3 
-        from ${table_name} c 
+        let sql = `select b.* from ${table_name} c 
         inner join ${branch_table} b on c.branch_shipping = b.code 
         where c.cart_no=?;`
         const query = await pool.query(sql, [data.cart_no])
@@ -392,6 +382,21 @@ module.exports = (db) => {
         const sql = `DELETE FROM ${table_name} WHERE uuid_index = ?;`
         logger.debug(sql)
         const result = await pool.query(sql, [id])
+        resolve({ status: "Success", data: JSON.stringify(result) })
+      } catch (err) {
+        logger.error(err)
+        reject({ status: "Error", msg: err.message })
+      }
+    })
+  }
+
+  module.findByCartToShopping = (cart_no) => {
+    logger.debug(`findByCartToShopping: ${cart_no}`)
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sql = `select * from ${table_name} where cart_no=? and shopping_step='order';`
+        logger.debug(sql)
+        const result = await pool.query(sql, [cart_no])
         resolve({ status: "Success", data: JSON.stringify(result) })
       } catch (err) {
         logger.error(err)

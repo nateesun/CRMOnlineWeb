@@ -25,4 +25,9 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     paddingTop: '16px',
   },
+  greenPaper: {
+    background: '#f0fcf2',
+    color: 'white',
+    marginBottom: '5px',
+  },
 }));
