@@ -2,7 +2,6 @@
 
 const logger = require("../logger");
 const pool = require("../mysql-connect")
-const { getDB } = require('./FuncUtil')();
 
 module.exports = db => {
   const module = {}
