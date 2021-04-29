@@ -58,7 +58,10 @@ export default function LeftMenu(props) {
   return (
     <List className={classes.container}>
       {leftMenuOther.map(({ id, icon, to_path: to }) => (
-        <ButtonLink to={appConstants.publicPath + to} key={`menu${id}`}>
+        <ButtonLink
+          to={appConstants.publicPath + to.replace('shopping', 'shopping/new')}
+          key={`menu${id}`}
+        >
           <ListItem key={id} button className={clsx(id === title && classes.itemActiveItem)}>
             <FormattedMessage id={`${scope}.menu${id}`}>
               {tt => (

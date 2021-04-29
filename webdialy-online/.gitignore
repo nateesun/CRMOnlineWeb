@@ -11,3 +11,5 @@ npm-debug.log
 .vscode
 logs/*
 __snapshots__
+
+.env*
