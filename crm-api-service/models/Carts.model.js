@@ -2,7 +2,12 @@
 
 const logger = require("../logger")
 const pool = require("../mysql-connect")
-const { getDB, zeroPad, computeDirection } = require("./FuncUtil")()
+const {
+  getDB,
+  zeroPad,
+  computeDirection,
+  computeAmount,
+} = require("./FuncUtil")()
 
 module.exports = (db) => {
   const module = {}
@@ -220,11 +225,12 @@ module.exports = (db) => {
     logger.debug(`updateTransportAmount: ${data}`)
     return new Promise(async (resolve, reject) => {
       try {
-        let sql = `select b.* from ${table_name} c 
+        let sql = `select b.*, c.total_net_amt 
+        from ${table_name} c 
         inner join ${branch_table} b on c.branch_shipping = b.code 
         where c.cart_no=?;`
         const query = await pool.query(sql, [data.cart_no])
-        const transportConfig = query[0];
+        const transportConfig = query[0]
 
         let total_transport_amt = 0
 
@@ -262,6 +268,33 @@ module.exports = (db) => {
             direction,
             mappingType,
             mappingBaht
+          )
+        }
+
+        // check amount 1
+        const totalNetAmount = transportConfig.total_net_amt
+
+        const mappingBillAmt1 = transportConfig.mapping_bill_amt1
+        const billType1 = transportConfig.bill_type1
+        const addMoney1 = transportConfig.add_money1
+        if (mappingBillAmt1) {
+          total_transport_amt = total_transport_amt + computeAmount(
+            totalNetAmount,
+            mappingBillAmt1,
+            billType1,
+            addMoney1
+          )
+        }
+
+        const mappingBillAmt2 = transportConfig.mapping_bill_amt2
+        const billType2 = transportConfig.bill_type2
+        const addMoney2 = transportConfig.add_money2
+        if (mappingBillAmt2) {
+          total_transport_amt = total_transport_amt + computeAmount(
+            totalNetAmount,
+            mappingBillAmt2,
+            billType2,
+            addMoney2
           )
         }
 

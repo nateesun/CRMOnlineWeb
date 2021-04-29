@@ -4,9 +4,9 @@
 
 const path = require('path');
 const webpack = require('webpack');
+require('dotenv').config();
 
-const BUILD_FOLDER_PATH = process.env.BUILD_FOLDER_PATH || 'build';
-const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+const customEnv = { ...process.env, NODE_ENV: 'development' };
 
 module.exports = options => ({
   mode: options.mode,
@@ -14,8 +14,8 @@ module.exports = options => ({
   output: Object.assign(
     {
       // Compile into js/build.js
-      path: path.resolve(process.cwd(), BUILD_FOLDER_PATH),
-      publicPath: PUBLIC_PATH,
+      path: path.resolve(process.cwd(), 'build'),
+      publicPath: '/',
     },
     options.output,
   ), // Merge with env dependent settings
@@ -114,11 +114,7 @@ module.exports = options => ({
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
-      REACT_APP_PUBLIC_PATH: '',
-      PUBLIC_PATH: '/',
-    }),
+    new webpack.EnvironmentPlugin(customEnv),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],

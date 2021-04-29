@@ -5,8 +5,9 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const basicAuth = require("express-basic-auth")
 const socketIo = require('socket.io')
+require('dotenv').config();
+
 const logger = require('./logger');
-const config = require('./config')
 
 // api document
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -55,7 +56,7 @@ const helmet = require("helmet")
 const cors = require("cors")
 const nocache = require('nocache');
 
-const fixPassword = config.fixPassword;
+const fixPassword = process.env.FIX_PASSWORD;
 
 const setupLogger = (req, res, next) => {
   logger.debug(`${req.method} ${req.path} ${res.statusCode}`);

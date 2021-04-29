@@ -5,3 +5,4 @@ logs/*
 coverage
 .nyc_output
 .vscode
+.env*
