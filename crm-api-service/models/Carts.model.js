@@ -271,38 +271,49 @@ module.exports = (db) => {
           )
         }
 
-        // check amount 1
         const totalNetAmount = transportConfig.total_net_amt
 
+        // check amount 1
         const mappingBillAmt1 = transportConfig.mapping_bill_amt1
         const billType1 = transportConfig.bill_type1
         const addMoney1 = transportConfig.add_money1
         if (mappingBillAmt1) {
-          total_transport_amt = total_transport_amt + computeAmount(
+          const { total, type } = computeAmount(
             totalNetAmount,
             mappingBillAmt1,
             billType1,
             addMoney1
           )
+          if (type === "free") {
+            total_transport_amt = 0
+          } else {
+            total_transport_amt = total_transport_amt + total
+          }
         }
 
+        // check amount 2
         const mappingBillAmt2 = transportConfig.mapping_bill_amt2
         const billType2 = transportConfig.bill_type2
         const addMoney2 = transportConfig.add_money2
         if (mappingBillAmt2) {
-          total_transport_amt = total_transport_amt + computeAmount(
+          const { total, type } = computeAmount(
             totalNetAmount,
             mappingBillAmt2,
             billType2,
             addMoney2
           )
+          if (type === "free") {
+            total_transport_amt = 0
+          } else {
+            total_transport_amt = total_transport_amt + total
+          }
         }
 
         sql = `UPDATE ${table_name} 
-        SET distance=?,
-        total_transport_amt=?,
-        total_net_amt=(total_amount+total_transport_amt) 
-        WHERE cart_no=?;`
+              SET distance=?,
+              total_transport_amt=?,
+              total_net_amt=(total_amount+total_transport_amt) 
+              WHERE cart_no=?;`
         logger.debug(sql)
         const result = await pool.query(sql, [
           data.distance,

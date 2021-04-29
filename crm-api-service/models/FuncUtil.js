@@ -40,20 +40,24 @@ module.exports = () => {
     return totalTransportAmt
   }
 
-  module.computeAmount = (netTotalAmt, mappingBillAmt, mappingType, mappingBaht) => {
-    let totalTransportAmt = 0
+  module.computeAmount = (
+    netTotalAmt,
+    mappingBillAmt,
+    mappingType,
+    mappingBaht
+  ) => {
     const map = mappingBillAmt.split("-")
     const map1 = parseInt(map[0])
     const map2 = map[1].toLowerCase() === "max" ? 999999999 : parseInt(map[1])
     if (netTotalAmt >= map1 && netTotalAmt <= map2) {
       if (mappingType === "A") {
-        totalTransportAmt = 0
+        return { type: 'free' }
       } else if (mappingType === "B") {
-        totalTransportAmt = mappingBaht
+        return { type: 'add', total: mappingBaht}
       }
     }
 
-    return totalTransportAmt
+    return { type: 'normal', total: 0 }
   }
 
   return module
